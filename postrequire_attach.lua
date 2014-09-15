@@ -1,11 +1,10 @@
 --[[
-DON'T do this in the .yml:
+DON'T wildcard '*' this script in the .yml
+i.e don't do this: 
 
-    v That right there
-- ['*', LUA\postrequire_attach.lua]) 
-    ^ That right there
-	
-or else you'll end up spamming your mod list with each extra attachment by however many lua files PD2 uses on its own (a lot).
+- ['*', LUA\postrequire_attach.lua]
+
+or else you'll end up spamming your mod list with each extra attachment by however many luac files PD2 uses on its own (a lot). Use what I provided in the installation guide
 ]]
 
 if not tweak_data then return end	
@@ -74,18 +73,25 @@ table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_74.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_74.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_74.uses_parts, "wpn_fps_lmg_rpk_fg_standard")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_74.uses_parts, "wpn_fps_ass_galil_s_wood")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_74.uses_parts, "wpn_fps_sho_ben_s_solid")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm.uses_parts, "wpn_fps_lmg_rpk_fg_standard")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm.uses_parts, "wpn_fps_ass_galil_s_wood")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm.uses_parts, "wpn_fps_sho_ben_s_solid")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm_gold.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm_gold.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm_gold.uses_parts, "wpn_fps_lmg_rpk_fg_standard")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm_gold.uses_parts, "wpn_fps_ass_galil_s_wood")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm_gold.uses_parts, "wpn_fps_sho_ben_s_solid")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_akmsu.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_akmsu.uses_parts, "wpn_fps_upg_o_leupold")
-table.insert(tweak_data.weapon.factory.wpn_fps_smg_akmsu.uses_parts, "wpn_upg_ak_s_folding_vanilla_gold")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_akmsu.uses_parts, "wpn_fps_ass_galil_s_wood")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_akmsu.uses_parts, "wpn_fps_sho_ben_s_solid")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_ak5.uses_parts, "wpn_fps_m4_uupg_b_short")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_ak5.uses_parts, "wpn_fps_upg_o_45iron")
@@ -93,7 +99,6 @@ table.insert(tweak_data.weapon.factory.wpn_fps_ass_ak5.uses_parts, "wpn_fps_upg_
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_aug.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_aug.uses_parts, "wpn_fps_upg_o_leupold")
-table.insert(tweak_data.weapon.factory.wpn_fps_ass_aug.uses_parts, "wpn_fps_upg_m4_m_quad")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_aug.uses_parts, "wpn_fps_upg_o_mbus_rear")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_g36.uses_parts, "wpn_fps_upg_o_45iron")
@@ -183,6 +188,8 @@ table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_u
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_upg_ak_fg_tapco") --the part IRL is for the Saiga anyways, why not?
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_upg_o_mbus_rear")
+table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_ass_galil_s_wood")
+table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_sho_ben_s_solid")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_ben.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_ben.uses_parts, "wpn_fps_upg_o_leupold")
@@ -221,6 +228,7 @@ tweak_data.weapon.g3.FIRE_MODE = "single" --starts off on semi-auto like the M14
 
 tweak_data.weapon.glock_18c.FIRE_MODE = "single" --starts off on semi-auto to avoid accidental mag dumping, especially if you have Equlibrium
 
+
 --This WOULD fix the FAL "barrels" to be properly categorized as handguards, however, this breaks **ANY AND ALL** FAL's you own (freezes the game as it's looking for an attached barrel that no longer exsists)
 --Buying a new FAL fixes the above crash (as the gun won't have an attached "barrel") but such a dirty and tedious fix won't do. I also don't know the adverse effects of this in MP since, again, the FAL won't have a "barrel".
 --[[ tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_standard.type = "foregrip"  
@@ -228,3 +236,4 @@ tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_wood.type = "foregrip"
 tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_01.type = "foregrip"  
 tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_03.type = "foregrip"  
 tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_04.type = "foregrip" ]]
+

@@ -119,7 +119,7 @@ function LocalizationManager:text( string_id, macros )
 	--[[Gecko]]
 	realnames["bm_w_galil"] = "IWI Galil ARM"
 	--Sniper
-	realnames["bm_wp_galil_fg_sniper"] = "IWI Galatz Handguard & Match Barrel"
+	realnames["bm_wp_galil_fg_sniper"] = "IWI Galatz Handguard & Heavy Barrel"
 	--Light
 	realnames["bm_wp_galil_fg_sar"] = "IWI Galil SAR Handguard & 13\" Barrel"
 	--CQB
@@ -138,7 +138,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_galil_s_fab"] = "FAB Defence MG-CP Cheek Pad"
 	
 	--[[Gewehr]]
-	realnames["bm_w_g3"] = "Heckler & Koch G3"
+	realnames["bm_w_g3"] = "Heckler & Koch G3" --"Mai Raifu"
 	--Assault Kit
 	realnames["bm_wp_g3_b_short"] = "Short Barrel"
 	--DMR Kit
@@ -236,7 +236,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_rpk_s_standard"] = "Synthetic Stock"
 	
 	--[[KSP]]
-	realnames["bm_w_m249"] = "FN M249 Para"
+	realnames["bm_w_m249"] = "FN Paratrooper M249"
 	--Railed Foregrip
 	realnames["bm_wp_m249_fg_mk46"] = "MK.46 Handguard"
 	--Solid Stock
@@ -365,7 +365,7 @@ function LocalizationManager:text( string_id, macros )
 	--Ninja
 	realnames["bm_wp_mp5_fg_mp5sd"] = "MP5SD Intergrated Suppressor"
 	--Adjustable
-	realnames["bm_wp_mp5_s_adjust"] = "A4 Retractable Stock"
+	realnames["bm_wp_mp5_s_adjust"] = "Retractable Stock"
 	--Bare Essentials
 	realnames["bm_wp_mp5_s_ring"] = "MP5 Strap Ring"
 	--MP5 Drum
@@ -521,7 +521,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_upg_ak_b_draco"] = "Draco Pistol Barrel"
 	
 	--Extended Mag (Glocks)
-	realnames["bm_wp_g18c_m_mag_33rnd"] = "33/22rnd Magazine (9mm/.40 S&W)"	
+	realnames["bm_wp_g18c_m_mag_33rnd"] = "33/22rnd Magazine (G18/G22c)"	
 	--Vintage Mag
 	realnames["bm_wp_m4_m_straight"] = "20rnd STANAG Magazine" --Hesitant to call them this since they're so off-model and resemble the M4A1 mags used in MW3
 	--Milspec Mag
@@ -593,10 +593,10 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_upg_a_bird_desc"] = "Tiny pellets that spread over a large area. Shoot 50 pellets (30 for the Judge) for greater pellet saturation. You find and carry more of this ammo.\nCAN CAUSE FPS DROPS" 
 	--000 Buck
 	realnames["bm_wp_upg_a_custom"] = "000 Buck"
-	realnames["bm_wp_upg_a_custom_desc"] = "Large pellets with greater stopping power. Shoot 6 pellets (4 for the Judge) with 45% less range for increased damage in close range." 
+	realnames["bm_wp_upg_a_custom_desc"] = "Large pellets with greater stopping power. Shoot 6 pellets (4 for the Judge) with 50% less range for increased damage in close range." 
 	--Flechette
 	realnames["bm_wp_upg_a_piercing"] = "Flechette Rounds"
-	realnames["bm_wp_upg_a_piercing_desc"] = "Dart ammunition capable of penetrating armour. Shoot 12 darts (8 for the Judge) with 50% increased range and accuracy."
+	realnames["bm_wp_upg_a_piercing_desc"] = "Dart ammunition capable of penetrating armour. Shoot 15 darts (10 for the Judge) with 60% increased range and accuracy."
 	--HE
 	realnames["bm_wp_upg_a_explosive"] = "Fragmentation Rounds"
 	realnames["bm_wp_upg_a_explosive_desc"] = "Fin stabilized rounds that explode on impact. Shoot explosives that can stun targets in its blast radius. You find and carry less of this ammo."
@@ -638,7 +638,7 @@ function LocalizationManager:text( string_id, macros )
 	--X46
 	realnames["bm_melee_x46"] = "Robson Knives X46 Utility Survival Knife"
 	
-	--Dind Dong
+	--Ding Dong
 	realnames["bm_melee_dingdong"] = "Gerber Ding Dong Breaching Tool"
 	
 	realnames["bm_menu_custom"] = "Internal Mods"
@@ -667,3 +667,4 @@ end
 ReelNames = true
 
 end
+

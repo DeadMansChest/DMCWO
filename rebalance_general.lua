@@ -4,7 +4,7 @@ if not RebalanceGen then
 if not tweak_data then return end
  
 --fixes the extra_ammo index so rounds can be added one by one instead of the default increments of two
-tweak_data.weapon.stats.extra_ammo				= {}
+tweak_data.weapon.stats.extra_ammo = {}
 for i = -10, 100, 1 do
 	table.insert( tweak_data.weapon.stats.extra_ammo, i )
 end
@@ -49,10 +49,18 @@ for i = 3, 0.5, -0.1 do
 end
 
 --"Silent Killer" adjustments
---Basic will generally negate a suppressor's damage de-buff, higher damage weapons will still see a slight damage increase
-tweak_data.upgrades.values.weapon.silencer_damage_multiplier = { 1.1, 1.2 }	-- BASIC, ACE
-tweak_data.upgrades.skill_descs.hitman.multibasic = "10%"
-tweak_data.upgrades.skill_descs.hitman.multipro = "10%"
+--Basic will generally reduced a suppressor's damage de-buff, ace will deal slightly more damage but ultimately not do much more
+tweak_data.upgrades.values.weapon.silencer_damage_multiplier = { 1.075, 1.15}	-- BASIC, ACE
+tweak_data.upgrades.skill_descs.hitman.multibasic = "7.5%"
+tweak_data.upgrades.skill_descs.hitman.multipro = "7.5%"
+
+--"The Professional" adjustments
+tweak_data.upgrades.values.weapon.silencer_recoil_multiplier = {0.9}
+tweak_data.upgrades.values.weapon.silencer_spread_multiplier = {0.9}
+tweak_data.upgrades.values.weapon.silencer_enter_steelsight_speed_multiplier = {1.25}
+tweak_data.upgrades.skill_descs.silence_expert.multibasic = "10%"
+tweak_data.upgrades.skill_descs.silence_expert.multipro = "10%"
+tweak_data.upgrades.skill_descs.silence_expert.multipro2 = "25%"
 
 --"Mag Plus" adjustments
 tweak_data.upgrades.values.weapon.clip_ammo_increase = { 10, 20 }
@@ -212,7 +220,7 @@ end
 local heavy = {'r870','benelli','ak5','new_m14','famas','g3'}
 for i, wep_id in ipairs(heavy) do
 	tweak_data.weapon[ wep_id ].transition_duration = -0.04
-	--tweak_data.weapon.famas.transition_duration = -0.06
+	tweak_data.weapon.famas.transition_duration = -0.06
 	
 	tweak_data.weapon[ wep_id ].timers.equip = 0.6
 	
@@ -236,6 +244,7 @@ end
 local heavy_2 = {'striker','fal','rpk','msr','r93'}
 for i, wep_id in ipairs(heavy_2) do
 	tweak_data.weapon[ wep_id ].transition_duration = -0.03
+	tweak_data.weapon.r93.transition_duration = 0
 	
 	tweak_data.weapon[ wep_id ].timers.equip = 0.65
 	
@@ -288,7 +297,57 @@ for i, wep_id in ipairs(gun_drag) do
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pivot = Vector3(10, -8, -25)--:rotate_with( Rotation(0,-110,110) ):rotate_with( Rotation(-110,10,110) )
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pivot = Vector3(10, -4, -12.5) 
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pivot = Vector3(10, -10, -2) 
-end 
+end
+
+local lmg_drag = {'m249','rpk','hk21'}
+for i, wep_id in ipairs(lmg_drag) do
+tweak_data.player.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.005
+end
+
+local pis_high = {'new_raging_bull','deagle','judge'}
+for i, wep_id in ipairs(pis_high) do
+tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.45, 3.60}
+end
+
+local forty = {'g22c','p226'}
+for i, wep_id in ipairs(forty) do
+tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.20, 7.80}
+end
+
+local nine_mil = {'new_mp5','mp9','m45','glock_17','glock_18c','ppk','b92fs'}
+for i, wep_id in ipairs(nine_mil) do
+tweak_data.weapon[ wep_id ].AMMO_PICKUP = {3.20, 10.00}
+end
+
+local forty_five = {'mac10','colt_1911','usp'} --UMP45 when
+for i, wep_id in ipairs(forty_five) do
+tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.40, 6.00}
+end
+
+local pdw_ammo = {'p90','mp7'}
+for i, wep_id in ipairs(pdw_ammo) do
+tweak_data.weapon[ wep_id ].AMMO_PICKUP = {3.20, 6.10}
+end
+
+local shell_ammo = {'r870','serbu','benelli','ksg','striker'}
+for i, wep_id in ipairs(shell_ammo) do
+tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.40, 3.50}
+end
+
+local ar_ammo = {'olympic','m16','amcar','new_m4','ak5','s552','g36','aug','famas'}
+for i, wep_id in ipairs(ar_ammo) do
+tweak_data.weapon[ wep_id ].AMMO_PICKUP = {3.40, 9.20}
+end
+
+local ammo_ak = {'akmsu','akm','akm_gold','ak74'}
+for i, wep_id in ipairs(ammo_ak) do
+tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.40, 6.20}
+end
+
+local ammo_762 = {'new_m14','scar','fal','galil','g3'}
+for i, wep_id in ipairs(ammo_762) do
+tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.40, 3.20}
+end
 
 --tweak_data.player.stances.default.crouched.head.translation = Vector3( 0, 0, 82 )
 
