@@ -2498,6 +2498,6 @@ tweak_data.blackmarket.melee_weapons.x46.stats.min_damage_effect = 1
 tweak_data.blackmarket.melee_weapons.x46.stats.max_damage_effect = 1.5
 
 
---RebalanceScript = true
+RebalanceScript = true
 
 end
