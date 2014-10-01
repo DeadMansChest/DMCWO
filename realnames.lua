@@ -1,8 +1,18 @@
+--[[
+v0.4.2.1
+This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
+Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
+
+==OR==
+
+Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+]]
+
 if not ReelNames then
 
 if not LocalizationManager then return end
 
---Real weapon names, code base thanks to hejoro, IDing by imfdb (Weapons), Payday Wikia (Leupold/Theia Scope) and DMC (Other Attachments)
+--Real weapon names, code base thanks to hejoro, IDing by imfdb (Weapons), Payday Wikia (Leupold/Theia Scope) and DMC, /k/-anon, and Steam friends (Other unidentified attachments)
 LocalizationManager_text = LocalizationManager_text or LocalizationManager.text
 function LocalizationManager:text( string_id, macros )
     local realnames = {}
@@ -14,7 +24,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_w_amcar"] = "Colt M733 Commando"
 	
 	--[[AK Rifle]]
-	realnames["bm_w_ak74"] = "Kalashnikov Concern AKS-74"
+	realnames["bm_w_ak74"] = "Concern Kalashnikov AKS-74"
 	
 	--[[CAR-4]]
 	realnames["bm_w_m4"] = "Colt M4A1" --"Safety Pins"
@@ -38,7 +48,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_famas_g_retro"] = "G2 Guard"
 	
 	--[[AK.762]]
-	realnames["bm_w_akm"] = "Kalashnikov Concern AKMS"
+	realnames["bm_w_akm"] = "Concern Kalashnikov AKMS"
 	
 	--[[JP36]]
 	realnames["bm_w_g36"] = "Heckler & Koch G36" --"Meltgun"
@@ -102,7 +112,7 @@ function LocalizationManager:text( string_id, macros )
 	--CQB
 	realnames["bm_wp_fal_body_standard"] = "DSA SA58 Handguard w/ Short Barrel" --this might conflict with something since this is also the name_id of the receiver
 	--Retro
-    realnames["bm_wp_fal_fg_03"] = "IWI Romat Handguard"
+    realnames["bm_wp_fal_fg_03"] = "IMI Romat Handguard"
 	--Marksman
     realnames["bm_wp_fal_fg_04"] = "DSA Freefloat Handguard"
 	--Wood
@@ -117,23 +127,23 @@ function LocalizationManager:text( string_id, macros )
     realnames["bm_wp_fal_s_03"] = "Magpul FAL PRS Stock"
 	
 	--[[Gecko]]
-	realnames["bm_w_galil"] = "IWI Galil ARM"
+	realnames["bm_w_galil"] = "IMI Galil ARM"
 	--Sniper
-	realnames["bm_wp_galil_fg_sniper"] = "IWI Galatz Handguard & Heavy Barrel"
+	realnames["bm_wp_galil_fg_sniper"] = "IMI Galatz Handguard & Heavy Barrel"
 	--Light
-	realnames["bm_wp_galil_fg_sar"] = "IWI Galil SAR Handguard & 13\" Barrel"
+	realnames["bm_wp_galil_fg_sar"] = "IMI Galil SAR Handguard & 13\" Barrel"
 	--CQB
-	realnames["bm_wp_galil_fg_mar"] = "IWI Galil MAR Handguard & 7\" Barrel"
+	realnames["bm_wp_galil_fg_mar"] = "IMI Galil MAR Handguard & 7\" Barrel"
 	--FAB
 	realnames["bm_wp_galil_fg_fab"] = "FAB Defence Galil Handguard"
 	--Sniper Grip
-	realnames["bm_wp_galil_g_sniper"] = "IWI Galatz Pistol Grip"
+	realnames["bm_wp_galil_g_sniper"] = "IMI Galatz Pistol Grip"
 	--Sniper Stock
-	realnames["bm_wp_galil_s_sniper"] = "IWI Galatz Wooden Stock"
+	realnames["bm_wp_galil_s_sniper"] = "IMI Galatz Wooden Stock"
 	--Skeletal Stock
-	realnames["bm_wp_galil_s_skeletal"] = "IWI Galil MAR Stock"
+	realnames["bm_wp_galil_s_skeletal"] = "IMI Galil MAR Stock"
 	--Light Stock
-	realnames["bm_wp_galil_s_light"] = "IWI Galatz Skeleton Stock"	
+	realnames["bm_wp_galil_s_light"] = "IMI Galatz Skeleton Stock"	
 	--FAB Stock
 	realnames["bm_wp_galil_s_fab"] = "FAB Defence MG-CP Cheek Pad"
 	
@@ -190,7 +200,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_r870_s_solid_big"] = "Solid Stock w/ Full Length Rail"
 	
 	--[[IZHMA 12G]]
-	realnames["bm_w_saiga"] = "Kalashnikov Concern Saiga-12K" --"Nyaa! I'm a Cat!"
+	realnames["bm_w_saiga"] = "Concern Kalashnikov Saiga-12K" --"Nyaa! I'm a Cat!"
 	--Tact. Russian
 	realnames["bm_wp_saiga_fg_lowerrail"] = "Ultimak AK Modular Rail Forend System"
 	--Saiga 20 rounder
@@ -229,7 +239,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_serbu_s_nostock_short"] = "Stockless Pistol Grip w/ Rail"
 	
 	--[[RPK]]
-	realnames["bm_w_rpk"] = "Kalashnikov Concern RPK"
+	realnames["bm_w_rpk"] = "Concern Kalashnikov RPK"
 	--Tactical Forgrip
 	realnames["bm_wp_rpk_fg_standard"] = "Synthetic Handguard"
 	--Plastic Stock
@@ -314,7 +324,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_g18c_co_comp_2"] = "SJC Compensator"
 	
 	--[[Deagle]]
-	realnames["bm_w_deagle"] = "IWI Desert Eagle Mark XIX" --"IS THAT A M16?"
+	realnames["bm_w_deagle"] = "IMI Desert Eagle Mark XIX" --"IS THAT A M16?"
 	--Mount
 	realnames["bm_wp_pis_deagle_extra"] = "Desert Eagle Scope Mount"
 	--La Femme
@@ -372,11 +382,27 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_mp5_m_drum"] = "110rnd GSG-5 .22lr Magazine"
 
 	--[[CMP]]
-	realnames["bm_w_mp9"] = "Brügger & Thomet TP9"
+	realnames["bm_w_mp9"] = "Brugger & Thomet TP9"
 	--Extended Mag
 	realnames["bm_wp_mp9_m_extended"] = "30rnd Magazine"
 	--Skeletal Stock
 	realnames["bm_wp_mp9_s_skel"] = "Steyr TMP Solid Stock"
+	
+	--[[Skorpion]]
+	realnames["bm_w_scorpion"] = "Skorpion vz. 61" --Klobb
+	realnames["bm_wp_scorpion_m_extended"] = "Dual Magazines"
+	
+	--[[Uzi]]
+	realnames["bm_w_uzi"] = "IMI Uzi"
+	realnames["bm_wp_uzi_s_solid"] = "Wood Stcok"
+	realnames["bm_wp_uzi_fg_rail"] = "FAB Defence Uzi Tri-Rail System"
+	realnames["bm_w_uzi"] = "IMI Uzi"
+	
+	--[[TEC-9]]
+	realnames["bm_w_tec9"] = "Intratec TEC-9"
+	realnames["bm_wp_tec9_b_standard"] = "AB-10 Barrel"
+	realnames["bm_wp_tec9_ns_ext"] = "TEC-9 Barrel Extension"
+	realnames["bm_wp_tec9_s_unfolded"] = "Wire Stock"
 	
 	--[[Para SMG]]
 	realnames["bm_w_olympic"] = "Olympic Arms K23B Tactical"
@@ -386,7 +412,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_olympic_s_short"] = "Buffer Tube" 
 	
 	--[[Krinkov]]
-	realnames["bm_w_akmsu"] = "Kalashnikov Concern AKMSU"
+	realnames["bm_w_akmsu"] = "Concern Kalashnikov AKMSU"
 	--Moscow Special
 	realnames["bm_wp_akmsu_fg_rail"] = "Samson K-Rail" --Seems to be loosely based off of the Samson K-Rail, it's the only thing that looked remotely like this
 	
@@ -462,7 +488,7 @@ function LocalizationManager:text( string_id, macros )
 	--Stubby **Don't know
 	--realnames["bm_wp_upg_ns_ass_smg_stubby"] = "Stubby Compensator"
 	--Tank **Don't know, could quite literally be a tank compensator
-	--realnames["bm_wp_upg_ns_ass_smg_tank"] = "The Tank Compensator"
+	realnames["bm_wp_upg_ns_ass_smg_tank"] = "Tank Compensator"
 	--Firebreather
 	realnames["bm_wp_upg_ns_ass_smg_firepig"] = "Noveske KX3 Compensator"
 	
@@ -531,7 +557,7 @@ function LocalizationManager:text( string_id, macros )
 	--CAR Quad
 	realnames["bm_wp_upg_m4_m_quad"] = "60rnd Surefire Magazine"
 	--AK Quad
-	realnames["bm_wp_upg_ak_m_quad"] = "60rnd Kalashnikov Concern Magazine"
+	realnames["bm_wp_upg_ak_m_quad"] = "60rnd Concern Kalashnikov Magazine"
 	--Beta-C
 	realnames["bm_wp_m4_m_drum"] = "100rnd Beta-C Magazine"
 	--AK Drum
@@ -641,17 +667,20 @@ function LocalizationManager:text( string_id, macros )
 	--Ding Dong
 	realnames["bm_melee_dingdong"] = "Gerber Ding Dong Breaching Tool"
 	
-	realnames["bm_menu_custom"] = "Internal Mods"
-	realnames["bm_menu_extra"] = "Rails"
-	realnames["bm_menu_upper_reciever"] = "Reciever Mods"
-	realnames["bm_menu_slide"] = "Pistol Barrels & Slides"
-	realnames["bm_menu_grip"] = "Grips"
-	realnames["bm_menu_barrel"] = "Barrels"
-	realnames["bm_menu_barrel_ext"] = "Barrel Extentions"
-	realnames["bm_menu_foregrip"] = "Handguards"
-	realnames["bm_menu_gadget"] = "Gadgets"
-	realnames["bm_menu_sight"] = "Sights"
-	realnames["bm_menu_stock"] = "Stocks"
+	--Cleaver
+	realnames["bm_melee_cleaver"] = "Cleaver"
+	
+	--Machete
+	realnames["bm_melee_machete"] = "Machete"
+	
+	realnames["bm_menu_custom"] = "Internal Mod"
+	realnames["bm_menu_extra"] = "Rail"
+	realnames["bm_menu_upper_reciever"] = "Body Mod"
+	realnames["bm_menu_slide"] = "Pistol Barrel & Slide"
+	realnames["bm_menu_grip"] = "Pistol Grip"
+	realnames["bm_menu_barrel_ext"] = "Barrel Extension"
+	realnames["bm_menu_foregrip"] = "Handguard"
+	realnames["bm_menu_sight"] = "Optic"
 	
 	realnames["menu_lmg"] = "Light Machine Guns"
 	realnames["menu_shotgun"] = "Shotguns"

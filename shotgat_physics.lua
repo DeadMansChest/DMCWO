@@ -1,3 +1,13 @@
+--[[
+v0.4.2.1
+This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
+Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
+
+==OR==
+
+Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+]]
+
 if not Shotty then 
 
 if not NewShotgunBase then return end
@@ -127,7 +137,7 @@ if not GamePlayCentralManager then return end
 --Shotgun push code
 --provided by B1313
 function GamePlayCentralManager:do_shotgun_push( unit, hit_pos, dir, distance )
-    if distance > 1000 then
+    if distance > 500 then
         return
     end
     

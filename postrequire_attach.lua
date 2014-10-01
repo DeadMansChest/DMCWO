@@ -1,4 +1,14 @@
 --[[
+v0.4.2.1
+This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
+Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
+
+==OR==
+
+Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+]]
+
+--[[
 DON'T wildcard '*' this script in the .yml
 i.e don't do this: 
 
@@ -130,6 +140,15 @@ table.insert(tweak_data.weapon.factory.wpn_fps_ass_s552.uses_parts, "wpn_fps_upg
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_mp7.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_mp7.uses_parts, "wpn_fps_upg_o_leupold")
 
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_tec9.uses_parts, "wpn_fps_upg_o_45iron")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_tec9.uses_parts, "wpn_fps_upg_o_leupold")
+
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_uzi.uses_parts, "wpn_fps_upg_o_45iron")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_uzi.uses_parts, "wpn_fps_upg_o_leupold")
+
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_scorpion.uses_parts, "wpn_fps_upg_o_45iron")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_scorpion.uses_parts, "wpn_fps_upg_o_leupold")
+
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_scar.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_scar.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_scar.uses_parts, "wpn_fps_upg_m4_g_hgrip")
@@ -138,6 +157,7 @@ table.insert(tweak_data.weapon.factory.wpn_fps_ass_scar.uses_parts, "wpn_fps_snp
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m4.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m4.uses_parts, "wpn_fps_upg_o_leupold")					
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m4.uses_parts, "wpn_fps_sho_ben_s_solid")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_m4.uses_parts, "wpn_fps_upg_m4_s_standard")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_famas.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_famas.uses_parts, "wpn_fps_upg_o_leupold")
@@ -150,6 +170,7 @@ table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_m4
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_upg_m4_m_pmag")					
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_m4_upper_reciever_edge")					
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_upg_m4_s_pts")								
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_upg_m4_s_standard")								
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_m4_uupg_s_fold")					
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_upg_o_leupold")

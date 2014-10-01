@@ -34,7 +34,7 @@ local m4_barrel = false
 --if set to true, sets the default A2 upper on the AMCAR/M733 to the railed upper w/carry handle
 --local amcar_upper = WIP, might not even go through with this
 
---If set to true, sets the M249 short and long barrels to use the G3 barrel models to match the rest of the black barrel. Default = false
+--If set to true, sets the M249 short and long barrels to use the AUG barrel models to match the rest of the black barrel. Default = false
 local m249_barrel = false
 
 --If set to true, hides the collapsed stock on the SpecOps/MP7 so it looks like you're buying it. Default = false
@@ -86,15 +86,15 @@ local hide_brakes = false
 --If set to true, hides shotgun muzzle brakes for all shotguns that can accept them. Default = false
 local hide_sg_brakes = false
 
---if set to true, sets the Theia/Leupold scope to use the default sniper scope model.Default = false
+--if set to true, sets the Theia/Leupold scope to use the default sniper scope model
 --NOTE: You'll lose the range finder if you set this to true and you'll still have Theia level zoom
 local theia_shortdot = false
 
---If set to true, enables the ELCAN Specter to use it's BUIS. Default = false
+--If set to true, enables the ELCAN Specter to use it's BUIS
 --NOTE: Enabling this will remove the 45 degree irons if they're attached, disallow it from being attached and will take the place as the first gadget you switch to with the laser/flashlight gadget becoming the second and/or third gadget you switch to
 local elcan_buis = false
 
---if set to true, changed the free 000 Buck to Birdshot. Default = false
+--if set to true, changed the free 000 Buck to Birdshot
 --NOTE: This fires 50 rays (30 for the Judge) out at a time, you may get performance issues
 local sho_bird = false
 
@@ -134,7 +134,7 @@ if barret_bipod == true then
 	tweak_data.weapon.factory.parts.wpn_fps_snp_m95_bipod.third_unit = "units/payday2/weapons/wpn_fps_smg_mp9_pts/wpn_fps_smg_mp9_b_dummy"
 else
 	tweak_data.weapon.factory.parts.wpn_fps_snp_m95_bipod.unit = "units/pd2_dlc_gage_snp/weapons/wpn_fps_snp_m95_pts/wpn_fps_snp_m95_bipod"
-	tweak_data.weapon.factory.parts.wpn_fps_snp_m95_bipod.third_unit = "units/pd2_dlc_gage_snp/weapons/wpn_third_snp_m95_pts/wpn_third_snp_m95_bipod"
+	tweak_data.weapon.factory.parts.wpn_fps_snp_m95_bipod.third_unit = "units/pd2_dlc_gage_snp/weapons/wpn_fps_snp_m95_pts/wpn_third_snp_m95_bipod"
 end
 
 if hide_sg_brakes == true then
@@ -489,7 +489,7 @@ if m4_barrel == true then
 	tweak_data.weapon.factory.parts.wpn_fps_m4_uupg_b_medium_vanilla.unit = "units/payday2/weapons/wpn_fps_ass_m4_pts/wpn_fps_m4_uupg_b_short"
 	tweak_data.weapon.factory.parts.wpn_fps_m4_uupg_b_medium_vanilla.third_unit = "units/payday2/weapons/wpn_third_ass_m4_pts/wpn_third_m4_uupg_b_short"
 	tweak_data.weapon.factory.parts.wpn_fps_m4_uupg_b_short.unit = "units/payday2/weapons/wpn_fps_ass_aug_pts/wpn_fps_aug_b_long"
-	tweak_data.weapon.factory.parts.wpn_fps_m4_uupg_b_short.third_unit = "units/payday2/weapons/wpn_third_ass_aug_pts/wpn_third_aug_b_long"
+	tweak_data.weapon.factory.parts.wpn_fps_m4_uupg_b_short.third_unit = "units/payday2/weapons/wpn_third_ass_aug_pts/wpn_third_ass_aug_b_long"
 else
 	tweak_data.weapon.factory.wpn_fps_ass_m4.override = {
 		wpn_fps_m4_upper_reciever_round = { 
@@ -882,11 +882,11 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_ns_ass_smg_firepig.stats = { value =
 --Tank Compensator
 tweak_data.weapon.factory.parts.wpn_fps_upg_ns_ass_smg_tank.stats = { value = 4, suppression = -2, recoil = 3, concealment = -1 } 
 --Stubby
-tweak_data.weapon.factory.parts.wpn_fps_upg_ns_ass_smg_stubby.stats = { value = 3, suppression = 2, recoil = 5 }
+tweak_data.weapon.factory.parts.wpn_fps_upg_ns_ass_smg_stubby.stats = { value = 3, suppression = 2, recoil = 4 }
 --Competitor's Compensator
 tweak_data.weapon.factory.parts.wpn_fps_upg_ass_ns_jprifles.stats = { suppression = 0, concealment = -2, spread = 2, recoil = -2}
 --Funnel of Fun
-tweak_data.weapon.factory.parts.wpn_fps_upg_ass_ns_linear.stats = { suppression = -3, spread = -1, concealment = -2, recoil = 4 }
+tweak_data.weapon.factory.parts.wpn_fps_upg_ass_ns_linear.stats = { suppression = -3, spread = -1, concealment = -2, recoil = 6 }
 --TACTICOOL
 tweak_data.weapon.factory.parts.wpn_fps_upg_ass_ns_surefire.stats = { spread = 1, recoil = 0, concealment = -2 }
 
@@ -903,7 +903,7 @@ tweak_data.weapon.factory.parts.wpn_fps_pis_deagle_co_long.stats = { value = 8, 
 --Ventilated Compensator (Glocks)
 tweak_data.weapon.factory.parts.wpn_fps_pis_g18c_co_1.stats = { value = 4, suppression = -2, recoil = 2, concealment = -1 }
 --Velocity Compensator (Glocks)
-tweak_data.weapon.factory.parts.wpn_fps_pis_g18c_co_comp_2.stats = { value = 5, suppression = -1, concealment = -1, spread = 1 }
+tweak_data.weapon.factory.parts.wpn_fps_pis_g18c_co_comp_2.stats = { value = 5, suppression = -1, concealment = -1, spread = 2, recoil = -2 }
 
 --Ventilated Compensator (P226)
 tweak_data.weapon.factory.parts.wpn_fps_pis_p226_co_comp_1.stats = { value = 4, suppression = -2, recoil = 2, concealment = -1 }
@@ -926,7 +926,7 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_pis_ns_flash.stats = { value = 5, su
 --Punisher Compensator (1911)
 tweak_data.weapon.factory.parts.wpn_fps_pis_1911_co_1.stats = { value = 5, suppression = -2, spread_moving = 1, recoil = 2, concealment = -1  }
 --Aggressor Compensator (1911)
-tweak_data.weapon.factory.parts.wpn_fps_pis_1911_co_2.stats = { value = 2, suppression = -1, spread_moving = -1, recoil = 0, concealment = -1, spread = 1 }
+tweak_data.weapon.factory.parts.wpn_fps_pis_1911_co_2.stats = { value = 2, suppression = -1, spread_moving = -1, recoil = -1, concealment = -1, spread = 1 }
 
 
 ------------------[[SUPPRESSORS]]------------------
@@ -955,18 +955,24 @@ tweak_data.weapon.factory.parts.wpn_fps_snp_msr_ns_suppressor.stats = { value = 
 
 --MP7 Suppressor
 tweak_data.weapon.factory.parts.wpn_fps_smg_mp7_b_suppressed.stats = { value = 4, spread = 2, suppression = 100, alert_size = 12, damage = -1, recoil = -1, spread_moving = -2, concealment = -2 }
+
+--Skorpion Suppressor
+tweak_data.weapon.factory.parts.wpn_fps_smg_scorpion_b_suppressed.stats = { value = 1, suppression = 100, alert_size = 12, spread = 0, recoil = 0, spread_moving = -2, concealment = -2 }
+
+--Uzi Suppressor
+tweak_data.weapon.factory.parts.wpn_fps_smg_uzi_b_suppressed.stats = { value = 1, suppression = 100, alert_size = 12, spread = 0, recoil = 0, spread_moving = -2, concealment = -2 }
 --}
 
 
 ------------------[[BARRELS]]------------------{
 --AK Slavic Dragon (AK74, AKM)
-tweak_data.weapon.factory.parts.wpn_fps_upg_ak_b_draco.stats = { recoil = 0, damage = -1, concealment = 1, spread = -2, suppression = -2}
+tweak_data.weapon.factory.parts.wpn_fps_upg_ak_b_draco.stats = { recoil = 0, damage = -1, concealment = 1, spread = -1, suppression = -2}
 
 --AR Medium Barrel (Para SMG)
 tweak_data.weapon.factory.parts.wpn_fps_m4_uupg_b_medium.stats = { value = 1, damage = 2, spread = 1, concealment = -1 }
 
 --AR Short Barrel (CAR-4)
-tweak_data.weapon.factory.parts.wpn_fps_m4_uupg_b_short.stats = { value = 5, damage = -1, spread = -2, recoil = 0, spread_moving = -2, concealment = 2, suppression = -2 }
+tweak_data.weapon.factory.parts.wpn_fps_m4_uupg_b_short.stats = { value = 5, damage = -1, spread = -1, recoil = 0, spread_moving = -2, concealment = 2, suppression = -2 }
 --AR Long Barrel (CAR-4, AMR-16)
 tweak_data.weapon.factory.parts.wpn_fps_m4_uupg_b_long.stats = { value = 4, damage = 2, spread = 1, recoil = 0, concealment = -2, suppression = 0 }
 
@@ -1018,12 +1024,12 @@ tweak_data.weapon.factory.parts.wpn_fps_smg_m45_b_small.stats = { value = 2, spr
 tweak_data.weapon.factory.parts.wpn_fps_snp_msr_b_long.stats = { value = 10, spread = 1, concealment = -3, damage = 2}
 
 --R93 Short Barrel 
-tweak_data.weapon.factory.parts.wpn_fps_snp_r93_b_short.stats = { value = 1, spread = -1, recoil = -1, spread_moving = 3, concealment = 3, damage = -4, suppression = -2 }
+tweak_data.weapon.factory.parts.wpn_fps_snp_r93_b_short.stats = { value = 1, spread = -1, recoil = 0, spread_moving = 3, concealment = 3, damage = -4, suppression = -2 }
 --R93 Suppressed Barrel
 tweak_data.weapon.factory.parts.wpn_fps_snp_r93_b_suppressed.stats = { value = 4, suppression = 100, alert_size = 12, spread = 0, damage = -10, recoil = 1, spread_moving = 1, concealment = -1 }
 		
 --M95 Long Barrel
-tweak_data.weapon.factory.parts.wpn_fps_snp_m95_barrel_long.stats = { value = 2, spread = 0, concealment = -1, suppression = 0, recoil = 1, damage = 54, spread_moving = -2, total_ammo_mod = -31}
+tweak_data.weapon.factory.parts.wpn_fps_snp_m95_barrel_long.stats = { value = 2, spread = 0, concealment = -1, suppression = 0, recoil = 1, damage = 52, spread_moving = -2, total_ammo_mod = -31}
 --M95 Short Barrel
 tweak_data.weapon.factory.parts.wpn_fps_snp_m95_barrel_short.stats = { value = 2, spread = -2, concealment = 8, damage = 0, suppression = -5 }
 --M95 Suppressed Barrel
@@ -1070,8 +1076,8 @@ tweak_data.weapon.factory.parts.wpn_fps_ass_g3_b_sniper.stats = {
 	recoil = -3,
 	spread = 1,
 	concealment = -2,
-	damage = 2,
-	total_ammo_mod = -0
+	damage = 12,
+	total_ammo_mod = -25
 	}
 
 --FAMAS Long
@@ -1106,14 +1112,43 @@ tweak_data.weapon.factory.parts.wpn_fps_ass_famas_b_suppressed.stats = {
 	concealment = -1,
 	damage = -1
 	}
+	
+--TEC-9 Barrel Extension
+tweak_data.weapon.factory.parts.wpn_fps_smg_tec9_ns_ext.forbids = {
+	"wpn_fps_upg_ns_ass_smg_large",
+	"wpn_fps_upg_ns_ass_smg_medium",
+	"wpn_fps_upg_ns_ass_smg_small",
+	"wpn_fps_upg_ns_ass_smg_firepig",
+	"wpn_fps_upg_ns_ass_smg_stubby",
+	"wpn_fps_upg_ns_ass_smg_tank",
+	"wpn_fps_upg_ass_ns_jprifles",
+	"wpn_fps_upg_ass_ns_linear",
+	"wpn_fps_upg_ass_ns_surefire",
+	}
+tweak_data.weapon.factory.parts.wpn_fps_smg_tec9_ns_ext.stats = {
+	value = 5,
+	spread = 1,
+	recoil = 1,
+	concealment = -3,
+	damage = 0
+	}
+	
+--TEC-9 AB-10 Barrel
+tweak_data.weapon.factory.parts.wpn_fps_smg_tec9_b_standard.stats = {
+	value = 3,
+	recoil = -1,
+	concealment = 1
+	}
+
+
 --}
 	
 
 ------------------[[Slides]]------------------{
 --1911 Longslide
-tweak_data.weapon.factory.parts.wpn_fps_pis_1911_b_long.stats = { value = 2, damage = 0, spread_moving = -2, spread = 1, recoil = 0, concealment = -2, suppression = -1 }
+tweak_data.weapon.factory.parts.wpn_fps_pis_1911_b_long.stats = { value = 2, damage = 0, spread_moving = -2, spread = 2, recoil = 0, concealment = -2, suppression = -0 }
 --1911 Vented
-tweak_data.weapon.factory.parts.wpn_fps_pis_1911_b_vented.stats = { value = 1, recoil = 2, spread_moving = 2, suppression = -3}
+tweak_data.weapon.factory.parts.wpn_fps_pis_1911_b_vented.stats = { value = 1, recoil = 3, spread_moving = 2, suppression = -2}
 
 --P226 Two Tone
 tweak_data.weapon.factory.parts.wpn_fps_pis_p226_b_equinox.stats = { value = 4, suppression = -0, recoil = 2, spread_moving = 1 }
@@ -1165,7 +1200,7 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_fg_midwest.stats = { value = 5, conc
 tweak_data.weapon.factory.parts.wpn_fps_ass_g36_fg_c.stats = { value = 4, spread_moving = 2, spread = -1, damage = -1, concealment = 2 }
 tweak_data.weapon.factory.parts.wpn_fps_ass_g36_fg_c.forbids = { "wpn_fps_addon_ris", "wpn_fps_ass_g36_b_long" } 
 --G36k Railed Handguard
-tweak_data.weapon.factory.parts.wpn_fps_ass_g36_fg_ksk.stats = { value = 5, spread_moving = -2, recoil = 1, concealment = -2 }
+tweak_data.weapon.factory.parts.wpn_fps_ass_g36_fg_ksk.stats = { value = 5, spread_moving = -2, recoil = 2, concealment = -2 }
 tweak_data.weapon.factory.parts.wpn_fps_ass_g36_fg_ksk.forbids = { "wpn_fps_addon_ris" }
 
 --Karbin Ceres (AK5)
@@ -1210,14 +1245,14 @@ tweak_data.weapon.factory.parts.wpn_fps_m16_fg_vietnam.stats = { value = 10, spr
 tweak_data.weapon.factory.parts.wpn_upg_saiga_fg_lowerrail.stats = { value = 5, recoil = 2, spread_moving = -2, concealment = -2 }
 
 --FAL Wooden Handguard
-tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_wood.stats = { value = 3, spread = 0, recoil = 4, concealment = -2 }
+tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_wood.stats = { value = 3, spread = 0, recoil = 3, concealment = -2 }
 --FAL DSA SA58 Handguard
-tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_01.stats = { value = 3, damage = -1, spread = -1, recoil = 0, concealment = 6, suppression = -2 }
+tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_01.stats = { value = 3, damage = -12, spread = -1, recoil = 0, concealment = 6, suppression = -2, total_ammo_mod = 34 }
 tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_01.forbids = { "wpn_fps_addon_ris" }
 --FAL Romat Handguard
-tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_03.stats = { value = 3, damage = 0, spread = 1, recoil = -1, concealment = -1 }
+tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_03.stats = { value = 3, damage = 0, spread = 1, recoil = -0, concealment = -1 }
 --FAL DSA Freefloat Barrel Handguard
-tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_04.stats = { value = 3, damage = 0, spread = 2, recoil = -3, concealment = -2 }
+tweak_data.weapon.factory.parts.wpn_fps_ass_fal_fg_04.stats = { value = 3, damage = 0, spread = 2, recoil = -2, concealment = -2 }
 
 --R870 Wood Pump (VANITY)
 tweak_data.weapon.factory.parts.wpn_fps_shot_r870_fg_wood.stats = { value = 2}
@@ -1226,14 +1261,14 @@ tweak_data.weapon.factory.parts.wpn_fps_shot_r870_fg_wood.stats = { value = 2}
 tweak_data.weapon.factory.parts.wpn_fps_smg_akmsu_fg_rail.stats = { value = 5, spread_moving = -2, recoil = 1, concealment = -2 }
 
 --G3 PSG-1 Handguard
-tweak_data.weapon.factory.parts.wpn_fps_ass_g3_fg_psg.stats = { value = 2, recoil = 1, spread = 0, concealment = -1 }
+tweak_data.weapon.factory.parts.wpn_fps_ass_g3_fg_psg.stats = { value = 2, recoil = 2, spread = 0, concealment = -1 }
 --G3 Railed Handguard
-tweak_data.weapon.factory.parts.wpn_fps_ass_g3_fg_railed.stats = { value = 2, recoil = 2, spread = 0, concealment = -2 }
+tweak_data.weapon.factory.parts.wpn_fps_ass_g3_fg_railed.stats = { value = 2, recoil = 3, spread = 0, concealment = -2 }
 tweak_data.weapon.factory.parts.wpn_fps_ass_g3_fg_railed.forbids = { "wpn_fps_addon_ris" } 
 --G3 Wood Handguard
-tweak_data.weapon.factory.parts.wpn_fps_ass_g3_fg_retro.stats = { value = 2, recoil = -1, spread = 0, concealment = 2 }
+tweak_data.weapon.factory.parts.wpn_fps_ass_g3_fg_retro.stats = { value = 2, recoil = 4, spread = -1, concealment = 2 }
 --G3 Plastic Handguard
-tweak_data.weapon.factory.parts.wpn_fps_ass_g3_fg_retro_plastic.stats = { value = 2, recoil = -3, spread = 0, concealment = 4 }
+tweak_data.weapon.factory.parts.wpn_fps_ass_g3_fg_retro_plastic.stats = { value = 2, recoil = -2, spread = 0, concealment = 4 }
 
 --Galil FAB Defence Handguard
 tweak_data.weapon.factory.parts.wpn_fps_ass_galil_fg_fab.stats = { value = 2, recoil = 2, spread = 0, concealment = -1 }
@@ -1250,6 +1285,10 @@ tweak_data.weapon.factory.parts.wpn_fps_ass_galil_fg_mar.stance_mod = {}
 tweak_data.weapon.factory.parts.wpn_fps_ass_galil_fg_sar.stats = { value = 2, recoil = 0, spread = 0, concealment = 1, damage = -1, suppression = -1 }
 --Galil Galatz Handguard
 tweak_data.weapon.factory.parts.wpn_fps_ass_galil_fg_sniper.stats = { value = 2, recoil = -0, spread = 1, concealment = -2, damage = 0}
+
+--FAB Defence UZI Tri-rail
+tweak_data.weapon.factory.parts.wpn_fps_smg_uzi_fg_rail.stats = { value = 2, recoil = 2, spread = 0, concealment = -2}
+tweak_data.weapon.factory.parts.wpn_fps_smg_uzi_fg_rail.forbids = { "wpn_fps_addon_ris", "wpn_fps_shot_r870_gadget_rail" }
 --}
 
 	
@@ -1320,7 +1359,8 @@ tweak_data.weapon.factory.parts.wpn_fps_pis_deagle_g_ergo.stats = { value = 6, s
 tweak_data.weapon.factory.parts.wpn_fps_pis_deagle_g_bling.stats = { value = 10, spread_moving = -2, spread = 1, concealment = 1, recoil = -2 }
 
 --Bling Grip (1911)
-tweak_data.weapon.factory.parts.wpn_fps_pis_1911_g_bling.stats = { value = 10, spread = 1, recoil = -1 }
+tweak_data.weapon.factory.parts.wpn_fps_pis_1911_g_ergo.stats = { value = 10, spread = 0, recoil = 2 }
+tweak_data.weapon.factory.parts.wpn_fps_pis_1911_g_bling.stats = { value = 10, spread = 1, recoil = -2 }
 
 --PPK Grip
 tweak_data.weapon.factory.parts.wpn_fps_pis_ppk_g_laser.stats = { value = 1, spread = 1 }
@@ -1357,6 +1397,26 @@ tweak_data.weapon.factory.parts.wpn_fps_ass_galil_g_sniper.stats = {
 	spread = 1,
 	concealment = -1
 	}
+	
+--Skorpion Wood Grip	
+tweak_data.weapon.factory.parts.wpn_fps_smg_scorpion_g_wood.stats = {
+	value = 1,
+	recoil = 1,
+	spread = 1,
+	recoil = 1,
+	concealment = -1
+	}
+	
+--Skorpion Ergo Grip	
+tweak_data.weapon.factory.parts.wpn_fps_smg_scorpion_g_ergo.stats = {
+	value = 1,
+	spread = 1,
+	spread = 0,
+	recoil = 3,
+	concealment = 1
+	}
+
+
 --}
 
 
@@ -1419,9 +1479,9 @@ tweak_data.weapon.factory.parts.wpn_fps_ass_s552_s_standard_green.stats = { valu
 tweak_data.weapon.factory.parts.wpn_fps_ass_scar_s_sniper.stats = { value = 4, recoil = 3, spread_moving = -3, concealment = -3 }
 
 --G36 Solid Stock 
-tweak_data.weapon.factory.parts.wpn_fps_ass_g36_s_kv.stats = { value = 4, spread_moving = 2, concealment = 2, spread = 1 }
+tweak_data.weapon.factory.parts.wpn_fps_ass_g36_s_kv.stats = { value = 4, spread_moving = 2, concealment = 2, recoil = 2 }
 --G36 SL8 Stock 
-tweak_data.weapon.factory.parts.wpn_fps_ass_g36_s_sl8.stats = { value = 9, recoil = 2, spread_moving = -3, concealment = -3 }
+tweak_data.weapon.factory.parts.wpn_fps_ass_g36_s_sl8.stats = { value = 9, recoil = 1, spread_moving = -3, concealment = -3, spread = 1 }
 
 --MP7 Extended stock
 tweak_data.weapon.factory.parts.wpn_fps_smg_mp7_s_long.stats = { value = 1, recoil = 2, spread_moving = -1, concealment = -2, spread = 1 }
@@ -1493,6 +1553,31 @@ tweak_data.weapon.factory.parts.wpn_fps_ass_galil_s_wood.stats = {
 	spread = 0,
 	concealment = -2
 	}
+	
+--Uzi Synthetic Stock 
+tweak_data.weapon.factory.parts.wpn_fps_smg_uzi_s_leather.stats = {
+	value = 1,
+	spread = 1,
+	recoil = 2,
+	concealment = -2
+	}
+		
+--Uzi Wood Stock 
+tweak_data.weapon.factory.parts.wpn_fps_smg_uzi_s_solid.stats = {
+	value = 1,
+	spread = 0,
+	recoil = 4,
+	concealment = -2
+	}
+
+--Skorpion No Stock
+tweak_data.weapon.factory.parts.wpn_fps_smg_tec9_s_unfolded.stats = {
+	value = 3,
+	recoil = 3,
+	spread = 1,
+	concealment = -2
+	}
+
 --}
 	
 	
@@ -1573,217 +1658,226 @@ tweak_data.weapon.factory.parts.wpn_fps_extra_zoom.stance_mod = {
 	wpn_fps_ass_galil = { translation = Vector3( 0,-9.6,-3.2 ) + Vector3( 0,0,-3.15) },			
 	}
 
---Aimpoint PRO
-tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod = { 
-	wpn_fps_ass_m4 = { translation = Vector3( 0,2.75,-0.45 ) },
-	wpn_fps_ass_amcar = { translation = Vector3( 0,-2.6,-0.1 ) },
-	wpn_fps_ass_m16 = { translation = Vector3( 0,-2.5,-0.05 ) },
-	wpn_fps_smg_olympic = { translation = Vector3( 0,-2.5,-0.01 ) },
-	wpn_fps_ass_74 = { translation = Vector3( 0,-1,-3 ) },
-	wpn_fps_ass_akm = { translation = Vector3( 0,-1,-3 ) },
-	wpn_fps_shot_saiga = { translation = Vector3( 0,1,-3 ) },
-	wpn_fps_shot_r870 = { translation = Vector3( 0,-5,-3.3 ) },
-	wpn_fps_shot_serbu = { translation = Vector3( 0,-4.5,-3.3 ) },
-	wpn_fps_smg_akmsu = { translation = Vector3( -0.025,7.25,-3.0 ) },
-	wpn_fps_ass_ak5 = { translation = Vector3( -0.025,2,-3.45 ),rotation = Rotation( 0,-0.2,0) },
-	wpn_fps_ass_aug = { translation = Vector3( 0,-2.5,-2.7 ) },
-	wpn_fps_ass_g36 = { translation = Vector3( 0,-0.5,-3 ) },
-	wpn_fps_smg_p90 = { translation = Vector3( 0,-9.75,-2.97 ) },
-	wpn_fps_ass_m14 = { translation = Vector3( -0.05,-17,-3.8 ) },
-	wpn_fps_smg_mp9 = { translation = Vector3( 0,-4,-3.4 ) },
-	wpn_fps_smg_mp5 = { translation = Vector3( 0,-2,-2.8 ),rotation = Rotation( 0,-0.35,0) },
-	wpn_fps_smg_mac10 = { translation = Vector3( 0,-19.25,-3 )},
-			
-	wpn_fps_ass_s552 = { translation = Vector3( -0.1,-10.25,-2.4 ),rotation = Rotation( 0,0.5,0)  },
-	wpn_fps_smg_m45 = { translation = Vector3( 0,-12.5,-4 ) },
-		
-	wpn_fps_smg_mp7 = { translation = Vector3( 0,-3.75,-2.77 ) },
-	wpn_fps_ass_scar = { translation = Vector3( 0,-1,-0.25 ) },
-			
-	wpn_fps_lmg_hk21 = { translation = Vector3( 0,-10,-3.25 ) },
-	wpn_fps_lmg_m249 = { translation = Vector3( -0.03,2.25,-3.55 ) },
-	wpn_fps_lmg_rpk = { translation = Vector3( 0.02,2,-3.1 ) },
-	
-	wpn_fps_pis_deagle = { translation = Vector3( 0,-34,-4.7 ) },
-	wpn_fps_pis_rage = { translation = Vector3( -0.05,-20,-4.6 ) },
-	
-	wpn_fps_ass_akm_gold = { translation = Vector3( 0,-1,-3 ) },
 
-	wpn_fps_snp_msr = { translation = Vector3(0, -13.5, -3.55) },
-	wpn_fps_snp_r93 = { translation = Vector3(0, -9.5, -3.8) },
-	wpn_fps_snp_m95 = { translation = Vector3(0, -2, -3.8) },
-			
-	wpn_fps_ass_fal = { translation = Vector3( 0,4.5,-3.5 ) },
-
-	wpn_fps_sho_ben = { translation = Vector3(0, -2.55, -3.2) },
-	wpn_fps_sho_striker = { translation = Vector3(0, -6.75, -2.7) },
-	wpn_fps_sho_ksg = { translation = Vector3(0, -3.5, -1.3) },
-
-	wpn_fps_pis_judge  = { translation = Vector3( -0.05,-20,-5.3 ) },
-
-	wpn_fps_ass_famas = { translation = Vector3( 0,-13,-6.25 )},		
-	wpn_fps_ass_g3 = { translation = Vector3( 0,-9.3,-3.28 )},		
-	wpn_fps_ass_galil = { translation = Vector3( 0,-9.6,-3.2 )},		
-	}
-
---EOTech
+--EOTech (Base)
 tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod = { 
-	wpn_fps_ass_m4 = { translation = Vector3( 0,-3.75,-0.45 ) },
-	wpn_fps_ass_amcar = { translation = Vector3( 0,-7.6,-0.1 ) },
-	wpn_fps_ass_m16 = { translation = Vector3( 0,-7.5,-0.05 ) },
-	wpn_fps_smg_olympic = { translation = Vector3( 0,-7.5,-0.01 ) },
-	wpn_fps_ass_74 = { translation = Vector3( 0,-6,-3 ) },
-	wpn_fps_ass_akm = { translation = Vector3( 0,-6,-3 ) },
-	wpn_fps_shot_saiga = { translation = Vector3( 0,-3,-3 ) },
-	wpn_fps_shot_r870 = { translation = Vector3( 0,-12,-3.3 ) },
-	wpn_fps_shot_serbu = { translation = Vector3( 0,-11.5,-3.3 ) },
-	wpn_fps_smg_akmsu = { translation = Vector3( -0.025,-0.25,-3.0 ) },
+	wpn_fps_pis_deagle = { translation = Vector3( 0,-34,-4.7 ) },
+	wpn_fps_pis_rage = { translation = Vector3( -0.05,-28,-4.6 ) },
+	wpn_fps_pis_judge  = { translation = Vector3( -0.05,-27,-5.3 ) },
+	
+	wpn_fps_ass_m4 = { translation = Vector3( 0,-3.3,-0.45 ) },
+	wpn_fps_ass_m16 = { translation = Vector3( 0,-7.3,-0.05 ) },
 	wpn_fps_ass_ak5 = { translation = Vector3( -0.025,-3,-3.45 ),rotation = Rotation( 0,-0.2,0) },
 	wpn_fps_ass_aug = { translation = Vector3( 0,-7.5,-2.7 ) },
-	wpn_fps_ass_g36 = { translation = Vector3( 0,-5.5,-3 ) },
-	wpn_fps_smg_p90 = { translation = Vector3( 0,-14.75,-2.97 ) },
-	wpn_fps_ass_m14 = { translation = Vector3( -0.05,-22,-3.8 ) },
-	wpn_fps_smg_mp9 = { translation = Vector3( 0,-9,-3.4 ) },
-	wpn_fps_smg_mp5 = { translation = Vector3( 0,-7,-2.8 ),rotation = Rotation( 0,-0.35,0) },
-	wpn_fps_smg_mac10 = { translation = Vector3( 0,-23.25,-3 )},
-			
-	wpn_fps_ass_s552 = { translation = Vector3( -0.1,-15.25,-2.4 ),rotation = Rotation( 0,0.5,0)  },
-	wpn_fps_smg_m45 = { translation = Vector3( 0,-17.5,-4 ) },
-		
-	wpn_fps_smg_mp7 = { translation = Vector3( 0,-8.75,-2.77 ) },
-	wpn_fps_ass_scar = { translation = Vector3( 0,-6,-0.25 ) },
-			
-	wpn_fps_lmg_hk21 = { translation = Vector3( 0,-14,-3.25 ) },
-	wpn_fps_lmg_m249 = { translation = Vector3( -0.03,-2.25,-3.55 ) },
-	wpn_fps_lmg_rpk = { translation = Vector3( 0.02,-2,-3.1 ) },
+	wpn_fps_ass_famas = { translation = Vector3( 0,-16.4,-6.25 )},
 	
-	wpn_fps_pis_deagle = { translation = Vector3( 0,-34,-4.7 ) },
-	wpn_fps_pis_rage = { translation = Vector3( -0.05,-23,-4.6 ) },
-	
+	wpn_fps_ass_74 = { translation = Vector3( 0,-6,-3 ) },
+	wpn_fps_ass_akm = { translation = Vector3( 0,-6,-3 ) },
 	wpn_fps_ass_akm_gold = { translation = Vector3( 0,-6,-3 ) },
+	
+	wpn_fps_ass_amcar = { translation = Vector3( 0,-7.2,-0.1 ) },
+	wpn_fps_ass_g36 = { translation = Vector3( 0,-5.4,-2.9 ) },
+	wpn_fps_ass_s552 = { translation = Vector3( -0.1,-15.25,-2.4 ),rotation = Rotation( 0,0.5,0)  },
+	wpn_fps_smg_olympic = { translation = Vector3( 0,-7.4,-0.1 ) },
+	wpn_fps_smg_akmsu = { translation = Vector3( -0.025,-0.25,-3.0 ) },
+	
+	wpn_fps_smg_m45 = { translation = Vector3( 0,-17.75,-4 ) },
+	wpn_fps_smg_mp9 = { translation = Vector3( 0,-9.25,-3.4 ) },
+	wpn_fps_smg_mp5 = { translation = Vector3( 0,-6.95,-2.7 ),rotation = Rotation( 0,-0.35,0) },
+	wpn_fps_smg_mac10 = { translation = Vector3( 0,-22.85,-3 )},
+	wpn_fps_smg_scorpion = { translation = Vector3( 0,-17.25,-5.15 )},
+	wpn_fps_smg_uzi = { translation = Vector3( 0,-11.7,-5.05 )},
+	wpn_fps_smg_tec9 = { translation = Vector3( 0,-12.25,-5 )},
+	
+	wpn_fps_smg_p90 = { translation = Vector3( 0,-14.7,-2.97 ) },
+	wpn_fps_smg_mp7 = { translation = Vector3( 0,-8.75,-2.77 ) },
+			
+	wpn_fps_lmg_hk21 = { translation = Vector3( 0,-13.5,-3.25 ) },
+	wpn_fps_lmg_m249 = { translation = Vector3( -0.03,-2.4,-3.55 ) },
+	wpn_fps_lmg_rpk = { translation = Vector3( 0.02,-2,-3.1 ) },
 
-	wpn_fps_snp_msr = { translation = Vector3(0, -18.5, -3.55) },
-	wpn_fps_snp_r93 = { translation = Vector3(0, -14.5, -3.8) },
+	wpn_fps_snp_msr = { translation = Vector3(0, -17.8, -3.55) },
+	wpn_fps_snp_r93 = { translation = Vector3(0, -14.2, -3.8) },
 	wpn_fps_snp_m95 = { translation = Vector3(0, -7, -3.8) },
 
-	wpn_fps_ass_fal = { translation = Vector3( 0,-0.5,-3.5 )},
+	wpn_fps_shot_saiga = { translation = Vector3( 0,-3,-3 ) },
+	wpn_fps_shot_r870 = { translation = Vector3( 0,-11.15,-3.3 ) },
+	wpn_fps_shot_serbu = { translation = Vector3( 0,-11.25,-3.3 ) },
+	wpn_fps_sho_ben = { translation = Vector3(0, -5.95, -3.2) },
+	wpn_fps_sho_striker = { translation = Vector3(0, -10.25, -2.7) },
+	wpn_fps_sho_ksg = { translation = Vector3(0, -7.1, -1.3) },
+	
+	wpn_fps_ass_m14 = { translation = Vector3( -0.05,-22.4,-3.8 ) },
+	wpn_fps_ass_scar = { translation = Vector3( 0,-5.8,-0.25 ) },
+	wpn_fps_ass_fal = { translation = Vector3( 0,-0.5,-3.5 )},		
+	wpn_fps_ass_g3 = { translation = Vector3( 0,-14,-3.48 )},		
+	wpn_fps_ass_galil = { translation = Vector3( 0,-14.3,-3.2 )},	
+	}
+	
+--Aimpoint PRO (+2)
+tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod = { 
+	wpn_fps_pis_deagle = { translation = Vector3( 0,-34,-4.7 ) },
+	wpn_fps_pis_rage = { translation = Vector3( -0.05,-26,-4.6 ) },
+	wpn_fps_pis_judge  = { translation = Vector3( -0.05,-27,-5.3 ) },
+	
+	wpn_fps_ass_m4 = { translation = Vector3( 0,-3.3,-0.45 ) + Vector3(0, 2, 0) },
+	wpn_fps_ass_m16 = { translation = Vector3( 0,-7.3,-0.05 ) + Vector3(0, 2, 0) },
+	wpn_fps_ass_ak5 = { translation = Vector3( -0.025,-3,-3.45 ) + Vector3(0, 2, 0),rotation = Rotation( 0,-0.2,0) },
+	wpn_fps_ass_aug = { translation = Vector3( 0,-7.5,-2.7 ) + Vector3(0, 2, 0) },
+	wpn_fps_ass_famas = { translation = Vector3( 0,-16.4,-6.25 ) + Vector3(0, 2, 0)},
+	
+	wpn_fps_ass_74 = { translation = Vector3( 0,-6,-3 ) + Vector3(0, 2, 0) },
+	wpn_fps_ass_akm = { translation = Vector3( 0,-6,-3 ) + Vector3(0, 2, 0) },
+	wpn_fps_ass_akm_gold = { translation = Vector3( 0,-6,-3 ) + Vector3(0, 2, 0) },
+	
+	wpn_fps_ass_amcar = { translation = Vector3( 0,-7.2,-0.1 ) + Vector3(0, 2, 0) },
+	wpn_fps_ass_g36 = { translation = Vector3( 0,-5.4,-2.9 ) + Vector3(0, 2, 0) },
+	wpn_fps_ass_s552 = { translation = Vector3( -0.1,-15.25,-2.4 ) + Vector3(0, 2, 0),rotation = Rotation( 0,0.5,0)  },
+	wpn_fps_smg_olympic = { translation = Vector3( 0,-7.4,-0.1 ) + Vector3(0, 2, 0) },
+	wpn_fps_smg_akmsu = { translation = Vector3( -0.025,-0.25,-3.0 ) + Vector3(0, 2, 0) },
+	
+	wpn_fps_smg_m45 = { translation = Vector3( 0,-17.75,-4 ) + Vector3(0, 2, 0) },
+	wpn_fps_smg_mp9 = { translation = Vector3( 0,-9.25,-3.4 ) + Vector3(0, 2, 0) },
+	wpn_fps_smg_mp5 = { translation = Vector3( 0,-6.95,-2.7 ) + Vector3(0, 2, 0),rotation = Rotation( 0,-0.35,0) },
+	wpn_fps_smg_mac10 = { translation = Vector3( 0,-22.85,-3 ) + Vector3(0, 2, 0)},
+	wpn_fps_smg_scorpion = { translation = Vector3( 0,-17.25,-5.15 ) + Vector3(0, 2, 0)},
+	wpn_fps_smg_uzi = { translation = Vector3( 0,-11.7,-5.05 ) + Vector3(0, 2, 0)},
+	wpn_fps_smg_tec9 = { translation = Vector3( 0,-12.25,-5 ) + Vector3(0, 2, 0)},
+	
+	wpn_fps_smg_p90 = { translation = Vector3( 0,-14.7,-2.97 ) + Vector3(0, 2, 0) },
+	wpn_fps_smg_mp7 = { translation = Vector3( 0,-8.75,-2.77 ) + Vector3(0, 2, 0) },
+			
+	wpn_fps_lmg_hk21 = { translation = Vector3( 0,-13.5,-3.25 ) + Vector3(0, 2, 0) },
+	wpn_fps_lmg_m249 = { translation = Vector3( -0.03,-2.4,-3.55 ) + Vector3(0, 2, 0) },
+	wpn_fps_lmg_rpk = { translation = Vector3( 0.02,-2,-3.1 ) + Vector3(0, 2, 0) },
 
-	wpn_fps_sho_ben = { translation = Vector3(0, -6.55, -3.2) },
-	wpn_fps_sho_striker = { translation = Vector3(0, -10.75, -2.7) },
-	wpn_fps_sho_ksg = { translation = Vector3(0, -7.5, -1.3) },
+	wpn_fps_snp_msr = { translation = Vector3(0, -17.8, -3.55) + Vector3(0, 2, 0) },
+	wpn_fps_snp_r93 = { translation = Vector3(0, -14.2, -3.8) + Vector3(0, 2, 0) },
+	wpn_fps_snp_m95 = { translation = Vector3(0, -7, -3.8) + Vector3(0, 2, 0) },
+
+	wpn_fps_shot_saiga = { translation = Vector3( 0,-3,-3 ) + Vector3(0, 2, 0) },
+	wpn_fps_shot_r870 = { translation = Vector3( 0,-11.15,-3.3 ) + Vector3(0, 2, 0) },
+	wpn_fps_shot_serbu = { translation = Vector3( 0,-11.25,-3.3 ) + Vector3(0, 2, 0) },
+	wpn_fps_sho_ben = { translation = Vector3(0, -5.95, -3.2) + Vector3(0, 2, 0) },
+	wpn_fps_sho_striker = { translation = Vector3(0, -10.25, -2.7) + Vector3(0, 2, 0)},
+	wpn_fps_sho_ksg = { translation = Vector3(0, -7.1, -1.3) + Vector3(0, 2, 0) },
 	
-	wpn_fps_pis_judge  = { translation = Vector3( -0.05,-20,-5.3 ) },
-	
-	wpn_fps_ass_famas = { translation = Vector3( 0,-13,-6.25 ) - Vector3( 0,-4, 0 )},		
-	wpn_fps_ass_g3 = { translation = Vector3( 0,-9.3,-3.28 ) - Vector3( 0,-4, 0 )},		
-	wpn_fps_ass_galil = { translation = Vector3( 0,-9.6,-3.2 ) - Vector3( 0,-4, 0 )},	
+	wpn_fps_ass_m14 = { translation = Vector3( -0.05,-22.4,-3.8 ) + Vector3(0, 2, 0) },
+	wpn_fps_ass_scar = { translation = Vector3( 0,-5.8,-0.25 ) + Vector3(0, 2, 0) },
+	wpn_fps_ass_fal = { translation = Vector3( 0,-0.5,-3.5 ) + Vector3(0, 2, 0)},		
+	wpn_fps_ass_g3 = { translation = Vector3( 0,-14,-3.48 ) + Vector3(0, 2, 0)},		
+	wpn_fps_ass_galil = { translation = Vector3( 0,-14.3,-3.2 ) + Vector3(0, 2, 0)},	
 	}
 
---Specter Sight (ELCAN Specter DR)
+--Specter Sight (+4)
 tweak_data.weapon.factory.parts.wpn_fps_upg_o_specter.stance_mod = { 
-	wpn_fps_ass_m4 = { translation = Vector3( 0,2.75,-0.5 ) },
-	wpn_fps_ass_amcar = { translation = Vector3( 0,-2.6,-0.05) },
-	wpn_fps_ass_m16 = { translation = Vector3( 0,-2.5,-0.05 ) },
-	wpn_fps_smg_olympic = { translation = Vector3( 0,-2.5,-0.01 ) },
-	wpn_fps_ass_74 = { translation = Vector3( -0.025,-23,-3 ) },
-	wpn_fps_ass_akm = { translation = Vector3( 0,-23,-3 ) },
-	wpn_fps_shot_saiga = { translation = Vector3( 0,-20,-3 ) },
-	wpn_fps_shot_r870 = { translation = Vector3( 0,-5,-3.3 ) },
-	wpn_fps_shot_serbu = { translation = Vector3( 0,-4.5,-3.3 ) },
-	wpn_fps_smg_akmsu = { translation = Vector3( -0.025,-15.25,-3.0 ) },
-	wpn_fps_ass_ak5 = { translation = Vector3( -0.025,2,-3.45 ),rotation = Rotation( 0,-0.2,0) },
-	wpn_fps_ass_aug = { translation = Vector3( 0,-2.5,-2.7 ) },
-	wpn_fps_ass_g36 = { translation = Vector3( -0.02,-0.5,-2.9 ) },
-	wpn_fps_smg_p90 = { translation = Vector3( 0,-9.75,-2.97 ) },
-	wpn_fps_ass_m14 = { translation = Vector3( -0.05,-17,-3.8 ) },
-	wpn_fps_smg_mp9 = { translation = Vector3( 0,-4,-3.4 ) },
-	wpn_fps_smg_mp5 = { translation = Vector3( 0,-2,-2.8 ),rotation = Rotation( 0,-0.35,0) },
-	wpn_fps_smg_mac10 = { translation = Vector3( 0,-19.25,-3 )},
-			
-	wpn_fps_ass_s552 = { translation = Vector3( -0.1,-10.25,-2.4 ),rotation = Rotation( 0,0.5,0) },
-	wpn_fps_smg_m45 = { translation = Vector3( 0,-12.5,-3.9  ) },
-		
-	wpn_fps_smg_mp7 = { translation = Vector3( 0,-3.75,-2.77 ) },
-	wpn_fps_ass_scar = { translation = Vector3( 0,-1,-0.25 ) },
-			
-	wpn_fps_lmg_hk21 = { translation = Vector3( 0,-10,-3.25 ) },
-	wpn_fps_lmg_m249 = { translation = Vector3( -0.03,2.25,-3.55 ) },
-	wpn_fps_lmg_rpk = { translation = Vector3( 0.02,-20,-3.1 ) },
+	wpn_fps_pis_deagle = { translation = Vector3( 0,-34,-4.7 ) + Vector3(0, 4, 0) },
+	wpn_fps_pis_rage = { translation = Vector3( -0.05,-26,-4.6 ) + Vector3(0, 4, 0) },
+	wpn_fps_pis_judge  = { translation = Vector3( -0.05,-27,-5.3 ) + Vector3(0, 4, 0) },
 	
-	wpn_fps_pis_deagle = { translation = Vector3( 0,-34,-4.7 ) },
-	wpn_fps_pis_rage = { translation = Vector3( -0.05,-20,-4.6 ) },
+	wpn_fps_ass_m4 = { translation = Vector3( 0,-3.3,-0.45 ) + Vector3(0, 4, 0) },
+	wpn_fps_ass_m16 = { translation = Vector3( 0,-7.3,-0.05 ) + Vector3(0, 4, 0) },
+	wpn_fps_ass_ak5 = { translation = Vector3( -0.025,-3,-3.45 ) + Vector3(0, 4, 0),rotation = Rotation( 0,-0.2,0) },
+	wpn_fps_ass_aug = { translation = Vector3( 0,-7.5,-2.7 ) + Vector3(0, 4, 0) },
+	wpn_fps_ass_famas = { translation = Vector3( 0,-16.4,-6.25 ) + Vector3(0, 4, 0)},
 	
-	wpn_fps_ass_akm_gold = { translation = Vector3( 0,-23,-3 ) },
+	wpn_fps_ass_74 = { translation = Vector3( 0,-23.85,-3 ) },
+	wpn_fps_ass_akm = { translation = Vector3( 0,-23.85,-3 ) },
+	wpn_fps_ass_akm_gold = { translation = Vector3( 0,-23.85,-3 ) },
+	
+	wpn_fps_ass_amcar = { translation = Vector3( 0,-7.2,-0.1 ) + Vector3(0, 4, 0) },
+	wpn_fps_ass_g36 = { translation = Vector3( 0,-5.4,-2.9 ) + Vector3(0, 4, 0) },
+	wpn_fps_ass_s552 = { translation = Vector3( -0.1,-15.25,-2.4 ) + Vector3(0, 4, 0),rotation = Rotation( 0,0.5,0)  },
+	wpn_fps_smg_olympic = { translation = Vector3( 0,-7.4,-0.1 ) + Vector3(0, 4, 0) },
+	wpn_fps_smg_akmsu = { translation = Vector3( -0.025,-18,-3.0 )},
+	
+	wpn_fps_smg_m45 = { translation = Vector3( 0,-17.75,-4 ) + Vector3(0, 4, 0) },
+	wpn_fps_smg_mp9 = { translation = Vector3( 0,-9.25,-3.4 ) + Vector3(0, 4, 0)},
+	wpn_fps_smg_mp5 = { translation = Vector3( 0,-6.95,-2.7 ) + Vector3(0, 4, 0),rotation = Rotation( 0,-0.35,0) },
+	wpn_fps_smg_mac10 = { translation = Vector3( 0,-22.85,-3 ) + Vector3(0, 4, 0)},
+	wpn_fps_smg_scorpion = { translation = Vector3( 0,-17.25,-5.15 ) + Vector3(0, 4, 0)},
+	wpn_fps_smg_uzi = { translation = Vector3( 0,-11.7,-5.05 ) + Vector3(0, 4, 0)},
+	wpn_fps_smg_tec9 = { translation = Vector3( 0,-12.25,-5 ) + Vector3(0, 4, 0)},
+	
+	wpn_fps_smg_p90 = { translation = Vector3( 0,-14.7,-2.97 ) + Vector3(0, 4, 0) },
+	wpn_fps_smg_mp7 = { translation = Vector3( 0,-8.75,-2.77 ) + Vector3(0, 4, 0) },
+			
+	wpn_fps_lmg_hk21 = { translation = Vector3( 0,-13.5,-3.25 ) + Vector3(0, 4, 0) },
+	wpn_fps_lmg_m249 = { translation = Vector3( -0.03,-2.4,-3.55 ) + Vector3(0, 4, 0) },
+	wpn_fps_lmg_rpk = { translation = Vector3( 0.02,-2,-3.1 ) },
 
-	wpn_fps_snp_msr = { translation = Vector3(0, -13.5, -3.55) },
-	wpn_fps_snp_r93 = { translation = Vector3(0, -9.5, -3.8) },
-	wpn_fps_snp_m95 = { translation = Vector3(0, -2, -3.8) },
-			
-	wpn_fps_ass_fal = { translation = Vector3( 0,4.5,-3.5 ) },
+	wpn_fps_snp_msr = { translation = Vector3(0, -17.8, -3.55) + Vector3(0, 4, 0) },
+	wpn_fps_snp_r93 = { translation = Vector3(0, -14.2, -3.8) + Vector3(0, 4, 0) },
+	wpn_fps_snp_m95 = { translation = Vector3(0, -7, -3.8) + Vector3(0, 4, 0) },
 
-	wpn_fps_sho_ben = { translation = Vector3(0, -2.55, -3.2) },
-	wpn_fps_sho_striker = { translation = Vector3(0, -6.75, -2.7) },
-	wpn_fps_sho_ksg = { translation = Vector3(0, -3.5, -1.3) },
+	wpn_fps_shot_saiga = { translation = Vector3( 0,-20.5,-3 ) },
+	wpn_fps_shot_r870 = { translation = Vector3( 0,-11.15,-3.3 ) + Vector3(0, 4, 0) },
+	wpn_fps_shot_serbu = { translation = Vector3( 0,-11.25,-3.3 ) + Vector3(0, 4, 0) },
+	wpn_fps_sho_ben = { translation = Vector3(0, -5.95, -3.2) + Vector3(0, 4, 0) },
+	wpn_fps_sho_striker = { translation = Vector3(0, -10.25, -2.7) + Vector3(0, 4, 0) },
+	wpn_fps_sho_ksg = { translation = Vector3(0, -7.1, -1.3) + Vector3(0, 4, 0) },
 	
-	wpn_fps_pis_judge  = { translation = Vector3( -0.05,-20,-5.3 ) },
-	
-	wpn_fps_ass_famas = { translation = Vector3( 0,-13,-6.25 )},		
-	wpn_fps_ass_g3 = { translation = Vector3( 0,-9.3,-3.28 )},		
-	wpn_fps_ass_galil = { translation = Vector3( 0,-9.6,-3.2 )},
+	wpn_fps_ass_m14 = { translation = Vector3( -0.05,-22.4,-3.8 ) + Vector3(0, 4, 0) },
+	wpn_fps_ass_scar = { translation = Vector3( 0,-5.8,-0.25 ) + Vector3(0, 4, 0) },
+	wpn_fps_ass_fal = { translation = Vector3( 0,-0.5,-3.5 ) + Vector3(0, 4, 0)},		
+	wpn_fps_ass_g3 = { translation = Vector3( 0,-14,-3.48 ) + Vector3(0, 4, 0)},		
+	wpn_fps_ass_galil = { translation = Vector3( 0,-14.3,-3.2 ) + Vector3(0, 4, 0)},	
 	}
 	
 --ACOG (+6)
 tweak_data.weapon.factory.parts.wpn_fps_upg_o_acog.stance_mod = { 
-	wpn_fps_ass_m4 = { translation = Vector3( 0,4.75,-0.5 ) },
-	wpn_fps_ass_amcar = { translation = Vector3( 0,-0.6,-0.05) },
-	wpn_fps_ass_m16 = { translation = Vector3( 0,-0.5,-0.05 ) },
-	wpn_fps_smg_olympic = { translation = Vector3( 0,-0.5,-0.01 ) },
-	wpn_fps_ass_74 = { translation = Vector3( -0.025,-21,-3 ) },
-	wpn_fps_ass_akm = { translation = Vector3( 0,-21,-3 ) },
-	wpn_fps_shot_saiga = { translation = Vector3( 0,-18,-3 ) },
-	wpn_fps_shot_r870 = { translation = Vector3( 0,-5,-3.3 ) },
-	wpn_fps_shot_serbu = { translation = Vector3( 0,-4.5,-3.3 ) },
-	wpn_fps_smg_akmsu = { translation = Vector3( -0.025,-17.25,-3.0 ) },
-	wpn_fps_ass_ak5 = { translation = Vector3( -0.025,4,-3.45 ),rotation = Rotation( 0,-0.2,0) },
-	wpn_fps_ass_aug = { translation = Vector3( 0,-0.5,-2.7 ) },
-	wpn_fps_ass_g36 = { translation = Vector3( -0.02,-2.5,-2.9 ) },
-	wpn_fps_smg_p90 = { translation = Vector3( 0,-7.75,-2.97 ) },
-	wpn_fps_ass_m14 = { translation = Vector3( -0.05,-16,-3.8 ) },
-	wpn_fps_smg_mp9 = { translation = Vector3( 0,-2,-3.4 ) },
-	wpn_fps_smg_mp5 = { translation = Vector3( 0,-0,-2.8 ),rotation = Rotation( 0,-0.35,0) },
-	wpn_fps_smg_mac10 = { translation = Vector3( 0,-17.25,-3 )},
+	wpn_fps_pis_deagle = { translation = Vector3( 0,-34,-4.7 ) + Vector3(0, 1, 0)  },
+	wpn_fps_pis_rage = { translation = Vector3( -0.05,-26,-4.6 ) + Vector3(0, 1.1, 0)  },
+	wpn_fps_pis_judge  = { translation = Vector3( -0.05,-27,-5.3 ) + Vector3(0, 1.1, 0)  },
+	
+	wpn_fps_ass_m4 = { translation = Vector3( 0,-3.3,-0.45 ) + Vector3(0, 6, 0)  },
+	wpn_fps_ass_m16 = { translation = Vector3( 0,-7.3,-0.05 ) + Vector3(0, 6, 0)  },
+	wpn_fps_ass_ak5 = { translation = Vector3( -0.025,-3,-3.45 ) + Vector3(0, 6, 0) ,rotation = Rotation( 0,-0.2,0) },
+	wpn_fps_ass_aug = { translation = Vector3( 0,-7.5,-2.7 ) + Vector3(0, 6, 0)  },
+	wpn_fps_ass_famas = { translation = Vector3( 0,-16.4,-6.25 ) + Vector3(0, 6, 0) },
+	
+	wpn_fps_ass_74 = { translation = Vector3( 0,-22,-3 ) },
+	wpn_fps_ass_akm = { translation = Vector3( 0,-22,-3 ) },
+	wpn_fps_ass_akm_gold = { translation = Vector3( 0,-22,-3 ) },
+	
+	wpn_fps_ass_amcar = { translation = Vector3( 0,-7.2,-0.1 ) + Vector3(0, 6, 0)  },
+	wpn_fps_ass_g36 = { translation = Vector3( 0,-5.4,-2.9 ) + Vector3(0, 6, 0)  },
+	wpn_fps_ass_s552 = { translation = Vector3( -0.1,-15.25,-2.4 ) + Vector3(0, 6, 0) ,rotation = Rotation( 0,0.5,0)  },
+	wpn_fps_smg_olympic = { translation = Vector3( 0,-7.4,-0.1 ) + Vector3(0, 6, 0)  },
+	wpn_fps_smg_akmsu = { translation = Vector3( -0.025,-16,-3.0 ) },
+	
+	wpn_fps_smg_m45 = { translation = Vector3( 0,-17.75,-4 ) + Vector3(0, 6, 0)  },
+	wpn_fps_smg_mp9 = { translation = Vector3( 0,-9.25,-3.4 ) + Vector3(0, 6, 0)  },
+	wpn_fps_smg_mp5 = { translation = Vector3( 0,-6.95,-2.7 ) + Vector3(0, 6, 0) ,rotation = Rotation( 0,-0.35,0) },
+	wpn_fps_smg_mac10 = { translation = Vector3( 0,-22.85,-3 ) + Vector3(0, 6, 0) },
+	wpn_fps_smg_scorpion = { translation = Vector3( 0,-17.25,-5.15 ) + Vector3(0, 6, 0)},
+	wpn_fps_smg_uzi = { translation = Vector3( 0,-11.7,-5.05 ) + Vector3(0, 6, 0)},
+	wpn_fps_smg_tec9 = { translation = Vector3( 0,-12.25,-5 ) + Vector3(0, 6, 0)},
+	
+	wpn_fps_smg_p90 = { translation = Vector3( 0,-14.7,-2.97 ) + Vector3(0, 6, 0)  },
+	wpn_fps_smg_mp7 = { translation = Vector3( 0,-8.75,-2.77 ) + Vector3(0, 6, 0)  },
 			
-	wpn_fps_ass_s552 = { translation = Vector3( -0.1,-15.25,-2.4 ),rotation = Rotation( 0,0.5,0) },
-	wpn_fps_smg_m45 = { translation = Vector3( 0,-17.5,-3.9  ) },
-		
-	wpn_fps_smg_mp7 = { translation = Vector3( 0,-8.75,-2.77 ) },
-	wpn_fps_ass_scar = { translation = Vector3( 0,1,-0.25 ) },
-			
-	wpn_fps_lmg_hk21 = { translation = Vector3( 0,-8,-3.25 ) },
-	wpn_fps_lmg_m249 = { translation = Vector3( -0.03,4.25,-3.55 ) },
+	wpn_fps_lmg_hk21 = { translation = Vector3( 0,-13.5,-3.25 ) + Vector3(0, 6, 0)  },
+	wpn_fps_lmg_m249 = { translation = Vector3( -0.03,-2.4,-3.55 ) + Vector3(0, 6, 0)  },
 	wpn_fps_lmg_rpk = { translation = Vector3( 0.02,-18,-3.1 ) },
-	
-	wpn_fps_pis_deagle = { translation = Vector3( 0,-32,-4.7 ) },
-	wpn_fps_pis_rage = { translation = Vector3( -0.05,-18,-4.6 ) },
-	
-	wpn_fps_ass_akm_gold = { translation = Vector3( 0,-21,-3 ) },
 
-	wpn_fps_snp_msr = { translation = Vector3(0, -11.5, -3.55) },
-	wpn_fps_snp_r93 = { translation = Vector3(0, -7.5, -3.8) },
-	wpn_fps_snp_m95 = { translation = Vector3(0, -0, -3.8) },
+	wpn_fps_snp_msr = { translation = Vector3(0, -17.8, -3.55) + Vector3(0, 6, 0) },
+	wpn_fps_snp_r93 = { translation = Vector3(0, -14.2, -3.8) + Vector3(0, 6, 0) },
+	wpn_fps_snp_m95 = { translation = Vector3(0, -7, -3.8) + Vector3(0, 6, 0) },
 
-	wpn_fps_ass_fal = { translation = Vector3( 0,6.5,-3.5 )},
+	wpn_fps_shot_saiga = { translation = Vector3( 0,-18.7,-3 ) },
+	wpn_fps_shot_r870 = { translation = Vector3( 0,-11.15,-3.3 ) + Vector3(0, 6, 0) },
+	wpn_fps_shot_serbu = { translation = Vector3( 0,-11.25,-3.3 ) + Vector3(0, 6, 0) },
+	wpn_fps_sho_ben = { translation = Vector3(0, -5.95, -3.2) + Vector3(0, 6, 0) },
+	wpn_fps_sho_striker = { translation = Vector3(0, -10.25, -2.7) + Vector3(0, 6, 0) },
+	wpn_fps_sho_ksg = { translation = Vector3(0, -7.1, -1.3) + Vector3(0, 6, 0) },
 	
-	wpn_fps_sho_ben = { translation = Vector3(0, -0.55, -3.2) },
-	wpn_fps_sho_striker = { translation = Vector3(0, -4.75, -2.7) },
-	wpn_fps_sho_ksg = { translation = Vector3(0, -1.5, -1.3) },
-	
-	wpn_fps_pis_judge  = { translation = Vector3( -0.05,-20,-5.3 ) },
-	
-	wpn_fps_ass_famas = { translation = Vector3( 0,-13,-6.25 ) + Vector3( 0, 2, 0 )},		
-	wpn_fps_ass_g3 = { translation = Vector3( 0,-9.3,-3.28 ) + Vector3( 0, 2, 0 )},		
-	wpn_fps_ass_galil = { translation = Vector3( 0,-9.6,-3.2 ) + Vector3( 0, 2, 0 )},
-}
+	wpn_fps_ass_m14 = { translation = Vector3( -0.05,-22.4,-3.8 ) + Vector3(0, 6, 0) },
+	wpn_fps_ass_scar = { translation = Vector3( 0,-5.8,-0.25 ) + Vector3(0, 6, 0) },
+	wpn_fps_ass_fal = { translation = Vector3( 0,-0.5,-3.5 ) + Vector3(0, 6, 0)},		
+	wpn_fps_ass_g3 = { translation = Vector3( 0,-14,-3.48 ) + Vector3(0, 6, 0)},		
+	wpn_fps_ass_galil = { translation = Vector3( 0,-14.3,-3.2 ) + Vector3(0, 6, 0)},	
+	}
 																		
 --45 degree irons
 tweak_data.weapon.factory.parts.wpn_fps_upg_o_45iron.stance_mod = {	
@@ -1810,6 +1904,9 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_o_45iron.stance_mod = {
 	wpn_fps_smg_mp9 = { translation = Vector3(-4.6, 5, -14.4),rotation = Rotation( 0.35, -0.3, -45) },
 	wpn_fps_smg_mp5 = { translation = Vector3(-2.15, 5, -12.75),rotation = Rotation(0.5, -0.5, -45) },
 	wpn_fps_smg_mac10 = { translation = Vector3(-1.4, 0, -11),rotation = Rotation( 0, -0, -45) },
+	wpn_fps_smg_scorpion = { translation = Vector3(-2.9, 5, -15.4),rotation = Rotation( 0, -0, -45) },
+	wpn_fps_smg_tec9 = { translation = Vector3(-2.625, 5, -13.5),rotation = Rotation( 0.125, -0, -45) },
+	wpn_fps_smg_uzi = { translation = Vector3(-2.4, 5, -15.2),rotation = Rotation( 0.15, -0, -45) },
 			
 	wpn_fps_ass_s552 = { translation = Vector3(-3.2, 0, -12.6),rotation = Rotation(-0.05 ,0.35, -45) },
 	wpn_fps_smg_m45 = { translation = Vector3(-4.1, 0, -14.65),rotation = Rotation(0.15, -0.1, -45) },
@@ -1845,18 +1942,18 @@ if sig_rear_iron == true then
 	tweak_data.player.stances.s552.steelsight.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 	tweak_data.player.stances.s552.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 	
+	--EOTech
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.01,-15.4,-3.1 ), rotation = Rotation( 0,0.95,0) }
+	--Aimpoint
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.01,-15.4,-3.1 ) + Vector3(0, 2, 0), rotation = Rotation( 0,0.95,0) }
 	--Specter Sight (ELCAN Specter DR) (+4)
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_specter.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.1,-10.25,-2.4 ), rotation = Rotation( 0,0.5,0) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_specter.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.1,-10.25,-2.4 ) + Vector3(0, 4, 0), rotation = Rotation( 0,0.5,0) }
 	--ACOG 
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_acog.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.01,-15.25,-3.1 ), rotation = Rotation( 0,0.95,0) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_acog.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.01,-15.25,-3.1 ) + Vector3(0, 6, 0), rotation = Rotation( 0,0.95,0) }
 	--45 degree irons
 	tweak_data.weapon.factory.parts.wpn_fps_upg_o_45iron.stance_mod.wpn_fps_ass_s552 = { translation = Vector3(-3.1, 0, -13.4),rotation = Rotation(-0.5, 1, -45) }
 	--Extra Zoom
 	tweak_data.weapon.factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.01,-10.25,-3.1 ) + Vector3( 0,0,-3.15), rotation = Rotation( 0,0.95,0) }
-	--Aimpoint
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.01,-10.25,-3.1 ),rotation = Rotation( 0,0.95,0) }
-	--EOTech
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.01,-15.25,-3.1 ),rotation = Rotation( 0,0.95,0) }
 else
 	tweak_data.weapon.factory.parts.wpn_fps_ass_s552_o_flipup.unit = "units/pd2_dlc1/weapons/wpn_fps_ass_s552_pts/wpn_fps_ass_s552_o_flipup"
 
@@ -1867,18 +1964,19 @@ else
 	tweak_data.player.stances.s552.steelsight.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 	tweak_data.player.stances.s552.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 	
+	--EOTech
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.05,-15.4,-2.4 ), rotation = Rotation( 0,0.5,0) }
+	--Aimpoint
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.05,-15.4,-2.4 ) + Vector3(0, 2, 0), rotation = Rotation( 0,0.5,0) }
 	--Specter Sight (ELCAN Specter DR) (+4)
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_specter.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.01,-10.25,-3.1 ), rotation = Rotation( 0,0.95,0) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_specter.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.01,-10.25,-3.1 ) + Vector3(0, 4, 0), rotation = Rotation( 0,0.95,0) }
 	--ACOG 
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_acog.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.1,-15.25,-2.4 ), rotation = Rotation( 0,0.5,0) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_acog.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.1,-15.25,-2.4 ) + Vector3(0, 6, 0), rotation = Rotation( 0,0.5,0) }
 	--45 degree irons
 	tweak_data.weapon.factory.parts.wpn_fps_upg_o_45iron.stance_mod.wpn_fps_ass_s552 = { translation = Vector3(-3.2, 0, -12.6),rotation = Rotation(-0.05 ,0.35, -45) }
 	--Extra Zoom
 	tweak_data.weapon.factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.1,-10.25,-2.4 ),rotation = Rotation( 0,0.5,0) }
-	--Aimpoint
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.1,-10.25,-2.4 ),rotation = Rotation( 0,0.5,0) }
-	--EOTech
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.1,-15.25,-2.4 ),rotation = Rotation( 0,0.5,0) }
+	
 end
 	
 if ak_optics == true then
@@ -1890,20 +1988,20 @@ if ak_optics == true then
 	tweak_data.weapon.factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_akm_gold = { translation = Vector3( 0,-23,-3 ) + Vector3( 0,0,-3.15) }
 	
 	--Aimpoint PRO (+4)
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_74 = { translation = Vector3( -0.025,-23,-3 ) }
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_akm = { translation = Vector3( 0,-23,-3 ) }
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_shot_saiga = { translation = Vector3( 0,-20,-3 ) }
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_smg_akmsu = { translation = Vector3( -0.025,-15.25,-3.0 ) }
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_lmg_rpk = { translation = Vector3( 0.02,-20,-3.1 ) }
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_akm_gold = { translation = Vector3( 0,-23,-3 ) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_74 = { translation = Vector3( -0.025,-27.75,-2.95 ) + Vector3( 0, 2, 0 ) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_akm = { translation = Vector3( 0,-27.85,-3 ) + Vector3( 0, 2, 0 ) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_shot_saiga = { translation = Vector3( 0,-24.6,-3 ) + Vector3( 0, 2, 0 ) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_smg_akmsu = { translation = Vector3( -0.025,-22.2,-3.0 ) + Vector3( 0, 2, 0 ) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_lmg_rpk = { translation = Vector3( 0.02,-23.8,-3.1 ) + Vector3( 0, 2, 0 ) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_akm_gold = { translation = Vector3( 0,-27.85,-3 ) + Vector3( 0, 2, 0 )}
 
 	--EOTech (base)
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_ass_74 = { translation = Vector3( -0.025,-27,-2.95 ) }
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_ass_akm = { translation = Vector3( 0,-27,-3 ) }
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_shot_saiga = { translation = Vector3( 0,-25,-3 ) }
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_smg_akmsu = { translation = Vector3( -0.025,-22.25,-3.0 ) }
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_lmg_rpk = { translation = Vector3( 0.02,-24,-3.1 ) }
-	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_ass_akm_gold = { translation = Vector3( 0,-27,-3 ) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_ass_74 = { translation = Vector3( -0.025,-27.75,-2.95 ) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_ass_akm = { translation = Vector3( 0,-27.85,-3 ) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_shot_saiga = { translation = Vector3( 0,-24.6,-3 ) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_smg_akmsu = { translation = Vector3( -0.025,-22.2,-3.0 ) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_lmg_rpk = { translation = Vector3( 0.02,-23.8,-3.1 ) }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_ass_akm_gold = { translation = Vector3( 0,-27.85,-3 ) }
 else
 	tweak_data.weapon.factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_74 = { translation = Vector3( 0,-1,-3 ) + Vector3( 0,-10,-3.15)  }
 	tweak_data.weapon.factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_akm = { translation = Vector3( 0,-1,-3 ) + Vector3( 0,-10,-3.15)  }
@@ -1992,6 +2090,7 @@ tweak_data.weapon.factory.parts.wpn_upg_o_marksmansight_rear.stats = { value = 1
 
 --RMR Red Dot (Pistols)
 tweak_data.weapon.factory.parts.wpn_fps_upg_o_rmr.stats = { value = 1, concealment = -1, recoil = 0, zoom = 1}					
+tweak_data.weapon.factory.parts.wpn_fps_pis_beretta_b_std.animations = { reload = "reload", fire = "recoil", fire_steelsight = "recoil"}
 tweak_data.weapon.factory.parts.wpn_fps_upg_o_rmr.stance_mod = { 
 	wpn_fps_pis_1911 = { translation = Vector3(0, -12, -0.45) },
 	wpn_fps_pis_beretta = { translation = Vector3(0, -7, -0.34) },
@@ -2054,6 +2153,9 @@ if theia_shortdot == true then
 		wpn_fps_smg_mp9 = { translation = Vector3( -0.005,-20,-4.225 ) },
 		wpn_fps_smg_mp5 = { translation = Vector3( -0.005,-17,-3.53 ),rotation = Rotation( 0,-0.35,0) },
 		wpn_fps_smg_mac10 = { translation = Vector3( -0.01,-32.25,-3.765 )},
+		wpn_fps_smg_scorpion= { translation = Vector3( 0.001,-27.5,-5.94 )},
+		wpn_fps_smg_tec9 = { translation = Vector3( 0.001,-22.9,-5.745 )},
+		wpn_fps_smg_uzi = { translation = Vector3( 0.001,-22.2,-5.835 )},
 				
 		wpn_fps_ass_s552 = { translation = Vector3( -0.0525,-26,-3.49),rotation = Rotation( 0,0.95,0) },
 		wpn_fps_smg_m45 = { translation = Vector3( -0.005,-27.5,-4.675 ) },
@@ -2078,7 +2180,7 @@ if theia_shortdot == true then
 		wpn_fps_sho_ksg = { translation = Vector3(0, -17.5, -2.075) },
 		
 		wpn_fps_ass_famas = { translation = Vector3( 0,-23.6,-7 )},		
-		wpn_fps_ass_g3 = { translation = Vector3( 0,-25.8,-4.0625 )},		
+		wpn_fps_ass_g3 = { translation = Vector3( 0,-25.8,-4.2625 )},		
 		wpn_fps_ass_galil = { translation = Vector3( 0,-25.,-3.962 )},
 		
 		wpn_fps_pis_deagle = { translation = Vector3( 0,-49.4,-5.47 ) },
@@ -2110,6 +2212,9 @@ else
 		wpn_fps_smg_mp9 = { translation = Vector3( -0.005,-25,-4.325 ) },
 		wpn_fps_smg_mp5 = { translation = Vector3( -0.005,-23,-3.63 ),rotation = Rotation( 0,-0.35,0) },
 		wpn_fps_smg_mac10 = { translation = Vector3( -0.01,-38.25,-3.865 )},
+		wpn_fps_smg_scorpion= { translation = Vector3( 0.001,-32.7,-6.04 )},
+		wpn_fps_smg_tec9 = { translation = Vector3( 0.005,-27.9,-5.852 )},
+		wpn_fps_smg_uzi = { translation = Vector3( 0.003,-27.2,-5.94 )},
 				
 		wpn_fps_ass_s552 = { translation = Vector3( -0.0525,-31.25,-3.65 ),rotation = Rotation( 0,0.95,0) },
 		wpn_fps_smg_m45 = { translation = Vector3( -0.005,-33.5,-4.775 ) },
@@ -2138,7 +2243,7 @@ else
 		wpn_fps_pis_judge  = { translation = Vector3( -0.03,-47.4,-6.23 ) },
 		
 		wpn_fps_ass_famas = { translation = Vector3( 0,-28.4,-7.1 )},		
-		wpn_fps_ass_g3 = { translation = Vector3( 0,-30.75,-4.175 )},		
+		wpn_fps_ass_g3 = { translation = Vector3( 0,-29.1,-4.375 )},		
 		wpn_fps_ass_galil = { translation = Vector3( 0,-30,-4.06 )},	
 	}
 end
@@ -2164,7 +2269,7 @@ tweak_data.weapon.factory.parts.wpn_fps_extra_zoom.stats = {value = 1, gadget_zo
 --}		
 			
 			
-------------------[[MAGS]]------------------{
+------------------[[MAGAZINES]]------------------{
 --30 rounder (AMCAR, AMR-16, Para SMG)
 tweak_data.weapon.factory.parts.wpn_fps_m4_uupg_m_std.stats = { value = 1, concealment = -1, extra_ammo = 10}
 
@@ -2186,10 +2291,10 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_m4_m_pmag.stats = { value = 3, extra
 --FAL 30 Round Mag
 tweak_data.weapon.factory.parts.wpn_fps_ass_fal_m_01.stats = { value = 3, extra_ammo = 10, concealment = -2 }
 
---R870 Tube extention
+--R870 Tube extension
 tweak_data.weapon.factory.parts.wpn_fps_shot_r870_m_extended.stats = { value = 6, concealment = -1, spread_moving = -1, extra_ammo = 2 }
 
---Loco Tube extention
+--Loco Tube extension
 tweak_data.weapon.factory.parts.wpn_fps_shot_shorty_m_extended_short.stats = { value = 1, extra_ammo = 1 }
 tweak_data.weapon.factory.parts.wpn_fps_shot_shorty_m_extended_short.unit = "units/payday2/weapons/wpn_fps_smg_mp9_pts/wpn_fps_smg_mp9_b_dummy"
 tweak_data.weapon.factory.parts.wpn_fps_shot_shorty_m_extended_short.third_unit = "units/payday2/weapons/wpn_fps_smg_mp9_pts/wpn_fps_smg_mp9_b_dummy"
@@ -2231,6 +2336,12 @@ tweak_data.weapon.factory.parts.wpn_fps_pis_beretta_m_extended.stats = { value =
 
 --M45 50 rounder
 tweak_data.weapon.factory.parts.wpn_fps_smg_m45_m_extended.stats = { value = 4, concealment = -2, extra_ammo = 14, recoil = 1 }
+
+--Skorpion Dual Mags
+tweak_data.weapon.factory.parts.wpn_fps_smg_scorpion_m_extended.stats = { value = 1, concealment = -3, recoil = 1, total_ammo_mod = 50}
+
+--TEC-9 50rnd Mag
+tweak_data.weapon.factory.parts.wpn_fps_smg_tec9_m_extended.stats = { value = 4, extra_ammo = 18, recoil = 0, concealment = -2}
 --}
 
 
@@ -2282,7 +2393,7 @@ end
 
 ------------------[[GUN FIXES]]------------------{
 
---sets optics closer on some of the AK type guns/mods for consistencies sake
+--sets optics to the default optic postion on a gun on some of the AK type guns/mods for consistencies sake
 tweak_data.weapon.factory.parts.wpn_upg_saiga_fg_standard.override = {}
 tweak_data.weapon.factory.parts.wpn_fps_smg_akmsu_fg_standard.override = {}
 
@@ -2290,11 +2401,24 @@ tweak_data.weapon.factory.parts.wpn_fps_smg_akmsu_fg_standard.override = {}
 tweak_data.weapon.factory.parts.wpn_fps_pis_g18c_b_standard.animations = {reload = "reload", fire = "recoil", fire_steelsight = "recoil"}
 --Fixed the 1911 irons not moving while aiming
 tweak_data.weapon.factory.wpn_fps_pis_1911.animations = {reload = "reload", fire = "recoil", fire_steelsight = "recoil"}
-
+--Fixes the Galil charging handle not moving while shooting
 tweak_data.weapon.factory.parts.wpn_fps_ass_galil_body_standard.animations = {reload = "reload", fire = "recoil", fire_steelsight = "recoil"}
 tweak_data.weapon.factory.wpn_fps_ass_galil.animations = {reload = "reload", fire = "recoil", fire_steelsight = "recoil"}
-
-
+--Fixes the RMR on the 92FS so it moves with the slide
+tweak_data.weapon.factory.wpn_fps_pis_beretta.override = {
+		wpn_upg_o_marksmansight_front = {a_obj = "a_os"},
+		wpn_fps_upg_o_rmr = {parent = "upper_reciever"},
+		wpn_fps_upg_pis_ns_flash = {
+			parent = "lower_reciever"
+		},
+		wpn_fps_upg_ns_pis_medium_slim = {
+			parent = "lower_reciever"
+		}
+	}
+	
+tweak_data.weapon.factory.wpn_fps_lmg_m249.override = {
+}
+--Adds the optic mounts to guns that need them for the "new" attachments
 tweak_data.weapon.factory.parts.wpn_fps_pis_deagle_lock.forbids = {
 	"wpn_fps_upg_o_specter",
 	"wpn_fps_upg_o_aimpoint",
@@ -2367,7 +2491,7 @@ tweak_data.weapon.factory.wpn_fps_pis_deagle.override = {
 		parent = "lower_reciever"
 	}
 }
-
+	
 tweak_data.weapon.factory.wpn_fps_pis_rage.adds = {
 	wpn_fps_upg_o_specter = {"wpn_fps_pis_rage_o_adapter"},
 	wpn_fps_upg_o_aimpoint = {"wpn_fps_pis_rage_o_adapter"},
@@ -2480,6 +2604,10 @@ tweak_data.weapon.factory.wpn_fps_ass_akm_gold.adds = {
 	wpn_fps_upg_o_leupold = { "wpn_fps_ak_extra_ris" },
 }
 	
+tweak_data.weapon.factory.wpn_fps_shot_saiga.adds = { 
+	wpn_fps_smg_akmsu_body_lowerreceiver = { "wpn_upg_ak_g_standard" }
+}
+
 tweak_data.weapon.factory.wpn_fps_ass_74.adds = { 
 	wpn_fps_upg_o_specter = { "wpn_fps_ak_extra_ris" },
 	wpn_fps_upg_o_aimpoint = { "wpn_fps_ak_extra_ris" },
@@ -2496,6 +2624,7 @@ tweak_data.weapon.factory.wpn_fps_ass_74.adds = {
 	wpn_fps_upg_o_rx30 = { "wpn_fps_ak_extra_ris" },
 	wpn_fps_upg_o_45iron = { "wpn_fps_ak_extra_ris" },
 	wpn_fps_upg_o_leupold = { "wpn_fps_ak_extra_ris" },
+	wpn_fps_ass_ak_body_lowerreceiver = { "wpn_upg_ak_g_standard" }
 }
 	
 tweak_data.weapon.factory.wpn_fps_ass_ak5.adds = { 	
@@ -2691,6 +2820,66 @@ tweak_data.weapon.factory.wpn_fps_smg_m45.adds = {
 	wpn_fps_upg_fl_ass_laser = { "wpn_fps_shot_r870_gadget_rail" }
 }
 
+tweak_data.weapon.factory.wpn_fps_smg_uzi.adds = {	
+	wpn_fps_upg_o_specter = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_aimpoint = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_aimpoint_2 = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_docter = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_eotech = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_t1micro = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_cmore = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_acog = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_cs = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_eotech_xps = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_reflex = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_rx01 = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_rx30 = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_45iron = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_leupold = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_fl_ass_smg_sho_surefire = { "wpn_fps_shot_r870_gadget_rail"	},
+	wpn_fps_upg_fl_ass_smg_sho_peqbox = { "wpn_fps_shot_r870_gadget_rail" },
+	wpn_fps_upg_fl_ass_peq15 = { "wpn_fps_shot_r870_gadget_rail" },
+	wpn_fps_upg_fl_ass_laser = { "wpn_fps_shot_r870_gadget_rail" }
+}
+tweak_data.weapon.factory.wpn_fps_smg_tec9.adds = {	
+	wpn_fps_upg_o_specter = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_aimpoint = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_aimpoint_2 = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_docter = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_eotech = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_t1micro = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_cmore = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_acog = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_cs = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_eotech_xps = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_reflex = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_rx01 = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_rx30 = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_45iron = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_leupold = { "wpn_fps_shot_r870_ris_special" },
+}
+
+tweak_data.weapon.factory.wpn_fps_smg_scorpion.adds = {
+		wpn_fps_upg_o_specter = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_aimpoint = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_aimpoint_2 = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_docter = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_eotech = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_t1micro = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_cmore = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_acog = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_cs = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_eotech_xps = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_reflex = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_rx01 = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_rx30 = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_45iron = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_o_leupold = {"wpn_fps_smg_scorpion_extra_rail"},
+		wpn_fps_upg_fl_pis_laser = {"wpn_fps_smg_scorpion_extra_rail_gadget"},
+		wpn_fps_upg_fl_pis_tlr1 = {"wpn_fps_smg_scorpion_extra_rail_gadget"}
+	}
+
+
 
 --Removes the gadget rail for some guns and attachments that aren't already covered above (mostly default attachments that have no stats)
 tweak_data.weapon.factory.parts.wpn_fps_ass_g36_fg_k.forbids = { "wpn_fps_addon_ris" } 
@@ -2860,5 +3049,3 @@ tweak_data.weapon.factory.wpn_fps_smg_p90.override = {
 RebalanceAtchScript = true
 
 end
-
-
