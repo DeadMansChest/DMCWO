@@ -762,7 +762,7 @@ end
 if ksg_gadget == true then
 	tweak_data.weapon.factory.wpn_fps_sho_ksg.override = {}
 else
-	wpn_fps_sho_ksg.override = {
+	tweak_data.weapon.factory.wpn_fps_sho_ksg.override = {
 		wpn_fps_upg_o_specter = { 
 			override = { 
 				wpn_fps_upg_fl_ass_smg_sho_peqbox = {a_obj = "a_fl_2"}, 
@@ -949,11 +949,14 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_ns_ass_smg_large.stats = { value = 5
 --Size Doesn't Matter
 tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_small.stats = { value = 3, suppression = 100, alert_size = 12, damage = -1, recoil = 0, spread_moving = -1, concealment = 0 }
 --Standard Issue
-tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_medium.stats = { value = 1, suppression = 100, alert_size = 12, damage = -1, recoil = 1, spread_moving = -2, concealment = -2, spread = 0  }
+tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_medium.stats = { value = 1, suppression = 100, alert_size = 12, damage = -1, recoil = 2, spread_moving = -2, concealment = -2, spread = 0  }
 --Monolith
-tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_large.stats = { value = 5, suppression = 100, alert_size = 12, damage = -1, recoil = 2, spread_moving = -2, concealment = -3, spread = 1 }
+tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_large.stats = { value = 5, suppression = 100, alert_size = 12, damage = -1, recoil = 3, spread_moving = -2, concealment = -3, spread = 1 }
 --Asepsis
 tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_medium_slim.stats = { value = 1, suppression = 100, alert_size = 12, spread = 0, recoil = 0, spread_moving = -2, concealment = -2 }
+
+tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_medium_gem.stats = { value = 1, suppression = 100, alert_size = 12, spread = 0, recoil = 1, spread_moving = -2, concealment = -1, damage = -1 }
+tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_large_kac.stats = { value = 1, suppression = 100, alert_size = 12, spread = 1, recoil = 0, spread_moving = -2, concealment = -2, damage = -1 }
 
 --Shotgun Suppressor
 tweak_data.weapon.factory.parts.wpn_fps_upg_ns_shot_thick.stats = { value = 7, suppression = 100, alert_size = 12, damage = -2, recoil = 1, spread_moving = -2, concealment = -2 }
