@@ -127,7 +127,22 @@ tweak_data.weapon.saw.stats = {
 		extra_ammo = 11,
 		total_ammo_mod = 101,
 	}
+	
+tweak_data.weapon.saw_secondary.stats = {
+		alert_size = 9,
+		suppression = 7,
+		zoom = 1,
+		spread = 3,
+		recoil = 18,
+		spread_moving = 7,
+		damage = 10,
+		concealment = 16,
+		value = 1,
+		extra_ammo = 11,
+		total_ammo_mod = 101,
+	}
 
+	
 --M67
 --tweak_data.grenades.frag.damage = 75 --Explosion damage
 	
@@ -217,9 +232,9 @@ tweak_data.weapon.deagle.kick.steelsight = tweak_data.weapon.deagle.kick.standin
 tweak_data.weapon.deagle.spread.standing = 5
 tweak_data.weapon.deagle.spread.crouching = 4.5
 tweak_data.weapon.deagle.spread.steelsight = 1.6
-tweak_data.weapon.deagle.spread.moving_standing = tweak_data.weapon.deagle.spread.standing * 2.25
-tweak_data.weapon.deagle.spread.moving_crouching = tweak_data.weapon.deagle.spread.crouching * 2.25
-tweak_data.weapon.deagle.spread.moving_steelsight = tweak_data.weapon.deagle.spread.steelsight * 2.65
+tweak_data.weapon.deagle.spread.moving_standing = tweak_data.weapon.deagle.spread.standing * 2
+tweak_data.weapon.deagle.spread.moving_crouching = tweak_data.weapon.deagle.spread.crouching * 2
+tweak_data.weapon.deagle.spread.moving_steelsight = tweak_data.weapon.deagle.spread.steelsight * 2
 
 tweak_data.weapon.deagle.CLIP_AMMO_MAX = 7
 --tweak_data.weapon.deagle.NR_CLIPS_MAX = 5
@@ -273,9 +288,9 @@ tweak_data.weapon.x_deagle.kick.steelsight = tweak_data.weapon.x_deagle.kick.sta
 tweak_data.weapon.x_deagle.spread.standing = 5 * 1.5
 tweak_data.weapon.x_deagle.spread.crouching = 4.5 * 1.5
 tweak_data.weapon.x_deagle.spread.steelsight = 1.6 * 1.5
-tweak_data.weapon.x_deagle.spread.moving_standing = tweak_data.weapon.x_deagle.spread.standing * 2.25
-tweak_data.weapon.x_deagle.spread.moving_crouching = tweak_data.weapon.x_deagle.spread.crouching * 2.25
-tweak_data.weapon.x_deagle.spread.moving_steelsight = tweak_data.weapon.x_deagle.spread.steelsight * 2.65
+tweak_data.weapon.x_deagle.spread.moving_standing = tweak_data.weapon.x_deagle.spread.standing * 2
+tweak_data.weapon.x_deagle.spread.moving_crouching = tweak_data.weapon.x_deagle.spread.crouching * 2
+tweak_data.weapon.x_deagle.spread.moving_steelsight = tweak_data.weapon.x_deagle.spread.steelsight * 2
 
 tweak_data.weapon.x_deagle.CLIP_AMMO_MAX = 7 * 2
 --tweak_data.weapon.x_deagle.NR_CLIPS_MAX = 5
