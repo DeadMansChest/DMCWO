@@ -1,22 +1,11 @@
 --[[
-v0.4.2.2
+v0.4.2.1
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
 ==OR==
 
 Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
-]]
-
---[[
-Post-require (recommended) this as:
-- ['lib/units/weapons/raycastweaponbase', (folder name, if any)\soundsfix.lua]
-
-==OR==
-
-Set this up as a Persisting script as:
-
-- [SoundFix, (folder name, if any)\soundsfix.lua]
 ]]
 
 if not SoundFix then
