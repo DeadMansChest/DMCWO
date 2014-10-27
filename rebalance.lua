@@ -2244,7 +2244,7 @@ tweak_data.weapon.striker.damage_far = 2900
 tweak_data.weapon.striker.muzzleflash = "effects/payday2/particles/weapons/shotgun/sho_muzzleflash"
 
 tweak_data.weapon.striker.stats_modifiers = {
-		damage = 20000000000000000000000000000000000000,
+		damage = 2,
 	}
 	
 tweak_data.weapon.striker.stats = {
