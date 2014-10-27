@@ -1736,6 +1736,7 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod = {
 	wpn_fps_sho_ben = { translation = Vector3(0, -5.95, -3.2) },
 	wpn_fps_sho_striker = { translation = Vector3(0, -10.25, -2.7) },
 	wpn_fps_sho_ksg = { translation = Vector3(0, -7.1, -1.3) },
+	wpn_fps_sho_spas12 = { translation = Vector3(-0.15, -5, -3.9) },
 	
 	wpn_fps_ass_m14 = { translation = Vector3( -0.05,-22.4,-3.8 ) },
 	wpn_fps_ass_scar = { translation = Vector3( 0,-5.8,-0.25 ) },
@@ -1791,6 +1792,7 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_o_aimpoint.stance_mod = {
 	wpn_fps_sho_ben = { translation = Vector3(0, -5.95, -3.2) + Vector3(0, 2, 0) },
 	wpn_fps_sho_striker = { translation = Vector3(0, -10.25, -2.7) + Vector3(0, 2, 0)},
 	wpn_fps_sho_ksg = { translation = Vector3(0, -7.1, -1.3) + Vector3(0, 2, 0) },
+	wpn_fps_sho_spas12 = { translation = Vector3(-0.15, -5, -3.9) + Vector3(0, 2, 0) },
 	
 	wpn_fps_ass_m14 = { translation = Vector3( -0.05,-22.4,-3.8 ) + Vector3(0, 2, 0) },
 	wpn_fps_ass_scar = { translation = Vector3( 0,-5.8,-0.25 ) + Vector3(0, 2, 0) },
@@ -1846,6 +1848,7 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_o_specter.stance_mod = {
 	wpn_fps_sho_ben = { translation = Vector3(0, -5.95, -3.2) + Vector3(0, 4, 0) },
 	wpn_fps_sho_striker = { translation = Vector3(0, -10.25, -2.7) + Vector3(0, 4, 0) },
 	wpn_fps_sho_ksg = { translation = Vector3(0, -7.1, -1.3) + Vector3(0, 4, 0) },
+	wpn_fps_sho_spas12 = { translation = Vector3(-0.15, -5, -3.9) + Vector3(0, 4, 0) },
 	
 	wpn_fps_ass_m14 = { translation = Vector3( -0.05,-22.4,-3.8 ) + Vector3(0, 4, 0) },
 	wpn_fps_ass_scar = { translation = Vector3( 0,-5.8,-0.25 ) + Vector3(0, 4, 0) },
@@ -1901,6 +1904,7 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_o_acog.stance_mod = {
 	wpn_fps_sho_ben = { translation = Vector3(0, -5.95, -3.2) + Vector3(0, 6, 0) },
 	wpn_fps_sho_striker = { translation = Vector3(0, -10.25, -2.7) + Vector3(0, 6, 0) },
 	wpn_fps_sho_ksg = { translation = Vector3(0, -7.1, -1.3) + Vector3(0, 6, 0) },
+	wpn_fps_sho_spas12 = { translation = Vector3(-0.15, -5, -3.9) + Vector3(0, 6, 0) },
 	
 	wpn_fps_ass_m14 = { translation = Vector3( -0.05,-22.4,-3.8 ) + Vector3(0, 6, 0) },
 	wpn_fps_ass_scar = { translation = Vector3( 0,-5.8,-0.25 ) + Vector3(0, 6, 0) },
@@ -1955,6 +1959,7 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_o_45iron.stance_mod = {
 	wpn_fps_sho_ben = { translation = Vector3(-3.3, 10, -13.5),rotation = Rotation(0.75 ,-0.75, -45) },
 	wpn_fps_sho_striker = { translation = Vector3(-2.6, 10, -12.9),rotation = Rotation(0.5 ,-0.3, -45) },
 	wpn_fps_sho_ksg = { translation = Vector3(-2.4, 10, -11.4),rotation = Rotation(0.1 ,-0.3, -45) },
+	wpn_fps_sho_spas12 = { translation = Vector3(-2.35, 10, -14),rotation = Rotation(0.8 ,-0.8, -45) },
 	
 	wpn_fps_ass_famas = { translation = Vector3(2.4, 2, -17),rotation = Rotation(-0.625, 2.2, -45) },
 	wpn_fps_ass_g3 = { translation = Vector3( -0.7,5,-12.4 ),rotation = Rotation(0.75 ,-0.7, -45)},		
@@ -2209,6 +2214,7 @@ if theia_shortdot == true then
 		wpn_fps_sho_ben = { translation = Vector3(0.025, -16.55, -3.965) },
 		wpn_fps_sho_striker = { translation = Vector3(0, -20.75, -3.515) },
 		wpn_fps_sho_ksg = { translation = Vector3(0, -17.5, -2.075) },
+		wpn_fps_sho_spas12 = { translation = Vector3(-0.1575, -16.75, -4.685) },
 		
 		wpn_fps_ass_famas = { translation = Vector3( 0,-23.6,-7 )},		
 		wpn_fps_ass_g3 = { translation = Vector3( 0,-25.8,-4.2625 )},		
@@ -2268,6 +2274,7 @@ else
 		wpn_fps_sho_ben = { translation = Vector3(0.025, -22.55, -4.065) },
 		wpn_fps_sho_striker = { translation = Vector3(0, -26.75, -3.615) },
 		wpn_fps_sho_ksg = { translation = Vector3(0, -23.5, -2.175) },
+		wpn_fps_sho_spas12 = { translation = Vector3(-0.155, -20.5, -4.79) },
 		
 		wpn_fps_pis_deagle = { translation = Vector3( 0,-54.4,-5.59 ) },
 		wpn_fps_pis_rage = {  translation = Vector3( -0.05,-47.4,-5.48 ) },

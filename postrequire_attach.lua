@@ -230,9 +230,14 @@ table.insert(tweak_data.weapon.factory.wpn_fps_shot_serbu.uses_parts, "wpn_fps_u
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_serbu.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_serbu.uses_parts, "wpn_fps_shot_r870_m_extended")
 
+table.insert(tweak_data.weapon.factory.wpn_fps_sho_spas12.uses_parts, "wpn_fps_upg_o_45iron")
+table.insert(tweak_data.weapon.factory.wpn_fps_sho_spas12.uses_parts, "wpn_fps_upg_o_leupold")
+
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_striker.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_striker.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_striker.uses_parts, "wpn_fps_upg_o_mbus_rear")
+
+
 
 --Fuck it, if the Judge can be suppressed somehow, so can this
 --NOTE: The Bull won't sound like it's suppressed

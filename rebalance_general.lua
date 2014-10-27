@@ -215,7 +215,7 @@ for i, wep_id in ipairs(med_weight_2) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.45
 end 
 
-local heavy = {'r870','benelli','ak5','new_m14','famas','g3'}
+local heavy = {'r870','benelli','ak5','new_m14','famas','g3','spas12'}
 for i, wep_id in ipairs(heavy) do
 	tweak_data.weapon[ wep_id ].transition_duration = -0.04
 	tweak_data.weapon.famas.transition_duration = -0.06
@@ -287,7 +287,7 @@ for i, wep_id in ipairs(super_heavy) do
 end 
 
 --ADS sway and pivot point for all weapons
-local gun_drag = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26'}
+local gun_drag = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12'}
 for i, wep_id in ipairs(gun_drag) do
 	tweak_data.player.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.00075
 	tweak_data.player.stances[ wep_id ].crouched.shakers.breathing.amplitude = tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude / 2
@@ -327,7 +327,7 @@ for i, wep_id in ipairs(pdw_ammo) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {3.40, 4.80}
 end
 
-local shell_ammo = {'r870','serbu','benelli','ksg','striker','huntsman'}
+local shell_ammo = {'r870','serbu','benelli','ksg','striker','huntsman','spas12'}
 for i, wep_id in ipairs(shell_ammo) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.90, 2.00}
 end
@@ -372,6 +372,7 @@ tweak_data.weapon.fal.weapon_movement_penalty = 0.9
 tweak_data.weapon.striker.weapon_movement_penalty = 0.9
 tweak_data.weapon.g3.weapon_movement_penalty = 0.9
 tweak_data.weapon.akm_gold.weapon_movement_penalty = 0.9
+tweak_data.weapon.spas12.weapon_movement_penalty = 0.9
 tweak_data.weapon.new_m14.weapon_movement_penalty = 0.95
 
 local babby_panic = {'mp7','p90','ppk','scorpion'}
@@ -414,7 +415,7 @@ for i, wep_id in ipairs(high_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.25
 end
 
-local high2_panic = {'benelli','saiga','serbu','striker','huntsman','r870','ksg','judge','hk21'}
+local high2_panic = {'benelli','saiga','serbu','striker','huntsman','r870','ksg','judge','spas12','hk21'}
 for i, wep_id in ipairs(high2_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.35
 end

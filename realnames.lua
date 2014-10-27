@@ -43,7 +43,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_aug_fg_a3"] = "A3 Rail"
 	
 	--[[CLARION]]
-	realnames["bm_w_famas"] = "M16" --"Nexter FAMAS" --"IS THAT A DEAGLE?"
+	realnames["bm_w_famas"] = "Nexter FAMAS" --"IS THAT A DEAGLE?"
 	--Retro Grip
 	realnames["bm_wp_famas_g_retro"] = "G2 Guard"
 	
@@ -108,7 +108,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_scar_fg_railext"] = "PWS SCAR Rail Extension"
 	
 	--[[Falcon]]
-	realnames["bm_w_fal"] = "Faru Nee-san"--"FN FAL"
+	realnames["bm_w_fal"] = "FN FAL"
 	--CQB
 	realnames["bm_wp_fal_body_standard"] = "DSA SA58 Handguard w/ Short Barrel" --this might conflict with something since this is also the name_id of the receiver
 	--Retro
@@ -127,7 +127,7 @@ function LocalizationManager:text( string_id, macros )
     realnames["bm_wp_fal_s_03"] = "Magpul FAL PRS Stock"
 	
 	--[[Gecko]]
-	realnames["bm_w_galil"] = "Galil-chan" --"IMI Galil ARM"
+	realnames["bm_w_galil"] = "IMI Galil ARM"
 	--Sniper
 	realnames["bm_wp_galil_fg_sniper"] = "IMI Galatz Handguard & Heavy Barrel"
 	--Light
@@ -148,7 +148,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_galil_s_fab"] = "FAB Defence MG-CP Cheek Pad"
 	
 	--[[Gewehr]]
-	realnames["bm_w_g3"] = "Jiisuri <3"--"Heckler & Koch G3" --"Mai Raifu"
+	realnames["bm_w_g3"] = "Heckler & Koch G3" --"Mai Raifu"
 	--Assault Kit
 	realnames["bm_wp_g3_b_short"] = "Short Barrel"
 	--DMR Kit
@@ -177,7 +177,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_msr_body_msr"] = "MSR Aluminum Stock & Receiver"
 	
 	--[[R93]]
-	realnames["bm_w_r93"] =  "BLAZE IT R420" --"Blaser R93 Tactical 2"
+	realnames["bm_w_r93"] =  "Blaser R93 Tactical 2"
 	--Wooden Body
 	realnames["bm_wp_r93_body_wood"] = "Long Range Sporter 2 Stock"
 	
@@ -223,6 +223,11 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_ksg_b_long"] = "Long Barrel w/ 2x 8-Shot Tubes"
 	--Short Barrel
 	realnames["bm_wp_ksg_b_short"] = "Patrol Barrel w/ 2x 6-Shot Tubes"
+	
+	--[[WHY DON'T YOU TAKE A SEAT OVER THERE?]]
+	realnames["bm_w_spas12"] = "Franchi SPAS-12"
+	realnames["bm_wp_spas12_b_long"] = "8-Shot Tube Magazine"
+	
 	
 	--[[STREET SWEEPER]]
 	realnames["bm_w_striker"] = "Cobray Street Sweeper" --Hard to name this really, it has the drum key of the Cobray SS, the ejection system of the Protecta (although the Cobray SS can also have this) and the drum advance lever of the original Striker
@@ -271,15 +276,15 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_pis_usp_b_match"] = "USP Match Slide"
 	
 	--[[Chimano Custom]]
-	realnames["bm_w_g22c"] = "Grenade 22c" --"Glock 22c"
+	realnames["bm_w_g22c"] = "Glock 22c"
 	--Long Slide
-	realnames["bm_wp_g22c_b_long"] = "Grenade 35 Compensated Slide" --"Glock 35 Compensated Slide"
+	realnames["bm_wp_g22c_b_long"] = "Glock 35 Compensated Slide"
 	
 	--[[Chimano 88]]
-	realnames["bm_w_glock_17"] = "Grenade 17" --"Glock 17"
+	realnames["bm_w_glock_17"] = "Glock 17"
 	
-	realnames["bm_wp_pis_g26"] =  "Grenade 26" --"Glock 26"
-	realnames["bm_w_jowi"] =  "Akimbo Grenade 26s" --"Akimbo Glock 26s"
+	realnames["bm_wp_pis_g26"] =  "Glock 26"
+	realnames["bm_w_jowi"] =  "Akimbo Glock 26s"
 	
 	realnames["bm_wp_g26_body_salient"] =  "Stipled Tan Frame"
 	realnames["bm_wp_g26_b_custom"] =  "Brushed Metal Frame"
@@ -296,7 +301,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_1911_b_long"] = "Compensated Long Barrel & Slide" 
 	--Vented
 	realnames["bm_wp_1911_b_vented"] = "Compensated Two-Tone Slide"
-	realnames["bm_wp_1911_m_extended"] = "12rnd Extendo Clip" --"12rnd Magazine"
+	realnames["bm_wp_1911_m_extended"] = "12rnd Magazine"
 	
 	--[[Bernetti 9]]
 	realnames["bm_w_b92fs"] = "Beretta 92FS"
@@ -306,7 +311,7 @@ function LocalizationManager:text( string_id, macros )
 	--Competitor
 	realnames["bm_wp_beretta_co_co2"] = "Competition Compensator" --Seems to actually be based off of the Shorty USA Beretta 92 Spring Gun, unsurprising considering some of the guns models were based off of airsoft counterparts
 	--Extended Mag
-	realnames["bm_wp_beretta_m_extended"] = "30rnd Clipanzine" --"30rnd Magazine"
+	realnames["bm_wp_beretta_m_extended"] = "30rnd Magazine"
 	--Elite Slide
 	realnames["bm_wp_beretta_sl_brigadier"] = "Brigadier Elite Slide"
 	
@@ -327,15 +332,15 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_w_judge"] = "Taurus Judge"
 	
 	--[[Stryk 18]]
-	realnames["bm_w_glock_18c"] =  "Grenade 18c" --"Glock 18c"
+	realnames["bm_w_glock_18c"] =  "Glock 18c"
 	--Ventilated **don't know
 	--realnames["bm_wp_g18c_co_1"] = "Ventilated Compensator" --I question the existence of this compensator
 	--Velocity
 	realnames["bm_wp_g18c_co_comp_2"] = "SJC Compensator 9mm"
 	
 	--[[Deagle]]
-	realnames["bm_w_deagle"] = "FAMAS" --"IMI Desert Eagle Mark XIX" --"IS THAT A M16?"
-	realnames["bm_w_x_deagle"] = "Akimbo FAMASs" --"Akimbo IMI Desert Eagles"
+	realnames["bm_w_deagle"] = "IMI Desert Eagle Mark XIX" --"IS THAT A M16?"
+	realnames["bm_w_x_deagle"] = "Akimbo IMI Desert Eagles"
 	--Mount
 	realnames["bm_wp_pis_deagle_extra"] = "Desert Eagle Scope Mount"
 	--La Femme
@@ -343,7 +348,7 @@ function LocalizationManager:text( string_id, macros )
 	--Overkill
 	realnames["bm_wp_deagle_co_long"] = "Custom Barrel Weight" --Attachment is a reference to the Boondock Saints
 	--Extended Mag
-	realnames["bm_wp_deagle_m_extended"] = "10rnd Clip" --"10rnd Magazine" --Given the length of the mag and considering the .50 AE variant is single stack only, this is the only choice. Not that it matters that there's more ammo than what's stated *cough* 1911 12rnd Mag *cough*
+	realnames["bm_wp_deagle_m_extended"] = "10rnd Magazine" --Given the length of the mag and considering the .50 AE variant is single stack only, this is the only choice. Not that it matters that there's more ammo than what's stated *cough* 1911 12rnd Mag *cough*
 	--Long Barrel
 	realnames["bm_wp_deagle_b_long"] = "10\" Long Barrel"
 	
@@ -362,7 +367,7 @@ function LocalizationManager:text( string_id, macros )
 	--Velocity .40
 	realnames["bm_wp_p226_co_comp_2"] = "SJC Compensator .40" --Technically only for the G17 but "Overkill logic" so yeah
 	--Extended Mag
-	realnames["bm_wp_p226_m_extended"] = "22rnd Ammobox"--"22rnd Magazine" --Not too sure if this exists, just basing it off of the fact the "22" is plastered all over the damn thing
+	realnames["bm_wp_p226_m_extended"] = "22rnd Magazine" --Not too sure if this exists, just basing it off of the fact the "22" is plastered all over the damn thing
 	--Two-Tone
 	realnames["bm_wp_p226_b_equinox"] = "Equinox Duo-Tone Slide"
 	--Long Slide
@@ -371,7 +376,7 @@ function LocalizationManager:text( string_id, macros )
 	--[[Mark-10]]
 	realnames["bm_w_mac10"] = "Ingram M10" --"Emten"
 	--Extended Mag
-	realnames["bm_wp_mac10_m_extended"] = "30rnd Clip"--"30rnd Magazine"
+	realnames["bm_wp_mac10_m_extended"] = "30rnd Magazine"
 	--Railed Handguard
 	realnames["bm_wp_mac10_body_ris"] = "MAC Rail System" --I'm getting nothing but airsoft results so generic name
 	--Skeletal Stock
@@ -395,12 +400,12 @@ function LocalizationManager:text( string_id, macros )
 	--[[CMP]]
 	realnames["bm_w_mp9"] = "Brugger & Thomet TP9" --"Tama-chan"
 	--Extended Mag
-	realnames["bm_wp_mp9_m_extended"] = "30rnd Extended Clip" --"30rnd Magazine"
+	realnames["bm_wp_mp9_m_extended"] = "30rnd Magazine"
 	--Skeletal Stock
 	realnames["bm_wp_mp9_s_skel"] = "Steyr TMP Solid Stock"
 	
 	--[[Skorpion]]
-	realnames["bm_w_scorpion"] = "Klobb" --"Skorpion vz. 61"
+	realnames["bm_w_scorpion"] = "Skorpion vz. 61"
 	realnames["bm_wp_scorpion_m_extended"] = "Dual Magazines"
 	
 	--[[Uzi]]
@@ -411,7 +416,7 @@ function LocalizationManager:text( string_id, macros )
 	--[[TEC-9]]
 	realnames["bm_w_tec9"] = "Intratec TEC-9"
 	realnames["bm_wp_tec9_b_standard"] = "AB-10 Barrel"
-	realnames["bm_wp_tec9_ns_ext"] = "The shoulder thing that goes up" --"TEC-9 Barrel Extension"
+	realnames["bm_wp_tec9_ns_ext"] = "TEC-9 Barrel Extension"
 	realnames["bm_wp_tec9_s_unfolded"] = "Interdynamic MP-9 Wire Stock"
 	realnames["bm_wp_tec9_m_extended"] = "50rnd Magazine"
 	
@@ -442,7 +447,7 @@ function LocalizationManager:text( string_id, macros )
 	--Airsoft Supressor
 	realnames["bm_wp_mp7_b_suppressed"] = "QD \"Power-Up\" MP7 Suppressor"	
 	--Extended Mag
-	realnames["bm_wp_mp7_m_extended"] = "40rnd Clips" --"40rnd Magazine"
+	realnames["bm_wp_mp7_m_extended"] = "40rnd Magazine"
 	--Extended Stock
 	realnames["bm_wp_mp7_s_long"] = "Extended Stock"
 	
@@ -572,13 +577,13 @@ function LocalizationManager:text( string_id, macros )
 	--Extended Mag (Glocks)
 	realnames["bm_wp_g18c_m_mag_33rnd"] = "33/22rnd Magazine (9mm/.40S&W)"	
 	--Vintage Mag
-	realnames["bm_wp_m4_m_straight"] = "20rnd STANAG Clipazine" --"20rnd STANAG Magazine" --Hesitant to call them this since they're so off-model and resemble the M4A1 mags used in MW3
+	realnames["bm_wp_m4_m_straight"] = "20rnd STANAG Magazine" --Hesitant to call them this since they're so off-model and resemble the M4A1 mags used in MW3
 	--Milspec Mag
-	realnames["bm_wp_m4_uupg_m_std"] = "30rnd Clip Magazine" --"30rnd STANAG Magazine"	
+	realnames["bm_wp_m4_uupg_m_std"] = "30rnd STANAG Magazine"	
 	--Tactical Mag
 	realnames["bm_wp_m4_m_pmag"] = "31rnd Magpul PMAG Magazine" --you can actually shove 31 rounds into one of the PMAG models and still have it load
 	--CAR Quad
-	realnames["bm_wp_upg_m4_m_quad"] = "60rnd DAKKA Magazine" --"60rnd Surefire Magazine"
+	realnames["bm_wp_upg_m4_m_quad"] = "60rnd Surefire Magazine"
 	--AK Quad
 	realnames["bm_wp_upg_ak_m_quad"] = "60rnd Concern Kalashnikov Magazine"
 	--Beta-C
@@ -688,7 +693,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_melee_x46"] = "Robson Knives X46 Utility Survival Knife"
 	
 	--Ding Dong
-	realnames["bm_melee_dingdong"] = "Ooooh, you touch my tralala"--"Gerber Ding Dong Breaching Tool"
+	realnames["bm_melee_dingdong"] = "Gerber Ding Dong Breaching Tool"
 	
 	--Cleaver
 	realnames["bm_melee_cleaver"] = "Cleaver"
@@ -708,7 +713,6 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_menu_barrel_ext"] = "Barrel Extension"
 	realnames["bm_menu_foregrip"] = "Handguard"
 	realnames["bm_menu_sight"] = "Optic"
-	realnames["bm_menu_magazine"] = "Clip"
 	
 	realnames["menu_lmg"] = "Light Machine Guns"
 	realnames["menu_shotgun"] = "Shotguns"
@@ -717,11 +721,13 @@ function LocalizationManager:text( string_id, macros )
 	realnames["menu_snp"] = "Sniper & Battle Rifles"
 	realnames["menu_smg"] = "Sub-Machine Guns & PDWs"
 	
+	realnames["ai_jowi"] = "The Cook"
+	
     if realnames[string_id] then return realnames[string_id] end
     return LocalizationManager_text(self, string_id, macros)
 end
 
-ReelNames = true
+--ReelNames = true
 
 end
 
