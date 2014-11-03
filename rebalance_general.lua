@@ -438,6 +438,6 @@ end
 --tweak_data.player.stances.default.crouched.head.translation = Vector3( 0, 0, 82 )
 
 RebalanceGen = true
-io.write("rebalance_gen.lua is working", "\n")
+io.write("rebalance_general.lua is working", "\n")
 
 end
