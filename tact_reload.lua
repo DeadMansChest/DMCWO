@@ -1,5 +1,5 @@
 --[[
-v0.4.2.2
+v0.4.2.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -19,7 +19,6 @@ Set this up as a Persisting script as:
 
 - [Tacticool, (folder name, if any)\tact_reload.lua]
 ]]
-
 if not Tacticool then
 
 if not tweak_data then return end
@@ -51,8 +50,10 @@ end
 function RaycastWeaponBase:on_reload()
 	if self:get_ammo_remaining_in_clip() > 0 and tweak_data.weapon[self._name_id].tactical_reload == true then
 		self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 1))
-	elseif self:get_ammo_remaining_in_clip() > 0 and tweak_data.weapon[self._name_id].tactical_akimbo == true then
+	elseif self:get_ammo_remaining_in_clip() > 1 and tweak_data.weapon[self._name_id].tactical_akimbo == true then
 		self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 2))
+	elseif self:get_ammo_remaining_in_clip() == 1 and tweak_data.weapon[self._name_id].tactical_akimbo == true then
+		self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 1))
 	elseif self._setup.expend_ammo then
 		self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip()))
 	else

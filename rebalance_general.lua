@@ -1,5 +1,5 @@
 --[[
-v0.4.2.2
+v0.4.2.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -68,9 +68,9 @@ tweak_data.upgrades.skill_descs.shotgun_impact.multipro = "25%"
 
 --Akimbo recoil penalty adjustments
 tweak_data.upgrades.values.akimbo.recoil_multiplier = {
-		1.75, --Changed it to 1.75. Provided my math doesn't fail me, how the fuck is 2.5 times more recoil translate to 75% more recoil???
-		1.5, --50% card
-		1 --unused AFAIK
+		1.75, --Third card
+		1.5, --Last card, Basic skill
+		1.25 --Aced skill
 	}
 
 --Default transition_duration is 0.23 seconds
@@ -292,7 +292,7 @@ for i, wep_id in ipairs(gun_drag) do
 	tweak_data.player.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.00075
 	tweak_data.player.stances[ wep_id ].crouched.shakers.breathing.amplitude = tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude / 2
 
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pivot = Vector3(10, -8, -25)--:rotate_with( Rotation(0,-110,110) ):rotate_with( Rotation(-110,10,110) )
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pivot = Vector3(10, -8, -25)
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pivot = Vector3(10, -4, -12.5) 
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pivot = Vector3(10, -10, -2) 
 end
@@ -438,5 +438,6 @@ end
 --tweak_data.player.stances.default.crouched.head.translation = Vector3( 0, 0, 82 )
 
 RebalanceGen = true
+io.write("rebalance_gen.lua is working", "\n")
 
 end

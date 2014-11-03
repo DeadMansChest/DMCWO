@@ -1,5 +1,5 @@
 --[[
-v0.4.2.2
+v0.4.2.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -20,9 +20,9 @@ or else you'll end up spamming your mod list with each extra attachment by howev
 if not tweak_data then return end	
 
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_ass_g3_s_wood")
-table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_ns_ass_smg_large")
-table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_ns_ass_smg_medium")
-table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_ns_ass_smg_small")
+-- table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_ns_ass_smg_large")
+-- table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_ns_ass_smg_medium")
+-- table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_ns_ass_smg_small")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_specter")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_aimpoint")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_docter")
@@ -39,9 +39,9 @@ table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_snp_msr_ns_suppressor")
 
-table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_ns_ass_smg_large")
-table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_ns_ass_smg_medium")
-table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_ns_ass_smg_small")
+-- table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_ns_ass_smg_large")
+-- table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_ns_ass_smg_medium")
+-- table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_ns_ass_smg_small")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_o_specter")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_o_aimpoint")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_o_docter")
@@ -60,9 +60,9 @@ table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_ak_g_hgrip")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_ak_g_pgrip")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_ak_g_wgrip")
-table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_ns_ass_smg_large")
-table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_ns_ass_smg_medium")
-table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_ns_ass_smg_small")
+-- table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_ns_ass_smg_large")
+-- table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_ns_ass_smg_medium")
+-- table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_ns_ass_smg_small")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_upg_ak_s_psl")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_upg_ak_s_skfoldable")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_o_specter")
@@ -174,6 +174,7 @@ table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_up
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_sho_ben_s_solid")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_smg_olympic_fg_railed")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_upg_m4_m_drum")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m16.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m16.uses_parts, "wpn_fps_upg_o_leupold")
@@ -277,7 +278,6 @@ table.insert(tweak_data.weapon.factory.wpn_fps_x_1911.uses_parts, "wpn_fps_upg_o
 
 table.insert(tweak_data.weapon.factory.wpn_fps_x_b92fs.uses_parts, "wpn_fps_upg_o_rmr")
 table.insert(tweak_data.weapon.factory.wpn_fps_x_b92fs.uses_parts, "wpn_upg_o_marksmansight_rear")
-
 
 --Had to put these here as the game doesn't like loading the game without the RMR having a parent
 tweak_data.weapon.factory.wpn_fps_jowi.override = {
@@ -498,6 +498,7 @@ tweak_data.weapon.factory.wpn_fps_x_deagle.override = {
 }
 
 --Gun adjustments	
+tweak_data.weapon.gre_m79.crosshair.standing.hidden = false
 tweak_data.weapon.scar.FIRE_MODE = "single" --starts off on semi-auto like the M14 since it's a battle rifle
 
 tweak_data.weapon.fal.FIRE_MODE = "single" --starts off on semi-auto like the M14 since it's a battle rifle
@@ -510,6 +511,3 @@ tweak_data.weapon.glock_18c.FIRE_MODE = "single" --starts off on semi-auto to av
 
 tweak_data.weapon.tec9.FIRE_MODE = "single" --Sets the gun to semi-auto ONLY
 tweak_data.weapon.tec9.CAN_TOGGLE_FIREMODE = false
-
-
-

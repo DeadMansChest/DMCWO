@@ -1,5 +1,5 @@
 --[[
-v0.4.2.2
+v0.4.2.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -29,7 +29,7 @@ function LocalizationManager:text( string_id, macros )
 	--[[CAR-4]]
 	realnames["bm_w_m4"] = "Colt M4A1" --"Safety Pins"
 	--Suppressed Barrel
-	realnames["bm_wp_m4_uupg_b_sd"] = "Internal Suppressor" 
+	realnames["bm_wp_m4_uupg_b_sd"] = "Suppressed Barrel" 
 	--Aftermarket
 	realnames["bm_wp_m4_uupg_fg_lr300"] = "LR300 Handguard"
 	--Competition
@@ -204,7 +204,7 @@ function LocalizationManager:text( string_id, macros )
 	--Tact. Russian
 	realnames["bm_wp_saiga_fg_lowerrail"] = "Ultimak AK Modular Rail Forend System"
 	--Saiga 20 rounder
-	realnames["bm_wp_saiga_m_20rnd"] = "20rnd Drum"
+	realnames["bm_wp_saiga_m_20rnd"] = "MD Arms 20rnd Drum Magazine"
 	
 	--[[M1014]]
 	realnames["bm_w_benelli"] = "Benelli M4"
@@ -721,13 +721,12 @@ function LocalizationManager:text( string_id, macros )
 	realnames["menu_snp"] = "Sniper & Battle Rifles"
 	realnames["menu_smg"] = "Sub-Machine Guns & PDWs"
 	
-	realnames["ai_jowi"] = "The Cook"
+	realnames["menu_jowi"] = "Wick"
 	
     if realnames[string_id] then return realnames[string_id] end
     return LocalizationManager_text(self, string_id, macros)
 end
 
---ReelNames = true
+ReelNames = true
 
 end
-

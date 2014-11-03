@@ -1,5 +1,5 @@
 --[[
-v0.4.2.2
+v0.4.2.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -11,59 +11,72 @@ Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 if not RebalanceAtchScript then 
 
 ------------------[[OPTIONAL SHIT YOU CAN TOGGLE]]------------------
---Pick and choose what you want, eveything here is aesthetic.
+--Pick and choose what you want, mostly eveything here is aesthetic. Only a few may change gameplay
 --Toggles will ony take effect after you go through a loading screen or reboot the game
 --If you want the changes to take effect immediately, comment out "RebalanceAtchScript = true" near the end of this file and make the script load itself again (go through a loading screen, reboot the game), just be sure to uncomment "RebalanceAtchScript = true" when you're done otherwise you might get performance issues since the script will be running the whole time
 
---If set to true, changes the rear iron sight on the Commando 553/SG552 to be replaced with the Marksman rear pistol sight. Default = false
+--If set to true, changes the rear iron sight on the Commando 553/SG552 to be replaced with the Marksman rear pistol sight. 
+--Default = false
 local sig_rear_iron = false
 
 --If set to true, when low power optics are attached to an AK type weapon, the gun is pulled up closer for optics to be in-line with the other guns. 
---NOTE: Higher powered optics like the Specter, ACOG and Leupold will always be held close to the player camera while ADS
 --Default = false
+--NOTE: Higher powered optics like the Specter, ACOG and Leupold will always be held close to the player camera while ADS, regardless of this being true or false
 local ak_optics = false
 
 --If set to true, all occurences of the underfolding stock being default on AK type weapons is changed to the sidefolding stock and the sidefolding stock attachment is changed to the Underfolder. Makes more sense from a stability standpoint too
+--Default = false
 --NOTE: The AK74, Gold AKM and RPK are excluded from this
 local ak_stock_switch = false
 
---If set to true, changes the upper receiver on the M16 and Para SMG/AR to the A2 upper receiver. Default = false
+--If set to true, changes the upper receiver on the M16 and Para SMG/AR to the A2 upper receiver.
+--Default = false
 --NOTE: The empty reload for the Para SMG/AR is kinda broken when you use this (charging handle does not move). If I set it to move it looks even worse due to the timing being really off
 local a2_upper = false
 
---Makes it so the front post gas block for the AMCAR/M733, AMR/M16 and Para/Olympic stay even when an optic is attached (with the exception of the Theia/Leupold scope) and IRL, actually be able to function (removing the gas block prevents the bolt from cycling and would pretty much turn the gun into a bolt action rifle). Default = true
+--Makes it so the front post gas block for the AMCAR/M733, AMR/M16 and Para/Olympic stay even when an optic is attached (with the exception of the Theia/Leupold scope) and IRL, actually be able to function (removing the gas block prevents the bolt from cycling and would pretty much turn the gun into a bolt action rifle). 
+--Default = true
 local ar_front_post = true
 
---If set to true, visually breaks the AMCAR upon attaching the Exotique/VLTOR upper reciever, even more so if you dettach it. A bug I'm keeping in as a toggle at the request of friends. If you toggled while it's broken/not broken state, just reattach the Exotique/VLTOR upper. Default = false
+--If set to true, visually breaks the AMCAR upon attaching the Exotique/VLTOR upper reciever, even more so if you dettach it. A bug I'm keeping in as a toggle at the request of friends. If you toggled while it's broken/not broken state, just reattach the Exotique/VLTOR upper. 
+--Default = false
 local its_fucked = false
 
---If set to true, sets the Long Barrel for the CAR-4/M4A1 to use the medium barrel (default barrel normally), the default Medium Barrel for the CAR-4/M4A1 to use the Short Barrel model and the Short Barrel for the CAR-4/M4A1 to use the AUG Short Barrel model. Default = false
+--If set to true, sets the Long Barrel for the CAR-4/M4A1 to use the medium barrel (default barrel normally), the default Medium Barrel for the CAR-4/M4A1 to use the Short Barrel model and the Short Barrel for the CAR-4/M4A1 to use the AUG Short Barrel model. 
+--Default = false
 --NOTE: Slight clipping will occur if you use a suppressor w/ the Short Barrel and Geissele Rail
 local m4_barrel = false
 
 --if set to true, sets the default A2 upper on the AMCAR/M733 to the railed upper w/carry handle
---local amcar_upper = WIP, might not even go through with this
+--local amcar_upper = WIP, not a priority
 
---If set to true, sets the M249 short and long barrels to use the G3 barrel models to match the rest of the black barrel. Default = false
+--If set to true, sets the M249 short and long barrels to use the G3 barrel models to match the rest of the black barrel. 
+--Default = false
 local m249_barrel = false
 
---If set to true, hides the collapsed stock on the SpecOps/MP7 so it looks like you're buying it. Default = false
+--If set to true, hides the collapsed stock on the SpecOps/MP7 so it looks like you're buying it. 
+--Default = false
 local mp7_nostock = false
 
---If set to true, changes the stubby tan VFG on the MP7 to the black VFG. Default = false
+--If set to true, changes the stubby tan VFG on the MP7 to the black VFG. 
+--Default = false
 --NOTE: I can't do this with the TP9 as the VFG on that is baked to the model
 local mp7_vfg = false
 
---If set to true, hides the folded stock "attachment" so it looks like you're paying for custom work to have it removed. Default = false
+--If set to true, hides the folded stock "attachment" so it looks like you're paying for custom work to have it removed. 
+--Default = false
 local m45_nostock = false
 
---If set the true, changes the gadget location on the KSG to only ever be on the side of the pump and not in front of your optic if one is attached. Default = true
+--If set the true, changes the gadget location on the KSG to only ever be on the side of the pump and not in front of your optic if one is attached. 
+--Default = true
 local ksg_gadget = true
 
---If set to true, set the pistol grip on the judge to that of the one on the Raging Bull. Default = false
+--If set to true, set the pistol grip on the judge to that of the one on the Raging Bull. 
+--Default = false
 local judge_grip = false
 
---If set to true, hides the M10's default wire stock. Default = false
+--If set to true, hides the M10's default wire stock. 
+--Default = false
 local hide_mac_wire = false
 
 --If set to 1, hides the R870 tube cap extension on the R870. 
@@ -78,38 +91,48 @@ local remington_cap = 0
 --Default = "0"
 local loco_cap = 0
 
---If set to true, on the SG552, the respective "Standard" version of a part will have its model swapped with its "Enhanced" counterpart and vice versa. Default is false for all three
+--If set to true, on the SG552, the respective "Standard" version of a part will have its model swapped with its "Enhanced" counterpart and vice versa. 
+--Default is false for all three
 --Keep in mind this won't make sense for concealment
 local sg552_stock = false
 local sg552_handguard = false
 local sg552_grip = false
 
---if set to true, hides the AFG seen on the SCAR. Default = false
+--if set to true, hides the AFG seen on the SCAR. 
+--Default = false
 local scar_afg_hide = false
 
---if set to true, hides the M95's bipod. Default = false
+--if set to true, hides the M95's bipod. 
+--Default = false
 local barret_bipod = false
 
---If set to true, hides rifle muzzle brakes for all guns that can accept them (ARs, LMGs, SMGs). Default = false
+--If set to true, hides rifle muzzle brakes for all guns that can accept them (ARs, LMGs, SMGs). 
+--Default = false
 local hide_brakes = false
 
---If set to true, hides shotgun muzzle brakes for all shotguns that can accept them. Default = false
+--If set to true, hides shotgun muzzle brakes for all shotguns that can accept them. 
+--Default = false
 local hide_sg_brakes = false
 
---if set to true, sets the Theia/Leupold scope to use the default sniper scope model. Default = false
+--if set to true, sets the Theia/Leupold scope to use the default sniper scope model. 
+--Default = false
 --NOTE: You'll lose the range finder if you set this to true and you'll still have Theia level zoom and auto-spotting
 local theia_shortdot = false
 
---If set to true, enables the ELCAN Specter to use it's BUIS on the top of the optic. Default = false
+--If set to true, enables the ELCAN Specter to use it's BUIS on the top of the optic. 
+--Default = false
 --NOTE: Enabling this will remove the 45 degree irons if they're attached, disallow it from being attached and will take the place as the first gadget you switch to with the laser/flashlight gadget becoming the second and/or third gadget you switch to
---You'll also get a floating 45 degree angle gadget in the main menu and mod screen, it's a side effect of having the BUIS actually work
+--NOTE 2: You'll also get a floating 45 degree angle gadget in the main menu and mod screen, it's a side effect of having the BUIS actually work
 local elcan_buis = false
 
---if set to true, changes the free 000 Buck to Birdshot. Default = false
---NOTE: This fires 50 rays (30 for the Judge) out at a time, you may get performance issues if you play on a computer worse than my toaster
+--if set to true, changes the free 000 Buck to Birdshot. 
+--Default = false
+--NOTE: This fires 50 rays (30 for the Judge) out at a time, you may get performance issues if you play on a computer worse than my toaster with SquareOne's instant bullet impact fix
+--NOTE 2: Cops WILL fly if killed using this
 local sho_bird = false
 
 --if set to true, swaps the Magpul BUIS/Flip-up sights with the default ones from the KSG
+--NOTE: May be slightly misaligned, not a priority of mine to fix it.
 local buis_swap = false
 
 if not tweak_data then return end
@@ -956,7 +979,10 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_large.stats = { value = 5, su
 tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_medium_slim.stats = { value = 1, suppression = 100, alert_size = 12, spread = 0, recoil = 0, spread_moving = -2, concealment = -2 }
 
 tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_medium_gem.stats = { value = 1, suppression = 100, alert_size = 12, spread = 0, recoil = 1, spread_moving = -2, concealment = -1, damage = -1 }
+tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_medium_gem.perks = { "silencer" }
+
 tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_large_kac.stats = { value = 1, suppression = 100, alert_size = 12, spread = 1, recoil = 0, spread_moving = -2, concealment = -2, damage = -1 }
+tweak_data.weapon.factory.parts.wpn_fps_upg_ns_pis_large_kac.perks = { "silencer" }
 
 --Shotgun Suppressor
 tweak_data.weapon.factory.parts.wpn_fps_upg_ns_shot_thick.stats = { value = 7, suppression = 100, alert_size = 12, damage = -2, recoil = 1, spread_moving = -2, concealment = -2 }
@@ -1010,12 +1036,12 @@ tweak_data.weapon.factory.parts.wpn_fps_lmg_hk21_b_long.stats = { value = 4, spr
 tweak_data.weapon.factory.parts.wpn_fps_lmg_m249_b_long.stats = { value = 4, damage = 2, spread = 1, recoil = 0, concealment = -2, suppression = 0 }
 
 --Deagle Long Barrel
-tweak_data.weapon.factory.parts.wpn_fps_pis_deagle_b_long.stats = { value = 7, spread_moving = -3, spread = 2, damage = 4, concealment = -3, recoil = 0, suppression = -0  }
+tweak_data.weapon.factory.parts.wpn_fps_pis_deagle_b_long.stats = { value = 7, spread_moving = -3, spread = 2, damage = 0, concealment = -3, recoil = 0, suppression = -0  }
 
 --Raging Bull Long Barrel
-tweak_data.weapon.factory.parts.wpn_fps_pis_rage_b_long.stats = { value = 5, recoil = 0, spread = 3, spread_moving = -3, concealment = -3, damage = 4, suppression = -1 }
+tweak_data.weapon.factory.parts.wpn_fps_pis_rage_b_long.stats = { value = 5, recoil = 0, spread = 3, spread_moving = -3, concealment = -3, damage = 0, suppression = -1 }
 --Raging Bull Short Barrel
-tweak_data.weapon.factory.parts.wpn_fps_pis_rage_b_short.stats = { value = 3, recoil = -1, spread_moving = 3, spread = -3, concealment = 3, damage = -1, suppression = -5 }
+tweak_data.weapon.factory.parts.wpn_fps_pis_rage_b_short.stats = { value = 3, recoil = -1, spread_moving = 3, spread = -3, concealment = 3, damage = -0, suppression = -5 }
 --Raging Bull Aggressor
 tweak_data.weapon.factory.parts.wpn_fps_pis_rage_b_comp1.stats = { value = 3, recoil = 1, damage = 0, spread = 1, spread_moving = -3, concealment = -3, suppression = -2 }
 --Raging Bull Vented
@@ -1118,7 +1144,7 @@ tweak_data.weapon.factory.parts.wpn_fps_ass_famas_b_sniper.stats = {
 	recoil = -2,
 	spread = 1,
 	concealment = -2,
-	damage = 4
+	damage = 2
 	}
 --FAMAS Supp.	
 tweak_data.weapon.factory.parts.wpn_fps_ass_famas_b_suppressed.stats = {
@@ -1970,10 +1996,10 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_o_45iron.stance_mod = {
 if sig_rear_iron == true then
 	tweak_data.weapon.factory.parts.wpn_fps_ass_s552_o_flipup.unit = "units/payday2/weapons/wpn_fps_upg_o_marksmansight/wpn_upg_o_marksmansight_rear"
 
-	local pivot_shoulder_translation = Vector3(10.6642, 22.0789, -3.95194)
-	local pivot_shoulder_rotation = Rotation(0.106285, 0.18453, 0.630167)
-	local pivot_head_translation = Vector3(-0.085, 19, 0.6)
-	local pivot_head_rotation = Rotation(-0.1, -0.65, 0)
+	pivot_shoulder_translation = Vector3(10.6642, 22.0789, -3.95194)
+	pivot_shoulder_rotation = Rotation(0.106285, 0.18453, 0.630167)
+	pivot_head_translation = Vector3(-0.085, 19, 0.6)
+	pivot_head_rotation = Rotation(-0.1, -0.65, 0)
 	tweak_data.player.stances.s552.steelsight.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 	tweak_data.player.stances.s552.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 	
@@ -1992,10 +2018,10 @@ if sig_rear_iron == true then
 else
 	tweak_data.weapon.factory.parts.wpn_fps_ass_s552_o_flipup.unit = "units/pd2_dlc1/weapons/wpn_fps_ass_s552_pts/wpn_fps_ass_s552_o_flipup"
 
-	local pivot_shoulder_translation = Vector3(10.6642, 22.0789, -3.95194)
-	local pivot_shoulder_rotation = Rotation(0.106285, 0.18453, 0.630167)
-	local pivot_head_translation = Vector3(0, 19, 0)
-	local pivot_head_rotation = Rotation(0, 0, 0)
+	pivot_shoulder_translation = Vector3(10.6642, 22.0789, -3.95194)
+	pivot_shoulder_rotation = Rotation(0.106285, 0.18453, 0.630167)
+	pivot_head_translation = Vector3(0, 19, 0)
+	pivot_head_rotation = Rotation(0, 0, 0)
 	tweak_data.player.stances.s552.steelsight.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 	tweak_data.player.stances.s552.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 	
@@ -2344,7 +2370,6 @@ tweak_data.weapon.factory.parts.wpn_fps_smg_mp7_m_extended.stats = {  value = 1,
 
 --MP5 GSG-5 Mag (can't be attached via the mod menu)
 tweak_data.weapon.factory.parts.wpn_fps_smg_mp5_m_drum.stats = { value = 1, extra_ammo = 80, damage = -2, recoil = 3 }
-tweak_data.weapon.factory.parts.wpn_fps_smg_mp5_m_drum.animations = {reload = "reload", fire = "recoil", fire_steelsight = "recoil"}
 
 --MP9 30 rounder
 tweak_data.weapon.factory.parts.wpn_fps_smg_mp9_m_extended.stats = { value = 4, concealment = -2, extra_ammo = 10 }
@@ -2397,7 +2422,7 @@ tweak_data.weapon.factory.parts.wpn_fps_upg_a_piercing.stats = { value = 5, dama
 tweak_data.weapon.factory.parts.wpn_fps_upg_a_piercing.custom_stats = { rays = 15, damage_far_mul = 1.6, armor_piercing_add = 1, ammo_pickup_min_mul = 1.0, ammo_pickup_max_mul = 1.025 }
 
 if sho_bird == true then
-	tweak_data.weapon.factory.parts.wpn_fps_upg_a_custom_free.stats = { value = 5, damage = -8, spread = -2, recoil = 6, total_ammo_mod = 10 }
+	tweak_data.weapon.factory.parts.wpn_fps_upg_a_custom_free.stats = { value = 5, damage = -10, spread = -2, recoil = 6, total_ammo_mod = 10 }
 	tweak_data.weapon.factory.parts.wpn_fps_upg_a_custom_free.name_id = "bm_wp_upg_a_bird"
 	tweak_data.weapon.factory.parts.wpn_fps_upg_a_custom_free.desc_id = "bm_wp_upg_a_bird_desc"
 	tweak_data.weapon.factory.parts.wpn_fps_upg_a_custom_free.custom_stats = { rays = 50, damage_far_mul = 0.9, ammo_pickup_min_mul = 1.025, ammo_pickup_max_mul = 1.05}
@@ -2435,6 +2460,8 @@ tweak_data.weapon.factory.parts.wpn_fps_sho_ksg_b_standard.override = {
 			wpn_fps_upg_o_mbus_front = {a_obj = "a_o_f_2"}
 		}
 
+
+		
 --sets optics to the default optic postion on a gun on some of the AK type guns/mods for consistencies sake
 tweak_data.weapon.factory.parts.wpn_upg_saiga_fg_standard.override = {}
 tweak_data.weapon.factory.parts.wpn_fps_smg_akmsu_fg_standard.override = {}
@@ -2448,6 +2475,7 @@ tweak_data.weapon.factory.wpn_fps_pis_1911.animations = {reload = "reload", fire
 --Fixes the Galil charging handle not moving while shooting
 tweak_data.weapon.factory.parts.wpn_fps_ass_galil_body_standard.animations = {reload = "reload", fire = "recoil", fire_steelsight = "recoil"}
 tweak_data.weapon.factory.wpn_fps_ass_galil.animations = {reload = "reload", fire = "recoil", fire_steelsight = "recoil"}
+tweak_data.weapon.factory.parts.wpn_fps_smg_uzi_body_standard.animations = {reload = "reload", reload_not_empty = "reload_not_empty", fire = "recoil", fire_steelsight = "recoil"}
 
 --Adds the optic mounts to guns that need them for the "new" attachments
 tweak_data.weapon.factory.parts.wpn_fps_pis_deagle_lock.forbids = {
@@ -2697,6 +2725,24 @@ tweak_data.weapon.factory.wpn_fps_ass_ak5.adds = {
 	wpn_fps_upg_o_rx30 = { "wpn_fps_ass_ak5_body_rail" },
 	wpn_fps_upg_o_45iron = { "wpn_fps_ass_ak5_body_rail" },
 	wpn_fps_upg_o_leupold = { "wpn_fps_ass_ak5_body_rail" },
+}
+
+tweak_data.weapon.factory.wpn_fps_sho_spas12.adds = {
+	wpn_fps_upg_o_specter = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_aimpoint = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_aimpoint_2 = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_docter = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_eotech = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_t1micro = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_cmore = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_acog = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_cs = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_eotech_xps = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_reflex = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_rx01 = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_rx30 = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_45iron = { "wpn_fps_shot_r870_ris_special" },
+	wpn_fps_upg_o_leupold = { "wpn_fps_shot_r870_ris_special" },
 }
 
 tweak_data.weapon.factory.wpn_fps_shot_r870.adds = {
@@ -2950,7 +2996,7 @@ tweak_data.weapon.factory.wpn_fps_ass_ak5.override  = {
 tweak_data.weapon.factory.wpn_fps_smg_olympic.override = { 
 	wpn_fps_upg_m4_m_pmag = {stats = { value = 3, extra_ammo = 11}},
 	wpn_fps_upg_m4_m_quad = {stats = { value = 1, concealment = -2, extra_ammo = 40 }},
-	wpn_fps_upg_m4_m_drum = {stats = { value = 9, extra_ammo = 80, recoil = 2, concealment = -5 }},
+	wpn_fps_upg_m4_m_drum = {stats = { value = 9, extra_ammo = 80, recoil = 1, concealment = -5 }},
 	wpn_fps_sho_ben_s_solid = { 
 		unit = "units/payday2/weapons/wpn_fps_ass_m16_pts/wpn_fps_m16_s_solid",
 		third_unit = "units/payday2/weapons/wpn_third_ass_m16_pts/wpn_third_m16_s_solid",
@@ -2960,7 +3006,7 @@ tweak_data.weapon.factory.wpn_fps_smg_olympic.override = {
 tweak_data.weapon.factory.wpn_fps_ass_amcar.override = { 
 	wpn_fps_upg_m4_m_pmag = {stats = { value = 3, extra_ammo = 11}},
 	wpn_fps_upg_m4_m_quad = {stats = { value = 1, concealment = -2, extra_ammo = 40 }},
-	wpn_fps_upg_m4_m_drum = {stats = { value = 9, extra_ammo = 80, recoil = 2, concealment = -5 }},
+	wpn_fps_upg_m4_m_drum = {stats = { value = 9, extra_ammo = 80, recoil = 1, concealment = -5 }},
 	wpn_fps_sho_ben_s_solid = { 
 		unit = "units/payday2/weapons/wpn_fps_ass_m16_pts/wpn_fps_m16_s_solid",
 		third_unit = "units/payday2/weapons/wpn_third_ass_m16_pts/wpn_third_m16_s_solid",
@@ -3004,7 +3050,7 @@ tweak_data.weapon.factory.wpn_fps_ass_akm_gold.override = {
 tweak_data.weapon.factory.wpn_fps_ass_m16.override = { 
 	wpn_fps_upg_m4_m_pmag = {stats = { value = 3, extra_ammo = 11}},
 	wpn_fps_upg_m4_m_quad = {stats = { value = 1, concealment = -2, extra_ammo = 40 }},
-	wpn_fps_upg_m4_m_drum = {stats = { value = 9, extra_ammo = 80, recoil = 2, concealment = -5 }}
+	wpn_fps_upg_m4_m_drum = {stats = { value = 9, extra_ammo = 80, recoil = 1, concealment = -5 }}
 }
 
 tweak_data.weapon.factory.wpn_fps_pis_g22c.override = {
@@ -3109,6 +3155,6 @@ tweak_data.weapon.factory.wpn_fps_smg_p90.override = {
 --}
 
 RebalanceAtchScript = true
+io.write("rebalance_attach.lua is working", "\n")
 
 end
-
