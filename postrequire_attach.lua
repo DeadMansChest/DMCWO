@@ -1,5 +1,5 @@
 --[[
-v0.4.2.3
+v0.4.2.4
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -38,6 +38,7 @@ table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_eotech_xps")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_snp_msr_ns_suppressor")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_pis_c96_sight")
 
 -- table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_ns_ass_smg_large")
 -- table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_ns_ass_smg_medium")
@@ -56,6 +57,7 @@ table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_o_reflex")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_o_eotech_xps")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_o_leupold")				
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_pis_c96_sight")				
 
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_ak_g_hgrip")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_ak_g_pgrip")
@@ -79,6 +81,7 @@ table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_o_reflex")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_o_eotech_xps")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_74.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_74.uses_parts, "wpn_fps_upg_o_leupold")
@@ -91,75 +94,95 @@ table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm.uses_parts, "wpn_fps_upg_
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm.uses_parts, "wpn_fps_lmg_rpk_fg_standard")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm.uses_parts, "wpn_fps_ass_galil_s_wood")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm.uses_parts, "wpn_fps_sho_ben_s_solid")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm_gold.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm_gold.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm_gold.uses_parts, "wpn_fps_lmg_rpk_fg_standard")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm_gold.uses_parts, "wpn_fps_ass_galil_s_wood")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm_gold.uses_parts, "wpn_fps_sho_ben_s_solid")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_akm_gold.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_akmsu.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_akmsu.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_akmsu.uses_parts, "wpn_fps_ass_galil_s_wood")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_akmsu.uses_parts, "wpn_fps_sho_ben_s_solid")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_akmsu.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_ak5.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_ak5.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_ak5.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_aug.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_aug.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_aug.uses_parts, "wpn_fps_upg_o_mbus_rear")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_aug.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_g36.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_g36.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_g36.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_p90.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_p90.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_p90.uses_parts, "wpn_fps_upg_o_mbus_rear")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_p90.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m14.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m14.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m14.uses_parts, "wpn_fps_snp_msr_ns_suppressor")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_m14.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_mp9.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_mp9.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_mp9.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_mp5.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_mp5.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_mp5.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_mac10.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_mac10.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_mac10.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_m45.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_m45.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_m45.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_s552.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_s552.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_s552.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_mp7.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_mp7.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_mp7.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_tec9.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_tec9.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_tec9.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_uzi.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_uzi.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_uzi.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_scorpion.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_scorpion.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_scorpion.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_scar.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_scar.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_scar.uses_parts, "wpn_fps_upg_m4_g_hgrip")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_scar.uses_parts, "wpn_fps_snp_msr_ns_suppressor")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_scar.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m4.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m4.uses_parts, "wpn_fps_upg_o_leupold")					
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m4.uses_parts, "wpn_fps_sho_ben_s_solid")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m4.uses_parts, "wpn_fps_upg_m4_s_standard")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_m4.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_famas.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_famas.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_famas.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_upg_m4_g_ergo")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_upg_m4_g_sniper")					
@@ -175,27 +198,33 @@ table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_up
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_sho_ben_s_solid")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_smg_olympic_fg_railed")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_upg_m4_m_drum")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_amcar.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m16.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m16.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m16.uses_parts, "wpn_fps_m4_uupg_s_fold")		
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_m16.uses_parts, "wpn_fps_pis_c96_sight")		
 
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_olympic.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_olympic.uses_parts, "wpn_fps_upg_o_leupold")		
 table.insert(tweak_data.weapon.factory.wpn_fps_smg_olympic.uses_parts, "wpn_fps_sho_ben_s_solid")		
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_olympic.uses_parts, "wpn_fps_pis_c96_sight")		
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_fal.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_fal.uses_parts, "wpn_fps_upg_o_leupold")			
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_fal.uses_parts, "wpn_fps_snp_msr_ns_suppressor")			
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_fal.uses_parts, "wpn_fps_pis_c96_sight")			
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_galil.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_galil.uses_parts, "wpn_fps_upg_o_leupold")			
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_galil.uses_parts, "wpn_fps_snp_msr_ns_suppressor")	
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_galil.uses_parts, "wpn_fps_pis_c96_sight")	
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_g3.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_g3.uses_parts, "wpn_fps_upg_o_leupold")			
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_g3.uses_parts, "wpn_fps_smg_mp5_s_adjust")			
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_g3.uses_parts, "wpn_fps_snp_msr_ns_suppressor")	
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_g3.uses_parts, "wpn_fps_pis_c96_sight")	
 										
 table.insert(tweak_data.weapon.factory.wpn_fps_pis_g17.uses_parts, "wpn_fps_pis_g18c_co_1")
 table.insert(tweak_data.weapon.factory.wpn_fps_pis_g17.uses_parts, "wpn_fps_pis_g18c_co_comp_2")
@@ -213,6 +242,7 @@ table.insert(tweak_data.weapon.factory.wpn_fps_jowi.uses_parts, "wpn_fps_upg_o_r
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_r870.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_r870.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_r870.uses_parts, "wpn_fps_shot_shorty_m_extended_short")
+table.insert(tweak_data.weapon.factory.wpn_fps_shot_r870.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_upg_o_leupold")
@@ -220,25 +250,33 @@ table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_u
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_upg_o_mbus_rear")
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_ass_galil_s_wood")
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_sho_ben_s_solid")
+table.insert(tweak_data.weapon.factory.wpn_fps_shot_saiga.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_ben.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_ben.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_sho_ben.uses_parts, "wpn_fps_pis_c96_sight")
 	
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_ksg.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_ksg.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_sho_ksg.uses_parts, "wpn_fps_pis_c96_sight")
 	
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_serbu.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_serbu.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_shot_serbu.uses_parts, "wpn_fps_shot_r870_m_extended")
+table.insert(tweak_data.weapon.factory.wpn_fps_shot_serbu.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_spas12.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_spas12.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_sho_spas12.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_striker.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_striker.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_sho_striker.uses_parts, "wpn_fps_upg_o_mbus_rear")
-
-
+table.insert(tweak_data.weapon.factory.wpn_fps_sho_striker.uses_parts, "wpn_fps_pis_c96_sight")
+	
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_sterling.uses_parts, "wpn_fps_upg_o_45iron")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_sterling.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_smg_sterling.uses_parts, "wpn_fps_pis_c96_sight")
 
 --Fuck it, if the Judge can be suppressed somehow, so can this
 --NOTE: The Bull won't sound like it's suppressed
@@ -249,12 +287,14 @@ table.insert(tweak_data.weapon.factory.wpn_fps_pis_rage.uses_parts, "wpn_fps_upg
 table.insert(tweak_data.weapon.factory.wpn_fps_pis_rage.uses_parts, "wpn_fps_upg_ns_pis_small")
 table.insert(tweak_data.weapon.factory.wpn_fps_pis_rage.uses_parts, "wpn_fps_upg_ns_pis_medium_slim")
 table.insert(tweak_data.weapon.factory.wpn_fps_pis_rage.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_pis_rage.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_pis_judge.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_pis_judge.uses_parts, "wpn_fps_pis_c96_sight")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_pis_deagle.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_pis_deagle.uses_parts, "wpn_fps_pis_c96_sight")
 
---Still working on this
 table.insert(tweak_data.weapon.factory.wpn_fps_x_deagle.uses_parts, "wpn_fps_upg_o_rmr")
 table.insert(tweak_data.weapon.factory.wpn_fps_x_deagle.uses_parts, "wpn_fps_pis_deagle_extra")
 table.insert(tweak_data.weapon.factory.wpn_fps_x_deagle.uses_parts, "wpn_fps_upg_o_specter")
@@ -271,6 +311,7 @@ table.insert(tweak_data.weapon.factory.wpn_fps_x_deagle.uses_parts, "wpn_fps_upg
 table.insert(tweak_data.weapon.factory.wpn_fps_x_deagle.uses_parts, "wpn_fps_upg_o_reflex")
 table.insert(tweak_data.weapon.factory.wpn_fps_x_deagle.uses_parts, "wpn_fps_upg_o_eotech_xps")
 table.insert(tweak_data.weapon.factory.wpn_fps_x_deagle.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_x_deagle.uses_parts, "wpn_fps_pis_c96_sight")
 table.insert(tweak_data.weapon.factory.wpn_fps_x_deagle.uses_parts, "wpn_upg_o_marksmansight_rear")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_x_1911.uses_parts, "wpn_upg_o_marksmansight_rear")
@@ -278,6 +319,8 @@ table.insert(tweak_data.weapon.factory.wpn_fps_x_1911.uses_parts, "wpn_fps_upg_o
 
 table.insert(tweak_data.weapon.factory.wpn_fps_x_b92fs.uses_parts, "wpn_fps_upg_o_rmr")
 table.insert(tweak_data.weapon.factory.wpn_fps_x_b92fs.uses_parts, "wpn_upg_o_marksmansight_rear")
+
+table.insert(tweak_data.weapon.factory.wpn_fps_pis_c96.uses_parts, "wpn_fps_upg_i_autofire")
 
 --Had to put these here as the game doesn't like loading the game without the RMR having a parent
 tweak_data.weapon.factory.wpn_fps_jowi.override = {
@@ -490,7 +533,10 @@ tweak_data.weapon.factory.wpn_fps_x_deagle.override = {
 	stats = { value = 5, zoom = 0, recoil = 0, spread_moving = -3, concealment = -2 }
 	},
 	wpn_fps_upg_o_leupold = {a_obj = "a_quite",
-	stats = {value = 8, zoom = 0, recoil = 2, spread_moving = -3, concealment = -3}
+	stats = {value = 8, zoom = 0, recoil = 3, spread_moving = -3, concealment = -3}
+	},
+	wpn_fps_pis_c96_sight = {a_obj = "a_quite",
+	stats = {value = 8, zoom = 0, recoil = 2, spread_moving = -3, concealment = -2}
 	},
 	wpn_fps_upg_o_rmr = {
 		parent = "lower_reciever"

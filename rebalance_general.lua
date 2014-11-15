@@ -1,5 +1,5 @@
 --[[
-v0.4.2.3
+v0.4.2.4
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -121,7 +121,7 @@ for i, wep_id in ipairs(med_pistol) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.275
 end 
 
-local light_pistol = {'usp','g22c','glock_17','glock_18c','ppk','judge','jowi','g26'}
+local light_pistol = {'usp','g22c','glock_17','glock_18c','ppk','judge','jowi','g26','c96'}
 for i, wep_id in ipairs(light_pistol) do
 	tweak_data.weapon[ wep_id ].transition_duration = -0.125
 	
@@ -167,7 +167,7 @@ for i, wep_id in ipairs(lightweight) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.35
 end 
 
-local med_weight = {'mac10','akmsu','new_m4','ak74','g36','gre_m79','ksg'}
+local med_weight = {'mac10','akmsu','new_m4','ak74','g36','gre_m79','ksg','sterling'}
 for i, wep_id in ipairs(med_weight) do
 	tweak_data.weapon[ wep_id ].transition_duration = -0.07
 	tweak_data.weapon.ksg.transition_duration = -0.085
@@ -215,7 +215,7 @@ for i, wep_id in ipairs(med_weight_2) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.45
 end 
 
-local heavy = {'r870','benelli','ak5','new_m14','famas','g3','spas12'}
+local heavy = {'r870','benelli','ak5','new_m14','famas','g3','spas12','mosin'}
 for i, wep_id in ipairs(heavy) do
 	tweak_data.weapon[ wep_id ].transition_duration = -0.04
 	tweak_data.weapon.famas.transition_duration = -0.06
@@ -263,7 +263,7 @@ for i, wep_id in ipairs(heavy_2) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.45
 end 
 
-local super_heavy = {'akm_gold','m95','hk21','m249','galil'}
+local super_heavy = {'akm_gold','m95','hk21','m249','galil','mg42'}
 for i, wep_id in ipairs(super_heavy) do
 	tweak_data.weapon[ wep_id ].transition_duration = 0.02
 	
@@ -287,7 +287,7 @@ for i, wep_id in ipairs(super_heavy) do
 end 
 
 --ADS sway and pivot point for all weapons
-local gun_drag = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12'}
+local gun_drag = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling'}
 for i, wep_id in ipairs(gun_drag) do
 	tweak_data.player.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.00075
 	tweak_data.player.stances[ wep_id ].crouched.shakers.breathing.amplitude = tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude / 2
@@ -297,22 +297,24 @@ for i, wep_id in ipairs(gun_drag) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pivot = Vector3(10, -10, -2) 
 end
 
-local lmg_drag = {'m249','rpk','hk21','striker'}
+local lmg_drag = {'m249','rpk','hk21','striker','mg42'}
 for i, wep_id in ipairs(lmg_drag) do
 	tweak_data.player.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.035
 end
+
+
 
 local pis_high = {'new_raging_bull','deagle','x_deagle','judge'}
 for i, wep_id in ipairs(pis_high) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.45, 3.20}
 end
 
-local forty = {'g22c','p226'}
+local forty = {'g22c','p226','c96'} --[[Yes I know the C96 isn't in .40]]
 for i, wep_id in ipairs(forty) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.20, 5.80}
 end
 
-local nine_mil = {'new_mp5','mp9','m45','glock_17','glock_18c','ppk','b92fs','tec9','scorpion','uzi'} --[[Yes I know the Skorpion and PPK aren't in 9mm]]
+local nine_mil = {'new_mp5','mp9','m45','glock_17','glock_18c','ppk','b92fs','tec9','scorpion','uzi','sterling'} --[[Yes I know the Skorpion and PPK aren't in 9mm]]
 for i, wep_id in ipairs(nine_mil) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {3.20, 6.10}
 end
@@ -344,36 +346,17 @@ for i, wep_id in ipairs(ammo_ak) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.50, 3.5}
 end
 
-local ammo_762 = {'new_m14','scar','fal','galil','g3'}
+local ammo_762 = {'new_m14','scar','fal','galil','g3','mosin'}
 for i, wep_id in ipairs(ammo_762) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.90, 2.00}
 end
 tweak_data.weapon.hk21.AMMO_PICKUP = {0.65, 1.45}
+tweak_data.weapon.mg42.AMMO_PICKUP = {0.65, 1.25}
 
 tweak_data.weapon.r93.AMMO_PICKUP = {0.55, 0.55}
 
 
 --tweak_data.upgrades.weapon_movement_penalty.lmg = 1 --0.8
-
-if not RaycastWeaponBase then return end
-
-function RaycastWeaponBase:movement_penalty()
-	return tweak_data.weapon[self._name_id].weapon_movement_penalty or 1
-end
-
-tweak_data.weapon.m95.weapon_movement_penalty = 0.7
-tweak_data.weapon.hk21.weapon_movement_penalty = 0.75
-tweak_data.weapon.m249.weapon_movement_penalty = 0.8
-tweak_data.weapon.r93.weapon_movement_penalty = 0.8
-tweak_data.weapon.rpk.weapon_movement_penalty = 0.85
-tweak_data.weapon.galil.weapon_movement_penalty = 0.85
-tweak_data.weapon.msr.weapon_movement_penalty = 0.9
-tweak_data.weapon.fal.weapon_movement_penalty = 0.9
-tweak_data.weapon.striker.weapon_movement_penalty = 0.9
-tweak_data.weapon.g3.weapon_movement_penalty = 0.9
-tweak_data.weapon.akm_gold.weapon_movement_penalty = 0.9
-tweak_data.weapon.spas12.weapon_movement_penalty = 0.9
-tweak_data.weapon.new_m14.weapon_movement_penalty = 0.95
 
 local babby_panic = {'mp7','p90','ppk','scorpion'}
 for i, wep_id in ipairs(babby_panic) do
@@ -415,7 +398,7 @@ for i, wep_id in ipairs(high_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.25
 end
 
-local high2_panic = {'benelli','saiga','serbu','striker','huntsman','r870','ksg','judge','spas12','hk21'}
+local high2_panic = {'benelli','saiga','serbu','striker','huntsman','r870','ksg','judge','spas12','hk21','mg42'}
 for i, wep_id in ipairs(high2_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.35
 end
@@ -436,6 +419,28 @@ for i, wep_id in ipairs(its2spooky_panic) do
 end
 
 --tweak_data.player.stances.default.crouched.head.translation = Vector3( 0, 0, 82 )
+
+if not RaycastWeaponBase then return end
+
+function RaycastWeaponBase:movement_penalty()
+	return tweak_data.weapon[self._name_id].weapon_movement_penalty or 1
+end
+
+tweak_data.weapon.m95.weapon_movement_penalty = 0.7
+tweak_data.weapon.mg42.weapon_movement_penalty = 0.7
+tweak_data.weapon.hk21.weapon_movement_penalty = 0.75
+tweak_data.weapon.m249.weapon_movement_penalty = 0.8
+tweak_data.weapon.r93.weapon_movement_penalty = 0.8
+tweak_data.weapon.rpk.weapon_movement_penalty = 0.85
+tweak_data.weapon.galil.weapon_movement_penalty = 0.85
+tweak_data.weapon.msr.weapon_movement_penalty = 0.9
+tweak_data.weapon.fal.weapon_movement_penalty = 0.9
+tweak_data.weapon.striker.weapon_movement_penalty = 0.9
+tweak_data.weapon.g3.weapon_movement_penalty = 0.9
+tweak_data.weapon.akm_gold.weapon_movement_penalty = 0.9
+tweak_data.weapon.spas12.weapon_movement_penalty = 0.9
+tweak_data.weapon.mosin.weapon_movement_penalty = 0.9
+tweak_data.weapon.new_m14.weapon_movement_penalty = 0.95
 
 RebalanceGen = true
 io.write("rebalance_general.lua is working", "\n")

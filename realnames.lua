@@ -1,5 +1,5 @@
 --[[
-v0.4.2.3
+v0.4.2.4
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -143,7 +143,7 @@ function LocalizationManager:text( string_id, macros )
 	--Skeletal Stock
 	realnames["bm_wp_galil_s_skeletal"] = "IMI Galil MAR Stock"
 	--Light Stock
-	realnames["bm_wp_galil_s_light"] = "IMI Galatz Skeleton Stock"	
+	realnames["bm_wp_galil_s_light"] = "IMI Galatz Skeleton Stock"
 	--FAB Stock
 	realnames["bm_wp_galil_s_fab"] = "FAB Defence MG-CP Cheek Pad"
 	
@@ -185,6 +185,12 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_w_m95"] = "Barrett M95"
 	--Tank Buster
 	realnames["bm_wp_m95_b_barrel_long"] = "Long Barrel w/ AW50F Muzzle Brake"
+	
+	--[[NAGANT]]
+	realnames["bm_w_mosin"] = "Mosin Nagant M91/30" --"Moist Nugget"
+	--Black Stock
+	realnames["bm_wp_mosin_body_conceal"] = "Black Paint"
+	
 	
 	--[[Reinfeld 880]]
 	realnames["bm_w_r870"] = "Remington Model 870"
@@ -261,6 +267,13 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_w_hk21"] = "Heckler & Koch HK21E" --"Related to mai raifu"
 	--Short Foregrip
 	realnames["bm_wp_hk21_fg_short"] = "Short Handguard"
+	
+	--[[MG42]]
+	realnames["bm_w_mg42"] = "Mauser Maschinengewehr 42"
+	--Light Barrel
+	realnames["bm_wp_mg42_b_mg34"] = "Maschinengewehr 34 Barrel"
+	--Heat Sink (Star Wars)
+	realnames["bm_wp_mg42_b_vg38"] = "DLT-19 Barrel"
 	
 	--[[Interceptor .45]]
 	realnames["bm_w_usp"] = "Heckler & Koch USP Tactical"
@@ -372,6 +385,17 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_p226_b_equinox"] = "Equinox Duo-Tone Slide"
 	--Long Slide
 	realnames["bm_wp_p226_b_long"] = "Brushed Metal Long Slide"
+	
+	--[[Broomstick]]
+	realnames["bm_w_c96"] = "Mauser C96"
+	--Long Barrel
+	realnames["bm_wp_c96_b_long"] = "Carbine Barrel"
+	--Han Solo
+	realnames["bm_wp_c96_nozzle"] = "DL-44 Muzzle"
+	--Scope
+	realnames["bm_wp_c96_sight"] = "Schmidt & Bender 1-8x24 PM Short Dot"
+	--20rnd Mag
+	realnames["bm_wp_c96_m_extended"] = "20rnd Magazine"
 
 	--[[Mark-10]]
 	realnames["bm_w_mac10"] = "Ingram M10" --"Emten"
@@ -420,6 +444,17 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_tec9_s_unfolded"] = "Interdynamic MP-9 Wire Stock"
 	realnames["bm_wp_tec9_m_extended"] = "50rnd Magazine"
 	
+	--[[Pachette]]
+	realnames["bm_w_sterling"] = "Sterling L2A1"
+	--Sup.. Barrel
+	realnames["bm_wp_sterling_b_suppressed"] = "L34A1 Barrel"
+	--Heat Sink Barrel
+	realnames["bm_wp_sterling_b_e11"] = "E-11 Barrel"
+	--10rnd Mag
+	realnames["bm_wp_sterling_m_short"] = "10rnd Magazine"
+	--34rnd Mag
+	realnames["bm_wp_sterling_m_long"] = "34rnd Magazine"
+
 	--[[Para SMG]]
 	realnames["bm_w_olympic"] = "Olympic Arms K23B Tactical"
 	--Railed Handguard
@@ -703,6 +738,15 @@ function LocalizationManager:text( string_id, macros )
 	
 	--Tanto
 	realnames["bm_melee_kabar_tanto"] = "KA-BAR Tanto"
+	
+	--Chef
+	realnames["bm_melee_chef"] = "Chef Knife"
+	
+	--Trench Knife
+	realnames["bm_melee_fairbair"] = "Fairbairn-Sykes Fighting Knife"
+	
+	--Erica Hartmann
+	realnames["bm_melee_model24"] = "Model 24 Stielhandgranate"
 	
 	realnames["bm_menu_custom"] = "Internal Mod"
 	realnames["bm_menu_extra"] = "Rail"
