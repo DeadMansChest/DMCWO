@@ -1,0 +1,30 @@
+#If you already have your own .yml set up, just append the lines under "PersistScripts" and "PostRequireScripts" into your already existing .yml
+
+Config:
+  OutputMode: 7
+  OutputFile: PD2Hook.log
+  PrintOffsets: true
+  ExtraCols: 8
+  ExtraRows: 8
+ 
+KeyBindings:
+#None  
+  
+PersistScripts:
+#DMCWO Required files
+ - [RebalanceScript, DMCWO\rebalance.lua]  
+ - [RebalanceGen, DMCWO\rebalance_general.lua]  
+ - [RebalanceAtchScript, DMCWO\rebalance_attach.lua]
+#DMCWO Optional files
+ - [ReelNames, DMCWO\realnames.lua]
+# - [RecoilFixer, DMCWO\recoil_fix.lua]
+
+PostRequireScripts:
+#DMCWO Required files
+ - ['lib/managers/weaponfactorymanager', DMCWO\postrequire_attach.lua]
+ - ['lib/units/weapons/RaycastWeaponBase', DMCWO\soundsfix.lua]
+ - ['*', DMCWO\shotgat_physics.lua]
+#DMCWO Optional files
+ - ['*', DMCWO\tact_reload.lua]
+ - ['lib/units/cameras/fpcameraplayerbase', DMCWO\recoil_fix.lua]
+ - ['lib/tweak_data/weaponfactorytweakdata', DMCWO\Extra\useable_drums.lua]

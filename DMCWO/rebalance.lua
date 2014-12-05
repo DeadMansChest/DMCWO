@@ -1,5 +1,5 @@
 --[[
-v0.4.2.4
+v1.0
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -28,29 +28,29 @@ if not tweak_data then return end
 
 local pivot_shoulder_translation = Vector3(10.7332, 15.6145, -2.75549)
 local pivot_shoulder_rotation = Rotation(0.106625, -0.450997, 0.629212)
-local ar_type_hold = {'amcar','m16','new_m4','olympic','new_mp5','new_m14','ak5'}
+local ar_type_hold = {'amcar','m16','new_m4','olympic','new_mp5','ak5'}
 for i, wep_id in ipairs(ar_type_hold) do
-	local pivot_head_translation = Vector3(10,22,-3)
+	local pivot_head_translation = Vector3(9,20,-4)
 	local pivot_head_rotation = Rotation(0,0,-1)
 	tweak_data.player.stances[wep_id].standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 	tweak_data.player.stances[wep_id].standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 	
-	pivot_head_translation = Vector3(8,20,-1)
+	pivot_head_translation = Vector3(7,18,-2)
 	pivot_head_rotation = Rotation(0,0,-2)
 	tweak_data.player.stances[wep_id].crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-	tweak_data.player.stances[wep_id].crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+	tweak_data.player.stances[wep_id].crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()	
 end
 
 pivot_shoulder_translation = Vector3(10.7353, 23.0139, -1.43553)
 pivot_shoulder_rotation = Rotation(0.106665, -0.0845104, 0.629231)
 ak_type_hold = {'saiga','akm','ak74','akmsu'}
 for i, wep_id in ipairs(ak_type_hold) do
-	pivot_head_translation = Vector3(10, 24, 0)
+	pivot_head_translation = Vector3(9, 24, 0)
 	pivot_head_rotation = Rotation(0.0, 0.0, -1)
 	tweak_data.player.stances[wep_id].standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 	tweak_data.player.stances[wep_id].standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 	
-	pivot_head_translation = Vector3(8, 20, 3)
+	pivot_head_translation = Vector3(7, 22, 2)
 	pivot_head_rotation = Rotation(0.0, 0.0, -2)
 	tweak_data.player.stances[wep_id].crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 	tweak_data.player.stances[wep_id].crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
@@ -139,7 +139,7 @@ end
 
 --[[WEAPONS]]--
 
---SAW
+--SAW(s)
 
 --just to fix it for the new extra_ammo and total_ammo_mod calculations
 tweak_data.weapon.saw.stats = {
@@ -155,7 +155,6 @@ tweak_data.weapon.saw.stats = {
 		extra_ammo = 11,
 		total_ammo_mod = 101,
 	}
-		
 tweak_data.weapon.saw_secondary.stats = {
 		alert_size = 9,
 		suppression = 7,
@@ -214,12 +213,12 @@ tweak_data.weapon.judge.kick.standing = {2.9, 3.8, -1.8, 1.8 }
 tweak_data.weapon.judge.kick.crouching = tweak_data.weapon.judge.kick.standing
 tweak_data.weapon.judge.kick.steelsight = tweak_data.weapon.judge.kick.standing
 		
-tweak_data.weapon.judge.spread.standing = 4.5
+tweak_data.weapon.judge.spread.standing = 6
 tweak_data.weapon.judge.spread.crouching = tweak_data.weapon.judge.spread.standing
-tweak_data.weapon.judge.spread.steelsight = tweak_data.weapon.judge.spread.standing * 0.6
+tweak_data.weapon.judge.spread.steelsight = tweak_data.weapon.judge.spread.standing * 0.5
 tweak_data.weapon.judge.spread.moving_standing = tweak_data.weapon.judge.spread.standing
 tweak_data.weapon.judge.spread.moving_crouching = tweak_data.weapon.judge.spread.standing
-tweak_data.weapon.judge.spread.moving_steelsight = tweak_data.weapon.judge.spread.standing * 0.8
+tweak_data.weapon.judge.spread.moving_steelsight = tweak_data.weapon.judge.spread.standing * 0.6
 
 tweak_data.weapon.judge.muzzleflash = "effects/payday2/particles/weapons/big_762_auto_fps"
 
@@ -257,7 +256,7 @@ tweak_data.weapon.judge.stats = {
 	
 	
 --FAMAS (DEAGLE)
-tweak_data.weapon.deagle.kick.standing = { 3.8, 4.9, -2.7, 3.0 } --changes recoil pattern to literally "fuck you"
+tweak_data.weapon.deagle.kick.standing = { 5.8, 6.9, -3.7, 4.0 } --changes recoil pattern to literally "fuck you"
 tweak_data.weapon.deagle.kick.crouching = tweak_data.weapon.deagle.kick.standing
 tweak_data.weapon.deagle.kick.steelsight = tweak_data.weapon.deagle.kick.standing
 
@@ -269,7 +268,6 @@ tweak_data.weapon.deagle.spread.moving_crouching = tweak_data.weapon.deagle.spre
 tweak_data.weapon.deagle.spread.moving_steelsight = tweak_data.weapon.deagle.spread.steelsight * 2
 
 tweak_data.weapon.deagle.CLIP_AMMO_MAX = 7
---tweak_data.weapon.deagle.NR_CLIPS_MAX = 5
 tweak_data.weapon.deagle.AMMO_MAX = 35
 
 tweak_data.weapon.deagle.muzzleflash = "effects/payday2/particles/weapons/big_762_auto_fps"
@@ -313,7 +311,7 @@ pivot_head_rotation = Rotation(0, 0, 0)
 tweak_data.player.stances.x_deagle.steelsight.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.x_deagle.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-tweak_data.weapon.x_deagle.kick.standing = { 3.8, 4.9, -2.7, 3.0 } --changes recoil pattern to literally "fuck you"
+tweak_data.weapon.x_deagle.kick.standing = { 5.8, 6.9, -3.7, 4.0 } --changes recoil pattern to literally "fuck you"
 tweak_data.weapon.x_deagle.kick.crouching = tweak_data.weapon.x_deagle.kick.standing
 tweak_data.weapon.x_deagle.kick.steelsight = tweak_data.weapon.x_deagle.kick.standing
 
@@ -325,7 +323,6 @@ tweak_data.weapon.x_deagle.spread.moving_crouching = tweak_data.weapon.x_deagle.
 tweak_data.weapon.x_deagle.spread.moving_steelsight = tweak_data.weapon.x_deagle.spread.steelsight * 2
 
 tweak_data.weapon.x_deagle.CLIP_AMMO_MAX = 7 * 2
---tweak_data.weapon.x_deagle.NR_CLIPS_MAX = 5
 tweak_data.weapon.x_deagle.AMMO_MAX = 35 * 2
 
 tweak_data.weapon.x_deagle.muzzleflash = "effects/payday2/particles/weapons/big_762_auto_fps"
@@ -357,7 +354,7 @@ tweak_data.weapon.x_deagle.stats = {
 	}
 	
 --RAGING BULL (Bronco. 44)
-tweak_data.weapon.new_raging_bull.kick.standing = { 2.9, 4.1, -2.3, 2.3 } --changes recoil pattern to heavy vertical kick
+tweak_data.weapon.new_raging_bull.kick.standing = { 3.9, 4.1, -2.3, 2.3 } --changes recoil pattern to heavy vertical kick
 tweak_data.weapon.new_raging_bull.kick.crouching = tweak_data.weapon.new_raging_bull.kick.standing
 tweak_data.weapon.new_raging_bull.kick.steelsight = tweak_data.weapon.new_raging_bull.kick.standing
 
@@ -371,7 +368,6 @@ tweak_data.weapon.new_raging_bull.spread.moving_steelsight = tweak_data.weapon.n
 tweak_data.weapon.new_raging_bull.fire_mode_data.fire_rate = 0.21428571428571428571428571428571
 
 tweak_data.weapon.new_raging_bull.CLIP_AMMO_MAX = 6
---tweak_data.weapon.new_raging_bull.NR_CLIPS_MAX = 7
 tweak_data.weapon.new_raging_bull.AMMO_MAX = 42
 
 tweak_data.weapon.new_raging_bull.shake.fire_multiplier = 1.75
@@ -415,12 +411,9 @@ tweak_data.weapon.colt_1911.spread.moving_crouching = tweak_data.weapon.colt_191
 tweak_data.weapon.colt_1911.spread.moving_steelsight = tweak_data.weapon.colt_1911.spread.steelsight * 1.75
 
 tweak_data.weapon.colt_1911.CLIP_AMMO_MAX = 8
---tweak_data.weapon.colt_1911.NR_CLIPS_MAX = 9
 tweak_data.weapon.colt_1911.AMMO_MAX = 80
 
 tweak_data.weapon.colt_1911.fire_mode_data.fire_rate = 0.1319
-
-tweak_data.weapon.colt_1911.weapon_hold = "glock"
 
 tweak_data.weapon.colt_1911.can_shoot_through_enemy = true
 tweak_data.weapon.colt_1911.can_shoot_through_wall = true
@@ -456,7 +449,6 @@ tweak_data.weapon.x_1911.spread.moving_crouching = tweak_data.weapon.x_1911.spre
 tweak_data.weapon.x_1911.spread.moving_steelsight = tweak_data.weapon.x_1911.spread.steelsight * 2
 
 tweak_data.weapon.x_1911.CLIP_AMMO_MAX = 8 *2
---tweak_data.weapon.x_1911.NR_CLIPS_MAX = 9
 tweak_data.weapon.x_1911.AMMO_MAX = 80 *2
 
 tweak_data.weapon.x_1911.fire_mode_data.fire_rate = 0.1319
@@ -498,7 +490,6 @@ tweak_data.weapon.usp.spread.moving_crouching = tweak_data.weapon.usp.spread.cro
 tweak_data.weapon.usp.spread.moving_steelsight = tweak_data.weapon.usp.spread.steelsight * 1.8
 
 tweak_data.weapon.usp.CLIP_AMMO_MAX = 12
---tweak_data.weapon.usp.NR_CLIPS_MAX = 6
 tweak_data.weapon.usp.AMMO_MAX = 84
 
 tweak_data.weapon.usp.fire_mode_data.fire_rate = 0.1277
@@ -527,7 +518,7 @@ tweak_data.weapon.usp.stats = {
 	
 	
 --C96
-tweak_data.weapon.c96.kick.standing = { 3.3, 2.9, -1.3, 1.3 }
+tweak_data.weapon.c96.kick.standing = { 1.8, 2.4, -2.1, 2.1 }
 tweak_data.weapon.c96.kick.crouching = tweak_data.weapon.c96.kick.standing
 tweak_data.weapon.c96.kick.steelsight = tweak_data.weapon.c96.kick.standing
 
@@ -894,19 +885,18 @@ tweak_data.weapon.ppk.stats = {
 		value = 1,
 	}
 	
+	
 --MARK 10
-
-
-tweak_data.weapon.mac10.kick.standing = { -0.6, 1.4, -1.55, 1.55 }
+tweak_data.weapon.mac10.kick.standing = { -0.7, 1.8, -1.7, 1.7 }
 tweak_data.weapon.mac10.kick.crouching = tweak_data.weapon.mac10.kick.standing
 tweak_data.weapon.mac10.kick.steelsight = tweak_data.weapon.mac10.kick.standing
 
-tweak_data.weapon.mac10.spread.standing = 4
-tweak_data.weapon.mac10.spread.crouching = 3.5
+tweak_data.weapon.mac10.spread.standing = 3.75
+tweak_data.weapon.mac10.spread.crouching = 3.25
 tweak_data.weapon.mac10.spread.steelsight = 1.55
-tweak_data.weapon.mac10.spread.moving_standing = tweak_data.weapon.mac10.spread.standing * 1.2
-tweak_data.weapon.mac10.spread.moving_crouching = tweak_data.weapon.mac10.spread.crouching * 1.2
-tweak_data.weapon.mac10.spread.moving_steelsight = tweak_data.weapon.mac10.spread.steelsight * 1.35
+tweak_data.weapon.mac10.spread.moving_standing = tweak_data.weapon.mac10.spread.standing * 1.3
+tweak_data.weapon.mac10.spread.moving_crouching = tweak_data.weapon.mac10.spread.crouching * 1.3
+tweak_data.weapon.mac10.spread.moving_steelsight = tweak_data.weapon.mac10.spread.steelsight * 1.3
 
 tweak_data.weapon.mac10.fire_mode_data.fire_rate = 0.0521739130434
 
@@ -914,8 +904,7 @@ tweak_data.weapon.mac10.can_shoot_through_enemy = true
 tweak_data.weapon.mac10.can_shoot_through_wall = true
 
 tweak_data.weapon.mac10.CLIP_AMMO_MAX = 20
-tweak_data.weapon.mac10.NR_CLIPS_MAX = 6
-tweak_data.weapon.mac10.AMMO_MAX = tweak_data.weapon.mac10.CLIP_AMMO_MAX * tweak_data.weapon.mac10.NR_CLIPS_MAX
+tweak_data.weapon.mac10.AMMO_MAX = 120
 
 tweak_data.weapon.mac10.armor_piercing_chance = 0.1
 
@@ -925,7 +914,7 @@ tweak_data.weapon.mac10.shake.fire_steelsight_multiplier = -0.75
 tweak_data.weapon.mac10.stats = {
 		damage = 17,
 		spread = 6,
-		recoil = 9,
+		recoil = 11,
 		spread_moving = 8,
 		zoom = 1,
 		concealment = 27,
@@ -935,22 +924,83 @@ tweak_data.weapon.mac10.stats = {
 		total_ammo_mod = 101,
 		value = 1,
 	}
+	
+	
+--Thompson
+pivot_head_translation = Vector3(8, 36, -8)
+pivot_head_rotation = Rotation(0, 0, -1)
+tweak_data.player.stances.m1928.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.m1928.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+
+pivot_head_translation = Vector3(6, 34, -6)
+pivot_head_rotation = Rotation(0, 0, -2)
+tweak_data.player.stances.m1928.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.m1928.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+
+tweak_data.weapon.m1928.kick.standing = { -0.6, 1.2, -2.0, 2.0 }
+tweak_data.weapon.m1928.kick.crouching = tweak_data.weapon.m1928.kick.standing
+tweak_data.weapon.m1928.kick.steelsight = tweak_data.weapon.m1928.kick.standing
+
+tweak_data.weapon.m1928.spread.standing = 6.25
+tweak_data.weapon.m1928.spread.crouching = 5.75
+tweak_data.weapon.m1928.spread.steelsight = 1.3
+tweak_data.weapon.m1928.spread.moving_standing = tweak_data.weapon.m1928.spread.standing * 1.6
+tweak_data.weapon.m1928.spread.moving_crouching = tweak_data.weapon.m1928.spread.crouching * 1.6
+tweak_data.weapon.m1928.spread.moving_steelsight = tweak_data.weapon.m1928.spread.steelsight * 1.6
+
+tweak_data.weapon.m1928.fire_mode_data.fire_rate = 0.08275862068965517241379310344828
+
+tweak_data.weapon.m1928.can_shoot_through_enemy = true
+tweak_data.weapon.m1928.can_shoot_through_wall = true
+
+tweak_data.weapon.m1928.CLIP_AMMO_MAX = 50
+tweak_data.weapon.m1928.AMMO_MAX = 100
+
+tweak_data.weapon.m1928.armor_piercing_chance = 0.1
+
+tweak_data.weapon.m1928.shake.fire_multiplier = 0.45
+tweak_data.weapon.m1928.shake.fire_steelsight_multiplier = -0.45
+
+tweak_data.weapon.m1928.stats = {
+		damage = 19,
+		spread = 7,
+		recoil = 19,
+		spread_moving = 8,
+		zoom = 1,
+		concealment = 18,
+		suppression = 9,
+		alert_size = 7,
+		extra_ammo = 11,
+		total_ammo_mod = 101,
+		value = 1,
+	}
 
 	
 --M45
-tweak_data.weapon.m45.kick.standing = { -0.7, 1.35, -1.9, 1.9 }
+pivot_shoulder_translation = Vector3(8.49051, 38.6474, -5.09399)
+pivot_shoulder_rotation = Rotation(0.0999949, -0.687702, 0.630304)
+pivot_head_translation = Vector3(8, 42, -1)
+pivot_head_rotation = Rotation(0, 0, -1)
+tweak_data.player.stances.m45.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.m45.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+
+pivot_head_translation = Vector3(6, 40, 1)
+pivot_head_rotation = Rotation(0, 0, -2)
+tweak_data.player.stances.m45.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.m45.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+	
+tweak_data.weapon.m45.kick.standing = { -0.5, 1.45, -2.2, 2.2 }
 tweak_data.weapon.m45.kick.crouching = tweak_data.weapon.m45.kick.standing
 tweak_data.weapon.m45.kick.steelsight = tweak_data.weapon.m45.kick.standing
 
 tweak_data.weapon.m45.spread.standing = 4.75
 tweak_data.weapon.m45.spread.crouching = 4.25
 tweak_data.weapon.m45.spread.steelsight = 1.7
-tweak_data.weapon.m45.spread.moving_standing = tweak_data.weapon.m45.spread.standing * 1.5
-tweak_data.weapon.m45.spread.moving_crouching = tweak_data.weapon.m45.spread.crouching * 1.5
-tweak_data.weapon.m45.spread.moving_steelsight = tweak_data.weapon.m45.spread.steelsight * 1.4
+tweak_data.weapon.m45.spread.moving_standing = tweak_data.weapon.m45.spread.standing * 1.3
+tweak_data.weapon.m45.spread.moving_crouching = tweak_data.weapon.m45.spread.crouching * 1.3
+tweak_data.weapon.m45.spread.moving_steelsight = tweak_data.weapon.m45.spread.steelsight * 1.3
 
 tweak_data.weapon.m45.CLIP_AMMO_MAX = 36
---tweak_data.weapon.m45.NR_CLIPS_MAX = 4
 tweak_data.weapon.m45.AMMO_MAX = 144 
 
 tweak_data.weapon.m45.stats = {
@@ -967,28 +1017,17 @@ tweak_data.weapon.m45.stats = {
 		value = 5,
 	}
 	
-pivot_shoulder_translation = Vector3(8.49051, 38.6474, -5.09399)
-pivot_shoulder_rotation = Rotation(0.0999949, -0.687702, 0.630304)
-pivot_head_translation = Vector3(5, 46, -1)
-pivot_head_rotation = Rotation(0, 0, -1)
-tweak_data.player.stances.m45.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-tweak_data.player.stances.m45.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3(8, 40, -1)
-pivot_head_rotation = Rotation(0, 0, -2)
-tweak_data.player.stances.m45.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-tweak_data.player.stances.m45.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-	
 --Uzi
-tweak_data.weapon.uzi.kick.standing = { -0.4, 1.7, -1.45, 1.45 }
+tweak_data.weapon.uzi.kick.standing = { -0.4, 1.7, -1.1, 1.1 }
 tweak_data.weapon.uzi.kick.crouching = tweak_data.weapon.uzi.kick.standing
 tweak_data.weapon.uzi.kick.steelsight = tweak_data.weapon.uzi.kick.standing
 
 tweak_data.weapon.uzi.spread.standing = 4
 tweak_data.weapon.uzi.spread.crouching = 3.5
 tweak_data.weapon.uzi.spread.steelsight = 1.5
-tweak_data.weapon.uzi.spread.moving_standing = tweak_data.weapon.uzi.spread.standing * 1.3
-tweak_data.weapon.uzi.spread.moving_crouching = tweak_data.weapon.uzi.spread.crouching * 1.3
+tweak_data.weapon.uzi.spread.moving_standing = tweak_data.weapon.uzi.spread.standing * 1.5
+tweak_data.weapon.uzi.spread.moving_crouching = tweak_data.weapon.uzi.spread.crouching * 1.5
 tweak_data.weapon.uzi.spread.moving_steelsight = tweak_data.weapon.uzi.spread.steelsight * 1.5
 
 tweak_data.weapon.uzi.fire_mode_data.fire_rate = 0.1
@@ -1023,7 +1062,7 @@ tweak_data.weapon.scorpion.spread.crouching = 2.75
 tweak_data.weapon.scorpion.spread.steelsight = 1.55
 tweak_data.weapon.scorpion.spread.moving_standing = tweak_data.weapon.scorpion.spread.standing * 1.4
 tweak_data.weapon.scorpion.spread.moving_crouching = tweak_data.weapon.scorpion.spread.crouching * 1.4
-tweak_data.weapon.scorpion.spread.moving_steelsight = tweak_data.weapon.scorpion.spread.steelsight * 1.5
+tweak_data.weapon.scorpion.spread.moving_steelsight = tweak_data.weapon.scorpion.spread.steelsight * 1.4
 
 tweak_data.weapon.scorpion.fire_mode_data.fire_rate = 0.070588235294117
 
@@ -1059,7 +1098,7 @@ tweak_data.weapon.tec9.spread.crouching = 4.75
 tweak_data.weapon.tec9.spread.steelsight = 1.65
 tweak_data.weapon.tec9.spread.moving_standing = tweak_data.weapon.tec9.spread.standing * 1.6
 tweak_data.weapon.tec9.spread.moving_crouching = tweak_data.weapon.tec9.spread.crouching * 1.6
-tweak_data.weapon.tec9.spread.moving_steelsight = tweak_data.weapon.tec9.spread.steelsight * 1.45
+tweak_data.weapon.tec9.spread.moving_steelsight = tweak_data.weapon.tec9.spread.steelsight * 1.6
 
 tweak_data.weapon.tec9.CLIP_AMMO_MAX = 32
 tweak_data.weapon.tec9.AMMO_MAX = 128
@@ -1102,7 +1141,7 @@ tweak_data.player.stances.tec9.crouched.shoulders.rotation = pivot_head_rotation
 
 
 --Gay for FNC too (MP9)
-tweak_data.weapon.mp9.kick.standing = {1.1, -0.6, -1.2, 1.2 }
+tweak_data.weapon.mp9.kick.standing = {1.2, -0.4, -1.3, 1.3 }
 tweak_data.weapon.mp9.kick.crouching = tweak_data.weapon.mp9.kick.standing
 tweak_data.weapon.mp9.kick.steelsight = tweak_data.weapon.mp9.kick.standing
 
@@ -1111,9 +1150,9 @@ tweak_data.weapon.mp9.fire_mode_data.fire_rate = 0.0667
 tweak_data.weapon.mp9.spread.standing = 2.75
 tweak_data.weapon.mp9.spread.crouching = 2.25
 tweak_data.weapon.mp9.spread.steelsight = 1.4
-tweak_data.weapon.mp9.spread.moving_standing = tweak_data.weapon.mp9.spread.standing * 1.15
-tweak_data.weapon.mp9.spread.moving_crouching = tweak_data.weapon.mp9.spread.crouching * 1.15
-tweak_data.weapon.mp9.spread.moving_steelsight = tweak_data.weapon.mp9.spread.steelsight * 1.3
+tweak_data.weapon.mp9.spread.moving_standing = tweak_data.weapon.mp9.spread.standing * 1.2
+tweak_data.weapon.mp9.spread.moving_crouching = tweak_data.weapon.mp9.spread.crouching * 1.2
+tweak_data.weapon.mp9.spread.moving_steelsight = tweak_data.weapon.mp9.spread.steelsight * 1.2
 
 tweak_data.weapon.mp9.CLIP_AMMO_MAX = 20
 tweak_data.weapon.mp9.AMMO_MAX = 150
@@ -1139,12 +1178,12 @@ tweak_data.weapon.mp9.stats = {
 --EMPI (MP5)
 pivot_shoulder_translation = Vector3(10.7414, 18.4543, -3.29175)
 pivot_shoulder_rotation = Rotation(0.106934, -0.220015, 0.629729)
-pivot_head_translation = Vector3(0,10,-0.05)
+pivot_head_translation = Vector3(0,10,-0.05) --7
 pivot_head_rotation = Rotation(0,0.25,0)
 tweak_data.player.stances.new_mp5.steelsight.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.new_mp5.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-tweak_data.weapon.new_mp5.kick.standing = {1.7, -0.3, -1.35, 1.35 }
+tweak_data.weapon.new_mp5.kick.standing = {1.5, -0.8, -1.35, 1.35 }
 tweak_data.weapon.new_mp5.kick.crouching = tweak_data.weapon.new_mp5.kick.standing
 tweak_data.weapon.new_mp5.kick.steelsight = tweak_data.weapon.new_mp5.kick.standing
 
@@ -1153,7 +1192,7 @@ tweak_data.weapon.new_mp5.spread.crouching = 3
 tweak_data.weapon.new_mp5.spread.steelsight = 1.3
 tweak_data.weapon.new_mp5.spread.moving_standing = tweak_data.weapon.new_mp5.spread.standing * 1.3
 tweak_data.weapon.new_mp5.spread.moving_crouching = tweak_data.weapon.new_mp5.spread.crouching * 1.3
-tweak_data.weapon.new_mp5.spread.moving_steelsight = tweak_data.weapon.new_mp5.spread.steelsight * 1.5
+tweak_data.weapon.new_mp5.spread.moving_steelsight = tweak_data.weapon.new_mp5.spread.steelsight * 1.3
 
 tweak_data.weapon.new_mp5.fire_mode_data.fire_rate = 0.0779
 
@@ -1165,7 +1204,7 @@ tweak_data.weapon.new_mp5.shake.fire_steelsight_multiplier = -0.8
 tweak_data.weapon.new_mp5.stats = {
 		damage = 13,
 		spread = 8,
-		recoil = 17,
+		recoil = 18,
 		spread_moving = 8,
 		zoom = 1,
 		concealment = 23,
@@ -1190,12 +1229,16 @@ pivot_head_rotation = Rotation(0, 0, -6)
 tweak_data.player.stances.sterling.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.sterling.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
+tweak_data.weapon.sterling.kick.standing = {1.5, -1.0, -1.2, 1.2 }
+tweak_data.weapon.sterling.kick.crouching = tweak_data.weapon.sterling.kick.standing
+tweak_data.weapon.sterling.kick.steelsight = tweak_data.weapon.sterling.kick.standing
+
 tweak_data.weapon.sterling.spread.standing = 4.75
 tweak_data.weapon.sterling.spread.crouching = 4.25
 tweak_data.weapon.sterling.spread.steelsight = 1.3
-tweak_data.weapon.sterling.spread.moving_standing = tweak_data.weapon.sterling.spread.standing * 1.5
-tweak_data.weapon.sterling.spread.moving_crouching = tweak_data.weapon.sterling.spread.crouching * 1.5
-tweak_data.weapon.sterling.spread.moving_steelsight = tweak_data.weapon.sterling.spread.steelsight * 1.5
+tweak_data.weapon.sterling.spread.moving_standing = tweak_data.weapon.sterling.spread.standing * 1.8
+tweak_data.weapon.sterling.spread.moving_crouching = tweak_data.weapon.sterling.spread.crouching * 1.8
+tweak_data.weapon.sterling.spread.moving_steelsight = tweak_data.weapon.sterling.spread.steelsight * 1.8
 
 tweak_data.weapon.sterling.shake.fire_multiplier = 0.9
 tweak_data.weapon.sterling.shake.fire_steelsight_multiplier = -0.9
@@ -1221,20 +1264,19 @@ tweak_data.weapon.mp7.kick.standing = {1.8, -0.6, -1.0, 1.6}
 tweak_data.weapon.mp7.kick.crouching = tweak_data.weapon.mp7.kick.standing
 tweak_data.weapon.mp7.kick.steelsight = tweak_data.weapon.mp7.kick.standing
 
-tweak_data.weapon.mp7.spread.standing = 4.5
-tweak_data.weapon.mp7.spread.crouching = 4
+tweak_data.weapon.mp7.spread.standing = 4.25
+tweak_data.weapon.mp7.spread.crouching = 3.75
 tweak_data.weapon.mp7.spread.steelsight = 1.2
-tweak_data.weapon.mp7.spread.moving_standing = tweak_data.weapon.mp7.spread.standing * 1.3
-tweak_data.weapon.mp7.spread.moving_crouching = tweak_data.weapon.mp7.spread.crouching * 1.3
-tweak_data.weapon.mp7.spread.moving_steelsight = tweak_data.weapon.mp7.spread.steelsight * 1.5
+tweak_data.weapon.mp7.spread.moving_standing = tweak_data.weapon.mp7.spread.standing * 1.4
+tweak_data.weapon.mp7.spread.moving_crouching = tweak_data.weapon.mp7.spread.crouching * 1.4
+tweak_data.weapon.mp7.spread.moving_steelsight = tweak_data.weapon.mp7.spread.steelsight * 1.4
 
 tweak_data.weapon.mp7.can_shoot_through_wall = true
 tweak_data.weapon.mp7.can_shoot_through_enemy = true
 tweak_data.weapon.mp7.can_shoot_through_shield = true
 
 tweak_data.weapon.mp7.CLIP_AMMO_MAX = 20
-tweak_data.weapon.mp7.NR_CLIPS_MAX = 10
-tweak_data.weapon.mp7.AMMO_MAX = tweak_data.weapon.mp7.CLIP_AMMO_MAX * tweak_data.weapon.mp7.NR_CLIPS_MAX
+tweak_data.weapon.mp7.AMMO_MAX = 200
 
 tweak_data.weapon.mp7.armor_piercing_chance = 0.7
 
@@ -1260,12 +1302,12 @@ tweak_data.weapon.mp7.stats = {
 --P90
 pivot_shoulder_translation = Vector3(11.0002, 24.3293, -0.962641)
 pivot_shoulder_rotation = Rotation(0.21279, 0.970214, 0.197877)
-pivot_head_translation = Vector3(12, 26, -2)
+pivot_head_translation = Vector3(11, 24, -2)
 pivot_head_rotation = Rotation(0, 0, -1)
 tweak_data.player.stances.p90.standard.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.p90.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3(14, 24, 1)
+pivot_head_translation = Vector3(9, 22, 1)
 pivot_head_rotation = Rotation(0, 0, -2)
 tweak_data.player.stances.p90.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.p90.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
@@ -1276,21 +1318,20 @@ tweak_data.weapon.p90.kick.steelsight = tweak_data.weapon.p90.kick.standing
 
 tweak_data.weapon.p90.spread.standing = 3.5
 tweak_data.weapon.p90.spread.crouching = 3
-tweak_data.weapon.p90.spread.steelsight = 1
-tweak_data.weapon.p90.spread.moving_standing = tweak_data.weapon.p90.spread.standing * 1.2
-tweak_data.weapon.p90.spread.moving_crouching = tweak_data.weapon.p90.spread.crouching * 1.2
+tweak_data.weapon.p90.spread.steelsight = 1.1
+tweak_data.weapon.p90.spread.moving_standing = tweak_data.weapon.p90.spread.standing * 1.3
+tweak_data.weapon.p90.spread.moving_crouching = tweak_data.weapon.p90.spread.crouching * 1.3
 tweak_data.weapon.p90.spread.moving_steelsight = tweak_data.weapon.p90.spread.steelsight * 1.3
 
 tweak_data.weapon.p90.can_shoot_through_shield = true
 tweak_data.weapon.p90.can_shoot_through_enemy = true
 tweak_data.weapon.p90.can_shoot_through_wall = true
 
-tweak_data.weapon.p90.armor_piercing_chance = 0.9
+tweak_data.weapon.p90.armor_piercing_chance = 0.8
 
 tweak_data.weapon.p90.fire_mode_data.fire_rate = 0.066666666666
 
 tweak_data.weapon.p90.CLIP_AMMO_MAX = 50
---tweak_data.weapon.p90.NR_CLIPS_MAX = 2
 tweak_data.weapon.p90.AMMO_MAX = 150
 
 tweak_data.weapon.p90.shake.fire_multiplier = 0.57
@@ -1321,12 +1362,11 @@ tweak_data.weapon.akmsu.kick.steelsight = tweak_data.weapon.akmsu.kick.standing
 tweak_data.weapon.akmsu.spread.standing = 5.75
 tweak_data.weapon.akmsu.spread.crouching = 4.25
 tweak_data.weapon.akmsu.spread.steelsight = 1.6
-tweak_data.weapon.akmsu.spread.moving_standing = tweak_data.weapon.akmsu.spread.standing * 1.55
-tweak_data.weapon.akmsu.spread.moving_crouching = tweak_data.weapon.akmsu.spread.crouching * 1.55
-tweak_data.weapon.akmsu.spread.moving_steelsight = tweak_data.weapon.akmsu.spread.steelsight * 1.75
+tweak_data.weapon.akmsu.spread.moving_standing = tweak_data.weapon.akmsu.spread.standing * 1.6
+tweak_data.weapon.akmsu.spread.moving_crouching = tweak_data.weapon.akmsu.spread.crouching * 1.6
+tweak_data.weapon.akmsu.spread.moving_steelsight = tweak_data.weapon.akmsu.spread.steelsight * 1.6
 
 tweak_data.weapon.akmsu.CLIP_AMMO_MAX = 30
---tweak_data.weapon.akmsu.NR_CLIPS_MAX = 4
 tweak_data.weapon.akmsu.AMMO_MAX = 90
 
 tweak_data.weapon.akmsu.can_shoot_through_enemy = true
@@ -1361,9 +1401,9 @@ tweak_data.weapon.olympic.kick.steelsight = tweak_data.weapon.olympic.kick.stand
 tweak_data.weapon.olympic.spread.standing = 4
 tweak_data.weapon.olympic.spread.crouching = 3.5
 tweak_data.weapon.olympic.spread.steelsight = 1.5
-tweak_data.weapon.olympic.spread.moving_standing = tweak_data.weapon.olympic.spread.standing * 1.2
-tweak_data.weapon.olympic.spread.moving_crouching = tweak_data.weapon.olympic.spread.crouching * 1.2
-tweak_data.weapon.olympic.spread.moving_steelsight = tweak_data.weapon.olympic.spread.steelsight * 1.35
+tweak_data.weapon.olympic.spread.moving_standing = tweak_data.weapon.olympic.spread.standing * 1.25
+tweak_data.weapon.olympic.spread.moving_crouching = tweak_data.weapon.olympic.spread.crouching * 1.25
+tweak_data.weapon.olympic.spread.moving_steelsight = tweak_data.weapon.olympic.spread.steelsight * 1.25
 
 tweak_data.weapon.olympic.can_shoot_through_enemy = true
 tweak_data.weapon.olympic.can_shoot_through_wall = true
@@ -1404,9 +1444,9 @@ tweak_data.weapon.akm.armor_piercing_chance = 0.5
 tweak_data.weapon.akm.spread.standing = 6.5
 tweak_data.weapon.akm.spread.crouching = 6
 tweak_data.weapon.akm.spread.steelsight = 1.5
-tweak_data.weapon.akm.spread.moving_standing = tweak_data.weapon.akm.spread.standing * 1.5
-tweak_data.weapon.akm.spread.moving_crouching = tweak_data.weapon.akm.spread.crouching * 1.5
-tweak_data.weapon.akm.spread.moving_steelsight = tweak_data.weapon.akm.spread.steelsight * 1.8
+tweak_data.weapon.akm.spread.moving_standing = tweak_data.weapon.akm.spread.standing * 1.55
+tweak_data.weapon.akm.spread.moving_crouching = tweak_data.weapon.akm.spread.crouching * 1.55
+tweak_data.weapon.akm.spread.moving_steelsight = tweak_data.weapon.akm.spread.steelsight * 1.55
 
 tweak_data.weapon.akm.CLIP_AMMO_MAX = 30
 tweak_data.weapon.akm.NR_CLIPS_MAX = 4
@@ -1432,7 +1472,7 @@ tweak_data.weapon.akm.stats = {
 	
 	
 --GOLD AKM
-tweak_data.weapon.akm_gold.kick.standing = {1.4, -0.75, -1.55, 1.55 }
+tweak_data.weapon.akm_gold.kick.standing = {1.4, -0.75, -1.65, 1.65 }
 tweak_data.weapon.akm_gold.kick.crouching = tweak_data.weapon.akm_gold.kick.standing
 tweak_data.weapon.akm_gold.kick.steelsight = tweak_data.weapon.akm_gold.kick.standing
 
@@ -1441,12 +1481,12 @@ tweak_data.weapon.akm_gold.can_shoot_through_wall = true
 
 tweak_data.weapon.akm_gold.armor_piercing_chance = 0.5
 
-tweak_data.weapon.akm_gold.spread.standing = 6.75
-tweak_data.weapon.akm_gold.spread.crouching = 6.25
+tweak_data.weapon.akm_gold.spread.standing = 6.5
+tweak_data.weapon.akm_gold.spread.crouching = 6
 tweak_data.weapon.akm_gold.spread.steelsight = 1.5
-tweak_data.weapon.akm_gold.spread.moving_standing = tweak_data.weapon.akm_gold.spread.standing * 1.8
-tweak_data.weapon.akm_gold.spread.moving_crouching = tweak_data.weapon.akm_gold.spread.crouching * 1.8
-tweak_data.weapon.akm_gold.spread.moving_steelsight = tweak_data.weapon.akm_gold.spread.steelsight * 1.85
+tweak_data.weapon.akm_gold.spread.moving_standing = tweak_data.weapon.akm_gold.spread.standing * 1.7
+tweak_data.weapon.akm_gold.spread.moving_crouching = tweak_data.weapon.akm_gold.spread.crouching * 1.7
+tweak_data.weapon.akm_gold.spread.moving_steelsight = tweak_data.weapon.akm_gold.spread.steelsight * 1.7
 
 tweak_data.weapon.akm_gold.CLIP_AMMO_MAX = 30
 tweak_data.weapon.akm_gold.NR_CLIPS_MAX = 4
@@ -1476,12 +1516,12 @@ tweak_data.weapon.akm_gold.stats = {
 	
 pivot_shoulder_translation = Vector3( 10.6725, 27.7166, -4.93564 )
 pivot_shoulder_rotation = Rotation( 0.1067, -0.0850111, 0.629008 )
-pivot_head_translation = Vector3( 8, 22, -4 )
+pivot_head_translation = Vector3( 9, 22, -5 )
 pivot_head_rotation = Rotation( 0.2, 0.5, -1 )
 tweak_data.player.stances.akm_gold.standard.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.akm_gold.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3( 10, 20, -1 )
+pivot_head_translation = Vector3( 7, 20, -3 )
 pivot_head_rotation = Rotation( 0.2, 0.5, -2 )
 tweak_data.player.stances.akm_gold.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.akm_gold.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
@@ -1493,9 +1533,9 @@ tweak_data.weapon.m16.spread.crouching = 5.75
 tweak_data.weapon.m16.spread.steelsight = 0.95
 tweak_data.weapon.m16.spread.moving_standing = tweak_data.weapon.m16.spread.standing * 1.55
 tweak_data.weapon.m16.spread.moving_crouching = tweak_data.weapon.m16.spread.crouching * 1.55
-tweak_data.weapon.m16.spread.moving_steelsight = tweak_data.weapon.m16.spread.steelsight * 1.65
+tweak_data.weapon.m16.spread.moving_steelsight = tweak_data.weapon.m16.spread.steelsight * 1.55
 
-tweak_data.weapon.m16.kick.standing = { -0.6, 1.675, -1.45, 1.45 }
+tweak_data.weapon.m16.kick.standing = { -0.45, 1.675, -1.45, 1.45 }
 tweak_data.weapon.m16.kick.crouching = tweak_data.weapon.m16.kick.standing
 tweak_data.weapon.m16.kick.steelsight = tweak_data.weapon.m16.kick.standing
 
@@ -1503,9 +1543,6 @@ tweak_data.weapon.m16.fire_mode_data.fire_rate = 0.070588 --850 RPM
 
 tweak_data.weapon.m16.can_shoot_through_enemy = true
 tweak_data.weapon.m16.can_shoot_through_wall = true
-
-
-tweak_data.weapon.factory.parts.wpn_fps_smg_mp5_m_drum.animations = {reload = "reload", fire = "recoil", fire_steelsight = "recoil"}
 
 tweak_data.weapon.m16.armor_piercing_chance = 0.2
 
@@ -1518,7 +1555,7 @@ tweak_data.weapon.m16.AMMO_MAX = 150
 tweak_data.weapon.m16.stats = {
 		damage = 19,
 		spread = 7,
-		recoil = 14,
+		recoil = 13,
 		spread_moving = 5,
 		zoom = 1,
 		concealment = 17,
@@ -1543,7 +1580,7 @@ pivot_head_rotation = Rotation(2.5, 0, -2)
 tweak_data.player.stances.aug.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.aug.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-tweak_data.weapon.aug.kick.standing = { -0.6, 1.3, -1.7, 1.8}
+tweak_data.weapon.aug.kick.standing = { -0.2, 1.9, -1.0, 1.0}
 tweak_data.weapon.aug.kick.crouching = tweak_data.weapon.aug.kick.standing
 tweak_data.weapon.aug.kick.steelsight = tweak_data.weapon.aug.kick.standing
 
@@ -1601,7 +1638,7 @@ pivot_head_rotation = Rotation(0, 0, 0)
 tweak_data.player.stances.famas.steelsight.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.famas.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-tweak_data.weapon.famas.kick.standing = { -1.0, 1.7, -1.6, 1.6}
+tweak_data.weapon.famas.kick.standing = { -1.1, 1.75, -1.7, 1.7}
 tweak_data.weapon.famas.kick.crouching = tweak_data.weapon.famas.kick.standing
 tweak_data.weapon.famas.kick.steelsight = tweak_data.weapon.famas.kick.standing
 
@@ -1641,16 +1678,16 @@ tweak_data.weapon.famas.stats = {
 	
 	
 --M4A1 (CAR-4)
-tweak_data.weapon.new_m4.kick.standing = { -0.2, 1.4, -1.3, 1.3}
+tweak_data.weapon.new_m4.kick.standing = { -0.8, 1.5, -1.5, 1.5}
 tweak_data.weapon.new_m4.kick.crouching = tweak_data.weapon.new_m4.kick.standing
 tweak_data.weapon.new_m4.kick.steelsight = tweak_data.weapon.new_m4.kick.standing
 
 tweak_data.weapon.new_m4.spread.standing = 5.75
 tweak_data.weapon.new_m4.spread.crouching = 5.25
 tweak_data.weapon.new_m4.spread.steelsight = 1.1
-tweak_data.weapon.new_m4.spread.moving_standing = tweak_data.weapon.new_m4.spread.standing * 1.4
-tweak_data.weapon.new_m4.spread.moving_crouching = tweak_data.weapon.new_m4.spread.standing * 1.4
-tweak_data.weapon.new_m4.spread.moving_steelsight = tweak_data.weapon.new_m4.spread.steelsight * 1.5
+tweak_data.weapon.new_m4.spread.moving_standing = tweak_data.weapon.new_m4.spread.standing * 1.45
+tweak_data.weapon.new_m4.spread.moving_crouching = tweak_data.weapon.new_m4.spread.standing * 1.45
+tweak_data.weapon.new_m4.spread.moving_steelsight = tweak_data.weapon.new_m4.spread.steelsight * 1.45
 
 tweak_data.weapon.new_m4.fire_mode_data.fire_rate = 0.08333333333333333333333333333333
 
@@ -1685,16 +1722,16 @@ pivot_head_rotation = Rotation(0,-0,0)
 tweak_data.player.stances.ak5.steelsight.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.ak5.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-tweak_data.weapon.ak5.kick.standing = { -0.5, 1.25, -1.5, 1.5 }
+tweak_data.weapon.ak5.kick.standing = { -0.5, 1.25, -1.8, 1.8 }
 tweak_data.weapon.ak5.kick.crouching = tweak_data.weapon.ak5.kick.standing
 tweak_data.weapon.ak5.kick.steelsight = tweak_data.weapon.ak5.kick.standing
 
 tweak_data.weapon.ak5.spread.standing = 5.75
 tweak_data.weapon.ak5.spread.crouching = 5.25
 tweak_data.weapon.ak5.spread.steelsight = 0.9
-tweak_data.weapon.ak5.spread.moving_standing = tweak_data.weapon.ak5.spread.standing * 1.7
-tweak_data.weapon.ak5.spread.moving_crouching = tweak_data.weapon.ak5.spread.crouching * 1.7
-tweak_data.weapon.ak5.spread.moving_steelsight = tweak_data.weapon.ak5.spread.steelsight * 1.75
+tweak_data.weapon.ak5.spread.moving_standing = tweak_data.weapon.ak5.spread.standing * 1.8
+tweak_data.weapon.ak5.spread.moving_crouching = tweak_data.weapon.ak5.spread.crouching * 1.8
+tweak_data.weapon.ak5.spread.moving_steelsight = tweak_data.weapon.ak5.spread.steelsight * 1.8
 
 tweak_data.weapon.ak5.fire_mode_data.fire_rate = 0.096
 
@@ -1725,8 +1762,8 @@ tweak_data.weapon.ak5.stats = {
 tweak_data.weapon.ak74.spread.standing = 5.75
 tweak_data.weapon.ak74.spread.crouching = 5.25
 tweak_data.weapon.ak74.spread.steelsight = 1.2
-tweak_data.weapon.ak74.spread.moving_standing = tweak_data.weapon.ak74.spread.standing * 1.25
-tweak_data.weapon.ak74.spread.moving_crouching = tweak_data.weapon.ak74.spread.crouching * 1.25
+tweak_data.weapon.ak74.spread.moving_standing = tweak_data.weapon.ak74.spread.standing * 1.375
+tweak_data.weapon.ak74.spread.moving_crouching = tweak_data.weapon.ak74.spread.crouching * 1.375
 tweak_data.weapon.ak74.spread.moving_steelsight = tweak_data.weapon.ak74.spread.steelsight * 1.375
 
 tweak_data.weapon.ak74.can_shoot_through_enemy = true
@@ -1765,11 +1802,11 @@ tweak_data.weapon.ak74.stats = {
 tweak_data.weapon.amcar.spread.standing = 4.75
 tweak_data.weapon.amcar.spread.crouching = 4.25
 tweak_data.weapon.amcar.spread.steelsight = 1.2
-tweak_data.weapon.amcar.spread.moving_standing = tweak_data.weapon.amcar.spread.standing * 1.3
-tweak_data.weapon.amcar.spread.moving_crouching = tweak_data.weapon.amcar.spread.standing * 1.3
+tweak_data.weapon.amcar.spread.moving_standing = tweak_data.weapon.amcar.spread.standing * 1.5
+tweak_data.weapon.amcar.spread.moving_crouching = tweak_data.weapon.amcar.spread.standing * 1.5
 tweak_data.weapon.amcar.spread.moving_steelsight = tweak_data.weapon.amcar.spread.steelsight * 1.5
 
-tweak_data.weapon.amcar.kick.standing = { -0.20, 1.3, -1.8, 1.8 }
+tweak_data.weapon.amcar.kick.standing = { -0.60, 1.4, -2.1, 2.1 }
 tweak_data.weapon.amcar.kick.crouching = tweak_data.weapon.amcar.kick.standing
 tweak_data.weapon.amcar.kick.steelsight = tweak_data.weapon.amcar.kick.standing
 
@@ -1788,7 +1825,7 @@ tweak_data.weapon.amcar.shake.fire_steelsight_multiplier = -0.9
 tweak_data.weapon.amcar.stats = {
 		damage = 17,
 		spread = 6,
-		recoil = 18,
+		recoil = 19,
 		spread_moving = 6,
 		zoom = 1,
 		concealment = 21,
@@ -1812,16 +1849,16 @@ pivot_head_translation = Vector3(9, 23, 3)
 pivot_head_rotation = Rotation(0.0, 0.0, -2)
 tweak_data.player.stances.s552.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.s552.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-tweak_data.weapon.s552.kick.standing = { -0.2, 1.6, -1.25, 1.25 }
+tweak_data.weapon.s552.kick.standing = { -0.15, 1.9, -1.1, 1.1 }
 tweak_data.weapon.s552.kick.crouching = tweak_data.weapon.s552.kick.standing
 tweak_data.weapon.s552.kick.steelsight = tweak_data.weapon.s552.kick.standing
 
 tweak_data.weapon.s552.spread.standing = 5.5
 tweak_data.weapon.s552.spread.crouching = 5
 tweak_data.weapon.s552.spread.steelsight = 1.1
-tweak_data.weapon.s552.spread.moving_standing = tweak_data.weapon.s552.spread.standing * 1.25
-tweak_data.weapon.s552.spread.moving_crouching = tweak_data.weapon.s552.spread.crouching * 1.25
-tweak_data.weapon.s552.spread.moving_steelsight = tweak_data.weapon.s552.spread.steelsight * 1.4
+tweak_data.weapon.s552.spread.moving_standing = tweak_data.weapon.s552.spread.standing * 1.3
+tweak_data.weapon.s552.spread.moving_crouching = tweak_data.weapon.s552.spread.crouching * 1.3
+tweak_data.weapon.s552.spread.moving_steelsight = tweak_data.weapon.s552.spread.steelsight * 1.3
 
 tweak_data.weapon.s552.fire_mode_data.fire_rate = 0.0769
 
@@ -1840,7 +1877,7 @@ tweak_data.weapon.s552.shake.fire_steelsight_multiplier = -0.6
 tweak_data.weapon.s552.stats = {
 		damage = 15,
 		spread = 7,
-		recoil = 13,
+		recoil = 14,
 		spread_moving = 0,
 		zoom = 1,
 		concealment = 22,
@@ -1860,12 +1897,12 @@ pivot_head_rotation = Rotation(0,0,0)
 tweak_data.player.stances.g36.steelsight.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.g36.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3(8, 26, -2)
+pivot_head_translation = Vector3(10, 26, -2)
 pivot_head_rotation = Rotation(0.0, 0.0, -1)
 tweak_data.player.stances.g36.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.g36.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3(10, 24, 0)
+pivot_head_translation = Vector3(8, 24, 0)
 pivot_head_rotation = Rotation(0.0, 0.0, -2)
 tweak_data.player.stances.g36.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.g36.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
@@ -1873,11 +1910,11 @@ tweak_data.player.stances.g36.crouched.shoulders.rotation = pivot_head_rotation 
 tweak_data.weapon.g36.spread.standing = 5.25
 tweak_data.weapon.g36.spread.crouching = 4.75
 tweak_data.weapon.g36.spread.steelsight = 1.15
-tweak_data.weapon.g36.spread.moving_standing = tweak_data.weapon.g36.spread.standing * 1.35
-tweak_data.weapon.g36.spread.moving_crouching = tweak_data.weapon.g36.spread.crouching * 1.35
-tweak_data.weapon.g36.spread.moving_steelsight = tweak_data.weapon.g36.spread.steelsight * 1.5
+tweak_data.weapon.g36.spread.moving_standing = tweak_data.weapon.g36.spread.standing * 1.25
+tweak_data.weapon.g36.spread.moving_crouching = tweak_data.weapon.g36.spread.crouching * 1.25
+tweak_data.weapon.g36.spread.moving_steelsight = tweak_data.weapon.g36.spread.steelsight * 1.25
 
-tweak_data.weapon.g36.kick.standing = { -0.65, 1.4, -1.4, 1.4}
+tweak_data.weapon.g36.kick.standing = { -0.85, 1.45, -1.55, 1.55}
 tweak_data.weapon.g36.kick.crouching = tweak_data.weapon.g36.kick.standing
 tweak_data.weapon.g36.kick.steelsight = tweak_data.weapon.g36.kick.standing
 
@@ -1909,12 +1946,12 @@ tweak_data.weapon.g36.stats = {
 
 	
 --Pink Twintails (Saiga)
-tweak_data.weapon.saiga.spread.standing = 4.5
+tweak_data.weapon.saiga.spread.standing = 6
 tweak_data.weapon.saiga.spread.crouching = tweak_data.weapon.saiga.spread.standing
-tweak_data.weapon.saiga.spread.steelsight = tweak_data.weapon.saiga.spread.standing * 0.9
+tweak_data.weapon.saiga.spread.steelsight = tweak_data.weapon.saiga.spread.standing * 0.7
 tweak_data.weapon.saiga.spread.moving_standing = tweak_data.weapon.saiga.spread.standing
 tweak_data.weapon.saiga.spread.moving_crouching = tweak_data.weapon.saiga.spread.standing
-tweak_data.weapon.saiga.spread.moving_steelsight = tweak_data.weapon.saiga.spread.standing * 0.95
+tweak_data.weapon.saiga.spread.moving_steelsight = tweak_data.weapon.saiga.spread.standing * 0.8
 
 tweak_data.weapon.saiga.CLIP_AMMO_MAX = 8
 tweak_data.weapon.saiga.NR_CLIPS_MAX = 10
@@ -1963,12 +2000,12 @@ pivot_head_rotation = Rotation(0,0,-0)
 tweak_data.player.stances.r870.steelsight.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.r870.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-tweak_data.weapon.r870.spread.standing = 4.5
+tweak_data.weapon.r870.spread.standing = 6
 tweak_data.weapon.r870.spread.crouching = tweak_data.weapon.r870.spread.standing
-tweak_data.weapon.r870.spread.steelsight = tweak_data.weapon.r870.spread.standing * 0.85
+tweak_data.weapon.r870.spread.steelsight = tweak_data.weapon.r870.spread.standing * 0.75
 tweak_data.weapon.r870.spread.moving_standing = tweak_data.weapon.r870.spread.standing
 tweak_data.weapon.r870.spread.moving_crouching = tweak_data.weapon.r870.spread.standing
-tweak_data.weapon.r870.spread.moving_steelsight = tweak_data.weapon.r870.spread.standing * 0.9
+tweak_data.weapon.r870.spread.moving_steelsight = tweak_data.weapon.r870.spread.standing * 0.85
 
 tweak_data.weapon.r870.kick.standing = {6.0, 5.0, -4.0, 4.0 }--{3.75, 2.6, -3.25, 3.25 }
 tweak_data.weapon.r870.kick.crouching = tweak_data.weapon.r870.kick.standing
@@ -2024,12 +2061,12 @@ pivot_head_rotation = Rotation( -0, -0, -2 )
 tweak_data.player.stances.huntsman.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.huntsman.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-tweak_data.weapon.huntsman.spread.standing = 4.5
+tweak_data.weapon.huntsman.spread.standing = 6
 tweak_data.weapon.huntsman.spread.crouching = tweak_data.weapon.huntsman.spread.standing 
-tweak_data.weapon.huntsman.spread.steelsight = tweak_data.weapon.huntsman.spread.standing * 0.9
+tweak_data.weapon.huntsman.spread.steelsight = tweak_data.weapon.huntsman.spread.standing * 0.7
 tweak_data.weapon.huntsman.spread.moving_standing = tweak_data.weapon.huntsman.spread.standing 
 tweak_data.weapon.huntsman.spread.moving_crouching = tweak_data.weapon.huntsman.spread.standing 
-tweak_data.weapon.huntsman.spread.moving_steelsight = tweak_data.weapon.huntsman.spread.standing * 0.95
+tweak_data.weapon.huntsman.spread.moving_steelsight = tweak_data.weapon.huntsman.spread.standing * 0.8
 
 tweak_data.weapon.huntsman.rays = 8
 
@@ -2071,12 +2108,12 @@ tweak_data.weapon.huntsman.stats = {
 	
 	
 --SPAS-12
-tweak_data.weapon.spas12.spread.standing = 4.5
+tweak_data.weapon.spas12.spread.standing = 6
 tweak_data.weapon.spas12.spread.crouching = tweak_data.weapon.spas12.spread.standing
-tweak_data.weapon.spas12.spread.steelsight = tweak_data.weapon.spas12.spread.standing * 0.75
+tweak_data.weapon.spas12.spread.steelsight = tweak_data.weapon.spas12.spread.standing * 0.8
 tweak_data.weapon.spas12.spread.moving_standing = tweak_data.weapon.spas12.spread.standing
 tweak_data.weapon.spas12.spread.moving_crouching = tweak_data.weapon.spas12.spread.standing
-tweak_data.weapon.spas12.spread.moving_steelsight = tweak_data.weapon.spas12.spread.standing * 0.85
+tweak_data.weapon.spas12.spread.moving_steelsight = tweak_data.weapon.spas12.spread.standing * 0.9
 
 tweak_data.weapon.spas12.kick.standing = {4.0, 3.0, -6.5, 6.5 }
 tweak_data.weapon.spas12.kick.crouching = tweak_data.weapon.spas12.kick.standing
@@ -2120,12 +2157,12 @@ tweak_data.weapon.benelli.CLIP_AMMO_MAX = 5
 --tweak_data.weapon.benelli.NR_CLIPS_MAX = 12
 tweak_data.weapon.benelli.AMMO_MAX = 70
 
-tweak_data.weapon.benelli.spread.standing = 4.5
+tweak_data.weapon.benelli.spread.standing = 6
 tweak_data.weapon.benelli.spread.crouching = tweak_data.weapon.benelli.spread.standing
-tweak_data.weapon.benelli.spread.steelsight = tweak_data.weapon.benelli.spread.standing * 0.8
+tweak_data.weapon.benelli.spread.steelsight = tweak_data.weapon.benelli.spread.standing * 0.75
 tweak_data.weapon.benelli.spread.moving_standing = tweak_data.weapon.benelli.spread.standing
 tweak_data.weapon.benelli.spread.moving_crouching = tweak_data.weapon.benelli.spread.standing
-tweak_data.weapon.benelli.spread.moving_steelsight = tweak_data.weapon.benelli.spread.standing * 0.9
+tweak_data.weapon.benelli.spread.moving_steelsight = tweak_data.weapon.benelli.spread.standing * 0.85
 
 tweak_data.weapon.benelli.kick.standing = {5.0, 4.5, -2.0, 2.0 }
 tweak_data.weapon.benelli.kick.crouching = tweak_data.weapon.benelli.kick.standing
@@ -2188,12 +2225,12 @@ tweak_data.weapon.ksg.damage_far = 3650
 
 tweak_data.weapon.ksg.AMMO_MAX = 56
 
-tweak_data.weapon.ksg.spread.standing = 4.5
+tweak_data.weapon.ksg.spread.standing = 6
 tweak_data.weapon.ksg.spread.crouching = tweak_data.weapon.ksg.spread.standing
-tweak_data.weapon.ksg.spread.steelsight = tweak_data.weapon.ksg.spread.standing * 0.85
+tweak_data.weapon.ksg.spread.steelsight = tweak_data.weapon.ksg.spread.standing * 0.6
 tweak_data.weapon.ksg.spread.moving_standing = tweak_data.weapon.ksg.spread.standing
 tweak_data.weapon.ksg.spread.moving_crouching = tweak_data.weapon.ksg.spread.standing
-tweak_data.weapon.ksg.spread.moving_steelsight = tweak_data.weapon.ksg.spread.standing * 0.9
+tweak_data.weapon.ksg.spread.moving_steelsight = tweak_data.weapon.ksg.spread.standing * 0.7
 
 tweak_data.weapon.ksg.sounds.enter_steelsight = "secondary_steel_sight_enter"
 tweak_data.weapon.ksg.sounds.leave_steelsight = "secondary_steel_sight_exit"
@@ -2230,12 +2267,12 @@ pivot_head_rotation = Rotation(0,0,0)
 tweak_data.player.stances.serbu.steelsight.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.serbu.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-tweak_data.weapon.serbu.spread.standing = 4.5
+tweak_data.weapon.serbu.spread.standing = 6
 tweak_data.weapon.serbu.spread.crouching = tweak_data.weapon.serbu.spread.standing
-tweak_data.weapon.serbu.spread.steelsight = tweak_data.weapon.serbu.spread.standing * 0.8
+tweak_data.weapon.serbu.spread.steelsight = tweak_data.weapon.serbu.spread.standing * 0.7
 tweak_data.weapon.serbu.spread.moving_standing = tweak_data.weapon.serbu.spread.standing
 tweak_data.weapon.serbu.spread.moving_crouching = tweak_data.weapon.serbu.spread.standing
-tweak_data.weapon.serbu.spread.moving_steelsight = tweak_data.weapon.serbu.spread.standing * 0.9
+tweak_data.weapon.serbu.spread.moving_steelsight = tweak_data.weapon.serbu.spread.standing * 0.8
 
 tweak_data.weapon.serbu.kick.standing = {6.0, 5.0, -6.5, 6.5 }
 tweak_data.weapon.serbu.kick.crouching = tweak_data.weapon.serbu.kick.standing
@@ -2250,7 +2287,7 @@ tweak_data.weapon.serbu.rays = 8
 tweak_data.weapon.serbu.damage_near = 100
 tweak_data.weapon.serbu.damage_far = 2400
 
-tweak_data.weapon.serbu.fire_mode_data.fire_rate = 0.5
+tweak_data.weapon.serbu.fire_mode_data.fire_rate = 0.42857142857142857142857142857143
 
 tweak_data.weapon.serbu.shake.fire_multiplier = 3
 tweak_data.weapon.serbu.shake.fire_steelsight_multiplier = -3
@@ -2279,13 +2316,13 @@ tweak_data.weapon.serbu.stats = {
 --Striker (STREET SWEEPER)
 pivot_shoulder_translation = Vector3(10.761, 11.8207, -3.78517)
 pivot_shoulder_rotation = Rotation(0.106622, -0.0844409, 0.629204)
-pivot_head_translation = Vector3(6, 20, -4)
-pivot_head_rotation = Rotation(0, 0, -4)
+pivot_head_translation = Vector3(8, 20, -5)
+pivot_head_rotation = Rotation(0, 0, -1)
 tweak_data.player.stances.striker.standard.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.striker.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3(8, 18, -1)
-pivot_head_rotation = Rotation(0, 0, -1)
+pivot_head_translation = Vector3(6, 18, -3)
+pivot_head_rotation = Rotation(0, 0, -2)
 tweak_data.player.stances.striker.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.striker.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
@@ -2293,12 +2330,12 @@ tweak_data.weapon.striker.kick.standing = {5.0, 4.0, -4.0, 4.0 } --{3.1, 2.25, -
 tweak_data.weapon.striker.kick.crouching = tweak_data.weapon.striker.kick.standing
 tweak_data.weapon.striker.kick.steelsight = tweak_data.weapon.striker.kick.standing
 
-tweak_data.weapon.striker.spread.standing = 4.5
+tweak_data.weapon.striker.spread.standing = 6
 tweak_data.weapon.striker.spread.crouching = tweak_data.weapon.striker.spread.standing
-tweak_data.weapon.striker.spread.steelsight = tweak_data.weapon.striker.spread.standing * 0.95
+tweak_data.weapon.striker.spread.steelsight = tweak_data.weapon.striker.spread.standing * 0.85
 tweak_data.weapon.striker.spread.moving_standing = tweak_data.weapon.striker.spread.standing
 tweak_data.weapon.striker.spread.moving_crouching = tweak_data.weapon.striker.spread.standing
-tweak_data.weapon.striker.spread.moving_steelsight = tweak_data.weapon.striker.spread.standing * 0.975
+tweak_data.weapon.striker.spread.moving_steelsight = tweak_data.weapon.striker.spread.standing * 0.95
 
 tweak_data.weapon.striker.sounds.enter_steelsight = "secondary_steel_sight_enter"
 tweak_data.weapon.striker.sounds.leave_steelsight = "secondary_steel_sight_exit"
@@ -2339,16 +2376,27 @@ tweak_data.weapon.striker.stats = {
 
 	
 --ICHIYON (M308)
+pivot_shoulder_translation = Vector3(10.7332, 15.6145, -2.75549)
+pivot_shoulder_rotation = Rotation(0.106625, -0.450997, 0.629212)
+pivot_head_translation = Vector3(10,16,-3)
+pivot_head_rotation = Rotation(0,0,-1)
+tweak_data.player.stances.new_m14.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.new_m14.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+
+pivot_head_translation = Vector3(8,14,-1)
+pivot_head_rotation = Rotation(0,0,-2)
+tweak_data.player.stances.new_m14.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.new_m14.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 tweak_data.weapon.new_m14.category = "snp"
 
-tweak_data.weapon.new_m14.spread.standing = 7.25
-tweak_data.weapon.new_m14.spread.crouching = 6.25
+tweak_data.weapon.new_m14.spread.standing = 6.5
+tweak_data.weapon.new_m14.spread.crouching = 6
 tweak_data.weapon.new_m14.spread.steelsight = 0.8
-tweak_data.weapon.new_m14.spread.moving_standing = tweak_data.weapon.new_m14.spread.standing * 1.75
-tweak_data.weapon.new_m14.spread.moving_crouching = tweak_data.weapon.new_m14.spread.crouching * 1.75
+tweak_data.weapon.new_m14.spread.moving_standing = tweak_data.weapon.new_m14.spread.standing * 1.5
+tweak_data.weapon.new_m14.spread.moving_crouching = tweak_data.weapon.new_m14.spread.crouching * 1.5
 tweak_data.weapon.new_m14.spread.moving_steelsight = tweak_data.weapon.new_m14.spread.steelsight * 2.1
 
-tweak_data.weapon.new_m14.kick.standing = {2.35, 1.55, -1.5, 1.5 }
+tweak_data.weapon.new_m14.kick.standing = {2.45, 1.65, -1.5, 1.5 }
 tweak_data.weapon.new_m14.kick.crouching = tweak_data.weapon.new_m14.kick.standing
 tweak_data.weapon.new_m14.kick.steelsight = tweak_data.weapon.new_m14.kick.standing
 
@@ -2386,11 +2434,11 @@ tweak_data.weapon.new_m14.stats = {
 --MK17 (SCAR/MK17)
 tweak_data.weapon.scar.category = "snp"
 
-tweak_data.weapon.scar.spread.standing = 6.25
-tweak_data.weapon.scar.spread.crouching = 5.75
+tweak_data.weapon.scar.spread.standing = 5.5
+tweak_data.weapon.scar.spread.crouching = 5
 tweak_data.weapon.scar.spread.steelsight = 0.85
-tweak_data.weapon.scar.spread.moving_standing = tweak_data.weapon.scar.spread.standing * 1.75
-tweak_data.weapon.scar.spread.moving_crouching = tweak_data.weapon.scar.spread.crouching * 1.75
+tweak_data.weapon.scar.spread.moving_standing = tweak_data.weapon.scar.spread.standing * 1.5
+tweak_data.weapon.scar.spread.moving_crouching = tweak_data.weapon.scar.spread.crouching * 1.5
 tweak_data.weapon.scar.spread.moving_steelsight = tweak_data.weapon.scar.spread.steelsight * 1.9
 
 tweak_data.weapon.scar.kick.standing = {-0.45, 1.95, -1.9, 1.9 }
@@ -2412,7 +2460,6 @@ tweak_data.weapon.scar.can_shoot_through_wall = true
 tweak_data.weapon.scar.armor_piercing_chance = 0.85
 
 tweak_data.weapon.scar.CLIP_AMMO_MAX = 20
---tweak_data.weapon.scar.NR_CLIPS_MAX = 4
 tweak_data.weapon.scar.AMMO_MAX = 80
 
 tweak_data.weapon.scar.muzzleflash = "effects/payday2/particles/weapons/big_762_auto"
@@ -2458,11 +2505,11 @@ tweak_data.player.stances.fal.crouched.shoulders.rotation = pivot_head_rotation 
 
 tweak_data.weapon.fal.category = "snp"
 
-tweak_data.weapon.fal.spread.standing = 6.25
-tweak_data.weapon.fal.spread.crouching = 5.75
+tweak_data.weapon.fal.spread.standing = 5.75
+tweak_data.weapon.fal.spread.crouching = 5.25
 tweak_data.weapon.fal.spread.steelsight = 1.05
-tweak_data.weapon.fal.spread.moving_standing = tweak_data.weapon.fal.spread.standing * 1.75
-tweak_data.weapon.fal.spread.moving_crouching = tweak_data.weapon.fal.spread.crouching * 1.75
+tweak_data.weapon.fal.spread.moving_standing = tweak_data.weapon.fal.spread.standing * 1.5
+tweak_data.weapon.fal.spread.moving_crouching = tweak_data.weapon.fal.spread.crouching * 1.5
 tweak_data.weapon.fal.spread.moving_steelsight = tweak_data.weapon.fal.spread.steelsight * 2.15
 
 tweak_data.weapon.fal.sounds.enter_steelsight = "primary_steel_sight_enter"
@@ -2483,7 +2530,7 @@ tweak_data.weapon.fal.armor_piercing_chance = 0.85
 tweak_data.weapon.fal.shake.fire_multiplier = 0.95
 tweak_data.weapon.fal.shake.fire_steelsight_multiplier = -0.95
 
-tweak_data.weapon.fal.kick.standing = {-0.5, 1.3, -2.45, 2.45 }
+tweak_data.weapon.fal.kick.standing = {-0.7, 1.3, -2.45, 2.45 }
 tweak_data.weapon.fal.kick.crouching = tweak_data.weapon.fal.kick.standing
 tweak_data.weapon.fal.kick.steelsight = tweak_data.weapon.fal.kick.standing
 
@@ -2523,15 +2570,15 @@ tweak_data.player.stances.galil.crouched.shoulders.rotation = pivot_head_rotatio
 
 tweak_data.weapon.galil.category = "snp"
 
-tweak_data.weapon.galil.kick.standing = {-1.45, 2.60, -2.10, 2.10 }
+tweak_data.weapon.galil.kick.standing = {-1.60, 2.45, -2.00, 2.00 }
 tweak_data.weapon.galil.kick.crouching = tweak_data.weapon.galil.kick.standing
 tweak_data.weapon.galil.kick.steelsight = tweak_data.weapon.galil.kick.standing
 
-tweak_data.weapon.galil.spread.standing = 6.5
-tweak_data.weapon.galil.spread.crouching = 6
+tweak_data.weapon.galil.spread.standing = 6.25
+tweak_data.weapon.galil.spread.crouching = 5.75
 tweak_data.weapon.galil.spread.steelsight = 1
-tweak_data.weapon.galil.spread.moving_standing = tweak_data.weapon.galil.spread.standing * 1.75
-tweak_data.weapon.galil.spread.moving_crouching = tweak_data.weapon.galil.spread.crouching * 1.75
+tweak_data.weapon.galil.spread.moving_standing = tweak_data.weapon.galil.spread.standing * 1.5
+tweak_data.weapon.galil.spread.moving_crouching = tweak_data.weapon.galil.spread.crouching * 1.5
 tweak_data.weapon.galil.spread.moving_steelsight = tweak_data.weapon.galil.spread.steelsight * 2.35
 
 tweak_data.weapon.galil.fire_mode_data.fire_rate = 0.08
@@ -2576,12 +2623,12 @@ pivot_head_rotation = Rotation(0.0, 0.2, 0)
 tweak_data.player.stances.g3.steelsight.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.g3.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3(9, 26, -3)
+pivot_head_translation = Vector3(10, 26, -3)
 pivot_head_rotation = Rotation(0.0, 0.2, -1)
 tweak_data.player.stances.g3.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.g3.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3(7, 24, -1)
+pivot_head_translation = Vector3(8, 24, -1)
 pivot_head_rotation = Rotation(0.0, 0.2, -2)
 tweak_data.player.stances.g3.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.g3.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
@@ -2592,11 +2639,11 @@ tweak_data.weapon.g3.kick.standing = {1.2, 1.95, -1.85, 1.85 }
 tweak_data.weapon.g3.kick.crouching = tweak_data.weapon.g3.kick.standing
 tweak_data.weapon.g3.kick.steelsight = tweak_data.weapon.g3.kick.standing
 
-tweak_data.weapon.g3.spread.standing = 6
-tweak_data.weapon.g3.spread.crouching = 5.5
+tweak_data.weapon.g3.spread.standing = 5.75
+tweak_data.weapon.g3.spread.crouching = 5.25
 tweak_data.weapon.g3.spread.steelsight = 0.9
-tweak_data.weapon.g3.spread.moving_standing = tweak_data.weapon.g3.spread.standing * 1.75
-tweak_data.weapon.g3.spread.moving_crouching = tweak_data.weapon.g3.spread.crouching * 1.75
+tweak_data.weapon.g3.spread.moving_standing = tweak_data.weapon.g3.spread.standing * 1.5
+tweak_data.weapon.g3.spread.moving_crouching = tweak_data.weapon.g3.spread.crouching * 1.5
 tweak_data.weapon.g3.spread.moving_steelsight = tweak_data.weapon.g3.spread.steelsight * 2.05
 
 tweak_data.weapon.g3.muzzleflash = "effects/payday2/particles/weapons/big_762_auto"
@@ -2645,12 +2692,12 @@ pivot_head_rotation = Rotation( -2.98, -0.9, -2 ) --( -3, -1, -2 )
 tweak_data.player.stances.hk21.steelsight.shoulders.translation = Vector3( 0.98, 15, 0.15 ) - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation ) --( 0.99, 20, 0.1 )
 tweak_data.player.stances.hk21.steelsight.shoulders.rotation = pivot_head_rotation
 
-pivot_head_translation = Vector3( 8, 18, -7 )
+pivot_head_translation = Vector3( 10, 18, -7 )
 pivot_head_rotation = Rotation( 0.2, 0.5, -1 )
 tweak_data.player.stances.hk21.standard.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.hk21.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3( 10, 16, -5 )
+pivot_head_translation = Vector3( 8, 16, -5 )
 pivot_head_rotation = Rotation( 0.2, 0.5, -2 )
 tweak_data.player.stances.hk21.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.hk21.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
@@ -2666,7 +2713,7 @@ tweak_data.weapon.hk21.spread.crouching = 6
 tweak_data.weapon.hk21.spread.steelsight = 1.10
 tweak_data.weapon.hk21.spread.moving_standing = tweak_data.weapon.hk21.spread.standing * 2.2
 tweak_data.weapon.hk21.spread.moving_crouching = tweak_data.weapon.hk21.spread.crouching * 2.2
-tweak_data.weapon.hk21.spread.moving_steelsight = tweak_data.weapon.hk21.spread.steelsight * 3.2
+tweak_data.weapon.hk21.spread.moving_steelsight = tweak_data.weapon.hk21.spread.steelsight * 3
 
 tweak_data.weapon.hk21.CLIP_AMMO_MAX = 100
 tweak_data.weapon.hk21.NR_CLIPS_MAX = 2
@@ -2705,12 +2752,12 @@ pivot_head_rotation = Rotation( -0.12, 0.2, -0 )
 tweak_data.player.stances.m249.steelsight.shoulders.translation = Vector3( 0.02, 10.7, 0.7 ) - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.m249.steelsight.shoulders.rotation = pivot_head_rotation
 
-pivot_head_translation = Vector3( 10, 20, -6 )
+pivot_head_translation = Vector3( 12, 20, -6 )
 pivot_head_rotation = Rotation( 0.2, 0.5, -1 )
 tweak_data.player.stances.m249.standard.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.m249.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3( 12, 18, -4 )
+pivot_head_translation = Vector3( 10, 18, -4 )
 pivot_head_rotation = Rotation( 0.2, 0.5, -2)
 tweak_data.player.stances.m249.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.m249.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
@@ -2768,12 +2815,12 @@ pivot_head_rotation = Rotation( 0, 0.2, 0 )
 tweak_data.player.stances.rpk.steelsight.shoulders.translation = Vector3( .08, 26, 0.22 ) - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.rpk.steelsight.shoulders.rotation = pivot_head_rotation
 
-pivot_head_translation = Vector3( 8, 36, -4 )
+pivot_head_translation = Vector3( 10, 36, -5 )
 pivot_head_rotation = Rotation( 0.2, 0.5, -1 )
 tweak_data.player.stances.rpk.standard.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.rpk.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3( 10, 34, -1 )
+pivot_head_translation = Vector3( 8, 34, -3 )
 pivot_head_rotation = Rotation( 0.2, 0.5, -2 )
 tweak_data.player.stances.rpk.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.rpk.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
@@ -2792,7 +2839,6 @@ tweak_data.weapon.rpk.sounds.enter_steelsight = "primary_steel_sight_enter"
 tweak_data.weapon.rpk.sounds.leave_steelsight = "primary_steel_sight_exit"
 	
 tweak_data.weapon.rpk.CLIP_AMMO_MAX = 75
---tweak_data.weapon.rpk.NR_CLIPS_MAX = 4
 tweak_data.weapon.rpk.AMMO_MAX = 300
 
 tweak_data.weapon.rpk.spread.standing = 5.5
@@ -2834,19 +2880,19 @@ pivot_head_rotation = Rotation( -0.12, 0.2, -0 )
 tweak_data.player.stances.mg42.steelsight.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.mg42.steelsight.shoulders.rotation = pivot_head_rotation
 
-pivot_head_translation = Vector3( 13, 7, -6 )
+pivot_head_translation = Vector3( 11, 10, -10 )
 pivot_head_rotation = Rotation( 0.2, 0.5, -1 )
 tweak_data.player.stances.mg42.standard.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.mg42.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3( 11, 5, -4 )
+pivot_head_translation = Vector3( 9, 8, -8 )
 pivot_head_rotation = Rotation( 0.2, 0.5, -2)
 tweak_data.player.stances.mg42.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.mg42.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-tweak_data.weapon.mg42.kick.standing = {2.00 * .75, -1.60 * .75, -2.40 * .75, 2.40 * .75}
+tweak_data.weapon.mg42.kick.standing = {1.1, -0.90, -1.2, 1.2 }
 tweak_data.weapon.mg42.kick.crouching = tweak_data.weapon.mg42.kick.standing
-tweak_data.weapon.mg42.kick.steelsight = {2.00, -1.60, -2.40, 2.40 }
+tweak_data.weapon.mg42.kick.steelsight = {1.50, 1.30, -1.1, 1.1 }
 
 tweak_data.weapon.mg42.sounds.fire = "mg42_fire"
 tweak_data.weapon.mg42.sounds.fire_single = "mg42_fire"
@@ -2854,16 +2900,16 @@ tweak_data.weapon.mg42.sounds.fire_single = "mg42_fire"
 tweak_data.weapon.mg42.spread.standing = 6.75
 tweak_data.weapon.mg42.spread.crouching = 6.25
 tweak_data.weapon.mg42.spread.steelsight = 1.175
-tweak_data.weapon.mg42.spread.moving_standing = tweak_data.weapon.mg42.spread.standing * 2.25
-tweak_data.weapon.mg42.spread.moving_crouching = tweak_data.weapon.mg42.spread.crouching * 2.25
+tweak_data.weapon.mg42.spread.moving_standing = tweak_data.weapon.mg42.spread.standing * 2.5
+tweak_data.weapon.mg42.spread.moving_crouching = tweak_data.weapon.mg42.spread.crouching * 2.5
 tweak_data.weapon.mg42.spread.moving_steelsight = tweak_data.weapon.mg42.spread.steelsight * 3.5
 
 tweak_data.weapon.mg42.CLIP_AMMO_MAX = 50
 tweak_data.weapon.mg42.NR_CLIPS_MAX = 3
 tweak_data.weapon.mg42.AMMO_MAX = tweak_data.weapon.mg42.CLIP_AMMO_MAX * tweak_data.weapon.mg42.NR_CLIPS_MAX
 
-tweak_data.weapon.mg42.shake.fire_multiplier = 1.2
-tweak_data.weapon.mg42.shake.fire_steelsight_multiplier = -1.2
+tweak_data.weapon.mg42.shake.fire_multiplier = 1.1
+tweak_data.weapon.mg42.shake.fire_steelsight_multiplier = -1.1
 
 tweak_data.weapon.mg42.can_shoot_through_shield = true
 tweak_data.weapon.mg42.can_shoot_through_enemy = true
@@ -2876,11 +2922,11 @@ tweak_data.weapon.mg42.armor_piercing_chance = 0.5
 tweak_data.weapon.mg42.stats = {
 		damage = 41,
 		spread = 7,
-		recoil = 10,
+		recoil = 11,
 		spread_moving = 8,
 		zoom = 1,
 		concealment = 2,
-		suppression = 1,
+		suppression = 0,
 		alert_size = 7,
 		extra_ammo = 11,
 		total_ammo_mod = 101,
@@ -3134,10 +3180,10 @@ tweak_data.weapon.mosin.stats = {
 
 --Buttstock Melee
 tweak_data.blackmarket.melee_weapons.weapon.stats.range = 150
-tweak_data.blackmarket.melee_weapons.weapon.stats.min_damage = 1.75
-tweak_data.blackmarket.melee_weapons.weapon.stats.max_damage = 1.75
-tweak_data.blackmarket.melee_weapons.weapon.stats.min_damage_effect = 1.74
-tweak_data.blackmarket.melee_weapons.weapon.stats.max_damage_effect = 1.74
+tweak_data.blackmarket.melee_weapons.weapon.stats.min_damage = 2
+tweak_data.blackmarket.melee_weapons.weapon.stats.max_damage = 2
+tweak_data.blackmarket.melee_weapons.weapon.stats.min_damage_effect = 2
+tweak_data.blackmarket.melee_weapons.weapon.stats.max_damage_effect = 2
 
 --ORAORAORAORAORAORAORAORAORAORAORA(Fists)
 if kenshiro == true then
@@ -3372,13 +3418,13 @@ tweak_data.blackmarket.melee_weapons.swagger.stats.max_damage_effect = 1.5
 
 --Lucille
 tweak_data.blackmarket.melee_weapons.barbedwire.anim_global_param = "melee_baseballbat_miami"
-tweak_data.blackmarket.melee_weapons.barbedwire.stats.charge_time = 2.55
+tweak_data.blackmarket.melee_weapons.barbedwire.stats.charge_time = 2.6
 tweak_data.blackmarket.melee_weapons.barbedwire.repeat_expire_t = 0.95
 tweak_data.blackmarket.melee_weapons.barbedwire.expire_t = 1.4
 tweak_data.blackmarket.melee_weapons.barbedwire.stats.min_damage = 3.5
-tweak_data.blackmarket.melee_weapons.barbedwire.stats.max_damage = 6.5
-tweak_data.blackmarket.melee_weapons.barbedwire.stats.min_damage_effect = 4.28
-tweak_data.blackmarket.melee_weapons.barbedwire.stats.max_damage_effect = 4.62
+tweak_data.blackmarket.melee_weapons.barbedwire.stats.max_damage = 7
+tweak_data.blackmarket.melee_weapons.barbedwire.stats.min_damage_effect = 4
+tweak_data.blackmarket.melee_weapons.barbedwire.stats.max_damage_effect = 4
 if twdbat == true then
 	tweak_data.blackmarket.melee_weapons.barbedwire.name_id = "bm_melee_twd"
 else
@@ -3386,22 +3432,31 @@ else
 end
 --Normal Bat
 tweak_data.blackmarket.melee_weapons.baseballbat.stats.charge_time = 2.5
-tweak_data.blackmarket.melee_weapons.baseballbat.repeat_expire_t = 0.9
+tweak_data.blackmarket.melee_weapons.baseballbat.repeat_expire_t = 0.85
 tweak_data.blackmarket.melee_weapons.baseballbat.expire_t = 1.4
 tweak_data.blackmarket.melee_weapons.baseballbat.stats.min_damage = 3.0
-tweak_data.blackmarket.melee_weapons.baseballbat.stats.max_damage = 5.0
-tweak_data.blackmarket.melee_weapons.baseballbat.stats.min_damage_effect = 3.32
-tweak_data.blackmarket.melee_weapons.baseballbat.stats.max_damage_effect = 3.99
+tweak_data.blackmarket.melee_weapons.baseballbat.stats.max_damage = 6.0
+tweak_data.blackmarket.melee_weapons.baseballbat.stats.min_damage_effect = 3
+tweak_data.blackmarket.melee_weapons.baseballbat.stats.max_damage_effect = 3
 tweak_data.blackmarket.melee_weapons.baseballbat.stats.range = 275
 --You touch my Tralala Hammer
 tweak_data.blackmarket.melee_weapons.dingdong.stats.charge_time = 3
-tweak_data.blackmarket.melee_weapons.dingdong.repeat_expire_t = 1.1
+tweak_data.blackmarket.melee_weapons.dingdong.repeat_expire_t = 1.0
 tweak_data.blackmarket.melee_weapons.dingdong.expire_t = 1.4
 tweak_data.blackmarket.melee_weapons.dingdong.stats.min_damage = 5
 tweak_data.blackmarket.melee_weapons.dingdong.stats.max_damage = 10
 tweak_data.blackmarket.melee_weapons.dingdong.stats.min_damage_effect = 5
 tweak_data.blackmarket.melee_weapons.dingdong.stats.max_damage_effect = 5
 tweak_data.blackmarket.melee_weapons.dingdong.stats.range = 250
+--Ayy Lmao Overkike Hammer
+tweak_data.blackmarket.melee_weapons.alien_maul.stats.charge_time = 5
+tweak_data.blackmarket.melee_weapons.alien_maul.repeat_expire_t = 1.15
+tweak_data.blackmarket.melee_weapons.alien_maul.expire_t = 1.4
+tweak_data.blackmarket.melee_weapons.alien_maul.stats.min_damage = 6
+tweak_data.blackmarket.melee_weapons.alien_maul.stats.max_damage = 12
+tweak_data.blackmarket.melee_weapons.alien_maul.stats.min_damage_effect = 5
+tweak_data.blackmarket.melee_weapons.alien_maul.stats.max_damage_effect = 5
+tweak_data.blackmarket.melee_weapons.alien_maul.stats.range = 275
 
 --FUCK YEAH
 tweak_data.blackmarket.melee_weapons.freedom.stats.min_damage = 8
@@ -3409,6 +3464,7 @@ tweak_data.blackmarket.melee_weapons.freedom.stats.max_damage = 16
 tweak_data.blackmarket.melee_weapons.freedom.stats.min_damage_effect = 0.2
 tweak_data.blackmarket.melee_weapons.freedom.stats.max_damage_effect = 0.2
 tweak_data.blackmarket.melee_weapons.freedom.stats.charge_time = 3
+tweak_data.blackmarket.melee_weapons.freedom.melee_damage_delay = 0.1
 --SPOOPY KNIFE
 tweak_data.blackmarket.melee_weapons.chef.repeat_expire_t = 0.45
 tweak_data.blackmarket.melee_weapons.chef.stats.min_damage = 1.3

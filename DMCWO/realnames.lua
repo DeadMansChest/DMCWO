@@ -1,5 +1,5 @@
 --[[
-v0.4.2.4
+v1.0
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -199,11 +199,11 @@ function LocalizationManager:text( string_id, macros )
 	--Zombie Hunter
     realnames["bm_wp_r870_fg_wood"] = "Wooden Pump"
 	--Short Enough **don't know
-	realnames["bm_wp_r870_s_nostock"] = "Stockless Pistol Grip"
+	realnames["bm_wp_r870_s_nostock"] = "No Stock"
 	--Short Enough Tact. **don't know
-	realnames["bm_wp_r870_s_nostock_big"] = "Stockless Pistol Grip w/ Full Length Rail"
+	realnames["bm_wp_r870_s_nostock_big"] = "No Stock w/ Full Length Rail"
 	--Govt. Stock **don't know
-	realnames["bm_wp_r870_s_solid_big"] = "Solid Stock w/ Full Length Rail"
+	realnames["bm_wp_r870_s_solid_big"] = "Fixed Stock w/ Full Length Rail"
 	
 	--[[IZHMA 12G]]
 	realnames["bm_w_saiga"] = "Concern Kalashnikov Saiga-12K" --"Nyaa! I'm a Cat!"
@@ -221,7 +221,7 @@ function LocalizationManager:text( string_id, macros )
 	--Collapsed Stock
 	realnames["bm_wp_ben_s_collapsed"] = "Collapsed M1014 Stock"
 	--Solid Stock
-	realnames["bm_wp_ben_fg_standard"] = "Solid Stock" --same deal with the FAL, possible conflict
+	realnames["bm_wp_ben_fg_standard"] = "Fixed Stock" --same deal with the FAL, possible conflict
 	
 	--[[RAVEN]]
 	realnames["bm_w_ksg"] = "Kel-Tec KSG" --"Kel-Tec Crap"
@@ -243,11 +243,11 @@ function LocalizationManager:text( string_id, macros )
 	--Extended Mag
 	realnames["bm_wp_shorty_m_extended_short"] = "Extended Tube Magazine (+1 Round)"
 	--Standard
-	realnames["bm_wp_r870_s_solid"] = "Solid Stock"
+	realnames["bm_wp_r870_s_solid"] = "Fixed Stock"
 	--Police Shorty
-	realnames["bm_wp_serbu_s_solid_short"] = "Solid Stock w/ Rail"
+	realnames["bm_wp_serbu_s_solid_short"] = "Fixed Stock w/ Rail"
 	--Tactical Shorty
-	realnames["bm_wp_serbu_s_nostock_short"] = "Stockless Pistol Grip w/ Rail"
+	realnames["bm_wp_serbu_s_nostock_short"] = "No Stock w/ Rail"
 	
 	--[[RPK]]
 	realnames["bm_w_rpk"] = "Concern Kalashnikov RPK"
@@ -404,7 +404,19 @@ function LocalizationManager:text( string_id, macros )
 	--Railed Handguard
 	realnames["bm_wp_mac10_body_ris"] = "MAC Rail System" --I'm getting nothing but airsoft results so generic name
 	--Skeletal Stock
-	realnames["bm_wp_mac10_s_skel"] = "Low Mount Skeleton Stock"
+	realnames["bm_wp_mac10_s_skel"] = "Low Mount Skeleton Stock"	
+	
+	--[[Thompson]]
+	realnames["bm_w_m1928"] = "Auto-Ordnance M1928"
+	--Short Barrel
+	realnames["bm_wp_m1928_b_short"] = "Short Barrel"	
+	--Dis. Foregrip
+	realnames["bm_wp_m1928_b_short"] = "Synthetic Foregrip"	
+	--Dis. Pistol Grip
+	realnames["bm_wp_m1928_b_short"] = "Synthetic Pistol Grip"	
+	--Dis. Stock
+	realnames["bm_wp_m1928_b_short"] = "Synthetic Stock"
+	
 	
 	--[[Compact-5]]
 	realnames["bm_w_mp5"] = "Heckler & Koch MP5A4" --"Empi"
@@ -426,15 +438,15 @@ function LocalizationManager:text( string_id, macros )
 	--Extended Mag
 	realnames["bm_wp_mp9_m_extended"] = "30rnd Magazine"
 	--Skeletal Stock
-	realnames["bm_wp_mp9_s_skel"] = "Steyr TMP Solid Stock"
+	realnames["bm_wp_mp9_s_skel"] = "Steyr TMP Fixed Stock"
 	
 	--[[Skorpion]]
-	realnames["bm_w_scorpion"] = "Skorpion vz. 61"
+	realnames["bm_w_scorpion"] = "CZ Skorpion vz. 61"
 	realnames["bm_wp_scorpion_m_extended"] = "Dual Magazines"
 	
 	--[[Uzi]]
 	realnames["bm_w_uzi"] = "IMI Uzi"
-	realnames["bm_wp_uzi_s_solid"] = "Wooden Stcok"
+	realnames["bm_wp_uzi_s_solid"] = "Wooden Stock"
 	realnames["bm_wp_uzi_fg_rail"] = "FAB Defence Uzi Tri-Rail System"
 	
 	--[[TEC-9]]
@@ -463,7 +475,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_olympic_s_short"] = "Buffer Tube" 
 	
 	--[[Krinkov]]
-	realnames["bm_w_akmsu"] = "Concern Kalashnikov AKMSU"
+	realnames["bm_w_akmsu"] = "Soviet Union AKMSU"
 	--Moscow Special
 	realnames["bm_wp_akmsu_fg_rail"] = "Samson K-Rail" --Seems to be loosely based off of the Samson K-Rail, it's the only thing that looked remotely like this
 	
@@ -688,7 +700,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_upg_a_piercing_desc"] = "Dart ammunition capable of penetrating armour. Shoot 15 darts (10 for the Judge) with 60% increased range and accuracy."
 	--HE
 	realnames["bm_wp_upg_a_explosive"] = "Fragmentation Rounds"
-	realnames["bm_wp_upg_a_explosive_desc"] = "Fin stabilized rounds that explode on impact. Shoot explosives that can stun targets in its blast radius. You find and carry less of this ammo."
+	realnames["bm_wp_upg_a_explosive_desc"] = "Fin stabilized rounds that explode on impact. Shoot explosives that can stun targets in its blast radius. Deals a flat 100 damage."
 	
 	--URSA
 	realnames["bm_melee_kabar"] = "USMC KA-BAR"
