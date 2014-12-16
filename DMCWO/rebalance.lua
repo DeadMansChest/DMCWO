@@ -1,5 +1,5 @@
 --[[
-v1.0
+v1.0.1
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -1613,6 +1613,46 @@ tweak_data.weapon.aug.stats = {
 		zoom = 1,
 		concealment = 20,
 		suppression = 10,
+		alert_size = 7,
+		extra_ammo = 11,
+		total_ammo_mod = 101,
+		value = 1,
+	}
+	
+	
+--*Jam* (L85)
+tweak_data.weapon.l85a2.kick.standing = { -0.8, 1.2, -0.95, 0.95}
+tweak_data.weapon.l85a2.kick.crouching = tweak_data.weapon.l85a2.kick.standing
+tweak_data.weapon.l85a2.kick.steelsight = tweak_data.weapon.l85a2.kick.standing
+
+tweak_data.weapon.l85a2.spread.standing = 5.5
+tweak_data.weapon.l85a2.spread.crouching = 5
+tweak_data.weapon.l85a2.spread.steelsight = 0.6
+tweak_data.weapon.l85a2.spread.moving_standing = tweak_data.weapon.l85a2.spread.standing * 1.45
+tweak_data.weapon.l85a2.spread.moving_crouching = tweak_data.weapon.l85a2.spread.crouching * 1.45
+tweak_data.weapon.l85a2.spread.moving_steelsight = tweak_data.weapon.l85a2.spread.steelsight * 1.45
+
+tweak_data.weapon.l85a2.CLIP_AMMO_MAX = 30
+tweak_data.weapon.l85a2.AMMO_MAX = 150
+
+tweak_data.weapon.l85a2.can_shoot_through_enemy = true
+tweak_data.weapon.l85a2.can_shoot_through_wall = true
+
+tweak_data.weapon.l85a2.armor_piercing_chance = 0.25
+
+tweak_data.weapon.l85a2.fire_mode_data.fire_rate = 0.098360655737704
+
+tweak_data.weapon.l85a2.shake.fire_multiplier = 0.7
+tweak_data.weapon.l85a2.shake.fire_steelsight_multiplier = -0.7
+
+tweak_data.weapon.l85a2.stats = {
+		damage = 19,
+		spread = 7,
+		recoil = 19,
+		spread_moving = 7,
+		zoom = 1,
+		concealment = 16,
+		suppression = 14,
 		alert_size = 7,
 		extra_ammo = 11,
 		total_ammo_mod = 101,

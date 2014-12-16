@@ -1,5 +1,5 @@
-[[Weapon Overhaul v1.0: ids habbeding Edition]]
-1000 suns
+[[Weapon Overhaul v1.0.1: Jammin Edition]]
+What, you expected a cute gun? It's just me, L85! *Jam*
 by: Dad's Meme Chest
 
 UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
@@ -76,12 +76,16 @@ Required for the following:
 These are stand alone versions of some parts of DMCWO:
 
 -Hide Brakes (ARs/SMGs/LMGs and Shotguns): http://steamcommunity.com/app/218620/discussions/15/624076027584693197/
-	-Hides the muzzle braks for ARs/SMGs/LMGs and Shotguns
+	-Hides the muzzle brakes for ARs/SMGs/LMGs and Shotguns
 	
 -Keep AR-15 Front Post: http://steamcommunity.com/app/218620/discussions/15/616187203893400313/
 	-Keeps the AR-15 front post on weapons that have them (M16, M733, Olympic AR) when an optic is attached
+
+-Real Weapon & Mod Names: http://steamcommunity.com/app/218620/discussions/15/624076751559360274/
+	-Pretty much renames most weapons and weapon mods to their real life counter parts (or the closest damn thing)
+	*Not for use alongside DMCWO. This version doesn't have support for the name toggles or the changed descriptions and names that better represent the changes made in DMCWO (redone ammo descriptions, magazine capcity counts in the names)
 	
--Properly Aligned Irons Sights and Optics: WIP
+-Properly Aligned Irons Sights & Optics: WIP
 	-Realigns optics to the actual PoI for some weapons
 
 =================[[The Files]]=================
@@ -100,7 +104,7 @@ These are stand alone versions of some parts of DMCWO:
 		-Changes the index tables to be more consistent rather than randomly go up to higher values halfway through the index
 		-Some skill adjustments
 		
-	*These three files print they're running to the hook log. Make sure all three are printing to the log before reporting bugs to me.
+	*Both "rebalance.lua" and "rebalance_attach.lua" rely on "rebalance_general.lua". Make sure all three are printing to the log before reporting bugs to me.
 
 OPTIONAL PERSIST SCRIPT:
 	realnames.lua

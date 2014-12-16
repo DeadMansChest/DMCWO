@@ -1,5 +1,5 @@
 --[[
-v1.0
+v1.0.1
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -21,6 +21,23 @@ or else you'll end up spamming your mod list with each extra attachment by howev
 
 if not tweak_data then return end	
 
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_specter")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_aimpoint")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_docter")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_eotech")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_t1micro")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_cmore")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_aimpoint_2")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_acog")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_cs")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_rx30")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_rx01")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_reflex")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_eotech_xps")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_45iron")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_upg_o_leupold")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_mg42.uses_parts, "wpn_fps_pis_c96_sight")
+
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_ass_g3_s_wood")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_specter")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_aimpoint")
@@ -35,6 +52,7 @@ table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_rx01")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_reflex")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_eotech_xps")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_snp_msr_ns_suppressor")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_hk21.uses_parts, "wpn_fps_pis_c96_sight")
@@ -52,6 +70,7 @@ table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_o_rx01")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_o_reflex")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_o_eotech_xps")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_upg_o_leupold")				
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_m249.uses_parts, "wpn_fps_pis_c96_sight")				
 
@@ -73,6 +92,7 @@ table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_o_rx01")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_o_reflex")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_o_eotech_xps")
+table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_o_45iron")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_upg_o_leupold")
 table.insert(tweak_data.weapon.factory.wpn_fps_lmg_rpk.uses_parts, "wpn_fps_pis_c96_sight")
 
@@ -321,62 +341,15 @@ table.insert(tweak_data.weapon.factory.wpn_fps_x_b92fs.uses_parts, "wpn_upg_o_ma
 table.insert(tweak_data.weapon.factory.wpn_fps_pis_c96.uses_parts, "wpn_fps_upg_i_autofire")
 
 --Had to put these here as the game doesn't like loading the game without the RMR having a parent
-tweak_data.weapon.factory.wpn_fps_jowi.override = {
-	wpn_fps_pis_g26_m_standard = {
-		animations = {
-			reload = "reload_right",
-			reload_not_empty = "reload_not_empty_right",
-			reload_left = "reload_left",
-			reload_not_empty_left = "reload_not_empty_left"
-		}
-	},
-	wpn_fps_pis_g26_m_contour = {
-		animations = {
-			reload = "reload_right",
-			reload_not_empty = "reload_not_empty_right",
-			reload_left = "reload_left",
-			reload_not_empty_left = "reload_not_empty_left"
-		}
-	},
-	wpn_fps_pis_g26_b_standard = {
-		animations = {
-			reload = "reload_right",
-			reload_left = "reload_left",
-			fire = "recoil"
-		}
-	},
-	wpn_fps_pis_g26_b_custom = {
-		animations = {
-			reload = "reload_right",
-			reload_left = "reload_left",
-			fire = "recoil"
-		}
-	},
-	wpn_fps_pis_g18c_m_mag_33rnd = {
+tweak_data.weapon.factory.wpn_fps_jowi.override.wpn_fps_pis_g18c_m_mag_33rnd = {
 			stats = { value = 6, spread_moving = -3, extra_ammo = 46, concealment = -2 },
-	},
-	wpn_fps_upg_o_rmr = {
+	}
+tweak_data.weapon.factory.wpn_fps_jowi.override.wpn_fps_upg_o_rmr = {
 		parent = "lower_reciever",
 		stats = { value = 1, concealment = -1, recoil = 0, zoom = 1}
 	}
-}
 
-tweak_data.weapon.factory.wpn_fps_x_b92fs.override = {
-	wpn_fps_upg_pis_ns_flash = {
-		parent = "lower_reciever"
-	},
-	wpn_fps_upg_ns_pis_medium_slim = {
-		parent = "lower_reciever"
-	},
-	wpn_fps_pis_beretta_m_std = {
-		animations = {
-			reload = "reload_right",
-			reload_not_empty = "reload_not_empty_right",
-			reload_left = "reload_left",
-			reload_not_empty_left = "reload_not_empty_left"
-		}
-	},
-	wpn_fps_pis_beretta_m_extended = {
+tweak_data.weapon.factory.wpn_fps_x_b92fs.override.wpn_fps_pis_beretta_m_extended = {
 		animations = {
 			reload = "reload_right",
 			reload_not_empty = "reload_not_empty_right",
@@ -389,40 +362,14 @@ tweak_data.weapon.factory.wpn_fps_x_b92fs.override = {
 			concealment = -2,
 			extra_ammo = 30
 		}
-	},
-	wpn_fps_pis_beretta_sl_std = {
-		animations = {
-			reload = "reload_right",
-			reload_left = "reload_left",
-			fire = "recoil",
-			fire_steelsight = "recoil"
-		}
-	},
-	wpn_fps_pis_beretta_sl_brigadier = {
-		animations = {
-			reload = "reload_right",
-			reload_left = "reload_left",
-			fire = "recoil",
-			fire_steelsight = "recoil"
-		}
-	},
-	wpn_upg_o_marksmansight_front = {a_obj = "a_os"},
-	wpn_fps_upg_o_rmr = {
+	}
+
+tweak_data.weapon.factory.wpn_fps_x_b92fs.override.wpn_fps_upg_o_rmr = {
 		parent = "lower_reciever",
 		stats = { value = 1, concealment = -1, recoil = 0, zoom = 1}
 	}
-}
 	
-tweak_data.weapon.factory.wpn_fps_x_1911.override = {
-	wpn_fps_pis_1911_m_standard = {
-		animations = {
-			reload = "reload_right",
-			reload_not_empty = "reload_not_empty_right",
-			reload_left = "reload_left",
-			reload_not_empty_left = "reload_not_empty_left"
-		}
-	},
-	wpn_fps_pis_1911_m_extended = {
+tweak_data.weapon.factory.wpn_fps_x_1911.override.wpn_fps_pis_1911_m_extended = {
 		animations = {
 			reload = "reload_right",
 			reload_not_empty = "reload_not_empty_right",
@@ -435,124 +382,85 @@ tweak_data.weapon.factory.wpn_fps_x_1911.override = {
 			concealment = -1,
 			extra_ammo = 8
 		}
-	},
-	wpn_fps_pis_1911_b_standard = {
-		animations = {
-			reload = "reload_right",
-			reload_left = "reload_left",
-			fire = "recoil",
-			fire_steelsight = "recoil"
-		}
-	},
-	wpn_fps_pis_1911_b_long = {
-		animations = {
-			reload = "reload_right",
-			reload_left = "reload_left",
-			fire = "recoil",
-			fire_steelsight = "recoil"
-		}
-	},
-	wpn_fps_pis_1911_b_vented = {
-		animations = {
-			reload = "reload_right",
-			reload_left = "reload_left",
-			fire = "recoil",
-			fire_steelsight = "recoil"
-		}
-	},
-	wpn_upg_o_marksmansight_rear = {
+	}
+tweak_data.weapon.factory.wpn_fps_x_1911.override.wpn_upg_o_marksmansight_rear = {
 		a_obj = "a_o",
 		forbids = {
 			"wpn_fps_pis_1911_o_long",
 			"wpn_fps_pis_1911_o_standard"
 		}
-	},
-	wpn_upg_o_marksmansight_front = {a_obj = "a_os"},
-	wpn_fps_upg_o_rmr = {
+	}
+tweak_data.weapon.factory.wpn_fps_x_1911.override.wpn_upg_o_marksmansight_front = {a_obj = "a_os"}
+tweak_data.weapon.factory.wpn_fps_x_1911.override.wpn_fps_upg_o_rmr = {
 		parent = "lower_reciever",
 		stats = { value = 1, concealment = -1, recoil = 0, zoom = 1}
 	}
-}
 
-tweak_data.weapon.factory.wpn_fps_x_deagle.override = {
-	wpn_fps_pis_deagle_m_standard = {
-		animations = {
-			reload = "reload_right",
-			reload_not_empty = "reload_not_empty_right",
-			reload_left = "reload_left",
-			reload_not_empty_left = "reload_not_empty_left"
-		}
-	},
-	wpn_fps_pis_deagle_m_extended = {
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_pis_deagle_m_extended = {
 		animations = {reload = "reload_right",reload_not_empty = "reload_not_empty_right",reload_left = "reload_left",reload_not_empty_left = "reload_not_empty_left"},
 		stats = {value = 7, concealment = -2, spread_moving = -2, extra_ammo = 6}
-	},
-	wpn_fps_pis_deagle_body_standard = {
-		animations = {reload = "reload_right",reload_left = "reload_left",fire = "recoil",fire_steelsight = "recoil"}
-	},
-	wpn_upg_o_marksmansight_rear = {
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_upg_o_marksmansight_rear = {
 	a_obj = "a_o",
 	forbids = {
 		"wpn_fps_pis_deagle_o_standard_front",
 		"wpn_fps_pis_deagle_o_standard_front_long",
 		"wpn_fps_pis_deagle_o_standard_rear"
+		}
 	}
-	},
-	wpn_upg_o_marksmansight_front = {a_obj = "a_os",	
-	},
-	wpn_fps_upg_o_specter = {a_obj = "a_quite",
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_upg_o_marksmansight_front = {a_obj = "a_os",	
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_specter = {a_obj = "a_quite",
 	stats = { value = 8, zoom = 0, recoil = 1, spread_moving = -3, concealment = -3 }
-	},
-	wpn_fps_upg_o_aimpoint = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_aimpoint = {a_obj = "a_quite",
 	stats = { value = 8, zoom = 0, recoil = 0, spread_moving = -3, concealment = -3 }
-	},
-	wpn_fps_upg_o_aimpoint_2 = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_aimpoint_2 = {a_obj = "a_quite",
 	stats = { value = 8, zoom = 0, recoil = 0, spread_moving = -3, concealment = -3 }
-	},
-	wpn_fps_upg_o_docter = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_docter = {a_obj = "a_quite",
 	stats = { value = 5, zoom = 0, recoil = 0, spread_moving = -1, concealment = -1 }
-	},
-	wpn_fps_upg_o_eotech = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_eotech = {a_obj = "a_quite",
 	stats = { value = 3, zoom = 0, recoil = 0, spread_moving = -2, concealment = -2 }
-	},
-	wpn_fps_upg_o_t1micro = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_t1micro = {a_obj = "a_quite",
 	stats = { value = 3, zoom = 0, recoil = 0, spread_moving = -1, concealment = -1 }
-	},
-	wpn_fps_upg_o_cmore = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_cmore = {a_obj = "a_quite",
 	stats = { value = 5, zoom = 0, recoil = 0, spread_moving = -1, concealment = -1 }
-	},
-	wpn_fps_upg_o_acog = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_acog = {a_obj = "a_quite",
 	stats = { value = 6, zoom = 0, recoil = 1, spread_moving = -1, concealment = -3 }
-	},
-	wpn_fps_upg_o_cs = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_cs = {a_obj = "a_quite",
 	stats = { value = 5, zoom = 0, recoil = 0, spread_moving = -3, concealment = -1 }
-	},
-	wpn_fps_upg_o_eotech_xps = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_eotech_xps = {a_obj = "a_quite",
 	stats = { value = 5, zoom = 0, recoil = 0, spread_moving = -3, concealment = -2 }
-	},
-	wpn_fps_upg_o_reflex = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_reflex = {a_obj = "a_quite",
 	stats = { value = 5, zoom = 0, recoil = 0, spread_moving = -3, concealment = -1 }
-	},
-	wpn_fps_upg_o_rx01 = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_rx01 = {a_obj = "a_quite",
 	stats = { value = 5, zoom = 0, recoil = 0, spread_moving = -3, concealment = -1 }
-	},
-	wpn_fps_upg_o_rx30 = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_rx30 = {a_obj = "a_quite",
 	stats = { value = 5, zoom = 0, recoil = 0, spread_moving = -3, concealment = -2 }
-	},
-	wpn_fps_upg_o_leupold = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_leupold = {a_obj = "a_quite",
 	stats = {value = 8, zoom = 0, recoil = 3, spread_moving = -3, concealment = -3}
-	},
-	wpn_fps_pis_c96_sight = {a_obj = "a_quite",
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_pis_c96_sight = {a_obj = "a_quite",
 	stats = {value = 8, zoom = 0, recoil = 2, spread_moving = -3, concealment = -2}
-	},
-	wpn_fps_upg_o_rmr = {
+	}
+tweak_data.weapon.factory.wpn_fps_x_deagle.override.wpn_fps_upg_o_rmr = {
 		parent = "lower_reciever",
 		stats = { value = 1, concealment = -1, recoil = 0, zoom = 1}
 	}
-}
 
---Gun adjustments	
-tweak_data.weapon.gre_m79.crosshair.standing.hidden = false
+--Gun adjustments
 tweak_data.weapon.scar.FIRE_MODE = "single" --starts off on semi-auto like the M14 since it's a battle rifle
 
 tweak_data.weapon.fal.FIRE_MODE = "single" --starts off on semi-auto like the M14 since it's a battle rifle
@@ -563,5 +471,5 @@ tweak_data.weapon.g3.FIRE_MODE = "single" --starts off on semi-auto like the M14
 
 tweak_data.weapon.glock_18c.FIRE_MODE = "single" --starts off on semi-auto to avoid accidental mag dumping, especially if you have Equlibrium
 
-tweak_data.weapon.tec9.FIRE_MODE = "single" --Sets the gun to semi-auto ONLY
-tweak_data.weapon.tec9.CAN_TOGGLE_FIREMODE = false
+tweak_data.weapon.tec9.FIRE_MODE = "single" --Sets the gun to semi-auto by default
+tweak_data.weapon.tec9.CAN_TOGGLE_FIREMODE = false	--Locks the TEC-9 to semi
