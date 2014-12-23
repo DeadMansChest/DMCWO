@@ -95,13 +95,6 @@ for i, wep_id in ipairs(gun_drag) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -2.5
 end
 
-local debug_damage = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928'}
-for i, wep_id in ipairs(debug_damage) do
-	
-	tweak_data.weapon[ wep_id ].ignore_damage_upgrades = true
-
-end
-
 local lmg_drag = {'m249','rpk','hk21','striker','mg42'}
 for i, wep_id in ipairs(lmg_drag) do
 	tweak_data.player.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.035
