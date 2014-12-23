@@ -1,4 +1,4 @@
-[[Weapon Overhaul v1.0.1: Jammin Edition]]
+[[Weapon Overhaul v1.0.2: Jammin Edition]]
 What, you expected a cute gun? It's just me, L85! *Jam*
 by: Dad's Meme Chest
 
@@ -269,7 +269,7 @@ if you have ANY of the extra attachments attached to your gun.
 You WILL crash if you try to play using it or equip another gun with extra attachments attached
 
 With that said, UNINSTALL this mod if a major game update is planned to be released soon and you want to play it immediately.
-This mod has a chance to break new weapons as the mod will not have the new entries for any new weapons/attachments, if any (which in that case you should be safe to keep this installed. Wouldn't take the risk, IMO).
+This mod *will* break new weapons as the mod will not have the new entries for any new weapons/attachments and as a result make then very buggy to use if not completely unuseable, if any (which in that case you should be safe to keep this installed. Wouldn't take the risk, IMO).
 
 I'm not gonna take heat if your game crashes because of this, I'll have warned you several times by the time you read this whole readme
 
@@ -304,39 +304,6 @@ Got that? Okay...
 	-Shotgun pellet range was increased, around 20-40m in game, drop off was made to start much, much earlier to compensate
 	-More realistic spread patterns for shotguns. Git gud at aiming!
 	-Damage stat was changed to show damage if all pellets hit within optimal range (1 meter for all shotguns)
-	#GAGE SHOTGUN PACK AMMO CHANGES
-		-000 Buck
-			-Reduced the negative ammo pickup multiplier (0.95 low, 1 high)
-			-Removed total ammo count reduction
-			-Gain 40 damage
-			-Shoots 6 pellets instead of 8
-				-4 for the Judge
-			-Drop-off starts practically immediately instead of 1m
-			-Long range capabilities reduced by 15%
-			-Slightly decreased accuracy/increased spread
-		-Flechette 
-			-Higher ammo pickup rate (1.0 low, 1.025 high)
-			-Lose 20 damage
-			-Shoots 12 pellets (darts) instead of 8
-				-8 for the Judge
-			-Drop-off starts at 2.5m instead of 1m
-			-Long range capabilities increased by 50%
-			-Increased accuracy
-			-Tan armor penetration
-		-Slugs
-			-Reduced the negative ammo pickup multiplier (0.9 low, 0.95 high)
-			-Small total ammo count reduction
-			-Gain 20 damage
-			-Greatly increased accuracy
-			-Long range capabilities increased by 250%
-			-Wall, shield, enemy and tan armor penetration
-		-Frag
-			-Damage is set to a flat 100, regardless of gun used
-			-Reduced the negative ammo pickup multiplier (0.85 low, 0.9 high)
-			-Large total ammo count reduction (still less than the vanilla ammo reduction)
-			-Slightly increased accuracy
-			-Max threat level
-			-Long range capabilities increased by 250%
 			
 -Better melee weapons
 	-Higher swing/stab speeds
@@ -451,7 +418,7 @@ Keep in mind, parts of some guns may be missing after an uninstall (notably the 
 
 Any issues I know of but can't personally fix because I can't code will be listed here
 
--Optics attached to the M249 don't follow the feed cover when reloading.
+-Optics attached to the M249 and MG42 don't follow the feed cover when reloading.
 
 -Killing cops with low health with a shotgun will send them flying, especially with flechette rounds and ESPECIALLY with birdshot. Any help with this would be appreciated
 
