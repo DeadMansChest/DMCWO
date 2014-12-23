@@ -47,6 +47,9 @@ function LocalizationManager:text( string_id, macros )
 	--Retro Grip
 	realnames["bm_wp_famas_g_retro"] = "G2 Guard"
 	
+	--[[JAM]]
+	realnames["bm_w_l85a2"] = "BAE L85A2" --"Eru"
+	
 	--[[AK.762]]
 	realnames["bm_w_akm"] = "Concern Kalashnikov AKMS"
 	
