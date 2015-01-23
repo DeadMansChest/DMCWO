@@ -1,6 +1,6 @@
-[[Weapon Overhaul v1.0.2: Jammin Edition]]
-What, you expected a cute gun? It's just me, L85! *Jam*
-by: Dad's Meme Chest
+[[DMC's Weapon Overhaul v1.1: Butts Edition]]
+Who doesn't like a nice butt?
+by: Don't Mumble Curses
 
 UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
@@ -8,13 +8,17 @@ Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ****Not for use in Pasta Perfection**** 
 (Not that it really could, most of this is just tweaked LUA source values, something PP already does on top of stealing actual code)
 
-%%%%%%%%%%%%%%%%%[[[DISCLAIMER]]]%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%[[[DISCLAIMER]]]%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Despite being out of pre-release, I'm still changing things left right and center, don't get too used to things
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-=================[[Wat do?]]=================
+
+======================================================
+=====================[[What do?]]=====================
+======================================================
 
 This mod is NOT meant to make the game easier (or at least not a whole lot easier) but I'd still class this s a form of cheating.
 
@@ -28,12 +32,15 @@ That said, extra attachments don't count towards your concealment if you're a cl
 ****I HIGHLY recommend you NOT try this mod until after reaching level 85-ish (when the grind REALLY starts) for the first time, this batch of scripts changes the whole dynamic on how to build weapons, more than likely making your current builds non-optimal or flat-out obsolete
 
 
-=================[[Credits & Thanks]]=================
+
+======================================================
+=================[[CREDITS & THANKS]]=================
+======================================================
 
 >>v00d00 for the LUA source code
 >>90e for the LUA source code, base code for the fixed fire loop sounds
 >>gir489 for LUA source code, LMG ironsights 
->>LazyOzzy for the fixed shotgun pellet mechanics, code advice
+>>LazyOzzy for the fixed shotgun pellet mechanics, fixed drop-off code, other code advice
 	-While not in this mod, the crosshair code to help me locate the center of the screen for centering optics
 >>B1313 for the shotgun push physics, code advice
 >>hejoro for the string hijack code
@@ -54,7 +61,11 @@ That said, extra attachments don't count towards your concealment if you're a cl
 	
 -Did I forget to credit you or improperly do so? Sorry if I did :> Bug the shit out of me, and tell me what I forgot to credit/I miscredited  you for.
 
+
+
+======================================================
 =================[[Recommended Mods]]=================
+======================================================
 
 I put in here w/e I saw fitting to go with this mod:
 
@@ -70,8 +81,11 @@ Required for the following:
 	-  's FN FAL Wooden Foregrip and Wooden Stock remake :http://steamcommunity.com/app/218620/discussions/15/35221031752086261/
 	-"Sandman"'s Enemy and Civilian Leg and Arm Hitboxes: http://steamcommunity.com/app/218620/discussions/15/35222218813407100/
 
-
-=================[[Standalone Mods]]=================
+	
+	
+======================================================
+=================[[Standalone Parts]]=================
+======================================================
 
 These are stand alone versions of some parts of DMCWO:
 
@@ -83,12 +97,16 @@ These are stand alone versions of some parts of DMCWO:
 
 -Real Weapon & Mod Names: http://steamcommunity.com/app/218620/discussions/15/624076751559360274/
 	-Pretty much renames most weapons and weapon mods to their real life counter parts (or the closest damn thing)
-	*Not for use alongside DMCWO. This version doesn't have support for the name toggles or the changed descriptions and names that better represent the changes made in DMCWO (redone ammo descriptions, magazine capcity counts in the names)
+	*Not for use alongside DMCWO. This version doesn't have support for the name toggles or the changed descriptions and names that better represent the changes made in DMCWO (redone shotgun ammo descriptions, magazine capacity counts in the names)
 	
 -Properly Aligned Irons Sights & Optics: WIP
 	-Realigns optics to the actual PoI for some weapons
-
-=================[[The Files]]=================
+	
+	
+	
+======================================================
+=====================[[Scripts]]======================
+======================================================
 
 ***REQUIRED PERSIST SCRIPTS***:
 	rebalance.lua*:
@@ -141,8 +159,12 @@ OPTIONAL POSTREQUIRE SCRIPTS:
 	useable_drums.lua (Contained inside the "Extra" folder):
 		-Makes drum mags attachable through the mod menu
 			-They don't have icons and when dropped through a card they look weird as hell
-
-=================[[INSTALLING]]=================
+			
+			
+			
+======================================================
+====================[[INSTALLING]]====================
+======================================================
 
 1. Nab Harfatus' LUA Hook .dll if you haven't already (Just take IPHLPAPI.dll from Hoxhud or something)
 
@@ -152,7 +174,10 @@ OPTIONAL POSTREQUIRE SCRIPTS:
 3. Run game, check log for errors. Report errors to me if there are any
 
 
-=================[[General Changes]]=================
+
+======================================================
+==================[[General Changes]]=================
+======================================================
 
 -Additional attachments!!!
 	LMGs:
@@ -255,7 +280,11 @@ OPTIONAL POSTREQUIRE SCRIPTS:
 
 	-And more... a word of warning though
 
+
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%[[[WARNING BELOW]]]%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 I CANNOT stress this enough, 
 
@@ -275,7 +304,11 @@ I'm not gonna take heat if your game crashes because of this, I'll have warned y
 
 There is an uninstall guide further down
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%[[[WARNING ABOVE]]]%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 Got that? Okay...
 
@@ -387,8 +420,11 @@ Got that? Okay...
 	-The M14, SCAR, FAL, G3 and Galil are now classed as "snipers"
 		-They still benefit from AR skills as Overkill programmed snipers to benefit from AR skills, they're just grouped with snipers under the renamed category "Sniper Rifles & Battle Rifles"
 	
-	
-=================[[UNINSTALLING]]=================
+
+
+======================================================
+===================[[UNINSTALLING]]===================
+======================================================
 
 Don't like the mod for w/e reason? You're following my advice about uninstalling this mod if an update is known to come out soon? Penis? Read below:
 
@@ -411,10 +447,13 @@ OR
 
 7. If you dun dang diddly did everything right, next time you boot up your game everything should be back to normal (or at least not make the game crash)
 
-Keep in mind, parts of some guns may be missing after an uninstall (notably the M16 upper receiver if you left nam_upper to "true"). You can easily fix this by selling and repurchasing the gun
+Keep in mind, parts of some guns may be missing after an uninstall. You can easily fix this by selling and repurchasing the gun
 
 
-=================[[KNOWN ISSUES]]=================
+
+======================================================
+===================[[KNOWN ISSUES]]===================
+======================================================
 
 Any issues I know of but can't personally fix because I can't code will be listed here
 
@@ -425,19 +464,25 @@ Any issues I know of but can't personally fix because I can't code will be liste
 -In rebalance_attach.lua, if "elcan_buis" is set to true, you'll see the 45 degree irons floating in the main menu. A side effect on how I got the BUIS toggle working.
 
 
-=================[[BUG REPORTING]]=================
+
+======================================================
+===================[[BUG REPORTING]]==================
+======================================================
 
 Please notify me of any bugs/issues not listed above. I will say now, bugs are most likely to happen with some optics as they have a lot of toggles associated with them on top of me having to manually adjust them to the center of the screen.
 
 If it is a bug with sight positioning, please give me:
 
-	-Your sig_rear_iron state (T/F), your ak_optics state (again, T/F) and any other toggle that changes sights and or their positioning
+	-Any other toggle that changes sights and/or their positioning (if the weapon in question is associated with any of them)
 	-The gun with the bugged optic
 	-The bugged optic
 	
 Thanks ;)
 
 
-=================[[Extra]]=================
+
+======================================================
+=======================[[EXTRA]]======================
+======================================================
 
 -Want the stealth symbol in your name? Here: 

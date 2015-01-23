@@ -24,6 +24,7 @@ PostRequireScripts:
  - ['lib/managers/weaponfactorymanager', DMCWO\postrequire_attach.lua]
  - ['lib/units/weapons/RaycastWeaponBase', DMCWO\soundsfix.lua]
  - ['*', DMCWO\shotgat_physics.lua]
+ - ['*', DMCWO\gat_physics.lua]
 #DMCWO Optional files
  - ['*', DMCWO\tact_reload.lua]
  - ['lib/units/cameras/fpcameraplayerbase', DMCWO\recoil_fix.lua]

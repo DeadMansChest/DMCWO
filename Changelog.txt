@@ -1,0 +1,133 @@
+I'll Heckle your Koch edition
+
+This update brings in damage drop-off, bullet penetration for ALL bullet weapons and a bunch of other things.
+
+Here's the Changelog:
+[u]All scripts (excluding scripts in the "Extra" folder):[/u]
+[list]
+	[*]Changed version note to v1.1
+	[*]Changed all instances of "io.write" to "io.stderr:write" so it's compatible with GoonMod
+[/list]
+
+[b]**NEW FILE**[/b]
+[u]gat_physics.lua:[/u]
+[list]
+	[*]Moved the weight penalty code stuff from "rebalance_general.lua" to here
+	[*]Added in support for muzzle devices changing muzzle flash (like how supressors change it to just smoke)
+	[*]Enabled damage drop-off for non-shotguns
+	[list]
+		[*]Thanks to LazyOzzy for fixing the "penetration resets damage drop-off" and "col_ray crash" bugs I was encountering
+		[*]The function for drop-off was already in the game's code (got shoved in one of the more recent updates), however, all it did was throw back w/e damage your weapon did in the first place and did nothing as a result
+	[/list]
+	[*]Bullet penetration is no longer just a true/false boolean for whether or not your gun can shoot through 40cm of w/e the hell you're trying to shoot through
+		[list]
+			[*]The maximum penetrable surface has been increased to 75cm
+			[*]How much you can shoot through is determined by a weapon's bullet damage at the time of impact (meaning hitting something at range reduces the chance of penetration) [b]and[b] its penetration power
+				[list]
+					[*]i.e. the MP7 has 2x the penetration power (32.5dmg * 2 = 65cm) while the 1911 has only 0.6x the penetration power (45dmg * 0.6 = 27cm)
+				[/list]
+			[*]Shooting through a wall will reduce your weapon's damage by w/e the weapon's penetration damage is
+				[list]
+					[*]i.e. the MP7 keeps 70% of its damage through surfaces so it'll have a damage loss of 30% (32.5dmg * 0.7 = 22.75dmg)
+					[*]On the other hand, the 1911 keeps 30% of its damage through surfaces so it'll have a damage loss of 70% (45dmg * 0.3 = 13.5dmg)
+				[/list]
+			[*]Shooting through a wall will increase the spread of the penetrating round by 3x
+		[/list]
+[/list]
+
+[u]rebalance_general.lua:[/u]
+[list]
+	[*]Changed some of the ammo pickup rates
+	[*]Akimbo weapons now have the ammo pickup rate of w/e the base pistol has
+	[*]Moved the weight penalty code stuff to "gat_physics.lua"
+	[*]Redid the accuracy/spread index so I can fine tune that stat better
+	[list]
+		[*]Each index step is now 0.1 (+/-1 in the stat chart) instead of the original 0.2 (+/-2 in the stat chart)
+	[/list]
+[/list]
+
+[u]rebalance.lua:[/u]
+[list]
+	[*]Made all shotguns' ADS spreads slightly more accurate
+	[list]
+		[*]Changed damage for most shotguns too, they all now have varying max damage ranges
+	[/list]
+	[*]Added in drop-off values for all non-shotguns 
+	[list]
+		[*]Altered damage for almost all weapons as a result
+		[*]I'll include a file that contains most of the data on damage drop-off
+		[*]Don't be alarmed if they seem rather high for some guns. Most weapons maintain that damage for only a few meters before it starts to drop lower
+	[/list]
+[/list]
+
+[u]rebalance_attach.lua:[/u]
+[list]
+	[*]Fixed the MBUS sights not appearing on the P90
+	[*]Fixed the Polymer RPK Stock still having the same stats for the other AKs
+	[list]
+		[*]It now has the same stats as the Fixed Stock for AKs (+2 Stab, -2 Con)
+		[list]
+			[*]A reminder that extra attachments don't affect your concealment, positively OR negatively, in games with a non-user host!
+		[/list]
+	[/list]
+	[*]Added sight coords for the L85
+	[*]The Magpul EMAG now adds 1 extra mag (30 bullets) to your total ammo
+		[list]
+			[*]Also sets mag capacity to 30 if it isn't already
+			[*]Reduces accuracy by 1 point
+		[/list]
+	[*]Slugs and Frag rounds cut your total ammo by roughly 25%
+	[*]Birdshot increases total ammo by roughly 25%
+	[*]Slugs no longer add damage		
+		[list]
+			[*]Changed their range profile, they now decrease the max damage range by 50% and increase range at a distance by 300%
+		[/list]
+	[*]Increased 000 Buck damage to +60 (from +40)
+		[list]
+			[*]The room for error was extremely big. The increased spread toppled with the reduced pellet count meant you lost a ton of potential damage if even one pellet missed. This gives some leeway if one or two pellets miss.
+			[*]Changed their range profile, they now increase the max damage range by 20% and reduce range at a distance by 30%
+		[/list]
+	[*]Redid the stats for the Stubby/Stinger, Tank and Firebreather/KX3 muzzle devices
+		[list]
+			[*]Stubby/Stinger only adds 2 Stabilty for a decrease in threat
+				[list]
+					[*]Muzzle flash is hidden*
+				[/list]
+			[*]Tank now adds 1 point to both stability and accuracy
+				[list]
+					[*]Muzzle flash is large and vented to the sides* (M95 muzzleflash)
+				[/list]
+			[*]Firebreather/KX3 adds 4 Stabilty (the Stubby/Stinger's old rating)
+				[list]
+					[*]Muzzle flash is made larger*
+				[/list]
+		[/list]
+	[*]The KIES linear Comepensator makes muzzle flash larger like the Firebreather/KX3*
+	[*]The pistol flash hider now hides flash*
+	[*]*gat_physics.lua needs to be active for the changed muzzle flashes to take effect
+[/list]
+
+[u]realnames.lua:[/u]
+[list]
+	[*]Renamed "Queen's Wrath" to "BAE L85A2"
+	[list]
+		[*]Renamed "Delightful Grip" to "Worn Rubber Grip"
+		[*]Renamed "Delightful Foregrip" to "Daniel Defence L85 Quad Rail"
+		[*]Renamed "Expert Mag" to "30rnd Magpul EMAG Magazine"
+	[/list]
+	[*]Renamed "Lion's Roar" to "HS Produkt VHS-2"
+	[*]Renamed "LEO" to "HS Produkt HS2000"	
+	[list]
+		[*]Renamed its extended magazine to "XD-40 22rnd Magazine"
+	[/list]
+[/list]
+
+[u]postrequire_attach.lua:[/u]
+[list]
+	[*]Fixed the RMR not appearing on the Akimbo 92FS, G26 and 1911
+	[*]Added the EMag to the M733
+	[*]Added the Leupold, Shortdot and 45 degree iron sights to the L85A2 and VHS-2
+	[*]Added the SJC Compensator .40 and Ventilated .40 to the HS2000
+[/list]
+
+	

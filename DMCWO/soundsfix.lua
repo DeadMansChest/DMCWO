@@ -1,5 +1,5 @@
 --[[
-v1.0.2
+v1.1
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -9,6 +9,11 @@ Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
 if not SoundFix then
+
+if not tweak_data then return end
+
+tweak_data.weapon.mg42.sounds.fire = "mg42_fire"
+tweak_data.weapon.mg42.sounds.fire_single = "mg42_fire"
 
 if not RaycastWeaponBase then return end
 
