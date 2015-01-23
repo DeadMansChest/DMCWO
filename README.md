@@ -1,5 +1,5 @@
-[[DMC's Weapon Overhaul v1.1: Butts Edition]]
-Who doesn't like a nice butt?
+[[DMC's Weapon Overhaul v1.1: I'll Heckle your Koch Edition]]
+I'd my raifu
 by: Don't Mumble Curses
 
 UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
@@ -71,11 +71,13 @@ I put in here w/e I saw fitting to go with this mod:
 
 -LazyOzzy's weapon gadget remembers last state script: http://www.unknowncheats.me/forum/990407-post24.html
 -LazyOzzy's Fully Loaded aced works with all shotgun ammo types: http://www.unknowncheats.me/forum/payday-2/118182-fully-loaded-all-ammo-types.html
+-LazyOzzy's Underdog Aced fix: http://www.unknowncheats.me/forum/payday-2/129527-underdog-fix.html
+-LazyOzzy's Burst Fire: http://www.unknowncheats.me/forum/payday-2/130566-burst-fire.html
+	-Has support in this mod
 
 -SquareOne's instant bullet impact fix. May cause frame drops on lower end PCs if you use shogun rounds that have high projectile counts
 
-Required for the following:
--i am not a spy...'s bundle mod tool: http://steamcommunity.com/app/218620/discussions/15/540744936746354308/
+Required for the following: i am not a spy...'s bundle mod tool: http://steamcommunity.com/app/218620/discussions/15/540744936746354308/
 	-i am not a spy...'s HD 3rd Person Weapons: http://steamcommunity.com/app/218620/discussions/15/558754900072790886/
 	-Bob_760's Black Gun Skins: http://steamcommunity.com/app/218620/discussions/15/558755529942726277/
 	-  's FN FAL Wooden Foregrip and Wooden Stock remake :http://steamcommunity.com/app/218620/discussions/15/35221031752086261/
@@ -312,17 +314,18 @@ There is an uninstall guide further down
 
 Got that? Okay...
 
--Muzzle brakes, handguards and everything else no longer magically alter damage (because stupid). Damage adjustments are now only changed via things that change the actual length of the barrel (HK21 handguard, actuall barrel mods, etc.)
+-All bullet weapons now have dmage drop-off
+	*They will never hit 0 damage like shotguns do
+	-Pistols are less effective at range than say, an AR
+
+-Muzzle brakes, handguards and everything else no longer magically alter damage (because stupid). Damage adjustments are now only changed via things that change the actual length of the barrel (HK21 handguard, actual barrel mods, etc.)
 	-Made damage reduction for all suppressors the same, instead, the larger suppressors will have added benefits like lower recoil and accuracy boosts at the cost of concealment
-		-Tweaked the "Silent Killer" skill to make suppressors not the best barrel extension to use (7.5% Basic, 15% Aced)
+		-Tweaked the "Silent Killer" skill to make suppressors not the best barrel extension to use (12.5% Basic, 25% Aced)
 			-This generally will make it so basic will nullify the damage reduction, give or take, while ace WILL boost damage (albeit slight, nothing big to push you past a damage breakpoint)
 		-Asepsis Suppressor has no benefits as a trade off for no damage reduction and lower concealment
 	-All suppressors completely nullify threat
 		-The exception is frag rounds for shotguns which will max out any shotgun's threat regardless of suppressors
 		
--Adjusted weapon damage to be close to some meta values (40, 50, blah blah blah)
-	-Otherwise I just geve them good ammo
-
 -Corrected magazine capacities:
 	-The Olympic AR and M16 use proper 20 round magazines (from 25 and 30)
 	-The FAMAS uses a proper 25 round magazine (from 30)
@@ -346,6 +349,9 @@ Got that? Okay...
 
 -Bullet penetration for most non-snipers!!
 	-Surface penetration
+		-All bullet weapons (penetration varies)
+		-Shotguns using slugs
+	-Enemy penetration
 		-All Assault rifles
 		-All LMGs
 		-All Battle Rifles
@@ -354,17 +360,11 @@ Got that? Okay...
 		-MP7
 		-AKMSU
 		-Olympic AR
-		-Pistols in .40S&W or greater
-			-Glock 22c
-			-P226
-			-USP Tactical
-			-1911
-			-Raging Bull
-			-Desert Eagle
-			-C96
-		-Shotguns using slugs
-	-Enemy penetration
-		-Same as the wall penetration list excluding the Glock 22c and the P226
+		-USP Tactical
+		-1911
+		-Raging Bull
+		-Desert Eagle
+		-C96
 		-Shotguns using slugs
 	-Tan armor penetration (penetration chance varies by weapon)
 	-Shield penetration
@@ -393,8 +393,9 @@ Got that? Okay...
 	-All battle rifles start on semi-auto, not just the M14
 	-The G18 starts on semi-auto to prevent accidental mag dumping upon starting
 	-Mosin now has a mount for the Theia/Leupold Scope
+	-Bunch of other things
 	
--Renamed everything with their IRL counterparts (or the closest thing)
+-Renamed almost everything with their IRL counterparts (or the closest thing)
 
 -Renamed weapon categories
 		-"Assault Rifle" is now called "Assault Rifles & Carbines"
@@ -415,7 +416,7 @@ Got that? Okay...
 		-They're still secondaries, only now they benefit from AR skills instead of the two SMG skills and appear under the renamed category "Assault Rifles & Carbines"
 	-The Judge is now classed as a "pistol"
 		-Now benefits from pistol based skills
-			-No longer benefits fron shotgun skills, bumped the damage up to compensate
+			-No longer benefits from shotgun skills, bumped the damage up to compensate
 	-The Tec-9 is also a pistol now
 	-The M14, SCAR, FAL, G3 and Galil are now classed as "snipers"
 		-They still benefit from AR skills as Overkill programmed snipers to benefit from AR skills, they're just grouped with snipers under the renamed category "Sniper Rifles & Battle Rifles"

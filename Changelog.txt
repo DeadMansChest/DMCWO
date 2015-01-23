@@ -71,7 +71,7 @@ Here's the Changelog:
 		[/list]
 	[/list]
 	[*]Added sight coords for the L85
-	[*]The Magpul EMAG now adds 1 extra mag (30 bullets) to your total ammo
+	[*]The Magpul EMAG now adds 1 extra mag (30 bulletes) to your total ammo
 		[list]
 			[*]Also sets mag capacity to 30 if it isn't already
 			[*]Reduces accuracy by 1 point
@@ -129,5 +129,3 @@ Here's the Changelog:
 	[*]Added the Leupold, Shortdot and 45 degree iron sights to the L85A2 and VHS-2
 	[*]Added the SJC Compensator .40 and Ventilated .40 to the HS2000
 [/list]
-
-	
