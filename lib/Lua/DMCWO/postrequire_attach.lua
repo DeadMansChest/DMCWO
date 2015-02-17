@@ -1,5 +1,5 @@
 --[[
-v1.1
+v1.2
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -20,7 +20,6 @@ or else you'll end up spamming your mod list with each extra attachment by howev
 --NOTE: Any attachments added to weapons here will NOT affect concealment with a non-user host
 
 if not tweak_data then return end	
-
 
 local weapon_factory_ids = {
 	"wpn_fps_lmg_mg42","wpn_fps_lmg_hk21","wpn_fps_lmg_m249","wpn_fps_lmg_rpk",
@@ -160,6 +159,8 @@ table.insert(tweak_data.weapon.factory.wpn_fps_ass_m4.uses_parts, "wpn_fps_shot_
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m4.uses_parts, "wpn_fps_upg_m4_s_standard")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m16.uses_parts, "wpn_fps_m4_uupg_s_fold")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_m16.uses_parts, "wpn_fps_upg_m4_s_pts")
+table.insert(tweak_data.weapon.factory.wpn_fps_ass_m16.uses_parts, "wpn_fps_upg_m4_s_standard")
 
 table.insert(tweak_data.weapon.factory.wpn_fps_ass_m14.uses_parts, "wpn_fps_snp_msr_ns_suppressor")
 	
@@ -248,8 +249,7 @@ table.insert(tweak_data.weapon.factory.wpn_fps_x_b92fs.uses_parts, "wpn_upg_o_ma
 
 table.insert(tweak_data.weapon.factory.wpn_fps_pis_c96.uses_parts, "wpn_fps_upg_i_autofire")
 
---Had to put these here as the game doesn't like loading the game without the RMR having a parent
-
+--Had to put these here as the game doesn't like loading without the RMR having a parent
 tweak_data.weapon.factory.wpn_fps_jowi.override.wpn_fps_upg_o_rmr = {
 		parent = "slide",
 		stats = { value = 1, concealment = -1, recoil = 0, zoom = 0}

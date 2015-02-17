@@ -1,131 +1,71 @@
-I'll Heckle your Koch edition
-
-This update brings in damage drop-off, bullet penetration for ALL bullet weapons and a bunch of other things.
+:^) Edition
 
 Here's the Changelog:
-[u]All scripts (excluding scripts in the "Extra" folder):[/u]
-[list]
-	[*]Changed version note to v1.1
-	[*]Changed all instances of "io.write" to "io.stderr:write" so it's compatible with GoonMod
-[/list]
 
-[b]**NEW FILE**[/b]
-[u]gat_physics.lua:[/u]
-[list]
-	[*]Moved the weight penalty code stuff from "rebalance_general.lua" to here
-	[*]Added in support for muzzle devices changing muzzle flash (like how supressors change it to just smoke)
-	[*]Enabled damage drop-off for non-shotguns
-	[list]
-		[*]Thanks to LazyOzzy for fixing the "penetration resets damage drop-off" and "col_ray crash" bugs I was encountering
-		[*]The function for drop-off was already in the game's code (got shoved in one of the more recent updates), however, all it did was throw back w/e damage your weapon did in the first place and did nothing as a result
-	[/list]
-	[*]Bullet penetration is no longer just a true/false boolean for whether or not your gun can shoot through 40cm of w/e the hell you're trying to shoot through
-		[list]
-			[*]The maximum penetrable surface has been increased to 75cm
-			[*]How much you can shoot through is determined by a weapon's bullet damage at the time of impact (meaning hitting something at range reduces the chance of penetration) [b]and[b] its penetration power
-				[list]
-					[*]i.e. the MP7 has 2x the penetration power (32.5dmg * 2 = 65cm) while the 1911 has only 0.6x the penetration power (45dmg * 0.6 = 27cm)
-				[/list]
-			[*]Shooting through a wall will reduce your weapon's damage by w/e the weapon's penetration damage is
-				[list]
-					[*]i.e. the MP7 keeps 70% of its damage through surfaces so it'll have a damage loss of 30% (32.5dmg * 0.7 = 22.75dmg)
-					[*]On the other hand, the 1911 keeps 30% of its damage through surfaces so it'll have a damage loss of 70% (45dmg * 0.3 = 13.5dmg)
-				[/list]
-			[*]Shooting through a wall will increase the spread of the penetrating round by 3x
-		[/list]
-[/list]
+General:
+	-No more wildcards!	
+		-I'd like to hope this would fix the single/auto fire lock bugs	
+	-Converted everything to the new hook (3.2.0), no need for you to edit in DMCWO scripts into your .yml anymore!
+	-Added stupid shit to the console/hook log that serves no purpose in the actual game! :^)
+		-This can be disabled, check DMCWO.lua
+	
 
-[u]rebalance_general.lua:[/u]
-[list]
-	[*]Changed some of the ammo pickup rates
-	[*]Akimbo weapons now have the ammo pickup rate of w/e the base pistol has
-	[*]Moved the weight penalty code stuff to "gat_physics.lua"
-	[*]Redid the accuracy/spread index so I can fine tune that stat better
-	[list]
-		[*]Each index step is now 0.1 (+/-1 in the stat chart) instead of the original 0.2 (+/-2 in the stat chart)
-	[/list]
-[/list]
+All scripts (excluding scripts in the "Extra" folder):
+	-Changed version note to v1.2
 
-[u]rebalance.lua:[/u]
-[list]
-	[*]Made all shotguns' ADS spreads slightly more accurate
-	[list]
-		[*]Changed damage for most shotguns too, they all now have varying max damage ranges
-	[/list]
-	[*]Added in drop-off values for all non-shotguns 
-	[list]
-		[*]Altered damage for almost all weapons as a result
-		[*]I'll include a file that contains most of the data on damage drop-off
-		[*]Don't be alarmed if they seem rather high for some guns. Most weapons maintain that damage for only a few meters before it starts to drop lower
-	[/list]
-[/list]
 
-[u]rebalance_attach.lua:[/u]
-[list]
-	[*]Fixed the MBUS sights not appearing on the P90
-	[*]Fixed the Polymer RPK Stock still having the same stats for the other AKs
-	[list]
-		[*]It now has the same stats as the Fixed Stock for AKs (+2 Stab, -2 Con)
-		[list]
-			[*]A reminder that extra attachments don't affect your concealment, positively OR negatively, in games with a non-user host!
-		[/list]
-	[/list]
-	[*]Added sight coords for the L85
-	[*]The Magpul EMAG now adds 1 extra mag (30 bulletes) to your total ammo
-		[list]
-			[*]Also sets mag capacity to 30 if it isn't already
-			[*]Reduces accuracy by 1 point
-		[/list]
-	[*]Slugs and Frag rounds cut your total ammo by roughly 25%
-	[*]Birdshot increases total ammo by roughly 25%
-	[*]Slugs no longer add damage		
-		[list]
-			[*]Changed their range profile, they now decrease the max damage range by 50% and increase range at a distance by 300%
-		[/list]
-	[*]Increased 000 Buck damage to +60 (from +40)
-		[list]
-			[*]The room for error was extremely big. The increased spread toppled with the reduced pellet count meant you lost a ton of potential damage if even one pellet missed. This gives some leeway if one or two pellets miss.
-			[*]Changed their range profile, they now increase the max damage range by 20% and reduce range at a distance by 30%
-		[/list]
-	[*]Redid the stats for the Stubby/Stinger, Tank and Firebreather/KX3 muzzle devices
-		[list]
-			[*]Stubby/Stinger only adds 2 Stabilty for a decrease in threat
-				[list]
-					[*]Muzzle flash is hidden*
-				[/list]
-			[*]Tank now adds 1 point to both stability and accuracy
-				[list]
-					[*]Muzzle flash is large and vented to the sides* (M95 muzzleflash)
-				[/list]
-			[*]Firebreather/KX3 adds 4 Stabilty (the Stubby/Stinger's old rating)
-				[list]
-					[*]Muzzle flash is made larger*
-				[/list]
-		[/list]
-	[*]The KIES linear Comepensator makes muzzle flash larger like the Firebreather/KX3*
-	[*]The pistol flash hider now hides flash*
-	[*]*gat_physics.lua needs to be active for the changed muzzle flashes to take effect
-[/list]
+DMCWO.lua:
+	-Sets up all the scripts and contains several strings that will be printed to the console/PD2Hook.log randomly when the "rebalance" scripts are all set up
+		-You can make this part shut the fuck up by setting "DMCWO.Stfu" to "true"
+		-You can also make the setup parts shut the fuck up by setting "DMCWO.Setup_Stfu" to "true"
+	-This script set will disable the more recently updated standalone scripts from this mod (Only "Real Weapon & Mod Names" is affected for now)
 
-[u]realnames.lua:[/u]
-[list]
-	[*]Renamed "Queen's Wrath" to "BAE L85A2"
-	[list]
-		[*]Renamed "Delightful Grip" to "Worn Rubber Grip"
-		[*]Renamed "Delightful Foregrip" to "Daniel Defence L85 Quad Rail"
-		[*]Renamed "Expert Mag" to "30rnd Magpul EMAG Magazine"
-	[/list]
-	[*]Renamed "Lion's Roar" to "HS Produkt VHS-2"
-	[*]Renamed "LEO" to "HS Produkt HS2000"	
-	[list]
-		[*]Renamed its extended magazine to "XD-40 22rnd Magazine"
-	[/list]
-[/list]
 
-[u]postrequire_attach.lua:[/u]
-[list]
-	[*]Fixed the RMR not appearing on the Akimbo 92FS, G26 and 1911
-	[*]Added the EMag to the M733
-	[*]Added the Leupold, Shortdot and 45 degree iron sights to the L85A2 and VHS-2
-	[*]Added the SJC Compensator .40 and Ventilated .40 to the HS2000
-[/list]
+gat_physics.lua:
+	-Changed formatting to use "RequiredScript"
+	-Contains code to block fire rate multipler upgrades
+	-Several attachments alter ROF, reload speeds, ADS times, etc.
+		-I'll release a .txt what mentions what does what
+	-Having a laser attached and **ON** will reduce hipfire spread by 25%
+		-Does NOT affect shotguns
+		-The code for checking if the laser is on is pretty much a copy of the code for checking if the angled sights are on
+	
+
+shotgat_physics.lua:
+	-Changed formatting to use "RequiredScript"
+
+
+tact_reload.lua:
+	-Changed formatting to use "RequiredScript"
+	-The Mosin and C96 only load how much their clips can feed
+		-You can only reload the Mosin when empty
+		-You can only reload the C96 if your current mag is empty, 10 or lower when using the 20 round mag
+	
+
+rebalance_general.lua:
+	-Will print if it's working to the console/log
+	-Needs to have run and work for "rebalance.lua" to run
+
+
+rebalance.lua:
+	-Will print if it's working to the console/log
+	-Requires "rebalance_general.lua" to be working correctly to run at all
+	-Needs to have run and work for "rebalance_attach.lua" to run
+	-Condensed weapon stats, removed the rewritten tables and instead altered the table values themselves, similarly to how I do melee weapons
+	-Fixed the VHS-2 having lower penetration than the other 5.56 NATO ARs
+	-Possibly fixed optic positioning on the MSR
+	-The C96, TEC-9 and G18c no longer benefit from Equilibrium Aced (The 2x ROF multiplier skill)
+		-5fast9me
+	
+
+rebalance_attach.lua:
+	-Will print if it's working to the console/log
+	-Requires "rebalance.lua" to be working correctly to run at all
+	-Undid the damage increase I made to 000 Buck, it's now back down to +40 damage	
+		-I didn't make the connection of increasing the base damage of shotguns and increasing the damage of 000 Buck together creating absurd damage outputs pretty much making ALL DW cops keel over 90% of the time from things like the 870 and Mosconi, even from body shots at a respectable distance.	
+			-You can still kill DW cops in one hit, I'm just reducing the chance of it killing them with a single bodyshot. Headshots will still murderize them, at least more than before I even buffed shotguns/000 Buck in the first place.
+		
+
+realnames.lua:
+	-Made some small tweaks
+

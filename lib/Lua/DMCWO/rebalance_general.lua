@@ -1,5 +1,5 @@
 --[[
-v1.1
+v1.2
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -11,6 +11,12 @@ Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 if not RebalanceGen then
  
 if not tweak_data then return end
+if DMCWO.Setup_Stfu ~= true then
+	if not stfu_gen then
+		stfu_gen = true
+		io.stdout:write("\n[DMCWO] rebalance_general.lua...")
+	end
+end
  
 --[[ INDEX TABLE TWEAKS ]]
  
@@ -47,6 +53,8 @@ tweak_data.weapon.stats.damage = {
 	...
 
 And so on
+
+0.25 = 2.5 damage in game
 ]]
 
 --alters the stability/recoil index to get rid of the duplicate entry	
@@ -56,6 +64,8 @@ for i = 3, 0.5, -0.1 do
 end
 
 --recreating the accuracy table
+--The contained values are multiplied wih w/e the weapon's spread value is
+--A weapon with a value of 0.8 for ADS standing still and a spread index of 1 (2 in this table) will result in the spread coming down to 1.6 degrees
 tweak_data.weapon.stats.spread = {
 	2,
 	1.9,
@@ -102,7 +112,7 @@ tweak_data.upgrades.values.shotgun.damage_multiplier = { 1.25 }
 tweak_data.upgrades.skill_descs.shotgun_impact.multibasic = "25%"
 tweak_data.upgrades.skill_descs.shotgun_impact.multipro = "25%"
 
---Akimbo recoil penalty adjustments so they actually are the +75/50/25% increase in recoil, matching the descriptions, and not 175/150/125% that they were coded to have
+--Akimbo recoil penalty adjustments so they actually are the +75/50/25% increase in recoil, matching the descriptions, and not 150/100/50% that they were coded to have
 tweak_data.upgrades.values.akimbo.recoil_multiplier = {
 		1.75, --Third card
 		1.5, --Last card, Basic skill
@@ -149,7 +159,6 @@ for i, wep_id in ipairs(light_pistol) do
 	
 	tweak_data.weapon[ wep_id ].timers.equip = 0.2
 	tweak_data.weapon.jowi.timers.equip = 0.4
-	
 	
 	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.125
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -3
@@ -325,7 +334,7 @@ for i, wep_id in ipairs(heavy) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.45
 end 
 
-local heavy_2 = {'striker','fal','rpk','msr','r93'}
+local heavy_2 = {'striker','fal','rpk','msr','r93','galil'}
 for i, wep_id in ipairs(heavy_2) do
 	tweak_data.weapon[ wep_id ].transition_duration = -0.03
 	tweak_data.weapon.r93.transition_duration = 0
@@ -350,7 +359,7 @@ for i, wep_id in ipairs(heavy_2) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.45
 end 
 
-local super_heavy = {'akm_gold','m95','hk21','m249','galil','mg42'}
+local super_heavy = {'akm_gold','m95','hk21','m249','mg42'}
 for i, wep_id in ipairs(super_heavy) do
 	tweak_data.weapon[ wep_id ].transition_duration = 0.02
 	
@@ -501,6 +510,15 @@ for i, wep_id in ipairs(no_burst) do
 end
 
 RebalanceGen = true
-io.stderr:write("rebalance_general.lua is working", "\n")
+if not DMCWO.rebalance_gen then
+	DMCWO.rebalance_gen = true
+	if DMCWO.Setup_Stfu ~= true then
+		io.stdout:write("is working!", "\n")
+	end
+	if not RebalanceGen then
+		io.stdout:write("[!] You left RebalanceGen commented out (or nil), you may experience FPS drops", "\n")
+	end
+	AddPersistScript("RebalanceScript", "lib/Lua/DMCWO/rebalance.lua")
+end
 
 end

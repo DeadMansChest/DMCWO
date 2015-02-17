@@ -1,5 +1,5 @@
 --[[
-v1.1
+v1.2
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -8,17 +8,17 @@ Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-w
 Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
-if not ReelNames then
-
-if not LocalizationManager then return end
-
---Real weapon names, code base thanks to hejoro, IDing by imfdb (Weapons), Payday Wikia (Leupold/Theia Scope), DMC, /k/-anon, and Steam friends (Other unidentified attachments)
+--Real Weapon Names
+--code base thanks to hejoro
+--imfdb (Most Weapons)
+--Payday Wikia (Leupold/Theia Scope)
+--/k/-anon and Steam friends (Other unidentified attachments and weapons I haven't found or were not ID'd by the two above sources)
 LocalizationManager_text = LocalizationManager_text or LocalizationManager.text
 function LocalizationManager:text( string_id, macros )
     local realnames = {}
 	
 	--[[GOLD SLAVSHIT]]
-	realnames["bm_w_akm_gold"] = "Golden AKMS"
+	realnames["bm_w_akm_gold"] = "Gold Plated AKMS"
 	
 	--[[JAM733]]
 	realnames["bm_w_amcar"] = "Colt M733 Commando"
@@ -173,7 +173,7 @@ function LocalizationManager:text( string_id, macros )
 	--Plastic Retro Foregrip
 	realnames["bm_wp_g3_fg_retro_plastic"] = "Slimline Handguard"
 	--Retro Grip
-	realnames["bm_wp_g3_g_retro"] = "Ergo Grip"
+	realnames["bm_wp_g3_g_retro"] = "G3 Ergo Grip"
 	--Sniper Grip
 	realnames["bm_wp_g3_g_sniper"] = "PSG-1 Pistol Grip"
 	--Sniper Stock
@@ -230,9 +230,9 @@ function LocalizationManager:text( string_id, macros )
 	--Short Barrel
 	realnames["bm_wp_ben_b_short"] = "NFA Barrel w/ 4-Shot Tube"
 	--Collapsed Stock
-	realnames["bm_wp_ben_s_collapsed"] = "Collapsed M1014 Stock"
+	realnames["bm_wp_ben_s_collapsed"] = "M1014 Collapsed Stock"
 	--Solid Stock
-	realnames["bm_wp_ben_fg_standard"] = "Fixed Stock" --same deal with the FAL, possible conflict
+	realnames["bm_wp_ben_fg_standard"] = "M1014 Civilian Stock" --same deal with the FAL, possible conflict
 	
 	--[[KELTEC]]
 	realnames["bm_w_ksg"] = "Kel-Tec KSG"
@@ -271,12 +271,13 @@ function LocalizationManager:text( string_id, macros )
 	--Railed Foregrip
 	realnames["bm_wp_m249_fg_mk46"] = "MK.46 Handguard"
 	--Solid Stock
-	realnames["bm_wp_m249_s_solid"] = "M249 Stock"
+	realnames["bm_wp_m249_s_solid"] = "M249 Solid Stock"
 	
 	--[[RELATED TO RAIFU]]
-	realnames["bm_w_hk21"] = "Heckler & Koch HK21E" --"Related to mai raifu"
+	realnames["bm_w_hk21"] = "Heckler & Koch HK21" --"Related to mai raifu"
 	--Short Foregrip
-	realnames["bm_wp_hk21_fg_short"] = "Short Handguard"
+	realnames["bm_wp_hk21_fg_short"] = "HK21 Short Handguard"
+	realnames["bm_wp_hk21_g_ergo"] = "HK21 Ergo Grip"
 	
 	--[[KERBEROS]]
 	realnames["bm_w_mg42"] = "Mauser Maschinengewehr 42"
@@ -309,7 +310,6 @@ function LocalizationManager:text( string_id, macros )
 	--[[GRENADE 26]]
 	realnames["bm_wp_pis_g26"] =  "Glock 26"
 	realnames["bm_w_jowi"] =  "Akimbo Glock 26s"
-	
 	realnames["bm_wp_g26_body_salient"] =  "Stipled Tan Frame"
 	realnames["bm_wp_g26_b_custom"] =  "Brushed Metal Frame"
 	realnames["bm_wp_g26_m_custom"] =  "G26 Stipled Tan Magazine"
@@ -417,7 +417,7 @@ function LocalizationManager:text( string_id, macros )
 	--20rnd Mag
 	realnames["bm_wp_c96_m_extended"] = "C96 20rnd Magazine"
 
-	--[[RUN ON SENTENCES]]
+	--[[RUNONSENTENCES]]
 	realnames["bm_w_mac10"] = "Ingram M10"
 	--Extended Mag
 	realnames["bm_wp_mac10_m_extended"] = "M10 30rnd Magazine"
@@ -805,8 +805,4 @@ function LocalizationManager:text( string_id, macros )
 	
     if realnames[string_id] then return realnames[string_id] end
     return LocalizationManager_text(self, string_id, macros)
-end
-
-ReelNames = true
-
 end

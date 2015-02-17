@@ -1,6 +1,6 @@
-[[DMC's Weapon Overhaul v1.1: I'll Heckle your Koch Edition]]
-I'd my raifu
-by: Don't Mumble Curses
+[[DMC's Weapon Overhaul v1.2: Monster Trucking Edition]]
+Do you have what it takes?
+by: Deranged Mating Calls
 
 UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
@@ -44,15 +44,15 @@ That said, extra attachments don't count towards your concealment if you're a cl
 	-While not in this mod, the crosshair code to help me locate the center of the screen for centering optics
 >>B1313 for the shotgun push physics, code advice
 >>hejoro for the string hijack code
->>HoxHud devs for the enemy health and damage indicators to guide me with weapon damage
+>>Harfatus for the lua hook
 >>IMFDB and Payday Wikia for weapon names and attachments I couldn't ID
 >>/k/ anon for semi-solidifiying some of the attachment names
 	Anon: Low Profile Suppressor might be a gemtec halo with a different attachment system but idk im getting buttflustered with you lol
 	Me: tfw we've been pretty much on the same page as to what the IRL counterparts are
 	Me: I'm in pain (from laughing)
 	Anon: I hate you, anon wants recognition for his internet fu ;_;
->>DMC (Me) for tweaking and testing and tweaking and testing all the gun/attachment stats to meta levels
-	-Also not me for buying a tablet and spending time on that drawing smut instead of updating this mod
+>>DMC for tweaking and testing and tweaking and testing all the gun/attachment stats to meta levels
+	-Also not me for buying a tablet and spending time on that drawing porn instead of updating this mod
 >>My Steam friends for being my guinea pigs for pre-release testing (0.1a)
 >>Not Illusion for making AA2 which has been distracting me from doing work on this mod as well
 	-I'm kidding. 10/10, 10/10, 100/100, Best game, BEST GAME
@@ -69,20 +69,22 @@ That said, extra attachments don't count towards your concealment if you're a cl
 
 I put in here w/e I saw fitting to go with this mod:
 
--LazyOzzy's weapon gadget remembers last state script: http://www.unknowncheats.me/forum/990407-post24.html
--LazyOzzy's Fully Loaded aced works with all shotgun ammo types: http://www.unknowncheats.me/forum/payday-2/118182-fully-loaded-all-ammo-types.html
--LazyOzzy's Underdog Aced fix: http://www.unknowncheats.me/forum/payday-2/129527-underdog-fix.html
--LazyOzzy's Burst Fire: http://www.unknowncheats.me/forum/payday-2/130566-burst-fire.html
-	-Has support in this mod
+Scripts from based Ozzy:
+	-Weapon gadget remembers last state script: http://www.unknowncheats.me/forum/990407-post24.html
+	-Fully Loaded aced works with all shotgun ammo types: http://www.unknowncheats.me/forum/payday-2/118182-fully-loaded-all-ammo-types.html
+	-Underdog Aced fix: http://www.unknowncheats.me/forum/payday-2/129527-underdog-fix.html
+	-Burst Fire: http://www.unknowncheats.me/forum/payday-2/130566-burst-fire.html
+		-Has support in this mod
 
--SquareOne's instant bullet impact fix. May cause frame drops on lower end PCs if you use shogun rounds that have high projectile counts
+SquareOne's instant bullet impact fix. May cause frame drops on lower end PCs if you use shogun rounds that have high projectile counts
 
 Required for the following: i am not a spy...'s bundle mod tool: http://steamcommunity.com/app/218620/discussions/15/540744936746354308/
 	-i am not a spy...'s HD 3rd Person Weapons: http://steamcommunity.com/app/218620/discussions/15/558754900072790886/
-	-Bob_760's Black Gun Skins: http://steamcommunity.com/app/218620/discussions/15/558755529942726277/
-	-  's FN FAL Wooden Foregrip and Wooden Stock remake :http://steamcommunity.com/app/218620/discussions/15/35221031752086261/
 	-"Sandman"'s Enemy and Civilian Leg and Arm Hitboxes: http://steamcommunity.com/app/218620/discussions/15/35222218813407100/
 
+mod_override things:
+	-Bob_760's Black Gun Skins: http://steamcommunity.com/app/218620/discussions/15/558755529942726277/
+	-  's FN FAL Wooden Foregrip and Wooden Stock remake :http://steamcommunity.com/app/218620/discussions/15/35221031752086261/
 	
 	
 ======================================================
@@ -111,26 +113,22 @@ These are stand alone versions of some parts of DMCWO:
 ======================================================
 
 ***REQUIRED PERSIST SCRIPTS***:
-	rebalance.lua*:
+	rebalance_general.lua:
+		*Required for rebalance.lua to run
+		-Changes the index tables to be more consistent rather than randomly go up to higher values halfway through the index
+		-Some skill adjustments
+		
+	rebalance.lua:
+		*Needs rebalance_general.lua to make a successful run first before it runs itself
+		*Required for rebalance_attach.lua to run
 		-Gage Pack #2 LMG ironsight codes by gir489
 		-Changes the base weapon stats for most weapons
 		-Properly aligns ironsights for some weapons (AK5, Deagle and a few others)
 		
 	rebalance_attach.lua*:
+		*Needs rebalance.lua to make a successful run first before it runs itself
 		-Contains a bunch of toggles that affect the appearances of some guns and attachments
 		-Changes the stats for most weapon mods as well as fixing a few bugs in the base game
-		
-	rebalance_general.lua*:
-		-Changes the index tables to be more consistent rather than randomly go up to higher values halfway through the index
-		-Some skill adjustments
-		
-	*Both "rebalance.lua" and "rebalance_attach.lua" rely on "rebalance_general.lua". Make sure all three are printing to the log before reporting bugs to me.
-
-OPTIONAL PERSIST SCRIPT:
-	realnames.lua
-		-String override code by hejoro
-		-Gives most weapons and weapons mods their real name (or the closest thing)
-		-Renames a few menu assets like "Foregrip" to "Handguard"
 	
 	
 ***REQUIRED POSTREQUIRE SCRIPTS***:
@@ -144,9 +142,16 @@ OPTIONAL PERSIST SCRIPT:
 	shotgat_physics.lua
 		-Fixed shotgun mechanics from LazyOzzy
 		-Shotgun physics from B1313
-		-Makes shotguns deal damage on a per pellet basis
+		-Makes shotguns deal damage on a per pellet basis	
+		
+	gat_physics.lua
+		-Damage drop-off for bullet weapons, fixed by LazyOzzy
+		-Wall penetraton for all bullet weapons, based on damage and a few other variables
 	
 OPTIONAL POSTREQUIRE SCRIPTS:
+	real_names.lua:
+		-Changes most weapons, weapon mods and melee weapons to use their IRL name
+		
 	recoil_fix.lua:
 		*This file can also be set up as a persistent script if you want to test different values without restarting each time you change it
 		-Reduces the floaty/ghost recoil you experience for some weapons, mainly high recoil weapons that have a high ROF
@@ -168,10 +173,9 @@ OPTIONAL POSTREQUIRE SCRIPTS:
 ====================[[INSTALLING]]====================
 ======================================================
 
-1. Nab Harfatus' LUA Hook .dll if you haven't already (Just take IPHLPAPI.dll from Hoxhud or something)
+1. Nab Harfatus' LUA Hook (IPHLPAPI.dll) if you haven't already (you can get it from HoxHud or PDTHHud)
 
 2. Download the Repo contents as a zip and extract into your Payday 2 directory
-	**If you already have your own .yml set up, just append the lines under "PersistScripts" and "PostRequireScripts" in the given .yml into your own .yml
 
 3. Run game, check log for errors. Report errors to me if there are any
 
@@ -203,6 +207,7 @@ OPTIONAL POSTREQUIRE SCRIPTS:
 			-AK-type pistol grips
 			-PSL Stock
 			-Side-Folding AK stock
+		etc...
 	
 	Assault Rifles:
 		K23B (secondary):
@@ -244,6 +249,7 @@ OPTIONAL POSTREQUIRE SCRIPTS:
 			-45 degree sights
 			-Shortdot Scope from the C96
 			-Solid Stock from the Loco (appears as the RPK's wood stock)
+		etc...
 	
 	Battle Rifles:
 		M14 DMR:
@@ -262,11 +268,12 @@ OPTIONAL POSTREQUIRE SCRIPTS:
 			-Shortdot Scope from the C96
 			-Titan QD Suppressor from the MSR
 			-Retractable Stock from the MP5A4
-		FN FAL:
+		Galil ARM:
 			-Leupold Scope
 			-45 degree sights
 			-Shortdot Scope from the C96
 			-Titan QD Suppressor from the MSR
+		etc...
 		
 	Shotguns:
 		-R870:
@@ -290,7 +297,7 @@ OPTIONAL POSTREQUIRE SCRIPTS:
 
 I CANNOT stress this enough, 
 
-****BACK UP YOUR SAVE**** 
+*BACK UP YOUR SAVE* (more so because this is modding 101, this is highly unlikely to break your save, even if you don't heed my warning below)
 
 and 
 
@@ -438,15 +445,9 @@ Don't like the mod for w/e reason? You're following my advice about uninstalling
 
 4. Close the game
 
-5. Remove the "DMCWO" folder
+5. Remove "DMCWO.lua" and the "DMCWO" folder inside lib/Lua
 
-6a. Remove the .yml
-
-OR
-
-6b. Remove the lines you added to your .yml
-
-7. If you dun dang diddly did everything right, next time you boot up your game everything should be back to normal (or at least not make the game crash)
+6. If you dun dang diddly did everything right, next time you boot up your game everything should be back to normal (or at least not make the game crash)
 
 Keep in mind, parts of some guns may be missing after an uninstall. You can easily fix this by selling and repurchasing the gun
 
@@ -477,6 +478,12 @@ If it is a bug with sight positioning, please give me:
 	-Any other toggle that changes sights and/or their positioning (if the weapon in question is associated with any of them)
 	-The gun with the bugged optic
 	-The bugged optic
+	
+If it's something else, tell me if:
+
+[DMCWO] All "rebalance" scripts are running!!
+
+is appearing in your log
 	
 Thanks ;)
 

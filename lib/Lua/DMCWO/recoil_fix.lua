@@ -1,5 +1,5 @@
 --[[
-v1.1
+v1.2
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -7,10 +7,6 @@ Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-w
 
 Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
-
-if not RecoilFixer then
-
-if not FPCameraPlayerBase then return end
 
 function FPCameraPlayerBase:stop_shooting( wait )
 	self._recoil_kick.to_reduce 	= self._recoil_kick.accumulated or 0 --Crash prevention for getting elctrocuted
@@ -80,8 +76,4 @@ function FPCameraPlayerBase:_horizonatal_recoil_kick(t, dt)
 	end
 
 	return r_value
-end
-
-RecoilFixer = true
-
 end
