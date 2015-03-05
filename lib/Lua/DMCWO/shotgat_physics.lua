@@ -1,5 +1,5 @@
 --[[
-v1.2
+v1.2.1
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -9,7 +9,37 @@ Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
 if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
-
+	local old_update_stats_values = NewShotgunBase._update_stats_values
+	
+	function NewShotgunBase:_update_stats_values()
+		old_update_stats_values(self)
+		
+		self._long_barrel = managers.weapon_factory:has_perk("long_barrel", self._factory_id, self._blueprint)
+		self._short_barrel = managers.weapon_factory:has_perk("short_barrel", self._factory_id, self._blueprint)
+		self._supp_barrel = managers.weapon_factory:has_perk("supp_barrel", self._factory_id, self._blueprint)
+		
+	end
+	
+	function NewShotgunBase:get_damage_falloff(damage, col_ray, user_unit)
+		local distance = col_ray.distance or mvector3.distance(col_ray.unit:position(), user_unit:position())
+		
+		if self._long_barrel then
+			self._damage_near = self._damage_near * 1.15
+			self._damage_far = self._damage_far * 1.15
+		elseif self._short_barrel then
+			self._damage_near = self._damage_near * 0.90
+			self._damage_far = self._damage_far * 0.90
+		end
+		
+		if self._silencer and not self._supp_barrel then
+			self._damage_near = self._damage_near * 0.80
+			self._damage_far = self._damage_far * 0.80
+			self._damage_min = self._damage_min * 0.9
+		end
+		
+		return (1 - math.min(1, math.max(0, distance - self._damage_near) / self._damage_far)) * damage
+	end
+	
 	--Makes shotgun pellet damage accumulative, code thanks to LazyOzzy
 	
 	function NewShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoot_player, spread_mul, autohit_mul, suppr_mul, shoot_through_data)
@@ -98,11 +128,14 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 	
 		for _, col_ray in pairs( hit_enemies ) do
 			local damage = self:get_damage_falloff(damage, col_ray, user_unit)
-			if damage > 0 --[[and not col_ray.unit:character_damage():dead()]] then
+			if damage > 0 and not col_ray.unit:character_damage():dead() then
 				local result = self._bullet_class:on_collision(col_ray, self._unit, user_unit, damage)
 				if result and result.type == "death" then
 					managers.game_play_central:do_shotgun_push(col_ray.unit, col_ray.position, col_ray.ray, col_ray.distance)
 				end
+			elseif damage > 0 and col_ray.unit:character_damage():dead() then
+				managers.game_play_central:play_impact_flesh({col_ray = col_ray})
+				managers.game_play_central:play_impact_sound_and_effects({col_ray = col_ray})
 			end
 		end
 	
@@ -142,7 +175,7 @@ elseif RequiredScript == "lib/managers/gameplaycentralmanager" then
 			unit:movement()._active_actions[1]:force_ragdoll()
 		end
 		
-		local scale = math.clamp( 1 - distance / 500, 0.5, 1 ) * 0.4 -- <<<< NEW MULTIPLIER HERE
+		local scale = math.clamp( 1 - distance / 500, 0.5, 1 ) * 1 -- <<<< NEW MULTIPLIER HERE
 		
 		local height = mvector3.distance( hit_pos, unit:position() ) - 100
 		

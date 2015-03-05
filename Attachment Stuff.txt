@@ -5,26 +5,31 @@ The following attachments now have positive and/or negative attributes
 		-The GemTech SFM, GemTech Blackslide, KAC MK.23 and SAI M80 Suppressors increase ADS time by 5%
 		-The Bigger the Better, Silencerco, Asepsis, MP7, Skorpion and Uzi Suppressors increase ADS time by 10%
 		-The Silent Killer (Shotguns) and TITAN QD (MSR, BRs) Suppressors as well as the Mosin bayonet increase ADS time by 15%
+		-All **MUZZLE ATTACHED** Suppressors reduce range by 15% and minimum damage is reduced by 10%
 	
 	Barrels & Slides
-		+Short Barrels reduce ADS time by 5%	
-			+Includes the AB-10 Barrel (TEC-9)
+		~Short Barrels reduce ADS time by 5% and reduce range by 10%
+			-Includes the AB-10 Barrel (TEC-9), the Draco Barrel (AKs) and AK-105 Barrel (AKs)
 		~The MG34 Barrel (MG42) reduces ADS time by 5% and reduces the ROF to 900 RPM
-		-Long Barrels increase ADS time by 5%	
+		~Long Barrels increase ADS time by 5% and increase range by 15%
 			-Includes the C96 Carbine Barrel and TEC-9 Barrel Extension
 			-Includes the M1014 and KSG Extended Tubes
-			-Not including the M95 Long Barrel
-		-"Sniper" and Suppressed Barrels increase ADS time by 10%
-			-Not including the Star-Wars Barrels for the Sterling and MG42 or the M95 Suppressed Barrel
+			-NOT including the M95 Long Barrel
+		~Sniper and DMR Barrels increase ADS time by 10% and increase range by 30%
 			-Weapons with "Sniper" barrels
 				-VHS
 				-FAMAS
 				-G3 (PSG-1 Barrel)
+			-Weapons with DMR barrels
+				-M4 & M16
+				-AKMS & AKS-74 (Zastava M76 Barrel)
+		-Suppressed Barrels increase ADS time by 10%
+			-NOT including the Star-Wars Barrels for the Sterling and MG42 or the M95 Suppressed Barrel
 		-The M95 Long Barrel increases ADS time by 10%
 		-The M95 Suppressed Barrel increases ADS time by 15%
-		-Long Slides increase ADS time by 5%
+		~Long Slides increase ADS time by 5% and increase range by 15%
 			-Includes the USP Match Slide and Glock 35 Compensated Slide (G22c)
-			-Not including the HS2000's "Long" Slide (Renamed as "Custom Slide") or PPKS Slide (PPK)
+			-NOT including the HS2000's "Long" Slide (Renamed as "Custom Slide") or PPKS Slide (PPK)
 		+The HS2000 Compensated Slide decreases ADS time by 5%
 	
 	-Handguards
@@ -51,9 +56,9 @@ The following attachments now have positive and/or negative attributes
 		-The G3 PSG-1 Handguard increases ADS time by 5%
 		-The G3 Wood Handguard increases ADS time by 10%
 		+The G3 Plastic Handguard decreases ADS time by 5%
-		+The Galil MAR Handguard increases the ROF to 750 RPM + decreases ADS time by 15%
+		+The Galil MAR Handguard increases the ROF to 750 RPM + decreases ADS time by 15% + decreases range by 10%
 		+The Galil SAR Handguard decreases ADS time by 5%
-		-The Galil Galatz Handguard decreases the ROF to 630 RPM + increases ADS time by 10%
+		~The Galil Galatz Handguard decreases the ROF to 630 RPM + increases ADS time by 10% + increases range by 30%
 		+The L85 DD Quad Rail decreases ADS time by 5%
 		+The Thompson Black Foregrip decreases ADS time by 5%
 		+The Uzi FAB Defence Tri-Rail decreases ADS time by 5%
@@ -70,8 +75,17 @@ The following attachments now have positive and/or negative attributes
 			-This includes the Command Arms UPG16 Pistol Grip (AR-15 Style Grips) and G3 Retro Grip (Renamed as "Ergo Grip")
 		+The US PALM Enhanced Pistol Grip (AK Type Rifles) decreases ADS time by 5%
 		+The FAMAS G2 Pistol Grip increases the ROF to 1200 RPM
+		
+	-Magazines
+		-Drum Magazines increase reload times by 15%
+		-The Magpul PMag decreases reload times by 5%
+		-The Magpul EMag increases reload times by 5%
+		-The US PALM AK mag decreases reload times by 5%
 	
 	-Other
+		+The CORE15 Lower Reciever (AR15s) decreases reload times by 5%
+		+The CORE15 Upper Reciever (AR15s) increases the ROF by 5%
+		+The Ballos Upper Reciever (AR15s) decreases the ROF by 5%
 		+The Auto Fire Lock mod increases your weapon's ROF by 15%, excluding the C96 and TEC-9 which have special multipliers instead
 			-The C96's ROF is set to 1000 RPM (from 500 RPM)
 			-The TEC-9's ROF is set to 800 RPM (from 600 RPM)

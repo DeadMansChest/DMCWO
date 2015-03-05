@@ -1,5 +1,5 @@
 --[[
-v1.2
+v1.2.1
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -22,7 +22,7 @@ end
  
 --fixes the extra_ammo index so rounds can be added one by one instead of the default increments of two
 tweak_data.weapon.stats.extra_ammo = {} --empties the original table
-for i = -10, 100, 1 do
+for i = -100, 100, 1 do
 	table.insert( tweak_data.weapon.stats.extra_ammo, i )
 end
 
@@ -57,7 +57,7 @@ And so on
 0.25 = 2.5 damage in game
 ]]
 
---alters the stability/recoil index to get rid of the duplicate entry	
+--alters the stability/recoil index to get rid of the duplicate entry and make more fine adjustments
 tweak_data.weapon.stats.recoil = {}
 for i = 3, 0.5, -0.1 do
 	table.insert( tweak_data.weapon.stats.recoil, i )
@@ -65,7 +65,7 @@ end
 
 --recreating the accuracy table
 --The contained values are multiplied wih w/e the weapon's spread value is
---A weapon with a value of 0.8 for ADS standing still and a spread index of 1 (2 in this table) will result in the spread coming down to 1.6 degrees
+--A weapon with a value of 0.8 for ADS standing still and a spread index of 1 (2 in this table) will result in the spread going up to 1.6 degrees
 tweak_data.weapon.stats.spread = {
 	2,
 	1.9,
@@ -118,6 +118,8 @@ tweak_data.upgrades.values.akimbo.recoil_multiplier = {
 		1.5, --Last card, Basic skill
 		1.25 --Aced skill
 	}
+	
+tweak_data.upgrades.explosive_bullet.player_dmg_mul = 0.75
 
 --[[ Viewmodel "Sway" and Drag ]]	
 
@@ -152,10 +154,10 @@ end
 tweak_data.player.TRANSITION_DURATION = 0.23
 
 --Adjustments made below add or subtract from TRANSITION_DURATION
-local light_pistol = {'usp','g22c','glock_17','glock_18c','ppk','judge','jowi','g26','c96','hs2000'}
-for i, wep_id in ipairs(light_pistol) do
-	tweak_data.weapon[ wep_id ].transition_duration = -0.125
-	tweak_data.weapon.jowi.transition_duration = -0.0625
+local babby_pistol = {'usp','g22c','glock_17','glock_18c','ppk','judge','jowi','g26','c96','hs2000'}
+for i, wep_id in ipairs(babby_pistol) do
+	tweak_data.weapon[ wep_id ].transition_duration = -0.1
+	tweak_data.weapon.jowi.transition_duration = -0.05
 	
 	tweak_data.weapon[ wep_id ].timers.equip = 0.2
 	tweak_data.weapon.jowi.timers.equip = 0.4
@@ -180,9 +182,9 @@ end
 
 local med_pistol = {'colt_1911','p226','b92fs','x_1911','x_b92fs'}
 for i, wep_id in ipairs(med_pistol) do
-	tweak_data.weapon[ wep_id ].transition_duration = -0.1
-	tweak_data.weapon.x_1911.transition_duration = -0.05
-	tweak_data.weapon.x_b92fs.transition_duration = -0.05
+	tweak_data.weapon[ wep_id ].transition_duration = -0.09
+	tweak_data.weapon.x_1911.transition_duration = -0.045
+	tweak_data.weapon.x_b92fs.transition_duration = -0.045
 	
 	tweak_data.weapon[ wep_id ].timers.equip = 0.25
 	tweak_data.weapon.x_1911.timers.equip = 0.5
@@ -206,10 +208,10 @@ for i, wep_id in ipairs(med_pistol) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.275
 end 
 
-local heavy_pistol = {'new_raging_bull','deagle','x_deagle'}
-for i, wep_id in ipairs(heavy_pistol) do
-	tweak_data.weapon[ wep_id ].transition_duration = -0.09
-	tweak_data.weapon.x_deagle.transition_duration = -0.045
+local beeg_pistol = {'new_raging_bull','deagle','x_deagle'}
+for i, wep_id in ipairs(beeg_pistol) do
+	tweak_data.weapon[ wep_id ].transition_duration = -0.08
+	tweak_data.weapon.x_deagle.transition_duration = -0.04
 	
 	tweak_data.weapon[ wep_id ].timers.equip = 0.3
 	tweak_data.weapon.x_deagle.timers.equip = 0.6
@@ -234,7 +236,7 @@ end
 
 local lightweight = {'mp7','mp9','amcar','new_mp5','p90','olympic','tec9','scorpion'}
 for i, wep_id in ipairs(lightweight) do
-	tweak_data.weapon[ wep_id ].transition_duration = -0.085
+	tweak_data.weapon[ wep_id ].transition_duration = -0.075
 	
 	tweak_data.weapon[ wep_id ].timers.equip = 0.45
 	
@@ -384,8 +386,8 @@ for i, wep_id in ipairs(super_heavy) do
 end 
 
 --[[ AMMO PICKUP RATES ]]
-local pis_high = {'new_raging_bull','deagle','x_deagle','judge','c96'}
-for i, wep_id in ipairs(pis_high) do
+local pis_high_cal = {'new_raging_bull','deagle','x_deagle','judge','c96'}
+for i, wep_id in ipairs(pis_high_cal) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.45, 3.30}
 end
 
@@ -399,8 +401,8 @@ for i, wep_id in ipairs(nine_mil) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {3.00, 5.30}
 end
 
-local forty = {'g22c','p226'}
-for i, wep_id in ipairs(forty) do
+local its_not_10mm_auto = {'g22c','p226'}
+for i, wep_id in ipairs(its_not_10mm_auto) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.20, 4.80}
 end
 
@@ -420,8 +422,8 @@ for i, wep_id in ipairs(shell_ammo) do
 end
 tweak_data.weapon.saiga.AMMO_PICKUP = {0.50, 1.60}
 
-local ar_ammo = {'olympic','m16','amcar','new_m4','ak5','s552','g36','aug','famas','l85a2','vhs'}
-for i, wep_id in ipairs(ar_ammo) do
+local ammo_ar = {'olympic','m16','amcar','new_m4','ak5','s552','g36','aug','famas','l85a2','vhs'}
+for i, wep_id in ipairs(ammo_ar) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.90, 4.50}
 end
 tweak_data.weapon.m249.AMMO_PICKUP = {1.20, 3.00}
@@ -463,7 +465,7 @@ for i, wep_id in ipairs(low3_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.07
 end
 
-local mid_panic = {'new_m4','ak5','aug','m16','famas','akmsu' --[[,'vhs']]}
+local mid_panic = {'new_m4','ak5','aug','m16','famas','akmsu','vhs'}
 for i, wep_id in ipairs(mid_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.09
 end
@@ -478,18 +480,18 @@ for i, wep_id in ipairs(mid3_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.13
 end
 
-local high_panic = {'new_m14','scar','fal','galil','g3','rpk'}
-for i, wep_id in ipairs(high_panic) do
+local weed_panic = {'new_m14','scar','fal','galil','g3','rpk'}
+for i, wep_id in ipairs(weed_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.15
 end
 
-local high2_panic = {'benelli','saiga','serbu','striker','huntsman','r870','ksg','judge','spas12','hk21','mg42'}
-for i, wep_id in ipairs(high2_panic) do
-	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.25
+local weed2_panic = {'benelli','saiga','serbu','striker','huntsman','r870','ksg','judge','spas12','hk21','mg42'}
+for i, wep_id in ipairs(weed2_panic) do
+	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.2
 end
 
-local high3_panic = {'new_raging_bull','msr'}
-for i, wep_id in ipairs(high3_panic) do
+local weed3_panic = {'new_raging_bull','msr'}
+for i, wep_id in ipairs(weed3_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.3
 end
 

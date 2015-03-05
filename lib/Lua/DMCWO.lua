@@ -1,6 +1,6 @@
 --[[
 DMC's Weapon Overhaul
-v1.1.1
+v1.2.1
 
 Please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
@@ -20,13 +20,15 @@ end
 
 ------[[Script setup]]------
 --[[POSTREQUIRE SCRIPTS]]
-RegisterScript("lib/Lua/DMCWO/postrequire_attach.lua", 2, "lib/managers/weaponfactorymanager")
+RegisterScript("lib/Lua/DMCWO/postrequire_attach.lua", 2, "lib/tweak_data/weaponfactorytweakdata")
+RegisterScript("lib/Lua/DMCWO/postrequire_attach.lua", 2, "lib/tweak_data/weapontweakdata")
 RegisterScript("lib/Lua/DMCWO/soundsfix.lua", 2, "lib/units/weapons/raycastweaponbase")
 RegisterScript("lib/Lua/DMCWO/shotgat_physics.lua", 2, "lib/units/weapons/shotgun/newshotgunbase")
 RegisterScript("lib/Lua/DMCWO/shotgat_physics.lua", 2, "lib/managers/gameplaycentralmanager")
 RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/units/weapons/raycastweaponbase")
 RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/units/weapons/newraycastweaponbase")
 RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/managers/blackmarketmanager")
+RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/managers/menu/blackmarketgui")
 
 --[[OPTIONAL POSTREQUIRE SCRIPTS]]
 --Useable Drums
