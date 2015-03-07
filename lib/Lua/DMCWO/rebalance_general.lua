@@ -1,5 +1,5 @@
 --[[
-v1.2.1
+v1.2.2
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -361,7 +361,7 @@ for i, wep_id in ipairs(heavy_2) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.45
 end 
 
-local super_heavy = {'akm_gold','m95','hk21','m249','mg42'}
+local super_heavy = {'akm_gold','m95','hk21','m249','mg42','rpg7'}
 for i, wep_id in ipairs(super_heavy) do
 	tweak_data.weapon[ wep_id ].transition_duration = 0.02
 	
@@ -378,6 +378,30 @@ for i, wep_id in ipairs(super_heavy) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 6.5
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 6.5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -6.5
+	
+	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = -0.65
+	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0.65
+	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0.45
+	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.45
+end 
+
+local the_fuck_even = {'m134'}
+for i, wep_id in ipairs(the_fuck_even) do
+	tweak_data.weapon[ wep_id ].transition_duration = 0.05
+	
+	tweak_data.weapon[ wep_id ].timers.equip = 0.9
+	
+	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.5
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -8
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 8
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 8 / 2
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_pos = -8
+	
+	tweak_data.player.stances[ wep_id ].crouched.shakers.breathing.amplitude = tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude / 2
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_neg = -7.5
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 7.5
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 7.5 / 2
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -7.5
 	
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = -0.65
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0.65
@@ -437,6 +461,7 @@ local ammo_762 = {'new_m14','scar','fal','galil','g3','msr'}
 for i, wep_id in ipairs(ammo_762) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.90, 2.20}
 end
+tweak_data.weapon.m134.AMMO_PICKUP = {0.70, 1.80}
 tweak_data.weapon.hk21.AMMO_PICKUP = {0.70, 1.80}
 tweak_data.weapon.mg42.AMMO_PICKUP = {0.60, 1.60}
 
@@ -500,7 +525,7 @@ for i, wep_id in ipairs(spooky_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.45
 end
 
-local its2spooky_panic = {'gre_m79','m95'}
+local its2spooky_panic = {'gre_m79','m95','rpg7','m134'}
 for i, wep_id in ipairs(its2spooky_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 1.10
 end

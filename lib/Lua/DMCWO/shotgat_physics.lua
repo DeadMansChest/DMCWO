@@ -1,5 +1,5 @@
 --[[
-v1.2.1
+v1.2.2
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -34,7 +34,6 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 		if self._silencer and not self._supp_barrel then
 			self._damage_near = self._damage_near * 0.80
 			self._damage_far = self._damage_far * 0.80
-			self._damage_min = self._damage_min * 0.9
 		end
 		
 		return (1 - math.min(1, math.max(0, distance - self._damage_near) / self._damage_far)) * damage

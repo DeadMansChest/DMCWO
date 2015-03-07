@@ -1,5 +1,5 @@
 --[[
-v1.2.1
+v1.2.2
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -69,7 +69,7 @@ local m45_nostock = false
 
 --If set the true, changes the gadget location on the KSG to only ever be on the side of the pump and not in front of your optic if one is attached. 
 --Default = true
-local ksg_gadget = true
+local ksg_gadget = false
 
 --If set to true, set the pistol grip on the judge to that of the one on the Raging Bull. 
 --Default = false
@@ -122,7 +122,7 @@ local hide_pis_flash = false
 --Default = false
 --NOTE: Enabling this will remove the 45 degree irons if they're attached, disallow it from being attached and will take the place as the first gadget you switch to with the laser/flashlight gadget becoming the second and/or third gadget you switch to
 --NOTE 2: You'll also get a floating 45 degree angle gadget in the main menu and mod screen, it's a side effect of having the BUIS actually work
-local elcan_buis = true
+local elcan_buis = false
 
 --if set to true, changes the free 000 Buck to Birdshot. 
 --Default = false
@@ -148,8 +148,8 @@ local tweak_factory = tweak_data.weapon.factory
 
 ------------------[[Creating and/or clearing some override tables]]------------------{
 tweak_factory.wpn_fps_pis_rage.override = {
-	wpn_fps_upg_o_leupold = { stats = {} },
-	wpn_fps_pis_c96_sight = { stats = {} },
+	wpn_fps_upg_o_leupold = { stats = { zoom = 10 } },
+	wpn_fps_pis_c96_sight = { stats = { zoom = 8} },
 }
 tweak_factory.wpn_fps_pis_deagle.override = {
 	wpn_upg_o_marksmansight_rear = {
@@ -177,8 +177,8 @@ tweak_factory.wpn_fps_pis_deagle.override = {
 	wpn_fps_upg_o_rmr = {
 		parent = "lower_reciever"
 	},
-	wpn_fps_upg_o_leupold = { stats = {} },
-	wpn_fps_pis_c96_sight = { stats = {} }
+	wpn_fps_upg_o_leupold = { stats = {zoom = 10} },
+	wpn_fps_pis_c96_sight = { stats = {zoom = 8} }
 
 }
 
@@ -206,8 +206,8 @@ tweak_factory.wpn_fps_ass_aug.override = {
 	wpn_upg_o_marksmansight_rear_vanilla = {a_obj = "a_or"},
 	wpn_upg_o_marksmansight_front_vanilla = {a_obj = "a_of"},
 	wpn_upg_o_marksmansight_front = {a_obj = "a_of"},
-	wpn_fps_upg_o_leupold = { stats = {} },
-	wpn_fps_pis_c96_sight = { stats = {} }
+	wpn_fps_upg_o_leupold = { stats = {zoom = 10} },
+	wpn_fps_pis_c96_sight = { stats = {zoom = 8} }
 
 }
 tweak_factory.wpn_fps_ass_m4.override = deep_clone(tweak_factory.wpn_fps_pis_rage.override)
@@ -221,8 +221,8 @@ tweak_factory.wpn_fps_ass_akm_gold.override = deep_clone(tweak_factory.wpn_fps_p
 tweak_factory.wpn_fps_smg_mac10.override = {
 	wpn_upg_o_marksmansight_rear_vanilla = {a_obj = "a_or"},
 	wpn_upg_o_marksmansight_front_vanilla = {a_obj = "a_of"},
-	wpn_fps_upg_o_leupold = { stats = {} },
-	wpn_fps_pis_c96_sight = { stats = {} }
+	wpn_fps_upg_o_leupold = { stats = {zoom = 10} },
+	wpn_fps_pis_c96_sight = { stats = {zoom = 8} }
 
 }
 tweak_factory.wpn_fps_smg_mp5.override = deep_clone(tweak_factory.wpn_fps_pis_rage.override)
@@ -237,8 +237,8 @@ tweak_factory.wpn_fps_smg_mp7.override = deep_clone(tweak_factory.wpn_fps_pis_ra
 tweak_factory.wpn_fps_smg_p90.override = {
 	wpn_upg_o_marksmansight_rear_vanilla = {a_obj = "a_or"},
 	wpn_upg_o_marksmansight_front = {a_obj = "a_of"},
-	wpn_fps_upg_o_leupold = { stats = {} },
-	wpn_fps_pis_c96_sight = { stats = {} }
+	wpn_fps_upg_o_leupold = { stats = {zoom = 10} },
+	wpn_fps_pis_c96_sight = { stats = {zoom = 8} }
 
 }
 
@@ -260,20 +260,20 @@ tweak_factory.wpn_fps_pis_judge.override = {
 	wpn_fps_upg_ns_shot_shark = {parent = "slide"},
 	wpn_fps_upg_ns_shot_thick = {parent = "slide"},
 	wpn_fps_upg_shot_ns_king = {parent = "slide"},
-	wpn_fps_upg_o_leupold = { stats = {} },
-	wpn_fps_pis_c96_sight = { stats = {} }	
+	wpn_fps_upg_o_leupold = { stats = {zoom = 10} },
+	wpn_fps_pis_c96_sight = { stats = {zoom = 8} }	
 }
 tweak_factory.wpn_fps_shot_saiga.override = {
 	wpn_upg_o_marksmansight_rear_vanilla = {a_obj = "a_or"},
 	wpn_upg_o_marksmansight_front = {a_obj = "a_of"},
-	wpn_fps_upg_o_leupold = { stats = {} },
-	wpn_fps_pis_c96_sight = { stats = {} }
+	wpn_fps_upg_o_leupold = { stats = {zoom = 10} },
+	wpn_fps_pis_c96_sight = { stats = {zoom = 8} }
 }
 tweak_factory.wpn_fps_sho_striker.override = {
 	wpn_upg_o_marksmansight_rear_vanilla = {a_obj = "a_o_r"},
 	wpn_upg_o_marksmansight_front = {a_obj = "a_o_f"},
-	wpn_fps_upg_o_leupold = { stats = {} },
-	wpn_fps_pis_c96_sight = { stats = {} }
+	wpn_fps_upg_o_leupold = { stats = {zoom = 10} },
+	wpn_fps_pis_c96_sight = { stats = {zoom = 8} }
 
 }
 
@@ -305,10 +305,10 @@ end
 
 if elcan_buis == true then
 	tweak_factory.parts.wpn_fps_upg_o_specter.adds = { "wpn_fps_extra_zoom" }
-	tweak_factory.parts.wpn_fps_upg_o_specter.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight","wpn_fps_upg_o_45iron" }
+	tweak_factory.parts.wpn_fps_upg_o_specter.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight","wpn_fps_upg_o_45iron", "wpn_fps_ass_l85a2_o_standard" }
 else
 	tweak_factory.parts.wpn_fps_upg_o_specter.adds = { }
-	tweak_factory.parts.wpn_fps_upg_o_specter.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+	tweak_factory.parts.wpn_fps_upg_o_specter.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight", "wpn_fps_ass_l85a2_o_standard" }
 end
 
 if judge_grip == true then
@@ -1115,8 +1115,8 @@ if ksg_gadget == true then
 	tweak_factory.wpn_fps_sho_ksg.override = deep_clone(tweak_factory.wpn_fps_pis_rage.override)
 else
 	tweak_factory.wpn_fps_sho_ksg.override = {
-		wpn_fps_upg_o_leupold = { stats = {} },
-		wpn_fps_pis_c96_sight = { stats = {} },
+		wpn_fps_upg_o_leupold = { stats = {zoom = 10} },
+		wpn_fps_pis_c96_sight = { stats = {zoom = 8} },
 		wpn_fps_upg_o_specter = { 
 			override = { 
 				wpn_fps_upg_fl_ass_smg_sho_peqbox = {a_obj = "a_fl_2"}, 
@@ -1390,7 +1390,7 @@ tweak_factory.parts.wpn_fps_upg_ass_m4_b_beowulf.perks = { "slowest_ads_brl", "d
 
 --Intergrated Suppressor (CAR-4)
 tweak_factory.parts.wpn_fps_m4_uupg_b_sd.stats = { value = 6, suppression = 100, alert_size = 12, spread = 0, damage = -1, recoil = 6, spread_moving = 1, concealment = 1 }
-tweak_factory.parts.wpn_fps_m4_uupg_b_sd.perks = { "slower_ads_brl", "silencer", "supp_barrel"}
+tweak_factory.parts.wpn_fps_m4_uupg_b_sd.perks = { "slowest_ads_brl", "silencer", "supp_barrel"}
 
 --SG552 Long Barrel
 tweak_factory.parts.wpn_fps_ass_s552_b_long.stats = { value = 6, spread = 2, damage = 0, spread_moving = -4, concealment = -4, recoil = 1 }
@@ -1455,7 +1455,7 @@ tweak_factory.parts.wpn_fps_snp_msr_b_long.stats = { value = 10, spread = 2, con
 tweak_factory.parts.wpn_fps_snp_r93_b_short.perks = { "fast_ads_brl", "short_barrel" }
 tweak_factory.parts.wpn_fps_snp_r93_b_short.stats = { value = 1, spread = -2, recoil = 0, spread_moving = 3, concealment = 3, damage = -4, suppression = -2 }
 --R93 Suppressed Barrel
-tweak_factory.parts.wpn_fps_snp_r93_b_suppressed.perks = { "silencer", "slower_ads_brl", "supp_barrel" }
+tweak_factory.parts.wpn_fps_snp_r93_b_suppressed.perks = { "silencer", "slower_ads_brl" }
 tweak_factory.parts.wpn_fps_snp_r93_b_suppressed.stats = { value = 4, suppression = 100, alert_size = 12, spread = 0, damage = -10, recoil = 1, spread_moving = 1, concealment = -1 }
 		
 --M95 Long Barrel
@@ -1490,7 +1490,7 @@ tweak_factory.parts.wpn_fps_sho_ksg_b_short.stats = { value = 5, recoil = 0, spr
 tweak_factory.parts.wpn_fps_sho_striker_b_long.perks = { "slow_ads_brl", "long_barrel" }
 tweak_factory.parts.wpn_fps_sho_striker_b_long.stats = { value = 3, recoil = 0, spread = 2, concealment = -2 }
 --Striker Suppressed Barrel
-tweak_factory.parts.wpn_fps_sho_striker_b_suppressed.perks = { "silencer", "slower_ads_brl", "supp_barrel" }
+tweak_factory.parts.wpn_fps_sho_striker_b_suppressed.perks = { "silencer", "slowest_ads_brl", "supp_barrel" }
 tweak_factory.parts.wpn_fps_sho_striker_b_suppressed.stats = { value = 5, suppression = 100, alert_size = 12, damage = -2, recoil = 1, spread_moving = 1, concealment = -2 }
 
 --G3 Short Barrel
@@ -1513,7 +1513,7 @@ tweak_factory.parts.wpn_fps_ass_famas_b_short.stats = {value = 2,recoil = -0,spr
 tweak_factory.parts.wpn_fps_ass_famas_b_sniper.perks = { "slowest_ads_brl", "dmr_barrel" }
 tweak_factory.parts.wpn_fps_ass_famas_b_sniper.stats = {value = 2,recoil = -2,spread = 4,concealment = -2,damage = 2}
 --FAMAS Supp.	
-tweak_factory.parts.wpn_fps_ass_famas_b_suppressed.perks = { "slower_ads_brl", "silencer", "supp_barrel" }
+tweak_factory.parts.wpn_fps_ass_famas_b_suppressed.perks = { "slowest_ads_brl", "silencer", "supp_barrel" }
 tweak_factory.parts.wpn_fps_ass_famas_b_suppressed.stats = {value = 2,recoil = 0,spread = 2,concealment = -1,damage = -1}
 	
 --TEC-9 Barrel Extension
@@ -1577,7 +1577,7 @@ tweak_factory.parts.wpn_fps_smg_sterling_b_short.stats = {
 	concealment = 1
 }
 --Sterling Suppressed Barrel
-tweak_factory.parts.wpn_fps_smg_sterling_b_suppressed.perks = { "silencer", "slower_ads_brl", "supp_barrel" }
+tweak_factory.parts.wpn_fps_smg_sterling_b_suppressed.perks = { "silencer", "slowest_ads_brl", "supp_barrel" }
 tweak_factory.parts.wpn_fps_smg_sterling_b_suppressed.stats = {
 	value = 4,
 	suppression = 100,
@@ -1622,15 +1622,22 @@ tweak_factory.parts.wpn_fps_ass_l85a2_b_short.perks = { "fast_ads_brl", "short_b
 tweak_factory.parts.wpn_fps_ass_l85a2_b_short.stats = {value = 1, spread = 0, recoil = 2, concealment = 3, damage = -0}		
 
 --VHS Suppresssed	
-tweak_factory.parts.wpn_fps_ass_vhs_b_silenced.perks = { "slower_ads_brl" }
+tweak_factory.parts.wpn_fps_ass_vhs_b_silenced.perks = { "silencer", "supp_barrel", "slowest_ads_brl" }
 --VHS Sniper		
 tweak_factory.parts.wpn_fps_ass_vhs_b_sniper.perks = { "slowest_ads_brl", "dmr_barrel" }	
-tweak_factory.parts.wpn_fps_ass_vhs_b_sniper.stats = {value = 1, spread = 2, recoil = 0, concealment = -2, damage = 1}	
+tweak_factory.parts.wpn_fps_ass_vhs_b_sniper.stats = {value = 1, spread = 3, recoil = -1, concealment = -2, damage = 1}	
 --VHS Short
 tweak_factory.parts.wpn_fps_ass_vhs_b_short.perks = { "fast_ads_brl", "short_barrel" }
 tweak_factory.parts.wpn_fps_ass_vhs_b_short.stats = {value = 1, spread = -1, recoil = 2, concealment = 3, suppression = -1}
 
-		
+--M134 Barrels
+--Long
+tweak_data.weapon.factory.parts.wpn_fps_lmg_m134_barrel_extreme.perks = { "slowest_ads_brl", "long_barrel" }
+tweak_data.weapon.factory.parts.wpn_fps_lmg_m134_barrel_extreme.stats = { value = 1, spread = 4, recoil = 4, concealment = -3 }
+--Short
+tweak_data.weapon.factory.parts.wpn_fps_lmg_m134_barrel_short.perks = { "fast_ads_brl", "short_barrel" }
+tweak_data.weapon.factory.parts.wpn_fps_lmg_m134_barrel_short.stats = { value = 1, spread = -4, recoil = -2, concealment = 3}
+tweak_data.weapon.factory.parts.wpn_fps_lmg_m134_barrel_short.custom_stats = {movement_speed = 1.2}
 --}
 	
 
@@ -1698,20 +1705,16 @@ tweak_factory.parts.wpn_fps_snp_mosin_ns_bayonet.stats = {
 --Aftermarket (CAR-4)
 tweak_factory.parts.wpn_fps_m4_uupg_fg_lr300.perks = { "faster_ads_hg" }
 tweak_factory.parts.wpn_fps_m4_uupg_fg_lr300.stats = { value = 5, concealment = 1, recoil = 1, spread = 0 }
-tweak_factory.parts.wpn_fps_m4_uupg_fg_lr300.forbids = { "wpn_fps_upg_vg_ass_smg_verticalgrip", "wpn_fps_upg_vg_ass_smg_stubby", "wpn_fps_upg_vg_ass_smg_afg" }
 --Competition (CAR-4)
 tweak_factory.parts.wpn_fps_upg_fg_jp.perks = { "fast_ads_hg" }
 tweak_factory.parts.wpn_fps_upg_fg_jp.stats = { spread = 2, recoil = -2, concealment = 2 }
-tweak_factory.parts.wpn_fps_upg_fg_jp.forbids = { "wpn_fps_upg_vg_ass_smg_verticalgrip", "wpn_fps_upg_vg_ass_smg_stubby", "wpn_fps_upg_vg_ass_smg_afg" }
 --Gazelle (CAR-4)
 tweak_factory.parts.wpn_fps_upg_fg_smr.stats = { spread = 1, recoil = 1, concealment = -2 }
-tweak_factory.parts.wpn_fps_upg_fg_smr.forbids = { "wpn_fps_upg_vg_ass_smg_verticalgrip", "wpn_fps_upg_vg_ass_smg_stubby", "wpn_fps_upg_vg_ass_smg_afg" }
 --LOVA
 tweak_factory.parts.wpn_fps_upg_ass_m4_fg_lvoa.stats = { value = 1, spread = 0, recoil = 2, }
 tweak_factory.parts.wpn_fps_upg_ass_m4_fg_lvoa.forbids = { "wpn_fps_addon_ris" }
 --MOE SL
 tweak_factory.parts.wpn_fps_upg_ass_m4_fg_moe.stats = { value = 1, spread = 1, recoil = 0, concealment = 2,}
-tweak_factory.parts.wpn_fps_upg_ass_m4_fg_moe.forbids = { "wpn_fps_addon_ris", "wpn_fps_upg_vg_ass_smg_verticalgrip", "wpn_fps_upg_vg_ass_smg_stubby", "wpn_fps_upg_vg_ass_smg_afg" }
 tweak_factory.parts.wpn_fps_upg_ass_m4_fg_moe.perks = { "fast_ads_hg" }
 
 --M16 Railed Handguard
@@ -1720,10 +1723,8 @@ tweak_factory.parts.wpn_fps_m16_fg_railed.stats = { value = 7, spread_moving = -
 --M16A1 Handguard
 tweak_factory.parts.wpn_fps_m16_fg_vietnam.perks = { "fast_ads_hg" }
 tweak_factory.parts.wpn_fps_m16_fg_vietnam.stats = { value = 10, spread_moving = 1, spread = 2, concealment = 2, recoil = -1 }
-tweak_factory.parts.wpn_fps_m16_fg_vietnam.forbids = { "wpn_fps_upg_vg_ass_smg_verticalgrip", "wpn_fps_upg_vg_ass_smg_stubby", "wpn_fps_upg_vg_ass_smg_afg" }
 --STAG
 tweak_factory.parts.wpn_fps_upg_ass_m16_fg_stag.stats = { value = 1, recoil = 3, concealment = -3}
-tweak_factory.parts.wpn_fps_upg_ass_m16_fg_stag.forbids = { "wpn_fps_upg_vg_ass_smg_verticalgrip", "wpn_fps_upg_vg_ass_smg_stubby", "wpn_fps_upg_vg_ass_smg_afg" }
 
 --AK Wood Rail
 tweak_factory.parts.wpn_upg_ak_fg_combo2.stats = { value = 3, spread_moving = -1, spread = 0, recoil = 2 }
@@ -1732,7 +1733,6 @@ tweak_factory.parts.wpn_upg_ak_fg_combo3.perks = { "slow_ads_hg" }
 tweak_factory.parts.wpn_upg_ak_fg_combo3.stats = { value = 5, spread_moving = -2, recoil = 1, spread = 1, concealment = -1 }
 --AK War Proven
 tweak_factory.parts.wpn_fps_upg_ak_fg_tapco.stats = { value = 5, concealment = 3, recoil = 1}
-tweak_factory.parts.wpn_fps_upg_ak_fg_tapco.forbids = { "wpn_fps_upg_vg_ass_smg_verticalgrip", "wpn_fps_upg_vg_ass_smg_stubby", "wpn_fps_upg_vg_ass_smg_afg" }
 --AK Light Weight
 tweak_factory.parts.wpn_fps_upg_fg_midwest.perks = { "fast_ads_hg" }
 tweak_factory.parts.wpn_fps_upg_fg_midwest.stats = { value = 5, concealment = -2, recoil = -2, spread = 4 }
@@ -1757,7 +1757,6 @@ tweak_factory.parts.wpn_fps_ass_ak5_fg_ak5c.stats = { value = 7, recoil = 3, spr
 --Belgian Heat (AK5)
 tweak_factory.parts.wpn_fps_ass_ak5_fg_fnc.perks = { "fnfnc_rof" }
 tweak_factory.parts.wpn_fps_ass_ak5_fg_fnc.stats = { value = 10, spread = 2, recoil = -1, concealment = 1}
-tweak_factory.parts.wpn_fps_ass_ak5_fg_fnc.forbids = { "wpn_fps_upg_vg_ass_smg_verticalgrip", "wpn_fps_upg_vg_ass_smg_stubby", "wpn_fps_upg_vg_ass_smg_afg" }
 
 --MP5k
 tweak_factory.parts.wpn_fps_smg_mp5_fg_m5k.stats = { value = 4, spread_moving = 3, recoil = -1, concealment = 3, damage = -1, spread = -1 , suppression = -5}
@@ -1766,20 +1765,6 @@ tweak_factory.parts.wpn_fps_smg_mp5_fg_m5k.perks = { "mp5k_rof", "faster_ads_hg"
 tweak_factory.parts.wpn_fps_smg_mp5_fg_mp5a5.stats = { value = 5, spread_moving = -2, recoil = 3, concealment = -3 }
 --MP5SD
 tweak_factory.parts.wpn_fps_smg_mp5_fg_mp5sd.stats = { value = 10, spread_moving = 1, suppression = 12, alert_size = 12, damage = -1, recoil = 3, concealment = 1 }
-tweak_factory.parts.wpn_fps_smg_mp5_fg_mp5sd.forbids = { 
-	"wpn_fps_upg_ns_ass_smg_large",
-	"wpn_fps_upg_ns_ass_smg_medium",
-	"wpn_fps_upg_ns_ass_smg_small",
-	"wpn_fps_upg_ns_ass_smg_firepig",
-	"wpn_fps_upg_ns_ass_smg_stubby",
-	"wpn_fps_upg_ns_ass_smg_tank",
-	"wpn_fps_upg_ass_ns_jprifles",
-	"wpn_fps_upg_ass_ns_linear",
-	"wpn_fps_upg_ass_ns_surefire",
-	"wpn_fps_upg_vg_ass_smg_verticalgrip", 
-	"wpn_fps_upg_vg_ass_smg_stubby", 
-	"wpn_fps_upg_vg_ass_smg_afg" 
-}
 tweak_factory.parts.wpn_fps_smg_mp5_fg_mp5sd.sound_switch = { suppressed = "suppressed_c" }
 tweak_factory.parts.wpn_fps_smg_mp5_fg_mp5sd.perks = { "silencer", "mp5sd_rof" }
 
@@ -1795,7 +1780,6 @@ tweak_factory.parts.wpn_fps_lmg_m249_fg_mk46.forbids = { "wpn_fps_addon_ris" }
 --RPK Black Handguard
 tweak_factory.parts.wpn_fps_lmg_rpk_fg_standard.stats = { value = 5, spread = 0, recoil = 1, spread_moving = 2, concealment = 1 }
 tweak_factory.parts.wpn_fps_lmg_rpk_fg_standard.adds = {}
-tweak_factory.parts.wpn_fps_lmg_rpk_fg_standard.forbids = { "wpn_fps_upg_vg_ass_smg_verticalgrip", "wpn_fps_upg_vg_ass_smg_stubby", "wpn_fps_upg_vg_ass_smg_afg" }
 
 --AUG A3 Handguard
 tweak_factory.parts.wpn_fps_aug_fg_a3.perks = { "slow_ads_hg" }
@@ -1938,6 +1922,9 @@ tweak_factory.parts.wpn_fps_smg_mac10_body_ris.stats = {
 
 tweak_factory.parts.wpn_fps_upg_ass_m4_lower_reciever_core.stats = {value = 1, recoil = -1}
 tweak_factory.parts.wpn_fps_upg_ass_m4_lower_reciever_core.perks = { "lower_fast_reload" }
+
+tweak_data.weapon.factory.parts.wpn_fps_lmg_m134_body_upper_light.stats = { value = 1, spread = 0, recoil = -2, concealment = 3, total_ammo_mod = -60 }
+tweak_data.weapon.factory.parts.wpn_fps_lmg_m134_body_upper_light.custom_stats = {movement_speed = 1.2}
 --}
 		
 		
@@ -2208,6 +2195,8 @@ tweak_data.player.stances.s552.steelsight.shoulders.rotation = pivot_head_rotati
 
 --ELCAN BUIS
 tweak_factory.parts.wpn_fps_extra_zoom.stance_mod = {}
+tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_rpg7 = { translation = Vector3( 0, 2, 0.05 ) + Vector3( 0, 0 ,-3.15 ) }
+
 tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_pis_deagle = { translation = Vector3( 0,-34,-4.7 )+ Vector3( 0, 0 ,-3.15 ) }
 tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_pis_rage = { translation = Vector3( -0.05,-28,-4.6 )+ Vector3( 0, 0 ,-3.15 ) }
 tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_pis_judge  = { translation = Vector3( -0.05,-27,-5.3 )+ Vector3( 0, 0 ,-3.15 ) }
@@ -2215,6 +2204,8 @@ tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_pis_judge  = { transla
 tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_m4 = { translation = Vector3( 0,-3.3,-0.45 )+ Vector3( 0, 0 ,-3.15 ) }
 tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_m16 = { translation = Vector3( 0,-7.3,-0.05 )+ Vector3( 0, 0 ,-3.15 ) }
 tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_ak5 = { translation = Vector3( -0.025,-3,-3.45 )+ Vector3( 0, 0 ,-3.15 ),rotation = Rotation( 0,-0.2,0) }
+
+tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_vhs = { translation = Vector3(0, -7, -1.1) + Vector3(0, 0, -3.15 ) }
 tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_aug = { translation = Vector3( 0,-7.5,-2.7 )+ Vector3( 0, 0 ,-3.15 ) }
 tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_famas = { translation = Vector3( 0,-10.4,-6.25 )+ Vector3( 0, 0 ,-3.15 )}
 	
@@ -2266,6 +2257,8 @@ tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_g3 = { translation
 tweak_factory.parts.wpn_fps_extra_zoom.stance_mod.wpn_fps_ass_galil = { translation = Vector3( 0,-14.3,-3.2 )+ Vector3( 0, 0 ,-3.15 )}	
 		
 --EOTech (Base)
+tweak_factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_rpg7 = { translation = Vector3( 0, 2, 0.05 ) }
+
 tweak_factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_pis_deagle = { translation = Vector3( 0,-34,-4.7 ) }
 tweak_factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_pis_rage = { translation = Vector3( -0.05,-28,-4.6 ) }
 tweak_factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_pis_judge  = { translation = Vector3( -0.05,-27,-5.3 ) }
@@ -2328,6 +2321,8 @@ tweak_factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod.wpn_fps_ass_galil = { tr
 
 	
 --Aimpoint PRO (+2)
+tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_rpg7 = { translation = Vector3( 0, 2, 0.05 ) }
+
 tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_pis_deagle = { translation = Vector3( 0,-34,-4.7 ) }
 tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_pis_rage = { translation = Vector3( -0.05,-26,-4.6 ) }
 tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_pis_judge  = { translation = Vector3( -0.05,-27,-5.3 ) }
@@ -2347,7 +2342,7 @@ tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_akm_gold = { t
 	
 tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_amcar = { translation = Vector3( 0,-7.2,-0.1 ) + Vector3(0, 2, 0) }
 tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_g36 = { translation = Vector3( 0,-5.4,-2.9 ) + Vector3(0, 2, 0) }
-tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.	wpn_fps_ass_s552 = { translation = Vector3( -0.1,-15.25,-2.4 ) + Vector3(0, 2, 0),rotation = Rotation( 0,0.5,0)  }
+tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_s552 = { translation = Vector3( -0.1,-15.25,-2.4 ) + Vector3(0, 2, 0),rotation = Rotation( 0,0.5,0)  }
 tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_smg_olympic = { translation = Vector3( 0,-7.4,-0.1 ) + Vector3(0, 2, 0) }
 tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_smg_akmsu = { translation = Vector3( -0.025,-0.25,-3.0 ) + Vector3(0, 2, 0) }
 	
@@ -2390,6 +2385,8 @@ tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod.wpn_fps_ass_galil = { tran
 
 
 --Specter Sight (+4)
+tweak_factory.parts.wpn_fps_upg_o_specter.stance_mod.wpn_fps_rpg7 = { translation = Vector3( 0, 2, 0.05 ) + Vector3(0, 4, 0) }
+
 tweak_factory.parts.wpn_fps_upg_o_specter.stance_mod.wpn_fps_pis_deagle = { translation = Vector3( 0,-34,-4.7 ) + Vector3(0, 4, 0) }
 tweak_factory.parts.wpn_fps_upg_o_specter.stance_mod.wpn_fps_pis_rage = { translation = Vector3( -0.05,-26,-4.6 ) + Vector3(0, 4, 0) }
 tweak_factory.parts.wpn_fps_upg_o_specter.stance_mod.wpn_fps_pis_judge  = { translation = Vector3( -0.05,-27,-5.3 ) + Vector3(0, 4, 0) }
@@ -2452,6 +2449,8 @@ tweak_factory.parts.wpn_fps_upg_o_specter.stance_mod.wpn_fps_ass_galil = { trans
 	
 	
 --ACOG (+6)
+tweak_factory.parts.wpn_fps_upg_o_acog.stance_mod.wpn_fps_rpg7 = { translation = Vector3( 0, 2, 0.05 ) + Vector3(0, 1, 0)  }
+
 tweak_factory.parts.wpn_fps_upg_o_acog.stance_mod.wpn_fps_pis_deagle = { translation = Vector3( 0,-34,-4.7 ) + Vector3(0, 1, 0)  }
 tweak_factory.parts.wpn_fps_upg_o_acog.stance_mod.wpn_fps_pis_rage = { translation = Vector3( -0.05,-26,-4.6 ) + Vector3(0, 1.1, 0)  }
 tweak_factory.parts.wpn_fps_upg_o_acog.stance_mod.wpn_fps_pis_judge  = { translation = Vector3( -0.05,-27,-5.3 ) + Vector3(0, 1.1, 0)  }
@@ -2815,17 +2814,17 @@ tweak_factory.parts.wpn_fps_upg_o_specter.perks = { "scope", "slow_ads_op" }
 
 --Military Red Dot (Aimpoint PRO)
 tweak_factory.parts.wpn_fps_upg_o_aimpoint.stats = { value = 8, zoom = 4, recoil = 0, spread_moving = -3, concealment = -3 }
-tweak_factory.parts.wpn_fps_upg_o_aimpoint.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+tweak_factory.parts.wpn_fps_upg_o_aimpoint.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight", "wpn_fps_ass_l85a2_o_standard" }
 
 --EOTech
 tweak_factory.parts.wpn_fps_upg_o_eotech.stats = { value = 3, zoom = 3, recoil = 0, spread_moving = -2, concealment = -2 }
-tweak_factory.parts.wpn_fps_upg_o_eotech.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+tweak_factory.parts.wpn_fps_upg_o_eotech.forbids = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.forbids )
 tweak_factory.parts.wpn_fps_upg_o_eotech.stance_mod = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod )
 
 --ACOG
 tweak_factory.parts.wpn_fps_upg_o_acog.perks = { "scope", "slow_ads_op" }
 tweak_factory.parts.wpn_fps_upg_o_acog.stats = { value = 6, zoom = 6, recoil = 1, spread_moving = -1, concealment = -3 }
-tweak_factory.parts.wpn_fps_upg_o_acog.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+tweak_factory.parts.wpn_fps_upg_o_acog.forbids = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.forbids )
 
 --Military Red Dot CCE (Aimpoint PRO)
 tweak_factory.parts.wpn_fps_upg_o_aimpoint_2.stats = { value = 1, zoom = 4, recoil = 0, spread_moving = -3, concealment = -3 }
@@ -2834,41 +2833,41 @@ tweak_factory.parts.wpn_fps_upg_o_aimpoint_2.stance_mod = deep_clone( tweak_fact
 
 --EOTech XPS
 tweak_factory.parts.wpn_fps_upg_o_eotech_xps.stats = { value = 5, zoom = 3, recoil = 0, spread_moving = -3, concealment = -2 }
-tweak_factory.parts.wpn_fps_upg_o_eotech_xps.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+tweak_factory.parts.wpn_fps_upg_o_eotech_xps.forbids = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.forbids )
 
 --Aimpoint CS
 tweak_factory.parts.wpn_fps_upg_o_cs.stats = { value = 5, zoom = 4, recoil = 0, spread_moving = -3, concealment = -1 }
-tweak_factory.parts.wpn_fps_upg_o_cs.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+tweak_factory.parts.wpn_fps_upg_o_cs.forbids = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.forbids )
 tweak_factory.parts.wpn_fps_upg_o_cs.stance_mod = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod )
 
 --RX01
 tweak_factory.parts.wpn_fps_upg_o_rx01.stats = { value = 5, zoom = 3, recoil = 0, spread_moving = -3, concealment = -1 }
-tweak_factory.parts.wpn_fps_upg_o_rx01.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+tweak_factory.parts.wpn_fps_upg_o_rx01.forbids = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.forbids )
 tweak_factory.parts.wpn_fps_upg_o_rx01.stance_mod = deep_clone( tweak_factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod )
 
 --Docter
 tweak_factory.parts.wpn_fps_upg_o_docter.stats = { value = 5, zoom = 2, recoil = 0, spread_moving = -1, concealment = -1 }
-tweak_factory.parts.wpn_fps_upg_o_docter.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+tweak_factory.parts.wpn_fps_upg_o_docter.forbids = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.forbids )
 tweak_factory.parts.wpn_fps_upg_o_docter.stance_mod = deep_clone( tweak_factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod )
 
 --Micro T1
 tweak_factory.parts.wpn_fps_upg_o_t1micro.stats = { value = 3, zoom = 2, recoil = 0, spread_moving = -1, concealment = -1 }
-tweak_factory.parts.wpn_fps_upg_o_t1micro.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+tweak_factory.parts.wpn_fps_upg_o_t1micro.forbids = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.forbids )
 tweak_factory.parts.wpn_fps_upg_o_t1micro.stance_mod = deep_clone( tweak_factory.parts.wpn_fps_upg_o_eotech_xps.stance_mod )
 
 --CMORE
 tweak_factory.parts.wpn_fps_upg_o_cmore.stats = { value = 5, zoom = 2, recoil = 0, spread_moving = -1, concealment = -1 }
-tweak_factory.parts.wpn_fps_upg_o_cmore.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+tweak_factory.parts.wpn_fps_upg_o_cmore.forbids = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.forbids )
 tweak_factory.parts.wpn_fps_upg_o_cmore.stance_mod = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod )
 
 --RX30
 tweak_factory.parts.wpn_fps_upg_o_rx30.stats = { value = 5, zoom = 3, recoil = 0, spread_moving = -3, concealment = -2 }
-tweak_factory.parts.wpn_fps_upg_o_rx30.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+tweak_factory.parts.wpn_fps_upg_o_rx30.forbids = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.forbids )
 tweak_factory.parts.wpn_fps_upg_o_rx30.stance_mod = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod )
 
 --Reflex
 tweak_factory.parts.wpn_fps_upg_o_reflex.stats = { value = 5, zoom = 2, recoil = 0, spread_moving = -3, concealment = -1 }
-tweak_factory.parts.wpn_fps_upg_o_reflex.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+tweak_factory.parts.wpn_fps_upg_o_reflex.forbids = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.forbids )
 tweak_factory.parts.wpn_fps_upg_o_reflex.stance_mod = deep_clone( tweak_factory.parts.wpn_fps_upg_o_aimpoint.stance_mod )
 
 tweak_factory.parts.wpn_fps_snp_mosin_iron_sight.perks = { "fast_ads_op" }
@@ -2901,7 +2900,7 @@ tweak_factory.parts.wpn_fps_pis_hs2000_sl_long.override = {
 
 --Leupold Mark 4 LR/T M1 Illum. Ret. w/BORS (Theia)
 tweak_factory.parts.wpn_fps_upg_o_leupold.stats = {value = 8, zoom = 10, recoil = 3, spread_moving = -3, concealment = -3}
-tweak_factory.parts.wpn_fps_upg_o_leupold.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight", "wpn_fps_ass_m16_os_frontsight" }
+tweak_factory.parts.wpn_fps_upg_o_leupold.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight", "wpn_fps_ass_m16_os_frontsight", "wpn_fps_ass_l85a2_o_standard" }
 tweak_factory.parts.wpn_fps_upg_o_leupold.perks = {"scope", "highlight", "slowest_ads_op"}
 
 --ShortDot
@@ -2911,7 +2910,7 @@ tweak_factory.parts.wpn_fps_pis_c96_sight.unit = "units/pd2_dlc_gage_snp/weapons
 tweak_factory.parts.wpn_fps_pis_c96_sight.third_unit = "units/pd2_dlc_gage_snp/weapons/wpn_fps_upg_o_shortdot/wpn_third_upg_o_shortdot"
 tweak_factory.parts.wpn_fps_pis_c96_sight.perks = { "scope", "slower_ads_op" }
 tweak_factory.parts.wpn_fps_pis_c96_sight.stats = { value = 1, zoom = 8, recoil = 2, concealment = -2}
-tweak_factory.parts.wpn_fps_pis_c96_sight.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight" }
+tweak_factory.parts.wpn_fps_pis_c96_sight.forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight", "wpn_fps_ass_l85a2_o_standard" }
 
 --45 deg. irons
 tweak_factory.parts.wpn_fps_upg_o_45iron.stats = {value = 1, gadget_zoom = 1}

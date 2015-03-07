@@ -1,5 +1,5 @@
 --[[
-v1.2.1
+v1.2.2
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -22,6 +22,19 @@ function LocalizationManager:text( string_id, macros )
     local realnames = {}
 	
 	--[[GOLD SLAVSHIT]]
+	realnames["bm_w_m134"] = "GE M134"
+	realnames["bm_w_m134_desc"] = ""
+	realnames["bm_wp_m134_body_upper_light_desc"] = "Decreases movement penalty by 20%"
+	realnames["bm_wp_m134_barrel_extreme"] = "AA Barrel"
+	realnames["bm_wp_m134_barrel_extreme_desc"] = "Increases range by 15% \nDecreases ADS speed by 10%"
+	realnames["bm_wp_m134_barrel_short"] = "Compact Barrel"
+	realnames["bm_wp_m134_barrel_short_desc"] = "Decreases range by 10% \nIncreases ADS speed by 5% \nDecreases movement penalty by 20%"
+	
+	--[[GOLD SLAVSHIT]]
+	realnames["bm_w_rpg7"] = "Bazalt RPG-7"
+	
+	
+	--[[GOLD SLAVSHIT]]
 	realnames["bm_w_akm_gold"] = "Gold Plated AKMS"
 	
 	--[[JAM733]]
@@ -37,7 +50,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_m4_uupg_b_short_desc"] = "Decreases range by 10% \nIncreases ADS speed by 5%" 
 	--Suppressed Barrel
 	realnames["bm_wp_m4_uupg_b_sd"] = "Suppressed Barrel" 
-	realnames["bm_wp_m4_uupg_b_sd_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 7.5%" 
+	realnames["bm_wp_m4_uupg_b_sd_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 10%" 
 	--Aftermarket
 	realnames["bm_wp_m4_uupg_fg_lr300"] = "LR300 Handguard"
 	realnames["bm_wp_m4_uupg_fg_lr300_desc"] = "Increases ADS speed by 7.5%"
@@ -59,7 +72,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_famas_b_long_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%"
 	realnames["bm_wp_famas_b_sniper_desc"] = "Increases range by 30% \nDecreases ADS speed by 10%"
 	realnames["bm_wp_famas_b_short_desc"] = "Decreases range by 10% \nIncreases ADS speed by 5%"
-	realnames["bm_wp_famas_b_suppressed_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 7.5%"
+	realnames["bm_wp_famas_b_suppressed_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 10%"
 	
 	--Retro Grip
 	realnames["bm_wp_famas_g_retro"] = "G2 Guard"
@@ -79,6 +92,14 @@ function LocalizationManager:text( string_id, macros )
 	
 	--[[CROATGAT]]
 	realnames["bm_w_vhs"] = "HS Produkt VHS-2"
+	realnames["bm_wp_vhs_b_short"] = "Short Barrel"
+	realnames["bm_wp_vhs_b_short_desc"] = "Decreases range by 10% \nIncreases ADS speed by 5%"
+	
+	realnames["bm_wp_vhs_b_sniper"] = "Sniper Barrel"
+	realnames["bm_wp_vhs_b_sniper_desc"] = "Increases range by 30% \nDecreases ADS speed by 10%"
+	
+	realnames["bm_wp_vhs_b_silenced"] = "Suppressed Barrel"
+	realnames["bm_wp_vhs_b_silenced_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 10%"
 	
 	--[[SLAVSHIT]]
 	realnames["bm_w_akm"] = "Concern Kalashnikov AKMS"
@@ -237,12 +258,16 @@ function LocalizationManager:text( string_id, macros )
 	--Suppressor
 	realnames["bm_wp_snp_msr_ns_suppressor"] = "AAC TiTAN-QD Suppressor"
 	realnames["bm_wp_snp_msr_ns_suppressor_desc"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 10%"
+	realnames["bm_wp_snp_msr_b_long_desc"] = "Increases range by 15% \nDecreases ADS speed by 10%"
 	--Aluminum Body
 	realnames["bm_wp_msr_body_msr"] = "MSR Aluminum Stock & Receiver"
 	realnames["bm_wp_msr_body_msr_desc"] = "Increases ADS speed by 5%"
 	
 	--[[R93]]
 	realnames["bm_w_r93"] =  "Blaser R93 Tactical 2"
+	
+	realnames["bm_wp_r93_b_short_desc"] =  "Decreases range by 10% \nIncreases ADS speed by 5%"
+	realnames["bm_wp_r93_b_suppressed_desc"] =  "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 10%"
 	--Wooden Body
 	realnames["bm_wp_r93_body_wood"] = "Long Range Sporter 2 Stock"
 	realnames["bm_wp_r93_body_wood_desc"] = "Decreases ADS speed by 5%"
@@ -257,6 +282,13 @@ function LocalizationManager:text( string_id, macros )
 	
 	--[[MOIST NUGGET]]
 	realnames["bm_w_mosin"] = "Mosin Nagant M91/30"
+	
+	realnames["bm_wp_mosin_b_short_desc"] = "Decreases range by 10%\nIncreases ADS speed by 5%"
+	
+	realnames["bm_wp_mosin_b_standard_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%"
+	
+	realnames["bm_wp_mosin_b_sniper"] = "Mosin Suppressor"
+	realnames["bm_wp_mosin_b_sniper_desc"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 7.5%"
 	--Black Stock
 	realnames["bm_wp_mosin_body_conceal"] = "Black Paint"
 	
@@ -267,11 +299,12 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_huntsman_s_short"] = "Sawn-Off Stock"
 	
 	--[[870]]
-	realnames["bm_w_r870"] = "Remington Model 870"
+	realnames["bm_w_r870"] = "Remington Model 870" --"Remafdng"
 	--Extended Mag
 	realnames["bm_wp_r870_m_extended"] = "R870 Extended Tube Magazine (+2 Rounds)"
 	--Zombie Hunter
     realnames["bm_wp_r870_fg_wood"] = "Wooden Pump"
+    realnames["bm_wp_r870_fg_wood_desc"] = "Decreases ADS speed by 5%"
 	--Short Enough **don't know
 	realnames["bm_wp_r870_s_nostock"] = "No Stock"
 	--Short Enough Tact. **don't know
@@ -318,7 +351,7 @@ function LocalizationManager:text( string_id, macros )
 	--[[STREET SWEEPER]]
 	realnames["bm_w_striker"] = "Cobray Street Sweeper" --Hard to name this really, it has the drum key of the Cobray SS, the ejection system of the Protecta (although the Cobray SS can also have this) and the drum advance lever of the original Striker
 	realnames["bm_wp_striker_b_long_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%" 
-	realnames["bm_wp_striker_b_suppressed_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 7.5%" 
+	realnames["bm_wp_striker_b_suppressed_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 10%" 
 	
 	--[[BABBY 870]]
 	realnames["bm_w_serbu"] = "Short Barrelled Remington Model 870"
@@ -575,6 +608,9 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_scorpion_m_extended"] = "Skorpion Dual Magazines"
 	realnames["bm_wp_scorpion_m_extended_desc"] = "Increases reload speed by 25%"
 	
+	realnames["bm_wp_scorpion_b_supperessed"] = "Skorpion Suppressor"
+	realnames["bm_wp_scorpion_b_supperessed_desc"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 7.5%"
+	
 	--[[NOT THE STUDENT COUNCIL PRESIDENT (get FUCKED)]]
 	realnames["bm_w_uzi"] = "IMI Uzi"
 	
@@ -582,6 +618,9 @@ function LocalizationManager:text( string_id, macros )
 	
 	realnames["bm_wp_uzi_fg_rail"] = "FAB Defence Uzi Tri-Rail System"
 	realnames["bm_wp_uzi_fg_rail_desc"] = "Increases ADS speed by 5%"
+	
+	realnames["bm_wp_uzi_b_supperessed"] = "IMI Two-Stage Suppressor" --It's IMI made but it was never imported. No idea what the model name is.
+	realnames["bm_wp_uzi_b_supperessed_desc"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 7.5%"
 	
 	--[[S-COOL SHOOTINGS]]
 	realnames["bm_w_tec9"] = "Intratec TEC-9"
@@ -601,7 +640,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_w_sterling"] = "Sterling L2A1"
 	--Supp. Barrel
 	realnames["bm_wp_sterling_b_suppressed"] = "L34A1 Barrel"
-	realnames["bm_wp_sterling_b_suppressed_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 7.5%"
+	realnames["bm_wp_sterling_b_suppressed_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 10%"
 	--Heat Sink Barrel
 	realnames["bm_wp_sterling_b_e11"] = "E-11 Barrel"
 	realnames["bm_wp_sterling_b_e11_desc"] = "Internally suppressed barrel"
@@ -752,7 +791,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_upg_ns_ass_smg_medium"] = "Small Arms Industries M80 Suppressor" --Thanks Overkill for being vauge as fuck, I'm surprised I even found this
 	realnames["bm_wp_upg_ns_ass_smg_medium_desc"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 5%"
 	--Bigger the Better **Don't know
-	--realnames["bm_wp_upg_ns_ass_smg_large"] = "The Bigger the Better Suppressor"
+	realnames["bm_wp_upg_ns_ass_smg_large"] = "Large Suppressor"
 	realnames["bm_wp_upg_ns_ass_smg_large_desc"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 7.5%"
 	
 	--Size Doesn't Matter 
@@ -774,6 +813,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_upg_ns_pis_medium_slim_desc"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 7.5%"
 	
 	--Shotgun Suppressor
+	realnames["bm_wp_upg_ns_shot_thick"] = "Shotgun Suppressor"
 	realnames["bm_wp_upg_ns_shot_thick_desc"] = "Decreases range by 20% \nDecreases ADS speed by 10%"
 	
 	realnames["bm_wp_upg_ns_meatgrinder"] = "Standoff Muzzle Device"

@@ -1,5 +1,5 @@
 --[[
-v1.2.1
+v1.2.2
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -71,32 +71,7 @@ if RequiredScript == "lib/units/weapons/raycastweaponbase" then
 			}
 		end
 		return nil
-	end
-	
-	--Movement speed stuff
-	function RaycastWeaponBase:movement_penalty()
-		return tweak_data.weapon[self._name_id].weapon_movement_penalty or 1
-	end
-		
-	tweak_data.upgrades.weapon_movement_penalty.lmg = 1 --0.8
-	tweak_data.weapon.m95.weapon_movement_penalty = 0.7
-	tweak_data.weapon.mg42.weapon_movement_penalty = 0.7
-	tweak_data.weapon.hk21.weapon_movement_penalty = 0.75
-	tweak_data.weapon.m249.weapon_movement_penalty = 0.8
-	tweak_data.weapon.r93.weapon_movement_penalty = 0.8
-	tweak_data.weapon.rpk.weapon_movement_penalty = 0.85
-	tweak_data.weapon.galil.weapon_movement_penalty = 0.85
-	tweak_data.weapon.fal.weapon_movement_penalty = 0.9
-	tweak_data.weapon.striker.weapon_movement_penalty = 0.9
-	tweak_data.weapon.g3.weapon_movement_penalty = 0.9
-	tweak_data.weapon.spas12.weapon_movement_penalty = 0.9
-	tweak_data.weapon.mosin.weapon_movement_penalty = 0.9
-	tweak_data.weapon.m1928.weapon_movement_penalty = 0.9
-	tweak_data.weapon.l85a2.weapon_movement_penalty = 0.9
-	tweak_data.weapon.akm_gold.weapon_movement_penalty = 0.9
-	tweak_data.weapon.msr.weapon_movement_penalty = 0.95
-	tweak_data.weapon.new_m14.weapon_movement_penalty = 0.95
-	
+	end	
 
 elseif RequiredScript == "lib/managers/blackmarketmanager" then
 	
@@ -185,7 +160,7 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 	end
 
 elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
-
+			
 	--Damage falloff for non-shotguns (Penetration/Distance and col_ray bugs fixed by LazyOzzy)
 	function NewRaycastWeaponBase:get_damage_falloff(damage, col_ray, user_unit, distance)
 			
@@ -436,11 +411,48 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 
 
 	--Muzzle flash stuff
+	
+	tweak_data.upgrades.weapon_movement_penalty.lmg = 1 --0.8
+	tweak_data.weapon.m134.weapon_movement_penalty = 0.5
+	tweak_data.weapon.rpg7.weapon_movement_penalty = 0.8
+	tweak_data.weapon.m95.weapon_movement_penalty = 0.7
+	tweak_data.weapon.mg42.weapon_movement_penalty = 0.7
+	tweak_data.weapon.hk21.weapon_movement_penalty = 0.75
+	tweak_data.weapon.m249.weapon_movement_penalty = 0.8
+	tweak_data.weapon.r93.weapon_movement_penalty = 0.8
+	tweak_data.weapon.rpk.weapon_movement_penalty = 0.85
+	tweak_data.weapon.galil.weapon_movement_penalty = 0.85
+	tweak_data.weapon.fal.weapon_movement_penalty = 0.9
+	tweak_data.weapon.striker.weapon_movement_penalty = 0.9
+	tweak_data.weapon.g3.weapon_movement_penalty = 0.9
+	tweak_data.weapon.spas12.weapon_movement_penalty = 0.9
+	tweak_data.weapon.mosin.weapon_movement_penalty = 0.9
+	tweak_data.weapon.m1928.weapon_movement_penalty = 0.9
+	tweak_data.weapon.l85a2.weapon_movement_penalty = 0.9
+	tweak_data.weapon.akm_gold.weapon_movement_penalty = 0.9
+	tweak_data.weapon.msr.weapon_movement_penalty = 0.95
+	tweak_data.weapon.new_m14.weapon_movement_penalty = 0.95
+	
 	local old_update_stats_values = NewRaycastWeaponBase._update_stats_values
 	
 	function NewRaycastWeaponBase:_update_stats_values()
 		old_update_stats_values(self)
 		
+		self._movement_penalty = tweak_data.weapon[self._name_id].weapon_movement_penalty or 1
+		local custom_stats = managers.weapon_factory:get_custom_stats_from_weapon(self._factory_id, self._blueprint)
+		for part_id, stats in pairs(custom_stats) do
+			if stats.movement_speed then
+				self._movement_penalty = self._movement_penalty * stats.movement_speed
+			end
+			if tweak_data.weapon.factory.parts[part_id].type ~= "ammo" then
+				if stats.ammo_pickup_min_mul then
+					self._ammo_data.ammo_pickup_min_mul = self._ammo_data.ammo_pickup_min_mul and self._ammo_data.ammo_pickup_min_mul * stats.ammo_pickup_min_mul or stats.ammo_pickup_min_mul
+				end
+				if stats.ammo_pickup_max_mul then
+					self._ammo_data.ammo_pickup_max_mul = self._ammo_data.ammo_pickup_max_mul and self._ammo_data.ammo_pickup_max_mul * stats.ammo_pickup_max_mul or stats.ammo_pickup_max_mul
+				end
+			end
+		end
 		self._long_barrel = managers.weapon_factory:has_perk("long_barrel", self._factory_id, self._blueprint)
 		self._dmr_barrel = managers.weapon_factory:has_perk("dmr_barrel", self._factory_id, self._blueprint)
 		self._short_barrel = managers.weapon_factory:has_perk("short_barrel", self._factory_id, self._blueprint)
@@ -747,6 +759,8 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 elseif RequiredScript == "lib/managers/menu/blackmarketgui" then
 		
 	tweak_data.upgrades.weapon_movement_penalty.lmg = 1 --0.8
+	tweak_data.weapon.m134.weapon_movement_penalty = 0.5
+	tweak_data.weapon.rpg7.weapon_movement_penalty = 0.8
 	tweak_data.weapon.m95.weapon_movement_penalty = 0.7
 	tweak_data.weapon.mg42.weapon_movement_penalty = 0.7
 	tweak_data.weapon.hk21.weapon_movement_penalty = 0.75
@@ -839,11 +853,17 @@ elseif RequiredScript == "lib/managers/menu/blackmarketgui" then
 				if slot_data.not_moddable then
 					do
 						local weapon_id = slot_data.name
-						--local weapon_tweak = weapon_id and tweak_data.weapon[weapon_id]
-						local movement_penalty = tweak_data.weapon[weapon_id].weapon_movement_penalty or 1
+						local weapon_tweak = weapon_id and tweak_data.weapon[weapon_id]
+						local movement_penalty = weapon_tweak.weapon_movement_penalty or 1
 						if movement_penalty < 1 then
 							local penalty_as_string = string.format("%d%%", math.round((1 - movement_penalty) * 100))
 							updated_texts[5].text = updated_texts[5].text .. managers.localization:to_upper_text("bm_menu_weapon_movement_penalty_info", {penalty = penalty_as_string})
+						end
+						if weapon_tweak.has_description then
+							updated_texts[4].text = updated_texts[4].text .. [[
+
+
+]] .. managers.localization:text(tweak_data.weapon[slot_data.name].desc_id)
 						end
 					end
 				else
@@ -1036,12 +1056,13 @@ elseif RequiredScript == "lib/managers/menu/blackmarketgui" then
 			local is_gadget = part_id and tweak_data.weapon.factory.parts[part_id].type == "gadget" or perks and table.contains(perks, "gadget")
 			local is_ammo = part_id and tweak_data.weapon.factory.parts[part_id].type == "ammo" or perks and table.contains(perks, "ammo")
 			local is_bayonet = part_id and tweak_data.weapon.factory.parts[part_id].type == "bayonet" or perks and table.contains(perks, "bayonet")
-			if perks then
+			local has_desc = part_id and tweak_data.weapon.factory.parts[part_id].has_description == true
+			if is_gadget or is_ammo or is_bayonet or has_desc or perks then
 				local crafted = managers.blackmarket:get_crafted_category_slot(prev_data.category, prev_data.slot)
 				updated_texts[4].text = managers.weapon_factory:get_part_desc_by_part_id_from_weapon(part_id, crafted.factory_id, crafted.blueprint)
 			end
 			if slot_data.global_value and slot_data.global_value ~= "normal" then
-				if perks then
+				if is_gadget or is_ammo or is_bayonet or has_desc or perks then
 					updated_texts[4].text = updated_texts[4].text .. [[
 
 ##]] .. managers.localization:to_upper_text(tweak_data.lootdrop.global_values[slot_data.global_value].desc_id) .. "##"
@@ -1280,7 +1301,7 @@ elseif RequiredScript == "lib/managers/menu/blackmarketgui" then
 			end
 			local scale = 1
 			if info_text:bottom() > self._info_texts_panel:h() then
-				scale = self._info_texts_panel:h() / info_text:bottom()
+				scale = self._info_texts_panel:h() / (small_font_size / info_text:bottom())
 			end
 			info_text:set_font_size(small_font_size * scale)
 			_, _, _, th = info_text:text_rect()

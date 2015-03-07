@@ -1,6 +1,6 @@
 --[[
 DMC's Weapon Overhaul
-v1.2.1
+v1.2.2
 
 Please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
@@ -74,8 +74,7 @@ DMC_Random_Strings = {
 "ebin :DDD",
 "\"CARLOS!!!\"",
 "\"That ain't Falco!\"",
-"\"What is a man?\"",
-"\"A miserable little pile of secrets...\"",
+"\"What is a man?\"\n\"A miserable little pile of secrets...\"",
 "\"The cake is a lie\"",
 "You suck and we hate you \nLove, H&K",
 "I'll Heckle your Koch",
@@ -83,7 +82,7 @@ DMC_Random_Strings = {
 "\"Hot meme\" \n\"is cold\"",
 "\"This one time at band camp...\"",
 ">tfw I'm stuck with a toaster laptop",
-"\"I'm 12, what is this.\"",
+"\"I'm 12 and what is this?\"",
 "\"AH NU, CHEEKI BREEKI IV DAMKE!!\"",
 "\"What is love? Baby don't hurt me, don't hurt me, no more!v",
 "Pre-B CZ75 when?",
@@ -94,10 +93,11 @@ DMC_Random_Strings = {
 "*Insert bad pun here*",
 "\"ayy lmao\"",
 "\"420 BLAZE IT\"",
-"Would you Nep a Nep Nep?",
+"Would you Nep a Nep Nep? \nBecause I would...",
 "\"2spooky4me\"",
 ";)",
 ":3c",
+">tfw I can't have mai raifu in Canada",
 "What're you doing reading this?",
 "\"SILENCIO?\"",
 "\"ECH\"",

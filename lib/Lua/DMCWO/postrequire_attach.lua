@@ -1,5 +1,5 @@
 --[[
-v1.2.1
+v1.2.2
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -159,6 +159,7 @@ function WeaponFactoryTweakData:DMCWO_general()
 	table.insert(self.wpn_fps_shot_saiga.uses_parts, "wpn_fps_shot_r870_s_solid")
 	
 	table.insert(self.wpn_fps_shot_serbu.uses_parts, "wpn_fps_shot_r870_m_extended")
+	table.insert(self.wpn_fps_shot_serbu.uses_parts, "wpn_fps_shot_r870_fg_wood")
 	
 	table.insert(self.wpn_fps_sho_striker.uses_parts, "wpn_fps_upg_o_mbus_rear")
 	
