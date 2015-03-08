@@ -12,17 +12,19 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 	local old_update_stats_values = NewShotgunBase._update_stats_values
 	
 	function NewShotgunBase:_update_stats_values()
+		self._damage_near = tweak_data.weapon[self._name_id].damage_near or 100 -- 10 m
+		self._damage_far = tweak_data.weapon[self._name_id].damage_far or 4900 -- 200 m
+	
 		old_update_stats_values(self)
 		
 		self._long_barrel = managers.weapon_factory:has_perk("long_barrel", self._factory_id, self._blueprint)
 		self._short_barrel = managers.weapon_factory:has_perk("short_barrel", self._factory_id, self._blueprint)
 		self._supp_barrel = managers.weapon_factory:has_perk("supp_barrel", self._factory_id, self._blueprint)
-		
 	end
 	
 	function NewShotgunBase:get_damage_falloff(damage, col_ray, user_unit)
 		local distance = col_ray.distance or mvector3.distance(col_ray.unit:position(), user_unit:position())
-		
+				
 		if self._long_barrel then
 			self._damage_near = self._damage_near * 1.15
 			self._damage_far = self._damage_far * 1.15
@@ -132,7 +134,7 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 				if result and result.type == "death" then
 					managers.game_play_central:do_shotgun_push(col_ray.unit, col_ray.position, col_ray.ray, col_ray.distance)
 				end
-			elseif damage > 0 and col_ray.unit:character_damage():dead() then
+			else
 				managers.game_play_central:play_impact_flesh({col_ray = col_ray})
 				managers.game_play_central:play_impact_sound_and_effects({col_ray = col_ray})
 			end
