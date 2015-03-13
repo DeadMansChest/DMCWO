@@ -1,5 +1,5 @@
 --[[
-v1.2.2
+v1.2.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -21,16 +21,16 @@ LocalizationManager_text = LocalizationManager_text or LocalizationManager.text
 function LocalizationManager:text( string_id, macros )
     local realnames = {}
 	
-	--[[GOLD SLAVSHIT]]
-	realnames["bm_w_m134"] = "GE M134"
+	--[[BRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRT]]
+	realnames["bm_w_m134"] = "General Electric M134"
 	realnames["bm_w_m134_desc"] = ""
 	realnames["bm_wp_m134_body_upper_light_desc"] = "Decreases movement penalty by 20%"
-	realnames["bm_wp_m134_barrel_extreme"] = "AA Barrel"
-	realnames["bm_wp_m134_barrel_extreme_desc"] = "Increases range by 15% \nDecreases ADS speed by 10%"
+	realnames["bm_wp_m134_barrel_extreme"] = "Anti-Air Barrel"
+	realnames["bm_wp_m134_barrel_extreme_desc"] = "Increases range by 15% \nDecreases ADS speed by 10% \nIncreases movement penalty by 20%"
 	realnames["bm_wp_m134_barrel_short"] = "Compact Barrel"
 	realnames["bm_wp_m134_barrel_short_desc"] = "Decreases range by 10% \nIncreases ADS speed by 5% \nDecreases movement penalty by 20%"
 	
-	--[[GOLD SLAVSHIT]]
+	--[[WE TERRORIST NAO]]
 	realnames["bm_w_rpg7"] = "Bazalt RPG-7"
 	
 	
@@ -548,6 +548,14 @@ function LocalizationManager:text( string_id, macros )
 	--20rnd Mag
 	realnames["bm_wp_c96_m_extended"] = "C96 20rnd Magazine"
 
+	--[[EVENFASTERRUNONSENTENCES]]
+	realnames["bm_w_cobray"] = "Cobray M11/9"
+	realnames["bm_wp_cobray_ns_barrelext"] = "MAC Barrel Extension"
+	realnames["bm_wp_cobray_ns_barrelext_desc"] = "Decreases ADS speed by 10%"
+	realnames["bm_wp_cobray_ns_silencer"] = "SIONICS Suppressor"	
+	realnames["bm_wp_cobray_ns_silencer_desc"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 10%"	
+	realnames["bm_wp_cobray_body_upper_jacket_desc"] = "Decreases ROF to 850 RPM"	
+	
 	--[[RUNONSENTENCES]]
 	realnames["bm_w_mac10"] = "Ingram M10"
 	--Extended Mag
@@ -965,6 +973,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wpn_fps_upg_o_45iron"] = "XS Sights Angled Sights" --these are literally the worst things IRL, don't buy them for your gun if you have one and want angled sights to mount on it
 	--Flip-Up (KSG sights)
 	realnames["bm_wp_upg_o_mbus_rear"] = "Magpul MBUS Back-up Sights"
+	realnames["bm_wp_upg_o_mbus_rear_desc"] = "Flip-up sights"
 	realnames["dd_rear"] = "Daniel Defence Fixed Sight Combo"
 	
 	realnames["bm_wp_mosin_iron_sight"] = "Iron sights"

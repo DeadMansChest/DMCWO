@@ -1,5 +1,5 @@
 --[[
-v1.2.2
+v1.2.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -110,6 +110,8 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 		self._ak5c_rof = managers.weapon_factory:has_perk("ak5c_rof", factory_id, blueprint or default_blueprint)
 		self._fnfnc_rof = managers.weapon_factory:has_perk("fnfnc_rof", factory_id, blueprint or default_blueprint)
 		
+		self._m119_slow = managers.weapon_factory:has_perk("m119_slow", factory_id, blueprint or default_blueprint)
+		
 		self._rapid_fire = managers.weapon_factory:has_perk("fire_mode_auto", factory_id, blueprint or default_blueprint)
 		self._slow_fire = managers.weapon_factory:has_perk("fire_mode_single", factory_id, blueprint or default_blueprint)
 		
@@ -130,6 +132,8 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 			multiplier = multiplier / 1.0384615384615384615384615384615
 		elseif self._fnfnc_rof then
 			multiplier = multiplier / 0.96428571428571428571428571428571
+		elseif self._m119_slow then
+			multiplier = multiplier / 1.4117647058823529411764705882353
 		end
 		
 		if self._quick_bolt then
@@ -160,7 +164,7 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 	end
 
 elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
-			
+				
 	--Damage falloff for non-shotguns (Penetration/Distance and col_ray bugs fixed by LazyOzzy)
 	function NewRaycastWeaponBase:get_damage_falloff(damage, col_ray, user_unit, distance)
 			
@@ -350,8 +354,10 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 				
 				local ray_from_unit = hit_unit and col_ray.unit
 				if is_shield then
-					dmg_mul = ( dmg_mul or 1 ) * 0.15
+					dmg_mul = ( dmg_mul or 1 ) * tweak_data.weapon[self._name_id].shield_damage or 0.15
 				end
+				
+				
 				
 				self._shoot_through_data.has_hit_wall = has_hit_wall or is_wall
 				self._shoot_through_data.has_passed_shield = has_passed_shield or is_shield
@@ -377,7 +383,8 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 					spread_mul = ( spread_mul or 1 ) * 3
 				end
 				
-				mvector3.multiply( self._shoot_through_data.from, is_shield and 20 or penetration)
+				
+				mvector3.multiply( self._shoot_through_data.from, (is_shield and 20) or (is_wall and penetration) or 40)
 				mvector3.add( self._shoot_through_data.from, col_ray.position )
 				
 				local penetration_dist = math.sqrt(((col_ray.position.x - self._shoot_through_data.from.x) ^ 2) + ((col_ray.position.y - self._shoot_through_data.from.y) ^ 2) + ((col_ray.position.z - self._shoot_through_data.from.z) ^ 2)) or 0
@@ -489,6 +496,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		self._galatz_rof = managers.weapon_factory:has_perk("galatz_rof", self._factory_id, self._blueprint)
 		self._ak5c_rof = managers.weapon_factory:has_perk("ak5c_rof", self._factory_id, self._blueprint)
 		self._fnfnc_rof = managers.weapon_factory:has_perk("fnfnc_rof", self._factory_id, self._blueprint)
+		self._m119_slow = managers.weapon_factory:has_perk("m119_slow", self._factory_id, self._blueprint)
 		
 		self._rapid_fire = managers.weapon_factory:has_perk("fire_mode_auto", self._factory_id, self._blueprint)
 		self._slow_fire = managers.weapon_factory:has_perk("fire_mode_single", self._factory_id, self._blueprint)
@@ -584,86 +592,58 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	end
 
 	--fire rate multipler in-game stuff
-	function NewRaycastWeaponBase:fire_rate_multiplier()
+function NewRaycastWeaponBase:fire_rate_multiplier()
 		local multiplier = 1
-
-		if not self:upgrade_blocked(tweak_data.weapon[self._name_id].category, "fire_rate_multiplier") then
-			multiplier = multiplier + (1 - managers.player:upgrade_value(self:weapon_tweak_data().category, "fire_rate_multiplier", 1))
-		end
-		if not self:upgrade_blocked("weapon", "fire_rate_multiplier") then
-			multiplier = multiplier + (1 - managers.player:upgrade_value("weapon", "fire_rate_multiplier", 1))
-		end
-		if not self:upgrade_blocked(self._name_id, "fire_rate_multiplier") then
-			multiplier = multiplier + (1 - managers.player:upgrade_value(self._name_id, "fire_rate_multiplier", 1))
-		end
-
-		return self:_convert_add_to_mul(multiplier)
-	end
-	
-	--ROF stuff
-	function NewRaycastWeaponBase:weapon_rof()
-		local rof_mult = 1
 		
 		if self._mp5k_rof then 
-			rof_mult = 0.88888888888888888888888888888889
+			multiplier = multiplier / 0.88888888888888888888888888888889
 		elseif self._mp5sd_rof or self._mg34_rof then
-			rof_mult = 1.3333333333333333333333333333333
+			multiplier = multiplier / 1.3333333333333333333333333333333
 		elseif self._famas2_rof then
-			rof_mult = 0.83333333333333333333333333333333
+			multiplier = multiplier / 0.83333333333333333333333333333333
 		elseif self._mk14_rof or self._mar_rof then
-			rof_mult = 0.93333333333333333333333333333333
+			multiplier = multiplier / 0.93333333333333333333333333333333
 		elseif self._galatz_rof then
-			rof_mult = 1.1111111111111111111111111111111
+			multiplier = multiplier / 1.1111111111111111111111111111111
 		elseif self._ak5c_rof then
-			rof_mult = 1.0384615384615384615384615384615
+			multiplier = multiplier / 1.0384615384615384615384615384615
 		elseif self._fnfnc_rof then
-			rof_mult = 0.96428571428571428571428571428571
+			multiplier = multiplier / 0.96428571428571428571428571428571
+		elseif self._m119_slow then
+			multiplier = multiplier / 1.4117647058823529411764705882353
 		end
 		
 		if self._quick_bolt then
-			rof_mult = rof_mult / 1.02
+			multiplier = multiplier * 1.02
 		elseif self._fast_bolt then
-			rof_mult = rof_mult / 1.05
+			multiplier = multiplier * 1.05
 		elseif self._slow_bolt then
-			rof_mult = rof_mult / 0.95
+			multiplier = multiplier * 0.95
 		end
 		
 		if self._rapid_fire and not (self._name_id == "c96" or self._name_id == "tec9") then 
-			rof_mult = rof_mult / 1.15
+			multiplier = multiplier * 1.15
 		elseif self._rapid_fire and self._name_id == "c96" then 
-			rof_mult = rof_mult / 2
+			multiplier = multiplier * 2
 		elseif self._rapid_fire and self._name_id == "tec9" then 
-			rof_mult = rof_mult / 1.33333333333333
+			multiplier = multiplier * 1.33333333333333
 		elseif self._slow_fire then 
-			rof_mult = rof_mult / 0.9
+			multiplier = multiplier * 0.9
 		end
+
+		if not self:upgrade_blocked(tweak_data.weapon[self._name_id].category, "fire_rate_multiplier") then
+			multiplier = multiplier * managers.player:upgrade_value(self:weapon_tweak_data().category, "fire_rate_multiplier", 1)
+		end
+		if not self:upgrade_blocked("weapon", "fire_rate_multiplier") then
+			multiplier = multiplier * managers.player:upgrade_value("weapon", "fire_rate_multiplier", 1)
+		end
+		if not self:upgrade_blocked(self._name_id, "fire_rate_multiplier") then
+			multiplier = multiplier * managers.player:upgrade_value(self._name_id, "fire_rate_multiplier", 1)
+		end
+		return multiplier
+	end
+	
 		
-		return rof_mult
-	end
-	
-	function NewRaycastWeaponBase:trigger_pressed(...)
-		local fired
-		if self:start_shooting_allowed() then
-			fired = self:fire(...)
-			if fired then
-				local next_fire = (tweak_data.weapon[self._name_id].fire_mode_data and tweak_data.weapon[self._name_id].fire_mode_data.fire_rate * self:weapon_rof() or 0) / self:fire_rate_multiplier()
-				self._next_fire_allowed = self._next_fire_allowed + next_fire
-			end
-		end
-		return fired
-	end
-	
-	function NewRaycastWeaponBase:trigger_held(...)
-		local fired
-		if self._next_fire_allowed <= self._unit:timer():time() then
-			fired = self:fire(...)
-			if fired then
-				self._next_fire_allowed = self._next_fire_allowed + (tweak_data.weapon[self._name_id].fire_mode_data and tweak_data.weapon[self._name_id].fire_mode_data.fire_rate * self:weapon_rof() or 0) / self:fire_rate_multiplier()
-			end
-		end
-		return fired
-	end
-	
 	--Reload stuff
 	function NewRaycastWeaponBase:reload_speed_multiplier()
 		local multiplier = 1
@@ -1301,7 +1281,7 @@ elseif RequiredScript == "lib/managers/menu/blackmarketgui" then
 			end
 			local scale = 1
 			if info_text:bottom() > self._info_texts_panel:h() then
-				scale = self._info_texts_panel:h() / (small_font_size / info_text:bottom())
+				scale = self._info_texts_panel:h() / info_text:bottom() * .85
 			end
 			info_text:set_font_size(small_font_size * scale)
 			_, _, _, th = info_text:text_rect()

@@ -10,9 +10,8 @@ Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-w
 Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
-if not _G then return end
-if not _G.DMCWO then
-	_G.DMCWO = {}
+if not DMCWO then
+	DMCWO = {}
 	DMCWO.Setup_Stfu = false --set to true if you don't want the "rebalance" setup messages to print to the console/log
 	DMCWO.Stfu = false --set to true if you don't want the random message printing to the console/log after the persist scripts setup
 	--Regardless of either setting, you will still be warned if you leave the TestVar for w/e script commented out
@@ -29,6 +28,7 @@ RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/units/weapons/raycastwea
 RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/units/weapons/newraycastweaponbase")
 RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/managers/blackmarketmanager")
 RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/managers/menu/blackmarketgui")
+RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/tweak_data/blackmarkettweakdata")
 
 --[[OPTIONAL POSTREQUIRE SCRIPTS]]
 --Useable Drums
