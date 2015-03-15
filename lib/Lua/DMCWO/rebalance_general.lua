@@ -1,5 +1,5 @@
 --[[
-v1.2.3
+v1.2.4
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -124,7 +124,7 @@ tweak_data.upgrades.explosive_bullet.player_dmg_mul = 0.75
 --[[ Viewmodel "Sway" and Drag ]]	
 
 --ADS "sway" and pivot point for all weapons
-local gun_drag = {'default','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','rpg7'}
+local gun_drag = {'default','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','rpg7','b682'}
 for i, wep_id in ipairs(gun_drag) do
 	tweak_data.player.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.00075
 
@@ -283,7 +283,7 @@ for i, wep_id in ipairs(med_weight) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.45
 end 
 
-local med_weight_2 = {'serbu','s552','m16','m45','saiga','akm','scar','aug','huntsman','uzi','vhs'}
+local med_weight_2 = {'serbu','s552','m16','m45','saiga','akm','scar','aug','huntsman','uzi','vhs','b682'}
 for i, wep_id in ipairs(med_weight_2) do
 	tweak_data.weapon[ wep_id ].transition_duration = -0.055
 	tweak_data.weapon.aug.transition_duration = -0.08
@@ -440,7 +440,7 @@ for i, wep_id in ipairs(pdw_ammo) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.00, 4.50}
 end
 
-local shell_ammo = {'r870','serbu','benelli','ksg','striker','huntsman','spas12'}
+local shell_ammo = {'r870','serbu','benelli','ksg','striker','huntsman','spas12','b682'}
 for i, wep_id in ipairs(shell_ammo) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.80, 1.80}
 end
@@ -506,7 +506,7 @@ for i, wep_id in ipairs(weed_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.1
 end
 
-local weed2_panic = {'benelli','saiga','serbu','striker','huntsman','r870','ksg','judge','spas12','hk21','mg42'}
+local weed2_panic = {'benelli','saiga','serbu','striker','huntsman','r870','ksg','judge','spas12','hk21','mg42','b682'}
 for i, wep_id in ipairs(weed2_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.12
 end

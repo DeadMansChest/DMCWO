@@ -1,5 +1,5 @@
 --[[
-v1.2.3
+v1.2.4
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -297,6 +297,13 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_huntsman_b_short"] = "Sawn-Off Short Barrel"
 	realnames["bm_wp_huntsman_b_short_desc"] = "Decreases range by 10%\nIncreases ADS speed by 5%"
 	realnames["bm_wp_huntsman_s_short"] = "Sawn-Off Stock"
+	
+	--[[BARDODA SHOTGAT]]
+	realnames["bm_w_b682"] = "Berretta 682"
+	realnames["bm_wp_b682_b_short"] = "Sawn-Off Short Barrel"
+	realnames["bm_wp_b682_b_short_desc"] = "Decreases range by 10%\nIncreases ADS speed by 5%"
+	realnames["bm_wp_b682_s_short"] = "Sawn-Off Stock"
+	realnames["bm_wp_b682_s_ammopouch"] = "Ammo Pouch"
 	
 	--[[870]]
 	realnames["bm_w_r870"] = "Remington Model 870" --"Remafdng"

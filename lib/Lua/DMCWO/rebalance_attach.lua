@@ -1,5 +1,5 @@
 --[[
-v1.2.3
+v1.2.4
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -1414,8 +1414,13 @@ tweak_factory.parts.wpn_fps_ass_s552_b_long.perks = { "slow_ads_brl", "long_barr
 
 --Road Warrior/Sawn-off (Mosconi)
 tweak_factory.parts.wpn_fps_shot_huntsman_b_short.perks = { "fast_ads_brl", "short_barrel"}
-tweak_factory.parts.wpn_fps_shot_huntsman_b_short.stats = { value = 10, recoil = 0, spread = -6, spread_moving = 3, concealment = 10, suppression = -1 }
+tweak_factory.parts.wpn_fps_shot_huntsman_b_short.stats = { value = 10, recoil = -1, spread = -6, spread_moving = 3, concealment = 10, suppression = -1 }
 tweak_factory.parts.wpn_fps_shot_huntsman_b_short.stance_mod = { wpn_fps_shot_huntsman = {rotation = Rotation(0,0.5,0) } }
+
+--Sawn-off (B682)
+tweak_factory.parts.wpn_fps_shot_b682_b_short.stats = { value = 10, recoil = -2, spread = -4, spread_moving = 3, concealment = 10, suppression = -1 }
+tweak_factory.parts.wpn_fps_shot_b682_b_short.perks = { "fast_ads_brl", "short_barrel"}
+tweak_factory.parts.wpn_fps_shot_b682_b_short.stance_mod = { wpn_fps_shot_b682 = {rotation = Rotation(0,0.5,0) } }
 
 --SCAR Long Barrel
 tweak_factory.parts.wpn_fps_ass_scar_b_long.stats = { value = 4, spread = 2, spread_moving = -3, concealment = -3, damage = 12, recoil = -2, suppression = 0, total_ammo_mod = -38}
@@ -2095,6 +2100,11 @@ tweak_factory.parts.wpn_fps_lmg_rpk_s_standard.stats = { value = 3, recoil = 1, 
 
 --Gangster Special (Mosconi)
 tweak_factory.parts.wpn_fps_shot_huntsman_s_short.stats = { value = 10, recoil = -8, spread = 0, spread_moving = 3, concealment = 10 }
+
+--Wrist Wrecker
+tweak_factory.parts.wpn_fps_shot_b682_s_short.stats = { value = 1, recoil = -8, spread = 0, spread_moving = 3, concealment = 6 }
+--Ammo Pouch
+tweak_factory.parts.wpn_fps_shot_b682_s_ammopouch.stats = { value = 1, total_ammo_mod = 25}
 
 --Tactical Shorty (Loco)
 tweak_factory.parts.wpn_fps_shot_shorty_s_nostock_short.stats = { value = 4, spread_moving = 2, recoil = -3, concealment = 3 }
@@ -3099,7 +3109,7 @@ tweak_factory.parts.wpn_fps_upg_a_slug.custom_stats = { damage_far_mul = 3, rays
 tweak_factory.parts.wpn_fps_upg_a_custom.stats = { value = 5, total_ammo_mod = 0, damage = 8, spread = -2, recoil = -3 }
 tweak_factory.parts.wpn_fps_upg_a_custom.custom_stats = { rays = 6, ammo_pickup_min_mul = 0.85, ammo_pickup_max_mul = 0.95, damage_near_mul = 1.20, damage_far_mul = 0.70, armor_piercing_add = 0.1}
 
-tweak_factory.parts.wpn_fps_upg_a_explosive.stats ={ value = 5, total_ammo_mod = -38, damage = 0, spread = 4, moving_spread = 6, suppression = -110, recoil = -4 }
+tweak_factory.parts.wpn_fps_upg_a_explosive.stats = { value = 5, total_ammo_mod = -38, damage = 0, spread = 4, moving_spread = 6, suppression = -110, recoil = -4 }
 tweak_factory.parts.wpn_fps_upg_a_explosive.custom_stats = { ignore_statistic = true, rays = 1, damage_far_mul = 2.5, bullet_class = "InstantExplosiveBulletBase", ammo_pickup_min_mul = 0.7, ammo_pickup_max_mul = 0.8 }
 
 tweak_factory.parts.wpn_fps_upg_a_piercing.stats = { value = 5, damage = -4, spread = 4, recoil = 2 }
