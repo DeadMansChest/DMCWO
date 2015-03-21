@@ -1,5 +1,5 @@
 --[[
-v1.2.4
+v1.2.5
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -112,6 +112,8 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 		
 		self._m119_slow = managers.weapon_factory:has_perk("m119_slow", factory_id, blueprint or default_blueprint)
 		
+		self._f90_rof = managers.weapon_factory:has_perk("f90_rof", factory_id, blueprint or default_blueprint)
+		
 		self._rapid_fire = managers.weapon_factory:has_perk("fire_mode_auto", factory_id, blueprint or default_blueprint)
 		self._slow_fire = managers.weapon_factory:has_perk("fire_mode_single", factory_id, blueprint or default_blueprint)
 		
@@ -134,6 +136,8 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 			multiplier = multiplier / 0.96428571428571428571428571428571
 		elseif self._m119_slow then
 			multiplier = multiplier / 1.4117647058823529411764705882353
+		elseif self._f90_rof then
+			multiplier = multiplier / 0.82352941176470588235294117647059
 		end
 		
 		if self._quick_bolt then
@@ -354,7 +358,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 				
 				local ray_from_unit = hit_unit and col_ray.unit
 				if is_shield then
-					dmg_mul = ( dmg_mul or 1 ) * tweak_data.weapon[self._name_id].shield_damage or 0.15
+					dmg_mul = ( dmg_mul or 1 ) * (tweak_data.weapon[self._name_id].shield_damage or 0.25)
 				end
 				
 				
@@ -420,7 +424,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	--Muzzle flash stuff
 	
 	tweak_data.upgrades.weapon_movement_penalty.lmg = 1 --0.8
-	tweak_data.weapon.m134.weapon_movement_penalty = 0.5
+	tweak_data.weapon.m134.weapon_movement_penalty = 0.4
 	tweak_data.weapon.rpg7.weapon_movement_penalty = 0.8
 	tweak_data.weapon.m95.weapon_movement_penalty = 0.7
 	tweak_data.weapon.mg42.weapon_movement_penalty = 0.7
@@ -497,6 +501,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		self._ak5c_rof = managers.weapon_factory:has_perk("ak5c_rof", self._factory_id, self._blueprint)
 		self._fnfnc_rof = managers.weapon_factory:has_perk("fnfnc_rof", self._factory_id, self._blueprint)
 		self._m119_slow = managers.weapon_factory:has_perk("m119_slow", self._factory_id, self._blueprint)
+		self._f90_rof = managers.weapon_factory:has_perk("f90_rof", self._factory_id, self._blueprint)
 		
 		self._rapid_fire = managers.weapon_factory:has_perk("fire_mode_auto", self._factory_id, self._blueprint)
 		self._slow_fire = managers.weapon_factory:has_perk("fire_mode_single", self._factory_id, self._blueprint)
@@ -611,6 +616,8 @@ function NewRaycastWeaponBase:fire_rate_multiplier()
 			multiplier = multiplier / 0.96428571428571428571428571428571
 		elseif self._m119_slow then
 			multiplier = multiplier / 1.4117647058823529411764705882353
+		elseif self._f90_rof then
+			multiplier = multiplier / 0.82352941176470588235294117647059
 		end
 		
 		if self._quick_bolt then
@@ -739,7 +746,7 @@ function NewRaycastWeaponBase:fire_rate_multiplier()
 elseif RequiredScript == "lib/managers/menu/blackmarketgui" then
 		
 	tweak_data.upgrades.weapon_movement_penalty.lmg = 1 --0.8
-	tweak_data.weapon.m134.weapon_movement_penalty = 0.5
+	tweak_data.weapon.m134.weapon_movement_penalty = 0.4
 	tweak_data.weapon.rpg7.weapon_movement_penalty = 0.8
 	tweak_data.weapon.m95.weapon_movement_penalty = 0.7
 	tweak_data.weapon.mg42.weapon_movement_penalty = 0.7

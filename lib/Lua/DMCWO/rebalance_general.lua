@@ -1,5 +1,5 @@
 --[[
-v1.2.4
+v1.2.5
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -124,7 +124,7 @@ tweak_data.upgrades.explosive_bullet.player_dmg_mul = 0.75
 --[[ Viewmodel "Sway" and Drag ]]	
 
 --ADS "sway" and pivot point for all weapons
-local gun_drag = {'default','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','rpg7','b682'}
+local gun_drag = {'default','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','rpg7','b682','x_usp','x_g17','x_g22c'}
 for i, wep_id in ipairs(gun_drag) do
 	tweak_data.player.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.00075
 
@@ -154,13 +154,11 @@ end
 tweak_data.player.TRANSITION_DURATION = 0.23
 
 --Adjustments made below add or subtract from TRANSITION_DURATION
-local babby_pistol = {'usp','g22c','glock_17','glock_18c','ppk','judge','jowi','g26','c96','hs2000'}
+local babby_pistol = {'usp','g22c','glock_17','glock_18c','ppk','judge','jowi','g26','c96','hs2000','x_usp','x_g17','x_g22c'}
 for i, wep_id in ipairs(babby_pistol) do
 	tweak_data.weapon[ wep_id ].transition_duration = -0.1
-	tweak_data.weapon.jowi.transition_duration = -0.05
 	
 	tweak_data.weapon[ wep_id ].timers.equip = 0.2
-	tweak_data.weapon.jowi.timers.equip = 0.4
 	
 	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.125
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -3
@@ -179,6 +177,14 @@ for i, wep_id in ipairs(babby_pistol) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0.25
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.25
 end 
+tweak_data.weapon.jowi.transition_duration = -0.05
+tweak_data.weapon.x_usp.transition_duration = -0.05
+tweak_data.weapon.x_g17.transition_duration = -0.05
+tweak_data.weapon.x_g22c.transition_duration = -0.05
+tweak_data.weapon.jowi.timers.equip = 0.4
+tweak_data.weapon.x_usp.timers.equip = 0.4
+tweak_data.weapon.x_g17.timers.equip = 0.4
+tweak_data.weapon.x_g22c.timers.equip = 0.4
 
 local med_pistol = {'colt_1911','p226','b92fs','x_1911','x_b92fs'}
 for i, wep_id in ipairs(med_pistol) do
@@ -420,17 +426,17 @@ for i, wep_id in ipairs(thirty_two) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.90, 5.50}
 end
 
-local nine_mil = {'new_mp5','mp9','m45','glock_17','glock_18c','b92fs','tec9','uzi','sterling','g26','jowi','x_b92fs','cobray'}
+local nine_mil = {'new_mp5','mp9','m45','glock_17','glock_18c','b92fs','tec9','uzi','sterling','g26','jowi','x_b92fs','cobray','x_g17'}
 for i, wep_id in ipairs(nine_mil) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.50, 5.10}
 end
 
-local its_not_10mm_auto = {'g22c','p226'}
+local its_not_10mm_auto = {'g22c','p226','x_g22c'}
 for i, wep_id in ipairs(its_not_10mm_auto) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.20, 4.80}
 end
 
-local forty_five = {'mac10','colt_1911','usp','m1928','x_1911'} --UMP45 never :'(
+local forty_five = {'mac10','colt_1911','usp','m1928','x_1911','x_usp'} --UMP45 never :'(
 for i, wep_id in ipairs(forty_five) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.45, 4.60}
 end
@@ -461,7 +467,7 @@ local ammo_762 = {'new_m14','scar','fal','galil','g3','msr'}
 for i, wep_id in ipairs(ammo_762) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.00, 2.40}
 end
-tweak_data.weapon.m134.AMMO_PICKUP = {0.80, 1.90}
+tweak_data.weapon.m134.AMMO_PICKUP = {0.50, 1.50}
 tweak_data.weapon.hk21.AMMO_PICKUP = {0.80, 1.90}
 
 tweak_data.weapon.mg42.AMMO_PICKUP = {0.50, 1.30}

@@ -1,6 +1,6 @@
-[[DMC's Weapon Overhaul v1.2: Monster Trucking Edition]]
+[[DMC's Weapon Overhaul v1.2.4: Monster Trucking Edition]]
 Do you have what it takes?
-by: Deranged Mating Calls
+by: Donk My Clock
 
 UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
@@ -24,7 +24,7 @@ This mod is NOT meant to make the game easier (or at least not a whole lot easie
 
 The point of this mod is to fully overhaul and "rebalance" the weapons in PD2 so that nothing is truely useless (RPK/HK21, AK5/AMCAR, Reinfeld), horribly overpowered compared to other weapons similar to themselves like the M249 (as of the courier pack), the CAR-4 (even more so with the courier pack) or the Locomotive (the best fucking shotgun, nothing beats it) or become ugly as fuck to make a decent build.
 
-tl;dr I got rid of the meta bullshit and made so you don't have to worry about making an abomination of a gun
+tl;dr I got rid of the fucking dumb shir meta bullshit that made the game all of 4-5 guns and made it so you don't have to worry about making an abomination of a gun
 
 NOTE: I didn't and won't be making concealment value modifications for vanilla attachments as that number is calculated by the host who more than likely won't be using this. I don't want to bring the false impression that you have "x" concealment when you really have "y" concealment. 
 That said, extra attachments don't count towards your concealment if you're a client, so keep that in mind. You'll benefit from extra attachment concealment if you host or play solo.
@@ -40,6 +40,7 @@ That said, extra attachments don't count towards your concealment if you're a cl
 >>v00d00 for the LUA source code
 >>90e for the LUA source code, base code for the fixed fire loop sounds
 >>gir489 for LUA source code, LMG ironsights 
+>>420Munk for LUA source code, LMG ironsights 
 >>LazyOzzy for the fixed shotgun pellet mechanics, fixed drop-off code, other code advice
 	-While not in this mod, the crosshair code to help me locate the center of the screen for centering optics
 >>B1313 for the shotgun push physics, code advice

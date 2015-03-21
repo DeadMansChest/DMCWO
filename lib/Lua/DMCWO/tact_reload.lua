@@ -1,5 +1,5 @@
 --[[
-v1.2.4
+v1.2.5
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -20,7 +20,7 @@ if RequiredScript == "lib/tweak_data/weapontweakdata" then
 			self[wep_id].tactical_reload = true
 		end
 	
-		local tact_akimbo = {'x_deagle','x_1911','x_b92fs','jowi'}
+		local tact_akimbo = {'x_deagle','x_1911','x_b92fs','jowi','x_usp','x_g17','x_g22c'}
 		for i, wep_id in ipairs(tact_akimbo) do
 			self[wep_id].tactical_akimbo = true
 		end
@@ -45,8 +45,8 @@ elseif RequiredScript == "lib/units/weapons/raycastweaponbase" then
 	end
 	
 	function RaycastWeaponBase:can_reload()
-		if tweak_data.weapon[self._name_id].uses_clip == true and ((self:get_ammo_max_per_clip() == tweak_data.weapon[self._name_id].clip_capacity and self:get_ammo_remaining_in_clip() > 0 ) or self:get_ammo_remaining_in_clip() > tweak_data.weapon[self._name_id].clip_capacity) then
-		return false
+		if tweak_data.weapon[self._name_id].uses_clip == true and ( (self:get_ammo_max_per_clip() == tweak_data.weapon[self._name_id].clip_capacity and self:get_ammo_remaining_in_clip() > 0 ) or self:get_ammo_remaining_in_clip() > self:get_ammo_max_per_clip() - 10) then
+			return false
 		elseif self:get_ammo_total() > self:get_ammo_remaining_in_clip() then
 			return true
 		end
@@ -59,7 +59,7 @@ elseif RequiredScript == "lib/units/weapons/raycastweaponbase" then
 			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 2))
 		elseif self:get_ammo_remaining_in_clip() == 1 and tweak_data.weapon[self._name_id].tactical_akimbo == true then
 			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 1))
-		elseif tweak_data.weapon[self._name_id].uses_clip == true and self:get_ammo_remaining_in_clip() <= tweak_data.weapon[self._name_id].clip_capacity  then
+		elseif tweak_data.weapon[self._name_id].uses_clip == true and self:get_ammo_remaining_in_clip() <= self:get_ammo_max_per_clip()  then
 			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip(), self:get_ammo_remaining_in_clip() + tweak_data.weapon[self._name_id].clip_capacity))
 		elseif self._setup.expend_ammo then
 			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip()))

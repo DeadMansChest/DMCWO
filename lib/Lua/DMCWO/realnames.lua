@@ -1,5 +1,5 @@
 --[[
-v1.2.4
+v1.2.5
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -65,6 +65,8 @@ function LocalizationManager:text( string_id, macros )
 	--A3 Tact. Foregrip
 	realnames["bm_wp_aug_fg_a3"] = "A3 Rail"
 	realnames["bm_wp_aug_fg_a3_desc"] = "Decreases ADS speed by 5%"
+	realnames["bm_wp_aug_b_short_desc"] = "Decreases range by 10% \nIncreases ADS speed by 5%"
+	realnames["bm_wp_aug_b_long_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%"
 	
 	--[[WHITE FLAG]]
 	realnames["bm_w_famas"] = "Nexter FAMAS" --"IS THAT A DEAGLE?"
@@ -194,7 +196,7 @@ function LocalizationManager:text( string_id, macros )
 	--Tactical Grip
 	realnames["bm_wp_fal_g_01"] = "Tapco FAL/SAW Pistol Grip"
 	--Extended Mag
-    realnames["bm_wp_fal_m_01"] = "FAL 30rnd Magazine"
+    realnames["bm_wp_fal_m_01"] = "30rnd FAL Magazine"
     realnames["bm_wp_fal_m_01_desc"] = "Decreases reload speed by 10%"
 	--Folding
     realnames["bm_wp_fal_s_01"] = "Sidefolding Stock"
@@ -299,7 +301,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_huntsman_s_short"] = "Sawn-Off Stock"
 	
 	--[[BARDODA SHOTGAT]]
-	realnames["bm_w_b682"] = "Berretta 682"
+	realnames["bm_w_b682"] = "Beretta 682"
 	realnames["bm_wp_b682_b_short"] = "Sawn-Off Short Barrel"
 	realnames["bm_wp_b682_b_short_desc"] = "Decreases range by 10%\nIncreases ADS speed by 5%"
 	realnames["bm_wp_b682_s_short"] = "Sawn-Off Stock"
@@ -325,7 +327,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_saiga_fg_lowerrail"] = "Ultimak AK Modular Rail Forend System"
 	realnames["bm_wp_saiga_fg_lowerrail_desc"] = "Decreases ADS speed by 5%"
 	--Saiga 20 rounder
-	realnames["bm_wp_saiga_m_20rnd"] = "Saiga MD Arms 20rnd Drum Magazine"
+	realnames["bm_wp_saiga_m_20rnd"] = " 20rnd MD Arms Saiga Drum"
 	realnames["bm_wp_saiga_m_20rnd_desc"] = "Decreases reload speed by 15%"
 	
 	--[[M1014]]
@@ -406,12 +408,13 @@ function LocalizationManager:text( string_id, macros )
 	
 	--[[GORDON]]
 	realnames["bm_w_usp"] = "Heckler & Koch USP Tactical"
+	realnames["bm_w_x_usp"] = "Akimbo H&K USP Tacticals"
 	--Ventilated .45 **don't know
 	--realnames["bm_wp_usp_co_comp_1"] = "Ventilated .45 Compensator" --I question the existence of this compensator
 	--Velocity .45
 	realnames["bm_wp_usp_co_comp_2"] = "SJC Compensator .45" --Technically only for the G17 but "Overkill logic" so yeah
 	--Extended Mag
-	realnames["bm_wp_pis_usp_m_extended"] = "USP 20rnd Magazine"
+	realnames["bm_wp_pis_usp_m_extended"] = "20rnd USP Magazine"
 	realnames["bm_wp_pis_usp_m_extended_desc"] = "Decreases reload speed by 5%"
 	--Expert
 	realnames["bm_wp_pis_usp_b_expert"] = "USP Expert Slide"
@@ -420,13 +423,15 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_pis_usp_b_match_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%" 
 	
 	--[[GRENADE 22]]
-	realnames["bm_w_g22c"] = "Glock 22c"
+	realnames["bm_w_g22c"] = "Glock 22C"
+	realnames["bm_w_x_g22c"] = "Akimbo Glock 22Cs"
 	--Long Slide
 	realnames["bm_wp_g22c_b_long"] = "Glock 35 Compensated Slide"
 	realnames["bm_wp_g22c_b_long_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%" 
 	
 	--[[GRENADE 17]]
 	realnames["bm_w_glock_17"] = "Glock 17"
+	realnames["bm_w_x_g17"] = "Akimbo Glock 17s"
 	
 	--[[GRENADE 26]]
 	realnames["bm_wp_pis_g26"] =  "Glock 26"
@@ -450,7 +455,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_1911_b_long_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%" 
 	--Vented
 	realnames["bm_wp_1911_b_vented"] = "Compensated Two-Tone Slide"
-	realnames["bm_wp_1911_m_extended"] = "1911 12rnd Magazine"
+	realnames["bm_wp_1911_m_extended"] = "12rnd 1911 Magazine"
 	realnames["bm_wp_1911_m_extended_desc"] = "Decreases reload speed by 5%"
 	
 	--[[BARDODA]]
@@ -461,7 +466,7 @@ function LocalizationManager:text( string_id, macros )
 	--Competitor
 	realnames["bm_wp_beretta_co_co2"] = "Competition Compensator" --Seems to actually be based off of the Shorty USA Beretta 92 Spring Gun, unsurprising considering some of the guns models were based off of airsoft counterparts
 	--Extended Mag
-	realnames["bm_wp_beretta_m_extended"] = "92FS 30rnd Magazine"
+	realnames["bm_wp_beretta_m_extended"] = "30rnd 92FS Magazine"
 	realnames["bm_wp_beretta_m_extended_desc"] = "Decreases reload speed by 5%"
 	--Elite Slide
 	realnames["bm_wp_beretta_sl_brigadier"] = "Brigadier Elite Slide"
@@ -486,7 +491,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_w_judge"] = "Taurus Judge"
 	
 	--[[GRENADE 18]]
-	realnames["bm_w_glock_18c"] =  "Glock 18c"
+	realnames["bm_w_glock_18c"] =  "Glock 18C"
 	--Ventilated **don't know
 	--realnames["bm_wp_g18c_co_1"] = "Ventilated Compensator" --I question the existence of this compensator
 	--Velocity
@@ -503,7 +508,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_deagle_co_long"] = "Custom Barrel Weight" --Attachment is a reference to the Boondock Saints
 	realnames["bm_wp_deagle_co_long_desc"] = "Decreases ADS speed by 5%" 
 	--Extended Mag
-	realnames["bm_wp_deagle_m_extended"] = "Deagle 10rnd Magazine" --Given the length of the mag and considering the .50 AE variant is single stack only, this is the only choice. Not that it matters that there's more ammo than what's stated *cough* 1911 12rnd Mag *cough*
+	realnames["bm_wp_deagle_m_extended"] = "10rnd Desert Eagle Magazine" --Given the length of the mag and considering the .50 AE variant is single stack only, this is the only choice. Not that it matters that there's more ammo than what's stated *cough* 1911 12rnd Mag *cough*
 	--Long Barrel
 	realnames["bm_wp_deagle_b_long"] = "10\" Long Barrel"
 	realnames["bm_wp_deagle_b_long_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%" 
@@ -523,7 +528,7 @@ function LocalizationManager:text( string_id, macros )
 	--Velocity .40
 	realnames["bm_wp_p226_co_comp_2"] = "SJC Compensator .40" --Technically only for the G17 but "Overkill logic" so yeah
 	--Extended Mag
-	realnames["bm_wp_p226_m_extended"] = "P226 22rnd Magazine" --Not too sure if this exists, just basing it off of the fact the "22" is plastered all over the damn thing
+	realnames["bm_wp_p226_m_extended"] = "22rnd P226 Magazine" --Not too sure if this exists, just basing it off of the fact the "22" is plastered all over the damn thing
 	realnames["bm_wp_p226_m_extended_desc"] = "Decreases reload speed by 5%"
 	--Two-Tone
 	realnames["bm_wp_p226_b_equinox"] = "Equinox Duo-Tone Slide"
@@ -534,7 +539,7 @@ function LocalizationManager:text( string_id, macros )
 	--[[LEO]]
 	realnames["bm_w_hs2000"] = "Springfield Armory XD(M)-40" --Fuck the texture labels, it's a XD(M)
 	--Extended Mag
-	realnames["bm_wp_hs2000_m_extended"] = "XD(M)-40 22rnd Magazine"
+	realnames["bm_wp_hs2000_m_extended"] = "22rnd XD(M)-40 Magazine"
 	realnames["bm_wp_hs2000_m_extended_desc"] = "Decreases reload speed by 5%"
 	--Custom Slide
 	realnames["bm_wp_hs2000_sl_custom"] = "Compensated Slide"
@@ -553,7 +558,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_c96_sight"] = "Schmidt & Bender 1-8x24 PM Short Dot"
 	realnames["bm_wp_c96_sight_desc"] = "High power scope \nDecreases ADS speed by 7.5%"
 	--20rnd Mag
-	realnames["bm_wp_c96_m_extended"] = "C96 20rnd Magazine"
+	realnames["bm_wp_c96_m_extended"] = "20rnd C96 Magazine"
 
 	--[[EVENFASTERRUNONSENTENCES]]
 	realnames["bm_w_cobray"] = "Cobray M11/9"
@@ -566,7 +571,7 @@ function LocalizationManager:text( string_id, macros )
 	--[[RUNONSENTENCES]]
 	realnames["bm_w_mac10"] = "Ingram M10"
 	--Extended Mag
-	realnames["bm_wp_mac10_m_extended"] = "M10 30rnd Magazine"
+	realnames["bm_wp_mac10_m_extended"] = "30rnd M10 Magazine"
 	realnames["bm_wp_mac10_m_extended_desc"] = "Decreases reload speed by 5%"
 	--Railed Handguard
 	realnames["bm_wp_mac10_body_ris"] = "MAC Rail System" --I'm getting nothing but airsoft results so generic name
@@ -606,13 +611,13 @@ function LocalizationManager:text( string_id, macros )
 	--Bare Essentials
 	realnames["bm_wp_mp5_s_ring"] = "No Stock" --"No Pantsu"
 	--MP5 Drum
-	realnames["bm_wp_mp5_m_drum"] = "GSG-5 110rnd .22lr Magazine"
-	realnames["bm_wp_mp5_m_drum_desc"] = "Decreases reload speed by 15%"
+	realnames["bm_wp_mp5_m_drum"] = "110rnd GSG-5 .22lr Drum"
+	realnames["bm_wp_mp5_m_drum_desc"] = ".22lr conversion \nDecreases reload speed by 15%"
 
 	--[[SLING STOCKS ARE 2LEWD]]
 	realnames["bm_w_mp9"] = "Brugger & Thomet TP9"
 	--Extended Mag
-	realnames["bm_wp_mp9_m_extended"] = "MP9 30rnd Magazine"
+	realnames["bm_wp_mp9_m_extended"] = "30rnd MP9 Magazine"
 	realnames["bm_wp_mp9_m_extended_desc"] = "Decreases reload speed by 5%"
 	--Skeletal Stock
 	realnames["bm_wp_mp9_s_skel"] = "Steyr TMP Fixed Stock"
@@ -648,7 +653,7 @@ function LocalizationManager:text( string_id, macros )
 	
 	realnames["bm_wp_tec9_s_unfolded"] = "Interdynamic MP-9 Wire Stock"
 	
-	realnames["bm_wp_tec9_m_extended"] = "TEC-9 50rnd Magazine"
+	realnames["bm_wp_tec9_m_extended"] = "50rnd TEC-9 Magazine"
 	realnames["bm_wp_tec9_m_extended_desc"] = "Decreases reload speed by 10%"
 	
 	--[[NOT A STEN]]
@@ -664,9 +669,9 @@ function LocalizationManager:text( string_id, macros )
 	
 	realnames["bm_wp_sterling_b_short_desc"] = "Decreases range by 10% \nIncreases ADS speed by 5%"
 	--10rnd Mag
-	realnames["bm_wp_sterling_m_short"] = "L2A1 10rnd Magazine"
+	realnames["bm_wp_sterling_m_short"] = "10rnd L2A1 Magazine"
 	--34rnd Mag
-	realnames["bm_wp_sterling_m_long"] = "L2A1 34rnd Magazine"
+	realnames["bm_wp_sterling_m_long"] = "34rnd L2A1 Magazine"
 
 	--[[BABBY AR]]
 	realnames["bm_w_olympic"] = "Olympic Arms K23B Tactical"
@@ -674,7 +679,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_olympic_fg_railed"] = "Vector Optics SCRA RAS" --a super short version at that, shares the delta ring so I'm assuming this is what it's based off of
 	--Shorter Than Short
 	realnames["bm_wp_olympic_s_short"] = "Buffer Tube Stock" 
-	realnames["wpn_fps_m4_uupg_b_medium_desc"] = "Increases range by 15%\n Decreases ADS speed by 5%" 
+	realnames["wpn_fps_m4_uupg_b_medium_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%" 
 	
 	--[[BABBY SLAVSHIT]]
 	realnames["bm_w_akmsu"] = "Soviet Union AKMSU"
@@ -686,19 +691,19 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_w_p90"] = "FN P90 TR"
 	--Long Barrel
 	realnames["bm_wp_p90_b_long"] = "PS90 Barrel"
-	realnames["bm_wp_p90_b_long_desc"] = "Increases range by 15%\n Decreases ADS speed by 5%" 
+	realnames["bm_wp_p90_b_long_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%" 
 	
 	--[[LOL SWEDS]]
 	realnames["bm_w_m45"] = "Carl Gustaf Kpist M/45"
 	--Extended Mag
-	realnames["bm_wp_smg_m45_m_extended"] = "M/45 50rnd Magazine"
+	realnames["bm_wp_smg_m45_m_extended"] = "50rnd M/45 Magazine"
 	realnames["bm_wp_smg_m45_m_extended_desc"] = "Decreases reload speed by 10%" 
 	
 	--[[YOU SUCK AND WE HATE YOU]]
 	realnames["bm_w_mp7"] = "Heckler & Koch MP7A2"
 	--Airsoft Supressor
-	realnames["bm_wp_mp7_b_suppressed"] = "QD \"Power-Up\" MP7 Suppressor"	
-	realnames["bm_wp_mp7_b_suppressed_"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 7.5%"	
+	realnames["bm_wp_mp7_b_suppressed"] = "B&T MP7 Rotex-II Suppressor"	
+	realnames["bm_wp_mp7_b_suppressed_desc"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 7.5%"	
 	--Extended Mag
 	realnames["bm_wp_mp7_m_extended"] = "MP7 40rnd Magazine"
 	realnames["bm_wp_mp7_m_extended_desc"] = "Decreases reload speed by 10%"
@@ -710,6 +715,35 @@ function LocalizationManager:text( string_id, macros )
 	
 	
 	--[[WEAPON MODS]]
+	
+	--Ported
+	realnames["bm_wp_ns_battle"] = "Battlecomp 2.0 Compensator"
+	--MP5 10mm Magazine
+	realnames["bm_wp_mp5_m_drum"] = "30rnd MP5/10 10mm Magazine"
+	realnames["bm_wp_mp5_m_drum_desc"] = "10mm Auto conversion \nDecreases reload speed by 5%"
+	--AK5 CQB
+	realnames["bm_wp_ak5_b_short"] = "Short Barrel" 
+	realnames["bm_wp_ak5_b_short_desc"] = "Decreases range by 10% \nIncreases ADS speed by 5%" 
+	--AUG Raptor
+	realnames["bm_wp_aug_body_f90"] = "Thales F90 Body Kit"
+	realnames["bm_wp_aug_body_f90_desc"] = "Increases ROF to 850 RPM"
+	--SALVO
+	realnames["bm_wp_upg_ns_sho_salvo_large"] = "Silencerco Salvo 12 Suppressor"
+	realnames["bm_wp_upg_ns_sho_salvo_large_desc"] = "Decreases range by 20% \nDecreases ADS speed by 10%"
+	--MP9 Suppressor
+	realnames["bm_wp_mp9_b_suppressed"] = "B&T MP9 QD Suppressor"
+	realnames["bm_wp_mp9_b_suppressed_desc"] = "Decreases range by 20% \nDecreases ADS speed by 10%"
+	--Filter
+	realnames["bm_wp_upg_ns_ass_filter"] = "Filter Suppressor"
+	realnames["bm_wp_upg_ns_ass_filter_dsc"] = "Decreases range by 20% \nDecreases ADS speed by 10%"
+	--M14 Scope Mount
+	realnames["bm_wp_upg_o_m14_scopemount"] = "Sun Optics USA M14/M1A Scope Mount"
+	--M14 Scope Mount
+	realnames["bm_wp_upg_fl_ass_utg"] = "UTG P38 LED Laser Combo"
+	--M14 Scope Mount
+	realnames["bm_wp_upg_fl_pis_m3x"] = "Insight Technology M3X"
+	
+	
 	
 	--AK Crab Rail
 	realnames["bm_wp_upg_ak_fg_krebs"] = "Krebs UFM Keymod System Handguard"
@@ -729,16 +763,16 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_upg_ns_ass_pbs1_desc"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 10%"
 	--DMR Kit
 	realnames["bm_wp_upg_ass_ak_b_zastava"] = "Zastava M76 Barrel"
-	realnames["bm_wp_upg_ass_ak_b_zastava_desc"] = "Increases range by 30%\nDecreases ADS speed by 10%"
+	realnames["bm_wp_upg_ass_ak_b_zastava_desc"] = "Increases range by 30% \nDecreases ADS speed by 10%"
 	--Modern Barrel
 	realnames["bm_wp_upg_ak_b_ak105"] = "AK-105 Barrel"
-	realnames["bm_wp_upg_ak_b_ak105_desc"] = "Decreases range by 10%\nIncreases ADS speed by 5%"
+	realnames["bm_wp_upg_ak_b_ak105_desc"] = "Decreases range by 10%"
 	
 	--Exotique Receiver
 	realnames["bm_wp_m4_upper_reciever_edge"] = "VLTOR Upper Receiver"
 	realnames["bm_wp_m4_upper_reciever_edge_desc"] = "Increases ROF by 2%"
 	
-	realnames["bm_wp_upg_ass_m4_upper_reciever_ballos"] = "Ballos Upper Receiver" --????
+	realnames["bm_wp_upg_ass_m4_upper_reciever_ballos"] = "2A-Arm BALIOS Upper Receiver" --????
 	realnames["bm_wp_upg_ass_m4_upper_reciever_ballos_desc"] = "Decreases ROF by 5%"
 	
 	realnames["bm_wp_upg_ass_m4_upper_reciever_core"] = "CORE15 Upper Receiver"
@@ -905,7 +939,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_upg_ak_b_draco_desc"] = "Decreases range by 10% \nIncreases ADS speed by 10%"
 	
 	--Extended Mag (Glocks)
-	realnames["bm_wp_g18c_m_mag_33rnd"] = "Glock 33/22rnd Magazine (9mm/.40S&W)"	
+	realnames["bm_wp_g18c_m_mag_33rnd"] = "33/22rnd Glock Magazine (9mm/.40S&W)"	
 	--Vintage Mag
 	realnames["bm_wp_m4_m_straight"] = "20rnd STANAG Magazine" --Hesitant to call them this since they're so off-model and resemble the M4A1 mags used in MW3
 	realnames["bm_wp_m4_m_straight_desc"] = "Increases reload speed by 10%"
@@ -924,18 +958,17 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_upg_ak_m_quad"] = "60rnd Concern Kalashnikov Magazine"
 	realnames["bm_wp_upg_ak_m_quad_desc"] = "Decreases reload speed by 10%"
 	--Beta-C
-	realnames["bm_wp_m4_m_drum"] = "100rnd Beta-C Magazine"
+	realnames["bm_wp_m4_m_drum"] = "100rnd Beta-C Dual Drum"
 	realnames["bm_wp_m4_m_drum_desc"] = "Decreases reload speed by 15%"
 	--AK Drum
-	realnames["bm_wp_ak_m_drum"] = "75rnd Drum Magazine"
+	realnames["bm_wp_ak_m_drum"] = "75rnd AK Drum"
 	realnames["bm_wp_ak_m_drum_desc"] = "Decreases reload speed by 15%"
 	
 	--Pistol Red Dot
 	realnames["bm_wp_upg_o_rmr"] = "Trijicon RMR Red Dot"
 	realnames["bm_wp_upg_o_rmr_desc"] = "Low power red dot sight"
-	
-	--Marksman
-	realnames["bm_wp_upg_o_marksmansight_rear"] = "Custom iron sights"
+	--Marksman Irons
+	realnames["bm_wp_upg_o_marksmansight_rear_desc"] = "Custom iron sights"
 	
 	--Military Red Dot
 	realnames["bm_wp_upg_o_aimpoint"] = "Aimpoint PRO Red Dot"

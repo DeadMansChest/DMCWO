@@ -1,6 +1,6 @@
 --[[
 DMC's Weapon Overhaul
-v1.2.4
+v1.2.5
 
 Please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html

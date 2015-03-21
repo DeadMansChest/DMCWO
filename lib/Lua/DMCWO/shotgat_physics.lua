@@ -1,5 +1,5 @@
 --[[
-v1.2.4
+v1.2.5
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -13,7 +13,7 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 	
 	function NewShotgunBase:setup_default()
 		self._damage_near = tweak_data.weapon[self._name_id].damage_near or 100 -- 10 m
-		self._damage_far = tweak_data.weapon[self._name_id].damage_far or 4900 -- 200 m
+		self._damage_far = tweak_data.weapon[self._name_id].damage_far or 4900 -- + damage_near = 200 m
 		self._rays = tweak_data.weapon[self._name_id].rays or 6
 		self._range = self._damage_far
 	end
