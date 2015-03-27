@@ -1,5 +1,5 @@
 --[[
-v1.2.5
+v1.2.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -11,9 +11,13 @@ Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 --[[
 VARIABLES AND TABLES FOR WEAPONS AND WHAT THEY DO
 
-tweak_data.weapon.gun.category = "pistol"
+tweak_data.weapon.gun.category = "assault_rifle"
 	--What category the weapon is considered
 		--Affects blackmarket categorization AND skill modifiers (if the weapon category has any, things like LMGs don't have any category based skill modifiers)
+tweak_data.weapon.gun.sub_category = "carbine"
+	*ONLY WORKS IF bmarketgui.lua AND realnames.lua ARE ACTIVE
+		--Places weapons in a separate category, similarly to how GLs, the minigun, Saws, etc. are under the "Special" tab in the buy menu
+			--This does NOT affect which skill modifiers are applied to a weapon
 
 tweak_data.weapon.gun.kick.standing = {1.0, -1.0, -1.0, 1.0 }
 	--Kick in degrees while standing
@@ -87,7 +91,7 @@ tweak_data.weapon.gun.stats.suppression = 4
 
 if not RebalanceScript and DMCWO.rebalance_gen == true then
 
---Set to true if you use LazyOzzy's burst fire script
+--Set to true if you use LazyOzzy's burst fire script and want a proper M16A4
 local ozzy_burst = false
 
 --if set to true, changes the money bundle name and description to reference Harry Enfield's "Loadsamoney" music video
@@ -98,7 +102,7 @@ local lodsofemone = false
 local kenshiro = false
 
 --If set to true, viewmodel positioning while UNAIMED is changed to emulate DOOM
---Optics have a pretty good chance of getting in the way, know that
+--Also, optics have a pretty good chance of getting in the way
 --CURRENTLY INCOMPLETE
 local doomguy = false
 
@@ -230,7 +234,7 @@ for i, wep_id in ipairs(pump_shotgun) do
 	tweak_data.player.stances[wep_id].crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 end
 
-local standard_stat_shit = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','rpg7','cobray','b682','x_usp','x_g17','x_g22c'}
+local standard_stat_shit = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','rpg7','cobray','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32'}
 
 for i, wep_id in ipairs(standard_stat_shit) do
 	tweak_data.weapon[wep_id].stats.zoom = 1
@@ -296,7 +300,7 @@ tweak_data.weapon.p90.penetration_power = 1.85
 tweak_data.weapon.p90.penetration_damage = 0.8
 tweak_data.weapon.p90.shield_damage = 0.25
 
-local ammo_slug = {'r870','serbu','benelli','ksg','striker','huntsman','spas12','judge','b682','saiga'}
+local ammo_slug = {'r870','serbu','benelli','ksg','striker','huntsman','spas12','judge','b682','saiga','aa12'}
 for i, wep_id in ipairs(ammo_slug) do
 	tweak_data.weapon[ wep_id ].penetration_power = 0.5 --Only relevant if you're using slugs!!
 	tweak_data.weapon[ wep_id ].penetration_damage = 0.4 --ditto
@@ -378,17 +382,17 @@ tweak_data.weapon.saw_secondary.stats = {
 tweak_data.weapon.gre_m79.fire_mode_data.fire_rate = 1.1 --sets the ROF just at the edge of the anti-cheat timer (1 per second)
 
 tweak_data.weapon.gre_m79.stats_modifiers = {
-		damage = 34,
+		damage = 3.4,
 	}
 
 tweak_data.weapon.gre_m79.stats = {
 		alert_size = 9,
 		suppression = 2,
 		zoom = 1,
-		spread = 13,
+		spread = 15,
 		recoil = 9,
 		spread_moving = 7,
-		damage = 4,
+		damage = 40,
 		concealment = 18,
 		value = 1,
 		extra_ammo = 101,
@@ -406,8 +410,32 @@ pivot_head_translation = Vector3(4, 37, -2)
 pivot_head_rotation = Rotation(0, 0, -2)
 tweak_data.player.stances.gre_m79.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.gre_m79.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+	
+
+	
+--[[     M32     ]]--
+tweak_data.weapon.m32.fire_mode_data.fire_rate = 1
+
+tweak_data.weapon.m32.stats_modifiers = {
+		damage = 3.4,
+	}
+
+tweak_data.weapon.m32.stats = {
+		alert_size = 9,
+		suppression = 2,
+		zoom = 1,
+		spread = 13,
+		recoil = 12,
+		spread_moving = 7,
+		damage = 40,
+		concealment = 10,
+		value = 1,
+		extra_ammo = 101,
+		total_ammo_mod = 101,
+	}
 
 
+	
 --[[     Vulcan Raven     ]]--
 tweak_data.weapon.m134.kick.standing = {2, -2, -2, 2}
 tweak_data.weapon.m134.kick.crouching = tweak_data.weapon.m134.kick.standing
@@ -442,7 +470,7 @@ tweak_data.weapon.m134.damage_min = 0.3
 
 tweak_data.weapon.m134.stats.damage = 36
 tweak_data.weapon.m134.stats.spread = 12
-tweak_data.weapon.m134.stats.recoil = 16
+tweak_data.weapon.m134.stats.recoil = 15
 tweak_data.weapon.m134.stats.suppression = 0
 
 pivot_shoulder_translation = Vector3(4.11438, 35.5734, -13.4323)
@@ -481,6 +509,12 @@ pivot_head_translation = Vector3(7, 12, 4)
 pivot_head_rotation = Rotation(0, 0, -4)	
 tweak_data.player.stances.rpg7.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 tweak_data.player.stances.rpg7.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+
+
+
+--[[     Flammen     ]]
+tweak_data.weapon.flamethrower_mk2.stats.damage = 8
+
 --}
 
 
@@ -528,11 +562,17 @@ tweak_data.weapon.judge.stats.suppression = 4
 	
 	
 --[[     Grenade 18C     ]]--
+tweak_data.weapon.glock_18c.category = "smg"
+tweak_data.weapon.glock_18c.sub_category = "mach_pis"
+
+--[[
 tweak_data.weapon.glock_18c.upgrade_blocks = {
 		pistol = {
 			"fire_rate_multiplier"
 		}
 	}
+]]
+
 tweak_data.weapon.glock_18c.kick.standing = { 2.6, -1.8, -1.0, 1.0 }
 tweak_data.weapon.glock_18c.kick.crouching = tweak_data.weapon.glock_18c.kick.standing
 tweak_data.weapon.glock_18c.kick.steelsight = tweak_data.weapon.glock_18c.kick.standing
@@ -1312,6 +1352,8 @@ tweak_data.weapon.scorpion.stats.suppression = 17
 
 
 --[[     Loli no pantsu     ]]--
+tweak_data.weapon.mp9.sub_category = "mach_pis"
+
 tweak_data.weapon.mp9.kick.standing = {1.2, -0.4, -1.3, 1.3 }
 tweak_data.weapon.mp9.kick.crouching = tweak_data.weapon.mp9.kick.standing
 tweak_data.weapon.mp9.kick.steelsight = tweak_data.weapon.mp9.kick.standing
@@ -1487,17 +1529,7 @@ tweak_data.weapon.sterling.stats.suppression = 12
 
 
 --[[     M10's littler sister     ]]--
-pivot_shoulder_translation = Vector3(9.3342, 14.4687, -5.79688)
-pivot_shoulder_rotation = Rotation(-7.67834E-4, 0.00181087, 0.00114593)
-pivot_head_translation = Vector3(8, 17, -6)
-pivot_head_rotation = Rotation(0, 0, -1)
-tweak_data.player.stances.cobray.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-tweak_data.player.stances.cobray.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-
-pivot_head_translation = Vector3(6, 15, -4)
-pivot_head_rotation = Rotation(0, 0, -2)
-tweak_data.player.stances.cobray.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-tweak_data.player.stances.cobray.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+tweak_data.weapon.cobray.sub_category = "mach_pis"
 
 tweak_data.weapon.cobray.kick.standing = {1.9, 0.0, -0.9, 0.9 }
 tweak_data.weapon.cobray.kick.crouching = tweak_data.weapon.cobray.kick.standing
@@ -1524,20 +1556,22 @@ tweak_data.weapon.cobray.stats.spread = 14
 tweak_data.weapon.cobray.stats.recoil = 14
 tweak_data.weapon.cobray.stats.suppression = 10
 
+pivot_shoulder_translation = Vector3(9.3342, 14.4687, -5.79688)
+pivot_shoulder_rotation = Rotation(-7.67834E-4, 0.00181087, 0.00114593)
+pivot_head_translation = Vector3(8, 17, -6)
+pivot_head_rotation = Rotation(0, 0, -1)
+tweak_data.player.stances.cobray.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.cobray.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+
+pivot_head_translation = Vector3(6, 15, -4)
+pivot_head_rotation = Rotation(0, 0, -2)
+tweak_data.player.stances.cobray.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.cobray.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+
 
 
 --[[     ILIKESHOOTINGTHINGSREALLYREALLYFASTFASTERTHANSANICAMITOOFASTFORYOUTOOBADDEALWITHIT     ]]--
-pivot_shoulder_translation = Vector3(8.66375, 35.7106, -2.84375)
-pivot_shoulder_rotation = Rotation(0.110006, -0.898579, 0.630296)
-pivot_head_translation = Vector3(8, 30, -5)
-pivot_head_rotation = Rotation(0, 0, -1)
-tweak_data.player.stances.mac10.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-tweak_data.player.stances.mac10.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-
-pivot_head_translation = Vector3(6, 28, -3)
-pivot_head_rotation = Rotation(0, 0, -2)
-tweak_data.player.stances.mac10.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-tweak_data.player.stances.mac10.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+tweak_data.weapon.mac10.sub_category = "mach_pis"
 
 tweak_data.weapon.mac10.kick.standing = { -0.7, 1.8, -1.7, 1.7 }
 tweak_data.weapon.mac10.kick.crouching = tweak_data.weapon.mac10.kick.standing
@@ -1569,6 +1603,18 @@ tweak_data.weapon.mac10.stats.spread = 12
 tweak_data.weapon.mac10.stats.recoil = 13
 tweak_data.weapon.mac10.stats.suppression = 9
 	
+pivot_shoulder_translation = Vector3(8.66375, 35.7106, -2.84375)
+pivot_shoulder_rotation = Rotation(0.110006, -0.898579, 0.630296)
+pivot_head_translation = Vector3(8, 30, -5)
+pivot_head_rotation = Rotation(0, 0, -1)
+tweak_data.player.stances.mac10.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.mac10.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+
+pivot_head_translation = Vector3(6, 28, -3)
+pivot_head_rotation = Rotation(0, 0, -2)
+tweak_data.player.stances.mac10.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.mac10.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+
 
 
 --[[     Thompson-sensei     ]]--
@@ -1618,6 +1664,8 @@ tweak_data.player.stances.m1928.crouched.shoulders.rotation = pivot_head_rotatio
 ----------------------------------------------[[PDWS]]----------------------------------------------
 --{
 --[[     I'd this little sister too (I'd all the H&K gun girls tbh)     ]]--
+tweak_data.weapon.mp7.sub_category = "pdw"
+
 tweak_data.weapon.mp7.kick.standing = {1.2, -0.4, -0.7, 1.2}
 tweak_data.weapon.mp7.kick.crouching = tweak_data.weapon.mp7.kick.standing
 tweak_data.weapon.mp7.kick.steelsight = tweak_data.weapon.mp7.kick.standing
@@ -1653,18 +1701,7 @@ tweak_data.weapon.mp7.stats.suppression = 15
 
 
 --[[     Overpriced .22LR     ]]--
-pivot_shoulder_translation = Vector3(11.0002, 24.3293, -0.962641)
-pivot_shoulder_rotation = Rotation(0.21279, 0.970214, 0.197877)
-pivot_head_translation = Vector3(9, 25, -3)
-pivot_head_rotation = Rotation(0, 0, -1)
-tweak_data.player.stances.p90.standard.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
-tweak_data.player.stances.p90.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-
-pivot_head_translation = Vector3(7, 23, -1)
-pivot_head_rotation = Rotation(0, 0, -2)
-tweak_data.player.stances.p90.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
-tweak_data.player.stances.p90.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-
+tweak_data.weapon.p90.sub_category = "pdw"
 tweak_data.weapon.p90.kick.standing = {0.55, -0.3, -0.8, 0.8 }
 tweak_data.weapon.p90.kick.crouching = tweak_data.weapon.p90.kick.standing
 tweak_data.weapon.p90.kick.steelsight = tweak_data.weapon.p90.kick.standing
@@ -1696,6 +1733,18 @@ tweak_data.weapon.p90.stats.damage = 13
 tweak_data.weapon.p90.stats.spread = 15
 tweak_data.weapon.p90.stats.recoil = 18
 tweak_data.weapon.p90.stats.suppression = 12
+
+pivot_shoulder_translation = Vector3(11.0002, 24.3293, -0.962641)
+pivot_shoulder_rotation = Rotation(0.21279, 0.970214, 0.197877)
+pivot_head_translation = Vector3(9, 25, -3)
+pivot_head_rotation = Rotation(0, 0, -1)
+tweak_data.player.stances.p90.standard.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
+tweak_data.player.stances.p90.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+
+pivot_head_translation = Vector3(7, 23, -1)
+pivot_head_rotation = Rotation(0, 0, -2)
+tweak_data.player.stances.p90.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
+tweak_data.player.stances.p90.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 --}
 
 	
@@ -1704,6 +1753,7 @@ tweak_data.weapon.p90.stats.suppression = 12
 --{
 --[[     I'm Special     ]]--
 tweak_data.weapon.olympic.category = "assault_rifle"
+tweak_data.weapon.olympic.sub_category = "carbine"
 
 tweak_data.weapon.olympic.kick.standing = { -0.9, 1.5, -1.3, 1.4 }
 tweak_data.weapon.olympic.kick.crouching = tweak_data.weapon.olympic.kick.standing
@@ -1736,6 +1786,7 @@ tweak_data.weapon.olympic.stats.suppression = 10
 
 --[[     Krink     ]]--
 tweak_data.weapon.akmsu.category = "assault_rifle"
+tweak_data.weapon.akmsu.sub_category = "carbine"
 
 tweak_data.weapon.akmsu.kick.standing = {1.65, -0.6, -1.4, 1.4 }
 tweak_data.weapon.akmsu.kick.crouching = tweak_data.weapon.akmsu.kick.standing
@@ -1767,6 +1818,8 @@ tweak_data.weapon.akmsu.stats.suppression = 9
 
 
 --[[     Heat     ]]--
+tweak_data.weapon.amcar.sub_category = "carbine"
+
 tweak_data.weapon.amcar.spread.standing = 4.75
 tweak_data.weapon.amcar.spread.crouching = 4.25
 tweak_data.weapon.amcar.spread.steelsight = 1.2
@@ -1799,6 +1852,8 @@ tweak_data.weapon.amcar.stats.suppression = 11
 
 
 --[[     Meltgun     ]]--
+tweak_data.weapon.g36.sub_category = "carbine"
+
 tweak_data.weapon.g36.spread.standing = 5.25
 tweak_data.weapon.g36.spread.crouching = 4.75
 tweak_data.weapon.g36.spread.steelsight = 1.15
@@ -1850,6 +1905,8 @@ tweak_data.player.stances.g36.crouched.shoulders.rotation = pivot_head_rotation 
 
 
 --[[     Shigu     ]]--
+tweak_data.weapon.s552.sub_category = "carbine"
+
 tweak_data.weapon.s552.kick.standing = { -0.15, 1.9, -1.1, 1.1 }
 tweak_data.weapon.s552.kick.crouching = tweak_data.weapon.s552.kick.standing
 tweak_data.weapon.s552.kick.steelsight = tweak_data.weapon.s552.kick.standing
@@ -2326,8 +2383,8 @@ tweak_data.weapon.saiga.fire_mode_data.fire_rate = 0.1
 
 tweak_data.weapon.saiga.rays = 8 --pellets per shot
 
-tweak_data.weapon.saiga.damage_near = 100
-tweak_data.weapon.saiga.damage_far = 2900
+tweak_data.weapon.saiga.damage_near = 300
+tweak_data.weapon.saiga.damage_far = 3200
 
 tweak_data.weapon.saiga.armor_piercing_chance = 0.2
 
@@ -2344,6 +2401,57 @@ tweak_data.weapon.saiga.stats.damage = 20
 tweak_data.weapon.saiga.stats.spread = 12
 tweak_data.weapon.saiga.stats.recoil = 17
 tweak_data.weapon.saiga.stats.suppression = 5
+
+
+
+--[[     Auto Assault 12     ]]--
+tweak_data.weapon.aa12.spread.standing = 6
+tweak_data.weapon.aa12.spread.crouching = tweak_data.weapon.aa12.spread.standing
+tweak_data.weapon.aa12.spread.steelsight = tweak_data.weapon.aa12.spread.standing * 0.65
+tweak_data.weapon.aa12.spread.moving_standing = tweak_data.weapon.aa12.spread.standing
+tweak_data.weapon.aa12.spread.moving_crouching = tweak_data.weapon.aa12.spread.standing
+tweak_data.weapon.aa12.spread.moving_steelsight = tweak_data.weapon.aa12.spread.standing * 0.75
+
+tweak_data.weapon.aa12.CLIP_AMMO_MAX = 8
+tweak_data.weapon.aa12.AMMO_MAX = 72
+
+tweak_data.weapon.aa12.kick.standing = {1.30, -0.70, -1.2, 1.2 }
+tweak_data.weapon.aa12.kick.crouching = tweak_data.weapon.aa12.kick.standing
+tweak_data.weapon.aa12.kick.steelsight = tweak_data.weapon.aa12.kick.standing
+
+tweak_data.weapon.aa12.fire_mode_data.fire_rate = 0.2
+
+tweak_data.weapon.aa12.rays = 8 --pellets per shot
+
+tweak_data.weapon.aa12.damage_near = 500
+tweak_data.weapon.aa12.damage_far = 3500
+
+tweak_data.weapon.aa12.armor_piercing_chance = 0.2
+
+tweak_data.weapon.aa12.shake.fire_multiplier = 1
+tweak_data.weapon.aa12.shake.fire_steelsight_multiplier = -1
+
+tweak_data.weapon.aa12.muzzleflash = "effects/payday2/particles/weapons/big_762_auto_fps"
+
+tweak_data.weapon.aa12.stats_modifiers = {
+		damage = 2,
+	}
+
+tweak_data.weapon.aa12.stats.damage = 20
+tweak_data.weapon.aa12.stats.spread = 14
+tweak_data.weapon.aa12.stats.recoil = 21
+tweak_data.weapon.aa12.stats.suppression = 6
+
+pivot_shoulder_translation = Vector3(10.9866, 17.7262, -1.21375)
+pivot_shoulder_rotation = Rotation(1.26918, 0.0466027, -0.0824729)
+pivot_head_translation = Vector3(10, 21, -3)
+pivot_head_rotation = Rotation(0, 0, -1)
+tweak_data.player.stances.aa12.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.aa12.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+pivot_head_translation = Vector3(8, 19, -1)
+pivot_head_rotation = Rotation(0, 0, -2)
+tweak_data.player.stances.aa12.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.aa12.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
 
 
@@ -2530,7 +2638,7 @@ tweak_data.weapon.spas12.shake.fire_steelsight_multiplier = -1.5
 
 tweak_data.weapon.spas12.muzzleflash = "effects/payday2/particles/weapons/big_762_auto_fps"
 
-tweak_data.weapon.spas12.fire_mode_data.fire_rate = 0.18461538461538461538461538461538
+tweak_data.weapon.spas12.fire_mode_data.fire_rate = 0.16
 
 tweak_data.weapon.spas12.damage_near = 600
 tweak_data.weapon.spas12.damage_far = 2400
@@ -2757,6 +2865,7 @@ tweak_data.player.stances.striker.crouched.shoulders.rotation = pivot_head_rotat
 --{
 --[[     EAG H     ]]--
 tweak_data.weapon.scar.category = "snp"
+tweak_data.weapon.scar.sub_category = "battle_rifle"
 
 tweak_data.weapon.scar.spread.standing = 5.5
 tweak_data.weapon.scar.spread.crouching = 5
@@ -2811,6 +2920,7 @@ tweak_data.player.stances.scar.crouched.shoulders.rotation = pivot_head_rotation
 
 --[[     Jiisuri is mai raifu~     ]]--
 tweak_data.weapon.g3.category = "snp"
+tweak_data.weapon.g3.sub_category = "battle_rifle"
 
 tweak_data.weapon.g3.kick.standing = {1.75, 2.75, -1.75, 1.75 }
 tweak_data.weapon.g3.kick.crouching = tweak_data.weapon.g3.kick.standing
@@ -2873,6 +2983,7 @@ tweak_data.player.stances.g3.crouched.shoulders.rotation = pivot_head_rotation *
 
 --[[     Faru Nee-san     ]]--
 tweak_data.weapon.fal.category = "snp"
+tweak_data.weapon.fal.sub_category = "battle_rifle"
 
 tweak_data.weapon.fal.spread.standing = 5.75
 tweak_data.weapon.fal.spread.crouching = 5.25
@@ -2927,6 +3038,7 @@ tweak_data.player.stances.fal.crouched.shoulders.rotation = pivot_head_rotation 
 
 --[[     Galil-chan     ]]--
 tweak_data.weapon.galil.category = "snp"
+tweak_data.weapon.galil.sub_category = "battle_rifle"
 
 tweak_data.weapon.galil.kick.standing = {-1.0, 1.55, -1.45, 1.45 }
 tweak_data.weapon.galil.kick.crouching = tweak_data.weapon.galil.kick.standing
@@ -2985,18 +3097,8 @@ tweak_data.player.stances.galil.crouched.shoulders.rotation = pivot_head_rotatio
 
 
 --[[     Puns     ]]--
-pivot_shoulder_translation = Vector3(10.7332, 15.6145, -2.75549)
-pivot_shoulder_rotation = Rotation(0.106625, -0.450997, 0.629212)
-pivot_head_translation = Vector3(11,14,-4)
-pivot_head_rotation = Rotation(0,0,-1)
-tweak_data.player.stances.new_m14.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-tweak_data.player.stances.new_m14.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-
-pivot_head_translation = Vector3(9,12,-2)
-pivot_head_rotation = Rotation(0,0,-2)
-tweak_data.player.stances.new_m14.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-tweak_data.player.stances.new_m14.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 tweak_data.weapon.new_m14.category = "snp"
+tweak_data.weapon.new_m14.sub_category = "battle_rifle"
 
 tweak_data.weapon.new_m14.spread.standing = 6.5
 tweak_data.weapon.new_m14.spread.crouching = 6
@@ -3032,6 +3134,18 @@ tweak_data.weapon.new_m14.stats.damage = 48
 tweak_data.weapon.new_m14.stats.spread = 17
 tweak_data.weapon.new_m14.stats.recoil = 8
 tweak_data.weapon.new_m14.stats.suppression = 3
+
+pivot_shoulder_translation = Vector3(10.7332, 15.6145, -2.75549)
+pivot_shoulder_rotation = Rotation(0.106625, -0.450997, 0.629212)
+pivot_head_translation = Vector3(11,14,-4)
+pivot_head_rotation = Rotation(0,0,-1)
+tweak_data.player.stances.new_m14.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.new_m14.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+
+pivot_head_translation = Vector3(9,12,-2)
+pivot_head_rotation = Rotation(0,0,-2)
+tweak_data.player.stances.new_m14.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+tweak_data.player.stances.new_m14.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 --}	
 	
 	
@@ -3433,6 +3547,8 @@ tweak_data.player.stances.r93.crouched.shoulders.rotation = pivot_head_rotation 
 	
 
 --[[     SHITTER BAIT     ]]--
+tweak_data.weapon.m95.sub_category = "anti_mat"
+
 tweak_data.weapon.m95.spread.standing = 10
 tweak_data.weapon.m95.spread.crouching = tweak_data.weapon.m95.spread.standing / 2
 tweak_data.weapon.m95.spread.steelsight = 0.075
@@ -3911,7 +4027,6 @@ if doomguy == true then
 	tweak_data.player.stances.m134.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 	tweak_data.player.stances.m134.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 end
-
 
 RebalanceScript = true
 if not DMCWO.rebalance_wep then

@@ -1,5 +1,5 @@
 --[[
-v1.2.5
+v1.2.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -45,7 +45,7 @@ elseif RequiredScript == "lib/units/weapons/raycastweaponbase" then
 	end
 	
 	function RaycastWeaponBase:can_reload()
-		if tweak_data.weapon[self._name_id].uses_clip == true and ( (self:get_ammo_max_per_clip() == tweak_data.weapon[self._name_id].clip_capacity and self:get_ammo_remaining_in_clip() > 0 ) or self:get_ammo_remaining_in_clip() > self:get_ammo_max_per_clip() - 10) then
+		if tweak_data.weapon[self._name_id].uses_clip == true and ( (self:get_ammo_max_per_clip() == tweak_data.weapon[self._name_id].clip_capacity and self:get_ammo_remaining_in_clip() > 0 ) or self:get_ammo_remaining_in_clip() > self:get_ammo_max_per_clip() - tweak_data.weapon[self._name_id].clip_capacity) then
 			return false
 		elseif self:get_ammo_total() > self:get_ammo_remaining_in_clip() then
 			return true

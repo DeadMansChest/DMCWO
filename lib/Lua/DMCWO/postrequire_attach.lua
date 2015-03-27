@@ -1,20 +1,11 @@
 --[[
-v1.2.5
+v1.2.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
 ==OR==
 
 Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
-]]
-
---[[
-DON'T wildcard '*' this script in the .yml
-i.e don't do this: 
-
-- ['*', LUA\postrequire_attach.lua]
-
-or else you'll end up spamming your mod list with each extra attachment by however many luac files PD2 uses on its own (a lot). Use what I provided in the installation guide
 ]]
 
 if RequiredScript == "lib/tweak_data/weaponfactorytweakdata" then

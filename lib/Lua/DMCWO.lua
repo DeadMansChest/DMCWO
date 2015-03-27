@@ -24,11 +24,10 @@ RegisterScript("lib/Lua/DMCWO/postrequire_attach.lua", 2, "lib/tweak_data/weapon
 RegisterScript("lib/Lua/DMCWO/soundsfix.lua", 2, "lib/units/weapons/raycastweaponbase")
 RegisterScript("lib/Lua/DMCWO/shotgat_physics.lua", 2, "lib/units/weapons/shotgun/newshotgunbase")
 RegisterScript("lib/Lua/DMCWO/shotgat_physics.lua", 2, "lib/managers/gameplaycentralmanager")
-RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/units/weapons/raycastweaponbase")
 RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/units/weapons/newraycastweaponbase")
 RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/managers/blackmarketmanager")
-RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/managers/menu/blackmarketgui")
 RegisterScript("lib/Lua/DMCWO/gat_physics.lua", 2, "lib/tweak_data/blackmarkettweakdata")
+RegisterScript("lib/Lua/DMCWO/bmarketgui.lua", 2, "lib/managers/menu/blackmarketgui")
 
 --[[OPTIONAL POSTREQUIRE SCRIPTS]]
 --Useable Drums

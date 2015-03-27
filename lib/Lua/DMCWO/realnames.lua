@@ -1,5 +1,5 @@
 --[[
-v1.2.5
+v1.2.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
 Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 
@@ -327,8 +327,15 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_saiga_fg_lowerrail"] = "Ultimak AK Modular Rail Forend System"
 	realnames["bm_wp_saiga_fg_lowerrail_desc"] = "Decreases ADS speed by 5%"
 	--Saiga 20 rounder
-	realnames["bm_wp_saiga_m_20rnd"] = " 20rnd MD Arms Saiga Drum"
+	realnames["bm_wp_saiga_m_20rnd"] = "20rnd MD Arms Saiga Drum"
 	realnames["bm_wp_saiga_m_20rnd_desc"] = "Decreases reload speed by 15%"
+	
+	--[[AA12]]
+	realnames["bm_w_aa12"] = "MPS Auto Assault-12"
+	realnames["bm_wp_aa12_mag_drum"] = "20rnd AA-12 Drum"
+	realnames["bm_wp_aa12_mag_drum_desc"] = "Decreases reload speed by 15%"
+	realnames["bm_wp_aa12_barrel_long_desc"] = "Increases range by 15%\nDecreases ADS speed by 5%"
+	realnames["bm_wp_aa12_barrel_silenced_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 10%"
 	
 	--[[M1014]]
 	realnames["bm_w_benelli"] = "Benelli M4"
@@ -679,7 +686,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_olympic_fg_railed"] = "Vector Optics SCRA RAS" --a super short version at that, shares the delta ring so I'm assuming this is what it's based off of
 	--Shorter Than Short
 	realnames["bm_wp_olympic_s_short"] = "Buffer Tube Stock" 
-	realnames["wpn_fps_m4_uupg_b_medium_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%" 
+	realnames["bm_wp_m4_uupg_b_medium_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%" 
 	
 	--[[BABBY SLAVSHIT]]
 	realnames["bm_w_akmsu"] = "Soviet Union AKMSU"
@@ -713,14 +720,17 @@ function LocalizationManager:text( string_id, macros )
 	--[[DEMOMAN]]
 	realnames["bm_w_gre_m79"] = "Springfield Armory M79"
 	
+	--[[NADE SPAM]]
+	realnames["bm_w_m32"] = "Milkor Multiple Grenade Launcher"
+	
 	
 	--[[WEAPON MODS]]
 	
 	--Ported
 	realnames["bm_wp_ns_battle"] = "Battlecomp 2.0 Compensator"
 	--MP5 10mm Magazine
-	realnames["bm_wp_mp5_m_drum"] = "30rnd MP5/10 10mm Magazine"
-	realnames["bm_wp_mp5_m_drum_desc"] = "10mm Auto conversion \nDecreases reload speed by 5%"
+	realnames["bm_wp_mp5_m_straight"] = "30rnd MP5/10 10mm Magazine"
+	realnames["bm_wp_mp5_m_straight_desc"] = "10mm Auto conversion \nDecreases reload speed by 5%"
 	--AK5 CQB
 	realnames["bm_wp_ak5_b_short"] = "Short Barrel" 
 	realnames["bm_wp_ak5_b_short_desc"] = "Decreases range by 10% \nIncreases ADS speed by 5%" 
@@ -738,10 +748,15 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_upg_ns_ass_filter_dsc"] = "Decreases range by 20% \nDecreases ADS speed by 10%"
 	--M14 Scope Mount
 	realnames["bm_wp_upg_o_m14_scopemount"] = "Sun Optics USA M14/M1A Scope Mount"
-	--M14 Scope Mount
+	--LED Combo
 	realnames["bm_wp_upg_fl_ass_utg"] = "UTG P38 LED Laser Combo"
-	--M14 Scope Mount
+	--M3X
 	realnames["bm_wp_upg_fl_pis_m3x"] = "Insight Technology M3X"
+	--P90 Mall
+	realnames["bm_wp_p90_b_ninja_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 10%"
+	--P90 Civ
+	realnames["bm_wp_p90_b_civilian"] = "Custom Barrel"
+	realnames["bm_wp_p90_b_civilian_desc"] = "Decreases ADS speed by 7.5%"
 	
 	
 	
@@ -783,7 +798,7 @@ function LocalizationManager:text( string_id, macros )
 	
 	realnames["bm_wp_upg_m4_s_ubr"] = "Magpul UBR Stock"
 	
-	realnames["bm_wp_upg_m4_m_l5"] = " 30rnd Lancer Systems L5 AW Magazine"
+	realnames["bm_wp_upg_m4_m_l5"] = "30rnd Lancer Systems L5 AW Magazine"
 	
 	realnames["bm_wp_upg_smg_olympic_fg_lr300"] = "Short LR300 Handguard"
 	
@@ -1019,6 +1034,9 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_mosin_iron_sight"] = "Iron sights"
 	realnames["bm_wp_mosin_iron_sight_desc"] = "Remove the scope and use iron sights"
 	
+	--Dragons Breath
+	realnames["bm_wp_upg_a_dragons_breath"] = "Dragon's Breath Rounds"
+	realnames["bm_wp_upg_a_dragons_breath_desc"] = "Magnesium pellets capable of setting targets on fire. Shoot a blast of fire capable of burning enemies."
 	--AP Slug
 	realnames["bm_wp_upg_a_slug"] = "Armor Piercing SABOT Slugs"
 	realnames["bm_wp_upg_a_slug_desc"] = "A slug capable of going through most surfaces. Shoot a single, accurate slug with -50% max damage range and +300% range at a distance."
@@ -1033,7 +1051,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_upg_a_piercing_desc"] = "Darts capable of penetrating armour. Shoot 15 darts (10 in the Judge) with +50% range at a distance and tighter spread."
 	--HE
 	realnames["bm_wp_upg_a_explosive"] = "Fragmentation Rounds"
-	realnames["bm_wp_upg_a_explosive_desc"] = "Fin stabilized rounds that explode on impact. Shoot explosives that can stun and/or targets in its blast radius. Deals a flat 100 damage."
+	realnames["bm_wp_upg_a_explosive_desc"] = "Fin stabilized rounds that explode on impact. Shoot explosives that can stun and/or kill targets in its blast radius. Deals a flat 100 damage."
 	
 	--URSA
 	realnames["bm_melee_kabar"] = "USMC KA-BAR"
@@ -1096,13 +1114,17 @@ function LocalizationManager:text( string_id, macros )
 	
 	--Trench Knife
 	realnames["bm_melee_fairbair"] = "Fairbairn-Sykes Fighting Knife"
-	realnames["bm_melee_fairbair_desc"] = "The Fairbairn-Sykes fighting knife is a double-edged fighting knife resembling a dagger or poignard with a foil grip "
+	realnames["bm_melee_fairbair_desc"] = "The Fairbairn-Sykes fighting knife is a double-edged fighting knife resembling a dagger or poignard with a foil grip."
 	
 	realnames["bm_melee_swagger_desc"] = "Hello, heisters. Look at your knife, now back to this, now back at your knife, now back to this. \n\nSadly, your knife isn't as swag as this, but if you stopped using that pansy knife and started using this swagger stick, you could be swagging all over those cops.                                                                             \n"
 
 	--Erica Hartmann
 	realnames["bm_melee_model24"] = "Model 24 Stielhandgranate"
 	realnames["bm_melee_model24_desc"] = "Why would anyone ever use a grenade as a melee weapon? \n\nI guess those that have tried and lived are really grenade-ful it didn't go off...\n"
+	
+	realnames["bm_armor_level_5"] = "Flak Jacket A Bigger Shit"
+	realnames["bm_armor_level_6"] = "Combined Tactical Vest A Shit"
+	
 	
 	realnames["bm_menu_custom"] = "Internal Mod"
 	realnames["bm_menu_extra"] = "Rail"
@@ -1114,12 +1136,19 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_menu_foregrip"] = "Handguard"
 	realnames["bm_menu_sight"] = "Optic"
 	
+	
+	realnames["menu_anti_mat"] = "Anti Materiel Rifles"
+	realnames["menu_pdw"] = "PDWs"
+	realnames["menu_mach_pis"] = "Machine Pistols"
+	realnames["menu_battle_rifle"] = "Battle Rifles"
+	realnames["menu_carbine"] = "Carbines"
+	
 	realnames["menu_lmg"] = "Light Machine Guns"
 	realnames["menu_shotgun"] = "Shotguns"
-	realnames["menu_pistol"] = "Pistols"
-	realnames["menu_assault_rifle"] = "Assault Rifles & Carbines"
-	realnames["menu_snp"] = "Sniper & Battle Rifles"
-	realnames["menu_smg"] = "Sub-Machine Guns & PDWs"
+	realnames["menu_pistol"] = "Handguns"
+	realnames["menu_assault_rifle"] = "Assault Rifles"
+	realnames["menu_snp"] = "Snipers"
+	realnames["menu_smg"] = "Sub-Machine Guns"
 	
 	realnames["menu_jowi"] = "Wick"
 	
