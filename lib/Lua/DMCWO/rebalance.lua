@@ -1254,6 +1254,7 @@ tweak_data.weapon.deagle.shake.fire_steelsight_multiplier = -3.5
 
 tweak_data.weapon.deagle.fire_mode_data.fire_rate = 0.2
 
+tweak_data.weapon.deagle.can_shoot_through_shield = true
 tweak_data.weapon.deagle.armor_piercing_chance = 0.5
 
 tweak_data.weapon.deagle.damage_near = 6 * 100
@@ -1296,6 +1297,7 @@ tweak_data.weapon.x_deagle.shake.fire_steelsight_multiplier = 4.2
 
 tweak_data.weapon.x_deagle.fire_mode_data.fire_rate = 0.2
 
+tweak_data.weapon.x_deagle.can_shoot_through_shield = true
 tweak_data.weapon.x_deagle.armor_piercing_chance = 0.5
 
 tweak_data.weapon.x_deagle.animations.has_steelsight_stance = false
