@@ -1,6 +1,6 @@
-[[DMC's Weapon Overhaul v1.2.4: Monster Trucking Edition]]
-Do you have what it takes?
-by: Donk My Clock
+[[DMC's Weapon Overhaul v1.3: yee Edition]]
+yee
+by: Diddle Middle Ciddle
 
 UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
 Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
@@ -13,7 +13,6 @@ Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Despite being out of pre-release, I'm still changing things left right and center, don't get too used to things
-
 
 
 ======================================================
@@ -77,7 +76,7 @@ Scripts from based Ozzy:
 	-Burst Fire: http://www.unknowncheats.me/forum/payday-2/130566-burst-fire.html
 		-Has support in this mod
 
-SquareOne's instant bullet impact fix. May cause frame drops on lower end PCs if you use shogun rounds that have high projectile counts
+SquareOne's instant bullet impact fix. May cause frame drops on lower end PCs if you use shotgun rounds that have high ray counts
 
 Required for the following: i am not a spy...'s bundle mod tool: http://steamcommunity.com/app/218620/discussions/15/540744936746354308/
 	-i am not a spy...'s HD 3rd Person Weapons: http://steamcommunity.com/app/218620/discussions/15/558754900072790886/
@@ -85,7 +84,7 @@ Required for the following: i am not a spy...'s bundle mod tool: http://steamcom
 
 mod_override things:
 	-Bob_760's Black Gun Skins: http://steamcommunity.com/app/218620/discussions/15/558755529942726277/
-	-  's FN FAL Wooden Foregrip and Wooden Stock remake :http://steamcommunity.com/app/218620/discussions/15/35221031752086261/
+	-Dude_47's FN FAL Wooden Foregrip and Wooden Stock remake :http://steamcommunity.com/app/218620/discussions/15/35221031752086261/
 	
 	
 ======================================================
@@ -103,7 +102,7 @@ These are stand alone versions of some parts of DMCWO:
 -Real Weapon & Mod Names: http://steamcommunity.com/app/218620/discussions/15/624076751559360274/
 	-Pretty much renames most weapons and weapon mods to their real life counter parts (or the closest damn thing)
 	*Not for use alongside DMCWO. This version doesn't have support for the name toggles or the changed descriptions and names that better represent the changes made in DMCWO (redone shotgun ammo descriptions, magazine capacity counts in the names)
-	
+
 -Properly Aligned Irons Sights & Optics: WIP
 	-Realigns optics to the actual PoI for some weapons
 	

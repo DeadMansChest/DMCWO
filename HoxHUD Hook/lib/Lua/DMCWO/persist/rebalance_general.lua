@@ -1,14 +1,9 @@
 --[[
-v1.2.6
-This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
-Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
-
-==OR==
-
-Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+v1.3
+This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
-if not RebalanceGen then
+if DMCWO and DMCWO.Startup and not RebalanceGen then
  
 if not tweak_data then return end
 if DMCWO.Setup_Stfu ~= true then
@@ -57,37 +52,27 @@ And so on
 0.25 = 2.5 damage in game
 ]]
 
---alters the stability/recoil index to get rid of the duplicate entry and make more fine adjustments
-tweak_data.weapon.stats.recoil = {}
-for i = 3, 0.5, -0.1 do
-	table.insert( tweak_data.weapon.stats.recoil, i )
-end
+--alters the stability/recoil index to get rid of the duplicate entry and make more fine adjustments (doing a for loop left me with rounding errors)
+--also recreating the accuracy table (doing a for loop left me with rounding errors)
+--The contained values are multiplied wih w/e the weapon's spread/kick value is
+local kick_n_spread = {'recoil','spread'}
+for i, stat_id in ipairs(kick_n_spread) do
 
---recreating the accuracy table (doing a for loop left me with some odd results)
---The contained values are multiplied wih w/e the weapon's spread value is
---A weapon with a value of 0.8 for ADS standing still and a spread index of 1 (2 in this table) will result in the spread going up to 1.6 degrees
-tweak_data.weapon.stats.spread = {
-	2,
-	1.9,
-	1.8,
-	1.7,
-	1.6,
-	1.5,
-	1.4,
-	1.3,
-	1.2,
-	1.1,
-	1,
-	0.9,
-	0.8,
-	0.7,
-	0.6,
-	0.5,
-	0.4,
-	0.3,
-	0.2,
-	0.1
+	tweak_data.weapon.stats[stat_id] = {
+	10,
+	9.9,9.8,9.7,9.6,9.5,9.4,9.3,9.2,9.1,9.0,
+	8.9,8.8,8.7,8.6,8.5,8.4,8.3,8.2,8.1,8.0,
+	7.9,7.8,7.7,7.6,7.5,7.4,7.3,7.2,7.1,7.0,
+	6.9,6.8,6.7,6.6,6.5,6.4,6.3,6.2,6.1,6.0,
+	5.9,5.8,5.7,5.6,5.5,5.4,5.3,5.2,5.1,5.0,
+	4.9,4.8,4.7,4.6,4.5,4.4,4.3,4.2,4.1,4.0,
+	3.9,3.8,3.7,3.6,3.5,3.4,3.3,3.2,3.1,3.0,
+	2.9,2.8,2.7,2.6,2.5,2.4,2.3,2.2,2.1,2.0,
+	1.9,1.8,1.7,1.6,1.5,1.4,1.3,1.2,1.1,1.0,
+	0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1 --,0.0
 }
+	
+end
 
 --"Silent Killer" adjustments
 tweak_data.upgrades.values.weapon.silencer_damage_multiplier = { 1.125, 1.25}	--BASIC, ACE
@@ -108,10 +93,17 @@ tweak_data.upgrades.skill_descs.mag_plus.multibasic = "10"
 tweak_data.upgrades.skill_descs.mag_plus.multipro = "10"
 
 --"Shotgun Impact" adjustments
-tweak_data.upgrades.values.shotgun.recoil_multiplier = { 0.75 }
+tweak_data.upgrades.values.shotgun.recoil_multiplier = { 0.85  }
 tweak_data.upgrades.values.shotgun.damage_multiplier = { 1.25 }
-tweak_data.upgrades.skill_descs.shotgun_impact.multibasic = "25%"
+tweak_data.upgrades.skill_descs.shotgun_impact.multibasic = "15%"
 tweak_data.upgrades.skill_descs.shotgun_impact.multipro = "25%"
+
+tweak_data.upgrades.values.team.weapon.recoil_multiplier = {0.85}
+tweak_data.upgrades.skill_descs.leadership.multipro = "15%"
+
+tweak_data.upgrades.values.snp.recoil_multiplier = {0.85}
+tweak_data.upgrades.values.assault_rifle.recoil_multiplier = {0.85}
+tweak_data.upgrades.skill_descs.sharpshooter.multipro = "15%"
 
 --Akimbo recoil penalty adjustments so they actually are the +75/50/25% increase in recoil, matching the descriptions, and not 150/100/50% that they were coded to have
 tweak_data.upgrades.values.akimbo.recoil_multiplier = {
@@ -422,22 +414,22 @@ end
 
 local thirty_two = {'ppk','scorpion'}
 for i, wep_id in ipairs(thirty_two) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.70, 5.50}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.90, 5.50}
 end
 
 local nine_mil = {'new_mp5','mp9','m45','glock_17','glock_18c','b92fs','tec9','uzi','sterling','g26','jowi','x_b92fs','cobray','x_g17'}
 for i, wep_id in ipairs(nine_mil) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.30, 4.90}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.50, 5.10}
 end
 
 local its_not_10mm_auto = {'g22c','p226','x_g22c'}
 for i, wep_id in ipairs(its_not_10mm_auto) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.00, 4.60}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.20, 4.80}
 end
 
 local forty_five = {'mac10','colt_1911','usp','m1928','x_1911','x_usp'} --UMP45 never :'(
 for i, wep_id in ipairs(forty_five) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.30, 4.50}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.45, 4.60}
 end
 
 local pdw_ammo = {'p90','mp7'}
@@ -447,32 +439,32 @@ end
 
 local shell_ammo = {'r870','serbu','benelli','ksg','striker','huntsman','spas12','b682'}
 for i, wep_id in ipairs(shell_ammo) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.60, 1.60}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.80, 1.80}
 end
 tweak_data.weapon.saiga.AMMO_PICKUP = {0.50, 1.50}
---tweak_data.weapon.aa12.AMMO_PICKUP = {0.50, 1.50}
 
 local ammo_ar = {'olympic','m16','amcar','new_m4','ak5','s552','g36','aug','famas','l85a2','vhs'}
 for i, wep_id in ipairs(ammo_ar) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.30, 4.30}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.50, 4.50}
 end
-tweak_data.weapon.m249.AMMO_PICKUP = {0.70, 3.00}
+tweak_data.weapon.m249.AMMO_PICKUP = {1.00, 2.70}
 
 local ammo_ak = {'akmsu','akm','akm_gold','ak74','rpk'}
 for i, wep_id in ipairs(ammo_ak) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.00, 3.50}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.20, 3.50}
 end
 
 local ammo_762 = {'new_m14','scar','fal','galil','g3','msr'}
 for i, wep_id in ipairs(ammo_762) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.80, 2.40}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.00, 2.40}
 end
-tweak_data.weapon.hk21.AMMO_PICKUP = {0.60, 1.90}
+tweak_data.weapon.m134.AMMO_PICKUP = {0.50, 1.50}
+tweak_data.weapon.hk21.AMMO_PICKUP = {0.80, 1.90}
 
-tweak_data.weapon.mg42.AMMO_PICKUP = {0.50, 1.50}
-tweak_data.weapon.mosin.AMMO_PICKUP = {0.50, 1.50}
+tweak_data.weapon.mg42.AMMO_PICKUP = {0.50, 1.30}
+tweak_data.weapon.mosin.AMMO_PICKUP = {0.50, 1.30}
 
-tweak_data.weapon.r93.AMMO_PICKUP = {0.50, 0.90}
+tweak_data.weapon.r93.AMMO_PICKUP = {0.50, 0.9}
 
 
 --[[ MUSCLE DECK "PANIC" PERCENT CHANCES ]]
@@ -546,7 +538,6 @@ if not DMCWO.rebalance_gen then
 	if not RebalanceGen then
 		io.stdout:write("[!] You left RebalanceGen commented out (or nil), you may experience FPS drops", "\n")
 	end
-	AddPersistScript("RebalanceScript", "lib/Lua/DMCWO/rebalance.lua")
 end
 
 end

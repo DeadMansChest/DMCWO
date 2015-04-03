@@ -1,11 +1,6 @@
 --[[
-v1.2.6
-This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
-Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
-
-==OR==
-
-Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+v1.3
+This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
 tweak_data.upgrades.weapon_movement_penalty.lmg = 1 --0.8

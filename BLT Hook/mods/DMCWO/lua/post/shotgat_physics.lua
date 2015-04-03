@@ -1,11 +1,6 @@
 --[[
-v1.2.6
-This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
-Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
-
-==OR==
-
-Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+v1.3
+This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
 if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
@@ -13,13 +8,14 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 	
 	function NewShotgunBase:setup_default()
 		self._damage_near = tweak_data.weapon[self._name_id].damage_near or 100 -- 10 m
-		self._damage_far = tweak_data.weapon[self._name_id].damage_far or 4900 -- + damage_near = 200 m
-		self._rays = tweak_data.weapon[self._name_id].rays or 6
+		self._damage_far = tweak_data.weapon[self._name_id].damage_far or 4900 -- + damage_near = 50 m
+		self._rays = tweak_data.weapon[self._name_id].rays or 8
 		self._range = self._damage_far
 	end
 	
 	function NewShotgunBase:_update_stats_values()
 		old_update_stats_values(self)		
+		
 		self._long_barrel = managers.weapon_factory:has_perk("long_barrel", self._factory_id, self._blueprint)
 		self._short_barrel = managers.weapon_factory:has_perk("short_barrel", self._factory_id, self._blueprint)
 		self._supp_barrel = managers.weapon_factory:has_perk("supp_barrel", self._factory_id, self._blueprint)

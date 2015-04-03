@@ -1,11 +1,6 @@
 --[[
-v1.2.6
-This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
-Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
-
-==OR==
-
-Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+v1.3
+This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
 --[[
@@ -677,13 +672,15 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_sterling_b_short_desc"] = "Decreases range by 10% \nIncreases ADS speed by 5%"
 	--10rnd Mag
 	realnames["bm_wp_sterling_m_short"] = "10rnd L2A1 Magazine"
+	realnames["bm_wp_sterling_m_short_desc"] = "Increases reload speed by 15%"
 	--34rnd Mag
 	realnames["bm_wp_sterling_m_long"] = "34rnd L2A1 Magazine"
+	realnames["bm_wp_sterling_m_long_desc"] = "Decreases reload speed by 10%"
 
 	--[[BABBY AR]]
 	realnames["bm_w_olympic"] = "Olympic Arms K23B Tactical"
 	--Railed Handguard
-	realnames["bm_wp_olympic_fg_railed"] = "Vector Optics SCRA RAS" --a super short version at that, shares the delta ring so I'm assuming this is what it's based off of
+	realnames["bm_wp_olympic_fg_railed"] = "KAC Free Float Handguard" --a super short version at that, shares the delta ring so I'm assuming this is what it's based off of
 	--Shorter Than Short
 	realnames["bm_wp_olympic_s_short"] = "Buffer Tube Stock" 
 	realnames["bm_wp_m4_uupg_b_medium_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%" 
@@ -755,8 +752,8 @@ function LocalizationManager:text( string_id, macros )
 	--P90 Mall
 	realnames["bm_wp_p90_b_ninja_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 10%"
 	--P90 Civ
-	realnames["bm_wp_p90_b_civilian"] = "Custom Barrel"
-	realnames["bm_wp_p90_b_civilian_desc"] = "Decreases ADS speed by 7.5%"
+	realnames["bm_wp_p90_b_civilian"] = "Moerse Lekker Barrel Shroud"
+	realnames["bm_wp_p90_b_civilian_desc"] = "Increases range by 15% \nDecreases ADS speed by 7.5%"
 	
 	
 	
@@ -1036,7 +1033,7 @@ function LocalizationManager:text( string_id, macros )
 	
 	--Dragons Breath
 	realnames["bm_wp_upg_a_dragons_breath"] = "Dragon's Breath Rounds"
-	realnames["bm_wp_upg_a_dragons_breath_desc"] = "Magnesium pellets capable of setting targets on fire. Shoot a blast of fire capable of burning enemies."
+	realnames["bm_wp_upg_a_dragons_breath_desc"] = "Magnesium pellets capable of setting targets on fire. Shoot a blast of 8 pellets, each with a 50% chance to set your target on fire within 30 meters \nThe reduced charge per shell lowers the ROF of non-pump/manual action shotguns by 10%"
 	--AP Slug
 	realnames["bm_wp_upg_a_slug"] = "Armor Piercing SABOT Slugs"
 	realnames["bm_wp_upg_a_slug_desc"] = "A slug capable of going through most surfaces. Shoot a single, accurate slug with -50% max damage range and +300% range at a distance."
@@ -1142,6 +1139,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["menu_mach_pis"] = "Machine Pistols"
 	realnames["menu_battle_rifle"] = "Battle Rifles"
 	realnames["menu_carbine"] = "Carbines"
+	realnames["menu_gpmg"] = "General Purpose Machine Guns"
 	
 	realnames["menu_lmg"] = "Light Machine Guns"
 	realnames["menu_shotgun"] = "Shotguns"
@@ -1151,6 +1149,19 @@ function LocalizationManager:text( string_id, macros )
 	realnames["menu_smg"] = "Sub-Machine Guns"
 	
 	realnames["menu_jowi"] = "Wick"
+	
+	--Compatibility with lekousin's ArmorOverhaul
+	realnames["bm_menu_regen"] = "Regen per second"
+	realnames["bm_menu_deflect_min_dmg"] = "Dmg max deflect"
+	realnames["bm_menu_deflect_min_procent"] = "Max deflect chance"
+	realnames["bm_menu_deflect_max_dmg"] = "Dmg min deflect"
+	realnames["bm_menu_deflect_max_procent"] = "Min deflect chance"
+	realnames["bm_menu_hdr_min_dmg"] = "Min HDR dmg"
+	realnames["bm_menu_hdr_min_procent"] = "Min HDR value"
+	realnames["bm_menu_hdr_max_dmg"] = "Max HDR dmg"
+	realnames["bm_menu_hdr_max_procent"] = "Max HDR value"
+	realnames["bm_menu_explosion_damage_reduction"] = "Explosion damage reduction"
+	realnames["bm_menu_ammo_mul"] = "Ammo multiplier"
 	
     if realnames[string_id] then return realnames[string_id] end
     return LocalizationManager_text(self, string_id, macros)

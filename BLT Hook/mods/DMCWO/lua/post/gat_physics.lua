@@ -1,14 +1,13 @@
 --[[
-v1.2.6
-This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by:
-Checking the UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
-
-==OR==
-
-Checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+v1.3
+This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
-if RequiredScript == "lib/managers/blackmarketmanager" then
+if RequiredScript == "lib/units/weapons/raycastweaponbase" then
+
+	--nothing here
+
+elseif RequiredScript == "lib/managers/blackmarketmanager" then
 	
 	--fire rate multiplier blackmarket statchart stuff
 		
@@ -52,8 +51,11 @@ if RequiredScript == "lib/managers/blackmarketmanager" then
 		self._rapid_fire = managers.weapon_factory:has_perk("fire_mode_auto", factory_id, blueprint or default_blueprint)
 		self._slow_fire = managers.weapon_factory:has_perk("fire_mode_single", factory_id, blueprint or default_blueprint)
 		
+		self._quick_bolt = managers.weapon_factory:has_perk("quick_bolt", factory_id, blueprint or default_blueprint)
 		self._fast_bolt = managers.weapon_factory:has_perk("fast_bolt", factory_id, blueprint or default_blueprint)
 		self._slow_bolt = managers.weapon_factory:has_perk("slow_bolt", factory_id, blueprint or default_blueprint)
+		
+		self._db_charge = managers.weapon_factory:has_perk("db_charge", factory_id, blueprint or default_blueprint)
 		
 		if self._mp5k_rof then 
 			multiplier = multiplier / 0.88888888888888888888888888888889
@@ -81,6 +83,10 @@ if RequiredScript == "lib/managers/blackmarketmanager" then
 			multiplier = multiplier * 1.05
 		elseif self._slow_bolt then
 			multiplier = multiplier * 0.95
+		end
+		
+		if self._db_charge and not (name == "r870" or name == "serbu" or name == "ksg" or name == "judge" or name == "huntsman" or name == "b682") then
+			multiplier = multiplier * 0.9
 		end
 		
 		if self._rapid_fire and not (name == "c96" or name == "tec9") then 
@@ -451,6 +457,8 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		self._quick_bolt = managers.weapon_factory:has_perk("quick_bolt", self._factory_id, self._blueprint)
 		self._fast_bolt = managers.weapon_factory:has_perk("fast_bolt", self._factory_id, self._blueprint)
 		self._slow_bolt = managers.weapon_factory:has_perk("slow_bolt", self._factory_id, self._blueprint)
+		
+		self._db_charge = managers.weapon_factory:has_perk("db_charge", self._factory_id, self._blueprint)
 		--}
 		
 		--Reload speed perks--{
@@ -517,7 +525,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	
 	function NewRaycastWeaponBase:_laser_spread()
 		if self:_is_laser_on() and not (self:weapon_tweak_data().category == "shotgun" or self._name_id == "judge") then
-			return 0.75
+			return 0.85 --15% spread reduction
 		else
 			return 1
 		end
@@ -529,7 +537,9 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		if current_state._moving then
 			spread_multiplier = spread_multiplier * managers.player:upgrade_value(self:weapon_tweak_data().category, "move_spread_multiplier", 1)
 		end
-		if current_state:in_steelsight() then
+		if current_state:in_steelsight() and tweak_data.weapon[self._name_id].always_hipfire == true then
+			return self._spread * tweak_data.weapon[self._name_id].spread[current_state._moving and "moving_steelsight" or "steelsight"] * spread_multiplier * self:_laser_spread()
+		elseif current_state:in_steelsight() then
 			return self._spread * tweak_data.weapon[self._name_id].spread[current_state._moving and "moving_steelsight" or "steelsight"] * spread_multiplier
 		end
 		spread_multiplier = spread_multiplier * managers.player:upgrade_value(self:weapon_tweak_data().category, "hip_fire_spread_multiplier", 1)
@@ -569,6 +579,10 @@ function NewRaycastWeaponBase:fire_rate_multiplier()
 			multiplier = multiplier * 1.05
 		elseif self._slow_bolt then
 			multiplier = multiplier * 0.95
+		end
+		
+		if self._db_charge and not (self._name_id == "r870" or self._name_id == "serbu" or self._name_id == "ksg" or self._name_id == "serbu" or self._name_id == "huntsman" or self._name_id == "b682") then
+			multiplier = multiplier * 0.9
 		end
 		
 		if self._rapid_fire and not (self._name_id == "c96" or self._name_id == "tec9") then 
