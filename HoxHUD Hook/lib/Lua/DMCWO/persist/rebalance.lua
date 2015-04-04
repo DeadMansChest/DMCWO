@@ -1,5 +1,5 @@
 --[[
-v1.3
+v1.31
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
@@ -387,7 +387,7 @@ tweak_data.weapon.m32.stats_modifiers = {
 
 tweak_data.weapon.m32.stats.alert_size = 9
 tweak_data.weapon.m32.stats.suppression = 2
-tweak_data.weapon.m32.stats.spread = 63
+tweak_data.weapon.m32.stats.spread = 61
 tweak_data.weapon.m32.stats.recoil = 48
 tweak_data.weapon.m32.stats.damage = 40
 
@@ -674,7 +674,7 @@ tweak_data.weapon.x_g17.damage_far = 93 * 100
 tweak_data.weapon.x_g17.damage_min = 0.6
 
 tweak_data.weapon.x_g17.stats.damage = 12
-tweak_data.weapon.x_g17.stats.spread = 61
+tweak_data.weapon.x_g17.stats.spread = 60
 tweak_data.weapon.x_g17.stats.recoil = 73
 tweak_data.weapon.x_g17.stats.suppression = 16
 
@@ -744,7 +744,7 @@ tweak_data.weapon.x_b92fs.damage_far = 96 * 100
 tweak_data.weapon.x_b92fs.damage_min = 0.6
 
 tweak_data.weapon.x_b92fs.stats.damage = 12
-tweak_data.weapon.x_b92fs.stats.spread = 70
+tweak_data.weapon.x_b92fs.stats.spread = 67
 tweak_data.weapon.x_b92fs.stats.recoil = 69
 tweak_data.weapon.x_b92fs.stats.suppression = 16
 
@@ -977,7 +977,7 @@ tweak_data.weapon.x_g22c.damage_far = 90 * 100
 tweak_data.weapon.x_g22c.damage_min = 0.5
 
 tweak_data.weapon.x_g22c.stats.damage = 16
-tweak_data.weapon.x_g22c.stats.spread = 66
+tweak_data.weapon.x_g22c.stats.spread = 62
 tweak_data.weapon.x_g22c.stats.recoil = 60
 tweak_data.weapon.x_g22c.stats.suppression = 12
 
@@ -1182,7 +1182,7 @@ tweak_data.weapon.x_usp.damage_far = 75 * 100
 tweak_data.weapon.x_usp.damage_min = 0.3
 
 tweak_data.weapon.x_usp.stats.damage = 18
-tweak_data.weapon.x_usp.stats.spread = 52
+tweak_data.weapon.x_usp.stats.spread = 51
 tweak_data.weapon.x_usp.stats.recoil = 58
 tweak_data.weapon.x_usp.stats.suppression = 10
 
@@ -1341,7 +1341,7 @@ tweak_data.weapon.x_deagle.damage_far = 88 * 100
 tweak_data.weapon.x_deagle.damage_min = 0.3
 
 tweak_data.weapon.x_deagle.stats.damage = 48
-tweak_data.weapon.x_deagle.stats.spread = 68
+tweak_data.weapon.x_deagle.stats.spread = 47
 tweak_data.weapon.x_deagle.stats.recoil = 7 
 tweak_data.weapon.x_deagle.stats.suppression = 4
 	
@@ -1381,8 +1381,8 @@ tweak_data.weapon.scorpion.damage_far = 55 * 100
 tweak_data.weapon.scorpion.damage_min = 0.4
 
 tweak_data.weapon.scorpion.stats.damage = 14
-tweak_data.weapon.scorpion.stats.spread = 11
-tweak_data.weapon.scorpion.stats.recoil = 84
+tweak_data.weapon.scorpion.stats.spread = 62
+tweak_data.weapon.scorpion.stats.recoil = 88
 tweak_data.weapon.scorpion.stats.suppression = 17
 
 
@@ -1684,12 +1684,12 @@ tweak_data.weapon.m1928.stats.spread = 61
 tweak_data.weapon.m1928.stats.recoil = 72
 tweak_data.weapon.m1928.stats.suppression = 9
 
-pivot_head_translation = Vector3(8, 42, -8)
+pivot_head_translation = Vector3(9, 38, -8)
 pivot_head_rotation = Rotation(0, 0, -1)
 tweak_data.player.stances.m1928.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.m1928.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3(6, 40, -6)
+pivot_head_translation = Vector3(7, 36, -6)
 pivot_head_rotation = Rotation(0, 0, -2)
 tweak_data.player.stances.m1928.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.m1928.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
@@ -2563,7 +2563,7 @@ tweak_data.player.stances.huntsman.crouched.shoulders.rotation = pivot_head_rota
 
 tweak_data.weapon.huntsman.spread.standing = 0.5
 tweak_data.weapon.huntsman.spread.crouching = tweak_data.weapon.huntsman.spread.standing 
-tweak_data.weapon.huntsman.spread.steelsight = tweak_data.weapon.huntsman.spread.standing * 0.7
+tweak_data.weapon.huntsman.spread.steelsight = tweak_data.weapon.huntsman.spread.standing * 0.8
 tweak_data.weapon.huntsman.spread.moving_standing = tweak_data.weapon.huntsman.spread.standing 
 tweak_data.weapon.huntsman.spread.moving_crouching = tweak_data.weapon.huntsman.spread.standing 
 tweak_data.weapon.huntsman.spread.moving_steelsight = tweak_data.weapon.huntsman.spread.standing * 0.85
@@ -2598,7 +2598,7 @@ tweak_data.weapon.huntsman.stats_modifiers = {
 
 tweak_data.weapon.huntsman.stats.damage = 40
 tweak_data.weapon.huntsman.stats.spread = 21
-tweak_data.weapon.huntsman.stats.recoil = 13
+tweak_data.weapon.huntsman.stats.recoil = 12
 tweak_data.weapon.huntsman.stats.suppression = 2
 
 
@@ -2606,10 +2606,10 @@ tweak_data.weapon.huntsman.stats.suppression = 2
 --[[     BARDODA SHOTGAT     ]]
 tweak_data.weapon.b682.spread.standing = 0.5
 tweak_data.weapon.b682.spread.crouching = tweak_data.weapon.b682.spread.standing 
-tweak_data.weapon.b682.spread.steelsight = tweak_data.weapon.b682.spread.standing * 0.7
+tweak_data.weapon.b682.spread.steelsight = tweak_data.weapon.b682.spread.standing * 0.6
 tweak_data.weapon.b682.spread.moving_standing = tweak_data.weapon.b682.spread.standing 
 tweak_data.weapon.b682.spread.moving_crouching = tweak_data.weapon.b682.spread.standing 
-tweak_data.weapon.b682.spread.moving_steelsight = tweak_data.weapon.b682.spread.standing * 0.8
+tweak_data.weapon.b682.spread.moving_steelsight = tweak_data.weapon.b682.spread.standing * 0.7
 
 tweak_data.weapon.b682.rays = 8
 
@@ -2641,7 +2641,7 @@ tweak_data.weapon.b682.stats_modifiers = {
 
 tweak_data.weapon.b682.stats.damage = 40
 tweak_data.weapon.b682.stats.spread = 41
-tweak_data.weapon.b682.stats.recoil = 8
+tweak_data.weapon.b682.stats.recoil = 6
 tweak_data.weapon.b682.stats.suppression = 2
 
 pivot_shoulder_translation = Vector3(8.47311, 22.1434, -6.31211)
@@ -3087,12 +3087,12 @@ tweak_data.weapon.galil.kick.standing = { 0.6, -0.4, -0.5, 0.5}
 tweak_data.weapon.galil.kick.crouching = tweak_data.weapon.galil.kick.standing
 tweak_data.weapon.galil.kick.steelsight = tweak_data.weapon.galil.kick.standing
 
-tweak_data.weapon.galil.spread.standing = 5
+tweak_data.weapon.galil.spread.standing = 4.8
 tweak_data.weapon.galil.spread.crouching = 4.5
 tweak_data.weapon.galil.spread.steelsight = 0.25
-tweak_data.weapon.galil.spread.moving_standing = tweak_data.weapon.galil.spread.standing * 1.7
-tweak_data.weapon.galil.spread.moving_crouching = tweak_data.weapon.galil.spread.crouching * 1.7
-tweak_data.weapon.galil.spread.moving_steelsight = tweak_data.weapon.galil.spread.steelsight * 1.7
+tweak_data.weapon.galil.spread.moving_standing = tweak_data.weapon.galil.spread.standing * 1.65
+tweak_data.weapon.galil.spread.moving_crouching = tweak_data.weapon.galil.spread.crouching * 1.65
+tweak_data.weapon.galil.spread.moving_steelsight = tweak_data.weapon.galil.spread.steelsight * 1.65
 
 tweak_data.weapon.galil.fire_mode_data.fire_rate = 0.08571428571428571428571428571429
 
@@ -3116,8 +3116,8 @@ tweak_data.weapon.galil.damage_far = 87 * 100
 tweak_data.weapon.galil.damage_min = 0.5
 
 tweak_data.weapon.galil.stats.damage = 48
-tweak_data.weapon.galil.stats.spread = 81
-tweak_data.weapon.galil.stats.recoil = 51
+tweak_data.weapon.galil.stats.spread = 79
+tweak_data.weapon.galil.stats.recoil = 52
 tweak_data.weapon.galil.stats.suppression = 4
 	
 pivot_shoulder_translation = Vector3(10.7344, 22.1028, -3.71493)
@@ -3127,12 +3127,12 @@ pivot_head_rotation = Rotation(0, 0, 0)
 tweak_data.player.stances.galil.steelsight.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.galil.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3(9, 23, -4)
+pivot_head_translation = Vector3(9, 23, -5)
 pivot_head_rotation = Rotation(0, 0, -1)
 tweak_data.player.stances.galil.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.galil.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 
-pivot_head_translation = Vector3(7, 21,-2)
+pivot_head_translation = Vector3(7, 21,-3)
 pivot_head_rotation = Rotation(0, 0, -2)
 tweak_data.player.stances.galil.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 tweak_data.player.stances.galil.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
@@ -3175,7 +3175,7 @@ tweak_data.weapon.new_m14.damage_min = 0.5
 
 tweak_data.weapon.new_m14.stats.damage = 48
 tweak_data.weapon.new_m14.stats.spread = 90
-tweak_data.weapon.new_m14.stats.recoil = 52
+tweak_data.weapon.new_m14.stats.recoil = 54
 tweak_data.weapon.new_m14.stats.suppression = 3
 
 pivot_shoulder_translation = Vector3(10.7332, 15.6145, -2.75549)

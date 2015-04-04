@@ -144,5 +144,5 @@ RegisterScript("lib/Lua/DMCWO/post/tact_reload.lua", 2, "lib/units/weapons/shotg
 
 --[[PERSIST SCRIPTS]]
 AddPersistScript("RebalanceGen", "lib/Lua/DMCWO/persist/rebalance_general.lua")
-AddPersistScript("RebalanceGen", "lib/Lua/DMCWO/persist/rebalance.lua")
-AddPersistScript("RebalanceGen", "lib/Lua/DMCWO/persist/rebalance_attach.lua")
+AddPersistScript("RebalanceScript", "lib/Lua/DMCWO/persist/rebalance.lua")
+AddPersistScript("RebalanceAtchScript", "lib/Lua/DMCWO/persist/rebalance_attach.lua")

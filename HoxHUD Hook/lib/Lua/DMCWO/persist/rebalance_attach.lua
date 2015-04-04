@@ -1,5 +1,5 @@
 --[[
-v1.3
+v1.31
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
@@ -119,7 +119,7 @@ local hide_pis_flash = false
 --Default = false
 --NOTE: Enabling this will remove the 45 degree irons if they're attached, disallow it from being attached and will take the place as the first gadget you switch to with the laser/flashlight gadget becoming the second and/or third gadget you switch to
 --NOTE 2: You'll also get a floating 45 degree angle gadget in the main menu and mod screen, it's a side effect of having the BUIS actually work
---NOTE 3: Every now and then I might forget to u[date this for new weapons
+--NOTE 3: Every now and then I might forget to update this for new weapons
 local elcan_buis = false
 
 --if set to true, changes the free 000 Buck to Birdshot. 
@@ -1418,15 +1418,15 @@ tweak_factory.parts.wpn_fps_smg_mp9_b_suppressed.stats = {
 
 ------------------[[BARRELS]]------------------{
 --AK Slavic Dragon (AK74, AKM)
-tweak_factory.parts.wpn_fps_upg_ak_b_draco.stats = { recoil = 0, concealment = 1, spread = -1, suppression = 0}
+tweak_factory.parts.wpn_fps_upg_ak_b_draco.stats = { recoil = 0, concealment = 1, spread = -0, suppression = 0}
 tweak_factory.parts.wpn_fps_upg_ak_b_draco.perks = { "fastest_ads_brl", "short_barrel" }
 
-tweak_factory.parts.wpn_fps_upg_ass_ak_b_zastava.stats = { value = 1, spread = 6, recoil = -6, total_ammo_mod = -0, damage = 0, concealment = -4 }
+tweak_factory.parts.wpn_fps_upg_ass_ak_b_zastava.stats = { value = 1, spread = 8, recoil = -10, total_ammo_mod = -0, damage = 0, concealment = -4 }
 tweak_factory.parts.wpn_fps_upg_ass_ak_b_zastava.custom_stats = {}
 tweak_factory.parts.wpn_fps_upg_ass_ak_b_zastava.perks = { "slowest_ads_brl", "dmr_barrel" }
 
 tweak_factory.parts.wpn_fps_upg_ak_b_ak105.perks = { "short_barrel" }
-tweak_factory.parts.wpn_fps_upg_ak_b_ak105.stats = { value = 1, spread = -1, recoil = 1, concealment = 1 }
+tweak_factory.parts.wpn_fps_upg_ak_b_ak105.stats = { value = 1, spread = -1, recoil = 2, concealment = 1 }
 
 --AR Medium Barrel (Para SMG)
 tweak_factory.parts.wpn_fps_m4_uupg_b_medium.stats = { value = 1, spread = 2, concealment = -1 }
@@ -1436,10 +1436,10 @@ tweak_factory.parts.wpn_fps_m4_uupg_b_medium.perks = { "slow_ads_brl", "long_bar
 tweak_factory.parts.wpn_fps_m4_uupg_b_short.stats = { value = 5, damage = -1, spread = -1, recoil = 0, spread_moving = -2, concealment = 2, suppression = -2 }
 tweak_factory.parts.wpn_fps_m4_uupg_b_short.perks = { "fast_ads_brl", "short_barrel" }
 --AR Long Barrel (CAR-4, AMR-16)
-tweak_factory.parts.wpn_fps_m4_uupg_b_long.stats = { value = 4, damage = 2, spread = 2, recoil = 0, concealment = -2, suppression = 0 }
+tweak_factory.parts.wpn_fps_m4_uupg_b_long.stats = { value = 4, damage = 2, spread = 2, recoil = -1, concealment = -2, suppression = 0 }
 tweak_factory.parts.wpn_fps_m4_uupg_b_long.perks = { "slow_ads_brl", "long_barrel" }
 --Beowulf
-tweak_factory.parts.wpn_fps_upg_ass_m4_b_beowulf.stats = { value = 1, spread = 6, recoil = -6, total_ammo_mod = -0, damage = 2, concealment = -4 }
+tweak_factory.parts.wpn_fps_upg_ass_m4_b_beowulf.stats = { value = 1, spread = 8, recoil = -10, total_ammo_mod = -0, damage = 2, concealment = -4 }
 tweak_factory.parts.wpn_fps_upg_ass_m4_b_beowulf.custom_stats = {}
 tweak_factory.parts.wpn_fps_upg_ass_m4_b_beowulf.perks = { "slowest_ads_brl", "dmr_barrel" }
 --Intergrated Suppressor (CAR-4)
@@ -1452,7 +1452,7 @@ tweak_factory.parts.wpn_fps_ass_ak5_b_short.perks = { "fast_ads_brl", "short_bar
 
 
 --SG552 Long Barrel
-tweak_factory.parts.wpn_fps_ass_s552_b_long.stats = { value = 6, spread = 2, damage = 0, spread_moving = -4, concealment = -4, recoil = 1 }
+tweak_factory.parts.wpn_fps_ass_s552_b_long.stats = { value = 6, spread = 2, damage = 0, spread_moving = -4, concealment = -4, recoil = 0 }
 tweak_factory.parts.wpn_fps_ass_s552_b_long.perks = { "slow_ads_brl", "long_barrel" }
 
 --Road Warrior/Sawn-off (Mosconi)
@@ -1461,12 +1461,12 @@ tweak_factory.parts.wpn_fps_shot_huntsman_b_short.stats = { value = 10, recoil =
 tweak_factory.parts.wpn_fps_shot_huntsman_b_short.stance_mod = { wpn_fps_shot_huntsman = {rotation = Rotation(0,0.5,0) } }
 
 --Sawn-off (B682)
-tweak_factory.parts.wpn_fps_shot_b682_b_short.stats = { value = 10, recoil = -2, spread = -4, spread_moving = 3, concealment = 10, suppression = -1 }
+tweak_factory.parts.wpn_fps_shot_b682_b_short.stats = { value = 10, recoil = -1, spread = -4, spread_moving = 3, concealment = 10, suppression = -1 }
 tweak_factory.parts.wpn_fps_shot_b682_b_short.perks = { "fast_ads_brl", "short_barrel"}
 tweak_factory.parts.wpn_fps_shot_b682_b_short.stance_mod = { wpn_fps_shot_b682 = {rotation = Rotation(0,0.5,0) } }
 
 --SCAR Long Barrel
-tweak_factory.parts.wpn_fps_ass_scar_b_long.stats = { value = 4, spread = 2, spread_moving = -3, concealment = -3, damage = 12, recoil = -2, suppression = 0, total_ammo_mod = -38}
+tweak_factory.parts.wpn_fps_ass_scar_b_long.stats = { value = 4, spread = 3, spread_moving = -3, concealment = -3, damage = 12, recoil = -2, suppression = 0, total_ammo_mod = -38}
 tweak_factory.parts.wpn_fps_ass_scar_b_long.perks = { "slow_ads_brl", "long_barrel" }
 --SCAR Short Barrel
 tweak_factory.parts.wpn_fps_ass_scar_b_short.stats = { value = 3, damage = -0, suppression = -3, spread = -1, spread_moving = 3, concealment = 3 , recoil = 0}
@@ -1481,11 +1481,11 @@ tweak_factory.parts.wpn_fps_lmg_m249_b_long.stats = { value = 4, damage = 1, spr
 tweak_factory.parts.wpn_fps_lmg_m249_b_long.perks = { "slow_ads_brl", "long_barrel" }
 
 --Deagle Long Barrel
-tweak_factory.parts.wpn_fps_pis_deagle_b_long.stats = { value = 7, spread_moving = -3, spread = 4, damage = 0, concealment = -3, recoil = 0, suppression = -0  }
+tweak_factory.parts.wpn_fps_pis_deagle_b_long.stats = { value = 7, spread_moving = -3, spread = 4, damage = 0, concealment = -3, recoil = -1, suppression = -0  }
 tweak_factory.parts.wpn_fps_pis_deagle_b_long.perks = { "slow_ads_brl", "long_barrel" }
 
 --Raging Bull Long Barrel
-tweak_factory.parts.wpn_fps_pis_rage_b_long.stats = { value = 5, recoil = 0, spread = 6, spread_moving = -3, concealment = -3, damage = 0, suppression = -1 }
+tweak_factory.parts.wpn_fps_pis_rage_b_long.stats = { value = 5, recoil = -2, spread = 7, spread_moving = -3, concealment = -3, damage = 0, suppression = -1 }
 tweak_factory.parts.wpn_fps_pis_rage_b_long.perks = { "slower_ads_brl", "long_barrel" }
 --Raging Bull Short Barrel
 tweak_factory.parts.wpn_fps_pis_rage_b_short.stats = { value = 3, recoil = -1, spread_moving = 3, spread = -6, concealment = 3, damage = -0, suppression = -5 }
@@ -1503,8 +1503,8 @@ tweak_factory.parts.wpn_fps_smg_p90_b_long.stats = { value = 8, spread = 2, spre
 tweak_factory.parts.wpn_fps_smg_p90_b_ninja.perks = { "slowest_ads_brl", "silencer", "supp_barrel" }
 tweak_factory.parts.wpn_fps_smg_p90_b_ninja.stats = { value = 2, suppression = 100, alert_size = 12, damage = -1, recoil = 4, spread = 2 }
 
-tweak_factory.parts.wpn_fps_smg_p90_b_civilian.perks = { "slower_ads_brl" }
-tweak_factory.parts.wpn_fps_smg_p90_b_civilian.stats = { value = 1, damage = 1, spread = 1, recoil = 2, concealment = -4}
+tweak_factory.parts.wpn_fps_smg_p90_b_civilian.perks = { "slower_ads_brl", "long_barrel" }
+tweak_factory.parts.wpn_fps_smg_p90_b_civilian.stats = { value = 1, damage = 1, spread = 1, recoil = 3, concealment = -4}
 
 --AUG Long Barrel
 tweak_factory.parts.wpn_fps_aug_b_long.stats = { value = 7, spread_moving = -2, spread = 2, recoil = 0, concealment = -3, damage = 1 }
@@ -1526,17 +1526,17 @@ tweak_factory.parts.wpn_fps_snp_r93_b_short.perks = { "fast_ads_brl", "short_bar
 tweak_factory.parts.wpn_fps_snp_r93_b_short.stats = { value = 1, spread = -2, recoil = 0, spread_moving = 3, concealment = 3, damage = -4, suppression = -2 }
 --R93 Suppressed Barrel
 tweak_factory.parts.wpn_fps_snp_r93_b_suppressed.perks = { "silencer", "slower_ads_brl" }
-tweak_factory.parts.wpn_fps_snp_r93_b_suppressed.stats = { value = 4, suppression = 100, alert_size = 12, spread = 0, damage = -10, recoil = 1, spread_moving = 1, concealment = -1 }
+tweak_factory.parts.wpn_fps_snp_r93_b_suppressed.stats = { value = 4, suppression = 100, alert_size = 12, spread = 0, damage = -10, recoil = 3, spread_moving = 1, concealment = -1 }
 		
 --M95 Long Barrel
 tweak_factory.parts.wpn_fps_snp_m95_barrel_long.perks = { "slowest_ads_brl", "long_barrel" }
-tweak_factory.parts.wpn_fps_snp_m95_barrel_long.stats = { value = 2, spread = 1, concealment = -1, suppression = 0, recoil = -2, damage = 40, spread_moving = -2, total_ammo_mod = -46}
+tweak_factory.parts.wpn_fps_snp_m95_barrel_long.stats = { value = 2, spread = 1, concealment = -1, suppression = 0, recoil = -3, damage = 40, spread_moving = -2, total_ammo_mod = -46}
 --M95 Short Barrel
 tweak_factory.parts.wpn_fps_snp_m95_barrel_short.perks = { "fast_ads_brl", "short_barrel" }
 tweak_factory.parts.wpn_fps_snp_m95_barrel_short.stats = { value = 2, spread = -1, concealment = 8, damage = 0, suppression = -5 }
 --M95 Suppressed Barrel
 tweak_factory.parts.wpn_fps_snp_m95_barrel_suppressed.perks = { "slowest_ads_brl", "silencer", "supp_barrel" }
-tweak_factory.parts.wpn_fps_snp_m95_barrel_suppressed.stats = { value = 2, recoil = 3, concealment = 2, damage = -10, suppression = 100, alert_size = 12 }
+tweak_factory.parts.wpn_fps_snp_m95_barrel_suppressed.stats = { value = 2, recoil = 10, concealment = 2, damage = -10, suppression = 100, alert_size = 12 }
 
 --M1014 Long Barrel
 tweak_factory.parts.wpn_fps_sho_ben_b_long.perks = { "slow_ads_brl", "long_barrel" }
@@ -1568,7 +1568,7 @@ tweak_factory.parts.wpn_fps_sho_aa12_barrel_long.perks = { "slow_ads_brl", "long
 tweak_factory.parts.wpn_fps_sho_aa12_barrel_long.stats = { value = 1, recoil = 0, spread = 2, concealment = -2 }
 --AA12 Suppressed Barrel
 tweak_factory.parts.wpn_fps_sho_aa12_barrel_silenced.perks = { "silencer", "slowest_ads_brl", "supp_barrel" }
-tweak_factory.parts.wpn_fps_sho_aa12_barrel_silenced.stats = { value = 5, suppression = 100, alert_size = 12, damage = -2, recoil = 1, spread = 1, concealment = -2 }
+tweak_factory.parts.wpn_fps_sho_aa12_barrel_silenced.stats = { value = 5, suppression = 100, alert_size = 12, damage = -2, recoil = 2, spread = 1, concealment = -2 }
 
 --G3 Short Barrel
 tweak_factory.parts.wpn_fps_ass_g3_b_short.perks = { "fast_ads_brl", "short_barrel" }
@@ -1578,7 +1578,7 @@ tweak_factory.parts.wpn_fps_ass_g3_b_sniper.override = {}
 tweak_factory.parts.wpn_fps_ass_g3_b_sniper.adds = {}
 tweak_factory.parts.wpn_fps_ass_g3_b_sniper.forbids = {"wpn_fps_ammo_type"}
 tweak_factory.parts.wpn_fps_ass_g3_b_sniper.perks = { "slowest_ads_brl", "dmr_barrel" }
-tweak_factory.parts.wpn_fps_ass_g3_b_sniper.stats = {value = 2,recoil = -4,spread = 2,concealment = -2,damage = 12,total_ammo_mod = -38}
+tweak_factory.parts.wpn_fps_ass_g3_b_sniper.stats = {value = 2,recoil = -5,spread = 3,concealment = -2,damage = 12,total_ammo_mod = -38}
 
 --FAMAS Long
 tweak_factory.parts.wpn_fps_ass_famas_b_long.perks = { "slow_ads_brl", "long_barrel" }
@@ -2171,7 +2171,7 @@ tweak_factory.parts.wpn_fps_lmg_m249_s_solid.stats = { value = 3, recoil = 2, co
 tweak_factory.parts.wpn_fps_lmg_rpk_s_standard.stats = { value = 3, recoil = 1, concealment = 1 }
 
 --Gangster Special (Mosconi)
-tweak_factory.parts.wpn_fps_shot_huntsman_s_short.stats = { value = 10, recoil = -7, spread = 0, spread_moving = 3, concealment = 10 }
+tweak_factory.parts.wpn_fps_shot_huntsman_s_short.stats = { value = 10, recoil = -8, spread = 0, spread_moving = 3, concealment = 10 }
 
 --Wrist Wrecker
 tweak_factory.parts.wpn_fps_shot_b682_s_short.stats = { value = 1, recoil = -9, spread = 0, spread_moving = 3, concealment = 6 }
@@ -2179,20 +2179,20 @@ tweak_factory.parts.wpn_fps_shot_b682_s_short.stats = { value = 1, recoil = -9, 
 tweak_factory.parts.wpn_fps_shot_b682_s_ammopouch.stats = { value = 1, total_ammo_mod = 25}
 
 --Tactical Shorty (Loco)
-tweak_factory.parts.wpn_fps_shot_shorty_s_nostock_short.stats = { value = 4, spread_moving = 2, recoil = -3, concealment = 3 }
+tweak_factory.parts.wpn_fps_shot_shorty_s_nostock_short.stats = { value = 4, spread_moving = 2, recoil = -4, concealment = 3 }
 --Standard (Loco)
-tweak_factory.parts.wpn_fps_shot_r870_s_solid.stats = { value = 2, spread_moving = -2, recoil = 2, concealment = -1 }
+tweak_factory.parts.wpn_fps_shot_r870_s_solid.stats = { value = 2, spread_moving = -2, recoil = 3, concealment = -1 }
 
 --MP9 Stock
-tweak_factory.parts.wpn_fps_smg_mp9_s_skel.stats = { value = 5, recoil = 2, spread_moving = -3, concealment = -3, spread = 1 }
+tweak_factory.parts.wpn_fps_smg_mp9_s_skel.stats = { value = 5, recoil = 3, spread_moving = -3, concealment = -3, spread = 0 }
 
 --MP5 Retractable Stock
 tweak_factory.parts.wpn_fps_smg_mp5_s_adjust.stats = { value = 3, spread_moving = 1, concealment = 3, recoil = -1 }
 --MP5 No Stock
-tweak_factory.parts.wpn_fps_smg_mp5_s_ring.stats = { value = 3, spread_moving = 4, recoil = -3, concealment = 4 }
+tweak_factory.parts.wpn_fps_smg_mp5_s_ring.stats = { value = 3, spread_moving = 4, recoil = -4, concealment = 4 }
 
 --R870 Top Folding Stock
-tweak_factory.parts.wpn_fps_shot_r870_s_folding.stats = { value = 9, spread_moving = 1, recoil = -1, concealment = 1 }
+tweak_factory.parts.wpn_fps_shot_r870_s_folding.stats = { value = 9, spread_moving = 1, recoil = -0, concealment = 1 }
 
 --SG552 Green Stock
 tweak_factory.parts.wpn_fps_ass_s552_s_standard_green.stats = { value = 4, recoil = 2, concealment = -2, spread = 0 }
@@ -2206,14 +2206,14 @@ tweak_factory.parts.wpn_fps_ass_g36_s_kv.stats = { value = 4, spread_moving = 2,
 tweak_factory.parts.wpn_fps_ass_g36_s_sl8.stats = { value = 9, recoil = 1, spread_moving = -3, concealment = -3, spread = 2 }
 
 --MP7 Extended stock
-tweak_factory.parts.wpn_fps_smg_mp7_s_long.stats = { value = 1, recoil = 2, spread_moving = -1, concealment = -2, spread = 2 }
+tweak_factory.parts.wpn_fps_smg_mp7_s_long.stats = { value = 1, recoil = 3, spread_moving = -1, concealment = -2, spread = 0 }
 
 --FAL Folding Stock
-tweak_factory.parts.wpn_fps_ass_fal_s_01.stats = { value = 3, spread = 0, recoil = -1, concealment = 5 }
+tweak_factory.parts.wpn_fps_ass_fal_s_01.stats = { value = 3, spread = 0, recoil = -3, concealment = 5 }
 --FAL Magpul Stock
-tweak_factory.parts.wpn_fps_ass_fal_s_03.stats = { value = 3, spread = 2, recoil = 1, concealment = -2 }
+tweak_factory.parts.wpn_fps_ass_fal_s_03.stats = { value = 3, spread = 2, recoil = 2, concealment = -2 }
 --FAL Wooden Stock
-tweak_factory.parts.wpn_fps_ass_fal_s_wood.stats = { value = 3, spread = 0, recoil = 3, concealment = 0 }
+tweak_factory.parts.wpn_fps_ass_fal_s_wood.stats = { value = 3, spread = 0, recoil = 4, concealment = 0 }
 
 --M1014 Solid Stock
 tweak_factory.parts.wpn_fps_sho_ben_s_solid.stats = { value = 5, recoil = 2, concealment = -2 }
@@ -4015,7 +4015,7 @@ tweak_factory.wpn_fps_ass_m16.override.wpn_fps_upg_m4_m_drum = {stats = { value 
 tweak_factory.wpn_fps_ass_m16.override.wpn_fps_ass_l85a2_m_emag = {stats = { value = 1, spread = -1, extra_ammo = 10, recoil = 0, total_ammo_mod = 30}}
 tweak_factory.wpn_fps_ass_m16.override.wpn_fps_upg_m4_m_l5 = {stats = { value = 1, extra_ammo = 10, recoil = 1, total_ammo_mod = 0, spread = -0}}
 tweak_factory.wpn_fps_ass_m16.override.wpn_fps_m4_uupg_b_long = {stats = { value = 4, damage = 1, spread = 2, recoil = 0, concealment = -2, suppression = 0}}
-tweak_factory.wpn_fps_ass_m16.override.wpn_fps_upg_ass_m4_b_beowulf = {stats = { value = 1, spread = 6, recoil = -6, total_ammo_mod = -0, damage = 1, concealment = -4 }}
+tweak_factory.wpn_fps_ass_m16.override.wpn_fps_upg_ass_m4_b_beowulf = {stats = { value = 1, spread = 8, recoil = -10, total_ammo_mod = -0, damage = 1, concealment = -4 }}
 
 
 --AK overrides
@@ -4339,7 +4339,7 @@ if not DMCWO.rebalance_att then
 	end
 	if DMCWO.stfu == false then
 		local rand_num = math.random(#DMCWO.Strings)
-		io.stdout:write( tostring(DMCWO.Strings[rand_num]), "\n" )
+		io.stdout:write(tostring(DMCWO.Strings[rand_num]), "\n" )
 	end
 end
 
