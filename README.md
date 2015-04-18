@@ -40,10 +40,6 @@ I HIGHLY recommend you NOT try this mod until after reaching level 85-ish (when 
 * Harfatus for the lua hook
 * IMFDB and Payday Wikia for weapon names and attachments I couldn't ID
 * /k/ anon for semi-solidifiying some of the attachment names
-  > Anon: Low Profile Suppressor might be a gemtec halo with a different attachment system but idk im getting buttflustered with you lol
-  > Me: tfw we've been pretty much on the same page as to what the IRL counterparts are
-  > Me: I'm in pain (from laughing)
-  > Anon: I hate you, anon wants recognition for his internet fu ;_;
 * DMC for tweaking and testing and tweaking and testing all the gun/attachment stats to meta levels
   * Also not me for buying a tablet and spending time on that drawing porn instead of updating this mod
 * My Steam friends for being my guinea pigs for pre-release testing (0.1a)
@@ -69,7 +65,7 @@ SquareOne's instant bullet impact fix. May cause frame drops on lower end PCs if
 
 Required for the following: i am not a spy...'s bundle mod tool: http://steamcommunity.com/app/218620/discussions/15/540744936746354308/
 * i am not a spy...'s HD 3rd Person Weapons: http://steamcommunity.com/app/218620/discussions/15/558754900072790886/
-* "Sandman"'s Enemy and Civilian Leg and Arm Hitboxes: http://steamcommunity.com/app/218620/discussions/15/35222218813407100/
+* Sandman's Enemy and Civilian Leg and Arm Hitboxes: http://steamcommunity.com/app/218620/discussions/15/35222218813407100/
 
 mod_override things:
 * Bob_760's Black Gun Skins: http://steamcommunity.com/app/218620/discussions/15/558755529942726277/
