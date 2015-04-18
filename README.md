@@ -1,5 +1,7 @@
 # DMC's Weapon Overhaul v1.3: yee Edition
+
 yee
+
 by: Diddle Middle Ciddle
 
 UC Thread: http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html
@@ -11,19 +13,19 @@ Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 
 Despite being out of pre-release, I'm still changing things left right and center, don't get too used to things
 
-
 # What do?
 
 This mod is NOT meant to make the game easier (or at least not a whole lot easier) but I'd still class this s a form of cheating.
 
 The point of this mod is to fully overhaul and "rebalance" the weapons in PD2 so that nothing is truely useless (RPK/HK21, AK5/AMCAR, Reinfeld), horribly overpowered compared to other weapons similar to themselves like the M249 (as of the courier pack), the CAR-4 (even more so with the courier pack) or the Locomotive (the best fucking shotgun, nothing beats it) or become ugly as fuck to make a decent build.
 
-tl;dr I got rid of the fucking dumb shir meta bullshit that made the game all of 4-5 guns and made it so you don't have to worry about making an abomination of a gun
+tl;dr I got rid of the fucking dumb shir meta bullshit that made the game all of 4–5 guns and made it so you don't have to worry about making an abomination of a gun.
 
-NOTE: I didn't and won't be making concealment value modifications for vanilla attachments as that number is calculated by the host who more than likely won't be using this. I don't want to bring the false impression that you have "x" concealment when you really have "y" concealment. 
+**NOTE:** I didn't and won't be making concealment value modifications for vanilla attachments as that number is calculated by the host who more than likely won't be using this. I don't want to bring the false impression that you have "x" concealment when you really have "y" concealment. 
+
 That said, extra attachments don't count towards your concealment if you're a client, so keep that in mind. You'll benefit from extra attachment concealment if you host or play solo.
 
-****I HIGHLY recommend you NOT try this mod until after reaching level 85-ish (when the grind REALLY starts) for the first time, this batch of scripts changes the whole dynamic on how to build weapons, more than likely making your current builds non-optimal or flat-out obsolete
+I HIGHLY recommend you NOT try this mod until after reaching level 85-ish (when the grind REALLY starts) for the first time, this batch of scripts changes the whole dynamic on how to build weapons, more than likely making your current builds non-optimal or flat-out obsolete.
 
 # Credits & Thanks
 
