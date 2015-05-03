@@ -1,5 +1,5 @@
 --[[
-v1.31
+v1.32
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
@@ -76,6 +76,37 @@ elseif RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 		end
 	end
 	
+	function NewShotgunBase:reload_enter_expire_t()
+		return self:weapon_tweak_data().timers.shotgun_reload_enter or 0.3
+	end
+	
+	function NewShotgunBase:reload_exit_expire_t()
+		return self:weapon_tweak_data().timers.shotgun_reload_exit_empty or 0.7
+	end
+	
+	function NewShotgunBase:reload_not_empty_exit_expire_t()
+		return self:weapon_tweak_data().timers.shotgun_reload_exit_not_empty or 0.3
+	end
+	
+	function NewShotgunBase:reload_shell_expire_t()
+		return self:weapon_tweak_data().timers.shotgun_reload_shell or 0.56666666
+	end
+	
+	function NewShotgunBase:_first_shell_reload_expire_t()
+		return self:reload_shell_expire_t() - (self:weapon_tweak_data().timers.shotgun_reload_first_shell_offset or 0.33)
+	end
+	
+	function NewShotgunBase:start_reload(...)
+		NewShotgunBase.super.start_reload(self, ...)
+		self._started_reload_empty = self:clip_empty()
+		local speed_multiplier = self:reload_speed_multiplier()
+		self._next_shell_reloded_t = managers.player:player_timer():time() + self:_first_shell_reload_expire_t() / speed_multiplier
+	end
+	
+	function NewShotgunBase:started_reload_empty()
+		return self._started_reload_empty
+	end
+	
 	function NewShotgunBase:update_reloading(t, dt, time_left)
 		if t > self._next_shell_reloded_t then
 			local speed_multiplier = self:reload_speed_multiplier()
@@ -89,5 +120,26 @@ elseif RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 			end
 		end
 	end
+	
+	SaigaShotgun = SaigaShotgun or class(NewShotgunBase)
+	function SaigaShotgun:reload_expire_t()
+		return nil
+	end
+	
+	function SaigaShotgun:reload_enter_expire_t()
+		return nil
+	end
+	
+	function SaigaShotgun:reload_exit_expire_t()
+		return nil
+	end
+	
+	function SaigaShotgun:reload_not_empty_exit_expire_t()
+		return nil
+	end
+	
+	function SaigaShotgun:update_reloading(t, dt, time_left)
+	end
+
 	
 end

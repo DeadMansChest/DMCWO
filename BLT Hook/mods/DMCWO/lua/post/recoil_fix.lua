@@ -1,5 +1,5 @@
 --[[
-v1.31
+v1.32
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
@@ -8,7 +8,7 @@ function FPCameraPlayerBase:stop_shooting( wait )
 	self._recoil_kick.h.to_reduce 	= self._recoil_kick.h.accumulated or 0 --ditto
 	self._recoil_kick.to_reduce 	= self._recoil_kick.to_reduce * 1 --Feel free to change this to w/e multiplier (0-1)
 	self._recoil_kick.h.to_reduce 	= self._recoil_kick.h.to_reduce	* 1  -- 1 = 100% recoil recovery, 0.5 = 50% recoil recovery, etc.
-	self._recoil_wait = wait or 0
+	self._recoil_wait = 0
 end
 
 function FPCameraPlayerBase:recoil_kick( up, down, left, right )

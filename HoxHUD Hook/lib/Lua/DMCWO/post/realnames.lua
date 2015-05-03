@@ -1,5 +1,5 @@
 --[[
-v1.31
+v1.32
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
@@ -140,8 +140,10 @@ function LocalizationManager:text( string_id, macros )
 	--going against imfdb here, simply for the fact the the flat top receiver isn't limited to the A4 and that the AMR bares more resemblence to the A3 (default handguard, automatic fire)
 	--Railed
 	realnames["bm_wp_m16_fg_railed"] = "Daniel Defense Lite Rail" --not a carbon copy, just based off of, if only for the delta ring
+	realnames["bm_wp_m16_fg_railed_desc"] = "Decreases ADS speed by 5%" --not a carbon copy, just based off of, if only for the delta ring
 	--Blast to the Past
 	realnames["bm_wp_m16_fg_vietnam"] = "M16A1 Handguard"
+	realnames["bm_wp_m16_fg_vietnam_desc"] = "Increases ADS speed by 5%"
 	
 	--[[553 NO PANTSU]]
 	realnames["bm_w_s552"] = "SIG SG 552" --"SG550's Little Sister"
@@ -178,8 +180,8 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_w_fal"] = "FN FAL"
 	--CQB
 	realnames["bm_wp_fal_body_standard"] = "DSA SA58 Handguard w/ Short Barrel" --this might conflict with something since this is also the name_id of the receiver
-	realnames["bm_wp_fal_body_standard_desc"] = "Decreases range by 10% \nIncreases ADS speed by 15%" --this might conflict with something since this is also the name_id of the receiver
-	--Retro
+	realnames["bm_wp_fal_body_standard_desc"] = "Decreases range by 10% \nIncreases ADS speed by 15% \nDecreases movement penalty by 5%"
+	
     realnames["bm_wp_fal_fg_03"] = "IMI Romat Handguard"
     realnames["bm_wp_fal_fg_03_desc"] = "Decreases ADS speed by 5%"
 	--Marksman
@@ -187,7 +189,7 @@ function LocalizationManager:text( string_id, macros )
     realnames["bm_wp_fal_fg_04_desc"] = "Increases ADS speed by 5%"
 	--Wood
     realnames["bm_wp_fal_fg_wood"] = "Wooden Handguard"
-    realnames["bm_wp_fal_fg_wood_desc"] = "Decreases ADS speed by 7.5%"
+    realnames["bm_wp_fal_fg_wood_desc"] = "Decreases ADS speed by 7.5% \nIncreases movement penalty by 5%"
 	--Tactical Grip
 	realnames["bm_wp_fal_g_01"] = "Tapco FAL/SAW Pistol Grip"
 	--Extended Mag
@@ -273,16 +275,16 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_w_m95"] = "Barrett M95"
 	--Tank Buster
 	realnames["bm_wp_m95_b_barrel_long"] = "Long Barrel w/ AW50F Muzzle Brake"
-	realnames["bm_wp_m95_b_barrel_long_desc"] = "Increases range by 15% \nDecreases ADS speed by 10%"
-	realnames["bm_wp_m95_b_barrel_short_desc"] = "Decreases range by 10% \nIncreases ADS speed by 5%"
-	realnames["bm_wp_m95_b_barrel_suppressed"] = "Internally suppressed barrel \nDecreases ADS speed by 10%"
+	realnames["bm_wp_m95_b_barrel_long_desc"] = "Increases range by 15% \nDecreases ADS speed by 10% \nIncreases movement penalty by 5%"
+	realnames["bm_wp_m95_b_barrel_short_desc"] = "Decreases range by 10% \nIncreases ADS speed by 5% \nDecreases movement penalty by 5%"
+	realnames["bm_wp_m95_b_barrel_suppressed_desc"] = "Internally suppressed barrel \nDecreases ADS speed by 10% \nIncreases movement penalty by 10%"
 	
 	--[[MOIST NUGGET]]
 	realnames["bm_w_mosin"] = "Mosin Nagant M91/30"
 	
 	realnames["bm_wp_mosin_b_short_desc"] = "Decreases range by 10%\nIncreases ADS speed by 5%"
 	
-	realnames["bm_wp_mosin_b_standard_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%"
+	realnames["bm_wp_mosin_b_long_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%"
 	
 	realnames["bm_wp_mosin_b_sniper"] = "Mosin Suppressor"
 	realnames["bm_wp_mosin_b_sniper_desc"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 7.5%"
@@ -472,7 +474,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_wp_beretta_m_extended_desc"] = "Decreases reload speed by 5%"
 	--Elite Slide
 	realnames["bm_wp_beretta_sl_brigadier"] = "Brigadier Elite Slide"
-	
+		
 	--[[HUEHUEHUEHUE]]
 	realnames["bm_w_raging_bull"] = "Taurus Raging Bull"
 	--Mount
@@ -720,6 +722,29 @@ function LocalizationManager:text( string_id, macros )
 	--[[NADE SPAM]]
 	realnames["bm_w_m32"] = "Milkor Multiple Grenade Launcher"
 	
+	--[[REVOLVER OCELOT]]
+	realnames["bm_w_peacemaker"] = "Revolver Ocelot" --"Colt Single Action Army"
+	--Long
+	realnames["bm_wp_peacemaker_barrel_long"] = "Revolver Ocelot" --"12\" Barrel"
+	realnames["bm_wp_peacemaker_barrel_long_desc"] = "Revolver Ocelot" --"Increases range by 15% \nDecreases ADS speed by 5%"
+	--Short
+	realnames["bm_wp_peacemaker_barrel_short"] = "Revolver Ocelot" --"5.5\" Barrel"
+	realnames["bm_wp_peacemaker_barrel_short_desc"] = "Revolver Ocelot" --"Decreases range by 10% \nIncreases ADS speed by 5%"
+	--Grip
+	realnames["bm_wp_peacemaker_handle_bling"] = "Revolver Ocelot" --"Engraved Grip"
+	--Stock
+	realnames["bm_wp_peacemaker_rifle_stock"] = "Revolver Ocelot" --Skeletal Stock
+	
+	--[[Winchester]]--
+	realnames["bm_w_winchester1874"] = "Winchester Model 1873"
+	--Long
+	realnames["bm_wp_winchester_b_long"] = "Long Barrel"
+	realnames["bm_wp_winchester_b_long_desc"] = "Increases range by 15% \nDecreases ADS speed by 5%" 
+	--Supp
+	realnames["bm_wp_winchester_b_suppressed"] = "Suppressor"
+	realnames["bm_wp_winchester_b_suppressed_desc"] = "Decreases range by 20% \nDecreases minimum damage by 10% \nDecreases ADS speed by 7.5%"
+	
+	realnames["bm_wp_winchester_sniper_scope_desc"] = "High power scope \nDecreases ADS speed by 10%"
 	
 	--[[WEAPON MODS]]
 	
@@ -1140,12 +1165,12 @@ function LocalizationManager:text( string_id, macros )
 	realnames["menu_battle_rifle"] = "Battle Rifles"
 	realnames["menu_carbine"] = "Carbines"
 	realnames["menu_gpmg"] = "General Purpose Machine Guns"
+	realnames["menu_revolvo"] = "Revolvers"
 	
 	realnames["menu_lmg"] = "Light Machine Guns"
 	realnames["menu_shotgun"] = "Shotguns"
-	realnames["menu_pistol"] = "Handguns"
 	realnames["menu_assault_rifle"] = "Assault Rifles"
-	realnames["menu_snp"] = "Snipers"
+	realnames["menu_snp"] = "Rifles"
 	realnames["menu_smg"] = "Sub-Machine Guns"
 	
 	realnames["menu_jowi"] = "Wick"

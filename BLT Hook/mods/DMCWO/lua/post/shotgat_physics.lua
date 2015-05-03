@@ -1,5 +1,5 @@
 --[[
-v1.31
+v1.32
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
@@ -34,23 +34,16 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 		end
 	end
 	
-	function NewShotgunBase:get_damage_falloff(damage, col_ray, user_unit)
-		local distance = col_ray.distance or mvector3.distance(col_ray.unit:position(), user_unit:position())		
-		return (1 - math.min(1, math.max(0, distance - self._damage_near) / self._damage_far)) * damage
-	end
-	
 	--Makes shotgun pellet damage accumulative, code thanks to LazyOzzy
-	
+	local mvec_to = Vector3()
+	local mvec_direction = Vector3()
+	local mvec_spread_direction = Vector3()
 	function NewShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoot_player, spread_mul, autohit_mul, suppr_mul, shoot_through_data)
-		if self._rays == 1 then
-			local result = NewShotgunBase.super._fire_raycast(self, user_unit, from_pos, direction, dmg_mul, shoot_player, spread_mul, autohit_mul, suppr_mul, shoot_through_data)
-			return result
+		local result
+		local add_shoot_through_bullet = self._can_shoot_through_shield or self._can_shoot_through_enemy or self._can_shoot_through_wall
+		if add_shoot_through_bullet then
+			result = NewShotgunBase.super._fire_raycast(self, user_unit, from_pos, direction, dmg_mul, shoot_player, spread_mul, autohit_mul, suppr_mul, shoot_through_data)
 		end
-	
-		local mvec_to = Vector3()
-		local mvec_direction = Vector3()
-		local mvec_spread_direction = Vector3()
-		local result = {}
 		local hit_enemies = {}
 		local hit_something, col_rays
 		if self._alert_events then
@@ -76,7 +69,7 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 		damage = damage / self._rays --split damage across all pellets
 		spread = spread
 		
-		for i = 1, self._rays do
+		for i = add_shoot_through_bullet and 2 or 1, self._rays do
 			mvector3.set(mvec_spread_direction, mvec_direction)
 			if spread then
 				mvector3.spread(mvec_spread_direction, spread * (spread_mul or 1))
@@ -128,8 +121,8 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 		for _, col_ray in pairs( hit_enemies ) do
 			local damage = self:get_damage_falloff(damage, col_ray, user_unit)
 			if damage > 0 and not col_ray.unit:character_damage():dead() then
-				local result = self._bullet_class:on_collision(col_ray, self._unit, user_unit, damage)
-				if result and result.type == "death" then
+				local my_result = self._bullet_class:on_collision(col_ray, self._unit, user_unit, damage)
+				if my_result and my_result.type == "death" then
 					managers.game_play_central:do_shotgun_push(col_ray.unit, col_ray.position, col_ray.ray, col_ray.distance)
 				end
 			else
@@ -144,9 +137,12 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 			end
 		end
 	
-		result.hit_enemy = next(hit_enemies) and true or false
-		if self._alert_events then
-			result.rays = #col_rays > 0 and col_rays
+		if not result then
+			result = {}
+			result.hit_enemy = next(hit_enemies) and true or false
+			if self._alert_events then
+				result.rays = #col_rays > 0 and col_rays
+			end
 		end
 		managers.statistics:shot_fired({ hit = false, weapon_unit = self._unit })
 		

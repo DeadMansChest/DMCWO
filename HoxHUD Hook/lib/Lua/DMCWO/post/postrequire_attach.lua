@@ -1,5 +1,5 @@
 --[[
-v1.31
+v1.32
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
@@ -33,6 +33,8 @@ function WeaponFactoryTweakData:DMCWO_general()
 	"wpn_fps_smg_p90","wpn_fps_smg_mp7",
 	
 	"wpn_fps_shot_r870","wpn_fps_shot_saiga","wpn_fps_sho_ben","wpn_fps_sho_ksg","wpn_fps_shot_serbu","wpn_fps_sho_spas12","wpn_fps_sho_striker",
+	
+	"wpn_fps_snp_winchester",
 	}
 	for i, factory_id in ipairs(weapon_factory_ids) do
 		table.insert(self[factory_id].uses_parts, "wpn_fps_upg_o_45iron")
@@ -41,7 +43,7 @@ function WeaponFactoryTweakData:DMCWO_general()
 	end
 	
 	local lmg_sights = {
-	"wpn_fps_lmg_mg42","wpn_fps_lmg_hk21","wpn_fps_lmg_m249","wpn_fps_lmg_rpk",
+	"wpn_fps_lmg_mg42","wpn_fps_lmg_hk21","wpn_fps_lmg_m249","wpn_fps_lmg_rpk","wpn_fps_snp_winchester"
 	}
 	for i, factory_id in ipairs(lmg_sights) do
 		table.insert(self[factory_id].uses_parts, "wpn_fps_upg_o_specter")

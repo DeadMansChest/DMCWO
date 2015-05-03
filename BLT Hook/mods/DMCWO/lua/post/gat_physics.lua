@@ -1,5 +1,5 @@
 --[[
-v1.31
+v1.32
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
 ]]
 
@@ -89,12 +89,14 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 			multiplier = multiplier * 0.9
 		end
 		
-		if self._rapid_fire and not (name == "c96" or name == "tec9") then 
+		if self._rapid_fire and not (name == "c96" or name == "tec9" or name == "colt_1911") then 
 			multiplier = multiplier * 1.15
 		elseif self._rapid_fire and name == "c96" then 
 			multiplier = multiplier * 2
 		elseif self._rapid_fire and name == "tec9" then 
 			multiplier = multiplier * 1.33333333333333
+		elseif self._rapid_fire and name == "colt_1911" then 
+			multiplier = multiplier * 2.1978021978021978021978021978022
 		elseif self._slow_fire then 
 			multiplier = multiplier * 0.9
 		end
@@ -109,12 +111,149 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 	end
 
 elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
-				
-	--Damage falloff for non-shotguns (Penetration/Distance and col_ray bugs fixed by LazyOzzy)
-	function NewRaycastWeaponBase:get_damage_falloff(damage, col_ray, user_unit, distance)
-			
-		local dist = distance or mvector3.distance(col_ray.unit:position(), user_unit:position())
+
 	
+	--Movement
+	tweak_data.upgrades.weapon_movement_penalty.lmg = 1 --0.8
+	
+	tweak_data.weapon.m134.weapon_movement_penalty = 0.4
+	
+	tweak_data.weapon.m95.weapon_movement_penalty = 0.7
+	tweak_data.weapon.mg42.weapon_movement_penalty = 0.7
+	
+	tweak_data.weapon.hk21.weapon_movement_penalty = 0.75
+	
+	tweak_data.weapon.m249.weapon_movement_penalty = 0.8
+	tweak_data.weapon.r93.weapon_movement_penalty = 0.8
+	tweak_data.weapon.rpg7.weapon_movement_penalty = 0.8
+	
+	tweak_data.weapon.rpk.weapon_movement_penalty = 0.85
+	tweak_data.weapon.galil.weapon_movement_penalty = 0.85
+	
+	tweak_data.weapon.fal.weapon_movement_penalty = 0.9
+	tweak_data.weapon.striker.weapon_movement_penalty = 0.9
+	tweak_data.weapon.g3.weapon_movement_penalty = 0.9
+	tweak_data.weapon.spas12.weapon_movement_penalty = 0.9
+	tweak_data.weapon.mosin.weapon_movement_penalty = 0.9
+	tweak_data.weapon.m1928.weapon_movement_penalty = 0.9
+	tweak_data.weapon.l85a2.weapon_movement_penalty = 0.9
+	tweak_data.weapon.akm_gold.weapon_movement_penalty = 0.9
+	tweak_data.weapon.aa12.weapon_movement_penalty = 0.9
+	tweak_data.weapon.m32.weapon_movement_penalty = 0.9
+	
+	tweak_data.weapon.msr.weapon_movement_penalty = 0.95
+	tweak_data.weapon.new_m14.weapon_movement_penalty = 0.95
+	
+	--Muzzle flash stuff
+	local old_update_stats_values = NewRaycastWeaponBase._update_stats_values
+	
+	function NewRaycastWeaponBase:_update_stats_values()
+		old_update_stats_values(self)
+		
+		self._movement_penalty = tweak_data.weapon[self._name_id].weapon_movement_penalty or 1
+		local custom_stats = managers.weapon_factory:get_custom_stats_from_weapon(self._factory_id, self._blueprint)
+		for part_id, stats in pairs(custom_stats) do
+			if stats.movement_speed then
+				self._movement_penalty = self._movement_penalty * stats.movement_speed
+			end
+			if tweak_data.weapon.factory.parts[part_id].type ~= "ammo" then
+				if stats.ammo_pickup_min_mul then
+					self._ammo_data.ammo_pickup_min_mul = self._ammo_data.ammo_pickup_min_mul and self._ammo_data.ammo_pickup_min_mul * stats.ammo_pickup_min_mul or stats.ammo_pickup_min_mul
+				end
+				if stats.ammo_pickup_max_mul then
+					self._ammo_data.ammo_pickup_max_mul = self._ammo_data.ammo_pickup_max_mul and self._ammo_data.ammo_pickup_max_mul * stats.ammo_pickup_max_mul or stats.ammo_pickup_max_mul
+				end
+			end
+		end
+		self._long_barrel = managers.weapon_factory:has_perk("long_barrel", self._factory_id, self._blueprint)
+		self._dmr_barrel = managers.weapon_factory:has_perk("dmr_barrel", self._factory_id, self._blueprint)
+		self._short_barrel = managers.weapon_factory:has_perk("short_barrel", self._factory_id, self._blueprint)
+		self._supp_barrel = managers.weapon_factory:has_perk("supp_barrel", self._factory_id, self._blueprint)
+		
+		self._silencer = managers.weapon_factory:has_perk("silencer", self._factory_id, self._blueprint)
+		self._flash_hide = managers.weapon_factory:has_perk("flash_hider", self._factory_id, self._blueprint)
+		self._side_comp = managers.weapon_factory:has_perk("side_comp", self._factory_id, self._blueprint)
+		self._big_flash = managers.weapon_factory:has_perk("big_flash", self._factory_id, self._blueprint)
+		if self._silencer then
+			self._muzzle_effect = Idstring(self:weapon_tweak_data().muzzleflash_silenced or "effects/payday2/particles/weapons/9mm_auto_silence_fps")
+		elseif self._ammo_data and self._ammo_data.muzzleflash ~= nil then
+			self._muzzle_effect = Idstring(self._ammo_data.muzzleflash)
+		elseif self._flash_hide then
+			self._muzzle_effect = Idstring(self:weapon_tweak_data().muzzleflash_silenced or "effects/payday2/particles/weapons/9mm_auto_silence_fps")
+		elseif self._side_comp then
+			self._muzzle_effect = Idstring("effects/payday2/particles/weapons/50cal_auto_fps")
+		elseif self._big_flash then
+			self._muzzle_effect = Idstring("effects/payday2/particles/weapons/big_762_auto_fps")
+		else
+			self._muzzle_effect = Idstring(self:weapon_tweak_data().muzzleflash or "effects/particles/test/muzzleflash_maingun")
+		end
+		self._muzzle_effect_table = {
+			effect = self._muzzle_effect,
+			parent = self._obj_fire,
+			force_synch = self._muzzle_effect_table.force_synch or false
+		}
+		
+		--ROF Multiplier perks--{
+		self._mp5k_rof = managers.weapon_factory:has_perk("mp5k_rof", self._factory_id, self._blueprint)
+		self._mp5sd_rof = managers.weapon_factory:has_perk("mp5sd_rof", self._factory_id, self._blueprint)
+		self._mg34_rof = managers.weapon_factory:has_perk("mg34_rof", self._factory_id, self._blueprint)
+		self._famas2_rof = managers.weapon_factory:has_perk("famas2_rof", self._factory_id, self._blueprint)
+		self._mk14_rof = managers.weapon_factory:has_perk("mk14_rof", self._factory_id, self._blueprint)
+		self._mar_rof = managers.weapon_factory:has_perk("mar_rof", self._factory_id, self._blueprint)
+		self._galatz_rof = managers.weapon_factory:has_perk("galatz_rof", self._factory_id, self._blueprint)
+		self._ak5c_rof = managers.weapon_factory:has_perk("ak5c_rof", self._factory_id, self._blueprint)
+		self._fnfnc_rof = managers.weapon_factory:has_perk("fnfnc_rof", self._factory_id, self._blueprint)
+		self._m119_slow = managers.weapon_factory:has_perk("m119_slow", self._factory_id, self._blueprint)
+		self._f90_rof = managers.weapon_factory:has_perk("f90_rof", self._factory_id, self._blueprint)
+		
+		self._rapid_fire = managers.weapon_factory:has_perk("fire_mode_auto", self._factory_id, self._blueprint)
+		self._slow_fire = managers.weapon_factory:has_perk("fire_mode_single", self._factory_id, self._blueprint)
+		self._quick_bolt = managers.weapon_factory:has_perk("quick_bolt", self._factory_id, self._blueprint)
+		self._fast_bolt = managers.weapon_factory:has_perk("fast_bolt", self._factory_id, self._blueprint)
+		self._slow_bolt = managers.weapon_factory:has_perk("slow_bolt", self._factory_id, self._blueprint)
+		
+		self._db_charge = managers.weapon_factory:has_perk("db_charge", self._factory_id, self._blueprint)
+		--}
+		
+		--Reload speed perks--{
+		self._fast_reload = managers.weapon_factory:has_perk("fast_reload", self._factory_id, self._blueprint)
+		self._faster_reload = managers.weapon_factory:has_perk("faster_reload", self._factory_id, self._blueprint)
+		self._fastest_reload = managers.weapon_factory:has_perk("fastest_reload", self._factory_id, self._blueprint)
+		self._dual_reload = managers.weapon_factory:has_perk("dual_reload", self._factory_id, self._blueprint)		
+		
+		self._slow_reload = managers.weapon_factory:has_perk("slow_reload", self._factory_id, self._blueprint)
+		self._slower_reload = managers.weapon_factory:has_perk("slower_reload", self._factory_id, self._blueprint)
+		self._slowest_reload = managers.weapon_factory:has_perk("slowest_reload", self._factory_id, self._blueprint)
+		
+		self._lower_fast_reload = managers.weapon_factory:has_perk("lower_fast_reload", self._factory_id, self._blueprint)
+		
+		--ADS speed perks--{
+		self._fast_ads_grip = managers.weapon_factory:has_perk("fast_ads_grip", self._factory_id, self._blueprint)
+		
+		self._fast_ads_brl = managers.weapon_factory:has_perk("fast_ads_brl", self._factory_id, self._blueprint)		
+		self._slow_ads_brl = managers.weapon_factory:has_perk("slow_ads_brl", self._factory_id, self._blueprint)
+		self._slower_ads_brl = managers.weapon_factory:has_perk("slower_ads_brl", self._factory_id, self._blueprint)
+		self._slowest_ads_brl = managers.weapon_factory:has_perk("slowest_ads_brl", self._factory_id, self._blueprint)
+		
+		self._fast_ads_hg = managers.weapon_factory:has_perk("fast_ads_hg", self._factory_id, self._blueprint)
+		self._faster_ads_hg = managers.weapon_factory:has_perk("faster_ads_hg", self._factory_id, self._blueprint)
+		self._fastest_ads_hg = managers.weapon_factory:has_perk("fastest_ads_hg", self._factory_id, self._blueprint)
+		self._slow_ads_hg = managers.weapon_factory:has_perk("slow_ads_hg", self._factory_id, self._blueprint)
+		self._slower_ads_hg = managers.weapon_factory:has_perk("slower_ads_hg", self._factory_id, self._blueprint)
+		self._slowest_ads_hg = managers.weapon_factory:has_perk("slowest_ads_hg", self._factory_id, self._blueprint)		
+	
+		self._fast_ads_op = managers.weapon_factory:has_perk("fast_ads_op", self._factory_id, self._blueprint)
+		self._slow_ads_op = managers.weapon_factory:has_perk("slow_ads_op", self._factory_id, self._blueprint)
+		self._slower_ads_op = managers.weapon_factory:has_perk("slower_ads_op", self._factory_id, self._blueprint)
+		self._slowest_ads_op = managers.weapon_factory:has_perk("slowest_ads_op", self._factory_id, self._blueprint)
+		
+		self._slow_ads_ns = managers.weapon_factory:has_perk("slow_ads_ns", self._factory_id, self._blueprint)
+		self._slower_ads_ns = managers.weapon_factory:has_perk("slower_ads_ns", self._factory_id, self._blueprint)
+		self._slowest_ads_ns = managers.weapon_factory:has_perk("slowest_ads_ns", self._factory_id, self._blueprint)
+		--}
+		
+		self:_check_laser()
+		
 		self._damage_near = tweak_data.weapon[self._name_id].damage_near or 1000 -- 10 m
 		self._damage_far = tweak_data.weapon[self._name_id].damage_far or 20000 -- 200 m
 		self._damage_min = tweak_data.weapon[self._name_id].damage_min or 0.6 -- maximum 60% drop
@@ -135,12 +274,18 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			self._damage_far = self._damage_far * 0.80
 			self._damage_min = self._damage_min * 0.9
 		end
---[[ 			
-		io.stdout:write("Dist: ", tostring(dist/100), "\n") --Distance from the surface/object/enemy you hit
-		io.stdout:write("Drop Dist: ", tostring(self._damage_near/100), "m \n") --Distance drop-off starts
-		io.stdout:write("Min. Dmg at: ", (((1 - self._damage_min) * (self._damage_far/100)) + (self._damage_near / 100)), "m \n") --Distance you'll hit minimum damage in meters
-		io.stdout:write("Min. Dmg: ", tostring((damage * 10) * self._damage_min), "\n") --Lowest possible damage your gun will output at max range
-		io.stdout:write("Init Dmg: ", tostring(damage * 10), "\n") --Initial damage from your shot
+	end
+				
+	--Damage falloff for non-shotguns (Penetration/Distance and col_ray bugs fixed by LazyOzzy)
+	function NewRaycastWeaponBase:get_damage_falloff(damage, col_ray, user_unit, distance)
+		local dist = distance or mvector3.distance(col_ray.unit:position(), user_unit:position())
+		
+		--[[ 		
+		log("Dist: " .. tostring(dist/100) .. "\n") --Distance from the surface/object/enemy you hit
+		log("Drop Dist: " .. tostring(self._damage_near/100) .. "m \n") --Distance drop-off starts
+		log("Min. Dmg at: " .. (((1 - self._damage_min) * (self._damage_far/100)) + (self._damage_near / 100)) .. "m \n") --Distance you'll hit minimum damage in meters
+		log("Min. Dmg: " .. tostring((damage * 10) * self._damage_min) .. "\n") --Lowest possible damage your gun will output at max range
+		log("Init Dmg: " .. tostring(damage * 10) .. "\n") --Initial damage from your shot
 		 ]]
 		
 		local ratio = (1 - math.min(1, math.max(0, dist - self._damage_near) / self._damage_far))
@@ -150,7 +295,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	
 		damage = ratio * damage
 		
-		--io.stdout:write("Impact Dmg: ", tostring(damage * 10), "\n\n") --Damage on impact
+		--log("Impact Dmg: " .. tostring(damage * 10) .. "\n\n") --Damage on impact
 		
 		return damage
 	end
@@ -208,6 +353,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 					self._autohit_current = (self._autohit_current + weight) / (1 + weight)
 					damage = self:get_damage_falloff(damage, autoaim, user_unit, total_distance)
 					hit_unit = self._bullet_class:on_collision(autoaim, self._unit, user_unit, damage)
+					col_ray = autoaim
 				else
 					self._autohit_current = self._autohit_current / (1 + weight)
 				end
@@ -358,148 +504,6 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		end
 		return result
 	end
-	
-	--Movement
-	tweak_data.upgrades.weapon_movement_penalty.lmg = 1 --0.8
-	
-	tweak_data.weapon.m134.weapon_movement_penalty = 0.4
-	
-	tweak_data.weapon.m95.weapon_movement_penalty = 0.7
-	tweak_data.weapon.mg42.weapon_movement_penalty = 0.7
-	
-	tweak_data.weapon.hk21.weapon_movement_penalty = 0.75
-	
-	tweak_data.weapon.m249.weapon_movement_penalty = 0.8
-	tweak_data.weapon.r93.weapon_movement_penalty = 0.8
-	tweak_data.weapon.rpg7.weapon_movement_penalty = 0.8
-	
-	tweak_data.weapon.rpk.weapon_movement_penalty = 0.85
-	tweak_data.weapon.galil.weapon_movement_penalty = 0.85
-	
-	tweak_data.weapon.fal.weapon_movement_penalty = 0.9
-	tweak_data.weapon.striker.weapon_movement_penalty = 0.9
-	tweak_data.weapon.g3.weapon_movement_penalty = 0.9
-	tweak_data.weapon.spas12.weapon_movement_penalty = 0.9
-	tweak_data.weapon.mosin.weapon_movement_penalty = 0.9
-	tweak_data.weapon.m1928.weapon_movement_penalty = 0.9
-	tweak_data.weapon.l85a2.weapon_movement_penalty = 0.9
-	tweak_data.weapon.akm_gold.weapon_movement_penalty = 0.9
-	tweak_data.weapon.aa12.weapon_movement_penalty = 0.9
-	tweak_data.weapon.m32.weapon_movement_penalty = 0.9
-	
-	tweak_data.weapon.msr.weapon_movement_penalty = 0.95
-	tweak_data.weapon.new_m14.weapon_movement_penalty = 0.95
-	
-	--Muzzle flash stuff
-	local old_update_stats_values = NewRaycastWeaponBase._update_stats_values
-	
-	function NewRaycastWeaponBase:_update_stats_values()
-		old_update_stats_values(self)
-		
-		self._movement_penalty = tweak_data.weapon[self._name_id].weapon_movement_penalty or 1
-		local custom_stats = managers.weapon_factory:get_custom_stats_from_weapon(self._factory_id, self._blueprint)
-		for part_id, stats in pairs(custom_stats) do
-			if stats.movement_speed then
-				self._movement_penalty = self._movement_penalty * stats.movement_speed
-			end
-			if tweak_data.weapon.factory.parts[part_id].type ~= "ammo" then
-				if stats.ammo_pickup_min_mul then
-					self._ammo_data.ammo_pickup_min_mul = self._ammo_data.ammo_pickup_min_mul and self._ammo_data.ammo_pickup_min_mul * stats.ammo_pickup_min_mul or stats.ammo_pickup_min_mul
-				end
-				if stats.ammo_pickup_max_mul then
-					self._ammo_data.ammo_pickup_max_mul = self._ammo_data.ammo_pickup_max_mul and self._ammo_data.ammo_pickup_max_mul * stats.ammo_pickup_max_mul or stats.ammo_pickup_max_mul
-				end
-			end
-		end
-		self._long_barrel = managers.weapon_factory:has_perk("long_barrel", self._factory_id, self._blueprint)
-		self._dmr_barrel = managers.weapon_factory:has_perk("dmr_barrel", self._factory_id, self._blueprint)
-		self._short_barrel = managers.weapon_factory:has_perk("short_barrel", self._factory_id, self._blueprint)
-		self._supp_barrel = managers.weapon_factory:has_perk("supp_barrel", self._factory_id, self._blueprint)
-		
-		self._silencer = managers.weapon_factory:has_perk("silencer", self._factory_id, self._blueprint)
-		self._flash_hide = managers.weapon_factory:has_perk("flash_hider", self._factory_id, self._blueprint)
-		self._side_comp = managers.weapon_factory:has_perk("side_comp", self._factory_id, self._blueprint)
-		self._big_flash = managers.weapon_factory:has_perk("big_flash", self._factory_id, self._blueprint)
-		if self._silencer then
-			self._muzzle_effect = Idstring(self:weapon_tweak_data().muzzleflash_silenced or "effects/payday2/particles/weapons/9mm_auto_silence_fps")
-		elseif self._ammo_data and self._ammo_data.muzzleflash ~= nil then
-			self._muzzle_effect = Idstring(self._ammo_data.muzzleflash)
-		elseif self._flash_hide then
-			self._muzzle_effect = Idstring(self:weapon_tweak_data().muzzleflash_silenced or "effects/payday2/particles/weapons/9mm_auto_silence_fps")
-		elseif self._side_comp then
-			self._muzzle_effect = Idstring("effects/payday2/particles/weapons/50cal_auto_fps")
-		elseif self._big_flash then
-			self._muzzle_effect = Idstring("effects/payday2/particles/weapons/big_762_auto_fps")
-		else
-			self._muzzle_effect = Idstring(self:weapon_tweak_data().muzzleflash or "effects/particles/test/muzzleflash_maingun")
-		end
-		self._muzzle_effect_table = {
-			effect = self._muzzle_effect,
-			parent = self._obj_fire,
-			force_synch = self._muzzle_effect_table.force_synch or false
-		}
-		
-		--ROF Multiplier perks--{
-		self._mp5k_rof = managers.weapon_factory:has_perk("mp5k_rof", self._factory_id, self._blueprint)
-		self._mp5sd_rof = managers.weapon_factory:has_perk("mp5sd_rof", self._factory_id, self._blueprint)
-		self._mg34_rof = managers.weapon_factory:has_perk("mg34_rof", self._factory_id, self._blueprint)
-		self._famas2_rof = managers.weapon_factory:has_perk("famas2_rof", self._factory_id, self._blueprint)
-		self._mk14_rof = managers.weapon_factory:has_perk("mk14_rof", self._factory_id, self._blueprint)
-		self._mar_rof = managers.weapon_factory:has_perk("mar_rof", self._factory_id, self._blueprint)
-		self._galatz_rof = managers.weapon_factory:has_perk("galatz_rof", self._factory_id, self._blueprint)
-		self._ak5c_rof = managers.weapon_factory:has_perk("ak5c_rof", self._factory_id, self._blueprint)
-		self._fnfnc_rof = managers.weapon_factory:has_perk("fnfnc_rof", self._factory_id, self._blueprint)
-		self._m119_slow = managers.weapon_factory:has_perk("m119_slow", self._factory_id, self._blueprint)
-		self._f90_rof = managers.weapon_factory:has_perk("f90_rof", self._factory_id, self._blueprint)
-		
-		self._rapid_fire = managers.weapon_factory:has_perk("fire_mode_auto", self._factory_id, self._blueprint)
-		self._slow_fire = managers.weapon_factory:has_perk("fire_mode_single", self._factory_id, self._blueprint)
-		self._quick_bolt = managers.weapon_factory:has_perk("quick_bolt", self._factory_id, self._blueprint)
-		self._fast_bolt = managers.weapon_factory:has_perk("fast_bolt", self._factory_id, self._blueprint)
-		self._slow_bolt = managers.weapon_factory:has_perk("slow_bolt", self._factory_id, self._blueprint)
-		
-		self._db_charge = managers.weapon_factory:has_perk("db_charge", self._factory_id, self._blueprint)
-		--}
-		
-		--Reload speed perks--{
-		self._fast_reload = managers.weapon_factory:has_perk("fast_reload", self._factory_id, self._blueprint)
-		self._faster_reload = managers.weapon_factory:has_perk("faster_reload", self._factory_id, self._blueprint)
-		self._fastest_reload = managers.weapon_factory:has_perk("fastest_reload", self._factory_id, self._blueprint)
-		self._dual_reload = managers.weapon_factory:has_perk("dual_reload", self._factory_id, self._blueprint)		
-		
-		self._slow_reload = managers.weapon_factory:has_perk("slow_reload", self._factory_id, self._blueprint)
-		self._slower_reload = managers.weapon_factory:has_perk("slower_reload", self._factory_id, self._blueprint)
-		self._slowest_reload = managers.weapon_factory:has_perk("slowest_reload", self._factory_id, self._blueprint)
-		
-		self._lower_fast_reload = managers.weapon_factory:has_perk("lower_fast_reload", self._factory_id, self._blueprint)
-		
-		--ADS speed perks--{
-		self._fast_ads_grip = managers.weapon_factory:has_perk("fast_ads_grip", self._factory_id, self._blueprint)
-		
-		self._fast_ads_brl = managers.weapon_factory:has_perk("fast_ads_brl", self._factory_id, self._blueprint)		
-		self._slow_ads_brl = managers.weapon_factory:has_perk("slow_ads_brl", self._factory_id, self._blueprint)
-		self._slower_ads_brl = managers.weapon_factory:has_perk("slower_ads_brl", self._factory_id, self._blueprint)
-		self._slowest_ads_brl = managers.weapon_factory:has_perk("slowest_ads_brl", self._factory_id, self._blueprint)
-		
-		self._fast_ads_hg = managers.weapon_factory:has_perk("fast_ads_hg", self._factory_id, self._blueprint)
-		self._faster_ads_hg = managers.weapon_factory:has_perk("faster_ads_hg", self._factory_id, self._blueprint)
-		self._fastest_ads_hg = managers.weapon_factory:has_perk("fastest_ads_hg", self._factory_id, self._blueprint)
-		self._slow_ads_hg = managers.weapon_factory:has_perk("slow_ads_hg", self._factory_id, self._blueprint)
-		self._slower_ads_hg = managers.weapon_factory:has_perk("slower_ads_hg", self._factory_id, self._blueprint)
-		self._slowest_ads_hg = managers.weapon_factory:has_perk("slowest_ads_hg", self._factory_id, self._blueprint)		
-	
-		self._fast_ads_op = managers.weapon_factory:has_perk("fast_ads_op", self._factory_id, self._blueprint)
-		self._slow_ads_op = managers.weapon_factory:has_perk("slow_ads_op", self._factory_id, self._blueprint)
-		self._slower_ads_op = managers.weapon_factory:has_perk("slower_ads_op", self._factory_id, self._blueprint)
-		self._slowest_ads_op = managers.weapon_factory:has_perk("slowest_ads_op", self._factory_id, self._blueprint)
-		
-		self._slow_ads_ns = managers.weapon_factory:has_perk("slow_ads_ns", self._factory_id, self._blueprint)
-		self._slower_ads_ns = managers.weapon_factory:has_perk("slower_ads_ns", self._factory_id, self._blueprint)
-		self._slowest_ads_ns = managers.weapon_factory:has_perk("slowest_ads_ns", self._factory_id, self._blueprint)
-		--}
-		
-		self:_check_laser()
-	end
 
 	function NewRaycastWeaponBase:_check_laser()
 		self._laser_data = nil
@@ -585,12 +589,14 @@ function NewRaycastWeaponBase:fire_rate_multiplier()
 			multiplier = multiplier * 0.9
 		end
 		
-		if self._rapid_fire and not (self._name_id == "c96" or self._name_id == "tec9") then 
+		if self._rapid_fire and not (self._name_id == "c96" or self._name_id == "tec9" or self._name_id == "colt_1911") then 
 			multiplier = multiplier * 1.15
 		elseif self._rapid_fire and self._name_id == "c96" then 
 			multiplier = multiplier * 2
 		elseif self._rapid_fire and self._name_id == "tec9" then 
 			multiplier = multiplier * 1.33333333333333
+		elseif self._rapid_fire and self._name_id == "colt_1911" then 
+			multiplier = multiplier * 2.1978021978021978021978021978022
 		elseif self._slow_fire then 
 			multiplier = multiplier * 0.9
 		end

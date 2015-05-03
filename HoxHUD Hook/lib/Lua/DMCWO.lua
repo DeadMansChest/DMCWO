@@ -1,6 +1,6 @@
 --[[
 DMC's Weapon Overhaul
-v1.3
+v1.32
 HoxHUD Hook Version
 
 Please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
