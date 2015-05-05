@@ -1,5 +1,6 @@
-#DMC's Weapon Overhaul v1.32: Ka ka Edition]]
+#DMC's Weapon Overhaul v1.32: Ka ka Edition
 Fuck you Kail :^)
+
 by: Dude My Car
 
 [UC Thread](http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html)
