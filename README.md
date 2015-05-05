@@ -1,12 +1,13 @@
 #DMC's Weapon Overhaul v1.32: Ka ka Edition
-Fuck you Kail :^)
-
+####Fuck you Kail :^) 
+######BLT Hook Branch
 by: Dude My Car
 
-[UC Thread](http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html)
+[UC Thread](http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html) 
+
 [Steam group](http://steamcommunity.com/groups/DMCWpnOverhaul)
 
-**_Not for use in Pasta Perfection_**
+**_Not for use in Pasta Perfection_** 
 (Not that it really could, most of this is just tweaked LUA source values, something PP already does on top of stealing actual code)
 
 ##DISCLAIMER
@@ -142,7 +143,7 @@ These are standalone versions of some parts of DMCWO available on [my Github rep
 Nab Wilko's "BLT" LUA Hook if you haven't from here: http://paydaymods.com/download/
 
 2. Download the Repo contents as a zip and extract into your Payday 2 directory
-  * Be sure to dl the corect branch!
+  * Be sure to dl the correct branch! (This is the BLT hook branch)
 
 3. Run game, check log for errors. Report errors to me (id/qt_314) if there are any
 
