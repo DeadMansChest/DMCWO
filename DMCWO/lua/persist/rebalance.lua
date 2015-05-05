@@ -104,7 +104,7 @@ if not tweak_data then return end
 if DMCWO.Setup_Stfu ~= true then
 	if not DMCWO.stfu_wep then
 		DMCWO.stfu_wep = true
-		io.stdout:write("[DMCWO] rebalance.lua...")
+		log("[DMCWO] rebalance.lua...")
 	end
 end
 
@@ -4230,10 +4230,10 @@ RebalanceScript = true
 if not DMCWO.rebalance_wep then
 	DMCWO.rebalance_wep = true
 	if DMCWO.Setup_Stfu ~= true then
-		io.stdout:write("is working!", "\n")
+		log("is working!", "\n")
 	end
 	if not RebalanceScript then
-		io.stdout:write("[!] You left RebalanceScript commented out (or nil), you may experience FPS drops", "\n")
+		log("[!] You left RebalanceScript commented out (or nil), you may experience FPS drops", "\n")
 	end
 end
 

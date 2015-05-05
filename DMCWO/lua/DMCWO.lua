@@ -1,13 +1,9 @@
 --[[
 DMC's Weapon Overhaul
-v1.32
-HoxHUD Hook Version
-
-Please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+v1.3
+BLT Hook Version
 ]]
-
-
-if not DMCWO then
+if not DMCWO_Setup then
 	
 	DMCWO = {}
 	DMCWO.Setup_Stfu = false --set to true if you don't want the "rebalance" setup messages to print to the console/log
@@ -115,34 +111,6 @@ if not DMCWO then
 	}
 	
 	DMCWO.Startup = true --Don't touch this
-
+	DMCWO_Setup = true
+	
 end
-
-------[[Script setup]]------
---[[POSTREQUIRE SCRIPTS]]
-RegisterScript("lib/Lua/DMCWO/post/postrequire_attach.lua", 2, "lib/tweak_data/weaponfactorytweakdata")
-RegisterScript("lib/Lua/DMCWO/post/postrequire_attach.lua", 2, "lib/tweak_data/weapontweakdata")
-RegisterScript("lib/Lua/DMCWO/post/soundsfix.lua", 2, "lib/units/weapons/raycastweaponbase")
-RegisterScript("lib/Lua/DMCWO/post/shotgat_physics.lua", 2, "lib/units/weapons/shotgun/newshotgunbase")
-RegisterScript("lib/Lua/DMCWO/post/shotgat_physics.lua", 2, "lib/managers/gameplaycentralmanager")
-RegisterScript("lib/Lua/DMCWO/post/gat_physics.lua", 2, "lib/units/weapons/newraycastweaponbase")
-RegisterScript("lib/Lua/DMCWO/post/gat_physics.lua", 2, "lib/managers/blackmarketmanager")
-RegisterScript("lib/Lua/DMCWO/post/gat_physics.lua", 2, "lib/tweak_data/blackmarkettweakdata")
-RegisterScript("lib/Lua/DMCWO/post/bmarketgui.lua", 2, "lib/managers/menu/blackmarketgui")
-
---[[OPTIONAL POSTREQUIRE SCRIPTS]]
---Useable Drums
-RegisterScript("lib/Lua/DMCWO/Extra/useable_drums.lua", 2, "lib/tweak_data/weaponfactorytweakdata")
---Real Weapon Mod Names (string override code by hejoro)
-RegisterScript("lib/Lua/DMCWO/post/realnames.lua", 2, "lib/managers/localizationmanager")
---Recoil Adjustments
-RegisterScript("lib/Lua/DMCWO/post/recoil_fix.lua", 2, "lib/units/cameras/fpcameraplayerbase")
---Tactical Reloading
-RegisterScript("lib/Lua/DMCWO/post/tact_reload.lua", 2, "lib/tweak_data/weapontweakdata")
-RegisterScript("lib/Lua/DMCWO/post/tact_reload.lua", 2, "lib/units/weapons/raycastweaponbase")
-RegisterScript("lib/Lua/DMCWO/post/tact_reload.lua", 2, "lib/units/weapons/shotgun/newshotgunbase")
-
---[[PERSIST SCRIPTS]]
-AddPersistScript("RebalanceGen", "lib/Lua/DMCWO/persist/rebalance_general.lua")
-AddPersistScript("RebalanceScript", "lib/Lua/DMCWO/persist/rebalance.lua")
-AddPersistScript("RebalanceAtchScript", "lib/Lua/DMCWO/persist/rebalance_attach.lua")

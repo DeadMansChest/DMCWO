@@ -137,7 +137,7 @@ if not tweak_data then return end
 if DMCWO.Setup_Stfu ~= true then
 	if not stfu_att then
 		stfu_att = true
-		io.stdout:write("[DMCWO] rebalance_attach.lua...")
+		log("[DMCWO] rebalance_attach.lua...")
 	end
 end
 
@@ -4402,14 +4402,14 @@ RebalanceAtchScript = true
 if not DMCWO.rebalance_att then
 	DMCWO.rebalance_att = true
 	if DMCWO.Setup_Stfu ~= true then
-		io.stdout:write("is working!\n")
+		log("is working!\n")
 	end
 	if not RebalanceAtchScript then
-		io.stdout:write("[!] You left RebalanceAtchScript commented out (or nil), you may experience FPS drops\n")
+		log("[!] You left RebalanceAtchScript commented out (or nil), you may experience FPS drops\n")
 	end
 	if DMCWO.stfu == false then
 		local rand_num = math.random(#DMCWO.Strings)
-		io.stdout:write( tostring(DMCWO.Strings[rand_num]), "\n" )
+		log( tostring(DMCWO.Strings[rand_num]), "\n" )
 	end
 end
 
