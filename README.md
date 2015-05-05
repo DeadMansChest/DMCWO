@@ -77,73 +77,71 @@ These are standalone versions of some parts of DMCWO available on [my Github rep
 * Excuse the lewd avatar if it is at the time
 	
 
-Scripts
+##Scripts
 **REQUIRED PERSIST SCRIPTS**:
-  rebalance_general.lua:
+  * rebalance_general.lua:
     * Required for rebalance.lua to run
     * Changes the index tables to be more consistent rather than randomly go up to higher values halfway through the index
     * Some skill adjustments
 		
-  rebalance.lua:
+  * rebalance.lua:
     * Needs rebalance_general.lua to make a successful run first before it runs itself
     * Required for rebalance_attach.lua to run
     * Gage Pack #2 LMG ironsight codes by gir489
     * Changes the base weapon stats for most weapons
     * Properly aligns ironsights for some weapons (AK5, Deagle and a few others)
 		
-  rebalance_attach.lua*:
+  * rebalance_attach.lua*:
     * Needs rebalance.lua to make a successful run first before it runs itself
     * Contains a bunch of toggles that affect the appearances of some guns and attachments
     * Changes the stats for most weapon mods as well as fixing a few bugs in the base game
 	
 	
-***REQUIRED POSTREQUIRE SCRIPTS***:
-  postrequire_attach.lua
+**REQUIRED POSTREQUIRE SCRIPTS**:
+  * postrequire_attach.lua
     * Adds the additional attachments for some weapons
 	
-  soundsfix.lua
+  * soundsfix.lua
     * Original fix by 90e
     * Makes all guns use their single fire sound on a per shot basis in place of the constantly desyncing full auto loop sound
 	
-  shotgat_physics.lua
+  * shotgat_physics.lua
     * Fixed shotgun mechanics from LazyOzzy
     * Shotgun physics from B1313
     * Makes shotguns deal damage on a per pellet basis	
 		
-  gat_physics.lua
+  * gat_physics.lua
     * Damage drop-off for bullet weapons, fixed by LazyOzzy
     * Wall penetraton for all bullet weapons, based on damage and a few other variables
 		
-  recoil_fix.lua:
+  * recoil_fix.lua:
     * This file can also be set up as a persistent script if you want to test different values without restarting each time you change it
     * Reduces the floaty/ghost recoil you experience for some weapons, mainly high recoil weapons that have a high ROF
     * Contains a multiplier value you can adjust which changes how much recoil you recover from. 
 			1 = 100% recoil recovery, your gun will settle down back to its original postion from where you fired from
 			0 = 0% recoil recovery, your gun will stay wherever recoil brings you
 			
-  real_names.lua:
+  * real_names.lua:
     * Changes most weapons, weapon mods and melee weapons to use their IRL name
     * Also adds in rather vital descriptions to some attachments that modify guns beyond their stat charts
 	
-OPTIONAL POSTREQUIRE SCRIPTS:			
-  tact_reload.lua:
+**OPTIONAL POSTREQUIRE SCRIPTS**:			
+  * tact_reload.lua:
     * Made with the help of B1313
     * Allows for round chambering on closed bolt weapons
 	
-  useable_drums.lua (Contained inside the "Extra" folder):
+  * useable_drums.lua (Contained inside the "Extra" folder):
     * Makes drum mags attachable through the mod menu
       * They don't have icons and when dropped through a card they look weird as hell
 			
 			
 ##INSTALLING
-1a. Nab Harfatus' LUA Hook if you haven't already (you can get it from HoxHud I think)
-
-OR
-
-1b. Nab Wilko's "BLT" LUA Hook if you haven't from here: http://paydaymods.com/download/
+1. Nab Harfatus' LUA Hook if you haven't already (you can get it from HoxHud I think)
+-OR-
+Nab Wilko's "BLT" LUA Hook if you haven't from here: http://paydaymods.com/download/
 
 2. Download the Repo contents as a zip and extract into your Payday 2 directory
-	-Be sure to dl the corect branch!
+  * Be sure to dl the corect branch!
 
 3. Run game, check log for errors. Report errors to me (id/qt_314) if there are any
 
@@ -382,11 +380,9 @@ Don't like the mod for w/e reason? You're following my advice about uninstalling
 
 4. Close the game
 
-5a. Remove "DMCWO.lua" and the "DMCWO" folder inside lib/Lua
-
-OR
-
-5b. Remove the "DMCWO" folder inside mods/
+5. Remove "DMCWO.lua" and the "DMCWO" folder inside lib/lua
+-OR-
+Remove the "DMCWO" folder inside mods/
 
 6. If you dun dang diddly did everything right, next time you boot up your game everything should be back to normal (or at least not make the game crash)
 
