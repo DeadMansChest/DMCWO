@@ -1,6 +1,6 @@
 --[[
-v1.32
-This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+v1.33
+This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
 if DMCWO and DMCWO.Startup and not RebalanceGen then
@@ -80,12 +80,12 @@ tweak_data.upgrades.skill_descs.hitman.multibasic = "12.5%"
 tweak_data.upgrades.skill_descs.hitman.multipro = "25%"
 
 --"The Professional" adjustments
-tweak_data.upgrades.values.weapon.silencer_recoil_multiplier = {0.8}
-tweak_data.upgrades.values.weapon.silencer_spread_multiplier = {0.8}
-tweak_data.upgrades.values.weapon.silencer_enter_steelsight_speed_multiplier = {1.5}
-tweak_data.upgrades.skill_descs.silence_expert.multibasic = "20%"
-tweak_data.upgrades.skill_descs.silence_expert.multipro = "20%"
-tweak_data.upgrades.skill_descs.silence_expert.multipro2 = "50%"
+tweak_data.upgrades.values.weapon.silencer_recoil_multiplier = {0.90}
+tweak_data.upgrades.values.weapon.silencer_spread_multiplier = {0.85}
+tweak_data.upgrades.values.weapon.silencer_enter_steelsight_speed_multiplier = {1.25}
+tweak_data.upgrades.skill_descs.silence_expert.multibasic = "10%"
+tweak_data.upgrades.skill_descs.silence_expert.multipro = "15%"
+tweak_data.upgrades.skill_descs.silence_expert.multipro2 = "25%"
 
 --"Mag Plus" adjustments
 tweak_data.upgrades.values.weapon.clip_ammo_increase = { 10, 20 }
@@ -93,19 +93,19 @@ tweak_data.upgrades.skill_descs.mag_plus.multibasic = "10"
 tweak_data.upgrades.skill_descs.mag_plus.multipro = "10"
 
 --"Shotgun Impact" adjustments
-tweak_data.upgrades.values.shotgun.recoil_multiplier = { 0.85  }
+tweak_data.upgrades.values.shotgun.recoil_multiplier = { 0.90  }
 tweak_data.upgrades.values.shotgun.damage_multiplier = { 1.25 }
-tweak_data.upgrades.skill_descs.shotgun_impact.multibasic = "15%"
+tweak_data.upgrades.skill_descs.shotgun_impact.multibasic = "10%"
 tweak_data.upgrades.skill_descs.shotgun_impact.multipro = "25%"
 
-tweak_data.upgrades.values.team.pistol.recoil_multiplier = {0.85}
-tweak_data.upgrades.values.team.weapon.recoil_multiplier = {0.85}
-tweak_data.upgrades.skill_descs.leadership.multibasic = "15%"
-tweak_data.upgrades.skill_descs.leadership.multipro = "15%"
+tweak_data.upgrades.values.team.pistol.recoil_multiplier = {0.90}
+tweak_data.upgrades.values.team.weapon.recoil_multiplier = {0.90}
+tweak_data.upgrades.skill_descs.leadership.multibasic = "10%"
+tweak_data.upgrades.skill_descs.leadership.multipro = "10%"
 
-tweak_data.upgrades.values.snp.recoil_multiplier = {0.85}
-tweak_data.upgrades.values.assault_rifle.recoil_multiplier = {0.85}
-tweak_data.upgrades.skill_descs.sharpshooter.multipro = "15%"
+tweak_data.upgrades.values.snp.recoil_multiplier = {0.90}
+tweak_data.upgrades.values.assault_rifle.recoil_multiplier = {0.90}
+tweak_data.upgrades.skill_descs.sharpshooter.multipro = "10%"
 
 --Akimbo recoil penalty adjustments so they actually are the +75/50/25% increase in recoil, matching the descriptions, and not 150/100/50% that they were coded to have
 tweak_data.upgrades.values.akimbo.recoil_multiplier = {
@@ -119,7 +119,7 @@ tweak_data.upgrades.explosive_bullet.player_dmg_mul = 0.75
 --[[ Viewmodel "Sway" and Drag ]]	
 
 --ADS "sway" and pivot point for all weapons
-local gun_drag = {'default','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','rpg7','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874'}
+local gun_drag = {'default','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','rpg7','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','m134','mateba'}
 for i, wep_id in ipairs(gun_drag) do
 	tweak_data.player.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.00075
 
@@ -138,6 +138,11 @@ for i, wep_id in ipairs(gun_drag) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 2.5
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 2.5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -2.5
+	
+	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = 0
+	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0
+	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0
+	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = 0
 end
 
 local lmg_drag = {'m249','rpk','hk21','striker','mg42'}
@@ -166,11 +171,6 @@ for i, wep_id in ipairs(babby_pistol) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 2.5
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 2.5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -2.5
-	
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = -0.25
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0.25
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0.25
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = -0.25
 end 
 tweak_data.weapon.jowi.transition_duration = -0.05
 tweak_data.weapon.x_usp.transition_duration = -0.05
@@ -181,7 +181,7 @@ tweak_data.weapon.x_usp.timers.equip = 0.4
 tweak_data.weapon.x_g17.timers.equip = 0.4
 tweak_data.weapon.x_g22c.timers.equip = 0.4
 
-local med_pistol = {'colt_1911','p226','b92fs','x_1911','x_b92fs'}
+local med_pistol = {'colt_1911','p226','b92fs','x_1911','x_b92fs','mateba'}
 for i, wep_id in ipairs(med_pistol) do
 	tweak_data.weapon[ wep_id ].transition_duration = -0.09
 	tweak_data.weapon.x_1911.transition_duration = -0.045
@@ -202,11 +202,6 @@ for i, wep_id in ipairs(med_pistol) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 3
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 3 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -3
-	
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = 0
 end 
 
 local beeg_pistol = {'new_raging_bull','deagle','x_deagle'}
@@ -228,11 +223,6 @@ for i, wep_id in ipairs(beeg_pistol) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 3.5
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 3.5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -3.5
-	
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = 0
 end 
 
 local lightweight = {'mp7','mp9','amcar','new_mp5','p90','olympic','tec9','scorpion','cobray'}
@@ -252,11 +242,6 @@ for i, wep_id in ipairs(lightweight) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 4
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 4 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -4
-	
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = 0
 end 
 
 local med_weight = {'mac10','akmsu','new_m4','ak74','g36','gre_m79','ksg','sterling'}
@@ -277,11 +262,6 @@ for i, wep_id in ipairs(med_weight) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 4.5
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 4.5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -4.5
-	
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = 0
 end 
 
 local med_weight_2 = {'serbu','s552','m16','m45','saiga','akm','scar','aug','huntsman','uzi','vhs','b682','flamethrower_mk2'}
@@ -303,11 +283,6 @@ for i, wep_id in ipairs(med_weight_2) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 5
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -5
-	
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = 0
 end 
 
 local heavy = {'r870','benelli','ak5','new_m14','famas','g3','spas12','mosin','m1928','l85a2','aa12','m32','winchester1874'}
@@ -354,11 +329,6 @@ for i, wep_id in ipairs(heavy_2) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 6
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 6 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -6
-	
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = 0
 end 
 
 local super_heavy = {'akm_gold','m95','hk21','m249','mg42','rpg7'}
@@ -378,11 +348,6 @@ for i, wep_id in ipairs(super_heavy) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 6.5
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 6.5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -6.5
-	
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = 0
 end 
 
 local the_fuck_even = {'m134'}
@@ -402,20 +367,23 @@ for i, wep_id in ipairs(the_fuck_even) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 7.5
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 7.5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -7.5
-	
-	
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = 0
 end 
 
 --[[ AMMO PICKUP RATES ]]
-local pis_high_cal = {'new_raging_bull','deagle','x_deagle','judge','c96'}
+
+tweak_data.weapon.c96.AMMO_PICKUP = {0.90, 3.00}
+
+tweak_data.weapon.mateba.AMMO_PICKUP = {0.60, 2.70}
+
+local pis_high_cal = {'new_raging_bull','deagle','x_deagle','judge'}
 for i, wep_id in ipairs(pis_high_cal) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.60, 2.80}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.55, 2.30}
 end
-tweak_data.weapon.peacemaker.AMMO_PICKUP = {0.50, 1.60}
+
+local pis_45_colt = {'peacemaker','judge'}
+for i, wep_id in ipairs(pis_45_colt) do
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.50, 1.50}
+end
 
 local thirty_two = {'ppk','scorpion'}
 for i, wep_id in ipairs(thirty_two) do
@@ -505,7 +473,7 @@ for i, wep_id in ipairs(mid2_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.08
 end
 
-local weed_panic = {'new_m14','scar','fal','galil','g3','rpk'}
+local weed_panic = {'new_m14','scar','fal','galil','g3','rpk','m134'}
 for i, wep_id in ipairs(weed_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.1
 end
@@ -515,7 +483,7 @@ for i, wep_id in ipairs(weed2_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.12
 end
 
-local weed3_panic = {'new_raging_bull','msr','m134','peacemaker','winchester1874'}
+local weed3_panic = {'new_raging_bull','msr','peacemaker','winchester1874'}
 for i, wep_id in ipairs(weed3_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.15
 end

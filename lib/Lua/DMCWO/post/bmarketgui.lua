@@ -1,6 +1,6 @@
 --[[
-v1.32
-This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+v1.33
+This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
 tweak_data.upgrades.weapon_movement_penalty.lmg = 1 --0.8
@@ -48,6 +48,8 @@ function BlackMarketGui:update_info_text()
 	local ids_category = Idstring(slot_data.category)
 	local identifier = tab_data.identifier
 	local updated_texts = {
+		{text = ""},
+		{text = ""},
 		{text = ""},
 		{text = ""},
 		{text = ""},
@@ -100,7 +102,9 @@ function BlackMarketGui:update_info_text()
 				updated_texts[5].text = updated_texts[5].text .. managers.localization:to_upper_text("bm_menu_last_weapon_warning") .. "\n"
 			end
 			if slot_data.global_value and slot_data.global_value ~= "normal" then
-				updated_texts[4].text = updated_texts[4].text .. "##" .. managers.localization:to_upper_text(tweak_data.lootdrop.global_values[slot_data.global_value].desc_id) .. "##"
+				updated_texts[4].text = updated_texts[4].text .. "##" .. managers.localization:to_upper_text(tweak_data.lootdrop.global_values[slot_data.global_value].desc_id) .. "##" .. [[
+
+]]
 				updated_texts[4].resource_color = tweak_data.lootdrop.global_values[slot_data.global_value].color
 				updated_texts[4].below_stats = true
 			end
@@ -111,15 +115,13 @@ function BlackMarketGui:update_info_text()
 					local movement_penalty = weapon_tweak.weapon_movement_penalty or 1
 					if movement_penalty < 1 then
 						local penalty_as_string = string.format("%d%%", math.round((1 - movement_penalty) * 100))
-						updated_texts[5].text = updated_texts[5].text .. managers.localization:to_upper_text("bm_menu_weapon_movement_penalty_info", {penalty = penalty_as_string})
+						updated_texts[5].text = updated_texts[5].text .. managers.localization:to_upper_text("bm_menu_weapon_movement_penalty_info") .. penalty_as_string
 					end
-					if weapon_tweak.has_description then
+					--if weapon_tweak.has_description then
 						updated_texts[4].text = updated_texts[4].text .. [[
-
-
-]] .. managers.localization:to_upper_text(tweak_data.weapon[slot_data.name].desc_id)
+]] .. managers.localization:text(tweak_data.weapon[slot_data.name].desc_id)
 						updated_texts[4].below_stats = true
-					end
+					--end
 				end
 			else
 			end
@@ -171,7 +173,12 @@ function BlackMarketGui:update_info_text()
 			table.insert(updated_texts[4].resource_color, tweak_data.lootdrop.global_values[slot_data.global_value].color)
 		end
 		updated_texts[4].below_stats = true
-		--updated_texts[4].text = desc_text --Gotta make descriptions for all the melee weapons first
+		if slot_data.global_value and slot_data.global_value == "normal" then
+			updated_texts[4].text = desc_text --Gotta make descriptions for all the melee weapons first
+		elseif slot_data.global_value and slot_data.global_value ~= "normal" then
+			updated_texts[4].text = updated_texts[4].text .. "\n".. desc_text 
+		end
+		updated_texts[4].less_scale = true
 	elseif identifier == self.identifiers.grenade then
 		updated_texts[1].text = self._slot_data.name_localized
 		if not slot_data.unlocked then
@@ -210,6 +217,12 @@ function BlackMarketGui:update_info_text()
 				level = slot_data.level,
 				SKILL = slot_data.name
 			}))
+			updated_texts[3].below_stats = true
+		elseif managers.player:has_category_upgrade("player", "damage_to_hot") then
+			if not table.contains(tweak_data:get_raw_value("upgrades", "damage_to_hot_data", "armors_allowed") or {}, self._slot_data.name) then
+				updated_texts[3].text = managers.localization:to_upper_text("bm_menu_disables_damage_to_hot")
+				updated_texts[3].below_stats = true
+			end
 		end
 	elseif identifier == self.identifiers.mask then
 		local price = slot_data.price
@@ -366,11 +379,13 @@ function BlackMarketGui:update_info_text()
 		end
 		local mask_mod_info = managers.blackmarket:info_customize_mask()
 		updated_texts[2].text = managers.localization:to_upper_text("bm_menu_mask_customization") .. "\n"
+		local resource_color = {}
 		local material_text = managers.localization:to_upper_text("bm_menu_materials")
 		local pattern_text = managers.localization:to_upper_text("bm_menu_textures")
 		local colors_text = managers.localization:to_upper_text("bm_menu_colors")
 		if mask_mod_info[1].overwritten then
 			updated_texts[2].text = updated_texts[2].text .. material_text .. ": " .. "##" .. managers.localization:to_upper_text("menu_bm_overwritten") .. "##" .. "\n"
+			table.insert(resource_color, tweak_data.screen_colors.risk)
 		elseif mask_mod_info[1].is_good then
 			updated_texts[2].text = updated_texts[2].text .. material_text .. ": " .. managers.localization:text(mask_mod_info[1].text)
 			if mask_mod_info[1].price and 0 < mask_mod_info[1].price then
@@ -382,6 +397,7 @@ function BlackMarketGui:update_info_text()
 		end
 		if mask_mod_info[2].overwritten then
 			updated_texts[2].text = updated_texts[2].text .. pattern_text .. ": " .. "##" .. managers.localization:to_upper_text("menu_bm_overwritten") .. "##" .. "\n"
+			table.insert(resource_color, tweak_data.screen_colors.risk)
 		elseif mask_mod_info[2].is_good then
 			updated_texts[2].text = updated_texts[2].text .. pattern_text .. ": " .. managers.localization:text(mask_mod_info[2].text)
 			if mask_mod_info[2].price and 0 < mask_mod_info[2].price then
@@ -390,9 +406,11 @@ function BlackMarketGui:update_info_text()
 			updated_texts[2].text = updated_texts[2].text .. "\n"
 		else
 			updated_texts[2].text = updated_texts[2].text .. pattern_text .. ": " .. "##" .. managers.localization:to_upper_text("menu_bm_not_selected") .. "##" .. "\n"
+			table.insert(resource_color, tweak_data.screen_colors.important_1)
 		end
 		if mask_mod_info[3].overwritten then
 			updated_texts[2].text = updated_texts[2].text .. colors_text .. ": " .. "##" .. managers.localization:to_upper_text("menu_bm_overwritten") .. "##" .. "\n"
+			table.insert(resource_color, tweak_data.screen_colors.risk)
 		elseif mask_mod_info[3].is_good then
 			updated_texts[2].text = updated_texts[2].text .. colors_text .. ": " .. managers.localization:text(mask_mod_info[3].text)
 			if mask_mod_info[3].price and 0 < mask_mod_info[3].price then
@@ -401,6 +419,7 @@ function BlackMarketGui:update_info_text()
 			updated_texts[2].text = updated_texts[2].text .. "\n"
 		else
 			updated_texts[2].text = updated_texts[2].text .. colors_text .. ": " .. "##" .. managers.localization:to_upper_text("menu_bm_not_selected") .. "##" .. "\n"
+			table.insert(resource_color, tweak_data.screen_colors.important_1)
 		end
 		updated_texts[2].text = updated_texts[2].text .. "\n"
 		local price, can_afford = managers.blackmarket:get_customize_mask_value()
@@ -462,15 +481,23 @@ function BlackMarketGui:update_info_text()
 ##]] .. managers.localization:to_upper_text("menu_bm_overwrite", {
 					category = managers.localization:text("bm_menu_" .. part_info.override)
 				}) .. "##"
-				table.insert(updated_texts[4].resource_color, tweak_data.screen_colors.important_1)
+				table.insert(updated_texts[4].resource_color, tweak_data.screen_colors.risk)
 			end
 		end
 		if price and price > 0 then
 			updated_texts[2].text = updated_texts[2].text .. managers.localization:to_upper_text("menu_bm_total_cost", {
 				cost = (not can_afford and "##" or "") .. managers.experience:cash_string(price) .. (not can_afford and "##" or "")
 			})
+			if not can_afford then
+				table.insert(resource_color, tweak_data.screen_colors.important_1)
+			end
 		end
-		updated_texts[2].resource_color = tweak_data.screen_colors.important_1
+		if #resource_color == 1 then
+			updated_texts[2].resource_color = resource_color[1]
+		else
+			updated_texts[2].resource_color = resource_color
+		end
+		
 		if not managers.blackmarket:can_finish_customize_mask() then
 			local list_of_mods = ""
 			local missed_mods = {}
@@ -485,7 +512,7 @@ function BlackMarketGui:update_info_text()
 					if i < #missed_mods - 1 then
 						list_of_mods = list_of_mods .. ", "
 					elseif i == #missed_mods - 1 then
-						list_of_mods = list_of_mods .. managers.localization:text("bm_menu_last_of_kind")
+						list_of_mods = list_of_mods .. ", "
 					end
 				end
 			elseif #missed_mods == 1 then
@@ -586,8 +613,10 @@ function BlackMarketGui:update_info_text()
 			end
 		end
 		local scale = 1
-		if info_text:bottom() > self._info_texts_panel:h() then
-			scale = self._info_texts_panel:h() / info_text:bottom() * .85
+		if info_text:bottom() > self._info_texts_panel:h() and not updated_texts[i].less_scale then
+			scale = self._info_texts_panel:h() / info_text:bottom() * .9
+		elseif info_text:bottom() > self._info_texts_panel:h() and updated_texts[i].less_scale then
+			scale = self._info_texts_panel:h() / info_text:bottom() * .95
 		end
 		info_text:set_font_size(small_font_size * scale)
 		_, _, _, th = info_text:text_rect()

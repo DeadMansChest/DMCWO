@@ -1,6 +1,6 @@
 --[[
-v1.32
-This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+v1.33
+This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
 if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
@@ -11,6 +11,7 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 		self._damage_far = tweak_data.weapon[self._name_id].damage_far or 4900 -- + damage_near = 50 m
 		self._rays = tweak_data.weapon[self._name_id].rays or 8
 		self._range = self._damage_far
+		self._use_shotgun_reload = self._use_shotgun_reload or self._use_shotgun_reload == nil
 	end
 	
 	function NewShotgunBase:_update_stats_values()
@@ -29,8 +30,8 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 		end
 		
 		if self._silencer and not self._supp_barrel then
-			self._damage_near = self._damage_near * 0.80
-			self._damage_far = self._damage_far * 0.80
+			self._damage_near = self._damage_near * 0.75
+			self._damage_far = self._damage_far * 0.75
 		end
 	end
 	
@@ -126,8 +127,10 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 					managers.game_play_central:do_shotgun_push(col_ray.unit, col_ray.position, col_ray.ray, col_ray.distance)
 				end
 			else
-				managers.game_play_central:play_impact_flesh({col_ray = col_ray})
-				managers.game_play_central:play_impact_sound_and_effects({col_ray = col_ray})
+				if damage > 0 then
+					managers.game_play_central:play_impact_flesh({col_ray = col_ray})
+					managers.game_play_central:play_impact_sound_and_effects({col_ray = col_ray})
+				end
 			end
 		end
 	
