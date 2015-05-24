@@ -1,6 +1,7 @@
-#DMC's Weapon Overhaul v1.32: Ka ka Edition
-####Fuck you Kail :^) 
-######BLT Hook Branch
+#DMC's Weapon Overhaul v1.33: Do the Kail edition
+####ERP for days
+######[Hoxhud Hook Branch](https://github.com/DeadMansChest/DMCWO)
+######[BLT Hook Branch](https://github.com/DeadMansChest/DMCWO/tree/BLT-Version)
 by: Dude My Car
 
 [UC Thread](http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html) 
@@ -35,7 +36,9 @@ I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-is
   * While not in this mod, the crosshair code to help me locate the center of the screen for centering optics
 * B1313 for the shotgun push physics, code advice
 * hejoro for the string hijack code
+* Lizard Foe for fixes made in gat_physics.lua
 * Harfatus for the lua hook
+* Wilko for the BLT lua hook
 * IMFDB and Payday Wikia for weapon names and attachments I couldn't ID
 * /k/ anon for semi-solidifiying some of the attachment names
   Anon: Low Profile Suppressor might be a gemtec halo with a different attachment system but idk im getting buttflustered with you lol
@@ -50,7 +53,7 @@ I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-is
   * https://www.youtube.com/watch?v=5Qx_q_TCVoE
 * Any and all users of this mod as they're pretty much testing this mod
 	
-Did I forget to credit you or improperly do so? Sorry if I did :> Bug the shit out of me, and tell me what I forgot to credit/I miscredited  you for.
+Did I forget to credit you or improperly do so? Sorry if I did :> Bug the shit out of me, and tell me what I forgot to credit/I miscredited you for.
 
 
 ##Recommended Mods
@@ -62,6 +65,12 @@ Scripts from based Ozzy:
   * [Underdog Aced fix](http://www.unknowncheats.me/forum/payday-2/129527-underdog-fix.html)
   * [Burst Fire](http://www.unknowncheats.me/forum/payday-2/130566-burst-fire.html)
     * Has support in this mod
+	
+Other LUA mods:
+  * [Kail's PROJECT: Canary](http://steamcommunity.com/groups/projectcanary)
+  * [Undeadsewer's Melee Overhaul REvamped (M.O.RE)](http://steamcommunity.com/groups/PD2_MORE)
+  * [Karate F22's Better Weapon Stats GUI](http://steamcommunity.com/groups/PD2-BWS-GUI)
+    * This is actually more or less of a requirement if you don't want the stats wigging out when you have skills affecting them too
 
 SquareOne's instant bullet impact fix. May cause frame drops on lower end PCs if you use shotgun rounds that have high ray counts
 
@@ -76,7 +85,7 @@ mod_override things:
 	
 ##Standalone Parts
 These are standalone versions of some parts of DMCWO available on [my Github repo](https://github.com/DeadMansChest) if you don't want (or like) the whole shebang
-* Excuse the lewd avatar if it is at the time
+* Excuse the lewd avatar if it is a lewd one at the time
 	
 
 ##Scripts
@@ -120,10 +129,10 @@ These are standalone versions of some parts of DMCWO available on [my Github rep
     * This file can also be set up as a persistent script if you want to test different values without restarting each time you change it
     * Reduces the floaty/ghost recoil you experience for some weapons, mainly high recoil weapons that have a high ROF
     * Contains a multiplier value you can adjust which changes how much recoil you recover from. 
-			1 = 100% recoil recovery, your gun will settle down back to its original postion from where you fired from
+			1 = 100% recoil recovery, your gun will settle down back to its original postion from where you initially fired from provided you didnt try to compensate
 			0 = 0% recoil recovery, your gun will stay wherever recoil brings you
 			
-  * real_names.lua:
+  * realnames.lua:
     * Changes most weapons, weapon mods and melee weapons to use their IRL name
     * Also adds in rather vital descriptions to some attachments that modify guns beyond their stat charts
 	
@@ -143,7 +152,7 @@ These are standalone versions of some parts of DMCWO available on [my Github rep
 Nab Wilko's "BLT" LUA Hook if you haven't from here: http://paydaymods.com/download/
 
 2. Download the Repo contents as a zip and extract into your Payday 2 directory
-  * Be sure to dl the correct branch! (This is the BLT hook branch)
+  * Be sure to dl the correct branch!
 
 3. Run game, check log for errors. Report errors to me (id/qt_314) if there are any
 
@@ -272,19 +281,21 @@ There is an uninstall guide further down
 
 Got that? Okay...
 
-All bullet weapons now have dmage drop-off
+All bullet weapons now have damage drop-off
   * They will never hit 0 damage like shotguns do
   * Pistols are less effective at range than say, an SMG
   * SMGS are less effective at range than ARs, etc...
 
 Muzzle brakes, handguards and everything else no longer magically alter damage (because stupid). Damage adjustments are now only changed via things that change the actual length of the barrel (HK21 handguard, actual barrel mods, etc.)
   * Made damage reduction for all suppressors the same, instead, the larger suppressors will have added benefits like lower recoil and accuracy boosts at the cost of concealment
-    * Tweaked the "Silent Killer" skill to make suppressors not the best barrel extension to use (12.5% Basic, 25% Aced)
+    * Tweaked the "Silent Killer" skill to make suppressors not the best barrel extension to use
       * This generally will make it so basic will nullify the damage reduction, give or take, while ace WILL boost damage (albeit slight, nothing big to push you past a damage breakpoint)
     * Asepsis Suppressor has no benefits as a trade off for no damage reduction and lower concealment
-  * All suppressors completely nullify threat
+  * All suppressors completely nullify threat and hurt your damage profile at range
     *The exception is frag rounds for shotguns which will max out any shotgun's threat regardless of suppressors
-		
+
+Longer barrels increase stats for concealment, shorter ones vice versa
+	
 Corrected magazine capacities:
   * The Olympic AR and M16 use proper 20 round magazines (from 25 and 30)
   * The FAMAS uses a proper 25 round magazine (from 30)
@@ -293,7 +304,7 @@ Corrected magazine capacities:
 
 Mag capacities were made consistent so mags like the AR Quadstack Mag will set ammo to 60 for all guns that can accept it
 
-Shotguns now do damage per pellet instead of dealing full damage as long as one pellet hits (Thanks to LazyOzzy). As a result, shotgun pellet damage has been nerfed down to the 20s since dealing 65 damage for all 8 pellets is far too much but overall does more damge if all land on target.
+Shotguns now do damage per pellet instead of dealing full damage as long as one pellet hits (Thanks to LazyOzzy). As a result, shotgun pellet damage has been nerfed down to the 20s since dealing 65 damage for all 8 pellets is far too much but overall does more damage if all land on target.
   * Shotgun pellet count was changed to 8 for all shotguns
     * Excluding the Judge which shoots 5 pellets
     * Pellet count will vary depending on the special ammo used
@@ -303,13 +314,13 @@ Shotguns now do damage per pellet instead of dealing full damage as long as one 
 			
 Better melee weapons
   * Higher swing/stab speeds
-  * Higher damage
+  * Higher damage for some (i.e. the Machete)
   * Bladed weapons under the "axe" category are changed to the "knife" category, allowing you to hurt dozers with them
   * Can actually help you conserve ammo
 
 Bullet penetration for most non-snipers!!
   * Surface penetration
-    * All bullet weapons (penetration varies)
+    * All bullet weapons (penetration power varies)
     * Shotguns using slugs
   * Enemy penetration
     * All (Sniper) rifles
@@ -327,6 +338,7 @@ Bullet penetration for most non-snipers!!
     * Colt SAA
     * Desert Eagle
     * C96
+    * 2006M
     * Shotguns using slugs
   * Tan armor penetration (penetration chance varies by weapon)
   * Shield penetration
@@ -336,6 +348,7 @@ Bullet penetration for most non-snipers!!
     * MG42
     * Raging Bull
     * Colt SAA
+    * 2006M
     * Desert Eagle
     * P90
     * MP7
@@ -343,7 +356,7 @@ Bullet penetration for most non-snipers!!
 
 Greatly reduced ADS sway for all weapons since it does nothing to the actual PoI
 
-Toggles for some asethetic mods (you can change them at the top of the rebalance_attach.lua)
+True/false toggles for some asethetic mods (you can change them at the top of the rebalance_attach.lua)
 
 Random fixes:
   * Tried my best at realigning all the optics and iron sights
@@ -368,7 +381,7 @@ Reclassed several weapons
   * The Judge is now classed as a "pistol"
     * Now benefits from pistol based skills
       * No longer benefits from shotgun skills, bumped the damage up to compensate
-    * The Tec-9 is also a pistol now
+  * The Tec-9 is also a pistol now
 	
 	
 ##UNINSTALLING
@@ -397,7 +410,7 @@ Any issues I know of but can't personally fix because I can't code will be liste
 * Optics attached to the M249 and MG42 don't follow the feed cover when reloading.
 
 * In rebalance_attach.lua, if "elcan_buis" is set to true, you'll see the 45 degree irons floating in the main menu. A side effect on how I got the BUIS toggle working.
-    * I also don't update this often so some guns may not work with it
+    * I also don't update this as often as I should so some guns may not work with it
 
 
 ##BUG REPORTING
@@ -419,4 +432,4 @@ Thanks ;)
 
 
 ###EXTRA
-* Want the stealth symbol in your name? Here: 
+* Want the silencio symbol in your name? Here: 
