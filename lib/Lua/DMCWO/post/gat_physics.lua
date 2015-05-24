@@ -1,5 +1,5 @@
 --[[
-v1.33
+v1.34
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 

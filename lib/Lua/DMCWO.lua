@@ -1,6 +1,6 @@
 --[[
 DMC's Weapon Overhaul
-v1.33
+v1.34
 HoxHud Hook Version
 ]]
 
