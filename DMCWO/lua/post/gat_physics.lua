@@ -1,6 +1,6 @@
 --[[
-v1.32
-This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version by checking the Steam group: http://steamcommunity.com/groups/DMCWpnOverhaul
+v1.33
+This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
 if RequiredScript == "lib/units/weapons/raycastweaponbase" then
@@ -28,7 +28,8 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 			end
 		local multiplier = 1
 
-
+		self._block_eq_aced = managers.weapon_factory:has_perk("fire_mode_auto", factory_id, blueprint or default_blueprint)
+		
 		self._mp5k_rof = managers.weapon_factory:has_perk("mp5k_rof", factory_id, blueprint or default_blueprint)
 		self._mp5sd_rof = managers.weapon_factory:has_perk("mp5sd_rof", factory_id, blueprint or default_blueprint)
 		
@@ -85,7 +86,7 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 			multiplier = multiplier * 0.95
 		end
 		
-		if self._db_charge and not (name == "r870" or name == "serbu" or name == "ksg" or name == "judge" or name == "huntsman" or name == "b682") then
+		if self._db_charge and not (name == "r870" or name == "serbu" or name == "ksg" or name == "judge" or name == "huntsman" or name == "b682" or name == "striker") then
 			multiplier = multiplier * 0.9
 		end
 		
@@ -101,11 +102,17 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 			multiplier = multiplier * 0.9
 		end
 				
-		if not upgrade_blocked(weapon.category, "fire_rate_multiplier") then
-			multiplier = multiplier * managers.player:upgrade_value(category, "fire_rate_multiplier", 1)
+		if not upgrade_blocked(weapon.category, "fire_rate_multiplier") then	
+			if (name == "tec9" or name == "c96") and self._block_eq_aced then
+			else
+				multiplier = multiplier * managers.player:upgrade_value(category, "fire_rate_multiplier", 1)
+			end
 		end
 		if not upgrade_blocked(weapon.name, "fire_rate_multiplier") then
-			multiplier = multiplier * managers.player:upgrade_value(name, "fire_rate_multiplier", 1)
+			if (name == "tec9" or name == "c96") and self._block_eq_aced then
+			else
+				multiplier = multiplier * managers.player:upgrade_value(name, "fire_rate_multiplier", 1)
+			end
 		end
 		return multiplier
 	end
@@ -194,6 +201,8 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		}
 		
 		--ROF Multiplier perks--{
+		self._block_eq_aced = managers.weapon_factory:has_perk("fire_mode_auto", self._factory_id, self._blueprint)
+		
 		self._mp5k_rof = managers.weapon_factory:has_perk("mp5k_rof", self._factory_id, self._blueprint)
 		self._mp5sd_rof = managers.weapon_factory:has_perk("mp5sd_rof", self._factory_id, self._blueprint)
 		self._mg34_rof = managers.weapon_factory:has_perk("mg34_rof", self._factory_id, self._blueprint)
@@ -264,15 +273,16 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		elseif self._dmr_barrel then
 			self._damage_near = self._damage_near * 1.30
 			self._damage_far = self._damage_far * 1.30		
+			self._damage_min = self._damage_min * 1.1		
 		elseif self._short_barrel then
 			self._damage_near = self._damage_near * 0.90
 			self._damage_far = self._damage_far * 0.90
 		end
 		
 		if self._silencer and not self._supp_barrel then
-			self._damage_near = self._damage_near * 0.80
-			self._damage_far = self._damage_far * 0.80
-			self._damage_min = self._damage_min * 0.9
+			self._damage_near = self._damage_near * 0.75
+			self._damage_far = self._damage_far * 0.75
+			self._damage_min = self._damage_min * 0.85
 		end
 	end
 				
@@ -280,13 +290,13 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	function NewRaycastWeaponBase:get_damage_falloff(damage, col_ray, user_unit, distance)
 		local dist = distance or mvector3.distance(col_ray.unit:position(), user_unit:position())
 		
-		--[[ 		
+		--[[ 			
 		log("Dist: " .. tostring(dist/100) .. "\n") --Distance from the surface/object/enemy you hit
 		log("Drop Dist: " .. tostring(self._damage_near/100) .. "m \n") --Distance drop-off starts
 		log("Min. Dmg at: " .. (((1 - self._damage_min) * (self._damage_far/100)) + (self._damage_near / 100)) .. "m \n") --Distance you'll hit minimum damage in meters
 		log("Min. Dmg: " .. tostring((damage * 10) * self._damage_min) .. "\n") --Lowest possible damage your gun will output at max range
 		log("Init Dmg: " .. tostring(damage * 10) .. "\n") --Initial damage from your shot
-		 ]]
+		  ]]
 		
 		local ratio = (1 - math.min(1, math.max(0, dist - self._damage_near) / self._damage_far))
 		if ratio < self._damage_min then
@@ -322,7 +332,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		local col_ray = (ray_from_unit or World):raycast("ray", from_pos, mvec_to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units)
 		
 		if col_ray and col_ray.unit then
-			total_distance = shoot_through_data and (shoot_through_data.total_distance + col_ray.distance) or col_ray.distance
+			total_distance = shoot_through_data and shoot_through_data.total_distance and (shoot_through_data.total_distance + col_ray.distance) or col_ray.distance
 		end
 		
 		if shoot_through_data and shoot_through_data.has_hit_wall then
@@ -351,8 +361,8 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 				end
 				if autohit_chance > math.random() then
 					self._autohit_current = (self._autohit_current + weight) / (1 + weight)
-					damage = self:get_damage_falloff(damage, autoaim, user_unit, total_distance)
-					hit_unit = self._bullet_class:on_collision(autoaim, self._unit, user_unit, damage)
+					damage = self:get_damage_falloff(damage, col_ray, user_unit, total_distance)
+					hit_unit = self._bullet_class:on_collision(col_ray, self._unit, user_unit, damage)
 					col_ray = autoaim
 				else
 					self._autohit_current = self._autohit_current / (1 + weight)
@@ -382,12 +392,14 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 				end
 			end
 		end
-		if (col_ray and total_distance > 700 or not col_ray) and alive(self._obj_fire) then
-			self._obj_fire:m_position(self._trail_effect_table.position)
-			mvector3.set(self._trail_effect_table.normal, mvec_spread_direction)
-			local trail = World:effect_manager():spawn(self._trail_effect_table)
-			if col_ray then
-				World:effect_manager():set_remaining_lifetime(trail, math.clamp((total_distance - 600) / 10000, 0, total_distance))
+		if col_ray and total_distance ~=nil then
+			if (col_ray and total_distance > 700 or not col_ray) and alive(self._obj_fire) then
+				self._obj_fire:m_position(self._trail_effect_table.position)
+				mvector3.set(self._trail_effect_table.normal, mvec_spread_direction)
+				local trail = World:effect_manager():spawn(self._trail_effect_table)
+				if col_ray then
+					World:effect_manager():set_remaining_lifetime(trail, math.clamp((total_distance - 600) / 10000, 0, total_distance))
+				end
 			end
 		end
 		result.hit_enemy = hit_unit
@@ -457,8 +469,8 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 				
 				local penetration_power = tweak_data.weapon[self._name_id].penetration_power or 0.5
 				local penetration
-				if (damage * 10) * penetration_power > 75 then
-					penetration = 75
+				if (damage * 10) * penetration_power > 55 then
+					penetration = 55
 				else
 					penetration = (damage * 10) * penetration_power
 				end
@@ -585,7 +597,7 @@ function NewRaycastWeaponBase:fire_rate_multiplier()
 			multiplier = multiplier * 0.95
 		end
 		
-		if self._db_charge and not (self._name_id == "r870" or self._name_id == "serbu" or self._name_id == "ksg" or self._name_id == "serbu" or self._name_id == "huntsman" or self._name_id == "b682") then
+		if self._db_charge and not (self._name_id == "r870" or self._name_id == "serbu" or self._name_id == "ksg" or self._name_id == "huntsman" or self._name_id == "b682" or self._name_id == "judge" or self._name_id == "striker") then
 			multiplier = multiplier * 0.9
 		end
 		
@@ -602,13 +614,22 @@ function NewRaycastWeaponBase:fire_rate_multiplier()
 		end
 
 		if not self:upgrade_blocked(tweak_data.weapon[self._name_id].category, "fire_rate_multiplier") then
-			multiplier = multiplier * managers.player:upgrade_value(self:weapon_tweak_data().category, "fire_rate_multiplier", 1)
+			if (self._name_id == "tec9" or self._name_id == "c96") and self._block_eq_aced then
+			else
+				multiplier = multiplier * managers.player:upgrade_value(self:weapon_tweak_data().category, "fire_rate_multiplier", 1)
+			end
 		end
 		if not self:upgrade_blocked("weapon", "fire_rate_multiplier") then
-			multiplier = multiplier * managers.player:upgrade_value("weapon", "fire_rate_multiplier", 1)
+			if (self._name_id == "tec9" or self._name_id == "c96") and self._block_eq_aced then
+			else
+				multiplier = multiplier * managers.player:upgrade_value("weapon", "fire_rate_multiplier", 1)
+			end
 		end
 		if not self:upgrade_blocked(self._name_id, "fire_rate_multiplier") then
-			multiplier = multiplier * managers.player:upgrade_value(self._name_id, "fire_rate_multiplier", 1)
+			if (self._name_id == "tec9" or self._name_id == "c96") and self._block_eq_aced then
+			else
+				multiplier = multiplier * managers.player:upgrade_value(self._name_id, "fire_rate_multiplier", 1)
+			end
 		end
 		return multiplier
 	end

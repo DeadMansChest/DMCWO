@@ -8,7 +8,7 @@ if not DMCWO_Setup then
 	DMCWO = {}
 	DMCWO.Setup_Stfu = false --set to true if you don't want the "rebalance" setup messages to print to the console/log
 	DMCWO.stfu = false --set to true if you don't want the random message printing to the console/log after the persist scripts setup
-	--Regardless of either setting, you will still be warned if you leave the TestVar for w/e script commented out
+	--Regardless of either setting, you will still be warned if you leave the TestVar for w/e script commented out/nil
 		
 	--Random messages
 	--Which line can you get in your log/console? ;)
@@ -21,7 +21,9 @@ if not DMCWO_Setup then
 	"Noep-roblems here!",
 	"\"Kono lolicon domome!\"",
 	"\"Filthy lolicon scum!\"",
-	"\"There are no buses in Gensokyo!\"",
+	"\"There are no buses in Gensokyo!\"", --https://www.youtube.com/watch?v=GNeyqFfXf7k
+	"Cirno must taste good...", --https://www.youtube.com/watch?v=JUBbigtfCWs
+	"\"PETTAN PETTAN TSURUPETTAN\"", --https://www.youtube.com/watch?v=hfUe2eckPFQ
 	"*tips fedora*",
 	"\"At this moment I am euphoric...\"",
 	"Guys, the thermal drill, go get it...",
@@ -31,12 +33,20 @@ if not DMCWO_Setup then
 	"My Uncle survived going through mustard gas and pepper spray. He's quite the seasoned veteran.",
 	"DONUT STEEL",
 	">implying",
+	"pls",
+	"\"Do you like hurting other people?\"",
+	"\"Do you know what time it is?\"",
+	"\"IT'S TIME TO D-D-D-D\"\n\"DU-DU-DU-DUEL\"",
 	"Why is this here?",
 	"Is that a FAMAS?",
 	"Is that a Deagle?",
 	"Is that a M16?",
 	"\"WOMBO COMBO\"",
+	"\"STUPID FAGGOT LITTLE COCKSUCKER\"", --https://www.youtube.com/watch?v=nLmsVBgZiak
+	"\"Have you ever tried to fuck a box?\"", --https://www.youtube.com/watch?v=VXiavai0ZLU
+	"\"SUMONE JUMPDE FRUM DEE BEELDEENG!\"", --https://www.youtube.com/watch?v=GU3Gg696yrM
 	"ebin :DDD",
+	"\"Nice meme\"",
 	"\"CARLOS!!!\"",
 	"\"That ain't Falco!\"",
 	"\"What is a man?\"\n\"A miserable little pile of secrets...\"",
@@ -74,6 +84,7 @@ if not DMCWO_Setup then
 	"RIP IN PIECE",
 	"\"GO! GO! GO! GO! GO! GO! GALO SENGEN!\"",
 	"<3",
+	"\"Ka ka~\"",
 	"DMC's todo list for 20xx:\n-draw more\n-draw more porn\n-lrn2code\n-get a real PC",
 	"\"Baka baka, baka baka\"",
 	"Kek la Kek",
@@ -82,9 +93,10 @@ if not DMCWO_Setup then
 	"Get your \"First Aid Kit\" here ~<3",
 	"I'd Nonon's nonos",
 	"Based LazyOzzy",
+	"Based Seven",
 	"\"Dickbutt\"",
 	"\"What what, in the butt\"",
-	"\"Her name is Koko, she is loco, I said oh no!\"",
+	"\"Her name is Koko, she is loco, I said oh no!\"", --https://www.youtube.com/watch?v=IIn63BNIncE
 	"\"I have no need for filthy language and idle threats...\"",
 	"Anime is for losers!", -- ;)
 	"How long until this gets old?", -- Once
@@ -97,7 +109,7 @@ if not DMCWO_Setup then
 	"\"You expected a cute girl? Too bad! It's just me, text!\"",
 	"\"SNAAAAAKE EEAAATERRRR!!!\"",
 	"The BUALLS",
-	"SAKO RK95 when?",
+	"SAKO RK95 when?", --https://www.youtube.com/watch?v=Q-rEJys-Vnc
 	"\"git gud\"",
 	"\"Gimme da chocolate, Hisao\"",
 	"\"DOZER INCOMING\"",

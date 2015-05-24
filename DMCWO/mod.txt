@@ -1,13 +1,13 @@
 {
 	"name" : "DeadMansChest's Weapon Overhaul",
 	"description" : "Full overhaul of the weapons present in PD2"
-	"author" : "DeadMansChest",
-	"contact" : "steamid/qt3_14",
-	"version" : "1.32",
+	"author" : "DeadMansChest/Noep",
+	"contact" : "id/qt3_14",
+	"version" : "1.33",
 	"priority" : 69,
 	"updates" : [
 		{
-			"revision" : 1.32,
+			"revision" : 1.33,
 			"identifier" : "dmcwo",
 		}
 	]
