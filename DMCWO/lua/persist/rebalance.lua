@@ -1,5 +1,5 @@
 --[[
-v1.33
+v1.34
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -4079,16 +4079,16 @@ tweak_data.blackmarket.melee_weapons.toothbrush.stats.max_damage = 20
 tweak_data.blackmarket.melee_weapons.toothbrush.stats.min_damage_effect = 0.2
 tweak_data.blackmarket.melee_weapons.toothbrush.stats.max_damage_effect = 0.04
 --Fork her
-tweak_data.blackmarket.melee_weapons.fork.stats.min_damage = 6
-tweak_data.blackmarket.melee_weapons.fork.stats.max_damage = 8
-tweak_data.blackmarket.melee_weapons.fork.stats.min_damage_effect = 2
-tweak_data.blackmarket.melee_weapons.fork.stats.max_damage_effect = 2
-tweak_data.blackmarket.melee_weapons.fork.stats.charge_time = 2.5
+tweak_data.blackmarket.melee_weapons.fork.stats.min_damage = 2.5
+tweak_data.blackmarket.melee_weapons.fork.stats.max_damage = 7
+tweak_data.blackmarket.melee_weapons.fork.stats.min_damage_effect = 0.3
+tweak_data.blackmarket.melee_weapons.fork.stats.max_damage_effect = 0.3
+tweak_data.blackmarket.melee_weapons.fork.stats.charge_time = 2.45
 tweak_data.blackmarket.melee_weapons.fork.stats.range = 140
-tweak_data.blackmarket.melee_weapons.fork.repeat_expire_t = 0.35
+tweak_data.blackmarket.melee_weapons.fork.repeat_expire_t = 0.3
 tweak_data.blackmarket.melee_weapons.fork.expire_t = 0.9
 --Gerber Knife
-tweak_data.blackmarket.melee_weapons.gerber.repeat_expire_t = 0.3
+tweak_data.blackmarket.melee_weapons.gerber.repeat_expire_t = 0.325
 tweak_data.blackmarket.melee_weapons.gerber.expire_t = 0.975
 tweak_data.blackmarket.melee_weapons.gerber.anim_global_param = "melee_knife"
 tweak_data.blackmarket.melee_weapons.gerber.anim_attack_vars = { "var1", "var3" } --gets rid of the the two long swipes

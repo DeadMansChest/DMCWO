@@ -1,5 +1,5 @@
 --[[
-v1.33
+v1.34
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -128,7 +128,7 @@ function LocalizationManager:text( string_id, macros )
 	
 	--[[PUNS]]
 	realnames["bm_w_m14"] = "Springfield M14 DMR"
-	realnames["bm_w_m14_desc"] = "A special DMR version of the American M14 battle rifle chambered in 7.62x51mm NATO\nCan pierce enemies, walls and shields"
+	realnames["bm_w_m14_desc"] = "A special DMR version of the American M14 battle rifle chambered in 7.62x51mm NATO\nCan pierce enemies, walls and shields\nBenefits from assault rifle skills"
 	--Abraham
 	realnames["bm_wp_m14_body_ebr"] = "MK.14 Kit"
 	realnames["bm_wp_m14_body_ebr_desc"] = "Decreases ADS speed by 5%\nIncreases movement penalty by 5%\nIncreases ROF to 750 RPM"
@@ -183,7 +183,7 @@ function LocalizationManager:text( string_id, macros )
 	
 	--[[EAG-H]]
 	realnames["bm_w_scar"] = "FN MK.17"
-	realnames["bm_w_scar_desc"] = "A Belgian-American battle rifle chambered in 7.62x51mm NATO\nCan pierce enemies, walls and shields"
+	realnames["bm_w_scar_desc"] = "A Belgian-American battle rifle chambered in 7.62x51mm NATO\nCan pierce enemies, walls and shields\nBenefits from assault rifle skills"
 	--Sniper Stock
 	realnames["bm_wp_scar_s_sniper"] = "MK.20 Stock"	
 	
@@ -196,7 +196,7 @@ function LocalizationManager:text( string_id, macros )
 	
 	--[[RIGHT ARM]]
 	realnames["bm_w_fal"] = "FN FAL"
-	realnames["bm_w_fal_desc"] = "A Belgian battle rifle chambered in 7.62x51mm NATO\nCan pierce enemies, walls and shields"
+	realnames["bm_w_fal_desc"] = "A Belgian battle rifle chambered in 7.62x51mm NATO\nCan pierce enemies, walls and shields\nBenefits from assault rifle skills"
 	--CQB
 	realnames["bm_wp_fal_body_standard"] = "DSA SA58 Handguard w/Short Barrel" --this might conflict with something since this is also the name_id of the receiver
 	realnames["bm_wp_fal_body_standard_desc"] = "Decreases range by 10%\nIncreases ADS speed by 15%\nDecreases movement penalty by 5%"
@@ -221,7 +221,7 @@ function LocalizationManager:text( string_id, macros )
 	
 	--[[BOTTLE OPENER]]
 	realnames["bm_w_galil"] = "IMI Galil ARM"
-	realnames["bm_w_galil_desc"] = "An Israeli battle rifle chambered in 7.62x51mm NATO\nCan pierce enemies, walls and shields"
+	realnames["bm_w_galil_desc"] = "An Israeli battle rifle chambered in 7.62x51mm NATO\nCan pierce enemies, walls and shields\nBenefits from assault rifle skills"
 	--Sniper
 	realnames["bm_wp_galil_fg_sniper"] = "IMI Galatz Handguard & Sniper Barrel"
 	realnames["bm_wp_galil_fg_sniper_desc"] = "Increases range by 15%\nDecreases ADS speed by 10%\nDecreases ROF to 630 RPM"
@@ -246,7 +246,7 @@ function LocalizationManager:text( string_id, macros )
 	
 	--[[MAI RAIFU (SHE'S MINE I TELL YOU)]]
 	realnames["bm_w_g3"] = "Heckler & Koch G3"
-	realnames["bm_w_g3_desc"] = "A German battle rifle based off the Spanish CETME, chambered in 7.62x51mm NATO\nCan pierce enemies, walls and shields\nBenefits from assault rifle skills\n\nDMC's raifu, please treat her well"
+	realnames["bm_w_g3_desc"] = "A German battle rifle based off the Spanish CETME, chambered in 7.62x51mm NATO\nCan pierce enemies, walls and shields\nBenefits from assault rifle skills\nDMC's raifu, please treat her well"
 	--Assault Kit
 	realnames["bm_wp_g3_b_short"] = "Short Barrel"
 	realnames["bm_wp_g3_b_short_desc"] = "Decreases range by 10%\nIncreases ADS speed by 5%"
@@ -447,7 +447,7 @@ function LocalizationManager:text( string_id, macros )
 	
 	--[[KERBEROS]]
 	realnames["bm_w_mg42"] = "Mauser Maschinengewehr 42"
-	realnames["bm_w_mg42_desc"] = "A German GPMG chambered in 7.92x57mm\nCan pierce enemies, walls and shields\n\nA good weapon for aerial combat too."
+	realnames["bm_w_mg42_desc"] = "A German GPMG chambered in 7.92x57mm\nCan pierce enemies, walls and shields\n\n\"And then the wolf... ate up Little Red Riding Hood\""
 	--Light Barrel
 	realnames["bm_wp_mg42_b_mg34"] = "Maschinengewehr 34 Barrel"
 	realnames["bm_wp_mg42_b_mg34_desc"] = "Increases ADS speed by 5%\nDecreases ROF to 900 RPM"
@@ -553,7 +553,7 @@ function LocalizationManager:text( string_id, macros )
 	
 	--[[HUEHUEHUEHUE BUT IT'S A SHOTGUN]]
 	realnames["bm_w_judge"] = "Taurus Judge"
-	realnames["bm_w_judge_desc"] = "A Brazilian revolver laoded with .410 bore shells\nCan be loaded with special ammo types\nBenefits from pistol skills"
+	realnames["bm_w_judge_desc"] = "A Brazilian revolver loaded with .410 bore shells\nCan be loaded with special ammo types\nBenefits from pistol skills"
 	
 	--[[GRENADE 18]]
 	realnames["bm_w_glock_18c"] = "Glock 18C"
@@ -824,7 +824,7 @@ function LocalizationManager:text( string_id, macros )
 	
 	--[[Winchester]]--
 	realnames["bm_w_winchester1874"] = "Winchester Model 1873"
-	realnames["bm_w_winchester1874_desc"] = "An American, tube fed, lever-action rifle chambered in .44-40 Winchester\nSuffers high damage drop-off compared to other rifles due to firing a pistol round\nCan shoot through enemies, walls and shields"
+	realnames["bm_w_winchester1874_desc"] = "An American, tube fed, lever-action rifle chambered in .44-40 Winchester\nSuffers high damage drop-off compared to other rifles due to firing a pistol round\nCan shoot through enemies, walls and shields\nBenefits from assault rifle skills"
 	--Long
 	realnames["bm_wp_winchester_b_long"] = "Long Barrel"
 	realnames["bm_wp_winchester_b_long_desc"] = "Increases range by 15%\nDecreases ADS speed by 5%" 
@@ -1236,11 +1236,11 @@ function LocalizationManager:text( string_id, macros )
 	
 	--Bullseye
 	realnames["bm_melee_bullseye"] = "Smith & Wesson Bullseye Hatchet"
-	realnames["bm_melee_bullseye_desc"] = "\"Bullseye\"\n\nI bet that's what you'd be saying if you had some to throw. But you don't... only got one."
+	realnames["bm_melee_bullseye_desc"] = "I don't even know what to say to be honest - this is not something you would bring to a fight unless you were some kind of psycho, right?\nI mean, this is intended for chopping logs and going camping, not robbing banks.\n\nRight?"
 	
 	--X46
 	realnames["bm_melee_x46"] = "Robson Knives X46 Utility Survival Knife"
-	realnames["bm_melee_x46_desc"] = "Robson Knives X46 Utility Survival Knife"
+	realnames["bm_melee_x46_desc"] = "The X46 is a single 6\" piece of coated A2 steel in a partially serrated bowie blade configuration with a false top edge.\nIntergrated guard and glass breaker pommel tip.\nThe multi-purpose field design of this knife makes it as useful on the battlefield as it is in an emergency."
 	
 	--Gunther
 	realnames["bm_melee_dingdong"] = "Gerber Ding Dong Breaching Tool"
@@ -1296,7 +1296,7 @@ function LocalizationManager:text( string_id, macros )
 	realnames["bm_melee_boxing_gloves_desc"] = "Time to come out swinging!\nSlip these beauties on and unleash 1000 pounds of peak punching power!\n\nThat is if you actually fight and not just run around avoiding conflict..."
 	
 	--A stick of lies
-	realnames["bm_melee_shillelagh_desc"] = "It's hard to determine the true origins of the shillelagh. How can you pinpoint the first time someone picked up a stout stick and brained someone else with it? And the shillelagh really hasn't evolved too much beyond that. Some prize blackthorn wood, while some might fill the head with molten lead. Others might bind it with leather straps, or cure it with animal fat.\n\nBut, at the end of the day, it really is just a bloody heavy stick that cracks skulls."
+	realnames["bm_melee_shillelagh_desc"] = "It's hard to determine the true origins of the shillelagh. How can you pinpoint the first time someone picked up a stout stick and brained someone else with it? And the shillelagh really hasn't evolved too much beyond that. Some prize blackthorn wood, while some might fill the head with molten lead.\n\nAt the end of the day, it really is just a bloody heavy stick that cracks skulls."
 	
 	--SJW Whiskey
 	realnames["bm_melee_whiskey_desc"] = "Know what makes you a good heister?\n\nReading this message obviously. Clear indication you haven't been caught."
@@ -1323,6 +1323,9 @@ function LocalizationManager:text( string_id, macros )
 	--Autism
 	realnames["bm_melee_mining_pick"] = "Pickaxe"
 	realnames["bm_melee_mining_pick_desc"] = "There's gold in 'dem 'der hills! And by hills we mean teeth. But, hills or teeth, nothing digs the gold out faster than a swinging spike of pig iron."
+	
+	--Ebay sellers
+	realnames["bm_melee_scalper_desc"] = "For the victor, it is the symbol of war, of power and of dominance. For the loser, it is the symbol of a really bad haircut."
 	
 	--NAOW THIS IS A KNOIFE
 	realnames["bm_melee_bowie"] = "Bowie Knife"

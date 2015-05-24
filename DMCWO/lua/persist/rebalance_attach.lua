@@ -1,5 +1,5 @@
 --[[
-v1.33
+v1.34
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -2022,7 +2022,7 @@ tweak_factory.wpn_fps_shot_r870.override.wpn_fps_shot_r870_body_rack = { stats =
 tweak_factory.parts.wpn_fps_saw_body_speed.stats = {value = 1, damage = 3}
 
 --Saw Durable Blade
-tweak_factory.parts.wpn_fps_saw_m_blade_durable.stats = {value = 1, extra_ammo = 50}
+tweak_factory.parts.wpn_fps_saw_m_blade_durable.stats = {value = 1, extra_ammo = 50, total_ammo_mod = 75}
 --Saw Sharp Blade
 tweak_factory.parts.wpn_fps_saw_m_blade_sharp.stats = {value = 1, damage = 3}
 
