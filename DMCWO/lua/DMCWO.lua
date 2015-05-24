@@ -1,6 +1,6 @@
 --[[
 DMC's Weapon Overhaul
-v1.3
+v1.33
 BLT Hook Version
 ]]
 if not DMCWO_Setup then
