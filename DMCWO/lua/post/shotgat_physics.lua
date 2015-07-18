@@ -1,5 +1,5 @@
 --[[
-v1.34
+v1.41
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -8,31 +8,28 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 	
 	function NewShotgunBase:setup_default()
 		self._damage_near = tweak_data.weapon[self._name_id].damage_near or 100 -- 10 m
-		self._damage_far = tweak_data.weapon[self._name_id].damage_far or 4900 -- + damage_near = 50 m
+		self._damage_far = (tweak_data.weapon[self._name_id].damage_far or 5000) - self._damage_near -- - damage_near = 50 m
 		self._rays = tweak_data.weapon[self._name_id].rays or 8
 		self._range = self._damage_far
 		self._use_shotgun_reload = self._use_shotgun_reload or self._use_shotgun_reload == nil
 	end
 	
 	function NewShotgunBase:_update_stats_values()
-		old_update_stats_values(self)		
-		
-		self._long_barrel = managers.weapon_factory:has_perk("long_barrel", self._factory_id, self._blueprint)
-		self._short_barrel = managers.weapon_factory:has_perk("short_barrel", self._factory_id, self._blueprint)
-		self._supp_barrel = managers.weapon_factory:has_perk("supp_barrel", self._factory_id, self._blueprint)
-		
-		if self._long_barrel then
-			self._damage_near = self._damage_near * 1.15
-			self._damage_far = self._damage_far * 1.15
-		elseif self._short_barrel then
-			self._damage_near = self._damage_near * 0.90
-			self._damage_far = self._damage_far * 0.90
+
+		local custom_stats = managers.weapon_factory:get_custom_stats_from_weapon(self._factory_id, self._blueprint)
+		for part_id, stats in pairs(custom_stats) do
+			if stats.movement_speed then
+				self._movement_penalty = self._movement_penalty * stats.movement_speed
+			end
+			if stats.damage_near_mul then
+				self._damage_near = self._damage_near * stats.damage_near_mul
+			end
+			if stats.damage_far_mul then
+				self._damage_far = self._damage_far * stats.damage_far_mul
+			end
 		end
 		
-		if self._silencer and not self._supp_barrel then
-			self._damage_near = self._damage_near * 0.75
-			self._damage_far = self._damage_far * 0.75
-		end
+		old_update_stats_values(self)	
 	end
 	
 	--Makes shotgun pellet damage accumulative, code thanks to LazyOzzy
@@ -89,6 +86,37 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 					local spread_direction = mvector3.copy(mvec_spread_direction)
 					table.insert(col_rays, {position = ray_to, ray = spread_direction})
 				end
+			end
+			
+			if col_ray then
+				local tracer_dist = col_ray.distance
+				if (col_ray and tracer_dist > 0 or not col_ray) and alive(self._obj_fire) and not shoot_through_data then
+					self._obj_fire:m_position(self._trail_effect_table.position)
+					mvector3.set(self._trail_effect_table.normal, mvec_spread_direction)
+					if self:weapon_tweak_data().has_trail == true or self._starwars == true then
+						self._trail_effect_table.effect = Idstring("effects/particles/weapons/sniper_trail")
+					end
+					local clamp_dist = tracer_dist
+					if self._starwars then
+						clamp_dist = 0.075
+					end
+					local trail = World:effect_manager():spawn(self._trail_effect_table)
+					if col_ray then
+						World:effect_manager():set_remaining_lifetime(trail, math.clamp(tracer_dist / 10000, 0, clamp_dist))
+					end
+				end
+			elseif not col_ray then
+				self._obj_fire:m_position(self._trail_effect_table.position)
+				mvector3.set(self._trail_effect_table.normal, mvec_spread_direction)
+				if self:weapon_tweak_data().has_trail == true or self._starwars == true then
+					self._trail_effect_table.effect = Idstring("effects/particles/weapons/sniper_trail")
+				end
+				local clamp_dist = 0.5
+				if self._starwars then
+					clamp_dist = 0.075
+				end
+				local trail = World:effect_manager():spawn(self._trail_effect_table)
+				World:effect_manager():set_remaining_lifetime(trail, clamp_dist)
 			end
 	
 			if self._autoaim and autoaim then

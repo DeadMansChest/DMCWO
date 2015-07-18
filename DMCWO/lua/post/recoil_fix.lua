@@ -1,5 +1,5 @@
 --[[
-v1.34
+v1.41
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -36,7 +36,7 @@ function FPCameraPlayerBase:_vertical_recoil_kick(t, dt)
 		end
 	elseif self._recoil_kick.to_reduce then
 		self._recoil_kick.current = nil
-		local n = math.lerp(self._recoil_kick.to_reduce, 0, 6 * dt)
+		local n = math.lerp(self._recoil_kick.to_reduce, 0, 5 * dt)
 		r_value = -(self._recoil_kick.to_reduce - n)
 		self._recoil_kick.to_reduce = n
 		if self._recoil_kick.to_reduce == 0 then
@@ -61,7 +61,7 @@ function FPCameraPlayerBase:_horizonatal_recoil_kick(t, dt)
 		end
 	elseif self._recoil_kick.h.to_reduce then
 		self._recoil_kick.h.current = nil
-		local n = math.lerp(self._recoil_kick.h.to_reduce, 0, 6 * dt)
+		local n = math.lerp(self._recoil_kick.h.to_reduce, 0, 5 * dt)
 		r_value = -(self._recoil_kick.h.to_reduce - n)
 		self._recoil_kick.h.to_reduce = n
 		if self._recoil_kick.h.to_reduce == 0 then

@@ -1,8 +1,8 @@
-#DMC's Weapon Overhaul v1.34: Do the Kail edition
+#DMC's Weapon Overhaul v1.41: Amadeus edition
 ####ERP for days
 ######[Hoxhud Hook Branch](https://github.com/DeadMansChest/DMCWO)
 ######[BLT Hook Branch](https://github.com/DeadMansChest/DMCWO/tree/BLT-Version)
-by: Dude My Car
+by: Don't Mail Cellphones
 
 [UC Thread](http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html) 
 
@@ -60,17 +60,17 @@ Did I forget to credit you or improperly do so? Sorry if I did :> Bug the shit o
 I put in here w/e I saw fitting to go with this mod:
 
 Scripts from based Ozzy:
-  * [Weapon gadget remembers last state script](http://www.unknowncheats.me/forum/990407-post24.html)
   * [Ozzy's Generalized Ammo Fix](http://www.unknowncheats.me/forum/payday-2/122695-ammo-pickup-changes.html)
+  * [Weapon gadget remembers last state script](http://www.unknowncheats.me/forum/990407-post24.html)
   * [Underdog Aced fix](http://www.unknowncheats.me/forum/payday-2/129527-underdog-fix.html)
   * [Burst Fire](http://www.unknowncheats.me/forum/payday-2/130566-burst-fire.html)
     * Has support in this mod
 	
 Other LUA mods:
-  * [Kail's PROJECT: Canary](http://steamcommunity.com/groups/projectcanary)
-  * [Undeadsewer's Melee Overhaul REvamped (M.O.RE)](http://steamcommunity.com/groups/PD2_MORE)
   * [Karate F22's Better Weapon Stats GUI](http://steamcommunity.com/groups/PD2-BWS-GUI)
     * This is actually more or less of a requirement if you don't want the stats wigging out when you have skills affecting them too
+  * [Kail's PROJECT: Canary](http://steamcommunity.com/groups/projectcanary)
+  * [Undeadsewer's Melee Overhaul REvamped (M.O.RE)](http://steamcommunity.com/groups/PD2_MORE)
 
 SquareOne's instant bullet impact fix. May cause frame drops on lower end PCs if you use shotgun rounds that have high ray counts
 
@@ -84,8 +84,8 @@ mod_override things:
 	
 	
 ##Standalone Parts
-These are standalone versions of some parts of DMCWO available on [my Github repo](https://github.com/DeadMansChest) if you don't want (or like) the whole shebang
-* Excuse the lewd avatar if it is a lewd one at the time
+There are standalone versions of some parts of DMCWO available on [my Github repo](https://github.com/DeadMansChest) if you don't want (or like) the whole shebang DMCWO offers.
+	* Excuse the lewd avatar if it is a lewd one at the time
 	
 
 ##Scripts
@@ -111,6 +111,7 @@ These are standalone versions of some parts of DMCWO available on [my Github rep
 **REQUIRED POSTREQUIRE SCRIPTS**:
   * postrequire_attach.lua
     * Adds the additional attachments for some weapons
+	* Adds the specialized ammo for bullet weapons 
 	
   * soundsfix.lua
     * Original fix by 90e
