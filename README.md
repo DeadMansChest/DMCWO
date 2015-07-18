@@ -1,4 +1,4 @@
-#DMC's Weapon Overhaul v1.34: Do the Kail edition
+#DMC's Weapon Overhaul v1.41: Amadeus edition
 ####ERP for days
 ######[Hoxhud Hook Branch](https://github.com/DeadMansChest/DMCWO)
 ######[BLT Hook Branch](https://github.com/DeadMansChest/DMCWO/tree/BLT-Version)
