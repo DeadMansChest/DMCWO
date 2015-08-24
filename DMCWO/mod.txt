@@ -3,11 +3,11 @@
 	"description" : "Full overhaul of the weapons present in PD2"
 	"author" : "DeadMansChest/Noep",
 	"contact" : "id/qt3_14",
-	"version" : "1.41",
+	"version" : "1.42",
 	"priority" : 69,
 	"updates" : [
 		{
-			"revision" : 1.41,
+			"revision" : 1.42,
 			"identifier" : "dmcwo",
 		}
 	]
@@ -28,6 +28,10 @@
 	"hooks" : [
 		{ 	
 			"hook_id" : "lib/entry",
+			"script_path" : "lua/DMCWO.lua" 
+		},	
+		{ 	
+			"hook_id" : "lib/units/unitbase",
 			"script_path" : "lua/DMCWO.lua" 
 		},	
 		{ 	
@@ -67,10 +71,6 @@
 			"script_path" : "lua/post/gat_physics.lua"
 		},
 		{ 	
-			"hook_id" : "lib/units/enemies/cop/copdamage",
-			"script_path" : "lua/post/gat_physics.lua"
-		},
-		{ 	
 			"hook_id" : "lib/managers/blackmarketmanager",
 			"script_path" : "lua/post/gat_physics.lua"
 		},
@@ -79,8 +79,16 @@
 			"script_path" : "lua/post/gat_physics.lua"
 		},
 		{ 	
+			"hook_id" : "lib/units/beings/player/playerdamage",
+			"script_path" : "lua/post/player.lua"
+		},
+		{ 	
 			"hook_id" : "lib/units/beings/player/states/playerstandard",
-			"script_path" : "lua/post/gat_physics.lua"
+			"script_path" : "lua/post/player.lua"
+		},
+		{ 	
+			"hook_id" : "lib/units/enemies/cop/copdamage",
+			"script_path" : "lua/post/copdamage.lua"
 		},
 		{ 	
 			"hook_id" : "lib/tweak_data/weapontweakdata",
@@ -105,6 +113,26 @@
 		{ 	
 			"hook_id" : "lib/units/cameras/fpcameraplayerbase",
 			"script_path" : "lua/post/recoil_fix.lua"
+		},
+		{ 	
+			"hook_id" : "lib/units/beings/player/states/playerstandard",
+			"script_path" : "lua/Extra/burstfire.lua"
+		},
+		{ 	
+			"hook_id" : "lib/units/weapons/newraycastweaponbase",
+			"script_path" : "lua/Extra/burstfire.lua"
+		},
+		{ 	
+			"hook_id" : "lib/units/weapons/akimboweaponbase",
+			"script_path" : "lua/Extra/burstfire.lua"
+		},
+		{ 	
+			"hook_id" : "lib/managers/hudmanagerpd2",
+			"script_path" : "lua/Extra/burstfire.lua"
+		},
+		{ 	
+			"hook_id" : "lib/managers/hud/hudteammate",
+			"script_path" : "lua/Extra/burstfire.lua"
 		},
 		{ 	
 			"hook_id" : "lib/tweak_data/weaponfactorytweakdata",

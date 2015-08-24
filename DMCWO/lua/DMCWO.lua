@@ -1,8 +1,10 @@
 --[[
 DMC's Weapon Overhaul
-v1.41
+v1.42
 BLT Hook Version
 ]]
+
+--Make sure when you save this file it's encrypted in ANSI as UTF-8. The native Windows notepad application likes to not save it in this format and makes the script unreadable by the hook so I recommend something like Notepad++
 
 if not DMCWO then
 	DMCWO = DMCWO or {}
@@ -16,35 +18,55 @@ DMCWO.stfu = false
 
 --Regardless of either setting, you will still be warned if you leave the TestVar for w/e "rebalance" script commented out/nil
 
---[[ DEBUG TOGGLES ]]--{
---Really these are just for me for development purposes but I figure why not? The default setting for all of these are "false"
+--[[ DEBUG/WIP TOGGLES ]]--{
+--Really these are just for me for development and testing purposes but I figure why not? The default setting for all of these are "false"
 
 --REQUIRES THE ENGINE CONSOLE TO BE ENABLED (unless you feel like reading the log.txt)
 --YOU MAY GET PERFORMANCE DROPS WHILE USING THIS WITH AUTOMATIC FIRE
 --If set to true, outputs various statistics from your last shot taken from a "newraycastweaponbase" gun
 --Shots into the open skybox are not tracked
---Shotguns and other projectile weapons are not tracked
+--Non-"newraycastweaponbase" guns are not tracked
 DMCWO.debug_range = false
 
---If set to true, disables PASSIVE damage boosts
---Boosts earned temporarily like Underdog or Beserker still apply
+--If set to true, disables ALL damage boosts from skills
 DMCWO.debug_damage = false
+
+--If set to true, viewmodel positioning while UNAIMED is changed to emulate DOOM
+--Attached optics have a pretty good chance of getting in the way so you should remove them before hand
+--Overrides hipfire/crouched stance changes from "reposed_vms" if that is active
+--WIP
+DMCWO.doomguy = false
+
+--If set to true, gets rid of the ammo purse reload system for box magazine/belt fed weapons. Reloading before emptying your current magazine will discard any rounds left in that magazine.
+--The Beretta 682/Joceline is excluded from this despite using the "magazine" reload system as you keep your second shell loaded when you perform a non-empty reload.
+--WIP
+DMCWO.no_ammo_purse = false
+--}
+
+--[[ STRING TOGGLES ]]--{
+
+--If set to true, renames/changes the description of weapons to their Upotte counter parts (if they've made an appearance)
+--NOTE: This is really fucking stupid
+--NOTE 2: Jiisuri is loev. Jiisuri is lyfe.
+--Default = false
+DMCWO.upotte = true -- :^)
+
 --}
 
 --[[ WEAPON TOGGLES ]]--{
 
---Set to true if you use LazyOzzy's burst fire script and want an M16A4, complete with rename.
---##DO NOT## set this to "true" if you don't use Ozzy's burstfire script as you'll just lock your M16 to semi-auto
---Default = false
-DMCWO.ozzy_burst = false
-
---If set to true, you use the PD:TH sniper trails for the MSR, R93, Mosin, WA2000 and M95
+--If set to true, you leave behind PD:TH sniper trails for the MSR, R93, Mosin, WA2000 and M95
 --Default = false
 DMCWO.sniper_tracers = false
 
+--If set to true, ALL raycast firing guns (shotguns too) leave PD:TH sniper trails.
+--NOTE: This is really fucking stupid
+--Default = false
+DMCWO.light_show = false
+
 --If set to true, you retain closer-to-vanilla total ammo counts.
 --I say "closer-to-vanilla" as mag capacities remain adjusted which can still influence total ammo.
---More or less just there if you're really paranoid about being questioned about your ammo.
+--More or less just there if you're really paranoid about being questioned about your ammo (but at that point, why are you playing in pubs?)
 --Default = false
 DMCWO.vanilla_ammo = false
 
@@ -54,12 +76,9 @@ DMCWO.vanilla_ammo = false
 --Default = true
 DMCWO.reposed_vms = true
 
---If set to true, viewmodel positioning while UNAIMED is changed to emulate DOOM
---Attached optics have a pretty good chance of getting in the way
---Overrides hipfire/crouched stance changes from "reposed_vms" if that is active
---Default = false
---CURRENTLY INCOMPLETE
-DMCWO.doomguy = false
+--If set to true, allows attachments that modify ammo pickup to be affected by Walk-in-Closet or Fully Loaded Aced
+--Default = true
+DMCWO.fix_pickup = true
 
 --}
 
@@ -89,7 +108,7 @@ DMCWO.hide_sg_brakes = false
 --Default = false
 DMCWO.hide_pis_flash = false
 
---If set to true, enables the ELCAN Specter to use it's BUIS on the top of the optic. 
+--If set to true, enables the ELCAN Specter to use the BUIS on the top of the optic. 
 --Default = false
 --NOTE: Enabling this will remove the 45 degree irons if they're attached, disallow it from being attached and will take the place as the first gadget you switch to with the laser/flashlight gadget becoming the second and/or third gadget you switch to
 --NOTE 2: You'll also get a floating 45 degree angle gadget in the main menu and mod screen, it's a side effect of having the BUIS actually work
@@ -284,8 +303,8 @@ DMCWO.Strings = {
 "*Insert bad pun here*",
 "\"ayy lmao\"",
 "\"IMPREGNATE MY ASS!!!\"", --https://www.youtube.com/watch?v=XpeyDCsLarg
-"\"GAY DICK SEX\"", --https://www.youtube.com/watch?v=dUK-y4SofZQ
-"\"420 BLAZE IT\"",
+"\"GAY DICK SEX\"", 
+"\"420 BLAZE IT\"", --http://420.moe/
 "Would you Nep a Nep Nep? \nBecause I would...",
 "\"2spooky4me\"",
 ";)",
@@ -294,6 +313,9 @@ DMCWO.Strings = {
 "What're you doing reading this?",
 "\"SILENCIO?\"",
 "\"ECH\"",
+"\"ORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORA\"",
+"\"MUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDA\"",
+"\"RERORERORERORERORERORERORERORERORERORERORERORERO\"",
 "fugg da bolis :DDD",
 "That cop was one swood guy!",
 "\"YOOOOOOOOOOOOOOOOOOOOOOOO!\"", --https://www.youtube.com/watch?v=0T6go6EOuG4
@@ -310,8 +332,15 @@ DMCWO.Strings = {
 "Kek la Kek",
 "\"NUUUDIST BEECHOO\"",
 "\"Now its personel!\"",
+"Callie is better",
+"Aori is better",
+"Marie is better",
+"Hotaru is better",
+"Why not both squid sisters?",
 "\"Are you a kid?\"\n\"Or a squid?\"",
 "\"YOU'RE A KID NOW, YOU'RE A SQUID NOW, YOU'RE A KID, YOU'RE A SQUID, YOU'RE A KID NOW\"",
+"\"SPLATATATATATATATATATATATATATATATAS SPLATOON\"",
+"I'd an Inkling...",
 "Get your \"First Aid Kit\" here ~<3", -->tfw drawing lewd Kawaii pictures
 "I'd Nonon's nonos",
 "Based LazyOzzy",
