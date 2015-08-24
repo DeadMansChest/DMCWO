@@ -23,7 +23,6 @@ function WeaponFactoryTweakData:DMCWO_general()
 		wpn_upg_o_marksmansight_rear = {
 			a_obj = "a_o",
 			forbids = {
-			forbids = {
 				"wpn_fps_pis_deagle_o_standard_front",
 				"wpn_fps_pis_deagle_o_standard_front_long",
 				"wpn_fps_pis_deagle_o_standard_rear"
