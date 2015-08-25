@@ -118,195 +118,131 @@ if DMCWO.hide_brakes == true then
 			}
 		}
 	}
+	local hide_ext = { 
+		unit = "units/pd2_dlc_clover/weapons/wpn_fps_ass_l85a2_pts/wpn_fps_ass_l85a2_ns_standard", 
+		third_unit = "units/pd2_dlc_clover/weapons/wpn_third_ass_l85a2_pts/wpn_third_ass_l85a2_ns_standard" 
+	}
 	tweak_factory.parts.wpn_fps_ass_l85a2_b_medium.override = {
-		wpn_fps_upg_ns_ass_smg_firepig = { 
-			unit = "units/pd2_dlc_clover/weapons/wpn_fps_ass_l85a2_pts/wpn_fps_ass_l85a2_ns_standard",
-			third_unit = "units/pd2_dlc_clover/weapons/wpn_third_ass_l85a2_pts/wpn_third_ass_l85a2_ns_standard"
-		},
-		wpn_fps_upg_ns_ass_smg_tank = deep_clone(tweak_factory.parts.wpn_fps_ass_l85a2_b_medium.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ns_ass_smg_stubby = deep_clone(tweak_factory.parts.wpn_fps_ass_l85a2_b_medium.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_jprifles = deep_clone(tweak_factory.parts.wpn_fps_ass_l85a2_b_medium.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_linear = deep_clone(tweak_factory.parts.wpn_fps_ass_l85a2_b_medium.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_surefire = deep_clone(tweak_factory.parts.wpn_fps_ass_l85a2_b_medium.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_battle = deep_clone(tweak_factory.parts.wpn_fps_ass_l85a2_b_medium.override.wpn_fps_upg_ns_ass_smg_firepig),
+		wpn_fps_upg_ns_ass_smg_firepig = hide_ext,
+		wpn_fps_upg_ns_ass_smg_tank = hide_ext,
+		wpn_fps_upg_ns_ass_smg_stubby = hide_ext,
+		wpn_fps_upg_ass_ns_jprifles = hide_ext,
+		wpn_fps_upg_ass_ns_linear = hide_ext,
+		wpn_fps_upg_ass_ns_surefire = hide_ext,
+		wpn_fps_upg_ass_ns_battle = hide_ext
 	}
 	tweak_factory.parts.wpn_fps_ass_l85a2_b_long.override = deep_clone(tweak_factory.parts.wpn_fps_ass_l85a2_b_medium.override)
 	tweak_factory.parts.wpn_fps_ass_l85a2_b_short.override = deep_clone(tweak_factory.parts.wpn_fps_ass_l85a2_b_medium.override)
+	
+	local hide_ext = {
+		unit = "units/pd2_dlc_gage_historical/weapons/wpn_fps_lmg_mg42_pts/wpn_fps_lmg_mg42_n38",
+		third_unit = "units/pd2_dlc_gage_historical/weapons/wpn_third_lmg_mg42_pts/wpn_third_lmg_mg42_n38"
+	}
 	tweak_factory.parts.wpn_fps_lmg_mg42_b_vg38.override = {
-			wpn_fps_lmg_mg42_n42 = {
-			unit = "units/pd2_dlc_gage_historical/weapons/wpn_fps_lmg_mg42_pts/wpn_fps_lmg_mg42_n38",
-			third_unit = "units/pd2_dlc_gage_historical/weapons/wpn_third_lmg_mg42_pts/wpn_third_lmg_mg42_n38"
-			},
-		wpn_fps_upg_ns_ass_smg_firepig = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_vg38.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ns_ass_smg_tank = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_vg38.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ns_ass_smg_stubby = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_vg38.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_jprifles = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_vg38.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_linear = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_vg38.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_surefire = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_vg38.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_battle = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_vg38.override.wpn_fps_upg_ns_ass_smg_firepig),
-		}	
+		wpn_fps_lmg_mg42_n42 = hide_ext,
+		wpn_fps_upg_ns_ass_smg_firepig = hide_ext,
+		wpn_fps_upg_ns_ass_smg_tank = hide_ext,
+		wpn_fps_upg_ns_ass_smg_stubby = hide_ext,
+		wpn_fps_upg_ass_ns_jprifles = hide_ext,
+		wpn_fps_upg_ass_ns_linear = hide_ext,
+		wpn_fps_upg_ass_ns_surefire = hide_ext,
+		wpn_fps_upg_ass_ns_battle = hide_ext
+	}
+
+	local hide_ext = {
+		unit = "units/pd2_dlc_gage_historical/weapons/wpn_fps_lmg_mg42_pts/wpn_fps_lmg_mg42_n34",
+		third_unit = "units/pd2_dlc_gage_historical/weapons/wpn_third_lmg_mg42_pts/wpn_third_lmg_mg42_nozzle_34"
+	}	
 	tweak_factory.parts.wpn_fps_lmg_mg42_b_mg34.override = {
-		wpn_fps_lmg_mg42_n42 = {
-			unit = "units/pd2_dlc_gage_historical/weapons/wpn_fps_lmg_mg42_pts/wpn_fps_lmg_mg42_n34",
-			third_unit = "units/pd2_dlc_gage_historical/weapons/wpn_third_lmg_mg42_pts/wpn_third_lmg_mg42_nozzle_34"
-			},
-		wpn_fps_upg_ns_ass_smg_firepig = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg34.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ns_ass_smg_tank = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg34.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ns_ass_smg_stubby = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg34.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_jprifles = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg34.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_linear = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg34.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_surefire = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg34.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_battle = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg34.override.wpn_fps_upg_ns_ass_smg_firepig),
-		}	
+		wpn_fps_lmg_mg42_n42 = hide_ext,
+		wpn_fps_upg_ns_ass_smg_firepig = hide_ext,
+		wpn_fps_upg_ns_ass_smg_tank = hide_ext,
+		wpn_fps_upg_ns_ass_smg_stubby = hide_ext,
+		wpn_fps_upg_ass_ns_jprifles = hide_ext,
+		wpn_fps_upg_ass_ns_linear = hide_ext,
+		wpn_fps_upg_ass_ns_surefire = hide_ext,
+		wpn_fps_upg_ass_ns_battle = hide_ext
+	}	
+	
+	local hide_ext = { 
+		unit = "units/pd2_dlc_gage_historical/weapons/wpn_fps_lmg_mg42_pts/wpn_fps_lmg_mg42_n42",
+		third_unit = "units/pd2_dlc_gage_historical/weapons/wpn_third_lmg_mg42_pts/wpn_third_lmg_mg42_nozzle_42",
+	}
 	tweak_factory.parts.wpn_fps_lmg_mg42_b_mg42.override = {		
-		wpn_fps_upg_ns_ass_smg_firepig = { 
-			unit = "units/pd2_dlc_gage_historical/weapons/wpn_fps_lmg_mg42_pts/wpn_fps_lmg_mg42_n42",
-			third_unit = "units/pd2_dlc_gage_historical/weapons/wpn_third_lmg_mg42_pts/wpn_third_lmg_mg42_nozzle_42",
-			},
-		wpn_fps_upg_ns_ass_smg_tank = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg42.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ns_ass_smg_stubby = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg42.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_jprifles = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg42.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_linear = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg42.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_surefire = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg42.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_battle = deep_clone(tweak_factory.parts.wpn_fps_lmg_mg42_b_mg42.override.wpn_fps_upg_ns_ass_smg_firepig),
-		}
+		wpn_fps_upg_ns_ass_smg_firepig = hide_ext,
+		wpn_fps_upg_ns_ass_smg_tank = hide_ext,
+		wpn_fps_upg_ns_ass_smg_stubby = hide_ext,
+		wpn_fps_upg_ass_ns_jprifles = hide_ext,
+		wpn_fps_upg_ass_ns_linear = hide_ext,
+		wpn_fps_upg_ass_ns_surefire = hide_ext,
+		wpn_fps_upg_ass_ns_battle = hide_ext
+	}
+	
+	local hide_ext = { 
+		unit = "units/pd2_dlc_pines/weapons/wpn_fps_smg_m1928_pts/wpn_fps_smg_thompson_ns_standard",
+		third_unit = "units/pd2_dlc_pines/weapons/wpn_fps_smg_m1928_pts/wpn_third_smg_thompson_ns_standard",
+	}
 	tweak_factory.parts.wpn_fps_smg_thompson_barrel.override = {
-			wpn_fps_upg_ns_ass_smg_firepig = { 
-			unit = "units/pd2_dlc_pines/weapons/wpn_fps_smg_m1928_pts/wpn_fps_smg_thompson_ns_standard",
-			third_unit = "units/pd2_dlc_pines/weapons/wpn_fps_smg_m1928_pts/wpn_third_smg_thompson_ns_standard",
-			},
-		wpn_fps_upg_ns_ass_smg_tank = deep_clone(tweak_factory.parts.wpn_fps_smg_thompson_barrel.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ns_ass_smg_stubby = deep_clone(tweak_factory.parts.wpn_fps_smg_thompson_barrel.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_jprifles = deep_clone(tweak_factory.parts.wpn_fps_smg_thompson_barrel.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_linear = deep_clone(tweak_factory.parts.wpn_fps_smg_thompson_barrel.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_surefire = deep_clone(tweak_factory.parts.wpn_fps_smg_thompson_barrel.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_battle = deep_clone(tweak_factory.parts.wpn_fps_smg_thompson_barrel.override.wpn_fps_upg_ns_ass_smg_firepig),
-		}	
+		wpn_fps_upg_ns_ass_smg_firepig = hide_ext,
+		wpn_fps_upg_ns_ass_smg_tank = hide_ext,
+		wpn_fps_upg_ns_ass_smg_stubby = hide_ext,
+		wpn_fps_upg_ass_ns_jprifles = hide_ext,
+		wpn_fps_upg_ass_ns_linear = hide_ext,
+		wpn_fps_upg_ass_ns_surefire = hide_ext,
+		wpn_fps_upg_ass_ns_battle = hide_ext,
+	}	
 	tweak_factory.parts.wpn_fps_smg_thompson_barrel_long.override = {
-			wpn_fps_upg_ns_ass_smg_firepig = { 
-			unit = "units/pd2_dlc_pines/weapons/wpn_fps_smg_m1928_pts/wpn_fps_smg_thompson_ns_standard",
-			third_unit = "units/pd2_dlc_pines/weapons/wpn_fps_smg_m1928_pts/wpn_third_smg_thompson_ns_standard",
-			},
-		wpn_fps_upg_ns_ass_smg_tank = deep_clone(tweak_factory.parts.wpn_fps_smg_thompson_barrel_long.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ns_ass_smg_stubby = deep_clone(tweak_factory.parts.wpn_fps_smg_thompson_barrel_long.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_jprifles = deep_clone(tweak_factory.parts.wpn_fps_smg_thompson_barrel_long.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_linear = deep_clone(tweak_factory.parts.wpn_fps_smg_thompson_barrel_long.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_surefire = deep_clone(tweak_factory.parts.wpn_fps_smg_thompson_barrel_long.override.wpn_fps_upg_ns_ass_smg_firepig),
-		wpn_fps_upg_ass_ns_battle = deep_clone(tweak_factory.parts.wpn_fps_smg_thompson_barrel_long.override.wpn_fps_upg_ns_ass_smg_firepig),
-		}
+		wpn_fps_upg_ns_ass_smg_firepig = hide_ext,
+		wpn_fps_upg_ns_ass_smg_tank = hide_ext,
+		wpn_fps_upg_ns_ass_smg_stubby = hide_ext,
+		wpn_fps_upg_ass_ns_jprifles = hide_ext,
+		wpn_fps_upg_ass_ns_linear = hide_ext,
+		wpn_fps_upg_ass_ns_surefire = hide_ext,
+		wpn_fps_upg_ass_ns_battle = hide_ext
+	}
+	
+	local hide_ext = {
+		unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_short",
+		third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_short"
+	}
 	tweak_factory.parts.wpn_fps_ass_scar_b_short.override = {
-		wpn_fps_ass_scar_ns_standard = {
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_short",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_short"
-		},
-		wpn_fps_upg_ns_ass_smg_firepig = { 
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_short",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_short"
-		},
-		wpn_fps_upg_ns_ass_smg_tank = { 
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_short",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_short",
-		},
-		wpn_fps_upg_ns_ass_smg_stubby = { 
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_short",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_short",
-		},
-		wpn_fps_upg_ass_ns_jprifles = { 
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_short",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_short",
-		},
-		wpn_fps_upg_ass_ns_linear = { 
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_short",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_short",
-		},
-		wpn_fps_upg_ass_ns_surefire = { 
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_short",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_short",
-		},
+		wpn_fps_ass_scar_ns_standard = hide_ext,
+		wpn_fps_upg_ns_ass_smg_firepig = hide_ext,
+		wpn_fps_upg_ns_ass_smg_tank = hide_ext,
+		wpn_fps_upg_ns_ass_smg_stubby = hide_ext,
+		wpn_fps_upg_ass_ns_jprifles = hide_ext,
+		wpn_fps_upg_ass_ns_linear = hide_ext,
+		wpn_fps_upg_ass_ns_surefire = hide_ext,
+	}
+	
+	local hide_ext = {
+		unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_standard",
+		third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_standard"
 	}
 	tweak_factory.parts.wpn_fps_ass_scar_b_medium.override = {
-		wpn_fps_upg_ns_ass_smg_firepig = { 
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_standard",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_standard",
-		},
-		wpn_fps_upg_ns_ass_smg_tank = { 
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_standard",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_standard",
-		},
-		wpn_fps_upg_ns_ass_smg_stubby = { 
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_standard",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_standard",
-		},
-		wpn_fps_upg_ass_ns_jprifles = { 
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_standard",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_standard",
-		},
-		wpn_fps_upg_ass_ns_linear = { 
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_standard",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_standard",
-		},
-		wpn_fps_upg_ass_ns_surefire = { 
-			unit = "units/pd2_dlc_dec5/weapons/wpn_fps_ass_scar_pts/wpn_fps_ass_scar_ns_standard",
-			third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_ass_scar_pts/wpn_third_ass_scar_ns_standard",
-		},
+		wpn_fps_upg_ns_ass_smg_firepig = hide_ext,
+		wpn_fps_upg_ns_ass_smg_tank = hide_ext,
+		wpn_fps_upg_ns_ass_smg_stubby = hide_ext,
+		wpn_fps_upg_ass_ns_jprifles = hide_ext,
+		wpn_fps_upg_ass_ns_linear = hide_ext,
+		wpn_fps_upg_ass_ns_surefire = hide_ext,
 	}
 	tweak_factory.parts.wpn_fps_ass_scar_b_long.override = deep_clone(tweak_factory.parts.wpn_fps_ass_scar_b_medium.override)
+	
+	local hide_ext = {
+		unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
+		third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
+	}
 	tweak_factory.parts.wpn_fps_ass_vhs_b_standard.override = {	
-		wpn_fps_ass_vhs_ns_vhs_no = {
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
-		wpn_fps_upg_ns_ass_smg_firepig = { 
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
-		wpn_fps_upg_ns_ass_smg_tank = { 
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
-		wpn_fps_upg_ns_ass_smg_stubby = { 
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
-		wpn_fps_upg_ass_ns_jprifles = { 
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
-		wpn_fps_upg_ass_ns_linear = { 
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
-		wpn_fps_upg_ass_ns_surefire = { 
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
+		wpn_fps_ass_vhs_ns_vhs_no = hide_ext,
+		wpn_fps_upg_ns_ass_smg_firepig = hide_ext,
+		wpn_fps_upg_ns_ass_smg_tank = hide_ext,
+		wpn_fps_upg_ns_ass_smg_stubby = hide_ext,
+		wpn_fps_upg_ass_ns_jprifles = hide_ext,
+		wpn_fps_upg_ass_ns_linear = hide_ext,
+		wpn_fps_upg_ass_ns_surefire = hide_ext,
 		}		
-	tweak_factory.parts.wpn_fps_ass_vhs_b_short.override = {		
-		wpn_fps_upg_ns_ass_smg_firepig = { 
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
-		wpn_fps_upg_ns_ass_smg_tank = { 
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
-		wpn_fps_upg_ns_ass_smg_stubby = { 
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
-		wpn_fps_upg_ass_ns_jprifles = { 
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
-		wpn_fps_upg_ass_ns_linear = { 
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
-		wpn_fps_upg_ass_ns_surefire = { 
-			unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_fps_ass_vhs_ns_vhs",
-			third_unit = "units/pd2_dlc_dragan/weapons/wpn_fps_ass_vhs_pts/wpn_third_ass_vhs_ns_vhs"
-			},
-		}
+	tweak_factory.parts.wpn_fps_ass_vhs_b_short.override = deep_clone(tweak_factory.parts.wpn_fps_ass_vhs_b_standard.override)
 else
 	tweak_factory.parts.wpn_fps_upg_ns_ass_smg_firepig.unit = "units/payday2/weapons/wpn_fps_upg_ns_ass_smg_firepig/wpn_fps_upg_ns_ass_smg_firepig"
 	tweak_factory.parts.wpn_fps_upg_ns_ass_smg_firepig.third_unit = "units/payday2/weapons/wpn_third_upg_ns_ass_smg_firepig/wpn_third_upg_ns_ass_smg_firepig"
