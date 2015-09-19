@@ -1,5 +1,5 @@
 --[[
-v1.42
+v1.42.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -9,7 +9,7 @@ if RequiredScript == "lib/units/weapons/raycastweaponbase" then
 	--While I made this myself, credits to LazyOzzy for making the pickup fix in the first place
 		function RaycastWeaponBase:add_ammo(ratio, add_amount_override)
 			if self:ammo_max() then
-				return false
+				return false, 0
 			end
 			local multiplier_min = 1
 			local multiplier_max = 1
@@ -37,7 +37,7 @@ if RequiredScript == "lib/units/weapons/raycastweaponbase" then
 			if Application:production_build() then
 				managers.player:add_weapon_ammo_gain(self._name_id, add_amount)
 			end
-			return picked_up
+			return picked_up, add_amount
 		end
 	end
 
@@ -103,10 +103,12 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 		end
 		if current_state then
 			if self._name_id ~= "flamethrower_mk2" then
-				if current_state._state_data.in_air and not	current_state:in_steelsight() then
-					multiplier = multiplier * 2
-				elseif current_state._state_data.in_air and	current_state:in_steelsight() then
-					multiplier = multiplier * 1.25
+				if current_state._state_data.in_air then 
+					if current_state:in_steelsight() then
+						multiplier = multiplier * 1.5
+					else
+						multiplier = multiplier * 2
+					end
 				end
 			end
 			if current_state._moving then
@@ -161,7 +163,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		self._recoil_recover = self:weapon_tweak_data().r_recover or 1
 		self._movement_penalty = self:weapon_tweak_data().weapon_movement_penalty or 1
 		self._min_shield_pen_dam = self:weapon_tweak_data().min_shield_pen_dam or nil
-		self._reload_speed_mult = 1
+		self._reload_speed_mult = self:weapon_tweak_data().reload_speed_mult or 1
 		self._ads_speed_mult = 1
 		self._rof_mult = 1
 		self._penetration_power = self:weapon_tweak_data().penetration_power or 0.5
@@ -179,7 +181,11 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		local custom_stats = managers.weapon_factory:get_custom_stats_from_weapon(self._factory_id, self._blueprint)
 		for part_id, stats in pairs(custom_stats) do
 			if stats.movement_speed then
-				self._movement_penalty = self._movement_penalty * stats.movement_speed
+				if self._movement_penalty * stats.movement_speed > 1 then
+					self._movement_penalty = 1
+				else
+					self._movement_penalty = self._movement_penalty * stats.movement_speed
+				end
 			end
 			if stats.damage_near_mul then
 				self._damage_near = self._damage_near * stats.damage_near_mul
@@ -319,7 +325,67 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	function NewRaycastWeaponBase:recoil_wait()
 		return nil
 	end
+	
+	function NewRaycastWeaponBase:movement_penalty()
+		local mult = 1
+		local state = managers.player:player_unit():movement():current_state()
 		
+		local dicks = 1.8918918918918918918918918918919
+		if state._state_data.ducking then
+			dicks = 1.2162162162162162162162162162162
+		end		
+		if state._state_data.in_steelsight and not managers.player:has_category_upgrade("player", "steelsight_normal_movement_speed") then
+			if self:weapon_tweak_data().category == "pistol" then
+				mult = dicks * 0.95
+				if self:weapon_tweak_data().sub_category == "carbine" then
+						mult = dicks * 0.65
+					end
+			elseif self:weapon_tweak_data().category == "akimbo" then
+					mult = dicks * 0.85
+			elseif self:weapon_tweak_data().category == "assault_rifle" then
+					mult = dicks * 0.5
+					if self:weapon_tweak_data().sub_category == "battle_rifle" then
+						mult = dicks * 0.45
+					elseif self:weapon_tweak_data().sub_category == "carbine" then
+						mult = dicks * 0.6
+					end
+			elseif self:weapon_tweak_data().category == "smg" then
+					mult = dicks * 0.8
+					if self:weapon_tweak_data().sub_category == "pdw" then
+						mult = dicks * 0.75
+					end
+			elseif self:weapon_tweak_data().category == "shotgun" then
+					mult = dicks * 0.7
+			elseif self:weapon_tweak_data().category == "lmg" then
+					mult = dicks * 0.4
+					if self:weapon_tweak_data().sub_category == "gpmg" then
+						mult = dicks * 0.3
+					end
+			elseif self:weapon_tweak_data().category == "snp" then
+					mult = dicks * 0.475
+			end
+				
+			if self:weapon_tweak_data().ams then 
+				mult = dicks * self:weapon_tweak_data().ams
+			end
+			
+			--bullpup bonus speed
+			if self:weapon_tweak_data().is_bullpup then 
+				mult = mult * 1.2
+			end			
+		end
+		
+		if (state._state_data.reload_expire_t or state._state_data.reload_enter_expire_t or state._state_data.reload_exit_expire_t) and self:weapon_tweak_data().rms then
+			mult = mult * self:weapon_tweak_data().rms
+		end
+		--if magic occurs, prevents modified steelsight speeds exceeding the walking/crouched state's speed
+		if mult > dicks then
+			mult = dicks
+		end
+		
+		return (self._movement_penalty or 1) * mult
+	end
+			
 	function NewRaycastWeaponBase:get_damage_falloff(damage, col_ray, user_unit, distance)
 		local dist = distance or col_ray.distance or mvector3.distance(col_ray.unit:position(), user_unit:position())
 		local min_damage = (((self._current_stats.damage / self._damage) * damage) * self._damage_min)
@@ -403,7 +469,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 				hit_unit = self._bullet_class:on_collision(col_ray, self._unit, user_unit, damage)
 			end
 			self._shot_fired_stats_table.hit = hit_unit and true or false
-			if (not shoot_through_data or hit_unit) and (not self._ammo_data or not self._ammo_data.ignore_statistic) then
+			if (not shoot_through_data or hit_unit) and (not self._ammo_data or not self._ammo_data.ignore_statistic) and not self._rays then
 				self._shot_fired_stats_table.skip_bullet_count = shoot_through_data and true
 				managers.statistics:shot_fired(self._shot_fired_stats_table)
 			end
@@ -698,6 +764,10 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 
 	function NewRaycastWeaponBase:enter_steelsight_speed_multiplier()
 		local multiplier = 1
+		
+		if self:weapon_tweak_data().ADS_TIMER then
+			multiplier = multiplier / ( ( self:weapon_tweak_data().ADS_TIMER + tweak_data.player.TRANSITION_DURATION ) / tweak_data.player.TRANSITION_DURATION)
+		end
 				
 		multiplier = multiplier * self._ads_speed_mult
 

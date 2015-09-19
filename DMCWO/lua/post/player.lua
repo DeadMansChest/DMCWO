@@ -1,5 +1,5 @@
 --[[
-v1.42
+v1.42.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -11,8 +11,11 @@ if RequiredScript == "lib/units/beings/player/playerdamage" then
 --}
 elseif RequiredScript == "lib/units/beings/player/states/playerstandard" then
 --{
+	function PlayerStandard:in_steelsight()
+		return self._state_data.in_steelsight and self._camera_unit:base():is_stance_done()
+	end
 	
-	function PlayerStandard:_get_max_walk_speed(t)
+--[[ 	function PlayerStandard:_get_max_walk_speed(t)
 		local speed_weed = self._tweak_data.movement.speed
 		local movement_speed = speed_weed.STANDARD_MAX
 		local speed_state = "walk"
@@ -130,6 +133,6 @@ elseif RequiredScript == "lib/units/beings/player/states/playerstandard" then
 		end
 		return movement_speed * multiplier
 	end
-
+ ]]
 --}
 end

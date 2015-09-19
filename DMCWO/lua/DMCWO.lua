@@ -1,6 +1,6 @@
 --[[
 DMC's Weapon Overhaul
-v1.42
+v1.42.3
 BLT Hook Version
 ]]
 
@@ -38,18 +38,33 @@ DMCWO.debug_damage = false
 DMCWO.doomguy = false
 
 --If set to true, gets rid of the ammo purse reload system for box magazine/belt fed weapons. Reloading before emptying your current magazine will discard any rounds left in that magazine.
+--The chambered round is taken into consideration (if the weapon is closed bolt) and will not be lost if doing a non-empty reload
 --The Beretta 682/Joceline is excluded from this despite using the "magazine" reload system as you keep your second shell loaded when you perform a non-empty reload.
+--NOTE: This does NOT play well with Tasers. When you get tased, it runs the reload code to top up your mag before you dump it all. Guess what happens...
 --WIP
 DMCWO.no_ammo_purse = false
 --}
 
 --[[ STRING TOGGLES ]]--{
 
+--If set to true, renames/changes the description of weapons to their IRL counter parts
+--NOTE: This only affects weapon names. Descriptions are unchanged
+--Default = true
+DMCWO.reelnaems = true
+
+--If set to true, Revolver Ocelot
+--NOTE: Revolver Ocelot
+--NOTE 2: Revolver Ocelot
+--NOTE 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
+--Default = false
+DMCWO.ocelot = false
+
 --If set to true, renames/changes the description of weapons to their Upotte counter parts (if they've made an appearance)
 --NOTE: This is really fucking stupid
 --NOTE 2: Jiisuri is loev. Jiisuri is lyfe.
+--NOTE 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
 --Default = false
-DMCWO.upotte = true -- :^)
+DMCWO.upotte = false
 
 --}
 
@@ -66,7 +81,7 @@ DMCWO.light_show = false
 
 --If set to true, you retain closer-to-vanilla total ammo counts.
 --I say "closer-to-vanilla" as mag capacities remain adjusted which can still influence total ammo.
---More or less just there if you're really paranoid about being questioned about your ammo (but at that point, why are you playing in pubs?)
+--More or less just there if you're really paranoid about being questioned about your ammo when playing with the unknowing (but with that said, why are you playing pubs?)
 --Default = false
 DMCWO.vanilla_ammo = false
 
@@ -77,17 +92,22 @@ DMCWO.vanilla_ammo = false
 DMCWO.reposed_vms = true
 
 --If set to true, allows attachments that modify ammo pickup to be affected by Walk-in-Closet or Fully Loaded Aced
---Default = true
-DMCWO.fix_pickup = true
+--Default = false
+DMCWO.fix_pickup = false
 
 --}
 
 --[[ MELEE TOGGLES ]]--{
 
 --If set to true, using the fists allows you to turn into Kenshiro from Hokuto No Ken (Fist of the North Star)
---AAAH-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA
+--"AAAH-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA"
 --Default = false
 DMCWO.kenshiro = false
+
+--If set to true, become Raiden
+DMCWO.RULESOFNATURE = false
+--AND THEY RUN WHEN THE SUN COMES UP
+--WITH THEIR LIVES ON THE LINE
 
 --}
 
@@ -98,7 +118,7 @@ DMCWO.kenshiro = false
 --[General]--{
 --If set to true, hides attachable rifle/SMG/LMG class muzzle brakes
 --Default = false
-DMCWO.hide_brakes = true
+DMCWO.hide_brakes = false
 
 --If set to true, hides attachable shotgun class muzzle brakes
 --Default = false
@@ -110,15 +130,10 @@ DMCWO.hide_pis_flash = false
 
 --If set to true, enables the ELCAN Specter to use the BUIS on the top of the optic. 
 --Default = false
---NOTE: Enabling this will remove the 45 degree irons if they're attached, disallow it from being attached and will take the place as the first gadget you switch to with the laser/flashlight gadget becoming the second and/or third gadget you switch to
+--NOTE: Enabling this will remove the 45 degree irons if they're attached, disallow it from being attached along with the ELCAN scope and will take the place as the first gadget you switch to with the laser/flashlight gadget becoming the second and/or third gadget you switch to
 --NOTE 2: You'll also get a floating 45 degree angle gadget in the main menu and mod screen, it's a side effect of having the BUIS actually work
 --NOTE 3: Every now and then I might forget to update this for new weapons
 DMCWO.elcan_buis = false
-
---if set to true, changes the free 000 Buck to Birdshot. 
---Default = false
---NOTE: This fires 50 rays (30 for the Judge) out at a time, you may get performance issues if you play on a computer worse than my toaster, especially so if you use SquareOne's instant bullet impact fix
-DMCWO.sho_bird = false
 
 --if set to true, swaps the Magpul BUIS/Flip-up sights with the default ones from the KSG (Daniel Defence Irons)
 --NOTE: May be slightly misaligned, not a priority of mine to fix it.
@@ -368,6 +383,7 @@ DMCWO.Strings = {
 "More lood Kawaii pictures when?",
 "Why are fryfaced characters so good?",
 "shekelfest 2015",
+"You shit talking mai raifu, Slowpork?",
 ":^)",
 "\n   ^\n  ^^^\n:^^^^^)",
 "Why make lua scripts when you can draw porn?",

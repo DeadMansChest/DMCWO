@@ -1,5 +1,5 @@
 --[[
-v1.42
+v1.42.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -13,7 +13,7 @@ if RequiredScript == "lib/tweak_data/weapontweakdata" then
 		--self.*weapon_id*.tactical_reload = *either 1 or 2*
 		--(1 = normal, 2 = akimbo)
 	
-		local tact_rel = {'deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','new_m14','scar','fal','rpk','msr','r93','m95','famas','galil','g3','scorpion','benelli','serbu','r870','ksg','g26','spas12','l85a2','vhs','hs2000','tec9','sub2000','asval','wa2000','polymer'}
+		local tact_rel = {'deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','new_m14','scar','fal','rpk','msr','r93','m95','famas','galil','g3','scorpion','benelli','serbu','r870','ksg','g26','spas12','l85a2','vhs','hs2000','tec9','sub2000','asval','wa2000','polymer','winchester1874'}
 		for i, wep_id in ipairs(tact_rel) do
 			self[wep_id].tactical_reload = 1
 		end
@@ -24,6 +24,8 @@ if RequiredScript == "lib/tweak_data/weapontweakdata" then
 		end
 		
 		self.b682.keep_ammo = true
+		self.mosin.keep_ammo = true
+		self.c96.keep_ammo = true
 		
 		self.c96.uses_clip = true
 		self.mosin.uses_clip = true
@@ -55,25 +57,25 @@ elseif RequiredScript == "lib/units/weapons/raycastweaponbase" then
 	
 	function RaycastWeaponBase:on_reload()
 		if self:get_ammo_remaining_in_clip() > 0 and tweak_data.weapon[self._name_id].tactical_reload == 1 then
-			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 1))
-			if DMCWO.no_ammo_purse == true and tweak_data.weapon[self._name_id].keep_ammo ~= true then
+			if DMCWO.no_ammo_purse == true and not tweak_data.weapon[self._name_id].keep_ammo then
 				self:set_ammo_total(self:get_ammo_total() - (self:get_ammo_remaining_in_clip() - 1))
 			end
+			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 1))
 		elseif self:get_ammo_remaining_in_clip() > 1 and tweak_data.weapon[self._name_id].tactical_reload == 2 then
-			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 2))
 			if DMCWO.no_ammo_purse == true then
 				self:set_ammo_total(self:get_ammo_total() - (self:get_ammo_remaining_in_clip() - 2))
 			end
+			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 2))
 		elseif self:get_ammo_remaining_in_clip() == 1 and tweak_data.weapon[self._name_id].tactical_reload == 2 then
-			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 1))
 			if DMCWO.no_ammo_purse == true then
 				self:set_ammo_total(self:get_ammo_total() - (self:get_ammo_remaining_in_clip() - 1))
 			end
+			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 1))
 		elseif self:get_ammo_remaining_in_clip() > 0 and tweak_data.weapon[self._name_id].tactical_reload == nil then
-			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip()))
-			if DMCWO.no_ammo_purse == true and tweak_data.weapon[self._name_id].keep_ammo ~= true then
+			if DMCWO.no_ammo_purse == true and not tweak_data.weapon[self._name_id].keep_ammo then
 				self:set_ammo_total(self:get_ammo_total() - self:get_ammo_remaining_in_clip())
 			end
+			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip()))
 		elseif tweak_data.weapon[self._name_id].uses_clip == true and self:get_ammo_remaining_in_clip() <= self:get_ammo_max_per_clip()  then
 			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip(), self:get_ammo_remaining_in_clip() + tweak_data.weapon[self._name_id].clip_capacity))
 		elseif self._setup.expend_ammo then

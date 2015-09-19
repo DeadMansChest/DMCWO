@@ -1,5 +1,5 @@
 --[[
-v1.42
+v1.42.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -7,10 +7,11 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 	local old_update_stats_values = NewShotgunBase._update_stats_values
 	
 	function NewShotgunBase:setup_default()
-		self._damage_near = tweak_data.weapon[self._name_id].damage_near * 100 or 1000 -- 10 m
-		self._damage_far = (tweak_data.weapon[self._name_id].damage_far * 100 or 4000) - self._damage_near -- - damage_near = 40 m
+		self._range = self._damage_far
+		self._damage_near = (tweak_data.weapon[self._name_id].damage_near * 100) or 1000
+		self._damage_far = (tweak_data.weapon[self._name_id].damage_far * 100) or 4000
+		self._damage_far = self._damage_far - self._damage_near -- - damage_near = 40 m
 		self._rays = tweak_data.weapon[self._name_id].rays or 8
-		self._range = self._damage_far + self._damage_near
 		self._use_shotgun_reload = self._use_shotgun_reload or self._use_shotgun_reload == nil
 	end
 	
@@ -180,7 +181,12 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 				result.rays = #col_rays > 0 and col_rays
 			end
 		end
-		managers.statistics:shot_fired({ hit = false, weapon_unit = self._unit })
+		if not shoot_through_data then
+			managers.statistics:shot_fired({
+				hit = false,
+				weapon_unit = self._unit
+			})
+		end
 		
 		local exclude_hit_unit = {}
 		for k,v in pairs(hit_enemies) do

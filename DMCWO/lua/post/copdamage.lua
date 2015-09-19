@@ -1,7 +1,21 @@
 --[[
-v1.42
+v1.42.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
+
+function CopDamage:_dismember_condition(attack_data)
+	local dismember_victim = false
+	local target_is_spook = false
+	target_is_spook = attack_data.col_ray.unit and attack_data.col_ray.unit:base()._tweak_table == "spooc"
+	local criminal_name = managers.criminals:local_character_name()
+	local criminal_melee_weapon = managers.blackmarket:equipped_melee_weapon()
+	local weapon_charged = false
+	weapon_charged = attack_data.charge_lerp_value and attack_data.charge_lerp_value > 0.5
+	if target_is_spook and weapon_charged --[[and criminal_name == "dragon"]] and criminal_melee_weapon == "sandsteel" then
+		dismember_victim = true
+	end
+	return dismember_victim
+end
 
 function CopDamage:damage_bullet(attack_data)
 	if self._dead or self._invulnerable then

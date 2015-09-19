@@ -3,11 +3,11 @@
 	"description" : "Full overhaul of the weapons present in PD2"
 	"author" : "DeadMansChest/Noep",
 	"contact" : "id/qt3_14",
-	"version" : "1.42 (hotfix 2)",
+	"version" : "1.42.3",
 	"priority" : 69,
 	"updates" : [
 		{
-			"revision" : 1.422,
+			"revision" : 1.423,
 			"identifier" : "dmcwo",
 		}
 	]

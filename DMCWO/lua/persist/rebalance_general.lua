@@ -1,5 +1,5 @@
 --[[
-v1.42
+v1.42.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -118,25 +118,25 @@ tweak_data.upgrades.skill_descs.sharpshooter.multipro = "10%"
 --[[ Viewmodel "Sway" and Drag ]]	
 
 --ADS "sway" and pivot point for all weapons
-local gun_drag = {'default','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','rpg7','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','m134','mateba','sub2000','asval','polymer','wa2000','hunter'}
+local gun_drag = {'default','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','rpg7','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','m134','mateba','sub2000','asval','polymer','wa2000','hunter','baka','frankish','arblast','long'}
 for i, wep_id in ipairs(gun_drag) do
-	tweak_data.player.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.00075
+	tweak_data.player.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.000--75
 
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pivot = Vector3(10, -8, -25)
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pivot = Vector3(10, -4, -12.5) 
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pivot = Vector3(10, -10, -2) 
 	
 	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.125
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -3
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 3
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 3 / 2
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_pos = -3
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -1
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 1
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 1 / 2
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_pos = -1
 	
 	tweak_data.player.stances[ wep_id ].crouched.shakers.breathing.amplitude = tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude / 2
-	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_neg = -2.5
-	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 2.5
-	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 2.5 / 2
-	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -2.5
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_neg = -0.5
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 0.5
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 0.5 / 2
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -0.5
 	
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = 0
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0
@@ -144,22 +144,65 @@ for i, wep_id in ipairs(gun_drag) do
 	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = 0
 end
 
-local lmg_drag = {'m249','rpk','hk21','striker','mg42'}
-for i, wep_id in ipairs(lmg_drag) do
-	tweak_data.player.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.035
-end
+tweak_data.player.TRANSITION_DURATION = 0.2
 
-
-tweak_data.player.TRANSITION_DURATION = 0.23
-
---Adjustments made below add or subtract from TRANSITION_DURATION
 local babby_pistol = {'usp','g22c','glock_17','glock_18c','ppk','judge','jowi','g26','c96','hs2000','x_usp','x_g17','x_g22c','peacemaker','plainsrider','hunter'}
 for i, wep_id in ipairs(babby_pistol) do
-	tweak_data.weapon[ wep_id ].transition_duration = -0.1
+	tweak_data.weapon[ wep_id ].ADS_TIMER = -0.09
 	
 	tweak_data.weapon[ wep_id ].timers.equip = 0.2
 	
 	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.125
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -2
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 2
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 2 / 2
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_pos = -2
+	
+	tweak_data.player.stances[ wep_id ].crouched.shakers.breathing.amplitude = tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude / 2
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_neg = -1.5
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 1.5
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 1.5 / 2
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -1.5
+end 
+tweak_data.weapon.jowi.ADS_TIMER = -0.02
+tweak_data.weapon.jowi.timers.equip = 0.4
+tweak_data.weapon.x_usp.ADS_TIMER = -0.02
+tweak_data.weapon.x_usp.timers.equip = 0.4
+tweak_data.weapon.x_g17.ADS_TIMER = -0.02
+tweak_data.weapon.x_g17.timers.equip = 0.4
+tweak_data.weapon.x_g22c.ADS_TIMER = -0.02
+tweak_data.weapon.x_g22c.timers.equip = 0.4
+
+local med_pistol = {'colt_1911','p226','b92fs','x_1911','x_b92fs','mateba','baka'}
+for i, wep_id in ipairs(med_pistol) do
+	tweak_data.weapon[ wep_id ].ADS_TIMER = -0.08
+	
+	tweak_data.weapon[ wep_id ].timers.equip = 0.25
+	
+	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.175
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -2.5
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 2.5
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 2.5 / 2
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_pos = -2.5
+	
+	tweak_data.player.stances[ wep_id ].crouched.shakers.breathing.amplitude = tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude / 2
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_neg = -2
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 2
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 2 / 2
+	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -2
+end 
+tweak_data.weapon.x_1911.ADS_TIMER = -0.02
+tweak_data.weapon.x_1911.timers.equip = 0.5
+tweak_data.weapon.x_b92fs.ADS_TIMER = -0.02
+tweak_data.weapon.x_b92fs.timers.equip = 0.5
+
+local beeg_pistol = {'new_raging_bull','deagle','x_deagle','sub2000'}
+for i, wep_id in ipairs(beeg_pistol) do
+	tweak_data.weapon[ wep_id ].ADS_TIMER = -0.06
+	
+	tweak_data.weapon[ wep_id ].timers.equip = 0.3
+	
+	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.2
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -3
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 3
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 3 / 2
@@ -171,30 +214,20 @@ for i, wep_id in ipairs(babby_pistol) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 2.5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -2.5
 end 
-tweak_data.weapon.jowi.transition_duration = -0.05
-tweak_data.weapon.x_usp.transition_duration = -0.05
-tweak_data.weapon.x_g17.transition_duration = -0.05
-tweak_data.weapon.x_g22c.transition_duration = -0.05
-tweak_data.weapon.jowi.timers.equip = 0.4
-tweak_data.weapon.x_usp.timers.equip = 0.4
-tweak_data.weapon.x_g17.timers.equip = 0.4
-tweak_data.weapon.x_g22c.timers.equip = 0.4
+tweak_data.weapon.x_deagle.ADS_TIMER = -0.015
+tweak_data.weapon.x_deagle.timers.equip = 0.6
 
-local med_pistol = {'colt_1911','p226','b92fs','x_1911','x_b92fs','mateba'}
-for i, wep_id in ipairs(med_pistol) do
-	tweak_data.weapon[ wep_id ].transition_duration = -0.09
-	tweak_data.weapon.x_1911.transition_duration = -0.045
-	tweak_data.weapon.x_b92fs.transition_duration = -0.045
+local lightweight = {'mp7','mp9','amcar','new_mp5','p90','olympic','tec9','scorpion','cobray','asval','frankish'}
+for i, wep_id in ipairs(lightweight) do
+	tweak_data.weapon[ wep_id ].ADS_TIMER = -0.04
 	
-	tweak_data.weapon[ wep_id ].timers.equip = 0.25
-	tweak_data.weapon.x_1911.timers.equip = 0.5
-	tweak_data.weapon.x_b92fs.timers.equip = 0.5
+	tweak_data.weapon[ wep_id ].timers.equip = 0.45
 	
-	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.175
+	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.15
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -3.5
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 3.5
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 3.5 / 2
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_pos = -3.5
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_pos = -3.5	
 	
 	tweak_data.player.stances[ wep_id ].crouched.shakers.breathing.amplitude = tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_neg = -3
@@ -203,13 +236,11 @@ for i, wep_id in ipairs(med_pistol) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -3
 end 
 
-local beeg_pistol = {'new_raging_bull','deagle','x_deagle','sub2000'}
-for i, wep_id in ipairs(beeg_pistol) do
-	tweak_data.weapon[ wep_id ].transition_duration = -0.08
-	tweak_data.weapon.x_deagle.transition_duration = -0.04
+local med_weight = {'mac10','akmsu','new_m4','ak74','g36','gre_m79','ksg','sterling','polymer'}
+for i, wep_id in ipairs(med_weight) do
+	tweak_data.weapon[ wep_id ].ADS_TIMER = -0.0125
 	
-	tweak_data.weapon[ wep_id ].timers.equip = 0.3
-	tweak_data.weapon.x_deagle.timers.equip = 0.6
+	tweak_data.weapon[ wep_id ].timers.equip = 0.5
 	
 	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.2
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -4
@@ -223,18 +254,21 @@ for i, wep_id in ipairs(beeg_pistol) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 3.5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -3.5
 end 
+tweak_data.weapon.mac10.ADS_TIMER = -0.035
+tweak_data.weapon.ak74.ADS_TIMER = -0.0325
+tweak_data.weapon.ksg.ADS_TIMER = -0.06
 
-local lightweight = {'mp7','mp9','amcar','new_mp5','p90','olympic','tec9','scorpion','cobray','asval'}
-for i, wep_id in ipairs(lightweight) do
-	tweak_data.weapon[ wep_id ].transition_duration = -0.065
+local med_weight_2 = {'serbu','s552','m16','m45','saiga','akm','scar','aug','huntsman','uzi','vhs','b682','flamethrower_mk2','famas','l85a2','arblast'}
+for i, wep_id in ipairs(med_weight_2) do
+	tweak_data.weapon[ wep_id ].ADS_TIMER = -0.00
 	
-	tweak_data.weapon[ wep_id ].timers.equip = 0.45
+	tweak_data.weapon[ wep_id ].timers.equip = 0.55
 	
-	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.15
+	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.25
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -4.5
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 4.5
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 4.5 / 2
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_pos = -4.5	
+	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_pos = -4.5
 	
 	tweak_data.player.stances[ wep_id ].crouched.shakers.breathing.amplitude = tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_neg = -4
@@ -242,15 +276,20 @@ for i, wep_id in ipairs(lightweight) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 4 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -4
 end 
+tweak_data.weapon.m16.ADS_TIMER = 0.015
+tweak_data.weapon.akm.ADS_TIMER = 0.025
+tweak_data.weapon.scar.ADS_TIMER = 0.02
+tweak_data.weapon.aug.ADS_TIMER = -0.02
+tweak_data.weapon.vhs.ADS_TIMER = -0.03
+tweak_data.weapon.arblast.ADS_TIMER = 0.08
 
-local med_weight = {'mac10','akmsu','new_m4','ak74','g36','gre_m79','ksg','sterling','polymer'}
-for i, wep_id in ipairs(med_weight) do
-	tweak_data.weapon[ wep_id ].transition_duration = -0.05
-	tweak_data.weapon.ksg.transition_duration = -0.075
+local heavy = {'r870','benelli','ak5','fal','galil','famas','spas12','mosin','m1928','l85a2','aa12','m32','winchester1874'}
+for i, wep_id in ipairs(heavy) do
+	tweak_data.weapon[ wep_id ].ADS_TIMER = 0.015
 	
-	tweak_data.weapon[ wep_id ].timers.equip = 0.5
-	
-	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.2
+	tweak_data.weapon[ wep_id ].timers.equip = 0.6
+		
+	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.3
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -5
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 5
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 5 / 2
@@ -261,17 +300,26 @@ for i, wep_id in ipairs(med_weight) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 4.5
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 4.5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -4.5
+	
+	
+	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = 0
+	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0
+	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0
+	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = 0
 end 
+tweak_data.weapon.spas12.ADS_TIMER = 0.025
+tweak_data.weapon.aa12.ADS_TIMER = 0.05
+tweak_data.weapon.l85a2.ADS_TIMER = 0.02
+tweak_data.weapon.famas.ADS_TIMER = -0.005
+tweak_data.weapon.mosin.ADS_TIMER = 0.03
 
-local med_weight_2 = {'serbu','s552','m16','m45','saiga','akm','scar','aug','huntsman','uzi','vhs','b682','flamethrower_mk2'}
-for i, wep_id in ipairs(med_weight_2) do
-	tweak_data.weapon[ wep_id ].transition_duration = -0.045
-	tweak_data.weapon.aug.transition_duration = -0.07
-	tweak_data.weapon.vhs.transition_duration = -0.07
+local heavy_2 = {'striker','new_m14','g3','rpk','msr','r93','wa2000'}
+for i, wep_id in ipairs(heavy_2) do
+	tweak_data.weapon[ wep_id ].ADS_TIMER = 0.04
 	
-	tweak_data.weapon[ wep_id ].timers.equip = 0.55
+	tweak_data.weapon[ wep_id ].timers.equip = 0.65
 	
-	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.25
+	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.4
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -5.5
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 5.5
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 5.5 / 2
@@ -283,15 +331,17 @@ for i, wep_id in ipairs(med_weight_2) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -5
 end 
+tweak_data.weapon.rpk.ADS_TIMER = 0.05
+tweak_data.weapon.r93.ADS_TIMER = 0.06
+tweak_data.weapon.wa2000.ADS_TIMER = 0.065
 
-local heavy = {'r870','benelli','ak5','new_m14','famas','g3','spas12','mosin','m1928','l85a2','aa12','m32','winchester1874'}
-for i, wep_id in ipairs(heavy) do
-	tweak_data.weapon[ wep_id ].transition_duration = -0.03
-	tweak_data.weapon.famas.transition_duration = -0.05
+local super_heavy = {'akm_gold','m95','hk21','m249','mg42','rpg7'}
+for i, wep_id in ipairs(super_heavy) do
+	tweak_data.weapon[ wep_id ].ADS_TIMER = 0.075
 	
-	tweak_data.weapon[ wep_id ].timers.equip = 0.6
-		
-	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.3
+	tweak_data.weapon[ wep_id ].timers.equip = 0.7
+	
+	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.45
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -6
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 6
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 6 / 2
@@ -302,41 +352,19 @@ for i, wep_id in ipairs(heavy) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 5.5
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 5.5 / 2
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -5.5
-	
-	
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.yaw_pos = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_neg = 0
-	tweak_data.player.stances[ wep_id ].steelsight.vel_overshot.pitch_pos = 0
 end 
+tweak_data.weapon.m249.ADS_TIMER = 0.0925
+tweak_data.weapon.hk21.ADS_TIMER = 0.0975
+tweak_data.weapon.mg42.ADS_TIMER = 0.1025
+tweak_data.weapon.m95.ADS_TIMER = 0.095
 
-local heavy_2 = {'striker','fal','rpk','msr','r93','galil','wa2000'}
-for i, wep_id in ipairs(heavy_2) do
-	tweak_data.weapon[ wep_id ].transition_duration = -0.02
-	tweak_data.weapon.r93.transition_duration = 0.01
+local the_fuck_even = {'m134'}
+for i, wep_id in ipairs(the_fuck_even) do
+	tweak_data.weapon[ wep_id ].ADS_TIMER = 0.09
 	
-	tweak_data.weapon[ wep_id ].timers.equip = 0.65
+	tweak_data.weapon[ wep_id ].timers.equip = 0.9
 	
-	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.4
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -6.5
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 6.5
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 6.5 / 2
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_pos = -6.5
-	
-	tweak_data.player.stances[ wep_id ].crouched.shakers.breathing.amplitude = tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude / 2
-	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_neg = -6
-	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 6
-	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 6 / 2
-	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -6
-end 
-
-local super_heavy = {'akm_gold','m95','hk21','m249','mg42','rpg7'}
-for i, wep_id in ipairs(super_heavy) do
-	tweak_data.weapon[ wep_id ].transition_duration = 0.03
-	
-	tweak_data.weapon[ wep_id ].timers.equip = 0.7
-	
-	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.45
+	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.5
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -7
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 7
 	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 7 / 2
@@ -349,44 +377,25 @@ for i, wep_id in ipairs(super_heavy) do
 	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -6.5
 end 
 
-local the_fuck_even = {'m134'}
-for i, wep_id in ipairs(the_fuck_even) do
-	tweak_data.weapon[ wep_id ].transition_duration = 0.06
-	
-	tweak_data.weapon[ wep_id ].timers.equip = 0.9
-	
-	tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.5
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_neg = -8
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.yaw_pos = 8
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_neg = 8 / 2
-	tweak_data.player.stances[ wep_id ].standard.vel_overshot.pitch_pos = -8
-	
-	tweak_data.player.stances[ wep_id ].crouched.shakers.breathing.amplitude = tweak_data.player.stances[ wep_id ].standard.shakers.breathing.amplitude / 2
-	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_neg = -7.5
-	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.yaw_pos = 7.5
-	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_neg = 7.5 / 2
-	tweak_data.player.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -7.5
-end 
-
 --[[ AMMO PICKUP RATES ]]
 
 tweak_data.weapon.c96.AMMO_PICKUP = {0.45, 2.70}
 
-tweak_data.weapon.mateba.AMMO_PICKUP = {0.45, 2.40}
+tweak_data.weapon.mateba.AMMO_PICKUP = {0.50, 2.30}
 
-local pis_44 = {'new_raging_bull','judge'}
+local pis_44 = {'new_raging_bull'}
 for i, wep_id in ipairs(pis_44) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.40, 2.10}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.45, 2.00}
 end
 
-local pis_50ae = {'deagle','x_deagle'}
-for i, wep_id in ipairs(pis_50ae) do
+local pis_50 = {'deagle','x_deagle'}
+for i, wep_id in ipairs(pis_50) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.35, 1.50}
 end
 
 local pis_45_colt = {'peacemaker','judge'}
 for i, wep_id in ipairs(pis_45_colt) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.30, 2.00}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.40, 1.80}
 end
 
 local thirty_two = {'ppk','scorpion'}
@@ -394,19 +403,19 @@ for i, wep_id in ipairs(thirty_two) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.30, 4.50}
 end
 
-local nine_mil = {'new_mp5','mp9','m45','glock_17','glock_18c','b92fs','tec9','uzi','sterling','g26','jowi','x_b92fs','cobray','x_g17'}
+local nine_mil = {'new_mp5','mp9','m45','glock_17','glock_18c','b92fs','tec9','uzi','sterling','g26','jowi','x_b92fs','cobray','x_g17','baka'}
 for i, wep_id in ipairs(nine_mil) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {2.00, 4.10}
 end
 
 local its_not_10mm_auto = {'g22c','p226','x_g22c'}
 for i, wep_id in ipairs(its_not_10mm_auto) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.60, 3.50}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.60, 3.70}
 end
 
 local forty_five = {'mac10','colt_1911','usp','m1928','x_1911','x_usp','polymer'} --UMP45 never :'(
 for i, wep_id in ipairs(forty_five) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.10, 3.10}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.10, 3.45}
 end
 
 local pdw_ammo = {'p90','mp7'}
@@ -425,20 +434,20 @@ local ammo_ar = {'olympic','m16','amcar','new_m4','ak5','s552','g36','aug','fama
 for i, wep_id in ipairs(ammo_ar) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.90, 3.50}
 end
-tweak_data.weapon.m249.AMMO_PICKUP = {0.40, 1.70}
+tweak_data.weapon.m249.AMMO_PICKUP = {0.40, 1.90}
 
 local ammo_ak = {'akmsu','akm','akm_gold','ak74','rpk'}
 for i, wep_id in ipairs(ammo_ak) do
-	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {1.75, 3.20}
+	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.75, 3.00}
 end
-tweak_data.weapon.asval.AMMO_PICKUP = {0.60, 2.70}
+tweak_data.weapon.asval.AMMO_PICKUP = {0.55, 2.70}
 
 local ammo_762 = {'new_m14','scar','fal','galil','g3','msr','wa2000'}
 for i, wep_id in ipairs(ammo_762) do
 	tweak_data.weapon[ wep_id ].AMMO_PICKUP = {0.40, 2.20}
 end
-tweak_data.weapon.m134.AMMO_PICKUP = {0.20, 1.50}
-tweak_data.weapon.hk21.AMMO_PICKUP = {0.30, 1.80}
+tweak_data.weapon.m134.AMMO_PICKUP = {0.25, 1.50}
+tweak_data.weapon.hk21.AMMO_PICKUP = {0.35, 1.75}
 
 tweak_data.weapon.mg42.AMMO_PICKUP = {0.30, 1.30}
 tweak_data.weapon.mosin.AMMO_PICKUP = {0.45, 1.30}
@@ -453,7 +462,7 @@ for i, wep_id in ipairs(babby_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.01
 end
 
-local low_panic = {'new_mp5','mp9','m45','glock_17','glock_18c','b92fs','uzi','g26','jowi','x_b92fs','plainsrider','hunter'}
+local low_panic = {'new_mp5','mp9','m45','glock_17','glock_18c','b92fs','uzi','g26','jowi','x_b92fs','plainsrider','hunter','baka'}
 for i, wep_id in ipairs(low_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.015
 end
@@ -503,8 +512,8 @@ for i, wep_id in ipairs(its2spooky_panic) do
 	tweak_data.weapon[ wep_id ].panic_suppression_chance = 0.30
 end
 
---Burst fire stuff if you're using Ozzy's burst fire script
-local no_burst = {'glock_18c','mac10','m45','mp9','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','amcar','new_m4','ak5','aug','saiga','new_m14','scar','fal','galil','g3','tec9','scorpion','uzi','sterling','m1928','l85a2','vhs','cobray','aa12','flamethrower_mk2','m32','asval'}
+--Burst fire stuff
+local no_burst = {'glock_18c','mac10','m45','mp9','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','amcar','new_m4','ak5','aug','saiga','new_m14','scar','fal','galil','g3','tec9','scorpion','uzi','sterling','m1928','l85a2','vhs','cobray','aa12','flamethrower_mk2','m32','asval','baka'}
 for i, wep_id in ipairs(no_burst) do
 	tweak_data.weapon[ wep_id ].BURST_FIRE = false
 end
@@ -515,27 +524,11 @@ for i, wep_id in ipairs(bullpup) do
 	tweak_data.weapon[ wep_id ].is_bullpup = true
 end
 
-tweak_data.projectiles.west_arrow.launch_speed = 2000
-tweak_data.projectiles.west_arrow.adjust_z = -45
-
-tweak_data.projectiles.west_arrow_exp.launch_speed = 1800
-tweak_data.projectiles.west_arrow_exp.adjust_z = -45
-
-tweak_data.projectiles.crossbow_arrow.launch_speed = 1900
-tweak_data.projectiles.crossbow_arrow.adjust_z = 45
-
-tweak_data.projectiles.crossbow_poison_arrow.launch_speed = 1800
-tweak_data.projectiles.crossbow_poison_arrow.adjust_z = 45
-tweak_data.projectiles.crossbow_poison_arrow.damage = 3.25
-
-tweak_data.projectiles.crossbow_arrow_exp.launch_speed = 1700
-tweak_data.projectiles.crossbow_arrow_exp.adjust_z = 45
-
 tweak_data.projectiles.wpn_prj_four.launch_speed = 1200
 tweak_data.projectiles.wpn_prj_four.adjust_z = 45
 
 if DMCWO.debug_damage == true then
-	local debug_damage = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','rpg7','cobray','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','mateba','sub2000','asval','polymer','wa2000','hunter'}
+	local debug_damage = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','rpg7','cobray','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','mateba','sub2000','asval','polymer','wa2000','hunter','baka'}
 	for i, wep_id in ipairs(debug_damage) do
 		tweak_data.weapon[ wep_id ].ignore_damage_upgrades = true
 	end

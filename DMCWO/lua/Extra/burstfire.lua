@@ -116,7 +116,7 @@ elseif RequiredScript == "lib/units/weapons/akimboweaponbase" then
 		
 		if not self:is_npc() then
 			self._is_akimbo = true
-			self._native_fire_rate = tweak_data.weapon[self._name_id].fire_mode_data.fire_rate / 2
+			self._native_fire_rate = tweak_data.weapon[self._name_id].fire_mode_data.fire_rate
 		end
 	end
 	

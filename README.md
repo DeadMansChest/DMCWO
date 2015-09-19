@@ -1,5 +1,6 @@
-#DMC's Weapon Overhaul v1.42: AND MY NAME IS JOHN CENA edition
-####[DO DOO DOO DOOOOOOOO](https://www.youtube.com/watch?v=4QCm__n5oko)
+#DMC's Weapon Overhaul v1.42.3: The Bagger 288 edition
+####[A monstrous, titanic killing machine the likes of which the world has never seen!
+](https://www.youtube.com/watch?v=azEvfD4C6ow)
 ######[Hoxhud Hook Branch](https://github.com/DeadMansChest/DMCWO)
 ######[BLT Hook Branch](https://github.com/DeadMansChest/DMCWO/tree/BLT-Version)
 by: Don't Care Mister
