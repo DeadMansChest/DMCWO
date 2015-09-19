@@ -1,8 +1,9 @@
-#DMC's Weapon Overhaul v1.41: Amadeus edition
-####ERP for days
+#DMC's Weapon Overhaul v1.42.3: The Bagger 288 edition
+####[A monstrous, titanic killing machine the likes of which the world has never seen!
+](https://www.youtube.com/watch?v=azEvfD4C6ow)
 ######[Hoxhud Hook Branch](https://github.com/DeadMansChest/DMCWO)
 ######[BLT Hook Branch](https://github.com/DeadMansChest/DMCWO/tree/BLT-Version)
-by: Dude My Car
+by: Don't Care Mister
 
 [UC Thread](http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html) 
 
@@ -13,31 +14,37 @@ by: Dude My Car
 
 ##DISCLAIMER
 Despite being out of pre-release, I'm still changing things left right and center, don't get too used to things
+Also don't blame me if OVK or other players get on your case, use this mod in pubs at your own risk.
 
 
 ##What do?
 This mod is **NOT** meant to make the game easier (or at least not a whole lot easier) but _I'd still class this as a form of cheating_.
 
-The point of this mod is to fully overhaul and "rebalance" the weapons in PD2 so that nothing is truely useless (RPK/HK21, AK5/AMCAR, Reinfeld), horribly overpowered compared to other weapons similar to themselves like the M249 (as of the courier pack), the CAR-4 (even more so with the courier pack) or the Locomotive (the best fucking shotgun, nothing beats it) or become ugly as fuck to make a decent build.
+The point of this mod is to fully overhaul and "rebalance" the weapons in PD2 so that nothing is truely useless (RPK/HK21, AK5/AMCAR, Reinfeld), horribly overpowered compared to other weapons similar to themselves like the M249 (as of the courier pack), the CAR-4 (even more so with the courier pack) or the Locomotive (the best fucking shotgun, nothing beats it) or become some ugly as fuck thing to make a decent build.
 
-tl;dr I got rid of the fucking dumb shit meta bullshit that made the game all of 4-5 guns and made it so you don't have to worry too much about making an abomination of a gun
+tl;dr I got rid of the fucking dumb shitass meta bullshit that made the game all of 4-5 guns and made it so you don't have to worry too much about making an eldritch abomination of a gun. You should be perfectly capable running the base gun.
+
+It also puts weapon classes in their place as all bullet weapons now have damage drop-off. For example something like a 9mm pistol will perform extremly poorly against a sniper perched way on the other side of the map because even if you do manage to hit them, you`ll be dealing only around 30% of your normal damage.
 
 NOTE: I didn't and won't be making concealment value modifications for vanilla attachments as that number is calculated by the host who more than likely won't be using this. I don't want to bring the false impression that you have "x" concealment when you really have "y" concealment.
 
-I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-ish (when the grind _really_ starts) for the first time, this batch of scripts changes the whole dynamic on how to build weapons, more than likely making your current builds non-optimal or flat-out obsolete
+I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-ish (when the grind _really_ starts) for the first time, this batch of scripts changes the whole dynamic on how to build weapons, more than likely making your current builds non-optimal or flat-out obsolete.
 
 
 ##CREDITS & THANKS
 * v00d00 for the LUA source code
 * 90e for the LUA source code, base code for the fixed fire loop sounds
 * gir489 for LUA source code, LMG ironsights 
-* 420Munk for LUA source code, LMG ironsights 
+* 420Munk for LUA source code
+* YaPh1l for LUA source code
 * LazyOzzy for the fixed shotgun pellet mechanics, fixed drop-off code, other code advice
+  * Also for allowing me to include the burst-fire script
   * While not in this mod, the crosshair code to help me locate the center of the screen for centering optics
 * B1313 for the shotgun push physics, code advice
-* hejoro for the string hijack code
+* old string hijack code thanks to hejoro
+* newer string hijack code thanks to Wobin Ralker and Melting Terminal
 * Lizard Foe for fixes made in gat_physics.lua
-* Harfatus for the lua hook
+* Harfatus/Olipro for the OG lua hook
 * Wilko for the BLT lua hook
 * IMFDB and Payday Wikia for weapon names and attachments I couldn't ID
 * /k/ anon for semi-solidifiying some of the attachment names
@@ -51,7 +58,10 @@ I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-is
 * Not Illusion for making AA2 which has been distracting me from doing work on this mod as well
   * I'm kidding. 10/10, 10/10, 100/100, Best game, BEST GAME
   * https://www.youtube.com/watch?v=5Qx_q_TCVoE
-* Any and all users of this mod as they're pretty much testing this mod
+  * Illusion's newly announced game, Sexy Beach Premium Resort, will probably take the title as my big time-waster like AA2 was
+    * :^)
+* Any and all users of this mod as they're pretty much telling OVK to consider rebalancing their weapons
+
 	
 Did I forget to credit you or improperly do so? Sorry if I did :> Bug the shit out of me, and tell me what I forgot to credit/I miscredited you for.
 
@@ -60,19 +70,20 @@ Did I forget to credit you or improperly do so? Sorry if I did :> Bug the shit o
 I put in here w/e I saw fitting to go with this mod:
 
 Scripts from based Ozzy:
-  * [Weapon gadget remembers last state script](http://www.unknowncheats.me/forum/990407-post24.html)
   * [Ozzy's Generalized Ammo Fix](http://www.unknowncheats.me/forum/payday-2/122695-ammo-pickup-changes.html)
+  * [Weapon gadget remembers last state script](http://www.unknowncheats.me/forum/990407-post24.html)
   * [Underdog Aced fix](http://www.unknowncheats.me/forum/payday-2/129527-underdog-fix.html)
   * [Burst Fire](http://www.unknowncheats.me/forum/payday-2/130566-burst-fire.html)
-    * Has support in this mod
+    * It's now intergrated into this mod but if you don't want DMCWO then you can still have Ozzy's original script
 	
 Other LUA mods:
-  * [Kail's PROJECT: Canary](http://steamcommunity.com/groups/projectcanary)
-  * [Undeadsewer's Melee Overhaul REvamped (M.O.RE)](http://steamcommunity.com/groups/PD2_MORE)
   * [Karate F22's Better Weapon Stats GUI](http://steamcommunity.com/groups/PD2-BWS-GUI)
     * This is actually more or less of a requirement if you don't want the stats wigging out when you have skills affecting them too
-
-SquareOne's instant bullet impact fix. May cause frame drops on lower end PCs if you use shotgun rounds that have high ray counts
+  * [Kail's PROJECT: Canary](http://steamcommunity.com/groups/projectcanary)
+  * [Undeadsewer's Melee Overhaul REvamped (M.O.RE)](http://steamcommunity.com/groups/PD2_MORE)
+  * [lekousin's Armor Overhaul](http://steamcommunity.com/groups/lekousinAO)
+  * [SquareOne's instant bullet impact fix](http://www.unknowncheats.me/forum/payday-2/118472-fixing-bullet-delayed-hit-effects.html) 
+    * May cause frame drops on lower end PCs if you use shotgun rounds that have high ray counts
 
 Required for the following: [i am not a spy...'s bundle mod tool](http://steamcommunity.com/app/218620/discussions/15/540744936746354308/)
   * [i am not a spy...'s HD 3rd Person Weapons](http://steamcommunity.com/app/218620/discussions/15/558754900072790886/)
@@ -84,8 +95,8 @@ mod_override things:
 	
 	
 ##Standalone Parts
-These are standalone versions of some parts of DMCWO available on [my Github repo](https://github.com/DeadMansChest) if you don't want (or like) the whole shebang
-* Excuse the lewd avatar if it is a lewd one at the time
+There are standalone versions of some parts of DMCWO available on [my Github repo](https://github.com/DeadMansChest) if you don't want (or like) the whole shebang DMCWO offers.
+	* Excuse the lewd avatar if it is a lewd one at the time
 	
 
 ##Scripts
@@ -111,6 +122,7 @@ These are standalone versions of some parts of DMCWO available on [my Github rep
 **REQUIRED POSTREQUIRE SCRIPTS**:
   * postrequire_attach.lua
     * Adds the additional attachments for some weapons
+	* Adds the specialized ammo for bullet weapons 
 	
   * soundsfix.lua
     * Original fix by 90e
@@ -152,12 +164,18 @@ These are standalone versions of some parts of DMCWO available on [my Github rep
 Nab Wilko's "BLT" LUA Hook if you haven't from here: http://paydaymods.com/download/
 
 2. Download the Repo contents as a zip and extract into your Payday 2 directory
-  * Be sure to dl the correct branch!
+  * Be sure to dl the correct branch! Links you your hook's version are at the top of this readme!
 
-3. Run game, check log for errors. Report errors to me (id/qt_314) if there are any
+3. Run game, check log for errors. Report errors to me (steam_id/qt_314) if there are any
 
 
 ##General Changes
+
+Redone Accuracy and Stabilty stats!
+  * These stats now scale from 0 to 99
+    * 90 accuracy is akin to 18 accuracy in the vanilla game for most weapons
+	* 80-ish stability is akin to 25 stability in the vanllia game
+	
 Additional attachments!!!
   * LMGs:
     * HK21:
@@ -257,7 +275,6 @@ Additional attachments!!!
 
   * And more... a word of warning though
 
-  
 #WARNING BELOW
 I **CANNOT** stress this enough, 
 
@@ -267,17 +284,15 @@ and
 
 **DO NOT REMOVE OR DISABLE "postrequire_attach.lua"**
 
-if you have ANY of the extra attachments attached to your current gun(s).
-There is a chance you'll crash if you try to play using it or equip another gun with extra attachments attached.
+If you have ANY of the extra attachments attached to your current gun(s), there is a chance you'll crash if you try to play using it or equip another gun with extra attachments attached.
 
-With that said, UNINSTALL OR DISABLE this mod if a major game update is planned to be released soon and you want to play it immediately.
+With that said, UNINSTALL or DISABLE this mod if a major game update is planned to be released soon and you want to play it immediately.
 This mod *WILL* break new weapons as the mod *WILL NOT* have the new entries for any new weapons/attachments and as a result make then very buggy to use if not completely unuseable, if any (which in that case you should be safe to keep this installed. Wouldn't take the risk, IMO).
 
-I'm not gonna take heat if your game crashes because of this, I'll have warned you several times by the time you read this whole readme
+I'm not gonna take heat if your game crashes because of this, I'll have warned you several times by the time you read this whole readme.
 
 There is an uninstall guide further down
 #WARNING ABOVE
-
 
 Got that? Okay...
 
@@ -385,7 +400,7 @@ Reclassed several weapons
 	
 	
 ##UNINSTALLING
-Don't like the mod for w/e reason? You're following my advice about uninstalling this mod if an update is known to come out soon? Penis? Read below:
+Don't like the mod for w/e reason? You're following my advice about uninstalling/disabling this mod if an update is known to come out soon? Penis? Read below:
 
 1. REMOVE ANY OF THE EXTRA ATTACHMENTS NOT NORMALLY AVAILABLE ON GUNS IN THE VANILLA GAME
 
@@ -395,9 +410,9 @@ Don't like the mod for w/e reason? You're following my advice about uninstalling
 
 4. Close the game
 
-5. Remove "DMCWO.lua" and the "DMCWO" folder inside lib/lua
+5. Remove "DMCWO.lua" and the "DMCWO" folder inside lib/lua/
 -OR-
-Remove the "DMCWO" folder inside mods/
+Remove the "DMCWO" folder inside mods/ (or disable the mod though the "Lua Mods" menu provided by the BLT hook
 
 6. If you dun dang diddly did everything right, next time you boot up your game everything should be back to normal (or at least not make the game crash)
 
@@ -432,4 +447,4 @@ Thanks ;)
 
 
 ###EXTRA
-* Want the silencio symbol in your name? Here: 
+* Want the SILENCIO??/STEALT (ghost) symbol in your name? Here: 
