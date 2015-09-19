@@ -212,7 +212,7 @@ function WeaponFactoryTweakData:DMCWO_general()
 	end
 	
 	local lmg_sights = {
-	"wpn_fps_lmg_mg42","wpn_fps_lmg_hk21","wpn_fps_lmg_m249","wpn_fps_lmg_rpk","wpn_fps_snp_winchester","wpn_fps_smg_baka"
+	"wpn_fps_lmg_mg42","wpn_fps_lmg_hk21","wpn_fps_lmg_m249","wpn_fps_lmg_rpk","wpn_fps_snp_winchester" --[[,"wpn_fps_smg_baka"]]
 	}
 	for i, factory_id in ipairs(lmg_sights) do
 		table.insert(self[factory_id].uses_parts, "wpn_fps_upg_o_specter")

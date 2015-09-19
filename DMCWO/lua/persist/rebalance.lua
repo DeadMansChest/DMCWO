@@ -1627,8 +1627,8 @@ tweak_data.weapon.frankish.kick.standing = {0.4, 0.2, 0.2, 0.2}
 tweak_data.weapon.frankish.kick.crouching = tweak_data.weapon.frankish.kick.standing
 tweak_data.weapon.frankish.kick.steelsight = tweak_data.weapon.frankish.kick.standing
 
-tweak_data.weapon.frankish.spread.standing = 1.1
-tweak_data.weapon.frankish.spread.crouching = 0.85
+tweak_data.weapon.frankish.spread.standing = 1.5
+tweak_data.weapon.frankish.spread.crouching = 1.2
 tweak_data.weapon.frankish.spread.steelsight = 0.20
 tweak_data.weapon.frankish.spread.moving_standing = tweak_data.weapon.frankish.spread.standing * 1.2
 tweak_data.weapon.frankish.spread.moving_crouching = tweak_data.weapon.frankish.spread.crouching * 1.2
@@ -1638,6 +1638,9 @@ tweak_data.weapon.frankish.shake.fire_multiplier = 1.8
 tweak_data.weapon.frankish.shake.fire_steelsight_multiplier = -1.8
 
 tweak_data.weapon.frankish.fire_mode_data.fire_rate = 0.4
+
+tweak_data.weapon.frankish.timers.reload_not_empty = 1.6
+tweak_data.weapon.frankish.timers.reload_empty = 1.6
 
 tweak_data.weapon.frankish.stats_modifiers = {damage = 10}
 	
@@ -1659,7 +1662,7 @@ tweak_data.projectiles.arblast_arrow_exp.damage = 60
 
 tweak_data.weapon.arblast.reload_speed_mult = 0.65
 tweak_data.weapon.arblast.ams = 0.5
-tweak_data.weapon.arblast.rms = 0.6
+tweak_data.weapon.arblast.rms = 0.5
 
 tweak_data.weapon.arblast.kick.standing = {0.4, 0.2, 0.2, 0.2}
 tweak_data.weapon.arblast.kick.crouching = tweak_data.weapon.arblast.kick.standing
@@ -2699,6 +2702,8 @@ tweak_data.weapon.uzi.stats.suppression = 14
 
 
 --[[     (9) BALL     ]]--
+tweak_data.weapon.baka.sub_category = "mach_pis"
+
 tweak_data.weapon.baka.kick.standing = { 0.05, 0.35, -0.3, 0.3 }
 tweak_data.weapon.baka.kick.crouching = tweak_data.weapon.baka.kick.standing
 tweak_data.weapon.baka.kick.steelsight = tweak_data.weapon.baka.kick.standing
@@ -2909,7 +2914,7 @@ tweak_data.weapon.mp7.damage_near = 22
 tweak_data.weapon.mp7.damage_far = 55
 tweak_data.weapon.mp7.damage_min = 0.7
 
-tweak_data.weapon.mp7.stats.damage = 13
+tweak_data.weapon.mp7.stats.damage = 12
 tweak_data.weapon.mp7.stats.spread = 72
 tweak_data.weapon.mp7.stats.recoil = 87
 tweak_data.weapon.mp7.stats.suppression = 15
@@ -2943,7 +2948,7 @@ tweak_data.weapon.p90.damage_near = 29
 tweak_data.weapon.p90.damage_far = 60
 tweak_data.weapon.p90.damage_min = 0.7
 
-tweak_data.weapon.p90.stats.damage = 14
+tweak_data.weapon.p90.stats.damage = 13
 tweak_data.weapon.p90.stats.spread = 79
 tweak_data.weapon.p90.stats.recoil = 83
 tweak_data.weapon.p90.stats.suppression = 13

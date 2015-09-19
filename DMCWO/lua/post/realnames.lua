@@ -827,7 +827,11 @@ function LocalizationManager:text(string_id, ...)
 	
 	--[[B-BAKA]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_baka" and "IMI Micro Uzi"
-	or string_id == "bm_w_baka_desc" and "An Israeli sub-machine gun chambered in 9mm.\nCan pierce thin walls."
+	or string_id == "bm_w_baka_desc" and "An Israeli machine pistol chambered in 9mm.\nCan pierce thin walls.\nBenefits from SMG skills."
+	
+	or string_id == "bm_wp_baka_b_smallsupp_desc" and "A ##small## suppressor for the Micro Uzi.\n##20% shorter## overall range.\n##10% decrease## in minimum damage.\n##5% slower## ADS speeds."
+	or string_id == "bm_wp_baka_b_midsupp_desc" and "A ##medium## suppressor for the Micro Uzi.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
+	or string_id == "bm_wp_baka_b_longsupp_desc" and "A ##large## suppressor for the Micro Uzi.\n##10% shorter## overall range.\n##5% decrease## in minimum damage.\n##10% slower## ADS speeds."
 	
 	--[[S-COOL SHOOTINGS]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_tec9" and "Intratec TEC-9"
@@ -901,7 +905,7 @@ function LocalizationManager:text(string_id, ...)
 	--[[YOU SUCK AND WE HATE YOU]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_mp7" and "Heckler & Koch MP7A2"
 	or string_id == "bm_w_mp7_desc" and "A German personal defence weapon chambered in 4.6x30mm.\nCan pierce enemies, walls and shields."
-	--Airsoft Supressor
+	--B&T Suppressor
 	or DMCWO.reelnaems == true and string_id == "bm_wp_mp7_b_suppressed" and "B&T MP7 Rotex-II Suppressor"	
 	or string_id == "bm_wp_mp7_b_suppressed_desc" and "A ##specialized## suppressor for the MP7.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##7.5% slower## ADS speeds."	
 	--Extended Mag
@@ -950,7 +954,7 @@ function LocalizationManager:text(string_id, ...)
 	--[[TOASTY]]
 	or string_id == "bm_w_flamethrower_mk2_desc" and "A flamethrower capable of shooting out to 20 meters.\n30% chance to set your target aflame.\nNo police ammobox pickups."
 
-	--[[TAGUSO]] --GiTS references abound!
+	--[[TOGUSA]] --GiTS references abound!
 	or DMCWO.reelnaems == true and string_id == "bm_w_mateba" and "Mateba 2006M"
 	or string_id == "bm_w_mateba_desc" and "An Italian revolver chambered in .357 Magnum.\nCan pierce enemies, walls and shields.\nBenefits from pistol skills.\n\n\"Ангелы и демоны кружили надо мной,\nРазбивали тернии и звёздные пути,\nНе знает счастья только тот,\nКто его зова понять не смог\""
 	--Long
@@ -986,6 +990,12 @@ function LocalizationManager:text(string_id, ...)
 	--XXX Boner
 	or DMCWO.reelnaems == true and string_id == "bm_w_hunter" and "Avalanche CB1-50 Pistol Grip Crossbow"
 	or string_id == "bm_w_hunter_desc" and "A handheld crossbow.\nNo police ammobox pickups.\nNon-exploded bolts can be retrieved and fired again.\nDamage boosts from skills do not affect this weapon."
+	
+	or DMCWO.reelnaems == true and string_id == "bm_w_frankish" and "Basic Crossbow"
+	or string_id == "bm_w_arblast_desc" and "A basic wooden crossbow.\nNo police ammobox pickups.\nNon-exploded bolts can be retrieved and fired again.\nDamage boosts from skills do not affect this weapon."
+	
+	or DMCWO.reelnaems == true and string_id == "bm_w_arblast" and "Arbalest Crossbow"
+	or string_id == "bm_w_arblast_desc" and "A heavy crossbow used during the 12th century.\nNo police ammobox pickups.\nNon-exploded bolts can be retrieved and fired again.\nDamage boosts from skills do not affect this weapon."
 	
 	--2000 crying babies
 	or DMCWO.reelnaems == true and string_id == "bm_w_wa2000" and "Walther WA2000"
