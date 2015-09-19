@@ -1011,6 +1011,16 @@ tweak_data.weapon.factory.parts.wpn_fps_smg_polymer_ns_silencer.stats = {
 		concealment = -1
 	}
 tweak_data.weapon.factory.parts.wpn_fps_smg_polymer_ns_silencer.custom_stats = {damage_near_mul = 0.85, damage_far_mul = 0.85, damage_min = 0.925, ads_speed_mult = 0.85 }
+
+--Micro Uzi Small
+tweak_factory.parts.wpn_fps_smg_baka_b_smallsupp.stats = { value = 3, suppression = 100, alert_size = 12, damage = -2, recoil = -4, spread_moving = -1, concealment = 0, spread = 1}
+tweak_factory.parts.wpn_fps_smg_baka_b_smallsupp.custom_stats = {damage_near_mul = 0.80, damage_far_mul = 0.80, damage_min = 0.9, ads_speed_mult = 0.95 }
+--Micro Uzi Med
+tweak_factory.parts.wpn_fps_smg_baka_b_midsupp.stats = { value = 2, suppression = 100, alert_size = 12, damage = -2, recoil = 0, spread_moving = -2, concealment = -2, spread = 2}
+tweak_factory.parts.wpn_fps_smg_baka_b_midsupp.custom_stats = {damage_near_mul = 0.85, damage_far_mul = 0.85, damage_min = 0.925, ads_speed_mult = 0.925 }
+--Micro Uzi Big
+tweak_factory.parts.wpn_fps_smg_baka_b_longsupp.stats = { value = 5, suppression = 100, alert_size = 12, damage = -2, recoil = 1, spread_moving = -3, concealment = -4, spread = 3}
+tweak_factory.parts.wpn_fps_smg_baka_b_longsupp.custom_stats = {damage_near_mul = 0.90, damage_far_mul = 0.90, damage_min = 0.95, ads_speed_mult = 0.9 }
 --}
 
 
@@ -1403,7 +1413,12 @@ tweak_data.weapon.factory.parts.wpn_fps_smg_polymer_barrel_precision.stats = {
 	}
 tweak_data.weapon.factory.parts.wpn_fps_smg_polymer_barrel_precision.custom_stats = {damage_near_mul = 1.20, damage_far_mul = 1.20, ads_speed_mult = 0.90 }
 	
-
+--Micro Uzi Comp'd Barrel
+tweak_data.weapon.factory.parts.wpn_fps_smg_baka_b_comp.stats = {
+		value = 1,
+		concealment = -1,
+		recoil = 4
+	}
 --}
 	
 
@@ -1985,9 +2000,9 @@ tweak_factory.parts.wpn_fps_smg_uzi_s_leather.stats = {value = 1,spread = 2,reco
 tweak_factory.parts.wpn_fps_smg_uzi_s_solid.stats = {value = 1,spread = 0,recoil = 4,concealment = -2}
 
 --Micro Uzi Stock 
-tweak_factory.parts.wpn_fps_smg_uzi_s_solid.stats = {value = 1, recoil = 8, concealment = -2}
+tweak_factory.parts.wpn_fps_smg_baka_s_unfolded.stats = {value = 1, recoil = 8, concealment = -3}
 --Micro Uzi No Stock
-tweak_factory.parts.wpn_fps_smg_baka_s_unfolded.stats = {value = 1, recoil = -4, concealment = 1}
+tweak_factory.parts.wpn_fps_smg_baka_s_unfolded.stats = {value = 1, recoil = -5, concealment = 1}
 
 --Tec-9 Stock
 tweak_factory.parts.wpn_fps_smg_tec9_s_unfolded.stats = {value = 3,recoil = 3,spread = 2,concealment = -2}
