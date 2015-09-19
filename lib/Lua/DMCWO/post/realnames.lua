@@ -1,1499 +1,1590 @@
 --[[
-v1.41
+v1.42.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
 --[[
 Real Weapon Names
--code base thanks to hejoro
+-old string hijack code thanks to hejoro
+-newer string hijack code thanks to Wobin Ralker and Melting Terminal
 -imfdb (Most Weapons)
 -Payday Wikia (Leupold/Theia Scope)
 -/k/anon and Steam friends (Other unidentified attachments and weapons I haven't found or were not ID'd by the two above sources)
 	-Comrade Sniper for the MOE SL Handguard
 ]]
 
-LocalizationManager_text = LocalizationManager_text or LocalizationManager.text
-function LocalizationManager:text( string_id, macros )
-    local realnames = {}
+local text_original = LocalizationManager.text
+local testAllStrings = false  --Set to true to show all string ID's, false to return to normal.
+function LocalizationManager:text(string_id, ...)
+
 	
 	--Movement penalty string
-	realnames["bm_menu_weapon_movement_penalty_info"] = "While drawn, move speed is reduced by "
+	return string_id == "bm_menu_weapon_movement_penalty_info" and "Base move speed when drawn: "
+	
+	--armor
+	or string_id == "bm_armor_level_5" and "Flak Jacket A Bigger Shit"
+	or string_id == "bm_armor_level_6" and "Combined Tactical Vest A Shit"
+	
+	--attachments
+	or string_id == "bm_menu_custom" and "Internal Mod"
+	or string_id == "bm_menu_extra" and "Rail"
+	or string_id == "bm_menu_upper_reciever" and "Upper Body Mod"
+	or string_id == "bm_menu_lower_reciever" and "Lower Body Mod"
+	or string_id == "bm_menu_slide" and "Barrel/Slide"
+	or string_id == "bm_menu_grip" and "Pistol Grip"
+	or string_id == "bm_menu_barrel_ext" and "Barrel Extension"
+	or string_id == "bm_menu_foregrip" and "Handguard"
+	or string_id == "bm_menu_sight" and "Optic"
+	
+	--pseudo-categories
+	or string_id == "menu_anti_mat" and "Anti Materiel Rifles"
+	or string_id == "menu_pdw" and "PDWs"
+	or string_id == "menu_mach_pis" and "Machine Pistols"
+	or string_id == "menu_battle_rifle" and "Battle Rifles"
+	or string_id == "menu_carbine" and "Carbines"
+	or string_id == "menu_gpmg" and "General Purpose Machine Guns"
+	or string_id == "menu_revolvo" and "Revolvers"
+	
+	--real categories
+	or string_id == "menu_pistol" and "Pistols"
+	or string_id == "menu_lmg" and "Light Machine Guns"
+	or string_id == "menu_shotgun" and "Shotguns"
+	or string_id == "menu_assault_rifle" and "Assault Rifles"
+	or string_id == "menu_snp" and "Rifles"
+	or string_id == "menu_smg" and "Sub-Machine Guns"
+	
+	--characters
+	or string_id == "menu_jowi" and "Wick"
+	
+	--[[ WE UPOTTE NAO ]]--{
+	--[ Faculty ]
+	or DMCWO.upotte == true and string_id == "bm_w_m1928" and "Thompson-sensei"
+	or DMCWO.upotte == true and string_id == "bm_w_m1928_desc" and "An American elementary school teacher working at Seishou Academy. She's chambered in .45 ACP.\nCheerful but airheaded.\nCan pierce enemies and walls."
+	--[ Elementary Schoolers ]
+	--MP5
+	or DMCWO.upotte == true and string_id == "bm_w_mp5" and "Empi"
+	or DMCWO.upotte == true and string_id == "bm_w_mp5_desc" and "A German elementary schooler attending Seishou Academy. She's chambered in 9mm.\nPresident of the elementary school student council.\nCan pierce thin walls."
+	or DMCWO.upotte == true and string_id == "bm_w_mac10" and "Emten"
+	or DMCWO.upotte == true and string_id == "bm_w_mac10_desc" and "An American elementary schooler attending Seishou Academy. She's chambered in .45 ACP.\nMotor-mouthed and quite \"stacked\".\nCan pierce enemies and walls."
+	--[ Middleschoolers ]
+	--AUG
+	or DMCWO.upotte == true and string_id == "bm_w_aug" and "AUG"
+	or DMCWO.upotte == true and string_id == "bm_w_aug_desc" and "An Austrian middleschooler attending Seishou Academy. She's chambered in 5.56 NATO.\nStrict but reserved.\nCan pierce enemies and walls."
+	--M16
+	or DMCWO.upotte == true and string_id == "bm_w_m16" and "Ichiroku"
+	or DMCWO.upotte == true and string_id == "bm_w_m16_desc" and "An American middleschooler attending Seishou Academy. She's chambered in 5.56 NATO.\nEnergetic and foul-mouthed.\nCan pierce enemies and walls."
+	--L85
+	or DMCWO.upotte == true and string_id == "bm_w_l85a2" and "Eru"
+	or DMCWO.upotte == true and string_id == "bm_w_l85a2_desc" and "A British middleschooler attending Seishou Academy. She's chambered in 5.56 NATO.\nShy and clumsy.\nCan pierce enemies and walls."
+	--M4A1
+	or DMCWO.upotte == true and string_id == "bm_w_m16" and "Em-Four"
+	or DMCWO.upotte == true and string_id == "bm_w_m16_desc" and "An American middleschooler attending Seishou Academy. She's chambered in 5.56 NATO.\nVice-president of the middleschool student council.\nCan pierce enemies and walls."
+	--AK74
+	or DMCWO.upotte == true and string_id == "bm_w_ak74" and "AK74"
+	or DMCWO.upotte == true and string_id == "bm_w_ak74_desc" and "A Russian middleschooler attending Red Steel Academy. She's chambered in 5.45x39.\nSerious and cunning.\nCan pierce enemies and walls."
+	--AKM
+	or DMCWO.upotte == true and string_id == "bm_w_akm" and "AKM"
+	or DMCWO.upotte == true and string_id == "bm_w_akm_desc" and "A Russian middleschooler attending Red Steel Academy. She's chambered in 7.62x39.\nMenacing and a bully.\nCan pierce enemies and walls."
+	--RPK
+	or DMCWO.upotte == true and string_id == "bm_w_rpk" and "RPK"
+	or DMCWO.upotte == true and string_id == "bm_w_rpk_desc" and "A Russian middleschooler attending Red Steel Academy. She's chambered in 7.62x39.\nAgressive but rather simple minded.\nCan pierce enemies and walls."
+	--[ Highschoolers ]
+	--G3
+	or DMCWO.upotte == true and string_id == "bm_w_g3" and "Jiisuri"
+	or DMCWO.upotte == true and string_id == "bm_w_g3_desc" and "A German highschooler attending Seishou Academy. She's chambered in 7.62 NATO.\nElegant but a bit of a klutz.\nCan pierce enemies, walls and shields.\nDMC's raifu, treat her well."
+	--M14
+	or DMCWO.upotte == true and string_id == "bm_w_m14" and "Ichiyon"
+	or DMCWO.upotte == true and string_id == "bm_w_m14_desc" and "An American highschooler attending Seishou Academy. She's chambered in 7.62 NATO.\nCarefree and filled with puns.\nCan pierce enemies, walls and shields."
+	--FAL
+	or DMCWO.upotte == true and string_id == "bm_w_fal" and "Faaru"
+	or DMCWO.upotte == true and string_id == "bm_w_fal_desc" and "A Belgian highschooler attending Seishou Academy. She's chambered in 7.62 NATO.\nResponsible and lax.\nCan pierce enemies, walls and shields."
+	--}
+	
+	--[[ REVOLVER OCELOT ]]--{
+	--[[REVOLVER OCELOT]]
+	or DMCWO.ocelot == true and string_id == "bm_w_peacemaker" and "Revolver Ocelot"
+	or DMCWO.ocelot == true and string_id == "bm_w_peacemaker_desc" and "Revolver Ocelot"
+	--Long
+	or DMCWO.ocelot == true and string_id == "bm_wp_peacemaker_barrel_long" and "Revolver Ocelot"
+	or DMCWO.ocelot == true and string_id == "bm_wp_peacemaker_barrel_long_desc" and "Revolver Ocelot"
+	--Short
+	or DMCWO.ocelot == true and string_id == "bm_wp_peacemaker_barrel_short" and "Revolver Ocelot"
+	or DMCWO.ocelot == true and string_id == "bm_wp_peacemaker_barrel_short_desc" and "Revolver Ocelot" 
+	--Grip
+	or DMCWO.ocelot == true and string_id == "bm_wp_peacemaker_handle_bling" and "Revolver Ocelot"
+	--Stock
+	or DMCWO.ocelot == true and string_id == "bm_wp_peacemaker_rifle_stock" and "Revolver Ocelot"
+	--}
 	
 	--[[BRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRT]]
-	realnames["bm_w_m134"] = "General Electric M134"
-	realnames["bm_w_m134_desc"] = "A 7.62 NATO, six-barreled machine gun with high suppressive capabilities.\nCan pierce enemies, walls and shields."
-	realnames["bm_wp_m134_body_upper_light_desc"] = "##20% faster## movement.\n##10% faster## reload speeds."
-	realnames["bm_wp_m134_barrel_extreme"] = "Anti-Air Barrel"
-	realnames["bm_wp_m134_barrel_extreme_desc"] = "##15% longer## overall range.\n##10% slower## ADS speeds.\n##10% slower## movement."
-	realnames["bm_wp_m134_barrel_short"] = "Compact Barrel"
-	realnames["bm_wp_m134_barrel_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds.\n##20% faster## movement."
+	or DMCWO.reelnaems == true and string_id == "bm_w_m134" and "General Electric M134"
+	or string_id == "bm_w_m134_desc" and "A 7.62 NATO, six-barreled machine gun with high suppressive capabilities.\nCan pierce enemies, walls and shields."
+	or string_id == "bm_wp_m134_body_upper_light_desc" and "##20% faster## movement.\n##10% faster## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m134_barrel_extreme" and "Anti-Air Barrel"
+	or string_id == "bm_wp_m134_barrel_extreme_desc" and "##15% longer## overall range.\n##10% slower## ADS speeds.\n##10% slower## movement."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m134_barrel_short" and "Compact Barrel"
+	or string_id == "bm_wp_m134_barrel_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds.\n##20% faster## movement."
 	
 	--[[WE TERRORIST NAO]]
-	realnames["bm_w_rpg7"] = "Bazalt RPG-7"
-	realnames["bm_w_rpg7_desc"] = "A Russian rocket-propelled grenade launcher.\nNo police ammobox pickups.\nDamage boosts from skills do not affect this weapon."
+	or DMCWO.reelnaems == true and string_id == "bm_w_rpg7" and "Bazalt RPG-7"
+	or string_id == "bm_w_rpg7_desc" and "A Russian rocket-propelled grenade launcher.\nNo police ammobox pickups.\nDamage boosts from skills do not affect this weapon."
 	
 	--[[GOLD SLAVSHIT]]
-	realnames["bm_w_akm_gold"] = "Gold Plated AKMS"
-	realnames["bm_w_akm_gold_desc"] = "A Russian gold-plated assault rifle chambered in 7.62x39mm.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_akm_gold" and "Gold Plated AKMS"
+	or string_id == "bm_w_akm_gold_desc" and "A Russian gold-plated assault rifle chambered in 7.62x39mm.\nCan pierce enemies and walls."
 	
 	--[[JAM733]]
-	realnames["bm_w_amcar"] = "Colt M733 Commando"
-	realnames["bm_w_amcar_desc"] = "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_amcar" and "Colt M733 Commando"
+	or string_id == "bm_w_amcar_desc" and "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls."
 	
 	--[[STEEL BALLS]]
-	realnames["bm_w_ak74"] = "Concern Kalashnikov AKS-74"
-	realnames["bm_w_ak74_desc"] = "A Russian assault rifle chambered in 5.45x39mm.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_ak74" and "Concern Kalashnikov AKS-74"
+	or string_id == "bm_w_ak74_desc" and "A Russian assault rifle chambered in 5.45x39mm.\nCan pierce enemies and walls."
 	
 	--[[JAM-4]]
-	realnames["bm_w_m4"] = "Colt M4A1" --"Safety Pins"
-	realnames["bm_w_m4_desc"] = "An American assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_m4" and "Colt M4A1" --"Safety Pins"
+	or string_id == "bm_w_m4_desc" and "An American assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls."
 	--Barrels
-	realnames["bm_wp_m4_uupg_b_long_desc"] = "##15% longer## overall range.\n##5% slower## ADS speeds." 
-	realnames["bm_wp_m4_uupg_b_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or string_id == "bm_wp_m4_uupg_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
+	or string_id == "bm_wp_m4_uupg_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	--Suppressed Barrel
-	realnames["bm_wp_m4_uupg_b_sd"] = "Suppressed Barrel" 
-	realnames["bm_wp_m4_uupg_b_sd_desc"] = "##Internally suppressed## barrel.\n##10% slower## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m4_uupg_b_sd" and "Suppressed Barrel" 
+	or string_id == "bm_wp_m4_uupg_b_sd_desc" and "##Internally suppressed## barrel.\n##10% slower## ADS speeds." 
 	--Aftermarket
-	realnames["bm_wp_m4_uupg_fg_lr300"] = "LR300 Handguard"
-	realnames["bm_wp_m4_uupg_fg_lr300_desc"] = "##7.5% faster## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m4_uupg_fg_lr300" and "LR300 Handguard"
+	or string_id == "bm_wp_m4_uupg_fg_lr300_desc" and "##7.5% faster## ADS speeds."
 	--Competition
-	realnames["bm_wp_upg_fg_jp"] = "JPE Modular Handguard"
-	realnames["bm_wp_upg_fg_jp_desc"] = "##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fg_jp" and "JPE Modular Handguard"
+	or string_id == "bm_wp_upg_fg_jp_desc" and "##5% faster## ADS speeds." 
 	--Gazelle
-	realnames["bm_wp_upg_fg_smr"] = "Geissele Super Modular Rail"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fg_smr" and "Geissele Super Modular Rail"
 	
 	--[[AUGLY]]
-	realnames["bm_w_aug"] = "Steyr AUG A2"
-	realnames["bm_w_aug_desc"] = "An Austrian bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_aug" and "Steyr AUG A2"
+	or string_id == "bm_w_aug_desc" and "An Austrian bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls."
 	--A3 Tact. Foregrip
-	realnames["bm_wp_aug_fg_a3"] = "A3 Rail"
-	realnames["bm_wp_aug_fg_a3_desc"] = "##5% slower## ADS speeds."
-	realnames["bm_wp_aug_b_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
-	realnames["bm_wp_aug_b_long_desc"] = "##15% longer## overall range.\n##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_aug_fg_a3" and "A3 Rail"
+	or string_id == "bm_wp_aug_fg_a3_desc" and "##5% slower## ADS speeds."
+	or string_id == "bm_wp_aug_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or string_id == "bm_wp_aug_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 	
 	--[[WHITE FLAG]]
-	realnames["bm_w_famas"] = "Nexter FAMAS" --"IS THAT A DEAGLE?"
-	realnames["bm_w_famas_desc"] = "A French bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_famas" and "Nexter FAMAS" --"IS THAT A DEAGLE?"
+	or string_id == "bm_w_famas_desc" and "A French bullpup assault rifle chambered in 5.56 NATO.\nCan fire in 3-round bursts.\nCan pierce enemies and walls."
 	
-	realnames["bm_wp_famas_b_long_desc"] = "##15% longer## overall range.\n##5% slower## ADS speeds."
-	realnames["bm_wp_famas_b_sniper_desc"] = "##30% longer## overall range.\n##10% higher## minimum damage.\n##10% slower## ADS speeds."
-	realnames["bm_wp_famas_b_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
-	realnames["bm_wp_famas_b_suppressed_desc"] = "##Internally suppressed## barrel.\n##10% slower## ADS speeds."
+	or string_id == "bm_wp_famas_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_famas_b_sniper" and "G2 Sniper Barrel"
+	or string_id == "bm_wp_famas_b_sniper_desc" and "##Sniper class barrel.##\n##30% longer## overall range.\n##10% greater## minimum damage.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_famas_b_short" and "G2 Commando Barrel" 
+	or string_id == "bm_wp_famas_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or string_id == "bm_wp_famas_b_suppressed_desc" and "##Internally suppressed## barrel.\n##10% slower## ADS speeds."
 	
 	--Retro Grip
-	realnames["bm_wp_famas_g_retro"] = "G2 Guard"
-	realnames["bm_wp_famas_g_retro_desc"] = "ROF ##raised## to ##1200 RPM##"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_famas_g_retro" and "G2 Kit"
+	or string_id == "bm_wp_famas_g_retro_desc" and "ROF ##raised## to ##1200 RPM##"
 	
 	--[[JAM]]
-	realnames["bm_w_l85a2"] = "BAE L85A2" --"Eru"
-	realnames["bm_w_l85a2_desc"] = "A British-German bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls."
-	realnames["bm_wp_l85a2_b_long"] = "Long Barrel"
-	realnames["bm_wp_l85a2_b_long_desc"] = "##15% longer## overall range.\n##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_w_l85a2" and "BAE L85A2" --"Eru"
+	or string_id == "bm_w_l85a2_desc" and "A British-German bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_l85a2_b_long" and "Long Barrel"
+	or string_id == "bm_wp_l85a2_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 	
-	realnames["bm_wp_l85a2_b_short"] = "Short Barrel"
-	realnames["bm_wp_l85a2_b_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_l85a2_b_short" and "Short Barrel"
+	or string_id == "bm_wp_l85a2_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	
-	realnames["bm_wp_l85a2_g_worn"] = "Taped Pistol Grip"
-	realnames["bm_wp_l85a2_fg_short"] = "Daniel Defense L85 Quad Rail"
-	realnames["bm_wp_l85a2_fg_short_desc"] = "##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_l85a2_g_worn" and "Taped Pistol Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_l85a2_fg_short" and "Daniel Defense L85 Quad Rail"
+	or string_id == "bm_wp_l85a2_fg_short_desc" and "##5% faster## ADS speeds." 
 	
 	--[[CROATGAT]]
-	realnames["bm_w_vhs"] = "HS Produkt VHS-2"
-	realnames["bm_w_vhs_desc"] = "A Croatian bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls."
-	realnames["bm_wp_vhs_b_short"] = "Short Barrel"
-	realnames["bm_wp_vhs_b_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_w_vhs" and "HS Produkt VHS-2"
+	or string_id == "bm_w_vhs_desc" and "A Croatian bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_vhs_b_short" and "Short Barrel"
+	or string_id == "bm_wp_vhs_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	
-	realnames["bm_wp_vhs_b_sniper"] = "Sniper Barrel"
-	realnames["bm_wp_vhs_b_sniper_desc"] = "##30% longer## overall range.\n##10% higher## minimum damage.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_vhs_b_sniper" and "Sniper Barrel"
+	or string_id == "bm_wp_vhs_b_sniper_desc" and "##Sniper class barrel.##\n##30% longer## overall range.\n##10% greater## minimum damage.\n##10% slower## ADS speeds."
 	
-	realnames["bm_wp_vhs_b_silenced"] = "Suppressed Barrel"
-	realnames["bm_wp_vhs_b_silenced_desc"] = "##Internally suppressed## barrel.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_vhs_b_silenced" and "Suppressed Barrel"
+	or string_id == "bm_wp_vhs_b_silenced_desc" and "##Internally suppressed## barrel.\n##10% slower## ADS speeds."
 	
 	--[[SLAVSHIT]]
-	realnames["bm_w_akm"] = "Concern Kalashnikov AKMS"
-	realnames["bm_w_akm_desc"] = "A Russian assault rifle chambered in 7.62x39mm.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_akm" and "Concern Kalashnikov AKMS"
+	or string_id == "bm_w_akm_desc" and "A Russian assault rifle chambered in 7.62x39mm.\nCan pierce enemies and walls."
 	
 	--[[MELTGUN]]
-	realnames["bm_w_g36"] = "Heckler & Koch G36C"
-	realnames["bm_w_g36_desc"] = "A German carbine chambered in 5.56 NATO.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_g36" and "Heckler & Koch G36KV"
+	or string_id == "bm_w_g36_desc" and "A German carbine chambered in 5.56 NATO.\nCan fire in 2-round bursts.\nCan pierce enemies and walls."
 	--Compact
-	realnames["bm_wp_g36_fg_c"] = "Carbine Handguard"
-	realnames["bm_wp_g36_fg_c_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g36_fg_c" and "G36c Kit"
+	or string_id == "bm_wp_g36_fg_c_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds."
 	--Polizei
-	realnames["bm_wp_g36_fg_ksk"] = "Knights Armament Co. RAS Handguard"  
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g36_fg_ksk" and "Knights Armament Co. RAS Handguard"  
 	--Solid Stock
-	realnames["bm_wp_g36_s_kv"] = "G36KV Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g36_s_kv" and "G36KV Stock"
 	--Sniper Stock
-	realnames["bm_wp_g36_s_sl8"] = "SL8 Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g36_s_sl8" and "SL8 Stock"
 	
 	--[[PUNS]]
-	realnames["bm_w_m14"] = "Springfield M14 DMR"
-	realnames["bm_w_m14_desc"] = "A special DMR version of the American M14 battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\nBenefits from assault rifle skills."
+	or DMCWO.reelnaems == true and string_id == "bm_w_m14" and "Springfield M14 DMR"
+	or string_id == "bm_w_m14_desc" and "A special DMR version of the American M14 battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields."
 	--Abraham
-	realnames["bm_wp_m14_body_ebr"] = "MK.14 Kit"
-	realnames["bm_wp_m14_body_ebr_desc"] = "##5% slower## ADS speeds\n##5% slower## movement.\nROF ##raised## to ##750 RPM##"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m14_body_ebr" and "MK.14 Kit"
+	or string_id == "bm_wp_m14_body_ebr_desc" and "##5% slower## ADS speeds\n##5% slower## movement.\nROF ##raised## to ##750 RPM##"
 	--Seid ihr das Essen? Nein, wir sind der Jaeger! (watch better anime)
-	realnames["bm_wp_m14_body_jae"] = "M14 JAE Kit"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m14_body_jae" and "M14 JAE Kit"
 	
 	--[[SWED]]
-	realnames["bm_w_ak5"] = "Bofors Ak 5" --"FNC's sexy swedish cousin"
-	realnames["bm_w_ak5_desc"] = "A licensed Swedish copy of the Belgian FN FNC assault rifle, chambered in 5.56 NATO.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_ak5" and "Bofors Ak 5" --"FNC's sexy swedish cousin"
+	or string_id == "bm_w_ak5_desc" and "A licensed Swedish copy of the Belgian FN FNC assault rifle, chambered in 5.56 NATO.\nCan pierce enemies and walls."
 	--Karbin Ceres
-	realnames["bm_wp_ak5_fg_ak5c"] = "Ak 5c Handguard"
-	realnames["bm_wp_ak5_fg_ak5c_desc"] = "ROF ##lowered## to ##650 RPM##"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ak5_fg_ak5c" and "Ak 5c Kit"
+	or string_id == "bm_wp_ak5_fg_ak5c_desc" and "ROF ##lowered## to ##650 RPM.##"
 	--Belgian Heat
-	realnames["bm_wp_ak5_fg_fnc"] = "FN FNC Handguard"
-	realnames["bm_wp_ak5_fg_fnc_desc"] = "ROF ##raised## to ##700 RPM##"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ak5_fg_fnc" and "FN FNC Kit"
+	or string_id == "bm_wp_ak5_fg_fnc_desc" and "ROF ##raised## to ##700 RPM.##\nAllows the burst fire mod to be attached."
 	--Bertil
-	realnames["bm_wp_ak5_s_ak5b"] = "Ak 5b Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ak5_s_ak5b" and "Ak 5b Stock"
 	--Caesar
-	realnames["bm_wp_ak5_s_ak5c"] = "Ak 5c Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ak5_s_ak5c" and "Ak 5c Stock"
 	
 	--[[JAM16]]
-	realnames["bm_w_m16"] = "Colt M16A3" --"Orange Slices", "IS THAT A FAMAS?"
-	realnames["bm_w_m16a4"] = "Colt M16A4"
-	realnames["bm_w_m16_desc"] = "An American 5.56 NATO assault rifle.\nCan pierce enemies and walls."
-	--going against imfdb here, simply for the fact the the flat top receiver isn't limited to the A4 and that the AMR bares more resemblence to the A3 (default handguard, automatic fire)
+	or DMCWO.reelnaems == true and string_id == "bm_w_m16" and "Colt M16A4" --"Orange Slices", "IS THAT A FAMAS?"
+	or string_id == "bm_w_m16_desc" and "An American 5.56 NATO assault rifle.\nCan pierce enemies and walls."
 	--Railed
-	realnames["bm_wp_m16_fg_railed"] = "Daniel Defense Lite Rail" --not a carbon copy, just based off of, if only for the delta ring dongle thing
-	realnames["bm_wp_m16_fg_railed_desc"] = "##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m16_fg_railed" and "Daniel Defense Lite Rail" --not a carbon copy, just based off of, if only for the delta ring dongle thing
+	or string_id == "bm_wp_m16_fg_railed_desc" and "##5% slower## ADS speeds."
 	--Blast to the Past
-	realnames["bm_wp_m16_fg_vietnam"] = "M16A1 Handguard"
-	realnames["bm_wp_m16_fg_vietnam_desc"] = "##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m16_fg_vietnam" and "M16A1 Handguard"
+	or string_id == "bm_wp_m16_fg_vietnam_desc" and "##5% faster## ADS speeds." 
 	
 	--[[553 NO PANTSU]]
-	realnames["bm_w_s552"] = "SIG SG 552" --"SG550's Little Sister"
-	realnames["bm_w_s552_desc"] = "A Swiss-made carbine chambered in 5.56 NATO.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_s552" and "SIG SG 552-2" --"SG550's Little Sister"
+	or string_id == "bm_w_s552_desc" and "A Swiss-made carbine chambered in 5.56 NATO.\nCan fire in 3-round bursts.\nCan pierce enemies and walls."
 	--Enhanced Foregrip
-	realnames["bm_wp_ass_s552_fg_standard_green"] = "OD Green Handguard"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ass_s552_fg_standard_green" and "OD Green Handguard"
 	--Enhanced Grip
-	realnames["bm_wp_ass_s552_g_standard_green"] = "OD Green Pistol Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ass_s552_g_standard_green" and "OD Green Pistol Grip"
 	--Enhanced Stock
-	realnames["bm_wp_ass_s552_s_standard_green"] = "OD Green Stock"	
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ass_s552_s_standard_green" and "OD Green Stock"	
 	--Enhanced Foregrip
-	realnames["bm_wp_ass_s552_fg_black"] = "Black Handguard"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ass_s552_fg_black" and "Black Handguard"
 	--Enhanced Grip
-	realnames["bm_wp_ass_s552_g_black"] = "Black Pistol Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ass_s552_g_black" and "Black Pistol Grip"
 	--Enhanced Stock
-	realnames["bm_wp_ass_s552_s_black"] = "Black Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ass_s552_s_black" and "Black Stock"
 	--Railed Foregrip
-	realnames["bm_wp_ass_s552_fg_railed"] = "SIG Railed Handguard" --pretty sure Sig manufactures their own rails for the 552/3. Can't be bothered to look :/
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ass_s552_fg_railed" and "SIG Railed Handguard" --pretty sure Sig manufactures their own rails for the 552/3. Can't be bothered to look :/
 	--Heat Treated
-	realnames["bm_wp_ass_s552_body_standard_black"] = "Black Receiver" --GJ, Overkill. Heat treating metal, while it does make it harder, also makes it more brittle. Pretty sure you don't want that in a gun
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ass_s552_body_standard_black" and "Black Receiver" --GJ, Overkill. Heat treating metal, while it does make it harder, also makes it more brittle. Pretty sure you don't want that in a gun
+	--Long Barrel
+	or string_id == "bm_wp_ass_s552_b_long_desc" and "##15% longer## overall range.\n5##% slower## ADS speeds."
 	
 	--[[EAG-H]]
-	realnames["bm_w_scar"] = "FN MK.17"
-	realnames["bm_w_scar_desc"] = "A Belgian-American battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\nBenefits from assault rifle skills."
+	or DMCWO.reelnaems == true and string_id == "bm_w_scar" and "FN MK.17"
+	or string_id == "bm_w_scar_desc" and "A Belgian-American battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields."
 	--Sniper Stock
-	realnames["bm_wp_scar_s_sniper"] = "MK.20 Stock"	
+	or DMCWO.reelnaems == true and string_id == "bm_wp_scar_s_sniper" and "MK.20 Stock"	
 	
-	realnames["bm_wp_scar_b_long_desc"] = "15% longer overall range.\n5##% slower## ADS speeds."
+	or string_id == "bm_wp_scar_b_long_desc" and "##15% longer## overall range.\n5##% slower## ADS speeds."
 	
-	realnames["bm_wp_scar_b_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or string_id == "bm_wp_scar_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	--Rail Extension
-	realnames["bm_wp_scar_fg_railext"] = "PWS SCAR Rail Extension"
-	realnames["bm_wp_scar_fg_railext_desc"] = "##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_scar_fg_railext" and "PWS SCAR Rail Extension"
+	or string_id == "bm_wp_scar_fg_railext_desc" and "##5% slower## ADS speeds."
 	
 	--[[RIGHT ARM]]
-	realnames["bm_w_fal"] = "FN FAL"
-	realnames["bm_w_fal_desc"] = "A Belgian battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\nBenefits from assault rifle skills.\n\n\"Right arm of the free world.\""
+	or DMCWO.reelnaems == true and string_id == "bm_w_fal" and "FN FAL"
+	or string_id == "bm_w_fal_desc" and "A Belgian battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\n\"Right arm of the free world.\""
 	--CQB
-	realnames["bm_wp_fal_body_standard"] = "DSA SA58 Handguard w/Short Barrel" --this might conflict with something since this is also the name_id of the receiver
-	realnames["bm_wp_fal_body_standard_desc"] = "##10% shorter## overall range.\n##15% faster## ADS speeds.\n##5% faster## movement."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_fal_body_standard" and "DSA SA58 Handguard w/Short Barrel" --this might conflict with something since this is also the name_id of the receiver
+	or string_id == "bm_wp_fal_body_standard_desc" and "##10% shorter## overall range.\n##15% faster## ADS speeds.\n##5% faster## movement."
 	
-    realnames["bm_wp_fal_fg_03"] = "IMI Romat Handguard"
-    realnames["bm_wp_fal_fg_03_desc"] = "##5% slower## ADS speeds."
+    or DMCWO.reelnaems == true and string_id == "bm_wp_fal_fg_03" and "IMI Romat Handguard"
+    or string_id == "bm_wp_fal_fg_03_desc" and "##5% slower## ADS speeds."
 	--Marksman
-    realnames["bm_wp_fal_fg_04"] = "DSA Freefloat Handguard"
-    realnames["bm_wp_fal_fg_04_desc"] = "##5% faster## ADS speeds." 
+    or DMCWO.reelnaems == true and string_id == "bm_wp_fal_fg_04" and "DSA Freefloat Handguard"
+    or string_id == "bm_wp_fal_fg_04_desc" and "##5% faster## ADS speeds." 
 	--Wood
-    realnames["bm_wp_fal_fg_wood"] = "Wooden Handguard"
-    realnames["bm_wp_fal_fg_wood_desc"] = "##7.5% slower## ADS speeds.\n##5% slower## movement."
+    or DMCWO.reelnaems == true and string_id == "bm_wp_fal_fg_wood" and "Wooden Handguard"
+    or string_id == "bm_wp_fal_fg_wood_desc" and "##7.5% slower## ADS speeds.\n##5% slower## movement."
 	--Tactical Grip
-	realnames["bm_wp_fal_g_01"] = "Tapco FAL/SAW Pistol Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_fal_g_01" and "Tapco FAL/SAW Pistol Grip"
 	--Extended Mag
-    realnames["bm_wp_fal_m_01"] = "30rnd FAL Magazine"
-    realnames["bm_wp_fal_m_01_desc"] = "##10% slower## reload speeds."
+    or DMCWO.reelnaems == true and string_id == "bm_wp_fal_m_01" and "30rnd FAL Magazine"
+    or string_id == "bm_wp_fal_m_01_desc" and "##10% slower## reload speeds."
 	--Folding
-    realnames["bm_wp_fal_s_01"] = "Sidefolding Stock"
+    or DMCWO.reelnaems == true and string_id == "bm_wp_fal_s_01" and "Sidefolding Stock"
 	--Marksman
-    realnames["bm_wp_fal_s_03"] = "Magpul FAL PRS Stock"
+    or DMCWO.reelnaems == true and string_id == "bm_wp_fal_s_03" and "Magpul FAL PRS Stock"
 	
 	--[[BOTTLE OPENER]]
-	realnames["bm_w_galil"] = "IMI Galil ARM"
-	realnames["bm_w_galil_desc"] = "An Israeli battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\nBenefits from assault rifle skills."
+	or DMCWO.reelnaems == true and string_id == "bm_w_galil" and "IMI Galil ARM"
+	or string_id == "bm_w_galil_desc" and "An Israeli battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields."
 	--Sniper
-	realnames["bm_wp_galil_fg_sniper"] = "IMI Galatz Handguard & Sniper Barrel"
-	realnames["bm_wp_galil_fg_sniper_desc"] = "##15% longer## overall range.\n##10% slower## ADS speeds.\nROF ##lowered## to ##630 RPM##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_galil_fg_sniper" and "IMI Galatz Handguard & Sniper Barrel"
+	or string_id == "bm_wp_galil_fg_sniper_desc" and "##Sniper class barrel.##\n##30% longer## overall range.\n##10% greater## minimum damage.\n##10% slower## ADS speeds.\nROF ##lowered## to ##630 RPM.##"
 	--Light
-	realnames["bm_wp_galil_fg_sar"] = "IMI Galil SAR Handguard & 13\" Barrel"
-	realnames["bm_wp_galil_fg_sar_desc"] = "##5% faster ADS## speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_galil_fg_sar" and "IMI Galil SAR Handguard & 13\" Barrel"
+	or string_id == "bm_wp_galil_fg_sar_desc" and "##5% faster ADS## speeds." 
 	--CQB
-	realnames["bm_wp_galil_fg_mar"] = "IMI Galil MAR Handguard & 7\" Barrel"
-	realnames["bm_wp_galil_fg_mar_desc"] = "##10% shorter## overall range.\n15% faster ADS speeds.\n10% faster movement.\nROF ##raised## to ##750 RPM##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_galil_fg_mar" and "IMI Galil MAR Handguard & 7\" Barrel"
+	or string_id == "bm_wp_galil_fg_mar_desc" and "##10% shorter## overall range.\n##15% faster## ADS speeds.\n##10% faster## movement.\nROF ##raised## to ##750 RPM.##"
 	--FAB
-	realnames["bm_wp_galil_fg_fab"] = "FAB Defense VFR GA Handguard"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_galil_fg_fab" and "FAB Defense VFR GA Handguard"
 	--Sniper Grip
-	realnames["bm_wp_galil_g_sniper"] = "IMI Galatz Pistol Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_galil_g_sniper" and "IMI Galatz Pistol Grip"
 	--Sniper Stock
-	realnames["bm_wp_galil_s_sniper"] = "IMI Galatz Wooden Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_galil_s_sniper" and "IMI Galatz Wooden Stock"
 	--Skeletal Stock
-	realnames["bm_wp_galil_s_skeletal"] = "IMI Galil MAR Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_galil_s_skeletal" and "IMI Galil MAR Stock"
 	--Light Stock
-	realnames["bm_wp_galil_s_light"] = "IMI Galatz Skeleton Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_galil_s_light" and "IMI Galatz Skeleton Stock"
 	--FAB Stock
-	realnames["bm_wp_galil_s_fab"] = "FAB Defense MG-CP Cheek Pad"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_galil_s_fab" and "FAB Defense MG-CP Cheek Pad"
 	
 	--[[MAI RAIFU (SHE'S MINE I TELL YOU)]]
-	realnames["bm_w_g3"] = "Heckler & Koch G3"
-	realnames["bm_w_g3_desc"] = "A German battle rifle based off the Spanish CETME, chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\nBenefits from assault rifle skills\nDMC's raifu, please treat her well."
+	or DMCWO.reelnaems == true and string_id == "bm_w_g3" and "Heckler & Koch G3"
+	or string_id == "bm_w_g3_desc" and "A German battle rifle based off the Spanish CETME, chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\nDMC's raifu, treat her well."
 	--Assault Kit
-	realnames["bm_wp_g3_b_short"] = "Short Barrel"
-	realnames["bm_wp_g3_b_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g3_b_short" and "Short Barrel"
+	or string_id == "bm_wp_g3_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	--DMR Kit
-	realnames["bm_wp_g3_b_sniper"] = "PSG-1 Barrel"
-	realnames["bm_wp_g3_b_sniper_desc"] = "##30% longer## overall range.\n##10% higher## minimum damage.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g3_b_sniper" and "PSG-1 Barrel"
+	or string_id == "bm_wp_g3_b_sniper_desc" and "##Sniper class barrel.##\n##30% longer## overall range.\n##10% greater## minimum damage.\n##10% slower## ADS speeds.\nROF ##lowered## to ##500 RPM.##"
 	--PSG Foregrip
-	realnames["bm_wp_g3_fg_psg"] = "PSG-1 Handguard"
-	realnames["bm_wp_g3_fg_psg_desc"] = "##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g3_fg_psg" and "PSG-1 Handguard"
+	or string_id == "bm_wp_g3_fg_psg_desc" and "##5% slower## ADS speeds."
 	--Railed Foregrip
-	realnames["bm_wp_g3_fg_railed"] = "FAB Defense G3-RS Handguard"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g3_fg_railed" and "FAB Defense G3-RS Handguard"
 	--Retro Foregrip
-	realnames["bm_wp_g3_fg_retro"] = "Wooden Slimline Handguard"
-	realnames["bm_wp_g3_fg_retro_desc"] = "##7.5% slower## ADS speeds.\n##5% faster## movement."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g3_fg_retro" and "Wooden Slimline Handguard"
+	or string_id == "bm_wp_g3_fg_retro_desc" and "##7.5% slower## ADS speeds.\n##5% faster## movement."
 	--Plastic Retro Foregrip
-	realnames["bm_wp_g3_fg_retro_plastic"] = "Slimline Handguard"
-	realnames["bm_wp_g3_fg_retro_plastic_desc"] = "##5% faster## ADS speeds.\n##10% faster## movement."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g3_fg_retro_plastic" and "Slimline Handguard"
+	or string_id == "bm_wp_g3_fg_retro_plastic_desc" and "##5% faster## ADS speeds.\n##10% faster## movement."
 	--Retro Grip
-	realnames["bm_wp_g3_g_retro"] = "G3 Ergo Grip"
-	realnames["bm_wp_g3_g_retro_desc"] = "5% faster ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g3_g_retro" and "G3 Ergo Grip"
+	or string_id == "bm_wp_g3_g_retro_desc" and "##5% faster## ADS speeds." 
 	--Sniper Grip
-	realnames["bm_wp_g3_g_sniper"] = "PSG-1 Wooden Pistol Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g3_g_sniper" and "PSG-1 Wooden Pistol Grip"
 	--Sniper Stock
-	realnames["bm_wp_g3_s_sniper"] = "PSG-1 Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g3_s_sniper" and "PSG-1 Stock"
 
 	
 	--[[Rattlesnake]]
-	realnames["bm_w_msr"] = "Remington MSR"
-	realnames["bm_w_msr_desc"] = "An American bolt-action rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields."
+	or DMCWO.reelnaems == true and string_id == "bm_w_msr" and "Remington MSR"
+	or string_id == "bm_w_msr_desc" and "An American bolt-action rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields."
 	--Suppressor
-	realnames["bm_wp_snp_msr_ns_suppressor"] = "AAC TiTAN-QD Suppressor"
-	realnames["bm_wp_snp_msr_ns_suppressor_desc"] = "A ##large## 7.62 NATO suppressor.\n##20% shorter## overall range.\n##10% lower## minimum damage.\n##10% slower## ADS speeds."
-	realnames["bm_wp_snp_msr_b_long_desc"] = "##15% longer## overall range.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_snp_msr_ns_suppressor" and "AAC TiTAN-QD Suppressor"
+	or string_id == "bm_wp_snp_msr_ns_suppressor_desc" and "A ##large## suppressor.\n##20% shorter## overall range.\n##10% lower## minimum damage.\n##10% slower## ADS speeds."
+	or string_id == "bm_wp_snp_msr_b_long_desc" and "##15% longer## overall range.\n##10% slower## ADS speeds."
 	--Aluminum Body
-	realnames["bm_wp_msr_body_msr"] = "MSR Aluminum Stock & Receiver"
-	realnames["bm_wp_msr_body_msr_desc"] = "##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_msr_body_msr" and "MSR Aluminum Stock & Receiver"
+	or string_id == "bm_wp_msr_body_msr_desc" and "##5% faster## ADS speeds." 
 	
 	--[[R93]]
-	realnames["bm_w_r93"] =  "Blaser R93 Tactical 2"
-	realnames["bm_w_r93_desc"] = "A German bolt-action rifle chambered in .338 Lapua Magnum.\nCan pierce enemies, walls and shields."
+	or DMCWO.reelnaems == true and string_id == "bm_w_r93" and  "Blaser R93 Tactical 2"
+	or string_id == "bm_w_r93_desc" and "A German bolt-action rifle chambered in .338 Lapua Magnum.\nCan pierce enemies, walls and shields."
 	
-	realnames["bm_wp_r93_b_short_desc"] =  "##10% shorter## overall range.\n5% faster ADS speeds." 
-	realnames["bm_wp_r93_b_suppressed_desc"] =  "A ##large## .338 suppressor.\n20% shorter overall range.\n10% lower minimum damage.\n10% slower ADS speeds."
+	or string_id == "bm_wp_r93_b_short_desc" and  "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_r93_b_suppressed" and  "Harvester Big Bore 338 Suppressor"
+	or string_id == "bm_wp_r93_b_suppressed_desc" and  "A ##large## suppressor.\n##20% shorter## overall range.\n##10% lower## minimum damage.\n10% slower ADS speeds."
 	--Wooden Body
-	realnames["bm_wp_r93_body_wood"] = "Long Range Sporter 2 Stock"
-	realnames["bm_wp_r93_body_wood_desc"] = "##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_r93_body_wood" and "Long Range Sporter 2 Stock"
+	or string_id == "bm_wp_r93_body_wood_desc" and "##5% slower## ADS speeds."
 	
 	--[[FIDDY CAL]]
-	realnames["bm_w_m95"] = "Barrett M95"
-	realnames["bm_w_m95_desc"] = "An American .50 BMG, bolt-action, bullpup anti-materiel rifle.\nCan pierce enemies, walls and shields.\nPassive damage boosts do not effect this weapon."
+	or DMCWO.reelnaems == true and string_id == "bm_w_m95" and "Barrett M95"
+	or string_id == "bm_w_m95_desc" and "An American .50 BMG, bolt-action, bullpup anti-materiel rifle.\nCan pierce enemies, walls and shields.\nDamage boosts from skills do not effect this weapon."
 	--Tank Buster
-	realnames["bm_wp_m95_b_barrel_long"] = "Long Barrel w/AW50F Muzzle Brake"
-	realnames["bm_wp_m95_b_barrel_long_desc"] = "##15% longer## overall range.\n##10% slower## ADS speeds.\n##5% slower## movement."
-	realnames["bm_wp_m95_b_barrel_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds.\n##5% faster## movement."
-	realnames["bm_wp_m95_b_barrel_suppressed_desc"] = "##Internally suppressed## barrel.\n##10% slower## ADS speeds.\n##15% slower## movement."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m95_b_barrel_long" and "Long Barrel w/AW50F Muzzle Brake"
+	or string_id == "bm_wp_m95_b_barrel_long_desc" and "##15% longer## overall range.\n##10% slower## ADS speeds.\n##5% slower## movement."
+	or string_id == "bm_wp_m95_b_barrel_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds.\n##5% faster## movement."
+	or string_id == "bm_wp_m95_b_barrel_suppressed_desc" and "##Internally suppressed## barrel.\n##10% slower## ADS speeds.\n##15% slower## movement."
 	
 	--[[MOIST NUGGET]]
-	realnames["bm_w_mosin"] = "Mosin Nagant M91/30"
-	realnames["bm_w_mosin_desc"] = "A Russian bolt-action rifle chambered in 7.62x54R.\nCan pierce enemies, walls and shields.\nCan mount a bayonet."
+	or DMCWO.reelnaems == true and string_id == "bm_w_mosin" and "Mosin Nagant M91/30"
+	or string_id == "bm_w_mosin_desc" and "A Russian bolt-action rifle chambered in 7.62x54R.\nCan pierce enemies, walls and shields.\nCan mount a bayonet."
 	
-	realnames["bm_wp_mosin_b_short_desc"] = "##10% shorter## overall range.\n5% faster ADS speeds." 
+	or string_id == "bm_wp_mosin_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	
-	realnames["bm_wp_mosin_b_long_desc"] = "15% longer overall range.\n5% slower ADS speeds."
+	or string_id == "bm_wp_mosin_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 	
-	realnames["bm_wp_mosin_b_sniper"] = "Mosin Suppressor"
-	realnames["bm_wp_mosin_b_sniper_desc"] = "A ##large## 7.62x54R suppressor.\n20% shorter overall range.\n10%lower minimum damage.\n7.5% slower ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mosin_b_sniper" and "\"Bramit\" Device"
+	or string_id == "bm_wp_mosin_b_sniper_desc" and "A ##large## 7.62x54R suppressor.\n##20% shorter## overall range.\n##10%lower## minimum damage.\n7.5% slower ADS speeds."
 	--Black Stock
-	realnames["bm_wp_mosin_body_conceal"] = "Black Paint"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mosin_body_conceal" and "Black Paint"
 	
 	
 	--[[ELMER FUDD]]
-	realnames["bm_w_huntsman"] = "Mosconi Coach Gun"
-	realnames["bm_w_huntsman_desc"] = "A side-by-side, break-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
+	or DMCWO.reelnaems == true and string_id == "bm_w_huntsman" and "Mosconi Coach Gun"
+	or string_id == "bm_w_huntsman_desc" and "A side-by-side, break-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
 	
-	realnames["bm_wp_huntsman_b_short"] = "Sawn-Off Short Barrel"
-	realnames["bm_wp_huntsman_b_short_desc"] = "##10% shorter## overall range.\n5% faster ADS speeds." 
-	realnames["bm_wp_huntsman_s_short"] = "Sawn-Off Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_huntsman_b_short" and "Sawn-Off Short Barrel"
+	or string_id == "bm_wp_huntsman_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_huntsman_s_short" and "Sawn-Off Stock"
 	
 	--[[BARDODA SHOTGAT]]
-	realnames["bm_w_b682"] = "Beretta 682"
-	realnames["bm_w_b682_desc"] = "An Italian, over-under, break-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
-	realnames["bm_wp_b682_b_short"] = "Sawn-Off Short Barrel"
-	realnames["bm_wp_b682_b_short_desc"] = "##10% shorter## overall range.\n5% faster ADS speeds." 
-	realnames["bm_wp_b682_s_short"] = "Sawn-Off Stock"
-	realnames["bm_wp_b682_s_ammopouch"] = "Ammo Pouch"
+	or DMCWO.reelnaems == true and string_id == "bm_w_b682" and "Beretta 682"
+	or string_id == "bm_w_b682_desc" and "An Italian, over-under, break-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_b682_b_short" and "Sawn-Off Short Barrel"
+	or string_id == "bm_wp_b682_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_b682_s_short" and "Sawn-Off Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_b682_s_ammopouch" and "Ammo Pouch"
 	
 	--[[870]]
-	realnames["bm_w_r870"] = "Remington Model 870" --"Remafdng"
-	realnames["bm_w_r870_desc"] = "An American, tube fed, pump-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
+	or DMCWO.reelnaems == true and string_id == "bm_w_r870" and "Remington Model 870" --"Remafdng"
+	or string_id == "bm_w_r870_desc" and "An American, tube fed, pump-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
 	--Extended Mag
-	realnames["bm_wp_r870_m_extended"] = "R870 Extended Tube Magazine"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_r870_m_extended" and "R870 Extended Tube Magazine"
 	--Zombie Hunter
-    realnames["bm_wp_r870_fg_wood"] = "Wooden Pump"
-    realnames["bm_wp_r870_fg_wood_desc"] = "5% slower ADS speeds."
+    or DMCWO.reelnaems == true and string_id == "bm_wp_r870_fg_wood" and "Wooden Pump"
+    or string_id == "bm_wp_r870_fg_wood_desc" and "##5% slower## ADS speeds."
 	--Short Enough **don't know
-	realnames["bm_wp_r870_s_nostock"] = "No Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_r870_s_nostock" and "No Stock"
 	--Short Enough Tact. **don't know
-	realnames["bm_wp_r870_s_nostock_big"] = "No Stock w/Full Length Rail"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_r870_s_nostock_big" and "No Stock w/Full Length Rail"
 	--Govt. Stock **don't know
-	realnames["bm_wp_r870_s_solid_big"] = "Fixed Stock w/Full Length Rail"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_r870_s_solid_big" and "Fixed Stock w/Full Length Rail"
 	
 	--[[CATS]]
-	realnames["bm_w_saiga"] = "Concern Kalashnikov Saiga-12K"
-	realnames["bm_w_saiga_desc"] = "A Russian, magazine fed, fully automatic shotgun based off the AK platform, loaded with 12-gauge shells.\nCan be loaded with special ammo types."
+	or DMCWO.reelnaems == true and string_id == "bm_w_saiga" and "Concern Kalashnikov Saiga-12K"
+	or string_id == "bm_w_saiga_desc" and "A Russian, magazine fed, fully automatic shotgun based off the AK platform, loaded with 12-gauge shells.\nCan be loaded with special ammo types."
 	--Tact. Russian
-	realnames["bm_wp_saiga_fg_lowerrail"] = "Ultimak AK Modular Rail Forend System"
-	realnames["bm_wp_saiga_fg_lowerrail_desc"] = "5% slower ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_saiga_fg_lowerrail" and "Ultimak AK Modular Rail Forend System"
+	or string_id == "bm_wp_saiga_fg_lowerrail_desc" and "##5% slower## ADS speeds."
 	--Saiga 20 rounder
-	realnames["bm_wp_saiga_m_20rnd"] = "20rnd MD Arms Saiga Drum"
-	realnames["bm_wp_saiga_m_20rnd_desc"] = "15% slower reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_saiga_m_20rnd" and "20rnd MD Arms Saiga Drum"
+	or string_id == "bm_wp_saiga_m_20rnd_desc" and "##15% slower## reload speeds."
 	
 	--[[AA12]]
-	realnames["bm_w_aa12"] = "MPS Auto Assault-12 CQB"
-	realnames["bm_w_aa12_desc"] = "An American, magazine fed, fully automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
-	realnames["bm_wp_aa12_mag_drum"] = "20rnd AA-12 Drum"
-	realnames["bm_wp_aa12_mag_drum_desc"] = "15% slower reload speeds."
-	realnames["bm_wp_aa12_barrel_long"] = "Standard Barrel"
-	realnames["bm_wp_aa12_barrel_long_desc"] = "15% longer overall range.\n5% slower ADS speeds."
-	realnames["bm_wp_aa12_barrel_silenced_desc"] = "##Internally suppressed## barrel.\n10% slower ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_w_aa12" and "MPS Auto Assault-12 CQB"
+	or string_id == "bm_w_aa12_desc" and "An American, magazine fed, fully automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_aa12_mag_drum" and "20rnd AA-12 Drum"
+	or string_id == "bm_wp_aa12_mag_drum_desc" and "##15% slower## reload speeds."
+	or string_id == "bm_wp_aa12_barrel_long" and "Standard Barrel"
+	or string_id == "bm_wp_aa12_barrel_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
+	or string_id == "bm_wp_aa12_barrel_silenced_desc" and "##Internally suppressed## barrel.\n##10% slower## ADS speeds."
 	
 	--[[M1014]]
-	realnames["bm_w_benelli"] = "Benelli M4"
-	realnames["bm_w_benelli_desc"] = "An Italian, tube fed, semi automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
+	or DMCWO.reelnaems == true and string_id == "bm_w_benelli" and "Benelli M4"
+	or string_id == "bm_w_benelli_desc" and "An Italian, tube fed, semi automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
 	--Long Barrel
-	realnames["bm_wp_ben_b_long"] = "Long Barrel w/7-Shot Tube"
-	realnames["bm_wp_ben_b_long_desc"] = "15% longer overall range.\n5% slower ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ben_b_long" and "Long Barrel w/7-Shot Tube"
+	or string_id == "bm_wp_ben_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 	--Short Barrel
-	realnames["bm_wp_ben_b_short"] = "NFA Short Barrel w/4-Shot Tube"
-	realnames["bm_wp_ben_b_short_desc"] = "##10% shorter## overall range.\n5% faster ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ben_b_short" and "NFA Barrel w/4-Shot Tube"
+	or string_id == "bm_wp_ben_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	--Collapsed Stock
-	realnames["bm_wp_ben_s_collapsed"] = "M1014 Collapsed Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ben_s_collapsed" and "M1014 Collapsed Stock"
 	--Solid Stock
-	realnames["bm_wp_ben_fg_standard"] = "M1014 Civilian Stock" --same deal with the FAL, possible conflict
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ben_fg_standard" and "M1014 Solid Stock" --same deal with the FAL, possible conflict
 	
 	--[[KELTEC]]
-	realnames["bm_w_ksg"] = "Kel-Tec KSG"
-	realnames["bm_w_ksg_desc"] = "An American, dual tube fed, pump-action bullpup shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
+	or DMCWO.reelnaems == true and string_id == "bm_w_ksg" and "Kel-Tec KSG"
+	or string_id == "bm_w_ksg_desc" and "An American, dual tube fed, pump-action bullpup shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
 	--Long Barrel
-	realnames["bm_wp_ksg_b_long"] = "Long Barrel w/2x 8-Shot Tubes"
-	realnames["bm_wp_ksg_b_long_desc"] = "15% longer overall range.\n5% slower ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ksg_b_long" and "Long Barrel w/2x 8-Shot Tubes"
+	or string_id == "bm_wp_ksg_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 	--Short Barrel
-	realnames["bm_wp_ksg_b_short"] = "Patrol Barrel w/2x 6-Shot Tubes"
-	realnames["bm_wp_ksg_b_short_desc"] = "##10% shorter## overall range.\n5% faster ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ksg_b_short" and "Patrol Barrel w/2x 6-Shot Tubes"
+	or string_id == "bm_wp_ksg_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	
 	--[[WHY DON'T YOU TAKE A SEAT OVER THERE?]]
-	realnames["bm_w_spas12"] = "Franchi SPAS-12"
-	realnames["bm_w_spas12_desc"] = "An Italian, tube fed, semi automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
-	realnames["bm_wp_spas12_b_long"] = "SPAS-12 8-Shot Tube Magazine"
-	realnames["bm_wp_spas12_b_long_desc"] = "5% slower ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_w_spas12" and "Franchi SPAS-12"
+	or string_id == "bm_w_spas12_desc" and "An Italian, tube fed, semi automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_spas12_b_long" and "SPAS-12 8-Shot Tube Magazine"
+	or string_id == "bm_wp_spas12_b_long_desc" and "##5% slower## ADS speeds."
 	
 	--[[STREET SWEEPER]]
-	realnames["bm_w_striker"] = "Armsel Striker"
-	realnames["bm_w_striker_desc"] = "A South-African, cylinder fed, semi automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
-	realnames["bm_wp_striker_b_long_desc"] = "15% longer overall range.\n5% slower ADS speeds." 
-	realnames["bm_wp_striker_b_suppressed_desc"] = "##Internally suppressed## barrel.\n10% slower ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_w_striker" and "Armsel Striker"
+	or string_id == "bm_w_striker_desc" and "A South-African, cylinder fed, semi automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_striker_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
+	or string_id == "bm_wp_striker_b_suppressed_desc" and "##Internally suppressed## barrel.\n##10% slower## ADS speeds." 
 	
 	--[[BABBY 870]]
-	realnames["bm_w_serbu"] = "Short Barrelled Remington Model 870"
-	realnames["bm_w_serbu_desc"] = "An American, tube fed, pump-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
+	or DMCWO.reelnaems == true and string_id == "bm_w_serbu" and "Short Remington Model 870"
+	or string_id == "bm_w_serbu_desc" and "An American, tube fed, pump-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
 	--Extended Mag
-	realnames["bm_wp_shorty_m_extended_short"] = "R870 Extended Tube Magazine (+1 Round)"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_shorty_m_extended_short" and "Short R870 Extended Tube Magazine"
 	--Standard
-	realnames["bm_wp_r870_s_solid"] = "Fixed Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_r870_s_solid" and "Fixed Stock"
 	--Police Shorty
-	realnames["bm_wp_serbu_s_solid_short"] = "Fixed Stock w/Rail"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_serbu_s_solid_short" and "Fixed Stock w/Rail"
 	--Tactical Shorty
-	realnames["bm_wp_serbu_s_nostock_short"] = "No Stock w/Rail"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_serbu_s_nostock_short" and "No Stock w/Rail"
 	
 	--[[LONGCAT]]
-	realnames["bm_w_rpk"] = "Concern Kalashnikov RPK"
-	realnames["bm_w_rpk_desc"] = "A Russian LMG chambered in 7.62x39mm.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_rpk" and "Concern Kalashnikov RPK"
+	or string_id == "bm_w_rpk_desc" and "A Russian LMG chambered in 7.62x39mm.\nCan pierce enemies and walls."
 	--Tactical Forgrip
-	realnames["bm_wp_rpk_fg_standard"] = "Polymer Handguard"
-	realnames["bm_wp_rpk_fg_standard_desc"] = "5% faster ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_rpk_fg_standard" and "Polymer Handguard"
+	or string_id == "bm_wp_rpk_fg_standard_desc" and "##5% faster## ADS speeds." 
 	--Plastic Stock
-	realnames["bm_wp_rpk_s_standard"] = "Polymer Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_rpk_s_standard" and "Polymer Stock"
 	
 	--[[KSP]]
-	realnames["bm_w_m249"] = "FN Paratrooper M249"
-	realnames["bm_w_m249_desc"] = "A Belgian-American LMG chambered in 5.56 NATO.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_m249" and "FN Paratrooper M249"
+	or string_id == "bm_w_m249_desc" and "A Belgian-American LMG chambered in 5.56 NATO.\nCan pierce enemies and walls."
 	--Railed Foregrip
-	realnames["bm_wp_m249_fg_mk46"] = "MK.46 Handguard"
-	realnames["bm_wp_m249_fg_mk46_desc"] = "5% slower ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m249_fg_mk46" and "MK.46 Handguard"
+	or string_id == "bm_wp_m249_fg_mk46_desc" and "##5% slower## ADS speeds."
 	--Solid Stock
-	realnames["bm_wp_m249_s_solid"] = "M249 Solid Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m249_s_solid" and "M249 Solid Stock"
 	--LB
-	realnames["bm_wp_m249_b_long_desc"] = "15% longer overall range.\n5% slower ADS speeds."
+	or string_id == "bm_wp_m249_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 	
 	--[[RELATED TO RAIFU]]
-	realnames["bm_w_hk21"] = "Heckler & Koch HK21" --"Related to mai raifu"
-	realnames["bm_w_hk21_desc"] = "A German GPMG chambered in 7.62 NATO.\nCan pierce enemies, walls and shields."
+	or DMCWO.reelnaems == true and string_id == "bm_w_hk21" and "Heckler & Koch HK21E" --"Related to mai raifu"
+	or string_id == "bm_w_hk21_desc" and "A German GPMG chambered in 7.62 NATO.\nCan pierce enemies, walls and shields."
 	--Short Foregrip
-	realnames["bm_wp_hk21_fg_short"] = "HK21 Short Handguard"
-	realnames["bm_wp_hk21_fg_short_desc"] = "##10% shorter## overall range.\n5% faster ADS speeds.\nDecreases movement penalty by 10%."
-	realnames["bm_wp_hk21_g_ergo"] = "HK21 Ergo Grip"
-	realnames["bm_wp_hk21_g_ergo_desc"] = "5% faster ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_hk21_fg_short" and "HK21 Short Handguard"
+	or string_id == "bm_wp_hk21_fg_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds.\n##10% faster## movement."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_hk21_g_ergo" and "HK21 Ergo Grip"
+	or string_id == "bm_wp_hk21_g_ergo_desc" and "##5% faster## ADS speeds." 
 	--LB
-	realnames["bm_wp_hk21_b_long_desc"] = "15% longer overall range.\n5% slower ADS speeds."
+	or string_id == "bm_wp_hk21_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 	
 	--[[KERBEROS]]
-	realnames["bm_w_mg42"] = "Mauser Maschinengewehr 42"
-	realnames["bm_w_mg42_desc"] = "A German GPMG chambered in 7.92x57mm.\nCan pierce enemies, walls and shields.\n\n\"And then the wolf... ate up Little Red Riding Hood\""
+	or DMCWO.reelnaems == true and string_id == "bm_w_mg42" and "Mauser Maschinengewehr 42"
+	or string_id == "bm_w_mg42_desc" and "A German GPMG chambered in 7.92x57mm.\nCan pierce enemies, walls and shields.\n\n\"And then the wolf... ate up Little Red Riding Hood\""
 	--Light Barrel
-	realnames["bm_wp_mg42_b_mg34"] = "Maschinengewehr 34 Barrel"
-	realnames["bm_wp_mg42_b_mg34_desc"] = "##5% faster## ADS speeds.\nROF ##lowered## to ##900 RPM##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mg42_b_mg34" and "Maschinengewehr 34 Barrel"
+	or string_id == "bm_wp_mg42_b_mg34_desc" and "##5% faster## ADS speeds.\nROF ##lowered## to ##900 RPM.##"
 	--Heat Sink (Star Wars)
-	realnames["bm_wp_mg42_b_vg38"] = "Blastech DLT-19 Barrel"
-	realnames["bm_wp_mg42_b_vg38_desc"] = "Fire special tracers.\nROF ##lowered## to ##400 RPM##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mg42_b_vg38" and "BlasTech DLT-19 Barrel"
+	or string_id == "bm_wp_mg42_b_vg38_desc" and "Fire special tracers.\n##Lose all penetration capabilities.##\nROF ##lowered## to ##400 RPM.##"
 	
 	--[[GORDON]]
-	realnames["bm_w_usp"] = "Heckler & Koch USP Tactical"
-	realnames["bm_w_x_usp"] = "Akimbo H&K USP Tacticals"
-	realnames["bm_w_usp_desc"] = "A German handgun chambered in .45 ACP.\nCan pierce enemies and walls."
-	realnames["bm_w_x_usp_desc"] = "A pair of German handguns chambered in .45 ACP.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_usp" and "Heckler & Koch USP Tactical"
+	or DMCWO.reelnaems == true and string_id == "bm_w_x_usp" and "Akimbo H&K USP Tacticals"
+	or string_id == "bm_w_usp_desc" and "A German handgun chambered in .45 ACP.\nCan pierce enemies and walls."
+	or string_id == "bm_w_x_usp_desc" and "A pair of German handguns chambered in .45 ACP.\nCan pierce enemies and walls."
 	--Ventilated .45 **don't know
-	--realnames["bm_wp_usp_co_comp_1"] = "Ventilated .45 Compensator" --I question the existence of this compensator
+	--or string_id == "bm_wp_usp_co_comp_1" and "Ventilated .45 Compensator" --I question the existence of this compensator
 	--Velocity .45
-	realnames["bm_wp_usp_co_comp_2"] = "SJC Compensator .45" --Technically only for the G17 but "Overkill logic" so yeah
+	or DMCWO.reelnaems == true and string_id == "bm_wp_usp_co_comp_2" and "SJC Compensator .45" --Technically only for the G17 but "Overkill logic" so yeah
 	--Extended Mag
-	realnames["bm_wp_pis_usp_m_extended"] = "20rnd USP Magazine"
-	realnames["bm_wp_pis_usp_m_extended_desc"] = "##5% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_pis_usp_m_extended" and "20rnd USP Magazine"
+	or string_id == "bm_wp_pis_usp_m_extended_desc" and "##5% slower## reload speeds."
 	--Expert
-	realnames["bm_wp_pis_usp_b_expert"] = "USP Expert Slide"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_pis_usp_b_expert" and "USP Expert Slide"
 	--Match
-	realnames["bm_wp_pis_usp_b_match"] = "USP Match Slide"
-	realnames["bm_wp_pis_usp_b_match_desc"] = "15% longer overall range.\n5% slower ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_pis_usp_b_match" and "USP Match Slide"
+	or string_id == "bm_wp_pis_usp_b_match_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 	
 	--[[GRENADE 22]]
-	realnames["bm_w_g22c"] = "Glock 22C"
-	realnames["bm_w_x_g22c"] = "Akimbo Glock 22Cs"
-	realnames["bm_w_g22c_desc"] = "An Austrian handgun chambered in .40 S&W.\nCan pierce walls."
-	realnames["bm_w_x_g22c_desc"] = "A pair of Austrian handguns chambered in .40 S&W.\nCan pierce walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_g22c" and "Glock 22C"
+	or DMCWO.reelnaems == true and string_id == "bm_w_x_g22c" and "Akimbo Glock 22Cs"
+	or string_id == "bm_w_g22c_desc" and "An Austrian handgun chambered in .40 S&W.\nCan pierce walls."
+	or string_id == "bm_w_x_g22c_desc" and "A pair of Austrian handguns chambered in .40 S&W.\nCan pierce walls."
 	--Long Slide
-	realnames["bm_wp_g22c_b_long"] = "Glock 35 Compensated Slide"
-	realnames["bm_wp_g22c_b_long_desc"] = "15% longer overall range.\n5% slower ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g22c_b_long" and "Glock 35 Compensated Slide"
+	or string_id == "bm_wp_g22c_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 	
 	--[[GRENADE 17]]
-	realnames["bm_w_glock_17"] = "Glock 17"
-	realnames["bm_w_x_g17"] = "Akimbo Glock 17s"
-	realnames["bm_w_glock_17_desc"] = "An Austrian handgun chambered in 9mm.\nCan pierce thin walls."
-	realnames["bm_w_x_g17_desc"] = "A pair of Austrian handguns chambered in 9mm.\nCan pierce thin walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_glock_17" and "Glock 17"
+	or DMCWO.reelnaems == true and string_id == "bm_w_x_g17" and "Akimbo Glock 17s"
+	or string_id == "bm_w_glock_17_desc" and "An Austrian handgun chambered in 9mm.\nCan pierce thin walls."
+	or string_id == "bm_w_x_g17_desc" and "A pair of Austrian handguns chambered in 9mm.\nCan pierce thin walls."
 	
 	--[[GRENADE 26]]
-	realnames["bm_wp_pis_g26"] =  "Glock 26"
-	realnames["bm_w_jowi"] =  "Akimbo Glock 26s"
-	realnames["bm_wp_pis_g26_desc"] = "An Austrian handgun chambered in 9mm.\nCan pierce thin walls."
-	realnames["bm_w_jowi_desc"] = "A pair of Austrian handguns chambered in 9mm.\nCan pierce thin walls."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_pis_g26" and  "Glock 26"
+	or DMCWO.reelnaems == true and string_id == "bm_w_jowi" and  "Akimbo Glock 26s"
+	or string_id == "bm_wp_pis_g26_desc" and "An Austrian handgun chambered in 9mm.\nCan pierce thin walls."
+	or string_id == "bm_w_jowi_desc" and "A pair of Austrian handguns chambered in 9mm.\nCan pierce thin walls."
 	
-	realnames["bm_wp_g26_body_salient"] =  "Stipled Tan Frame"
-	realnames["bm_wp_g26_b_custom"] =  "Brushed Metal Frame"
-	realnames["bm_wp_g26_m_custom"] =  "G26 Stipled Tan Magazine"
-	realnames["bm_wp_g26_m_custom_desc"] =  "15% faster reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g26_body_salient" and  "Stipled Tan Frame"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g26_b_custom" and  "Brushed Metal Frame"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g26_m_custom" and  "G26 Stipled Tan Magazine"
+	or string_id == "bm_wp_g26_m_custom_desc" and  "##15% faster## reload speeds."
 	
 	--[[FAWHTY FAHVE]]
-	realnames["bm_w_colt_1911"] = "Springfield Operator 1911" 
-	realnames["bm_w_x_1911"] = "Akimbo Springfield Operator 1911s" 
-	realnames["bm_w_colt_1911_desc"] = "An American handgun chambered in .45 ACP.\nCan pierce enemies and walls."
-	realnames["bm_w_x_1911_desc"] = "A pair of American handguns chambered in .45 ACP.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_colt_1911" and "Springfield Operator 1911" 
+	or DMCWO.reelnaems == true and string_id == "bm_w_x_1911" and "Akimbo Springfield Operator 1911s" 
+	or string_id == "bm_w_colt_1911_desc" and "An American handgun chambered in .45 ACP.\nCan pierce enemies and walls."
+	or string_id == "bm_w_x_1911_desc" and "A pair of American handguns chambered in .45 ACP.\nCan pierce enemies and walls."
 	
 	--Aggressor
-	realnames["bm_wp_1911_co_2"] = "TCII Compensator" --Not 100% but seems to be based off of it
+	or DMCWO.reelnaems == true and string_id == "bm_wp_1911_co_2" and "TCII Compensator" --Not 100% but seems to be based off of it
 	--Punisher
-	realnames["bm_wp_1911_co_1"] = "Clark Heavy Pinmaster" --Not 100% but seems to be based off of it
+	or DMCWO.reelnaems == true and string_id == "bm_wp_1911_co_1" and "Clark Heavy Pinmaster" --Not 100% but seems to be based off of it
 	--Ergo Grip
-	realnames["bm_wp_1911_g_ergo_desc"] = "5% faster ADS speeds." 
+	or string_id == "bm_wp_1911_g_ergo_desc" and "##5% faster## ADS speeds." 
 	--Long
-	realnames["bm_wp_1911_b_long"] = "Compensated Long Barrel & Slide" 
-	realnames["bm_wp_1911_b_long_desc"] = "15% longer overall range.\n5% slower ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_1911_b_long" and "Compensated Long Barrel & Slide" 
+	or string_id == "bm_wp_1911_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 	--Vented
-	realnames["bm_wp_1911_b_vented"] = "Compensated Two-Tone Slide"
-	realnames["bm_wp_1911_m_extended"] = "12rnd 1911 Magazine"
-	realnames["bm_wp_1911_m_extended_desc"] = "##5% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_1911_b_vented" and "Compensated Two-Tone Slide"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_1911_m_extended" and "12rnd 1911 Magazine"
+	or string_id == "bm_wp_1911_m_extended_desc" and "##5% slower## reload speeds."
 	
 	--[[BARDODA]]
-	realnames["bm_w_b92fs"] = "Beretta 92FS"
-	realnames["bm_w_x_b92fs"] = "Akimbo Beretta 92s"	
-	realnames["bm_w_b92fs_desc"] = "An Italian handgun chambered in 9mm.\nCan pierce thin walls."
-	realnames["bm_w_x_b92fs_desc"] = "A pair of Italian handguns chambered in 9mm.\nCan pierce thin walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_b92fs" and "Beretta 92FS"
+	or DMCWO.reelnaems == true and string_id == "bm_w_x_b92fs" and "Akimbo Beretta 92s"	
+	or string_id == "bm_w_b92fs_desc" and "An Italian handgun chambered in 9mm.\nCan pierce thin walls."
+	or string_id == "bm_w_x_b92fs_desc" and "A pair of Italian handguns chambered in 9mm.\nCan pierce thin walls."
 	--Professional
-	realnames["bm_wp_beretta_co_co1"] = "SGS Compensator" --Original name was a reference to the movie "The Professional"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_beretta_co_co1" and "SGS Compensator" --Original name was a reference to the movie "The Professional"
 	--Competitor
-	realnames["bm_wp_beretta_co_co2"] = "Competition Compensator" --Seems to actually be based off of the Shorty USA Beretta 92 Spring Gun, unsurprising considering some of the guns models were based off of airsoft counterparts
+	or DMCWO.reelnaems == true and string_id == "bm_wp_beretta_co_co2" and "Competition Compensator" --Seems to actually be based off of the Shorty USA Beretta 92 Spring Gun, unsurprising considering some of the guns models were based off of airsoft counterparts
 	--Extended Mag
-	realnames["bm_wp_beretta_m_extended"] = "30rnd 92FS Magazine"
-	realnames["bm_wp_beretta_m_extended_desc"] = "##5% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_beretta_m_extended" and "30rnd 92FS Magazine"
+	or string_id == "bm_wp_beretta_m_extended_desc" and "##5% slower## reload speeds."
 	--Elite Slide
-	realnames["bm_wp_beretta_sl_brigadier"] = "Brigadier Elite Slide"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_beretta_sl_brigadier" and "Brigadier Elite Slide"
 		
 	--[[HUEHUEHUEHUE]]
-	realnames["bm_w_raging_bull"] = "Taurus Raging Bull"
-	realnames["bm_w_raging_bull_desc"] = "A Brazilian revolver chambered in .44 Magnum.\nCan pierce enemies, walls and shields\nBenefits from pistol skills."
+	or DMCWO.reelnaems == true and string_id == "bm_w_raging_bull" and "Taurus Raging Bull"
+	or string_id == "bm_w_raging_bull_desc" and "A Brazilian revolver chambered in .44 Magnum.\nCan pierce enemies, walls and shields\nBenefits from pistol skills."
 	--Mount
-	realnames["bm_wp_pis_rage_extra"] = "Raging Bull Scope Mount"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_pis_rage_extra" and "Raging Bull Scope Mount"
 	--Aggressor
-	realnames["bm_wp_rage_b_comp1"] = "S&W V-Compensator"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_rage_b_comp1" and "S&W V-Compensator"
 	--Pocket
-	realnames["bm_wp_rage_b_short"] = "Snub Nose Short Barrel"
-	realnames["bm_wp_rage_b_short_desc"] = "##10% shorter## overall range.\n5% faster ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_rage_b_short" and "Snub Nose Short Barrel"
+	or string_id == "bm_wp_rage_b_short_desc" and "##10% shorter## overall range.\n5% faster ADS speeds." 
 	--Ventilated
-	realnames["bm_wp_rage_b_comp2"] = "S&W Muzzle Compensator"
-	realnames["bm_wp_rage_b_comp2_desc"] = "Vents muzzle flash to the sides."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_rage_b_comp2" and "S&W Muzzle Compensator"
+	or string_id == "bm_wp_rage_b_comp2_desc" and "Vents muzzle flash to the sides."
 	--Overcompensating
-	realnames["bm_wp_rage_b_long"] = "Long Barrel"
-	realnames["bm_wp_rage_b_long_desc"] = "15% longer overall range.\n5% slower ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_rage_b_long" and "Long Barrel"
+	or string_id == "bm_wp_rage_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 	
 	--[[HUEHUEHUEHUE BUT IT'S A SHOTGUN]]
-	realnames["bm_w_judge"] = "Taurus 4510PLYFS"
-	realnames["bm_w_judge_desc"] = "Also known as \"The Judge\".\nA Brazilian revolver loaded with .410 bore shells.\nCan be loaded with special ammo types.\nBenefits from pistol skills."
+	or DMCWO.reelnaems == true and string_id == "bm_w_judge" and "Taurus 4510PLYFS"
+	or string_id == "bm_w_judge_desc" and "Also known as \"The Judge\".\nA Brazilian revolver loaded with .410 bore shells.\nCan be loaded with special ammo types.\nBenefits from pistol skills."
 	
 	--[[GRENADE 18]]
-	realnames["bm_w_glock_18c"] = "Glock 18C"
-	realnames["bm_w_glock_18c_desc"] = "An Austrian machine pistol chambered in 9mm.\nCan pierce thin walls.\nBenefits from pistol skills.\nIs not affected by Equilibrium Aced."
+	or DMCWO.reelnaems == true and string_id == "bm_w_glock_18c" and "Glock 18C"
+	or string_id == "bm_w_glock_18c_desc" and "An Austrian machine pistol chambered in 9mm.\nCan pierce thin walls.\nBenefits from pistol skills.\nIs not affected by Equilibrium Aced."
 	--Ventilated **don't know
-	--realnames["bm_wp_g18c_co_1"] = "Ventilated Compensator" --I question the existence of this compensator
+	--or string_id == "bm_wp_g18c_co_1" and "Ventilated Compensator" --I question the existence of this compensator
 	--Velocity
-	realnames["bm_wp_g18c_co_comp_2"] = "SJC Compensator 9mm"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g18c_co_comp_2" and "SJC Compensator 9mm"
 	
 	--[[DEAGLE]]
-	realnames["bm_w_deagle"] = "IMI Desert Eagle Mark XIX" --"IS THAT A M16?"
-	realnames["bm_w_x_deagle"] = "Akimbo IMI Desert Eagles"
-	realnames["bm_w_deagle_desc"] = "An Israeli-American handgun chambered in .50 AE.\nCan pierce enemies, walls and shields."
-	realnames["bm_w_x_deagle_desc"] = "A pair of Israeli-American handguns chambered in .50 AE.\nCan pierce enemies, walls and shields."
+	or DMCWO.reelnaems == true and string_id == "bm_w_deagle" and "IMI Desert Eagle Mark XIX" --"IS THAT A M16?"
+	or DMCWO.reelnaems == true and string_id == "bm_w_x_deagle" and "Akimbo IMI Desert Eagles"
+	or string_id == "bm_w_deagle_desc" and "An Israeli-American handgun chambered in .50 AE.\nCan pierce enemies, walls and shields."
+	or string_id == "bm_w_x_deagle_desc" and "A pair of Israeli-American handguns chambered in .50 AE.\nCan pierce enemies, walls and shields."
 	--Mount
-	realnames["bm_wp_pis_deagle_extra"] = "Desert Eagle Scope Mount"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_pis_deagle_extra" and "Desert Eagle Scope Mount"
 	--La Femme
-	realnames["bm_wp_deagle_co_short"] = "Desert Eagle Muzzle Brake" --Original name was a reference to a 1990s film only for the gun's appearance in it, otherwise this is based on a real attachment
+	or DMCWO.reelnaems == true and string_id == "bm_wp_deagle_co_short" and "Desert Eagle Muzzle Brake" --Original name was a reference to a 1990s film only for the gun's appearance in it, otherwise this is based on a real attachment
 	--Overkill
-	realnames["bm_wp_deagle_co_long"] = "Custom Barrel Weight" --Attachment is a reference to the Boondock Saints
-	realnames["bm_wp_deagle_co_long_desc"] = "5% slower ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_deagle_co_long" and "Custom Barrel Weight" --Attachment is a reference to the Boondock Saints
+	or string_id == "bm_wp_deagle_co_long_desc" and "5% slower ADS speeds." 
 	--Extended Mag
-	realnames["bm_wp_deagle_m_extended"] = "10rnd Desert Eagle Magazine" --Given the length of the mag and considering the .50 AE variant is single stack only, this is the only choice. Not that it matters that there's more ammo than what's stated *cough* 1911 12rnd Mag *cough*
+	or DMCWO.reelnaems == true and string_id == "bm_wp_deagle_m_extended" and "10rnd Desert Eagle Magazine" --Given the length of the mag and considering the .50 AE variant is single stack only, this is the only choice. Not that it matters that there's more ammo than what's stated *cough* 1911 12rnd Mag *cough*
 	--Long Barrel
-	realnames["bm_wp_deagle_b_long"] = "10\" Long Barrel"
-	realnames["bm_wp_deagle_b_long_desc"] = "15% longer overall range.\n5% slower ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_deagle_b_long" and "10\" Long Barrel"
+	or string_id == "bm_wp_deagle_b_long_desc" and "15% longer overall range.\n5% slower ADS speeds." 
 	
 	
 	--[[JAMES BOND]]
-	realnames["bm_w_ppk"] = "Walther PPK"
-	realnames["bm_w_ppk_desc"] = "A German handgun chambered in .32 ACP.\nCan pierce thin walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_ppk" and "Walther PPK"
+	or string_id == "bm_w_ppk_desc" and "A German handgun chambered in .32 ACP.\nCan pierce thin walls."
 	--Laser Grip
-	realnames["bm_wp_pis_ppk_g_laser"] = "Crimson Trace Laser Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_pis_ppk_g_laser" and "Crimson Trace Laser Grip"
 	--Long Side
-	realnames["bm_wp_pis_ppk_b_long"] = "PPKS Slide"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_pis_ppk_b_long" and "PPKS Slide"
 	
 	--[[40 SW IS A SHIT ROUND]]
-	realnames["bm_w_p226"] = "Sig Sauer P226R"
-	realnames["bm_w_p226_desc"] = "A Swiss-made handgun chambered in .40 S&W.\nCan pierce walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_p226" and "Sig Sauer P226R"
+	or string_id == "bm_w_p226_desc" and "A Swiss-made handgun chambered in .40 S&W.\nCan pierce walls."
 	--Ventilated .40 **don't know
-	--realnames["bm_wp_p226_co_comp_1"] = "Ventilated .40 Compensator" --I question the existence of this compensator
+	--or string_id == "bm_wp_p226_co_comp_1" and "Ventilated .40 Compensator" --I question the existence of this compensator
 	--Velocity .40
-	realnames["bm_wp_p226_co_comp_2"] = "SJC Compensator .40" --Technically only for the G17 but "Overkill logic" so yeah
+	or DMCWO.reelnaems == true and string_id == "bm_wp_p226_co_comp_2" and "SJC Compensator .40" --Technically only for the G17 but "Overkill logic" so yeah
 	--Extended Mag
-	realnames["bm_wp_p226_m_extended"] = "22rnd P226 Magazine" --Not too sure if this exists, just basing it off of the fact the "22" is plastered all over the damn thing
-	realnames["bm_wp_p226_m_extended_desc"] = "##5% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_p226_m_extended" and "22rnd P226 Magazine" --Not too sure if this exists, just basing it off of the fact the "22" is plastered all over the damn thing
+	or string_id == "bm_wp_p226_m_extended_desc" and "##10% slower## reload speeds."
 	--Two-Tone
-	realnames["bm_wp_p226_b_equinox"] = "Equinox Duo-Tone Slide"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_p226_b_equinox" and "Equinox Duo-Tone Slide"
 	--Long Slide
-	realnames["bm_wp_p226_b_long"] = "Brushed Long Slide"
-	realnames["bm_wp_p226_b_long_desc"] = "15% longer overall range.\n5% slower ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_p226_b_long" and "Brushed Long Slide"
+	or string_id == "bm_wp_p226_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 	
 	--[[LEO]]
-	realnames["bm_w_hs2000"] = "Springfield Armory XD(M)-40" --Fuck the texture labels, it's a XD(M)
-	realnames["bm_w_hs2000_desc"] = "A Croatian-American handgun chambered in .40 S&W.\nCan pierce walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_hs2000" and "Springfield Armory XD(M)-40" --Fuck the texture labels, it's a XD(M)
+	or string_id == "bm_w_hs2000_desc" and "A Croatian-American handgun chambered in .40 S&W.\nCan pierce walls."
 	--Extended Mag
-	realnames["bm_wp_hs2000_m_extended"] = "22rnd XD(M)-40 Magazine"
-	realnames["bm_wp_hs2000_m_extended_desc"] = "##5% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_hs2000_m_extended" and "22rnd XD(M)-40 Magazine"
+	or string_id == "bm_wp_hs2000_m_extended_desc" and "##5% slower## reload speeds."
 	--Custom Slide
-	realnames["bm_wp_hs2000_sl_custom"] = "Compensated Slide"
-	realnames["bm_wp_hs2000_sl_custom_desc"] = "5% faster ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_hs2000_sl_custom" and "Compensated Slide"
+	or string_id == "bm_wp_hs2000_sl_custom_desc" and "##5% faster## ADS speeds." 
 	--Long Slide
-	realnames["bm_wp_hs2000_sl_long"] = "Custom Slide"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_hs2000_sl_long" and "Custom Slide"
 	
 	--[[RED 9]]
-	realnames["bm_w_c96"] = "Mauser C96"
-	realnames["bm_w_c96_desc"] = "A German handgun chambered in 7.63x25mm that can be converted to full-auto.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_c96" and "Mauser C96"
+	or string_id == "bm_w_c96_desc" and "A German handgun chambered in 7.63x25mm that can be converted to full-auto.\nCan pierce enemies and walls."
 	--Long Barrel
-	realnames["bm_wp_c96_b_long"] = "Carbine Barrel"
-	realnames["bm_wp_c96_b_long_desc"] = "15% longer overall range.\n10% slower ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_c96_b_long" and "Carbine Barrel"
+	or string_id == "bm_wp_c96_b_long_desc" and "##15% longer## overall range.\n##10% slower## ADS speeds."
 	--Han Solo
-	realnames["bm_wp_c96_nozzle"] = "DL-44 Muzzle"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_c96_nozzle" and "DL-44 Muzzle"
+	or string_id == "bm_wp_c96_nozzle_desc" and "Fire special tracers.\n##Lose all penetration capabilities.##"
 	--Scope
-	realnames["bm_wp_c96_sight"] = "Schmidt & Bender 1-8x24 PM Short Dot"
-	realnames["bm_wp_c96_sight_desc"] = "High power scope.\n##7.5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_c96_sight" and "Schmidt & Bender 1-8x24 PM Short Dot"
+	or string_id == "bm_wp_c96_sight_desc" and "High power scope.\n##7.5% slower## ADS speeds."
 	--20rnd Mag
-	realnames["bm_wp_c96_m_extended"] = "20rnd C96 Magazine"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_c96_m_extended" and "20rnd C96 Magazine"
 
 	--[[EVENFASTERRUNONSENTENCES]]
-	realnames["bm_w_cobray"] = "Cobray M11/9"
-	realnames["bm_w_cobray_desc"] = "An American machine pistol chambered in 9mm.\nCan pierce enemies and walls.\nBenefits from SMG skills."
+	or DMCWO.reelnaems == true and string_id == "bm_w_cobray" and "Cobray M11/9"
+	or string_id == "bm_w_cobray_desc" and "An American machine pistol chambered in 9mm.\nCan pierce thin walls.\nBenefits from SMG skills."
 	
-	realnames["bm_wp_cobray_ns_barrelext"] = "MAC Barrel Extension"
-	realnames["bm_wp_cobray_ns_barrelext_desc"] = "##10% slower## ADS speeds."
-	realnames["bm_wp_cobray_ns_silencer"] = "SIONICS Suppressor"	
-	realnames["bm_wp_cobray_ns_silencer_desc"] = "A ##specialized## suppressor.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##10% slower## ADS speeds."	
-	realnames["bm_wp_cobray_body_upper_jacket_desc"] = "ROF ##lowered# to ##850 RPM##."	
+	or DMCWO.reelnaems == true and string_id == "bm_wp_cobray_ns_barrelext" and "MAC Barrel Extension"
+	or string_id == "bm_wp_cobray_ns_barrelext_desc" and "##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_cobray_ns_silencer" and "SIONICS Suppressor"	
+	or string_id == "bm_wp_cobray_ns_silencer_desc" and "A ##specialized## suppressor.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##10% slower## ADS speeds."	
 	
 	--[[RUNONSENTENCES]]
-	realnames["bm_w_mac10"] = "Ingram M10"
-	realnames["bm_w_mac10_desc"] = "An American machine pistol chambered in .45 ACP.\nCan pierce enemies and walls\nBenefits from SMG skills."
+	or DMCWO.reelnaems == true and string_id == "bm_w_mac10" and "Ingram M10"
+	or string_id == "bm_w_mac10_desc" and "An American machine pistol chambered in .45 ACP.\nCan pierce enemies and walls\nBenefits from SMG skills."
 	--Extended Mag
-	realnames["bm_wp_mac10_m_extended"] = "30rnd M10 Magazine"
-	realnames["bm_wp_mac10_m_extended_desc"] = "##5% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mac10_m_extended" and "30rnd M10 Magazine"
+	or string_id == "bm_wp_mac10_m_extended_desc" and "##5% slower## reload speeds."
 	--Railed Handguard
-	realnames["bm_wp_mac10_body_ris"] = "MAC Rail System" --I'm getting nothing but airsoft results so generic name
-	realnames["bm_wp_mac10_body_ris_desc"] = "##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mac10_body_ris" and "MAC Rail System" --I'm getting nothing but airsoft results so generic name
+	or string_id == "bm_wp_mac10_body_ris_desc" and "##5% slower## ADS speeds."
 	--Skeletal Stock
-	realnames["bm_wp_mac10_s_skel"] = "Low Mount Skeleton Stock"	
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mac10_s_skel" and "Low Mount Skeleton Stock"	
 	
 	--[[THOMPSON SENSEI]]
-	realnames["bm_w_m1928"] = "Auto-Ordnance M1928"
-	realnames["bm_w_m1928_desc"] = "An American sub-machine gun chambered in .45 ACP.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_m1928" and "Auto-Ordnance M1928"
+	or string_id == "bm_w_m1928_desc" and "An American sub-machine gun chambered in .45 ACP.\nCan pierce enemies and walls."
 	--Short Barrel
-	realnames["bm_wp_m1928_b_short"] = "Short Barrel"	
-	realnames["bm_wp_m1928_b_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m1928_b_short" and "Short Barrel"	
+	or string_id == "bm_wp_m1928_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	
-	realnames["bm_wp_m1928_b_long_desc"] = "##15% longer## overall range.\n##5% slower## ADS speeds."
+	or string_id == "bm_wp_m1928_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 	--Dis. Foregrip
-	realnames["bm_wp_m1928_fg_discrete"] = "Synthetic Foregrip"	--for once it's actually a foregrip
-	realnames["bm_wp_m1928_fg_discrete_desc"] = "##5% faster## ADS speeds." 	--for once it's actually a foregrip
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m1928_fg_discrete" and "Synthetic Foregrip"	--for once it's actually a foregrip
+	or string_id == "bm_wp_m1928_fg_discrete_desc" and "##5% faster## ADS speeds." 	--for once it's actually a foregrip
 	--Dis. Pistol Grip
-	realnames["bm_wp_m1928_g_discrete"] = "Synthetic Pistol Grip"	
-	realnames["bm_wp_m1928_g_discrete_desc"] = "##5% faster## ADS speeds." 	
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m1928_g_discrete" and "Synthetic Pistol Grip"	
+	or string_id == "bm_wp_m1928_g_discrete_desc" and "##5% faster## ADS speeds." 	
 	--Dis. Stock
-	realnames["bm_wp_m1928_s_discrete"] = "Synthetic Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m1928_s_discrete" and "Synthetic Stock"
 	
 	
 	--[[MAI RAIFU'S LITTLE SISTER AND STUDENT COUNCIL PRESIDENT OF THE ELEMETARY SCHOOL]]
-	realnames["bm_w_mp5"] = "Heckler & Koch MP5A4" --"Empi"
-	realnames["bm_w_mp5_desc"] = "A German sub-machine gun chambered in 9mm.\nCan pierce thin walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_mp5" and "Heckler & Koch MP5A4" --"Empi"
+	or string_id == "bm_w_mp5_desc" and "A German sub-machine gun chambered in 9mm.\nCan fire in 3-round bursts.\nCan pierce thin walls."
 	--Sehr Kurze
-	realnames["bm_wp_mp5_fg_m5k"] = "MP5k Railed Handguard"
-	realnames["bm_wp_mp5_fg_m5k_desc"] = "##15% shorter## overall range.\n##5% faster## ADS speeds.\nROF ##raised## to ##900 RPM##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp5_fg_m5k" and "MP5k Tri-Rail Kit"
+	or string_id == "bm_wp_mp5_fg_m5k_desc" and "##15% shorter## overall range.\n##5% faster## ADS speeds.\nROF ##raised## to ##900 RPM.##"
 	--Polizei Tactical
-	realnames["bm_wp_mp5_fg_mp5a5"] = "MP5 Railed Handguard"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp5_fg_mp5a5" and "MP5 Railed Handguard"
 	--Ninja
-	realnames["bm_wp_mp5_fg_mp5sd"] = "MP5SD Handguard"
-	realnames["bm_wp_mp5_fg_mp5sd_desc"] = "##Internally suppressed## barrel.\nROF ##lowered## to ##600 RPM##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp5_fg_mp5sd" and "MP5SD Kit"
+	or string_id == "bm_wp_mp5_fg_mp5sd_desc" and "##Internally suppressed## barrel.\nROF ##lowered## to ##600 RPM.##"
 	--Adjustable
-	realnames["bm_wp_mp5_s_adjust"] = "Retractable Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp5_s_adjust" and "Retractable Stock"
 	--Bare Essentials
-	realnames["bm_wp_mp5_s_ring"] = "No Stock" --"No Pantsu"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp5_s_ring" and "No Stock" --"No Pantsu"
 	--MP5 Drum
-	realnames["bm_wp_mp5_m_drum"] = "110rnd GSG-5 .22lr Drum"
-	realnames["bm_wp_mp5_m_drum_desc"] = ".22lr conversion for the MP5.\n##15% shorter## overall range.\n##15% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp5_m_drum" and "110rnd GSG-5 .22lr Drum"
+	or string_id == "bm_wp_mp5_m_drum_desc" and ".22lr conversion for the MP5.\n##15% shorter## overall range.\n##15% slower## reload speeds."
 
 	--[[SLING STOCKS ARE 2LEWD]]
-	realnames["bm_w_mp9"] = "Brugger & Thomet TP9SF"
-	realnames["bm_w_mp9_desc"] = "A Swiss-made machine pistol chambered in 9mm.\nBenefits from SMG skills."
+	or DMCWO.reelnaems == true and string_id == "bm_w_mp9" and "Brugger & Thomet TP9SF"
+	or string_id == "bm_w_mp9_desc" and "A Swiss-made machine pistol chambered in 9mm.\nBenefits from SMG skills."
 	--Extended Mag
-	realnames["bm_wp_mp9_m_extended"] = "30rnd MP9 Magazine"
-	realnames["bm_wp_mp9_m_extended_desc"] = "##5% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp9_m_extended" and "30rnd MP9 Magazine"
+	or string_id == "bm_wp_mp9_m_extended_desc" and "##5% slower## reload speeds."
 	--Skeletal Stock
-	realnames["bm_wp_mp9_s_skel"] = "Steyr TMP Fixed Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp9_s_skel" and "Steyr TMP Fixed Stock"
 	
 	--[[IT STINGS]]
-	realnames["bm_w_scorpion"] = "CZ Skorpion vz. 61"
-	realnames["bm_w_scorpion_desc"] = "A Czechoslovakian sub-machine gun chambered in .32 ACP.\nCan pierce thin walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_scorpion" and "CZ Skorpion vz. 61"
+	or string_id == "bm_w_scorpion_desc" and "A Czechoslovakian sub-machine gun chambered in .32 ACP.\nCan pierce thin walls."
 	
-	realnames["bm_wp_scorpion_m_extended"] = "Dual Magazines"
-	realnames["bm_wp_scorpion_m_extended_desc"] = "##20% faster## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_scorpion_m_extended" and "Dual Magazines"
+	or string_id == "bm_wp_scorpion_m_extended_desc" and "##20% faster## reload speeds."
 	
-	realnames["bm_wp_scorpion_b_suppressed"] = "Skorpion Suppressor"
-	realnames["bm_wp_scorpion_b_suppressed_desc"] = "A ##specialized## suppressor for the Skorpion.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
+	or string_id == "bm_wp_scorpion_g_ergo_desc" and "##5% faster## ADS speeds."
+	
+	or DMCWO.reelnaems == true and string_id == "bm_wp_scorpion_b_suppressed" and "Skorpion Suppressor"
+	or string_id == "bm_wp_scorpion_b_suppressed_desc" and "A ##specialized## suppressor for the Skorpion.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
 	
 	--[[NOT THE STUDENT COUNCIL PRESIDENT (get FUCKED)]]
-	realnames["bm_w_uzi"] = "IMI Uzi"
-	realnames["bm_w_uzi_desc"] = "An Israeli sub-machine gun chambered in 9mm.\nCan pierce thin walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_uzi" and "IMI Uzi"
+	or string_id == "bm_w_uzi_desc" and "An Israeli sub-machine gun chambered in 9mm.\nCan pierce thin walls."
 	
-	realnames["bm_wp_uzi_s_solid"] = "Wooden Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_uzi_s_solid" and "Wooden Stock"
 	
-	realnames["bm_wp_uzi_fg_rail"] = "FAB Defense Uzi Tri-Rail System"
-	realnames["bm_wp_uzi_fg_rail_desc"] = "##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_uzi_fg_rail" and "FAB Defense Uzi Tri-Rail System"
+	or string_id == "bm_wp_uzi_fg_rail_desc" and "##5% faster## ADS speeds." 
 	
-	realnames["bm_wp_uzi_b_supperessed"] = "IMI Two-Stage Suppressor" --It's IMI made but it was never imported. No idea what the model name is.
-	realnames["bm_wp_uzi_b_supperessed_desc"] = "A ##specialized## suppressor for the Uzi.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_uzi_b_suppressed" and "IMI Two-Stage Suppressor" --It's IMI made but it was never imported. No idea what the model name is.
+	or string_id == "bm_wp_uzi_b_suppressed_desc" and "A ##specialized## suppressor for the Uzi.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
+	
+	--[[B-BAKA]]
+	or DMCWO.reelnaems == true and string_id == "bm_w_baka" and "IMI Micro Uzi"
+	or string_id == "bm_w_baka_desc" and "An Israeli sub-machine gun chambered in 9mm.\nCan pierce thin walls."
 	
 	--[[S-COOL SHOOTINGS]]
-	realnames["bm_w_tec9"] = "Intratec TEC-9"
-	realnames["bm_w_tec9_desc"] = "A Swedish-American handgun chambered in 9mm that can be converted to full-auto.\nCan pierce thin walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_tec9" and "Intratec TEC-9"
+	or string_id == "bm_w_tec9_desc" and "A Swedish-American handgun chambered in 9mm that can be converted to full-auto.\nCan pierce thin walls."
 	
-	realnames["bm_wp_tec9_b_standard"] = "AB-10 Barrel"
-	realnames["bm_wp_tec9_b_standard_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_tec9_b_standard" and "AB-10 Barrel"
+	or string_id == "bm_wp_tec9_b_standard_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	
-	realnames["bm_wp_tec9_ns_ext"] = "TEC-9 Barrel Extension"
-	realnames["bm_wp_tec9_ns_ext_desc"] = "##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_tec9_ns_ext" and "TEC-9 Pseudo Barrel Extension"
+	or string_id == "bm_wp_tec9_ns_ext_desc" and "##5% slower## ADS speeds."
 	
-	realnames["bm_wp_tec9_s_unfolded"] = "Interdynamic MP-9 Wire Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_tec9_s_unfolded" and "Interdynamic MP-9 Wire Stock"
 	
-	realnames["bm_wp_tec9_m_extended"] = "50rnd TEC-9 Magazine"
-	realnames["bm_wp_tec9_m_extended_desc"] = "##10% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_tec9_m_extended" and "50rnd TEC-9 Magazine"
+	or string_id == "bm_wp_tec9_m_extended_desc" and "##10% slower## reload speeds."
 	
 	--[[NOT A STEN]]
-	realnames["bm_w_sterling"] = "Sterling L2A1"
-	realnames["bm_w_sterling_desc"] = "A British sub-machine gun chambered in 9mm.\nCan pierce thin walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_sterling" and "Sterling L2A1"
+	or string_id == "bm_w_sterling_desc" and "A British sub-machine gun chambered in 9mm.\nCan pierce thin walls."
 	--Supp. Barrel
-	realnames["bm_wp_sterling_b_suppressed"] = "L34A1 Barrel"
-	realnames["bm_wp_sterling_b_suppressed_desc"] = "##Internally suppressed## barrel.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_sterling_b_suppressed" and "L34A1 Barrel"
+	or string_id == "bm_wp_sterling_b_suppressed_desc" and "##Internally suppressed## barrel.\n##10% slower## ADS speeds."
 	--Heat Sink Barrel
-	realnames["bm_wp_sterling_b_e11"] = "E-11 Barrel"
-	realnames["bm_wp_sterling_b_e11_desc"] = "Fire special tracers."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_sterling_b_e11" and "BlasTech E-11 Barrel"
+	or string_id == "bm_wp_sterling_b_e11_desc" and "Fire special tracers.\n##Lose all penetration capabilities.##"
 	
-	realnames["bm_wp_sterling_b_long_desc"] = "##15% longer## overall range.\n##5% slower## ADS speeds."
+	or string_id == "bm_wp_sterling_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 	
-	realnames["bm_wp_sterling_b_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or string_id == "bm_wp_sterling_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	--10rnd Mag
-	realnames["bm_wp_sterling_m_short"] = "10rnd L2A1 Magazine"
-	realnames["bm_wp_sterling_m_short_desc"] = "##20% faster## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_sterling_m_short" and "10rnd L2A1 Magazine"
+	or string_id == "bm_wp_sterling_m_short_desc" and "##20% faster## reload speeds."
 	--34rnd Mag
-	realnames["bm_wp_sterling_m_long"] = "34rnd L2A1 Magazine"
-	realnames["bm_wp_sterling_m_long_desc"] = "##10% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_sterling_m_long" and "34rnd L2A1 Magazine"
+	or string_id == "bm_wp_sterling_m_long_desc" and "##10% slower## reload speeds."
 
 	--[[BABBY AR]]
-	realnames["bm_w_olympic"] = "Olympic Arms K23B Tactical"
-	realnames["bm_w_olympic_desc"] = "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_olympic" and "Olympic Arms K23B Tactical"
+	or string_id == "bm_w_olympic_desc" and "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls."
+	or string_id == "bm_w_olympic_desc" and "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls."
 	
 	--Railed Handguard
-	realnames["bm_wp_olympic_fg_railed"] = "KAC Free Float Handguard" --a super short version at that, shares the delta ring so I'm assuming this is what it's based off of
+	or DMCWO.reelnaems == true and string_id == "bm_wp_olympic_fg_railed" and "KAC Free Float Handguard" --a super short version at that, shares the delta ring so I'm assuming this is what it's based off of
 	--Shorter Than Short
-	realnames["bm_wp_olympic_s_short"] = "Buffer Tube Stock" 
-	realnames["bm_wp_m4_uupg_b_medium_desc"] = "##15% longer## overall range.\n##5% slower## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_olympic_s_short" and "Buffer Tube Stock" 
+	or string_id == "bm_wp_m4_uupg_b_medium_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 	
 	--[[BABBY SLAVSHIT]]
-	realnames["bm_w_akmsu"] = "Soviet Union AKMSU"
-	realnames["bm_w_akmsu_desc"] = "A Russian carbine chambered in 7.62x39mm.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_akmsu" and "Soviet Union AKMSU"
+	or string_id == "bm_w_akmsu_desc" and "A Russian carbine chambered in 7.62x39mm.\nCan pierce enemies and walls."
 	--Moscow Special
-	realnames["bm_wp_akmsu_fg_rail"] = "Samson K-Rail" --Seems to be loosely based off of the Samson K-Rail, it's the only thing that looked remotely like this
-	realnames["bm_wp_akmsu_fg_rail_desc"] = "5% slower ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_akmsu_fg_rail" and "Samson K-Rail" --Seems to be loosely based off of the Samson K-Rail, it's the only thing that looked remotely like this
+	or string_id == "bm_wp_akmsu_fg_rail_desc" and "5% slower ADS speeds."
 	
 	--[[OVERPRICED 22LR]]
-	realnames["bm_w_p90"] = "FN P90 TR"
-	realnames["bm_w_p90_desc"] = "A Belgian bullpup personal defence weapon chambered in 5.7x28mm.\nCan pierce enemies, walls and shields."
+	or DMCWO.reelnaems == true and string_id == "bm_w_p90" and "FN P90 TR"
+	or string_id == "bm_w_p90_desc" and "A Belgian bullpup personal defence weapon chambered in 5.7x28mm.\nCan pierce enemies, walls and shields."
 	--Long Barrel
-	realnames["bm_wp_p90_b_long"] = "PS90 Barrel"
-	realnames["bm_wp_p90_b_long_desc"] = "##15% longer## overall range.\n##5% slower## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_p90_b_long" and "PS90 Barrel"
+	or string_id == "bm_wp_p90_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 	
 	--[[LOL SWEDS]]
-	realnames["bm_w_m45"] = "Carl Gustaf Kpist M/45"
-	realnames["bm_w_m45_desc"] = "A Swedish sub-machine gun chambered in 9mm.\nCan pierce thin walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_m45" and "Carl Gustaf Kpist M/45"
+	or string_id == "bm_w_m45_desc" and "A Swedish sub-machine gun chambered in 9mm.\nCan pierce thin walls."
+	--Short Barrel
+	or string_id == "bm_wp_smg_m45_b_small_desc" and "##10% shorter## overall range.\n##7.5% faster## ADS speeds." 
 	--Extended Mag
-	realnames["bm_wp_smg_m45_m_extended"] = "50rnd M/45 Magazine"
-	realnames["bm_wp_smg_m45_m_extended_desc"] = "##10% slower## reload speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_smg_m45_m_extended" and "50rnd M/45 Magazine"
+	or string_id == "bm_wp_smg_m45_m_extended_desc" and "##10% slower## reload speeds." 
 	
 	--[[YOU SUCK AND WE HATE YOU]]
-	realnames["bm_w_mp7"] = "Heckler & Koch MP7A2"
-	realnames["bm_w_mp7_desc"] = "A German personal defence weapon chambered in 4.6x30mm.\nCan pierce enemies, walls and shields."
+	or DMCWO.reelnaems == true and string_id == "bm_w_mp7" and "Heckler & Koch MP7A2"
+	or string_id == "bm_w_mp7_desc" and "A German personal defence weapon chambered in 4.6x30mm.\nCan pierce enemies, walls and shields."
 	--Airsoft Supressor
-	realnames["bm_wp_mp7_b_suppressed"] = "B&T MP7 Rotex-II Suppressor"	
-	realnames["bm_wp_mp7_b_suppressed_desc"] = "A ##specialized## suppressor for the MP7.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##7.5% slower## ADS speeds."	
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp7_b_suppressed" and "B&T MP7 Rotex-II Suppressor"	
+	or string_id == "bm_wp_mp7_b_suppressed_desc" and "A ##specialized## suppressor for the MP7.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##7.5% slower## ADS speeds."	
 	--Extended Mag
-	realnames["bm_wp_mp7_m_extended"] = "MP7 40rnd Magazine"
-	realnames["bm_wp_mp7_m_extended_desc"] = "##5% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp7_m_extended" and "MP7 40rnd Magazine"
+	or string_id == "bm_wp_mp7_m_extended_desc" and "##5% slower## reload speeds."
 	--Extended Stock
-	realnames["bm_wp_mp7_s_long"] = "Extended Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp7_s_long" and "Extended Stock"
 	
 	--[[DEMOMAN]]
-	realnames["bm_w_gre_m79"] = "Springfield Armory M79"
-	realnames["bm_w_gre_m79_desc"] = "An American, single-shot, break-action grenade launcher loaded with 40mm grenades.\nCan fire incendiary rounds.\nDamage boosts from skills do not affect this weapon."
+	or DMCWO.reelnaems == true and string_id == "bm_w_gre_m79" and "Springfield Armory M79"
+	or string_id == "bm_w_gre_m79_desc" and "An American, single-shot, break-action grenade launcher loaded with 40mm grenades.\nCan fire incendiary rounds.\nDamage boosts from skills do not affect this weapon."
 	
 	--[[NADE SPAM]]
-	realnames["bm_w_m32"] = "Milkor Grenade Launcher"
-	realnames["bm_w_m32_desc"] = "A South-African, cylinder-fed grenade launcher loaded with 40mm grenades.\nCan fire incendiary rounds.\nDamage boosts from skills do not affect this weapon."
+	or DMCWO.reelnaems == true and string_id == "bm_w_m32" and "Milkor Grenade Launcher"
+	or string_id == "bm_w_m32_desc" and "A South-African, cylinder-fed grenade launcher loaded with 40mm grenades.\nCan fire incendiary rounds.\nDamage boosts from skills do not affect this weapon."
 	
 	--[[REVOLVER OCELOT]]
-	realnames["bm_w_peacemaker"] = "Colt Single Action Army" --"Revolver Ocelot"
-	realnames["bm_w_peacemaker_desc"] = "An American single-action revolver chambered in .45 Colt.\nCan pierce enemies, walls and shields.\nBenefits from pistol skills.\n\n\"This is the best handgun ever made\""
+	or DMCWO.reelnaems == true and string_id == "bm_w_peacemaker" and "Colt Single Action Army" --"Revolver Ocelot"
+	or string_id == "bm_w_peacemaker_desc" and "An American single-action revolver chambered in .45 Colt.\nCan pierce enemies, walls and shields.\nBenefits from pistol skills.\n\n\"This is the best handgun ever made\""
 	--Long
-	realnames["bm_wp_peacemaker_barrel_long"] = "12\" Barrel"
-	realnames["bm_wp_peacemaker_barrel_long_desc"] = "##15% longer## overall range.\n##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_barrel_long" and "12\" Barrel"
+	or string_id == "bm_wp_peacemaker_barrel_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 	--Short
-	realnames["bm_wp_peacemaker_barrel_short"] = "5.5\" Barrel"
-	realnames["bm_wp_peacemaker_barrel_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_barrel_short" and "5.5\" Barrel"
+	or string_id == "bm_wp_peacemaker_barrel_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	--Grip
-	realnames["bm_wp_peacemaker_handle_bling"] = "Engraved Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_handle_bling" and "Engraved Grip"
 	--Stock
-	realnames["bm_wp_peacemaker_rifle_stock"] = "Skeletal Stock"
-	
+	or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_rifle_stock" and "Skeletal Stock"
+		
 	--[[Winchester]]--
-	realnames["bm_w_winchester1874"] = "Winchester Model 1873"
-	realnames["bm_w_winchester1874_desc"] = "An American, tube fed, lever-action rifle chambered in .44-40 Winchester.\nHas high damage drop-off compared to other rifles.\nCan pierce enemies, walls and shields."
+	or DMCWO.reelnaems == true and string_id == "bm_w_winchester1874" and "Winchester Model 1873"
+	or string_id == "bm_w_winchester1874_desc" and "An American, tube fed, lever-action rifle chambered in .44-40 Winchester.\nHas high damage drop-off compared to other rifles.\nCan pierce enemies, walls and shields."
 	--Long
-	realnames["bm_wp_winchester_b_long"] = "Long Barrel"
-	realnames["bm_wp_winchester_b_long_desc"] = "##15% longer## overall range.\n##5% slower## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_winchester_b_long" and "Long Barrel"
+	or string_id == "bm_wp_winchester_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 	--Supp
-	realnames["bm_wp_winchester_b_suppressed"] = "Suppressor"
-	realnames["bm_wp_winchester_b_suppressed_desc"] = "A #medium# suppressor.\n##25% shorter## overall range.\n##12.5% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_winchester_b_suppressed" and "Suppressor"
+	or string_id == "bm_wp_winchester_b_suppressed_desc" and "A #medium# suppressor.\n##25% shorter## overall range.\n##12.5% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
 	
-	realnames["bm_wp_winchester_sniper_scope_desc"] = "High power scope\n10% slower ADS speeds."
+	or string_id == "bm_wp_winchester_sniper_scope_desc" and "High power scope\n10% slower ADS speeds."
 	
 	--[[HANG YOUR GAMES]]
-	realnames["bm_w_plainsrider_desc"] = "A wooden bow and arrow.\nCan fire explosive tipped arrows.\nNon-exploded arrows can be retrieved and fired again.\nNo police ammobox pickups."
+	or string_id == "bm_w_plainsrider_desc" and "A wooden bow and arrow.\nCan fire explosive tipped arrows.\nNon-exploded arrows can be retrieved and fired again.\nNo police ammobox pickups."
 	
 	--[[TOASTY]]
-	realnames["bm_w_flamethrower_mk2_desc"] = "A flamethrower capable of shooting out to 20 meters.\n30% chance to set your target aflame.\nNo police ammobox pickups."
+	or string_id == "bm_w_flamethrower_mk2_desc" and "A flamethrower capable of shooting out to 20 meters.\n30% chance to set your target aflame.\nNo police ammobox pickups."
 
 	--[[TAGUSO]] --GiTS references abound!
-	realnames["bm_w_mateba"] = "Mateba 2006M"
-	realnames["bm_w_mateba_desc"] = "An Italian revolver chambered in .357 Magnum.\nCan pierce enemies, walls and shields.\nBenefits from pistol skills.\n\n\"Ангелы и демоны кружили надо мной,\nРазбивали тернии и звёздные пути,\nНе знает счастья только тот,\nКто его зова понять не смог\""
+	or DMCWO.reelnaems == true and string_id == "bm_w_mateba" and "Mateba 2006M"
+	or string_id == "bm_w_mateba_desc" and "An Italian revolver chambered in .357 Magnum.\nCan pierce enemies, walls and shields.\nBenefits from pistol skills.\n\n\"Ангелы и демоны кружили надо мной,\nРазбивали тернии и звёздные пути,\nНе знает счастья только тот,\nКто его зова понять не смог\""
 	--Long
-	realnames["bm_wp_2006m_b_long"] = "Major Barrel"
-	realnames["bm_wp_2006m_b_long_desc"] = "##15% longer## overall range.\n##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_2006m_b_long" and "Major Barrel"
+	or string_id == "bm_wp_2006m_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 	--Med
-	realnames["bm_wp_2006m_b_medium"] = "Batou Barrel"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_2006m_b_medium" and "Batou Barrel"
 	--Short
-	realnames["bm_wp_2006m_b_short"] = "Togusa Barrel"
-	realnames["bm_wp_2006m_b_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_2006m_b_short" and "Togusa Barrel"
+	or string_id == "bm_wp_2006m_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	
 	--AS Val
-	realnames["bm_w_asval"] = "Tula Arms AS \"Val\""
-	realnames["bm_w_asval_desc"] = "A Russian internally suppressed assault rifle chambered in 9x39mm.\nCan pierce enemies and walls."
-	--Shorty
-	realnames["bm_wp_asval_b_proto_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_w_asval" and "Tula Arms AS \"Val\""
+	or string_id == "bm_w_asval_desc" and "A Russian internally suppressed assault rifle chambered in 9x39mm.\nCan pierce enemies and walls."
+	--Short
+	or DMCWO.reelnaems == true and string_id == "bm_wp_asval_b_proto" and "Prototype Barrel"
+	or string_id == "bm_wp_asval_b_proto_desc" and "##Removes the suppressor.##\n##10% longer## overall range.\n##5% faster## ADS speeds."
 	--VSS
-	realnames["bm_wp_asval_s_solid"] = "VSS Stock Kit"
-	realnames["bm_wp_asval_s_solid_desc"] = "ROF ##lowered## to ##600 RPM##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_asval_s_solid" and "VSS Kit"
+	or string_id == "bm_wp_asval_s_solid_desc" and "ROF ##lowered## to ##600 RPM.##"
 		
 	--SUB 2000
-	realnames["bm_w_sub2000"] = "Kel-Tec SUB-2000"
-	realnames["bm_w_sub2000_desc"] = "An Americal carbine chambered in 9mm.\nCan pierce thin walls.\nBenefits from pistol skills." 
+	or DMCWO.reelnaems == true and string_id == "bm_w_sub2000" and "Kel-Tec SUB-2000"
+	or string_id == "bm_w_sub2000_desc" and "An American carbine chambered in 9mm.\nCan pierce thin walls.\nBenefits from pistol skills." 
 	--Handguards
-	realnames["bm_wp_sub2000_fg_gen2"] = "Gen2 Handguard"
-	realnames["bm_wp_sub2000_fg_gen2_desc"] = "##5% faster## ADS speeds."
-	realnames["bm_wp_sub2000_fg_railed"] = "Red Lion R6 Handguard"
-	realnames["bm_wp_sub2000_fg_railed_desc"] = "##5% slower## ADS speeds."
-	realnames["bm_wp_sub2000_fg_suppressed"] = "Quad Rail Handguard w/Suppressor"
-	realnames["bm_wp_sub2000_fg_suppressed_desc"] = "A ##large## 9mm suppressor.\n##20% shorter## overall range.\n##10% lower## minimum damage.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_sub2000_fg_gen2" and "Gen2 Handguard"
+	or string_id == "bm_wp_sub2000_fg_gen2_desc" and "##5% faster## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_sub2000_fg_railed" and "Red Lion R6 Handguard"
+	or string_id == "bm_wp_sub2000_fg_railed_desc" and "##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_sub2000_fg_suppressed" and "Quad Rail Handguard w/Suppressor"
+	or string_id == "bm_wp_sub2000_fg_suppressed_desc" and "A ##large## 9mm suppressor.\n##20% shorter## overall range.\n##10% lower## minimum damage.\n##10% slower## ADS speeds."
 	
 	--XXX Boner
-	realnames["bm_w_hunter"] = "Avalanche CB1-50 Pistol Grip Crossbow"
-	realnames["bm_w_hunter_desc"] = "A handheld crossbow.\nNo police ammobox pickups.\nNon-exploded bolts can be retrieved and fired again.\nBenefits from pistol skills.\nDamage boosts from skills do not affect this weapon."
+	or DMCWO.reelnaems == true and string_id == "bm_w_hunter" and "Avalanche CB1-50 Pistol Grip Crossbow"
+	or string_id == "bm_w_hunter_desc" and "A handheld crossbow.\nNo police ammobox pickups.\nNon-exploded bolts can be retrieved and fired again.\nDamage boosts from skills do not affect this weapon."
 	
 	--2000 crying babies
-	realnames["bm_w_wa2000"] = "Walther WA2000"
-	realnames["bm_w_wa2000_desc"] = "A German semi-automatic bullpup rifle chambered in .308 Win.\nCan pierce enemies, walls and shields."
+	or DMCWO.reelnaems == true and string_id == "bm_w_wa2000" and "Walther WA2000"
+	or string_id == "bm_w_wa2000_desc" and "A German semi-automatic bullpup rifle chambered in .308 Win.\nCan pierce enemies, walls and shields."
 	--Long
-	realnames["bm_wp_wa2000_b_long"] = "Long Barrel"
-	realnames["bm_wp_wa2000_b_long_desc"] = "##15% longer## overall range.\n##7.5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_wa2000_b_long" and "Long Barrel"
+	or string_id == "bm_wp_wa2000_b_long_desc" and "##15% longer## overall range.\n##7.5% slower## ADS speeds."
 	--Supp.
-	realnames["bm_wp_wa2000_b_suppressed"] = "Suppressor"
-	realnames["bm_wp_wa2000_b_suppressed_desc"] = "A ##large## suppressor.\n##20% shorter## overall range.\n##10% decrease## in minimum damage.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_wa2000_b_suppressed" and "Suppressor"
+	or string_id == "bm_wp_wa2000_b_suppressed_desc" and "A ##large## suppressor.\n##20% shorter## overall range.\n##10% decrease## in minimum damage.\n##10% slower## ADS speeds."
 	--Light
-	realnames["bm_wp_wa2000_g_light"] = "Lightweight Furniture"
-	realnames["bm_wp_wa2000_g_light_desc"] = "##5% faster## ADS speeds.\n##10% faster## movement."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_wa2000_g_light" and "Lightweight Furniture"
+	or string_id == "bm_wp_wa2000_g_light_desc" and "##5% faster## ADS speeds.\n##10% faster## movement."
 	--Black
-	realnames["bm_wp_wa2000_g_stealth"] = "Black Furniture"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_wa2000_g_stealth" and "Black Furniture"
 	--Walnut
-	realnames["bm_wp_wa2000_g_walnut"] = "Walnut Furniture"
-	realnames["bm_wp_wa2000_g_walnut_desc"] = "##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_wa2000_g_walnut" and "Walnut Furniture"
+	or string_id == "bm_wp_wa2000_g_walnut_desc" and "##5% slower## ADS speeds."
 	
 	--Vector
-	realnames["bm_w_polymer"] = "KRISS Vector SMG"
-	realnames["bm_w_polymer_desc"] = "A recoil mitigating American sub-machine gun chambered in .45 ACP.\nCan pierce enemies and walls."
+	or DMCWO.reelnaems == true and string_id == "bm_w_polymer" and "KRISS Vector SMG"
+	or string_id == "bm_w_polymer_desc" and "A recoil mitigating American sub-machine gun chambered in .45 ACP.\nCan fire in 2-round bursts.\nCan pierce enemies and walls."
 	--CRB
-	realnames["bm_wp_polymer_barrel_precision"] = "CRB Barrel w/Shroud"
-	realnames["bm_wp_polymer_barrel_precision_desc"] = "##20% longer## overall range.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_polymer_barrel_precision" and "CRB Barrel w/Shroud"
+	or string_id == "bm_wp_polymer_barrel_precision_desc" and "##20% longer## overall range.\n##10% slower## ADS speeds."
 	--Supp
-	realnames["bm_wp_polymer_ns_silencer"] = "Defiance HPS 4GSK Suppressor"
-	realnames["bm_wp_polymer_ns_silencer_desc"] = "A ##specialized## suppressor.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##15% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_polymer_ns_silencer" and "Defiance HPS 4GSK Suppressor"
+	or string_id == "bm_wp_polymer_ns_silencer_desc" and "A ##specialized## suppressor.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##15% slower## ADS speeds."
 
 	--[[WEAPON MODS]]
 	--Ported
-	realnames["bm_wp_ns_battle"] = "Battlecomp 2.0 Compensator"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ns_battle" and "Battlecomp 2.0 Compensator"
 	--MP5 10mm Magazine
-	realnames["bm_wp_mp5_m_straight"] = "30rnd MP5/10 10mm Magazine"
-	realnames["bm_wp_mp5_m_straight_desc"] = "10mm Auto conversion for the MP5.\n##5% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp5_m_straight" and "30rnd MP5/10 10mm Magazine"
+	or string_id == "bm_wp_mp5_m_straight_desc" and "10mm Auto conversion for the MP5.\n##5% slower## reload speeds."
 	--AK5 CQB
-	realnames["bm_wp_ak5_b_short"] = "Short Barrel" 
-	realnames["bm_wp_ak5_b_short_desc"] = "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ak5_b_short" and "Short Barrel" 
+	or string_id == "bm_wp_ak5_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 	--AUG Raptor
-	realnames["bm_wp_aug_body_f90"] = "Thales F90 Body Kit"
-	realnames["bm_wp_aug_body_f90_desc"] = "ROF ##raised## to ##850 RPM##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_aug_body_f90" and "Thales F90 Body Kit"
+	or string_id == "bm_wp_aug_body_f90_desc" and "ROF ##raised## to ##850 RPM.##"
 	--SALVO
-	realnames["bm_wp_upg_ns_sho_salvo_large"] = "Silencerco Salvo 12 Suppressor"
-	realnames["bm_wp_upg_ns_sho_salvo_large_desc"] = "A ##large## shotgun suppressor.\n##20% shorter## overall range.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_sho_salvo_large" and "SilencerCo Salvo 12 Suppressor"
+	or string_id == "bm_wp_upg_ns_sho_salvo_large_desc" and "A ##large## shotgun suppressor.\n##20% shorter## overall range.\n##10% slower## ADS speeds."
 	--MP9 Suppressor
-	realnames["bm_wp_mp9_b_suppressed"] = "B&T MP9 QD Suppressor"
-	realnames["bm_wp_mp9_b_suppressed_desc"] = "##Internally suppressed## barrel.\n10% slower ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mp9_b_suppressed" and "B&T MP9 QD Suppressor"
+	or string_id == "bm_wp_mp9_b_suppressed_desc" and "##Internally suppressed## barrel.\n10% slower ADS speeds."
 	--BIG BOSS
-	realnames["bm_wp_upg_ns_ass_jungle"] = "Big Boss Suppressor"
-	realnames["bm_wp_upg_ns_ass_jungle_desc"] = "A ##large## pistol suppressor.\n##20% shorter## overall range.\n##10% decrease## in minimum damage.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_pis_jungle" and "Big Boss Suppressor"
+	or string_id == "bm_wp_upg_ns_pis_jungle_desc" and "A ##large## pistol suppressor.\n##20% shorter## overall range.\n##10% decrease## in minimum damage.\n##10% slower## ADS speeds."
 	--Filter
-	realnames["bm_wp_upg_ns_ass_filter"] = "Filter Suppressor"
-	realnames["bm_wp_upg_ns_ass_filter_desc"] = "An ##improvised## pistol suppressor.\n##25% shorter## overall range.\n##15% decrease## in minimum damage.\n10% slower ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_filter" and "Filter Suppressor"
+	or string_id == "bm_wp_upg_ns_ass_filter_desc" and "An ##improvised## pistol suppressor.\n##25% shorter## overall range.\n##15% decrease## in minimum damage.\n##10% slower## ADS speeds."
 	--M14 Scope Mount
-	realnames["bm_wp_upg_o_m14_scopemount"] = "Sun Optics USA M14/M1A Scope Mount"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_m14_scopemount" and "Sun Optics USA M14/M1A Scope Mount"
 	--LED Combo
-	realnames["bm_wp_upg_fl_ass_utg"] = "UTG P38 LED Laser Combo"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_utg" and "UTG P38 LED Laser Combo"
 	--M3X
-	realnames["bm_wp_upg_fl_pis_m3x"] = "Insight Technology M3X"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_pis_m3x" and "Insight Technology M3X"
 	--P90 Mall
-	realnames["bm_wp_p90_b_ninja_desc"] = "##Internally suppressed## barrel.\n##10% slower## ADS speeds."
+	or string_id == "bm_wp_p90_b_ninja_desc" and "##Internally suppressed## barrel.\n##10% slower## ADS speeds."
 	--P90 Civ
-	realnames["bm_wp_p90_b_civilian"] = "Moerse Lekker Barrel Shroud"
-	realnames["bm_wp_p90_b_civilian_desc"] = "##15% longer## overall range.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_p90_b_civilian" and "Moerse Lekker Barrel Shroud"
+	or string_id == "bm_wp_p90_b_civilian_desc" and "##15% longer## overall range.\n##10% slower## ADS speeds."
 	
 	
 	
 	--AK Crab Rail
-	realnames["bm_wp_upg_ak_fg_krebs"] = "Krebs UFM Keymod System Handguard"
-	realnames["bm_wp_upg_ak_fg_krebs_desc"] = "##7.5% faster## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ak_fg_krebs" and "Krebs UFM Keymod System Handguard"
+	or string_id == "bm_wp_upg_ak_fg_krebs_desc" and "##7.5% faster## ADS speeds."
 	--AK Keymod Rail
-	realnames["bm_wp_upg_ak_fg_trax"] = "Strike Industries TRAX Handguard"
-	realnames["bm_wp_upg_ak_fg_trax_desc"] = "##7.5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ak_fg_trax" and "Strike Industries TRAX Handguard"
+	or string_id == "bm_wp_upg_ak_fg_trax_desc" and "##7.5% slower## ADS speeds."
 	--AK Aluminum Grip
-	realnames["bm_wp_upg_ak_g_rk3"] = "ZenitCo PK-3 Pistol Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ak_g_rk3" and "ZenitCo PK-3 Pistol Grip"
 	--AK Aluminum Foregrip
-	realnames["bm_wp_upg_ak_fg_zenit"] = "ZenitCo Handguard"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ak_fg_zenit" and "ZenitCo Handguard"
 	--Scope Mount
-	realnames["bm_wp_upg_o_ak_scopemount"] = "K-VAR KV-04S Optic Mount"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_ak_scopemount" and "K-VAR KV-04S Optic Mount"
 	--Low Drag Magazine
-	realnames["bm_wp_upg_ak_m_uspalm"] = "30rnd US PALM AK30 Magazine"
-	realnames["bm_wp_upg_ak_m_uspalm_desc"] = "##5% faster## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ak_m_uspalm" and "30rnd US PALM AK30 Magazine"
+	or string_id == "bm_wp_upg_ak_m_uspalm_desc" and "##5% faster## reload speeds."
 	--PBS Suppressor
-	realnames["bm_wp_upg_ns_ass_pbs1"] = "PBS-1 Suppressor"
-	realnames["bm_wp_upg_ns_ass_pbs1_desc"] = "##15% shorter## overall range.\n##15% decrease## in minimum damage.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_pbs1" and "PBS-1 Suppressor"
+	or string_id == "bm_wp_upg_ns_ass_pbs1_desc" and "##15% shorter## overall range.\n##15% decrease## in minimum damage.\n##10% slower## ADS speeds."
 	--DMR Kit
-	realnames["bm_wp_upg_ass_ak_b_zastava"] = "Zastava M76 Barrel"
-	realnames["bm_wp_upg_ass_ak_b_zastava_desc"] = "##30% longer## overall range.\n##10% higher## minimum damage.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ass_ak_b_zastava" and "Zastava M76 Barrel"
+	or string_id == "bm_wp_upg_ass_ak_b_zastava_desc" and "##Sniper class barrel.##\n##30% longer## overall range.\n##10% greater## minimum damage.\n##10% slower## ADS speeds."
 	--Modern Barrel
-	realnames["bm_wp_upg_ak_b_ak105"] = "AK-105 Barrel"
-	realnames["bm_wp_upg_ak_b_ak105_desc"] = "##10% shorter## overall range."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ak_b_ak105" and "AK-105 Barrel"
+	or string_id == "bm_wp_upg_ak_b_ak105_desc" and "##10% shorter## overall range."
 	
 	--Exotique Receiver
-	realnames["bm_wp_m4_upper_reciever_edge"] = "VLTOR Upper Receiver"
-	realnames["bm_wp_m4_upper_reciever_edge_desc"] = "ROF ##raised## by ##2%##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m4_upper_reciever_edge" and "VLTOR Upper Receiver"
+	or string_id == "bm_wp_m4_upper_reciever_edge_desc" and "ROF ##raised## by ##2%.##"
 	
-	realnames["bm_wp_upg_ass_m4_upper_reciever_ballos"] = "2A-Arm BALIOS Upper Receiver" --????
-	realnames["bm_wp_upg_ass_m4_upper_reciever_ballos_desc"] = "ROF ##owered## by ##5%##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ass_m4_upper_reciever_ballos" and "2A-Arm BALIOS Upper Receiver" --????
+	or string_id == "bm_wp_upg_ass_m4_upper_reciever_ballos_desc" and "ROF ##lowered## by ##5%.##"
 	
-	realnames["bm_wp_upg_ass_m4_upper_reciever_core"] = "CORE15 Upper Receiver"
-	realnames["bm_wp_upg_ass_m4_upper_reciever_core_desc"] = "ROF ##raised## by ##5%##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ass_m4_upper_reciever_core" and "CORE15 Upper Receiver"
+	or string_id == "bm_wp_upg_ass_m4_upper_reciever_core_desc" and "ROF ##raised## by ##5%.##"
 	
-	realnames["bm_wp_upg_ass_m4_lower_reciever_core"] = "CORE15 Lower Receiver"
-	realnames["bm_wp_upg_ass_m4_lower_reciever_core_desc"] = "##5% faster## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ass_m4_lower_reciever_core" and "CORE15 Lower Receiver"
+	or string_id == "bm_wp_upg_ass_m4_lower_reciever_core_desc" and "##5% faster## reload speeds."
 	
-	realnames["bm_wp_upg_m4_s_ubr"] = "Magpul UBR Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_m4_s_ubr" and "Magpul UBR Stock"
 	
-	realnames["bm_wp_upg_m4_m_l5"] = "30rnd Lancer Systems L5 AW Magazine"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_m4_m_l5" and "30rnd Lancer Systems L5 AW Magazine"
 	
-	realnames["bm_wp_upg_smg_olympic_fg_lr300"] = "Short LR300 Handguard"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_smg_olympic_fg_lr300" and "Short LR300 Handguard"
 	
-	realnames["bm_wp_upg_ass_m16_fg_stag"] = "Stag Arms Model 8T Handguard"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ass_m16_fg_stag" and "Stag Arms Model 8T Handguard"
 	
-	realnames["bm_wp_upg_ass_m4_fg_moe"] = "Magpul MOE SL Handguard"
-	realnames["bm_wp_upg_ass_m4_fg_moe_desc"] = "##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ass_m4_fg_moe" and "Magpul MOE SL Handguard"
+	or string_id == "bm_wp_upg_ass_m4_fg_moe_desc" and "##5% faster## ADS speeds." 
 	
-	realnames["wpn_fps_upg_ass_m4_fg_lvoa"] = "War Sport LVOA Handguard"
-	realnames["wpn_fps_upg_ass_m4_fg_lvoa_desc"] = "##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ass_m4_fg_lvoa" and "War Sport LVOA Handguard"
+	or string_id == "bm_wp_upg_ass_m4_fg_lvoa_desc" and "##5% slower## ADS speeds."
 	
-	realnames["bm_wp_upg_ass_m4_b_beowulf"] = "Beowulf Barrel"
-	realnames["bm_wp_upg_ass_m4_b_beowulf_desc"] = "##30% longer## overall range.\n##10% higher## minimum damage.\n##10% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ass_m4_b_beowulf" and "Beowulf Barrel"
+	or string_id == "bm_wp_upg_ass_m4_b_beowulf_desc" and "##Sniper class barrel.##\n##30% longer## overall range.\n##10% greater## minimum damage.\n##10% slower## ADS speeds."
 	
 	--Descriptions are gone (for now) so I figured I'd change their names to reflect that they're locking the firemode
 	--Single Fire
-	realnames["bm_wp_upg_i_singlefire"] = "Single Fire Mod"
-	realnames["bm_wp_upg_i_singlefire_desc"] = "Locks fire mode to ##semi-auto##.\nROF ##lowered## by ##10%##."
+	or string_id == "bm_wp_upg_i_singlefire" and "Single Fire Mod"
+	or string_id == "bm_wp_upg_i_singlefire_desc" and "Locks fire mode to ##semi-auto.##\nROF ##lowered## by ##10%.##"
 	--Auto Fire
-	realnames["bm_wp_upg_i_autofire"] = "Auto Fire Mod"
-	realnames["bm_wp_upg_i_autofire_desc"] = "Locks fire mode to ##full-auto##.\nROF ##raised## by ##15%##."
-	realnames["bm_wp_upg_i_autofire_tec9"] = "Locks fire mode to ##full-auto##.\nROF ##raised## to ##800 RPM##.\n##Disables the effects of Equilibrium Aced##."
-	realnames["bm_wp_upg_i_autofire_c96"] = "Locks fire mode to ##full-auto##.\nROF ##raised## to ##1000 RPM##.\n##Disables the effects of Equilibrium Aced##."
-	realnames["bm_wp_upg_i_autofire_hk21"] = "ROF ##lowered## to ##450 RPM##."
+	or string_id == "bm_wp_upg_i_autofire" and "Auto Fire Mod"
+	or string_id == "bm_wp_upg_i_autofire_desc" and "Locks fire mode to ##full-auto.##\nROF ##raised## by ##15%.##"
+	or string_id == "bm_wp_upg_i_autofire_tec9" and "Locks fire mode to ##full-auto.##\nROF ##raised## to ##800 RPM.##\n##Disables the effects of Equilibrium Aced.##"
+	or string_id == "bm_wp_upg_i_autofire_c96" and "Locks fire mode to ##full-auto.##\nROF ##raised## to ##1000 RPM.##\n##Disables the effects of Equilibrium Aced.##"
+	or string_id == "bm_wp_upg_i_autofire_hk21" and "ROF ##lowered## to ##450 RPM.##"
 	
 	--Pistol Light
-	realnames["bm_wp_upg_fl_pis_tlr1"] = "Streamlight TLR1"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_pis_tlr1" and "Streamlight TLR1"
 	--Pistol Laser
-	realnames["bm_wp_upg_fl_pis_laser"] = "Aim Sports LH002 Laser Sight" --it seems to be more based on the RAP4 Paintball Pistol Laser sight but it's a lot less cool calling it that since paintball so the next closest thing will suffice	
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_pis_laser" and "Aim Sports LH002 Laser Sight" --it seems to be more based on the RAP4 Paintball Pistol Laser sight but it's a lot less cool calling it that since paintball so the next closest thing will suffice	
 	--Pistol Laser
-	realnames["bm_wp_upg_fl_x400v"] = "SureFire X400V-IRC"
-	realnames["bm_wp_upg_fl_crimson"] = "Crimson Trace CMR Laser Sight"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_x400v" and "SureFire X400V-IRC"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_crimson" and "Crimson Trace CMR Laser Sight"
 	
-	realnames["bm_wp_pis_g_laser"] = "Crimson Trace Glock Laser Grip"
-	realnames["bm_wp_pis_g_beavertail"] = "Beavertail Grip Extension"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_pis_g_laser" and "Crimson Trace Glock Laser Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_pis_g_beavertail" and "Beavertail Grip Extension"
 	
 	--Assault Light
-	realnames["bm_wp_upg_fl_ass_smg_sho_surefire"] = "Surefire Scout Light" --based off of but doesnt seem to take from a specific model
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_smg_sho_surefire" and "Surefire Scout Light" --based off of but doesnt seem to take from a specific model
 	--Compact Laser
-	realnames["bm_wp_upg_fl_ass_laser"] = "Offset Laser Mount & Sight"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_laser" and "Offset Laser Mount & Sight"
 	--Tactical Laser
-	realnames["bm_wp_upg_fl_ass_smg_sho_peqbox"] = "Insight Technology AN/PEQ-5"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_smg_sho_peqbox" and "Insight Technology AN/PEQ-5"
 	--Military Laser 
-	realnames["bm_wp_upg_fl_ass_peq15"] = "Insight Technology AN/PEQ-15"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_peq15" and "Insight Technology AN/PEQ-15"
 
 	--Shark Teeth
-	realnames["bm_wp_upg_ns_shot_shark"] = "Tromix Shark Breaching Brake"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_shot_shark" and "Tromix Shark Breaching Brake"
 	--King's Crown
-	realnames["bm_wp_upg_shot_ns_king"] = "King Armory KA-1212 Breaching Brake"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_shot_ns_king" and "King Armory KA-1212 Breaching Brake"
 	
 	--Pistol Flash Hider
-	realnames["bm_wp_upg_pis_ns_flash_desc"] = "Hides muzzle flash"
+	or string_id == "bm_wp_upg_pis_ns_flash_desc" and "Hides muzzle flash"
 
 	--Low Profile Suppressor
-	realnames["bm_wp_upg_ns_ass_smg_small"] = "GemTech HALO Suppressor" --not 100% but I can't find any other suppressor that is similar to this one's two-piece construction and the ability to wrap around an A2 style muzzle brake
-	realnames["bm_wp_upg_ns_ass_smg_small_desc"] = "##35% shorter## overall range.\n##17.5% decrease## in minimum damage."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_smg_small" and "GemTech HALO Suppressor" --not 100% but I can't find any other suppressor that is similar to this one's two-piece construction and the ability to wrap around an A2 style muzzle brake
+	or string_id == "bm_wp_upg_ns_ass_smg_small_desc" and "A ##small## pistol suppressor.\n##35% shorter## overall range.\n##17.5% decrease## in minimum damage."
 	--Medium Suppressor
-	realnames["bm_wp_upg_ns_ass_smg_medium"] = "Small Arms Industries M80 Suppressor" --Thanks Overkill for being vauge as fuck, I'm surprised I even found this
-	realnames["bm_wp_upg_ns_ass_smg_medium_desc"] = "##25% shorter## overall range.\n##12.5% decrease## in minimum damage.\n##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_smg_medium" and "Small Arms Industries M80 Suppressor" --Thanks Overkill for being vauge as fuck, I'm surprised I even found this
+	or string_id == "bm_wp_upg_ns_ass_smg_medium_desc" and "A ##medium## suppressor.\n##25% shorter## overall range.\n##12.5% decrease## in minimum damage.\n##5% slower## ADS speeds."
 	--Bigger the Better **Don't know
-	realnames["bm_wp_upg_ns_ass_smg_large"] = "Large Suppressor"
-	realnames["bm_wp_upg_ns_ass_smg_large_desc"] = "##20% shorter## overall range.\n##10% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_smg_large" and "Large Suppressor"
+	or string_id == "bm_wp_upg_ns_ass_smg_large_desc" and "A ##large## suppressor.\n##20% shorter## overall range.\n##10% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
 	
 	--Size Doesn't Matter 
-	realnames["bm_wp_upg_ns_pis_small"] = "Thompson Machine Poseidon Suppressor"	
-	realnames["bm_wp_upg_ns_pis_small_desc"] = "A ##small## pistol suppressor.\n##35% shorter## overall range.\n##17.5% decrease## in minimum damage."	
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_pis_small" and "Thompson Machine Poseidon Suppressor"	
+	or string_id == "bm_wp_upg_ns_pis_small_desc" and "A ##small## pistol suppressor.\n##35% shorter## overall range.\n##17.5% decrease## in minimum damage."	
 	--Standard Issue
-	realnames["bm_wp_upg_ns_pis_medium"] = "GemTech SFN Suppressor" --Close enough... it's sectioned similarly enough for me to just name it this
-	realnames["bm_wp_upg_ns_pis_medium_desc"] = "A ##medium## pistol suppressor.\n##25% shorter## overall range.\n##12.5% decrease## in minimum damage.\n##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_pis_medium" and "GemTech SFN Suppressor" --Close enough... it's sectioned similarly enough for me to just name it this
+	or string_id == "bm_wp_upg_ns_pis_medium_desc" and "A ##medium## pistol suppressor.\n##25% shorter## overall range.\n##12.5% decrease## in minimum damage.\n##5% slower## ADS speeds."
 	--Monolith 
-	realnames["bm_wp_upg_ns_pis_large"] = "Silencerco Osprey Suppressor"
-	realnames["bm_wp_upg_ns_pis_large_desc"] = "A ##large## pistol suppressor.\n##20% shorter## overall range.\n##10% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_pis_large" and "SilencerCo Osprey Suppressor"
+	or string_id == "bm_wp_upg_ns_pis_large_desc" and "A ##large## pistol suppressor.\n##20% shorter## overall range.\n##10% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
 	
-	realnames["bm_wp_upg_ns_medium_gem"] = "GemTech Blackside Suppressor"
-	realnames["bm_wp_upg_ns_medium_gem_desc"] = "A ##medium## pistol suppressor.\n##25% shorter## overall range.\n##12.5% decrease## in minimum damage.\n##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_medium_gem" and "GemTech Blackside Suppressor"
+	or string_id == "bm_wp_upg_ns_medium_gem_desc" and "A ##medium## pistol suppressor.\n##25% shorter## overall range.\n##12.5% decrease## in minimum damage.\n##5% slower## ADS speeds."
 	
-	realnames["bm_wp_upg_ns_large_kac"] = "KAC MK.23 Suppressor"
-	realnames["bm_wp_upg_ns_large_kac_desc"] = "A ##large## pistol suppressor.\n##20% shorter## overall range.\n##10% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_large_kac" and "KAC MK.23 Suppressor"
+	or string_id == "bm_wp_upg_ns_large_kac_desc" and "A ##large## pistol suppressor.\n##20% shorter## overall range.\n##10% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
 	
-	realnames["bm_wp_upg_ns_pis_medium_slim_desc"] = "A ##specialized## pistol suppressor.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
+	or string_id == "bm_wp_upg_ns_pis_medium_slim_desc" and "A ##specialized## pistol suppressor.\n##15% shorter## overall range.\n##7.5% decrease## in minimum damage.\n##7.5% slower## ADS speeds."
 	
 	--Shotgun Suppressor
-	realnames["bm_wp_upg_ns_shot_thick"] = "Shotgun Suppressor"
-	realnames["bm_wp_upg_ns_shot_thick_desc"] = "A ##medium## shotgun suppressor.\n##25% shorter## overall range.\n##5% slower## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_shot_thick" and "Shotgun Suppressor"
+	or string_id == "bm_wp_upg_ns_shot_thick_desc" and "A ##medium## shotgun suppressor.\n##25% shorter## overall range.\n##5% slower## ADS speeds."
 	
-	realnames["bm_wp_upg_ns_meatgrinder"] = "Standoff Muzzle Device"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_meatgrinder" and "Standoff Muzzle Device"
 	
 	--Stubby
-	realnames["bm_wp_upg_ns_ass_smg_stubby"] = "Stinger Flash Hider" --Based on the VFC Stinger's pseudo flash-hider
-	realnames["bm_wp_upg_ns_ass_smg_stubby_desc"] = "Hides muzzle flash"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_smg_stubby" and "Stinger Flash Hider" --Based on the VFC Stinger's pseudo flash-hider
+	or string_id == "bm_wp_upg_ns_ass_smg_stubby_desc" and "Hides muzzle flash"
 	--Tank **Don't know, could quite literally be based off of a tank compensator
-	realnames["bm_wp_upg_ns_ass_smg_tank"] = "Tank Compensator"
-	realnames["bm_wp_upg_ns_ass_smg_tank_desc"] = "Vents muzzle flash to the sides"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_smg_tank" and "Tank Compensator"
+	or string_id == "bm_wp_upg_ns_ass_smg_tank_desc" and "Vents muzzle flash to the sides"
 	--Firebreather
-	realnames["bm_wp_upg_ns_ass_smg_firepig"] = "Noveske KX3 Compensator"
-	realnames["bm_wp_upg_ns_ass_smg_firepig_desc"] = "Increases muzzle flash"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_smg_firepig" and "Noveske KX3 Compensator"
+	or string_id == "bm_wp_upg_ns_ass_smg_firepig_desc" and "Increases muzzle flash"
 	
 	--Competitors
-	realnames["bm_wp_upg_ass_ns_jprifles"] = "JPE Bennie Cooley Muzzle Brake"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ass_ns_jprifles" and "JPE Bennie Cooley Muzzle Brake"
 	--Funnel of Fun
-	realnames["bm_wp_upg_ass_ns_linear"] = "KIES Blast Master Linear Compensator"
-	realnames["bm_wp_upg_ass_ns_linear_desc"] = "Increases muzzle flash"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ass_ns_linear" and "KIES Blast Master Linear Compensator"
+	or string_id == "bm_wp_upg_ass_ns_linear_desc" and "Increases muzzle flash"
 	--Tactical
-	realnames["bm_wp_upg_ass_ns_surefire"] = "Surefire MBK Muzzle Brake"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ass_ns_surefire" and "Surefire MBK Muzzle Brake"
 	
 	--Muldon
-	realnames["bm_wp_r870_s_folding"] = "R870 Top Folding Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_r870_s_folding" and "R870 Top Folding Stock"
 	
 	--Standard
-	realnames["bm_wp_m4_s_standard"] = "Bushmaster LE Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m4_s_standard" and "Bushmaster LE Stock"
 	--Tactical
-	realnames["bm_wp_m4_s_pts"] = "Magpul PTS Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m4_s_pts" and "Magpul PTS Stock"
 	--Folding
-	realnames["bm_wp_m4_uupg_s_fold"] = "LR300 Folding Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m4_uupg_s_fold" and "LR300 Folding Stock"
 	--Wide
-	realnames["bm_wp_upg_m4_s_crane"] = "NSWC Crane Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_m4_s_crane" and "NSWC Crane Stock"
 	--War-Torn
-	realnames["bm_wp_upg_m4_s_mk46"] = "NSWC Crane Stock w/Cheek Pad" --looking at it now, the rudimentary cheek pad is generally useless since you hold the gun right handed (so you make a cheekweld with the left side of the gun) and the pad is mostly on the right. GJ Overkill.
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_m4_s_mk46" and "NSWC Crane Stock w/Cheek Pad" --looking at it now, the rudimentary cheek pad is generally useless since you hold the gun right handed (so you make a cheekweld with the left side of the gun) and the pad is mostly on the right. GJ Overkill.
 	
 	--Folding Stock (underfolder)
-	realnames["bm_wp_ak_s_folding"] = "Folding AK Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ak_s_folding" and "Folding AK Stock"
 	--Folding Stock (sidefolder)
-	realnames["bm_wp_ak_s_skfoldable"] = "Folding AK Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ak_s_skfoldable" and "Folding AK Stock"
 	--Wooden Sniper Stock
-	realnames["bm_wp_ak_s_psl"] = "PSL Thumbhole Stock"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ak_s_psl" and "PSL Thumbhole Stock"
 	
 	--Ergo (Glocks)
-	realnames["bm_wp_g18c_g_ergo"] = "Hogue Handall Grip Sleeve"
-	realnames["bm_wp_g18c_g_ergo_desc"] = "##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g18c_g_ergo" and "Hogue Handall Grip Sleeve"
+	or string_id == "bm_wp_g18c_g_ergo_desc" and "##5% faster## ADS speeds." 
 	--Ergo
-	realnames["bm_wp_m4_g_ergo"] = "Command Arms UPG16 Pistol Grip"
-	realnames["bm_wp_m4_g_ergo_desc"] = "##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m4_g_ergo" and "Command Arms UPG16 Pistol Grip"
+	or string_id == "bm_wp_m4_g_ergo_desc" and "##5% faster## ADS speeds." 
 	--Pro
-	realnames["bm_wp_m4_g_sniper"] = "PSG Style Pistol Grip" --there are a bunch of grips styled after the PSG-1's grip but the one in PD2 doesn't seem to take from any specific real-life model
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m4_g_sniper" and "PSG Style Pistol Grip" --there are a bunch of grips styled after the PSG-1's grip but the one in PD2 doesn't seem to take from any specific real-life model
 	--Rubber
-	realnames["bm_wp_upg_m4_g_hgrip"] = "Hogue OverMolded AR Pistol Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_m4_g_hgrip" and "Hogue OverMolded AR Pistol Grip"
 	--Straight
-	realnames["bm_wp_upg_m4_g_mgrip"] = "Magpul MOE-K Pistol Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_m4_g_mgrip" and "Magpul MOE-K Pistol Grip"
 	
 	--Rubber
-	realnames["bm_wp_upg_ak_g_hgrip"] = "Hogue OverMolded AK Pistol Grip"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ak_g_hgrip" and "Hogue OverMolded AK Pistol Grip"
 	--Plastic
-	realnames["bm_wp_upg_ak_g_pgrip"] = "US PALM Enhanced Pistol Grip"
-	realnames["bm_wp_upg_ak_g_pgrip_desc"] = "##5% faster## ADS speeds." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ak_g_pgrip" and "US PALM Enhanced Pistol Grip"
+	or string_id == "bm_wp_upg_ak_g_pgrip_desc" and "##5% faster## ADS speeds." 
 	
 	--Wood Rail
-	realnames["bm_wp_ak_fg_combo2"] = "Ultimak AK Optic Mount"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ak_fg_combo2" and "Ultimak AK Optic Mount"
 	--Tact. Russian
-	realnames["bm_wp_ak_fg_combo3"] = "Ultimak AK Modular Rail Forend System"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ak_fg_combo3" and "Ultimak AK Modular Rail Forend System"
 	--Battleproven
-	realnames["bm_wp_upg_ak_fg_tapco"] = "Tapco Intrafuse Handguard" --This is actually for the Saiga. lolOverkill
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ak_fg_tapco" and "Tapco Intrafuse Handguard" --This is actually for the Saiga. lolOverkill
 	--Lightweight
-	realnames["bm_wp_upg_fg_midwest"] = "Midwest Industries Quad Rail"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fg_midwest" and "Midwest Industries Quad Rail"
 	
 	--Slav. Dragon
-	realnames["bm_wp_upg_ak_b_draco"] = "Draco Pistol Barrel"
-	realnames["bm_wp_upg_ak_b_draco_desc"] = "##10% shorter## overall range.\n##10% faster## ADS speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ak_b_draco" and "Draco Pistol Barrel"
+	or string_id == "bm_wp_upg_ak_b_draco_desc" and "##10% shorter## overall range.\n##10% faster## ADS speeds."
 	
 	--Extended Mag (Glocks)
-	realnames["bm_wp_g18c_m_mag_33rnd"] = "33/22rnd Glock Magazine (9mm/.40S&W)"	
-	realnames["bm_wp_g18c_m_mag_33rnd_desc"] = "##5% slower## reload speeds."	
+	or DMCWO.reelnaems == true and string_id == "bm_wp_g18c_m_mag_33rnd" and "33/22rnd Glock Magazine (9mm/.40S&W)"	
+	or string_id == "bm_wp_g18c_m_mag_33rnd_desc" and "##5% slower## reload speeds."	
 	--Vintage Mag
-	realnames["bm_wp_m4_m_straight"] = "20rnd STANAG Magazine" --Hesitant to call them this since they're so off-model and resemble the M4A1 mags used in MW3
-	realnames["bm_wp_m4_m_straight_desc"] = "##10% faster## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m4_m_straight" and "20rnd STANAG Magazine" --Hesitant to call them this since they're so off-model and resemble the M4A1 mags used in MW3
+	or string_id == "bm_wp_m4_m_straight_desc" and "##10% faster## reload speeds."
 	--Milspec Mag
-	realnames["bm_wp_m4_uupg_m_std"] = "30rnd STANAG Magazine"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m4_uupg_m_std" and "30rnd STANAG Magazine"
 	--Tactical Mag
-	realnames["bm_wp_m4_m_pmag"] = "31rnd Magpul PMAG Magazine" --you can actually shove 31 rounds into one of the PMAG models and still have it load
-	realnames["bm_wp_m4_m_pmag_desc"] = "##5% faster## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m4_m_pmag" and "31rnd Magpul PMAG Magazine" --you can actually shove 31 rounds into one of the PMAG models and still have it load
+	or string_id == "bm_wp_m4_m_pmag_desc" and "##5% faster## reload speeds."
 	--Expert Mag
-	realnames["bm_wp_l85a2_m_emag"] = "30rnd Magpul EMAG Magazine"
-	realnames["bm_wp_l85a2_m_emag_desc"] = "Carry an extra magazine.\n##12% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_l85a2_m_emag" and "30rnd Magpul EMAG Magazine"
+	or string_id == "bm_wp_l85a2_m_emag_desc" and "Carry an extra magazine.\n##12% slower## reload speeds."
 	--CAR Quad
-	realnames["bm_wp_upg_m4_m_quad"] = "60rnd Surefire Magazine"
-	realnames["bm_wp_upg_m4_m_quad_desc"] = "##10% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_m4_m_quad" and "60rnd Surefire Magazine"
+	or string_id == "bm_wp_upg_m4_m_quad_desc" and "##10% slower## reload speeds."
 	--AK Quad
-	realnames["bm_wp_upg_ak_m_quad"] = "60rnd Concern Kalashnikov Magazine"
-	realnames["bm_wp_upg_ak_m_quad_desc"] = "##10% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ak_m_quad" and "60rnd Concern Kalashnikov Magazine"
+	or string_id == "bm_wp_upg_ak_m_quad_desc" and "##10% slower## reload speeds."
 	--Beta-C
-	realnames["bm_wp_m4_m_drum"] = "100rnd Beta-C Dual Drum"
-	realnames["bm_wp_m4_m_drum_desc"] = "##15% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_m4_m_drum" and "100rnd Beta-C Dual Drum"
+	or string_id == "bm_wp_m4_m_drum_desc" and "##15% slower## reload speeds."
 	--AK Drum
-	realnames["bm_wp_ak_m_drum"] = "75rnd AK Drum"
-	realnames["bm_wp_ak_m_drum_desc"] = "##15% slower## reload speeds."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_ak_m_drum" and "75rnd AK Drum"
+	or string_id == "bm_wp_ak_m_drum_desc" and "##15% slower## reload speeds."
 	
 	--Pistol Red Dot
-	realnames["bm_wp_upg_o_rmr"] = "Trijicon RMR Red Dot"
-	realnames["bm_wp_upg_o_rmr_desc"] = "Low power red dot sight"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_rmr" and "Trijicon RMR Red Dot"
+	or string_id == "bm_wp_upg_o_rmr_desc" and "Low power red dot sight"
 	--Marksman Irons
-	realnames["bm_wp_upg_o_marksmansight_rear_desc"] = "Custom iron sights."
+	or string_id == "bm_wp_upg_o_marksmansight_rear_desc" and "Custom iron sights."
 	
 	--Military Red Dot
-	realnames["bm_wp_upg_o_aimpoint"] = "Aimpoint PRO Red Dot"
-	realnames["bm_wp_upg_o_aimpoint_desc"] = "Encased red dot sight."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_aimpoint" and "Aimpoint PRO Red Dot"
+	or string_id == "bm_wp_upg_o_aimpoint_desc" and "Encased red dot sight."
 	--Holographic
-	realnames["bm_wp_upg_o_eotech"] = "EOTech 553 Holographic Sight"
-	realnames["bm_wp_upg_o_eotech_desc"] = "Low power holographic sight."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_eotech" and "EOTech 553 Holographic Sight"
+	or string_id == "bm_wp_upg_o_eotech_desc" and "Low power holographic sight."
 	--Professional
-	realnames["bm_wp_upg_o_t1micro"] = "Aimpoint Micro T-1 Red Dot"
-	realnames["bm_wp_upg_o_t1micro_desc"] = "Low power red dot sight."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_t1micro" and "Aimpoint Micro T-1 Red Dot"
+	or string_id == "bm_wp_upg_o_t1micro_desc" and "Low power red dot sight."
 	--Surgeon
-	realnames["bm_wp_upg_o_docter"] = "IRONDOT w/Docter Sight II Plus Red Dot"
-	realnames["bm_wp_upg_o_docter_desc"] = "Low power red dot sight."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_docter" and "IRONDOT w/Docter Sight II Plus Red Dot"
+	or string_id == "bm_wp_upg_o_docter_desc" and "Low power red dot sight."
 	--ACOUGH
-	realnames["bm_wp_upg_o_acog"] = "Trijicon ACOG Scope"
-	realnames["bm_wp_upg_o_acog_desc"] = "Medium range scope.\n##5% slower## ADS."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_acog" and "Trijicon ACOG Scope"
+	or string_id == "bm_wp_upg_o_acog_desc" and "Medium range scope.\n##5% slower## ADS."
 	--Milspec
-	realnames["bm_wp_upg_o_specter"] = "ELCAN Specter DR 1-4x Scope"
-	realnames["bm_wp_upg_o_specter_desc"] = "Medium range scope.\n##5% slower## ADS."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_specter" and "ELCAN Specter DR 1-4x Scope"
+	or string_id == "bm_wp_upg_o_specter_desc" and "Medium range scope.\n##5% slower## ADS."
 	--See More
-	realnames["bm_wp_upg_o_cmore"] = "C-More Railway Red Dot"
-	realnames["bm_wp_upg_o_cmore_desc"] = "Low power red dot sight."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_cmore" and "C-More Railway Red Dot"
+	or string_id == "bm_wp_upg_o_cmore_desc" and "Low power red dot sight."
 	--Combat
-	realnames["bm_wp_upg_o_cs"] = "Aimpoint CS Red Dot"
-	realnames["bm_wp_upg_o_cs_desc"] = "Encased red dot sight."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_cs" and "Aimpoint CS Red Dot"
+	or string_id == "bm_wp_upg_o_cs_desc" and "Encased red dot sight."
 	--Compact Holo
-	realnames["bm_wp_upg_o_eotech_xps"] = "EOTech EXPS3 Holographic Sight"
-	realnames["bm_wp_upg_o_eotech_xps_desc"] = "Low power holographic sight."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_eotech_xps" and "EOTech EXPS3 Holographic Sight"
+	or string_id == "bm_wp_upg_o_eotech_xps_desc" and "Low power holographic sight."
 	--Speculator
-	realnames["bm_wp_upg_o_reflex"] = "Sightmark Sureshot Red Dot" --super generic so I just went with what COD4 based it off of
-	realnames["bm_wp_upg_o_reflex_desc"] = "Low power red dot sight."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_reflex" and "Sightmark Sureshot Red Dot" --super generic so I just went with what COD4 based it off of
+	or string_id == "bm_wp_upg_o_reflex_desc" and "Low power red dot sight."
 	--Trigonom
-	realnames["bm_wp_upg_o_rx01"] = "Trijicon RX01 Red Dot"
-	realnames["bm_wp_upg_o_rx01_desc"] = "Low power red dot sight."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_rx01" and "Trijicon RX01 Red Dot"
+	or string_id == "bm_wp_upg_o_rx01_desc" and "Low power red dot sight."
 	--Solar
-	realnames["bm_wp_upg_o_rx30"] = "Trijicon RX30 Red Dot"	
-	realnames["bm_wp_upg_o_rx30_desc"] = "Low power red dot sight."	
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_rx30" and "Trijicon RX30 Red Dot"	
+	or string_id == "bm_wp_upg_o_rx30_desc" and "Low power red dot sight."	
 	--Theia
-	realnames["bm_wp_upg_o_leupold"] = "Leupold Mark 4 LR/T M1 Illum. Ret. w/BORS"
-	realnames["bm_wp_upg_o_leupold_desc"] = "Ballistic scope that ##auto-marks## enemies ##in stealth## or ##specials##.\n##10% slower## ADS."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_leupold" and "Leupold Mark 4 LR/T M1 Illum. Ret. w/BORS"
+	or string_id == "bm_wp_upg_o_leupold_desc" and "Ballistic scope that ##auto-marks## enemies ##in stealth## or ##specials.##\n##10% slower## ADS."
 	--45 irons
-	realnames["bm_wpn_fps_upg_o_45iron"] = "XS Sights Angled Sights" --these are literally the worst things IRL, don't buy them for your gun if you have one and want angled sights to mount on it
+	or DMCWO.reelnaems == true and string_id == "bm_wpn_fps_upg_o_45iron" and "XS Sights Angled Sights" --these are literally the worst things IRL, don't buy them for your gun if you have one and want angled sights to mount on it
 	--Flip-Up (KSG sights)
-	realnames["bm_wp_upg_o_mbus_rear"] = "Magpul MBUS Back-up Sights"
-	realnames["bm_wp_upg_o_mbus_rear_desc"] = "Flip-up sights."
-	realnames["dd_rear"] = "Daniel Defense Fixed Sight Combo"
-	realnames["dd_rear_desc"] = "Fixed sights"
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_o_mbus_rear" and "Magpul MBUS Back-up Sights"
+	or string_id == "bm_wp_upg_o_mbus_rear_desc" and "Flip-up sights."
+	or DMCWO.reelnaems == true and string_id == "dd_rear" and "Daniel Defense Fixed Sight Combo"
+	or string_id == "dd_rear_desc" and "Fixed sights"
 	
-	realnames["bm_wp_mosin_iron_sight"] = "Iron sights"
-	realnames["bm_wp_mosin_iron_sight_desc"] = "Remove the scope and use iron sights."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_mosin_iron_sight" and "Iron Sights"
+	or string_id == "bm_wp_mosin_iron_sight_desc" and "Remove the scope and use iron sights."
 	
 	--Dragons Breath
-	realnames["bm_wp_upg_a_dragons_breath"] = "Dragon's Breath Rounds"
-	realnames["bm_wp_upg_a_dragons_breath_desc"] = "Pellets capable of ##setting targets on fire##.\nFire ##8 pellets##.\n##50% chance## to set targets aflame within ##30m##"
-	realnames["bm_wp_upg_a_dragons_breath_auto"] = "Pellets capable of ##setting targets on fire##.\nFire ##8 pellets##.\n##50% chance## to set targets aflame within ##30m##\nROF ##lowered## by ##10%##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_a_dragons_breath" and "Dragon's Breath Rounds"
+	or string_id == "bm_wp_upg_a_dragons_breath_desc" and "Pellets capable of ##setting targets on fire.##\nFire ##8 pellets.##\n##50% chance## to set targets aflame within ##30m##"
+	or string_id == "bm_wp_upg_a_dragons_breath_auto" and "Pellets capable of ##setting targets on fire.##\nFire ##8 pellets.##\n##50% chance## to set targets aflame within ##30m##\nROF ##lowered## by ##10%.##"
 	--AP Slug
-	realnames["bm_wp_upg_a_slug"] = "Armor Piercing SABOT Slugs"
-	realnames["bm_wp_upg_a_slug_desc"] = "A slug capable of ##piercing through most surfaces##.\n##50% shorter## max damage range.\n##300% longer## drop-off range."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_a_slug" and "Armor Piercing SABOT Slugs"
+	or string_id == "bm_wp_upg_a_slug_desc" and "A slug capable of ##piercing through enemies, walls and shields.##\n##150% longer## drop-off range."
 	--Birdshot (originally the free 000 Buck)
-	realnames["bm_wp_upg_a_bird"] = "Birdshot"
-	realnames["bm_wp_upg_a_bird_desc"] = "Shoot tiny pellets for ##greater pellet coverage##.\n Shoot ##50 pellets##.\n##CAN CAUSE FPS DROPS ON LOW END SYSTEMS##"
- 	realnames["bm_wp_upg_a_bird_judge"] = "Shoot tiny pellets for ##greater pellet coverage##.\n Shoot ##30 pellets##.\n##CAN CAUSE FPS DROPS ON LOW END SYSTEMS##" 
+	or string_id == "bm_wp_upg_a_bird" and "Birdshot"
+	or string_id == "bm_wp_upg_a_bird_desc" and "Shoot tiny pellets for ##greater pellet coverage.##\n Shoot ##50 pellets.##\n##CAN CAUSE FPS DROPS ON LOW END SYSTEMS##"
+ 	or string_id == "bm_wp_upg_a_bird_judge" and "Shoot tiny pellets for ##greater pellet coverage.##\n Shoot ##30 pellets.##\n##CAN CAUSE FPS DROPS ON LOW END SYSTEMS##" 
 	--000 Buck
-	realnames["bm_wp_upg_a_custom"] = "000 Buck"
-	realnames["bm_wp_upg_a_custom_desc"] = "Large pellets with ##greater stopping power##.\nFire ##6 pellets##.\n##20% longer## max damage range.\n##30% shorter## drop-off range."
-	realnames["bm_wp_upg_a_custom_judge"] = "Large pellets with ##greater stopping power##.\nFire ##4 pellets##.\n##20% longer## max damage range.\n##30% shorter## drop-off range." 
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_a_custom" and "000 Buck"
+	or string_id == "bm_wp_upg_a_custom_desc" and "Large pellets with ##greater stopping power.##\nFire ##6 pellets.##\n##20% longer## max damage range.\n##35% shorter## drop-off range."
+	or string_id == "bm_wp_upg_a_custom_judge" and "Large pellets with ##greater stopping power.##\nFire ##4 pellets.##\n##20% longer## max damage range.\n##35% shorter## drop-off range." 
 	--Flechette
-	realnames["bm_wp_upg_a_piercing"] = "Flechette Rounds"
-	realnames["bm_wp_upg_a_piercing_desc"] = "Darts capable of ##penetrating MFR armor##.\nFire ##15 darts##.\n##50% longer## drop-off range."
-	realnames["bm_wp_upg_a_piercing_judge"] = "Darts capable of ##penetrating MFR armor##.\nFire ##10 darts##.\n##50% longer## drop-off range."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_a_piercing" and "Flechette Rounds"
+	or string_id == "bm_wp_upg_a_piercing_desc" and "Darts capable of ##penetrating MFR armor.##\nFire ##15 darts.##\n##40% longer## max damage range."
+	or string_id == "bm_wp_upg_a_piercing_judge" and "Darts capable of ##penetrating MFR armor.##\nFire ##10 darts.##\n##40% longer## max damage range."
 	--HE
-	realnames["bm_wp_upg_a_explosive"] = "Fragmentation Rounds"
-	realnames["bm_wp_upg_a_explosive_desc"] = "Fin stabilized rounds that ##explode on impact##. Shoot ##1 explosive## projectile.\n##2 meter## blast radius.\nDeals a flat ##100 damage##."
+	or DMCWO.reelnaems == true and string_id == "bm_wp_upg_a_explosive" and "Fragmentation Rounds"
+	or string_id == "bm_wp_upg_a_explosive_desc" and "Fin stabilized rounds that ##explode on impact.## Shoot ##1 explosive## projectile.\n##2 meter## blast radius.\nDeals a flat ##120 damage.##"
 	
 	--Hollow Points
-	realnames["bullet_hollow"] = "Hollow Point Ammunition"
-	realnames["bullet_hollow_desc"] = "##Deal more damage to light/unarmored units.##\n##No shield, enemy or armor penetration.\n50% less## penetration power/damage.\n##30% less## damage to Dozers, MFR helmets and Elites.\n##25% lower## pick-up rate."
+	or string_id == "bullet_hollow" and "Hollow Point Ammunition"
+	or string_id == "bullet_hollow_desc" and "##No shield, enemy or armor penetration.\n50% less## penetration through walls.\n##30% less## damage to Dozers, MFR helmets and Elite SWATs.\n##25% lower## pick-up rate."
 	--AP
-	realnames["bullet_ap"] = "Armor Piercing Ammunition"
-	realnames["bullet_ap_desc"] = "##Pierce shields, enemies and armor.##\n##Deal less damage to light/unarmored units.##\n##30% more## penetration power/damage.\n##20% more## damage to Dozers, MFR helmets and Elites.\n##25% lower## pick-up rate."
+	or string_id == "bullet_ap" and "Armor Piercing Ammunition"
+	or string_id == "bullet_ap_desc" and "##Pierce shields within max damage range.##\n##30% greater## chance to go through MFR armor.\n##50% more## penetration through walls.\n##20% more## damage to Dozers, MFR helmets and Elite SWATs.\n##25% lower## pick-up rate."
+	or string_id == "bullet_ap_desc_has_pen" and "##+5%## damage through shields.\n##30% greater## chance to go through MFR armor.\n##50% more## penetration through walls.\n##20% more## damage to Dozers, MFR helmets and Elite SWATs.\n##25% lower## pick-up rate."
+	or string_id == "bullet_ap_desc_9mm" and "##Pierce enemies and armor.##\n##30% greater## chance to go through MFR armor.\n##50% more## penetration through walls.\n##20% more## damage to Dozers, MFR helmets and Elite SWATs.\n##25% lower## pick-up rate."
 	--Match
-	realnames["bullet_match"] = "Match Grade Ammunition"
-	realnames["bullet_match_desc"] = "High grade rounds for ##greater range and accuracy##.\n##15% longer## overall range.\n##10% more## penetration power/damage.\n##Cannot be used with suppressors##."
+	or string_id == "bullet_match" and "Match Grade Ammunition"
+	or string_id == "bullet_match_desc" and "High grade rounds for ##greater range and accuracy.##\n##No suppressors.##\n##15% longer## overall range.\n##10% lower## pick-up rate."
 	--Low Power
-	realnames["bullet_low"] = "Low Powered Ammunition"
-	realnames["bullet_low_desc"] = "Rounds with reduced charges for ##less recoil##.\n##20% shorter## overall range.\n##15% less## penetration power/damage.\n##Cannot be used with DMR/sniper barrels##."
+	or string_id == "bullet_low" and "Low Powered Ammunition"
+	or string_id == "bullet_low_desc" and "Rounds with reduced loads for ##less recoil.##\n##No sniper class barrels.##\n##20% shorter## overall range.\n##15% less## penetration through walls."
 	--Incendiary
-	realnames["bullet_fire"] = "Incendiary Ammunition"
-	realnames["bullet_fire_desc"] = "Rounds with a ##15% chance## to set your target ##on fire##."
+	or string_id == "bullet_fire" and "Incendiary Ammunition"
+	or string_id == "bullet_fire_desc" and "Rounds with a ##5% chance## to set your target ##on fire.##\n##No ammo pickups.##"
+	--HEIAP
+	or string_id == "bullet_heiap" and "Raufoss Mk 211 Ammunition"
+	or string_id == "bullet_heiap_desc" and "...##No ammo pickups.##"
+	--Deagle Corbon
+	or string_id == "bullet_corbon" and ".440 Cor-bon Ammunition"
+	or string_id == "bullet_corbon_desc" and "Rechambers this weapon in .440 Cor-bon.\n##10% longer## overall range.\n##15% more## penetration through walls.\n##50% lower## pick-up rate."
+	--300 Winchester
+	or string_id == "bullet_300_win" and ".300 Winchester Magnum Ammunition"
+	or string_id == "bullet_300_win_desc" and "Rechambers this weapon in .300 Winchester Magnum.\n##15% longer## overall range.\n##10% lower## pick-up rate."
+	or string_id == "bullet_300_win_r93_desc" and "Rechambers this weapon in .300 Winchester Magnum.\n##10% shorter## overall range.\n##10% greater## pick-up rate."
 	
 	--Taser
-	realnames["shell_taser"] = "Taser Rounds"
-	realnames["shell_taser_desc"] = "Non-lethal shells that can stun a target for a short time.\n##No ammo pickups##"
+	or string_id == "shell_taser" and "Taser Rounds"
+	or string_id == "shell_taser_desc" and "Less than lethal shells that can stun a target for a short time.\n##No ammo pickups.##"
 	
 	--M134 Slow
-	realnames["m134_slow"] = "Death Machine Motor"
-	realnames["m134_slow_desc"] = "ROF ##lowered## to ##1666 RPM##."
+	or string_id == "m134_slow" and "Death Machine Motor"
+	or string_id == "m134_slow_desc" and "ROF ##lowered## to ##1666 RPM.##"
 	--M134 Slower
-	realnames["m134_slower"] = "Ghost Motor"
-	realnames["m134_slower_desc"] = "ROF ##lowered## to ##750 RPM##."
+	or string_id == "m134_slower" and "Ghost Motor"
+	or string_id == "m134_slower_desc" and "ROF ##lowered## to ##750 RPM.##"
+	--Burst Fire
+	or string_id == "burstfire" and "Burst Fire Kit"
+	or string_id == "burstfire_desc" and "Allows this weapon switch to ##3-round bursts.##"
+	or string_id == "burstfire_desc_ak5" and "Allows this weapon switch to ##3-round bursts.## \n##Requires the FN FNC Kit to be attached.##"
+	or string_id == "burstfire_desc_m16" and "Swaps out full-auto capabilities for ##3-round bursts.##"
+	or string_id == "burstfire_desc_raffica" and "Allows this weapon to fire in ##3-round bursts## at ##1200 RPM.##\n##Semi-auto fire rate is unchanged.##\n##Disables the effects of Equilibrium Aced.##"
+	--MAC slow kit
+	or string_id == "mac_slow" and "MAC Slow Fire Kit"
+	or string_id == "mac_slow_desc" and "ROF ##lowered## to ##750 RPM.##"
 	
 	--DMCWO loot shit
-	realnames["loot_dmcwo"] = "DeadMansChest's Weapon Overhaul"
-	realnames["loot_dmcwo_desc"] = "This is a DMCWO item!"
+	or string_id == "loot_dmcwo" and "DeadMansChest's Weapon Overhaul"
+	or string_id == "loot_dmcwo_desc" and "This is a DMCWO item!"
 	
 	--URSA
-	realnames["bm_melee_kabar"] = "USMC KA-BAR"
-	realnames["bm_melee_kabar_desc"] = "The most famous fixed blade knife in the World, the KA-BAR.\n\nDesigned to serve US troops during World War II and is still doing its job, in the hands of robbers, years later."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_kabar" and "USMC KA-BAR"
+	or string_id == "bm_melee_kabar_desc" and "The most famous fixed blade knife in the World, the KA-BAR.\n\nDesigned to serve US troops during World War II and is still doing its job, in the hands of robbers, years later."
 	--Krieger
-	realnames["bm_melee_kampfmesser"] = "KM 2000"
-	realnames["bm_melee_kampfmesser_desc"] = "The official combat knife of the German Bundeswehr Armed Forces. The new series KM2000 is manufactured to exacting ISO standards with substantially improved cutting edge capacity. Good choice for CQC."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_kampfmesser" and "KM 2000"
+	or string_id == "bm_melee_kampfmesser_desc" and "The official combat knife of the German Bundeswehr Armed Forces. The new series KM2000 is manufactured to exacting ISO standards with substantially improved cutting edge capacity. Good choice for CQC."
 	--Berger
-	realnames["bm_melee_gerber"] = "Gerber DMF Folder"
-	realnames["bm_melee_gerber_desc"] = "The manual opening DMF Folder brings the much sought after tactical innovations and technologies of the Automatic DMF to a large, ambidextrous use knife. Textured G-10 handle gives the DMF Folder a sure grip in gloved hands and maintains a perfect weight balance."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_gerber" and "Gerber DMF Folder"
+	or string_id == "bm_melee_gerber_desc" and "The manual opening DMF Folder brings the much sought after tactical innovations and technologies of the Automatic DMF to a large, ambidextrous use knife. Textured G-10 handle gives the DMF Folder a sure grip in gloved hands and maintains a perfect weight balance."
 	--Lambo
-	realnames["bm_melee_rambo_desc"] = "A survival knife with a heavy bowie blade. The length, sawtooth spine and centered tip works just as well in the wilderness as it does in close combat."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_rambo_desc" and "A survival knife with a heavy bowie blade. The length, sawtooth spine and centered tip works just as well in the wilderness as it does in close combat."
 	
 	--Tomahawk
-	realnames["bm_melee_tomahawk"] = "Gerber Downrange Tomahawk"
-	realnames["bm_melee_tomahawk_desc"] = "When you're in a situation where time is of the essence, you can't waste time wondering if you have the right tool for the heist. No matter what's on the other side of that door or vault, you want a tool with the same single-minded determination as the robber wielding it."
-	--Machete
-	realnames["bm_melee_becker"] = "KA-BAR Becker Tac Tool"
-	realnames["bm_melee_becker_desc"] = "A design collaboration between Ethan Becker of BK&T and John Benner of TDI, the Tac Tool smashes, bashes, prys, hammers and cuts.\n\nIt is equally powerful at lifting stubborn hinge pins, prying open doors or windows, and hammering out display cases as it is efficient at cutting police cable ties."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_tomahawk" and "Gerber Downrange Tomahawk"
+	or string_id == "bm_melee_tomahawk_desc" and "When you're in a situation where time is of the essence, you can't waste time wondering if you have the right tool for the heist. No matter what's on the other side of that door or vault, you want a tool with the same single-minded determination as the robber wielding it."
+	--Becker Machete
+	or DMCWO.reelnaems == true and string_id == "bm_melee_becker" and "KA-BAR Becker Tac Tool"
+	or string_id == "bm_melee_becker_desc" and "A design collaboration between Ethan Becker of BK&T and John Benner of TDI, the Tac Tool smashes, bashes, prys, hammers and cuts.\n\nIt is equally powerful at lifting stubborn hinge pins, prying open doors or windows, and hammering out display cases as it is efficient at cutting police cable ties."
 	--Baton
-	realnames["bm_melee_baton"] = "ASP Friction Loc Baton"
-	realnames["bm_melee_baton_desc"] = "The ASP Friction Loc Baton is the most tactically sophisticated impact weapon currently available to law enforcement. Tested by the most elite federal teams, it has proven itself virtually indestructible.\n\nIt's rather ironic that you're using it against them now."	
+	or DMCWO.reelnaems == true and string_id == "bm_melee_baton" and "ASP Friction Loc Baton"
+	or string_id == "bm_melee_baton_desc" and "The ASP Friction Loc Baton is the most tactically sophisticated impact weapon currently available to law enforcement. Tested by the most elite federal teams, it has proven itself virtually indestructible.\n\nIt's rather ironic that you're using it against them now."	
 	--Shovel
-	realnames["bm_melee_shovel"] = "KLAS Shovel"
-	realnames["bm_melee_shovel_desc"] = "The KLAS shovel can be used for a variety of recreational purposes. It can also be used as a weapon - sharpen the edges and you'll be cutting through flesh and bone.\n\nIf you use it correctly, that is.\n\nWhich you don't."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_shovel" and "KLAS Shovel"
+	or string_id == "bm_melee_shovel_desc" and "The KLAS shovel can be used for a variety of recreational purposes. It can also be used as a weapon - sharpen the edges and you'll be cutting through flesh and bone.\n\nIf you use it correctly, that is.\n\nWhich you don't."
 	
 	--EMONE
-	realnames["bm_melee_moneybundle"] = "LODS OF EMONE"
-	realnames["bm_melee_moneybundle_desc"] = "L-O-D-S OF E-M-O-N-E\nWhat's that spell?\nLOADSAMONEY!\n\nProb'ly.\n\nWOP IT OUT!"
+	or DMCWO.reelnaems == true and string_id == "bm_melee_moneybundle" and "LODS OF EMONE"
+	or string_id == "bm_melee_moneybundle_desc" and "L-O-D-S OF E-M-O-N-E\nWhat's that spell?\nLOADSAMONEY!\n\nProb'ly.\n\nWOP IT OUT!"
 	
 	--AAAA-TATATATATATATA
-	realnames["bm_melee_fists_desc"] = "You're no boxer, but you can still throw a pretty good punch. All it takes is some strength, speed and timing and you'll land a striking blow in no time."
+	or string_id == "bm_melee_fists_desc" and "You're no boxer, but you can still throw a pretty good punch. All it takes is some strength, speed and timing and you'll land a striking blow in no time."
 	
 	--KA-NUCKLES
-	realnames["bm_melee_brass_knuckles_desc"] = "Knuckle style weapons have been used all over the world for hundreds of years. Brass knuckles concentrate the punch's force by directing it towards a harder and smaller area, increasing the chanecs of tissue disruption. Hit hard enough and you'll even fracture some bones."
+	or string_id == "bm_melee_brass_knuckles_desc" and "Knuckle style weapons have been used all over the world for hundreds of years. Brass knuckles concentrate the punch's force by directing it towards a harder and smaller area, increasing the chanecs of tissue disruption. Hit hard enough and you'll even fracture some bones."
 
 	--TWD Bat
-	realnames["bm_melee_baseballbat"] = "\"Lucille\""
-	realnames["bm_melee_baseballbat_desc"] = "A baseball bat that has been given the name of \"Lucille\". It's been said that Lucille was used to bash a man's skull in, teach some unruly folks a lesson.\n\nNow that you have it, perhaps you could do the same and teach those cops a thing or two.\n"
+	or DMCWO.reelnaems == true and string_id == "bm_melee_baseballbat" and "\"Lucille\""
+	or string_id == "bm_melee_baseballbat_desc" and "A baseball bat that has been given the name of \"Lucille\". It's been said that Lucille was used to bash a man's skull in, teach some unruly folks a lesson.\n\nNow that you have it, perhaps you could do the same and teach those cops a thing or two.\n"
 	
 	--Bayonet
-	realnames["bm_melee_bayonet"] = "AKM Type II Bayonet"	
-	realnames["bm_melee_bayonet_desc"] = "A rugged bayonet, meant for mounting on the end of your AK and thrusting it into the bodies of your foes.\n\nDoing that makes sense though. You'll just use it like a regular knife, won't you?\n"	
+	or DMCWO.reelnaems == true and string_id == "bm_melee_bayonet" and "AKM Type II Bayonet"	
+	or string_id == "bm_melee_bayonet_desc" and "A rugged bayonet, meant for mounting on the end of your AK and thrusting it into the bodies of your foes.\n\nDoing that makes sense though. You'll just use it like a regular knife, won't you?\n"	
 	
 	--Bullseye
-	realnames["bm_melee_bullseye"] = "Smith & Wesson Bullseye Hatchet"
-	realnames["bm_melee_bullseye_desc"] = "I don't even know what to say to be honest - this is not something you would bring to a fight unless you were some kind of psycho, right?\nI mean, this is intended for chopping logs and going camping, not robbing banks.\n\nRight?"
+	or DMCWO.reelnaems == true and string_id == "bm_melee_bullseye" and "Smith & Wesson Bullseye Hatchet"
+	or string_id == "bm_melee_bullseye_desc" and "I don't even know what to say to be honest - this is not something you would bring to a fight unless you were some kind of psycho, right?\nI mean, this is intended for chopping logs and going camping, not robbing banks.\n\nRight?"
 	
 	--X46
-	realnames["bm_melee_x46"] = "Robson Knives X46 Utility Survival Knife"
-	realnames["bm_melee_x46_desc"] = "The X46 is a single 6\" piece of coated A2 steel in a partially serrated bowie blade configuration with a false top edge.\nIntergrated guard and glass breaker pommel tip.\nThe multi-purpose field design of this knife makes it as useful on the battlefield as it is in an emergency."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_x46" and "Robson Knives X46 Utility Survival Knife"
+	or string_id == "bm_melee_x46_desc" and "The X46 is a single 6\" piece of coated A2 steel in a partially serrated bowie blade configuration with a false top edge.\nIntergrated guard and glass breaker pommel tip.\nThe multi-purpose field design of this knife makes it as useful on the battlefield as it is in an emergency."
 	
 	--Gunther
-	realnames["bm_melee_dingdong"] = "Gerber Ding Dong Breaching Tool"
-	realnames["bm_melee_dingdong_desc"] = "A sledgehammer.\nA battering ram.\nA pry bar.\nAll three are essential breaching tools for heisters who need to get through doors quickly. The Ding Dong combines these three tools into one package as tight as the crew."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_dingdong" and "Gerber Ding Dong Breaching Tool"
+	or string_id == "bm_melee_dingdong_desc" and "A sledgehammer.\nA battering ram.\nA pry bar.\nAll three are essential breaching tools for heisters who need to get through doors quickly. The Ding Dong combines these three tools into one package as tight as the crew."
 	
-	--Cleaver
-	realnames["bm_melee_cleaver"] = "Cleaver"
-	realnames["bm_melee_cleaver_desc"] = "Your run of the mill cleaver.\n\nThe grip of this cleaver is rather slippery in your gloved hands so I'm telling you this now, you gotta get a grip on it unless you feel like tossing it."
+	--Cleaver girl
+	or DMCWO.reelnaems == true and string_id == "bm_melee_cleaver" and "Cleaver"
+	or string_id == "bm_melee_cleaver_desc" and "Your run of the mill cleaver.\n\nThe grip of this cleaver is rather slippery in your gloved hands so I'm telling you this now, you gotta get a grip on it unless you feel like tossing it."
 	
 	--Batshit insane
-	realnames["bm_melee_bat_desc"] = "A baseball bat, no more, no less.\n\nMeant for use in sport, you'll be using it fo something much more sinister.\n\nLike bashing in the head of an officer of the law."
+	or string_id == "bm_melee_bat_desc" and "A baseball bat, no more, no less.\n\nMeant for use in sport, you'll be using it fo something much more sinister.\n\nLike bashing in the head of an officer of the law."
 	
 	--Machete
-	realnames["bm_melee_machete"] = "Machete"
-	realnames["bm_melee_machete_desc"] = "You like hurting people. That's why you use this dull, worn to shit machete, allowing you to revel in the horrific aftermath of your work.\n\nGaping wounds, crudely chopped off body parts and the blood curdling screams of agony from that cop you failed to kill quickly.\n\nTruly the weapon of a cruel, cruel heister."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_machete" and "Machete"
+	or string_id == "bm_melee_machete_desc" and "You like hurting people. That's why you use this dull, worn to shit machete, allowing you to revel in the horrific aftermath of your work.\n\nGaping wounds, crudely chopped off body parts and the blood curdling screams of agony from that cop you failed to kill quickly.\n\nTruly the weapon of a cruel, cruel heister."
 	
 	--Fireaxe
-	realnames["bm_melee_fireaxe_desc"] = "Can I axe you a question?\n\nDo you like hurting other people?\n\nIf you do, what better way to do it than with something intended to save lives! Show your victims the fire in your eyes as you save them from yourself in one quick swing."
+	or string_id == "bm_melee_fireaxe_desc" and "Can I axe you a question?\n\nDo you like hurting other people?\n\nIf you do, what better way to do it than with something intended to save lives! Show your victims the fire in your eyes as you save them from yourself in one quick swing."
 	
 	--Briefcase
-	realnames["menu_l_global_value_hlm_game"] = "This is a Hotline Miami Ownership item!"
-	realnames["bm_melee_briefcase_desc"] = "Call it a blessing, but maybe it was for the best you lost the lock combination.\n\nNow you have an excuse to hit people over the head with this!\n"
+	or DMCWO.reelnaems == true and string_id == "menu_l_global_value_hlm_game" and "This is a Hotline Miami Ownership item!"
+	or string_id == "bm_melee_briefcase_desc" and "Call it a blessing, but maybe it was for the best you lost the lock combination.\n\nNow you have an excuse to hit people over the head with this!\n"
 	
 	--Tanto
-	realnames["bm_melee_kabar_tanto"] = "KA-BAR Tanto"
-	realnames["bm_melee_kabar_tanto_desc"] = "The Tanto blade shape, of Asian influence, has a thick pointed blade that's good for penetration. Coupled with a glass-filled nylon sheath this knife is designed for the toughest of tasks."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_kabar_tanto" and "KA-BAR Tanto"
+	or string_id == "bm_melee_kabar_tanto_desc" and "The Tanto blade shape, of Asian influence, has a thick pointed blade that's good for penetration. Coupled with a glass-filled nylon sheath this knife is designed for the toughest of tasks."
 	
 	--UberHaxorNova
-	realnames["bm_melee_toothbrush_desc"] = "A small plastic toothbrush, sharpened and hardened, ready to be driven into the side of your next victim.\n\nNova-ne will see it coming."
+	or string_id == "bm_melee_toothbrush_desc" and "A small plastic toothbrush, sharpened and hardened, ready to be driven into the side of your next victim.\n\nNova-ne will see it coming."
 	
 	--Chef
-	realnames["bm_melee_chef"] = "Chef Knife"
-	realnames["bm_melee_chef_desc"] = "Take this!\n\nWhether you're an angry heister or a psycho bank robber, this hot-forged, laser sharpened chef knife in fine, stainless molybdenum steel will serve you for years.\n\nDid you know that the traditional chef's knife was originally intended to slice and disjoint large cuts of flesh?"
+	or DMCWO.reelnaems == true and string_id == "bm_melee_chef" and "Chef Knife"
+	or string_id == "bm_melee_chef_desc" and "Take this!\n\nWhether you're an angry heister or a psycho bank robber, this hot-forged, laser sharpened chef knife in fine, stainless molybdenum steel will serve you for years.\n\nDid you know that the traditional chef's knife was originally intended to slice and disjoint large cuts of flesh?"
 	
 	--Trench Knife
-	realnames["bm_melee_fairbair"] = "Fairbairn-Sykes Fighting Knife"
-	realnames["bm_melee_fairbair_desc"] = "The Fairbairn-Sykes fighting knife is a double-edged fighting knife resembling a dagger or poignard with a foil grip. Good for those rough-n-tumble moments you can find yourself in while on a job."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_fairbair" and "Fairbairn-Sykes Fighting Knife"
+	or string_id == "bm_melee_fairbair_desc" and "The Fairbairn-Sykes fighting knife is a double-edged fighting knife resembling a dagger or poignard with a foil grip. Good for those rough-n-tumble moments you can find yourself in while on a job."
 	
-	realnames["bm_melee_swagger_desc"] = "Hello heisters. Look at your knife, now back to this, now back at your knife, now back to this.\n\nSadly, your knife isn't as swag as this, but if you stopped using that pansy ass knife and started using this swagger stick, you could be ballin' all over those cops."
+	or string_id == "bm_melee_swagger_desc" and "Hello heisters. Look at your knife, now back to this, now back at your knife, now back to this.\n\nSadly, your knife isn't as swag as this, but if you stopped using that pansy ass knife and started using this swagger stick, you could be ballin' all over those cops."
 
 	--Amerigan flag :DDD
-	realnames["bm_melee_freedom_desc"] = "Thirteen stripes of red alternating with white, a blue rectangle in the canton, fifty small, white, five pointed stars, a pinch of partriotism, two cups of freedom and a broken flag pole.\n\nVoila - you have yourself a deadly weapon."
+	or string_id == "bm_melee_freedom_desc" and "Thirteen stripes of red alternating with white, a blue rectangle in the canton, fifty small, white, five pointed stars, a pinch of partriotism, two cups of freedom and a broken flag pole.\n\nVoila - you have yourself a deadly weapon."
 
 	--Erica Hartmann
-	realnames["bm_melee_model24"] = "Model 24 Stielhandgranate"
-	realnames["bm_melee_model24_desc"] = "Why would anyone ever use a grenade as a melee weapon?\n\nStrike to the head?\nWitch-ful thinking?\n\nI guess those that have tried and lived are really grenade-ful it didn't go off."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_model24" and "Model 24 Stielhandgranate"
+	or string_id == "bm_melee_model24_desc" and "Why would anyone ever use a grenade as a melee weapon?\n\nStrike to the head?\nWitch-ful thinking?\n\nI guess those that have tried and lived are really grenade-ful it didn't go off."
 	
 	--Hammer time
-	realnames["bm_melee_hammer"] = "Jacket's Hammer"
-	realnames["bm_melee_hammer_desc"] = "The Jacket says, \"Do you know what time it is?\"\n\nWhy it's time to hammer some skulls in of course!\n\nCops won't be touching you, that's for sure."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_hammer" and "Jacket's Hammer"
+	or string_id == "bm_melee_hammer_desc" and "The Jacket says, \"Do you know what time it is?\"\n\nWhy it's time to hammer some skulls in of course!\n\nCops won't be touching you, that's for sure."
 	
 	--Mayweather a boring
-	realnames["bm_melee_boxing_gloves_desc"] = "Time to come out swinging!\nSlip these beauties on and unleash 1000 pounds of peak punching power!\n\nThat is if you actually fight and not just run around avoiding conflict..."
+	or string_id == "bm_melee_boxing_gloves_desc" and "Time to come out swinging!\nSlip these beauties on and unleash 1000 pounds of peak punching power!\n\nThat is if you actually fight and not just run around avoiding conflict..."
 	
 	--A stick of lies
-	realnames["bm_melee_shillelagh_desc"] = "It's hard to determine the true origins of the shillelagh. How can you pinpoint the first time someone picked up a stout stick and brained someone else with it? And the shillelagh really hasn't evolved too much beyond that. Some prize blackthorn wood, while some might fill the head with molten lead.\n\nAt the end of the day, it really is just a bloody heavy stick that cracks skulls."
+	or string_id == "bm_melee_shillelagh_desc" and "It's hard to determine the true origins of the shillelagh. How can you pinpoint the first time someone picked up a stout stick and brained someone else with it? And the shillelagh really hasn't evolved too much beyond that. Some prize blackthorn wood, while some might fill the head with molten lead.\n\nAt the end of the day, it really is just a bloody heavy stick that cracks skulls."
 	
 	--SJW Whiskey
-	realnames["bm_melee_whiskey_desc"] = "Know what makes you a good heister?\n\nReading this message obviously. Clear indication you haven't been caught."
+	or string_id == "bm_melee_whiskey_desc" and "Know what makes you a good heister?\n\nReading this message obviously. Clear indication you haven't been caught."
 	
 	--Another Cleaver
-	realnames["bm_melee_meat_cleaver"] = "Dragan's Cleaver"
-	realnames["bm_melee_meat_cleaver_desc"] = "The cleaver is a kind of knife primarily used for cutting through meat and bone, but rather than using precise cuts the cleaver delivers powerful hammer-like blows that rend even the most durable flesh. Cleavers have a long history of butchering human beings as well as livestock.\n\nYou'll be doing the former."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_meat_cleaver" and "Dragan's Cleaver"
+	or string_id == "bm_melee_meat_cleaver_desc" and "The cleaver is a kind of knife primarily used for cutting through meat and bone, but rather than using precise cuts the cleaver delivers powerful hammer-like blows that rend even the most durable flesh. Cleavers have a long history of butchering human beings as well as livestock.\n\nYou'll be doing the former."
 	 
 	--Tender lovin'
-	realnames["bm_melee_poker"] = "Firewood Poker"
-	realnames["bm_melee_poker_desc"] = "A long piece of iron with a pointy end is a fine implement for tending to smoldering embers, but it is also the perfect implement for causing havoc and extreme discomfort.\n\nTell'em to poker up!"
+	or DMCWO.reelnaems == true and string_id == "bm_melee_poker" and "Firewood Poker"
+	or string_id == "bm_melee_poker_desc" and "A long piece of iron with a pointy end is a fine implement for tending to smoldering embers, but it is also the perfect implement for causing havoc and extreme discomfort.\n\nTell'em to poker up!"
 	
 	--Tender lovin'
-	realnames["bm_melee_tenderizer"] = "Meat Tenderizer"
-	realnames["bm_melee_tenderizer_desc"] = "While it was mainly designed for softening and flattening tough strips of steak, it has also proven useful for softening and flattening tough strips of cop.\n\nShow'em some tender lovin'!"
+	or DMCWO.reelnaems == true and string_id == "bm_melee_tenderizer" and "Meat Tenderizer"
+	or string_id == "bm_melee_tenderizer_desc" and "While it was mainly designed for softening and flattening tough strips of steak, it has also proven useful for softening and flattening tough strips of cop.\n\nShow'em some tender lovin'!"
 	
 	--Fork her
-	realnames["bm_melee_fork"] = "BBQ Fork"
-	realnames["bm_melee_fork_desc"] = "What's the difference between a truckload of bowling balls and a truckload of dead dozers? You can't unload a truckload of bowling balls with a fork.\n\nGive'em a good forkin'!"
+	or DMCWO.reelnaems == true and string_id == "bm_melee_fork" and "BBQ Fork"
+	or string_id == "bm_melee_fork_desc" and "What's the difference between a truckload of bowling balls and a truckload of dead dozers? You can't unload a truckload of bowling balls with a fork.\n\nGive'em a good forkin'!"
 	
 	--Spangle Beb
-	realnames["bm_melee_spatula_desc"] = "A melee weapon with a dual purpose - use it to smear a cop all across the road, and then let others use it to scoop up their remains.\n\nGet'em faces sizzlin'!"
+	or string_id == "bm_melee_spatula_desc" and "A melee weapon with a dual purpose - use it to smear a cop all across the road, and then let others use it to scoop up their remains.\n\nGet'em faces sizzlin'!"
 	
 	--Autism
-	realnames["bm_melee_mining_pick"] = "Pickaxe"
-	realnames["bm_melee_mining_pick_desc"] = "There's gold in 'dem 'der hills! And by hills we mean teeth. But, hills or teeth, nothing digs the gold out faster than a swinging spike of pig iron."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_mining_pick" and "Pickaxe"
+	or string_id == "bm_melee_mining_pick_desc" and "There's gold in 'dem 'der hills! And by hills we mean teeth. But, hills or teeth, nothing digs the gold out faster than a swinging spike of pig iron."
 	
 	--Ebay sellers
-	realnames["bm_melee_scalper_desc"] = "For the victor, it is the symbol of war, of power and of dominance. For the loser, it is the symbol of a really bad haircut."
+	or string_id == "bm_melee_scalper_desc" and "For the victor, it is the symbol of war, of power and of dominance. For the loser, it is the symbol of a really bad haircut."
 	
 	--NAOW THIS IS A KNOIFE
-	realnames["bm_melee_bowie"] = "Bowie Knife"
-	realnames["bm_melee_bowie_desc"] = "Nine inches of clip-point fighting steel. It's origins lie in the age of the classic pirate, but it was the famous Brawl of Carroll County (and a dozen bloodied men) that brought it wide-spread fame"
+	or DMCWO.reelnaems == true and string_id == "bm_melee_bowie" and "Bowie Knife"
+	or string_id == "bm_melee_bowie_desc" and "Nine inches of clip-point fighting steel. It's origins lie in the age of the classic pirate, but it was the famous Brawl of Carroll County (and a dozen bloodied men) that brought it wide-spread fame"
 	
 	--MY BRAND
-	realnames["bm_melee_branding_iron"] = "Branding Iron"
-	realnames["bm_melee_branding_iron_desc"] = "It may have been designed to mark the thick hides of cattle for identification, but fire-heated iron is even more effective against the soft flesh of a deputy or marshall."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_branding_iron" and "Branding Iron"
+	or string_id == "bm_melee_branding_iron_desc" and "It may have been designed to mark the thick hides of cattle for identification, but fire-heated iron is even more effective against the soft flesh of a deputy or marshall."
 	
-	--Mike
-	realnames["bm_melee_microphone_desc"] = "A microphone you ask?\n\nIndeed it is. A dinky little microphone at that.\n\nNot much else to say,"
+	--*drops*
+	or string_id == "bm_melee_microphone_desc" and "A microphone you ask?\n\nIndeed it is. A dinky little microphone at that.\n\nNot much else to say,"
 
-	--Mike Stands
-	realnames["bm_melee_micstand_desc"] = "Can't quite understand why you'd use this.\n\nMaybe like how a singer can keep rabid folk away and off the stage, you can do the same with cops rushing you and off your loot."
+	--Mike Standklasa
+	or string_id == "bm_melee_micstand_desc" and "Can't quite underSTAND why you'd use this.\n\nMaybe you just can't STAND the presence of cops.\n\n...Sorry."
 	
 	--WOLOLOLO
-	realnames["bm_melee_oldbaton"] = "Nightstick"
-	realnames["bm_melee_oldbaton_desc"] = "Be one of the night and stick it to the man!\n\nShow them irony, show them pain!\nShow them in the end that this is (not) a game!"
+	or DMCWO.reelnaems == true and string_id == "bm_melee_oldbaton" and "Nightstick"
+	or string_id == "bm_melee_oldbaton_desc" and "Be one of the night and stick it to the man!\n\nShow them irony, show them pain!\nShow them in the end that this is (not) a game!"
 	
 	--WHOOP WHOOP PULL OVAH THAT BRASS TOO FAT
-	realnames["bm_melee_detector"] = "Garrett Handheld Metal Detector"
-	realnames["bm_melee_detector_desc"] = "You should probably leave this thing off if you plan on taking it with you on your next job.\n\nUnless you plan on wreaking havoc from the get go, then by all means go ahead and have fun."
+	or DMCWO.reelnaems == true and string_id == "bm_melee_detector" and "Garrett Handheld Metal Detector"
+	or string_id == "bm_melee_detector_desc" and "You should probably leave this thing off if you plan on taking it with you on your next job.\n\nUnless you plan on wreaking havoc from the get go, then by all means go ahead and have fun."
 	
-	--Stun Baton
-	realnames["bm_melee_taser"] = "ZAP Stun Baton"
+	--ZAP ZAP MOTHERFUCKER
+	or DMCWO.reelnaems == true and string_id == "bm_melee_taser" and "ZAP Stun Baton"
 	
 	--Kunai
-	realnames["bm_melee_cqc"] = "Kunai"
-	--Sai
-	realnames["bm_melee_twins"] = "Sais"
+	or DMCWO.reelnaems == true and string_id == "bm_melee_cqc" and "Kunai"
+	--MMM Whatcha Sai~
+	or DMCWO.reelnaems == true and string_id == "bm_melee_twins" and "Sais"
 	--Tekko-Kagi
-	realnames["bm_melee_tiger"] = "Tekko-Kagi"
+	or DMCWO.reelnaems == true and string_id == "bm_melee_tiger" and "Tekko-Kagi"
 	
-	realnames["bm_armor_level_5"] = "Flak Jacket A Bigger Shit"
-	realnames["bm_armor_level_6"] = "Combined Tactical Vest A Shit"
+	--This is actually my first katana
+	or string_id == "bm_melee_sandsteel_desc" and "The Shinsakuto-Katana is a masterpiece, but also freshly forged.\n\nIt has not tasted blood, and has no real heritage or history. It is simply waiting for a wielder with which to create that."
 	
-	realnames["bm_menu_custom"] = "Internal Mod"
-	realnames["bm_menu_extra"] = "Rail"
-	realnames["bm_menu_upper_reciever"] = "Upper Body Mod"
-	realnames["bm_menu_lower_reciever"] = "Lower Body Mod"
-	realnames["bm_menu_slide"] = "Barrel/Slide"
-	realnames["bm_menu_grip"] = "Pistol Grip"
-	realnames["bm_menu_barrel_ext"] = "Barrel Extension"
-	realnames["bm_menu_foregrip"] = "Handguard"
-	realnames["bm_menu_sight"] = "Optic"
+	--Ayy L-Maul
+	or string_id == "bm_melee_alien_maul_desc" and "Ayy L-maul. A hammer made to commemorate the launch of the Alienware Alpha."
+		
+	or testAllStrings == true and string_id
+	or text_original(self, string_id, ...)
 	
-	--pseudo-catagories
-	realnames["menu_anti_mat"] = "Anti Materiel Rifles"
-	realnames["menu_pdw"] = "PDWs"
-	realnames["menu_mach_pis"] = "Machine Pistols"
-	realnames["menu_battle_rifle"] = "Battle Rifles"
-	realnames["menu_carbine"] = "Carbines"
-	realnames["menu_gpmg"] = "General Purpose Machine Guns"
-	realnames["menu_revolvo"] = "Revolvers"
-	
-	realnames["menu_pistol"] = "Pistols"
-	realnames["menu_lmg"] = "Light Machine Guns"
-	realnames["menu_shotgun"] = "Shotguns"
-	realnames["menu_assault_rifle"] = "Assault Rifles"
-	realnames["menu_snp"] = "Rifles"
-	realnames["menu_smg"] = "Sub-Machine Guns"
-	
-	realnames["menu_jowi"] = "Wick"
-	
-	--Compatibility with SC's mod(s)
-	realnames["menu_smg_master_desc_sc"] = "BASIC: ##1 point / $56,500##\nIncreases your reload speed of SMG weapons by ##35%##.\n\nACE: ##3 points / $168,500##\nYou deal ##15%## more damage with SMG weapons."
-
-	--Compatibility with lekousin's ArmorOverhaul
-	realnames["bm_menu_regen"] = "Regen per second"
-	realnames["bm_menu_deflect_min_dmg"] = "Dmg max deflect"
-	realnames["bm_menu_deflect_min_procent"] = "Max deflect chance"
-	realnames["bm_menu_deflect_max_dmg"] = "Dmg min deflect"
-	realnames["bm_menu_deflect_max_procent"] = "Min deflect chance"
-	realnames["bm_menu_hdr_min_dmg"] = "Min HDR dmg"
-	realnames["bm_menu_hdr_min_procent"] = "Min HDR value"
-	realnames["bm_menu_hdr_max_dmg"] = "Max HDR dmg"
-	realnames["bm_menu_hdr_max_procent"] = "Max HDR value"
-	realnames["bm_menu_explosion_damage_reduction"] = "Explosion damage reduction"
-	realnames["bm_menu_ammo_mul"] = "Ammo multiplier"
-	
-    if realnames[string_id] then return realnames[string_id] end
-    return LocalizationManager_text(self, string_id, macros)
 end

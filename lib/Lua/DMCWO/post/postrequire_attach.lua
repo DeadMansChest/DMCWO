@@ -1,5 +1,5 @@
 --[[
-v1.41
+v1.42.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -15,6 +15,29 @@ function WeaponFactoryTweakData:init()
 end
 	
 function WeaponFactoryTweakData:DMCWO_general()
+	--Temporary, might reenable this unless something "else" happens --{
+	--[[
+	self.parts.wpn_fps_upg_o_specter.reticle_obj = "g_gfx"
+	self.parts.wpn_fps_upg_o_aimpoint.reticle_obj = "g_gfx"
+	self.parts.wpn_fps_upg_o_aimpoint_2.reticle_obj = "g_gfx"
+	self.parts.wpn_fps_upg_o_docter.reticle_obj = "g_gfx"
+	self.parts.wpn_fps_upg_o_eotech.reticle_obj = "g_reddot"
+	self.parts.wpn_fps_upg_o_t1micro.reticle_obj = "g_gfx"
+	self.parts.wpn_fps_upg_o_cmore.reticle_obj = "g_reddot"
+	self.parts.wpn_fps_upg_o_acog.reticle_obj = "g_reddot"
+	self.parts.wpn_fps_upg_o_cs.reticle_obj = "g_reddot"
+	self.parts.wpn_fps_upg_o_eotech_xps.reticle_obj = "g_reddot"
+	self.parts.wpn_fps_upg_o_reflex.reticle_obj = "g_reddot"
+	self.parts.wpn_fps_upg_o_rx01.reticle_obj = "g_reddot"
+	self.parts.wpn_fps_upg_o_rx30.reticle_obj = "g_reddot"
+	self.parts.wpn_fps_upg_o_rmr.reticle_obj = "g_reddot"
+	]]
+	self.parts.wpn_fps_upg_o_shortdot.reticle_obj = nil
+	self.parts.wpn_fps_upg_o_leupold.reticle_obj = nil
+	self.parts.wpn_fps_pis_c96_sight.reticle_obj = nil
+	self.parts.wpn_fps_upg_winchester_o_classic.reticle_obj = nil
+	--}
+	
 	self.wpn_fps_pis_rage.override = {
 		wpn_fps_upg_o_leupold = { stats = { value = 8, zoom = 10, recoil = 2} },
 		wpn_fps_pis_c96_sight = { stats = { value = 1, zoom = 8, recoil = 1} },
@@ -123,6 +146,7 @@ function WeaponFactoryTweakData:DMCWO_general()
 	}
 	
 	self.wpn_fps_snp_msr.override = {}
+	self.wpn_fps_snp_wa2000.override = {}
 	self.wpn_fps_snp_mosin.override = {}
 	self.wpn_fps_snp_r93.override = {}
 	self.wpn_fps_snp_m95.override = {
@@ -188,7 +212,7 @@ function WeaponFactoryTweakData:DMCWO_general()
 	end
 	
 	local lmg_sights = {
-	"wpn_fps_lmg_mg42","wpn_fps_lmg_hk21","wpn_fps_lmg_m249","wpn_fps_lmg_rpk","wpn_fps_snp_winchester"
+	"wpn_fps_lmg_mg42","wpn_fps_lmg_hk21","wpn_fps_lmg_m249","wpn_fps_lmg_rpk","wpn_fps_snp_winchester","wpn_fps_smg_baka"
 	}
 	for i, factory_id in ipairs(lmg_sights) do
 		table.insert(self[factory_id].uses_parts, "wpn_fps_upg_o_specter")
@@ -414,9 +438,11 @@ function WeaponFactoryTweakData:DMCWO_general()
 	}
 	
 	self.parts.wpn_upg_saiga_m_20rnd.alt_icon = "guis/textures/pd2/blackmarket/icons/mods/magazine"
+	self.parts.wpn_upg_saiga_m_20rnd.animations = {} --Thx SC
 	self.parts.wpn_fps_smg_mp5_m_drum.alt_icon = "guis/textures/pd2/blackmarket/icons/mods/magazine"
 	self.parts.wpn_fps_upg_m4_m_drum.alt_icon = "guis/textures/pd2/blackmarket/icons/mods/magazine"
 	self.parts.wpn_upg_ak_m_drum.alt_icon = "guis/textures/pd2/blackmarket/icons/mods/magazine"
+	
 end
 
 
@@ -478,13 +504,13 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		},
 		custom_stats = {
 			has_ap = true,
-			penetration_power_mult = 1.3,
-			penetration_damage_mult = 1.3,
+			penetration_power_mult = 1.5,
+			penetration_damage_mult = 1.5,
 			can_shoot_through_enemy = true,
 			can_shoot_through_shield = true,
 			ammo_pickup_min_mul = 0.75,
 			ammo_pickup_max_mul = 0.75,
-			armor_piercing_add = 1.3
+			armor_piercing_add = 0.3
 		},
 		--[[ 
 		desc_colors = {
@@ -496,9 +522,18 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		}, 
 		]]
 		internal_part = true,
-		sub_type = "singlefire"
+		sub_type = "ammo_piercing",
+		forbids = {
+			"wpn_fps_smg_sterling_b_e11","wpn_fps_smg_mp5_m_drum","wpn_fps_smg_mp5_m_straight"
+		}
 	}
-	
+	for i, factory_id in ipairs(self.parts.ap_ammo.forbids) do
+		if not self.parts[factory_id].forbids then
+			self.parts[factory_id].forbids = {}
+		end
+		table.insert(self.parts[factory_id].forbids, "ap_ammo")
+	end
+		
 	self.parts.match_ammo = {
 		pcs = {},
 		type = "ammo",
@@ -511,12 +546,12 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		alt_icon = "guis/textures/pd2/blackmarket/icons/deployables/ammo_bag",
 		stats = {
 			value = 3,
-			recoil = -4,
-			spread = 8
+			recoil = -7,
+			spread = 6
 		},
 		custom_stats = {
-			penetration_power_mult = 1.1,
-			penetration_damage_mult = 1.1,
+			ammo_pickup_min_mul = 0.90,
+			ammo_pickup_max_mul = 0.90,
 			damage_near_mul = 1.15, 
 			damage_far_mul = 1.15
 		},
@@ -527,7 +562,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		},
 		]]
 		internal_part = true,
-		sub_type = "ammo_slug",
+		sub_type = "singlefire",
 		forbids = {
 			"wpn_fps_upg_ns_ass_smg_small","wpn_fps_upg_ns_ass_smg_medium","wpn_fps_upg_ns_ass_smg_large",
 			"wpn_fps_snp_msr_ns_suppressor",
@@ -540,7 +575,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 			"wpn_fps_smg_polymer_ns_silencer",
 			"wpn_fps_smg_scorpion_b_suppressed","wpn_fps_smg_uzi_b_suppressed","wpn_fps_smg_cobray_ns_silencer",
 			"wpn_fps_ass_sub2000_fg_suppressed",
-			"wpn_fps_smg_mp9_b_suppressed",
+			"wpn_fps_smg_mp5_fg_mp5sd","wpn_fps_smg_mp9_b_suppressed",
 			"wpn_fps_smg_mp7_b_suppressed","wpn_fps_smg_p90_b_ninja",
 			"wpn_fps_upg_ns_pis_small","wpn_fps_upg_ns_pis_medium","wpn_fps_upg_ns_pis_large",
 			"wpn_fps_upg_ns_pis_medium_slim",
@@ -548,6 +583,13 @@ function WeaponFactoryTweakData:DMCWO_mods()
 			"wpn_fps_upg_ns_pis_jungle","wpn_fps_upg_ns_ass_filter"
 		}
 	}
+	for i, factory_id in ipairs(self.parts.match_ammo.forbids) do
+		if not self.parts[factory_id].forbids then
+			self.parts[factory_id].forbids = {}
+		end
+		table.insert(self.parts[factory_id].forbids, "match_ammo")
+	end
+	
 	self.parts.low_ammo = {
 		pcs = {},
 		type = "ammo",
@@ -563,7 +605,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 			value = 1,
 			damage = -0,
 			spread = -3,
-			recoil = 6
+			recoil = 5
 		},
 		custom_stats = {
 			penetration_power_mult = 0.85,
@@ -581,13 +623,17 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		sub_type = "ammo_slug",
 		forbids = {
 			"wpn_fps_upg_ass_ak_b_zastava","wpn_fps_upg_ass_m4_b_beowulf","wpn_fps_ass_g3_b_sniper",
-			"wpn_fps_ass_famas_b_sniper","wpn_fps_ass_vhs_b_sniper"
+			"wpn_fps_ass_famas_b_sniper","wpn_fps_ass_vhs_b_sniper",
+			"wpn_fps_ammo_type"
 		}
 	}
-	self.parts.wpn_fps_smg_mp5_m_drum.forbids = {"ap_ammo"}
-	self.parts.wpn_fps_smg_mp5_m_straight.forbids = {"ap_ammo"}
-
-	
+	for i, factory_id in ipairs(self.parts.low_ammo.forbids) do
+		if not self.parts[factory_id].forbids then
+			self.parts[factory_id].forbids = {}
+		end
+		table.insert(self.parts[factory_id].forbids, "low_ammo")
+	end
+		
 	local nato_ar_br = {
 		'wpn_fps_lmg_m249',
 		'wpn_fps_ass_amcar','wpn_fps_ass_g36','wpn_fps_ass_s552','wpn_fps_smg_olympic',
@@ -620,7 +666,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		'wpn_fps_jowi','wpn_fps_x_b92fs','wpn_fps_pis_x_g17',
 		'wpn_fps_pis_g17','wpn_fps_pis_beretta','wpn_fps_pis_g26','wpn_fps_smg_tec9',
 		'wpn_fps_pis_g18c','wpn_fps_smg_mp9',
-		'wpn_fps_smg_mp5','wpn_fps_smg_m45','wpn_fps_smg_uzi','wpn_fps_smg_sterling','wpn_fps_smg_cobray',
+		'wpn_fps_smg_mp5','wpn_fps_smg_m45','wpn_fps_smg_uzi','wpn_fps_smg_sterling','wpn_fps_smg_cobray','wpn_fps_smg_baka',
 		'wpn_fps_ass_sub2000'
 	}
 	for i, factory_id in ipairs(nine_mm) do
@@ -628,6 +674,21 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		table.insert(self[factory_id].uses_parts, "ap_ammo")
 		table.insert(self[factory_id].uses_parts, "match_ammo")
 		table.insert(self[factory_id].uses_parts, "low_ammo")
+		if not self[factory_id].override then
+			self[factory_id].override = {}
+		end
+		self[factory_id].override.ap_ammo = {
+			desc_id = "bullet_ap_desc_9mm",
+			custom_stats = {
+				has_ap = true,
+				penetration_power_mult = 1.5,
+				penetration_damage_mult = 1.5,
+				can_shoot_through_enemy = true,
+				ammo_pickup_min_mul = 0.75,
+				ammo_pickup_max_mul = 0.75,
+				armor_piercing_add = 0.3
+			}
+		}
 	end
 	
 	local forty_sw = {
@@ -653,7 +714,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 	local fortyfive_acp = {
 		'wpn_fps_x_1911','wpn_fps_pis_x_usp',
 		'wpn_fps_pis_usp','wpn_fps_pis_1911',
-		'wpn_fps_smg_mac10','wpn_fps_smg_polymer'
+		'wpn_fps_smg_mac10','wpn_fps_smg_thompson','wpn_fps_smg_polymer'
 	}
 	for i, factory_id in ipairs(fortyfive_acp) do
 		table.insert(self[factory_id].uses_parts, "hp_ammo")
@@ -663,7 +724,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 	
 	local magnum = {
 		'wpn_fps_x_deagle',
-		'wpn_fps_pis_rage','wpn_fps_pis_deagle','wpn_fps_pis_2006m',
+		'wpn_fps_pis_rage','wpn_fps_pis_deagle','wpn_fps_pis_2006m','wpn_fps_pis_peacemaker',
 		'wpn_fps_snp_winchester'
 	}
 	for i, factory_id in ipairs(magnum) do
@@ -684,18 +745,32 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		table.insert(self[factory_id].uses_parts, "hp_ammo")
 		table.insert(self[factory_id].uses_parts, "ap_ammo")
 		table.insert(self[factory_id].uses_parts, "low_ammo")
+		
+		self[factory_id].override.ap_ammo = {
+			custom_stats = {
+				has_ap = true,
+				penetration_power_mult = 1.5,
+				penetration_damage_mult = 1.5,
+				ammo_pickup_min_mul = 0.75,
+				ammo_pickup_max_mul = 0.75,
+				armor_piercing_add = 0.3,
+				shield_damage = 1.05
+			},
+			desc_id = "bullet_ap_desc_has_pen"
+		}
+		
 	end
 	
 	local other_guns = {
 		'wpn_fps_lmg_mg42',
-		'wpn_fps_pis_c96',
+		'wpn_fps_pis_c96'
 	}	
 	for i, factory_id in ipairs(other_guns) do
 		table.insert(self[factory_id].uses_parts, "low_ammo")
 	end
 
 	local ap_only = {
-		'wpn_fps_ass_asval',
+		'wpn_fps_ass_asval','wpn_fps_snp_r93'
 	}	
 	for i, factory_id in ipairs(ap_only) do
 		table.insert(self[factory_id].uses_parts, "ap_ammo")
@@ -713,7 +788,17 @@ function WeaponFactoryTweakData:DMCWO_mods()
 				value = 5,
 				damage = -4,
 				total_ammo_mod = -50
-			}
+			},
+			custom_stats = {
+				has_ap = true,
+				penetration_power_mult = 1.5,
+				penetration_damage_mult = 1.5,
+				ammo_pickup_min_mul = 0.75,
+				ammo_pickup_max_mul = 0.75,
+				armor_piercing_add = 0.3,
+				shield_damage = 1.05
+			},
+			desc_id = "bullet_ap_desc_has_pen"
 		}
 		self[factory_id].override.hp_ammo = { 
 			stats = {
@@ -767,7 +852,260 @@ function WeaponFactoryTweakData:DMCWO_mods()
 	
 	table.insert(self.wpn_fps_lmg_m134.uses_parts, "m134_slow")
 	table.insert(self.wpn_fps_lmg_m134.uses_parts, "m134_slower")
-
+	
+	self.parts.corbon_ammo = {
+		pcs = {},
+		type = "custom",
+		name_id = "bullet_corbon",
+		a_obj = "a_body",
+		unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		third_unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		dlc = "dmcwo",
+		is_a_unlockable = true,
+		alt_icon = "guis/textures/pd2/blackmarket/icons/deployables/ammo_bag",
+		stats = {
+			value = 12,
+			damage = 8,
+			spread = 2,
+			recoil = 3,
+			total_ammo_mod = -100
+		},
+		custom_stats = {
+			penetration_power_mult = 1.15, 
+			penetration_damage_mult = 1.15,
+			ammo_pickup_min_mul = 0.5,
+			ammo_pickup_max_mul = 0.5,
+			damage_near_mul = 1.10, 
+			damage_far_mul = 1.10
+		},
+		internal_part = true,
+		sub_type = "singlefire",
+		forbids = {
+			"hp_ammo","low_ammo","match_ammo"
+		}
+	}
+	for i, factory_id in ipairs(self.parts.low_ammo.forbids) do
+		if not self.parts[factory_id].forbids then
+			self.parts[factory_id].forbids = {}
+		end
+		table.insert(self.parts[factory_id].forbids, "corbon_ammo")
+	end
+	table.insert(self.wpn_fps_pis_deagle.uses_parts, "corbon_ammo")
+	table.insert(self.wpn_fps_x_deagle.uses_parts, "corbon_ammo")
+	
+	self.parts.win_300_ammo = {
+		pcs = {},
+		type = "custom",
+		name_id = "bullet_300_win",
+		a_obj = "a_body",
+		unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		third_unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		dlc = "dmcwo",
+		is_a_unlockable = true,
+		alt_icon = "guis/textures/pd2/blackmarket/icons/deployables/ammo_bag",
+		stats = {
+			value = 7,
+			damage = 0,
+			spread = 1,
+			recoil = 0,
+			total_ammo_mod = 0,
+			extra_ammo = 0
+		},
+		custom_stats = {
+			damage_far_mul = 1.15, 
+			damage_far_mul = 1.15,
+			ammo_pickup_min_mul = 0.90,
+			ammo_pickup_max_mul = 0.90
+		},
+		internal_part = true,
+		sub_type = "singlefire"
+	}
+	
+	table.insert(self.wpn_fps_snp_msr.uses_parts, "win_300_ammo")
+	table.insert(self.wpn_fps_snp_wa2000.uses_parts, "win_300_ammo")
+	table.insert(self.wpn_fps_snp_r93.uses_parts, "win_300_ammo")
+	
+	self.wpn_fps_snp_msr.override.win_300_ammo = {
+		stats = {
+			value = 7,
+			damage = 0,
+			spread = 1,
+			recoil = 0,
+			total_ammo_mod = 0,
+			extra_ammo = -4
+		}
+	}
+	self.wpn_fps_snp_r93.override.win_300_ammo = {
+		stats = {
+			value = 7,
+			damage = -28,
+			spread = -1,
+			recoil = 8,
+			total_ammo_mod = 200,
+			extra_ammo = -2
+		},
+		custom_stats = {
+			damage_far_mul = 0.90, 
+			damage_far_mul = 0.90,
+			ammo_pickup_min_mul = 1.1,
+			ammo_pickup_max_mul = 1.1
+		},
+		desc_id = "bullet_300_win_r93_desc"
+	}
+	--[[
+	self.parts.heiap_ammo = {
+		pcs = {},
+		type = "ammo",
+		name_id = "bullet_heiap",
+		a_obj = "a_body",
+		unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		third_unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		dlc = "dmcwo",
+		is_a_unlockable = true,
+		alt_icon = "guis/textures/pd2/blackmarket/icons/deployables/ammo_bag",
+		stats = {
+			value = 20,
+			damage = 200,
+			total_ammo_mod = -66
+		},
+		custom_stats = {
+			damage_far_mul = 1.15, 
+			damage_far_mul = 1.15,
+			ammo_pickup_min_mul = 0.0,
+			ammo_pickup_max_mul = 0.0
+		},
+		internal_part = true,
+		sub_type = "ammo_explosive"
+	}
+	
+	table.insert(self.wpn_fps_snp_m95.uses_parts, "heiap_ammo")
+	]]
+	
+	self.parts.burst_mod = {
+		pcs = {},
+		type = "custom",
+		name_id = "burstfire",
+		a_obj = "a_body",
+		unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		third_unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		dlc = "dmcwo",
+		is_a_unlockable = true,
+		alt_icon = "guis/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_i_autofire",
+		stats = {
+			value = 10,
+			spread = 0,
+			recoil = 0,
+		},
+		custom_stats = {has_burst_fire = true},
+		perks = {},
+		internal_part = true,
+		sub_type = "autofire",
+		forbids = {
+			"wpn_fps_ass_ak5_fg_ak5a", "wpn_fps_ass_ak5_fg_ak5c"
+		}
+	}
+	for i, factory_id in ipairs(self.parts.burst_mod.forbids) do
+		if not self.parts[factory_id].forbids then
+			self.parts[factory_id].forbids = {}
+		end
+		table.insert(self.parts[factory_id].forbids , "burst_mod")
+	end
+	
+	local swap_auto = { "wpn_fps_ass_amcar","wpn_fps_ass_m4","wpn_fps_ass_m16","wpn_fps_smg_olympic", "wpn_fps_pis_g18c" }
+	for i, factory_id in ipairs(swap_auto) do
+		table.insert(self[factory_id].uses_parts, "burst_mod")
+		if not self[factory_id].override then
+			self[factory_id].override = {}
+		end
+		self[factory_id].override.burst_mod = {
+			custom_stats = {has_burst_fire = true, disable_selector = true},
+			desc_id = "burstfire_desc_m16"
+		}
+	end
+	
+	table.insert(self.wpn_fps_ass_ak5.uses_parts, "burst_mod")
+	
+	table.insert(self.wpn_fps_pis_beretta.uses_parts, "burst_mod")
+	self.wpn_fps_pis_beretta.override.burst_mod = {
+		stats = { value = 10, spread = 0, recoil = -4 },
+		custom_stats = {has_burst_fire = true, disable_selector = true, block_eq_aced = true, burst_rof_mult = 2, hipfire_mod = 2.5},
+		desc_id = "burstfire_desc_raffica"
+	}
+	
+	self.parts.mac_slow = {
+		pcs = {},
+		type = "custom",
+		name_id = "mac_slow",
+		a_obj = "a_body",
+		unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		third_unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		dlc = "dmcwo",
+		is_a_unlockable = true,
+		alt_icon = "guis/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_i_autofire",
+		stats = {
+			value = 5,
+			recoil = 6
+		},
+		custom_stats = {rof_mult = 0.625 },
+		internal_part = true,
+		sub_type = "autofire"
+	}
+	
+	table.insert(self.wpn_fps_smg_mac10.uses_parts, "mac_slow")
+	table.insert(self.wpn_fps_smg_cobray.uses_parts, "mac_slow")
+	
+	self.wpn_fps_smg_mac10.override.mac_slow = {
+		custom_stats = {rof_mult = 0.6521739130434782608695652173913 }
+	}
+	
+		self.parts.sho_birdshot = {
+		pcs = {},
+		type = "ammo",
+		name_id = "bm_wp_upg_a_bird",
+		a_obj = "a_body",
+		unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		third_unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		dlc = "dmcwo",
+		is_a_unlockable = true,
+		alt_icon = "guis/textures/pd2/blackmarket/icons/deployables/ammo_bag",
+		stats = { 
+			value = 5, 
+			damage = -12, 
+			spread = -4, 
+			recoil = 8, 
+			total_ammo_mod = 50 
+		},
+		custom_stats = { 
+			rays = 50, 
+			damage_near_mul = 0.5,
+			damage_far_mul = 0.9, 
+			ammo_pickup_min_mul = 1.025, 
+			ammo_pickup_max_mul = 1.05
+		},
+		internal_part = true,
+		sub_type = "ammo_explosive"
+	}
+	
+	local shotgat = {
+		'wpn_fps_shot_saiga',
+		'wpn_fps_shot_r870',
+		'wpn_fps_shot_serbu',
+		'wpn_fps_sho_ben',
+		'wpn_fps_sho_striker',
+		'wpn_fps_sho_ksg',
+		'wpn_fps_pis_judge',
+		'wpn_fps_sho_aa12'
+	}	
+	for i, factory_id in ipairs(shotgat) do
+		table.insert(self[factory_id].uses_parts, "sho_birdshot")
+	end
+	
+	self.wpn_fps_pis_judge.override.wpn_fps_upg_a_custom_free = { 
+		desc_id = "bm_wp_upg_a_bird_judge",
+		custom_stats = { rays = 30, damage_near_mul = 0.0, ammo_pickup_min_mul = 1.025, ammo_pickup_max_mul = 1.05, damage_far_mul = 0.9}
+	}
+	
+	
 end
 
 elseif RequiredScript == "lib/tweak_data/dlctweakdata" then
@@ -841,6 +1179,74 @@ function DLCTweakData:init(...)
 			amount = 1
 		}
 	}
+	self.dmcwo_corbon_ammo = {}
+	self.dmcwo_corbon_ammo.free = true
+	self.dmcwo_corbon_ammo.content = {}
+	self.dmcwo_corbon_ammo.content.loot_global_value = "dmcwo"
+	self.dmcwo_corbon_ammo.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "corbon_ammo",
+			amount = 1
+		}
+	}
+	self.dmcwo_win_300_ammo = {}
+	self.dmcwo_win_300_ammo.free = true
+	self.dmcwo_win_300_ammo.content = {}
+	self.dmcwo_win_300_ammo.content.loot_global_value = "dmcwo"
+	self.dmcwo_win_300_ammo.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "win_300_ammo",
+			amount = 1
+		}
+	}
+	--[[
+	self.dmcwo_heiap_ammo = {}
+	self.dmcwo_heiap_ammo.free = true
+	self.dmcwo_heiap_ammo.content = {}
+	self.dmcwo_heiap_ammo.content.loot_global_value = "dmcwo"
+	self.dmcwo_heiap_ammo.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "heiap_ammo",
+			amount = 1
+		}
+	}
+	]]
+	self.dmcwo_burst_mod = {}
+	self.dmcwo_burst_mod.free = true
+	self.dmcwo_burst_mod.content = {}
+	self.dmcwo_burst_mod.content.loot_global_value = "dmcwo"
+	self.dmcwo_burst_mod.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "burst_mod",
+			amount = 1
+		}
+	}
+	self.dmcwo_mac_slow = {}
+	self.dmcwo_mac_slow.free = true
+	self.dmcwo_mac_slow.content = {}
+	self.dmcwo_mac_slow.content.loot_global_value = "dmcwo"
+	self.dmcwo_mac_slow.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "mac_slow",
+			amount = 1
+		}
+	}
+	self.dmcwo_birdshot = {}
+	self.dmcwo_birdshot.free = true
+	self.dmcwo_birdshot.content = {}
+	self.dmcwo_birdshot.content.loot_global_value = "dmcwo"
+	self.dmcwo_birdshot.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "sho_birdshot",
+			amount = 1
+		}
+	}
 end
 
 elseif RequiredScript == "lib/tweak_data/lootdroptweakdata" then
@@ -872,14 +1278,61 @@ old_wtd = WeaponTweakData._init_new_weapons
 function WeaponTweakData:_init_new_weapons(...)
 	old_wtd(self,...)
 	
-	self.scar.FIRE_MODE = "single" --starts off on semi-auto like the M14 since it's a battle rifle
-	self.fal.FIRE_MODE = "single" --starts off on semi-auto like the M14 since it's a battle rifle
-	self.galil.FIRE_MODE = "single" --starts off on semi-auto like the M14 since it's a battle rifle
-	self.g3.FIRE_MODE = "single" --starts off on semi-auto like the M14 since it's a battle rifle
-	self.glock_18c.FIRE_MODE = "single" --starts off on semi-auto to avoid accidental mag dumping, especially if you have Equlibrium
-	self.hunter.FIRE_MODE = "single" --starts off on semi-auto to avoid accidental mag dumping, especially if you have Equlibrium
-	self.tec9.FIRE_MODE = "single" --Sets the gun to semi-auto by default
-	self.m16.FIRE_MODE = "single" --starts off on semi-auto to stop weirdness if you have Ozzy's burst fire script enabled
+	local start_semi = {'glock_18c','new_m14','scar','fal','galil','g3','tec9'}
+	for i, wep_id in ipairs(start_semi) do
+		self[ wep_id ].FIRE_MODE = "single"
+	end
+		
+	local eight_nine = {'ak74','s552','new_m4','vhs','saiga','scar','aug','famas','r870','benelli','ak5','spas12','m16','mosin','striker','b682'}
+	for i, wep_id in ipairs(eight_nine) do
+		self[ wep_id ].weapon_movement_penalty = 0.95
+	end
+	local nine_ten = {'akm','fal','galil','winchester1874','m1928'}
+	for i, wep_id in ipairs(nine_ten) do
+		self[ wep_id ].weapon_movement_penalty = 0.925
+	end	
+	local ten_eleven = {'akm_gold','g3','rpk','new_m14','l85a2','aa12'}
+	for i, wep_id in ipairs(ten_eleven) do
+		self[ wep_id ].weapon_movement_penalty = 0.9
+	end
+	
+	local eleven_twelve = {'m32'}
+	for i, wep_id in ipairs(eleven_twelve) do
+		self[ wep_id ].weapon_movement_penalty = 0.875
+	end
+	local thirteen_fourteen = {'msr'}
+	for i, wep_id in ipairs(thirteen_fourteen) do
+		self[ wep_id ].weapon_movement_penalty = 0.825
+	end
+	local fourteen_fifteen	= {'r93','rpg7','flamethrower_mk2'}
+	for i, wep_id in ipairs(fourteen_fifteen) do
+		self[ wep_id ].weapon_movement_penalty = 0.8
+	end
+	local sixteen_seventeen = {'wa2000'}
+	for i, wep_id in ipairs(sixteen_seventeen) do
+		self[ wep_id ].weapon_movement_penalty = 0.725
+	end
+	
+	local twenty = {'m249'}
+	for i, wep_id in ipairs(twenty) do
+		self[ wep_id ].weapon_movement_penalty = 0.675
+	end
+	local twentytwo = {'hk21'}
+	for i, wep_id in ipairs(twentytwo) do
+		self[ wep_id ].weapon_movement_penalty = 0.65
+	end
+	local twentyfour = {'m95'}
+	for i, wep_id in ipairs(twentyfour) do
+		self[ wep_id ].weapon_movement_penalty = 0.625
+	end
+	local twentyfive = {'mg42'}
+	for i, wep_id in ipairs(twentyfive) do
+		self[ wep_id ].weapon_movement_penalty = 0.6
+	end
+	local fourty = {'m134'}
+	for i, wep_id in ipairs(fourty) do
+		self[ wep_id ].weapon_movement_penalty = 0.5
+	end
 end
 
 end

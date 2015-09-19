@@ -1,8 +1,10 @@
 --[[
 DMC's Weapon Overhaul
-v1.41
+v1.42.3
 HoxHud Hook Version
 ]]
+
+--The native Windows notepad application likes to mess with the formatting/encryption and makes the script unreadable by the hook so I recommend something like Notepad++
 
 if not DMCWO then
 	DMCWO = DMCWO or {}
@@ -16,35 +18,70 @@ DMCWO.stfu = false
 
 --Regardless of either setting, you will still be warned if you leave the TestVar for w/e "rebalance" script commented out/nil
 
---[[ DEBUG TOGGLES ]]--{
---Really these are just for me for development purposes but I figure why not? The default setting for all of these are "false"
+--[[ DEBUG/WIP TOGGLES ]]--{
+--Really these are just for me for development and testing purposes but I figure why not? The default setting for all of these are "false"
 
 --REQUIRES THE ENGINE CONSOLE TO BE ENABLED (unless you feel like reading the log.txt)
 --YOU MAY GET PERFORMANCE DROPS WHILE USING THIS WITH AUTOMATIC FIRE
 --If set to true, outputs various statistics from your last shot taken from a "newraycastweaponbase" gun
 --Shots into the open skybox are not tracked
---Shotguns and other projectile weapons are not tracked
+--Non-"newraycastweaponbase" guns are not tracked
 DMCWO.debug_range = false
 
---If set to true, disables PASSIVE damage boosts
---Boosts earned temporarily like Underdog or Beserker still apply
+--If set to true, disables ALL damage boosts from skills
 DMCWO.debug_damage = false
+
+--If set to true, viewmodel positioning while UNAIMED is changed to emulate DOOM
+--Attached optics have a pretty good chance of getting in the way so you should remove them before hand
+--Overrides hipfire/crouched stance changes from "reposed_vms" if that is active
+--WIP
+DMCWO.doomguy = false
+
+--If set to true, gets rid of the ammo purse reload system for box magazine/belt fed weapons. Reloading before emptying your current magazine will discard any rounds left in that magazine.
+--The chambered round is taken into consideration (if the weapon is closed bolt) and will not be lost if doing a non-empty reload
+--The Beretta 682/Joceline is excluded from this despite using the "magazine" reload system as you keep your second shell loaded when you perform a non-empty reload.
+--NOTE: This does NOT play well with Tasers. When you get tased, it runs the reload code to top up your mag before you dump it all. Guess what happens...
+--WIP
+DMCWO.no_ammo_purse = false
+--}
+
+--[[ STRING TOGGLES ]]--{
+
+--If set to true, renames/changes the description of weapons to their IRL counter parts
+--NOTE: This only affects weapon names. Descriptions are unchanged
+--Default = true
+DMCWO.reelnaems = true
+
+--If set to true, Revolver Ocelot
+--NOTE: Revolver Ocelot
+--NOTE 2: Revolver Ocelot
+--NOTE 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
+--Default = false
+DMCWO.ocelot = false
+
+--If set to true, renames/changes the description of weapons to their Upotte counter parts (if they've made an appearance)
+--NOTE: This is really fucking stupid
+--NOTE 2: Jiisuri is loev. Jiisuri is lyfe.
+--NOTE 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
+--Default = false
+DMCWO.upotte = false
+
 --}
 
 --[[ WEAPON TOGGLES ]]--{
 
---Set to true if you use LazyOzzy's burst fire script and want an M16A4, complete with rename.
---##DO NOT## set this to "true" if you don't use Ozzy's burstfire script as you'll just lock your M16 to semi-auto
---Default = false
-DMCWO.ozzy_burst = false
-
---If set to true, you use the PD:TH sniper trails for the MSR, R93, Mosin, WA2000 and M95
+--If set to true, you leave behind PD:TH sniper trails for the MSR, R93, Mosin, WA2000 and M95
 --Default = false
 DMCWO.sniper_tracers = false
 
+--If set to true, ALL raycast firing guns (shotguns too) leave PD:TH sniper trails.
+--NOTE: This is really fucking stupid
+--Default = false
+DMCWO.light_show = false
+
 --If set to true, you retain closer-to-vanilla total ammo counts.
 --I say "closer-to-vanilla" as mag capacities remain adjusted which can still influence total ammo.
---More or less just there if you're really paranoid about being questioned about your ammo.
+--More or less just there if you're really paranoid about being questioned about your ammo when playing with the unknowing (but with that said, why are you playing pubs?)
 --Default = false
 DMCWO.vanilla_ammo = false
 
@@ -54,21 +91,23 @@ DMCWO.vanilla_ammo = false
 --Default = true
 DMCWO.reposed_vms = true
 
---If set to true, viewmodel positioning while UNAIMED is changed to emulate DOOM
---Attached optics have a pretty good chance of getting in the way
---Overrides hipfire/crouched stance changes from "reposed_vms" if that is active
+--If set to true, allows attachments that modify ammo pickup to be affected by Walk-in-Closet or Fully Loaded Aced
 --Default = false
---CURRENTLY INCOMPLETE
-DMCWO.doomguy = false
+DMCWO.fix_pickup = false
 
 --}
 
 --[[ MELEE TOGGLES ]]--{
 
 --If set to true, using the fists allows you to turn into Kenshiro from Hokuto No Ken (Fist of the North Star)
---AAAH-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA
+--"AAAH-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA"
 --Default = false
 DMCWO.kenshiro = false
+
+--If set to true, become Raiden
+DMCWO.RULESOFNATURE = false
+--AND THEY RUN WHEN THE SUN COMES UP
+--WITH THEIR LIVES ON THE LINE
 
 --}
 
@@ -89,17 +128,12 @@ DMCWO.hide_sg_brakes = false
 --Default = false
 DMCWO.hide_pis_flash = false
 
---If set to true, enables the ELCAN Specter to use it's BUIS on the top of the optic. 
+--If set to true, enables the ELCAN Specter to use the BUIS on the top of the optic. 
 --Default = false
---NOTE: Enabling this will remove the 45 degree irons if they're attached, disallow it from being attached and will take the place as the first gadget you switch to with the laser/flashlight gadget becoming the second and/or third gadget you switch to
+--NOTE: Enabling this will remove the 45 degree irons if they're attached, disallow it from being attached along with the ELCAN scope and will take the place as the first gadget you switch to with the laser/flashlight gadget becoming the second and/or third gadget you switch to
 --NOTE 2: You'll also get a floating 45 degree angle gadget in the main menu and mod screen, it's a side effect of having the BUIS actually work
 --NOTE 3: Every now and then I might forget to update this for new weapons
 DMCWO.elcan_buis = false
-
---if set to true, changes the free 000 Buck to Birdshot. 
---Default = false
---NOTE: This fires 50 rays (30 for the Judge) out at a time, you may get performance issues if you play on a computer worse than my toaster, especially so if you use SquareOne's instant bullet impact fix
-DMCWO.sho_bird = false
 
 --if set to true, swaps the Magpul BUIS/Flip-up sights with the default ones from the KSG (Daniel Defence Irons)
 --NOTE: May be slightly misaligned, not a priority of mine to fix it.
@@ -284,8 +318,8 @@ DMCWO.Strings = {
 "*Insert bad pun here*",
 "\"ayy lmao\"",
 "\"IMPREGNATE MY ASS!!!\"", --https://www.youtube.com/watch?v=XpeyDCsLarg
-"\"GAY DICK SEX\"", --https://www.youtube.com/watch?v=dUK-y4SofZQ
-"\"420 BLAZE IT\"",
+"\"GAY DICK SEX\"", 
+"\"420 BLAZE IT\"", --http://420.moe/
 "Would you Nep a Nep Nep? \nBecause I would...",
 "\"2spooky4me\"",
 ";)",
@@ -294,6 +328,9 @@ DMCWO.Strings = {
 "What're you doing reading this?",
 "\"SILENCIO?\"",
 "\"ECH\"",
+"\"ORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORA\"",
+"\"MUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDA\"",
+"\"RERORERORERORERORERORERORERORERORERORERORERORERO\"",
 "fugg da bolis :DDD",
 "That cop was one swood guy!",
 "\"YOOOOOOOOOOOOOOOOOOOOOOOO!\"", --https://www.youtube.com/watch?v=0T6go6EOuG4
@@ -310,8 +347,15 @@ DMCWO.Strings = {
 "Kek la Kek",
 "\"NUUUDIST BEECHOO\"",
 "\"Now its personel!\"",
+"Callie is better",
+"Aori is better",
+"Marie is better",
+"Hotaru is better",
+"Why not both squid sisters?",
 "\"Are you a kid?\"\n\"Or a squid?\"",
 "\"YOU'RE A KID NOW, YOU'RE A SQUID NOW, YOU'RE A KID, YOU'RE A SQUID, YOU'RE A KID NOW\"",
+"\"SPLATATATATATATATATATATATATATATATAS SPLATOON\"",
+"I'd an Inkling...",
 "Get your \"First Aid Kit\" here ~<3", -->tfw drawing lewd Kawaii pictures
 "I'd Nonon's nonos",
 "Based LazyOzzy",
@@ -339,10 +383,11 @@ DMCWO.Strings = {
 "More lood Kawaii pictures when?",
 "Why are fryfaced characters so good?",
 "shekelfest 2015",
+"You shit talking mai raifu, Slowpork?",
 ":^)",
 "\n   ^\n  ^^^\n:^^^^^)",
 "Why make lua scripts when you can draw porn?",
-"What the fuck did you just fucking say about me, you little bitch?\nI'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.\nI am trained in gorilla warfare and I'm the top sniper in the entire US armed forces.\nYou are nothing to me but just another target.\nI will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words.\nYou think you can get away with saying that shit to me over the Internet?\nThink again, fucker.\nAs we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot.\nThe storm that wipes out the pathetic little thing you call your life.\nYou're fucking dead, kid.\nI can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands.\nNot only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit.\nIf only you could have known what unholy retribution your little “clever” comment was about to bring down upon you, maybe you would have held your fucking tongue.\nBut you couldn't, you didn't, and now you're paying the price, you goddamn idiot.\nI will shit fury all over you and you will drown in it.\nYou're fucking dead, kiddo.\n", --https://www.youtube.com/watch?v=jnp3AgXP0dU
+"What the fuck did you just fucking say about me, you little bitch?\nI'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.\nI am trained in gorilla warfare and I'm the top sniper in the entire US armed forces.\nYou are nothing to me but just another target.\nI will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words.\nYou think you can get away with saying that shit to me over the Internet?\nThink again, fucker.\nAs we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot.\nThe storm that wipes out the pathetic little thing you call your life.\nYou're fucking dead, kid.\nI can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands.\nNot only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit.\nIf only you could have known what unholy retribution your little \"clever\" comment was about to bring down upon you, maybe you would have held your fucking tongue.\nBut you couldn't, you didn't, and now you're paying the price, you goddamn idiot.\nI will shit fury all over you and you will drown in it.\nYou're fucking dead, kiddo.\n", --https://www.youtube.com/watch?v=jnp3AgXP0dU
 "\"ITTY BITTY BABBY\"",
 "\"ITTY BITTY BOAT\"",
 "\"I DON'T BELIEVE IT\"",
@@ -355,27 +400,37 @@ RegisterScript("lib/Lua/DMCWO/post/postrequire_attach.lua", 2, "lib/tweak_data/w
 RegisterScript("lib/Lua/DMCWO/post/postrequire_attach.lua", 2, "lib/tweak_data/weapontweakdata")
 RegisterScript("lib/Lua/DMCWO/post/postrequire_attach.lua", 2, "lib/tweak_data/dlctweakdata")
 RegisterScript("lib/Lua/DMCWO/post/postrequire_attach.lua", 2, "lib/tweak_data/lootdroptweakdata")
+
 RegisterScript("lib/Lua/DMCWO/post/soundsfix.lua", 2, "lib/units/weapons/raycastweaponbase")
+
 RegisterScript("lib/Lua/DMCWO/post/shotgat_physics.lua", 2, "lib/units/weapons/shotgun/newshotgunbase")
 RegisterScript("lib/Lua/DMCWO/post/shotgat_physics.lua", 2, "lib/managers/gameplaycentralmanager")
+
 RegisterScript("lib/Lua/DMCWO/post/gat_physics.lua", 2, "lib/units/weapons/newraycastweaponbase")
 RegisterScript("lib/Lua/DMCWO/post/gat_physics.lua", 2, "lib/managers/blackmarketmanager")
 RegisterScript("lib/Lua/DMCWO/post/gat_physics.lua", 2, "lib/tweak_data/blackmarkettweakdata")
-RegisterScript("lib/Lua/DMCWO/post/gat_physics.lua", 2, "lib/units/enemies/cop/copdamage")
 RegisterScript("lib/Lua/DMCWO/post/gat_physics.lua", 2, "lib/managers/menu/blackmarketgui")
-RegisterScript("lib/Lua/DMCWO/post/bmarketgui.lua", 2, "lib/managers/menu/blackmarketgui")
 
---[[OPTIONAL POSTREQUIRE SCRIPTS]]
---Useable Drums
-RegisterScript("lib/Lua/DMCWO/Extra/useable_drums.lua", 2, "lib/tweak_data/weaponfactorytweakdata")
---Real Weapon Mod Names (string override code by hejoro)
-RegisterScript("lib/Lua/DMCWO/post/realnames.lua", 2, "lib/managers/localizationmanager")
---Recoil Adjustments
-RegisterScript("lib/Lua/DMCWO/post/recoil_fix.lua", 2, "lib/units/cameras/fpcameraplayerbase")
---Tactical Reloading
+RegisterScript("lib/Lua/DMCWO/post/player.lua", 2, "lib/units/beings/player/playerdamage")
+RegisterScript("lib/Lua/DMCWO/post/player.lua", 2, "lib/units/beings/player/states/playerstandard")
+
 RegisterScript("lib/Lua/DMCWO/post/tact_reload.lua", 2, "lib/tweak_data/weapontweakdata")
 RegisterScript("lib/Lua/DMCWO/post/tact_reload.lua", 2, "lib/units/weapons/raycastweaponbase")
 RegisterScript("lib/Lua/DMCWO/post/tact_reload.lua", 2, "lib/units/weapons/shotgun/newshotgunbase")
+
+RegisterScript("lib/Lua/DMCWO/post/realnames.lua", 2, "lib/managers/localizationmanager")
+
+RegisterScript("lib/Lua/DMCWO/post/bmarketgui.lua", 2, "lib/managers/menu/blackmarketgui")
+
+RegisterScript("lib/Lua/DMCWO/post/recoil_fix.lua", 2, "lib/units/cameras/fpcameraplayerbase")
+
+RegisterScript("lib/Lua/DMCWO/post/burstfire.lua", 2, "lib/units/beings/player/states/playerstandard")
+RegisterScript("lib/Lua/DMCWO/post/burstfire.lua", 2, "lib/units/weapons/newraycastweaponbase")
+RegisterScript("lib/Lua/DMCWO/post/burstfire.lua", 2, "lib/units/weapons/akimboweaponbase")
+RegisterScript("lib/Lua/DMCWO/post/burstfire.lua", 2, "lib/managers/hudmanagerpd2")
+RegisterScript("lib/Lua/DMCWO/post/burstfire.lua", 2, "lib/managers/hud/hudteammate")
+
+RegisterScript("lib/Lua/DMCWO/Extra/useable_drums.lua", 2, "lib/tweak_data/weaponfactorytweakdata")
 
 --[[PERSIST SCRIPTS]]
 AddPersistScript("RebalanceGen", "lib/Lua/DMCWO/persist/rebalance_general.lua")

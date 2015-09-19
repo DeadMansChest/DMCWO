@@ -1,5 +1,5 @@
 --[[
-v1.41
+v1.42.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -9,16 +9,23 @@ if RequiredScript == "lib/tweak_data/weapontweakdata" then
 
 	function WeaponTweakData:_init_new_weapons(...)
 		old_wtd_init_new_weapons (self, ...)
+		
+		--self.*weapon_id*.tactical_reload = *either 1 or 2*
+		--(1 = normal, 2 = akimbo)
 	
-		local tact_rel = {'deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','new_m14','scar','fal','rpk','msr','r93','m95','famas','galil','g3','scorpion','benelli','serbu','r870','ksg','g26','spas12','l85a2','vhs','hs2000','tec9','sub2000','asval','wa2000','polymer'}
+		local tact_rel = {'deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','new_m14','scar','fal','rpk','msr','r93','m95','famas','galil','g3','scorpion','benelli','serbu','r870','ksg','g26','spas12','l85a2','vhs','hs2000','tec9','sub2000','asval','wa2000','polymer','winchester1874'}
 		for i, wep_id in ipairs(tact_rel) do
-			self[wep_id].tactical_reload = true
+			self[wep_id].tactical_reload = 1
 		end
 	
 		local tact_akimbo = {'x_deagle','x_1911','x_b92fs','jowi','x_usp','x_g17','x_g22c'}
 		for i, wep_id in ipairs(tact_akimbo) do
-			self[wep_id].tactical_akimbo = true
+			self[wep_id].tactical_reload = 2
 		end
+		
+		self.b682.keep_ammo = true
+		self.mosin.keep_ammo = true
+		self.c96.keep_ammo = true
 		
 		self.c96.uses_clip = true
 		self.mosin.uses_clip = true
@@ -31,9 +38,9 @@ elseif RequiredScript == "lib/units/weapons/raycastweaponbase" then
 
 --This script is by Deadly Mutton Chops and B1313
 	function RaycastWeaponBase:clip_full()
-		if tweak_data.weapon[self._name_id].tactical_reload == true then
+		if tweak_data.weapon[self._name_id].tactical_reload == 1 then
 			return self:get_ammo_remaining_in_clip() == self:get_ammo_max_per_clip() + 1
-		elseif tweak_data.weapon[self._name_id].tactical_akimbo == true then
+		elseif tweak_data.weapon[self._name_id].tactical_reload == 2 then
 			return self:get_ammo_remaining_in_clip() == self:get_ammo_max_per_clip() + 2
 		else
 			return self:get_ammo_remaining_in_clip() == self:get_ammo_max_per_clip()
@@ -49,12 +56,26 @@ elseif RequiredScript == "lib/units/weapons/raycastweaponbase" then
 	end
 	
 	function RaycastWeaponBase:on_reload()
-		if self:get_ammo_remaining_in_clip() > 0 and tweak_data.weapon[self._name_id].tactical_reload == true then
+		if self:get_ammo_remaining_in_clip() > 0 and tweak_data.weapon[self._name_id].tactical_reload == 1 then
+			if DMCWO.no_ammo_purse == true and not tweak_data.weapon[self._name_id].keep_ammo then
+				self:set_ammo_total(self:get_ammo_total() - (self:get_ammo_remaining_in_clip() - 1))
+			end
 			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 1))
-		elseif self:get_ammo_remaining_in_clip() > 1 and tweak_data.weapon[self._name_id].tactical_akimbo == true then
+		elseif self:get_ammo_remaining_in_clip() > 1 and tweak_data.weapon[self._name_id].tactical_reload == 2 then
+			if DMCWO.no_ammo_purse == true then
+				self:set_ammo_total(self:get_ammo_total() - (self:get_ammo_remaining_in_clip() - 2))
+			end
 			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 2))
-		elseif self:get_ammo_remaining_in_clip() == 1 and tweak_data.weapon[self._name_id].tactical_akimbo == true then
+		elseif self:get_ammo_remaining_in_clip() == 1 and tweak_data.weapon[self._name_id].tactical_reload == 2 then
+			if DMCWO.no_ammo_purse == true then
+				self:set_ammo_total(self:get_ammo_total() - (self:get_ammo_remaining_in_clip() - 1))
+			end
 			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip() + 1))
+		elseif self:get_ammo_remaining_in_clip() > 0 and tweak_data.weapon[self._name_id].tactical_reload == nil then
+			if DMCWO.no_ammo_purse == true and not tweak_data.weapon[self._name_id].keep_ammo then
+				self:set_ammo_total(self:get_ammo_total() - self:get_ammo_remaining_in_clip())
+			end
+			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip()))
 		elseif tweak_data.weapon[self._name_id].uses_clip == true and self:get_ammo_remaining_in_clip() <= self:get_ammo_max_per_clip()  then
 			self:set_ammo_remaining_in_clip(math.min(self:get_ammo_total(), self:get_ammo_max_per_clip(), self:get_ammo_remaining_in_clip() + tweak_data.weapon[self._name_id].clip_capacity))
 		elseif self._setup.expend_ammo then
@@ -63,13 +84,14 @@ elseif RequiredScript == "lib/units/weapons/raycastweaponbase" then
 			self:set_ammo_remaining_in_clip(self:get_ammo_max_per_clip())
 			self:set_ammo_total(self:get_ammo_max_per_clip())
 		end
+		managers.job:set_memory("kill_count_no_reload_" .. tostring(self._name_id), nil, true)
 	end
 	
 elseif RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 	
 	function NewShotgunBase:reload_expire_t()
 		local ammo_remaining_in_clip = self:get_ammo_remaining_in_clip()
-		if self:get_ammo_remaining_in_clip() > 0 and tweak_data.weapon[self._name_id].tactical_reload == true then
+		if self:get_ammo_remaining_in_clip() > 0 and tweak_data.weapon[self._name_id].tactical_reload == 1 then
 			return math.min(self:get_ammo_total() - ammo_remaining_in_clip, self:get_ammo_max_per_clip() + 1 - ammo_remaining_in_clip) * self:reload_shell_expire_t()
 		else
 			return math.min(self:get_ammo_total() - ammo_remaining_in_clip, self:get_ammo_max_per_clip() - ammo_remaining_in_clip) * self:reload_shell_expire_t()
@@ -111,7 +133,7 @@ elseif RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 		if t > self._next_shell_reloded_t then
 			local speed_multiplier = self:reload_speed_multiplier()
 			self._next_shell_reloded_t = self._next_shell_reloded_t + self:reload_shell_expire_t() / speed_multiplier
-			if self:get_ammo_remaining_in_clip() > 0 and tweak_data.weapon[self._name_id].tactical_reload == true then
+			if self:get_ammo_remaining_in_clip() > 0 and tweak_data.weapon[self._name_id].tactical_reload == 1 then
 				self:set_ammo_remaining_in_clip(math.min(self:get_ammo_max_per_clip() + 1, self:get_ammo_remaining_in_clip() + 1))
 				return true
 			else

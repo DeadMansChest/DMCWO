@@ -1,5 +1,5 @@
 --[[
-v1.41
+v1.42.3
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -7,10 +7,11 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 	local old_update_stats_values = NewShotgunBase._update_stats_values
 	
 	function NewShotgunBase:setup_default()
-		self._damage_near = tweak_data.weapon[self._name_id].damage_near or 100 -- 10 m
-		self._damage_far = (tweak_data.weapon[self._name_id].damage_far or 5000) - self._damage_near -- - damage_near = 50 m
-		self._rays = tweak_data.weapon[self._name_id].rays or 8
 		self._range = self._damage_far
+		self._damage_near = (tweak_data.weapon[self._name_id].damage_near * 100) or 1000
+		self._damage_far = (tweak_data.weapon[self._name_id].damage_far * 100) or 4000
+		self._damage_far = self._damage_far - self._damage_near -- - damage_near = 40 m
+		self._rays = tweak_data.weapon[self._name_id].rays or 8
 		self._use_shotgun_reload = self._use_shotgun_reload or self._use_shotgun_reload == nil
 	end
 	
@@ -52,6 +53,11 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 		local weight = 0.1
 		local enemy_died = false
 		local pellets = self._rays
+		--[[
+		if self:in_burst_mode() then
+			pellets = pellets * 2
+		end
+		]]
 		
 		local function hit_enemy(col_ray)
 			if col_ray.unit:character_damage() and col_ray.unit:character_damage().is_head then
@@ -67,7 +73,7 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 		damage = damage / self._rays --split damage across all pellets
 		spread = spread
 		
-		for i = add_shoot_through_bullet and 2 or 1, self._rays do
+		for i = add_shoot_through_bullet and 2 or 1, pellets do
 			mvector3.set(mvec_spread_direction, mvec_direction)
 			if spread then
 				mvector3.spread(mvec_spread_direction, spread * (spread_mul or 1))
@@ -98,7 +104,7 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 					end
 					local clamp_dist = tracer_dist
 					if self._starwars then
-						clamp_dist = 0.075
+						clamp_dist = 0.01
 					end
 					local trail = World:effect_manager():spawn(self._trail_effect_table)
 					if col_ray then
@@ -113,7 +119,7 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 				end
 				local clamp_dist = 0.5
 				if self._starwars then
-					clamp_dist = 0.075
+					clamp_dist = 0.01
 				end
 				local trail = World:effect_manager():spawn(self._trail_effect_table)
 				World:effect_manager():set_remaining_lifetime(trail, clamp_dist)
@@ -175,7 +181,12 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 				result.rays = #col_rays > 0 and col_rays
 			end
 		end
-		managers.statistics:shot_fired({ hit = false, weapon_unit = self._unit })
+		if not shoot_through_data then
+			managers.statistics:shot_fired({
+				hit = false,
+				weapon_unit = self._unit
+			})
+		end
 		
 		local exclude_hit_unit = {}
 		for k,v in pairs(hit_enemies) do
