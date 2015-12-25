@@ -1,5 +1,5 @@
 --[[
-v1.42.3
+v1.5
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -27,9 +27,10 @@ if RequiredScript == "lib/units/weapons/raycastweaponbase" then
 			
 			local add_amount = add_amount_override
 			local picked_up = true
+						
 			if not add_amount then
 				local rng_ammo = math.lerp(self._ammo_pickup[1] * multiplier_min, self._ammo_pickup[2] * multiplier_max, math.random())
-				picked_up = rng_ammo > 0
+				--picked_up = rng_ammo > 0
 				add_amount = math.max(0, math.round(rng_ammo))
 			end
 			add_amount = math.floor(add_amount * (ratio or 1))
@@ -40,6 +41,7 @@ if RequiredScript == "lib/units/weapons/raycastweaponbase" then
 			return picked_up, add_amount
 		end
 	end
+	
 
 
 elseif RequiredScript == "lib/managers/blackmarketmanager" then
@@ -91,7 +93,7 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 		return multiplier
 	end
 	
-	function BlackMarketManager:accuracy_multiplier(name, category, silencer, current_state, fire_mode, blueprint)
+	function BlackMarketManager:accuracy_multiplier(name, category, silencer, current_state, spread_moving, fire_mode, blueprint)
 		local multiplier = 1
 		multiplier = multiplier * (managers.player:upgrade_value("weapon", "spread_multiplier", 1))
 		multiplier = multiplier * (managers.player:upgrade_value(category, "spread_multiplier", 1))
@@ -114,10 +116,12 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 			if current_state._moving then
 				multiplier = multiplier * (managers.player:upgrade_value(category, "move_spread_multiplier", 1))
 				multiplier = multiplier * (managers.player:team_upgrade_value("weapon", "move_spread_multiplier", 1))
-				multiplier = multiplier * (self._spread_moving or 1)
+				--multiplier = multiplier * (self._spread_moving or 1)
 			end
-			if current_state:in_steelsight() then
+			if current_state:in_steelsight() and current_state:full_steelsight() then
 				multiplier = multiplier * (tweak_data.weapon[name].spread[current_state._moving and "moving_steelsight" or "steelsight"])
+			elseif current_state:_is_using_bipod() then
+				multiplier = ( multiplier * (tweak_data.weapon[name].spread[current_state._moving and "moving_steelsight" or "steelsight"]) ) * 0.5
 			else
 				multiplier = multiplier * (managers.player:upgrade_value(category, "hip_fire_spread_multiplier", 1))
 				if current_state._state_data.ducking then
@@ -131,6 +135,73 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 			multiplier = multiplier * (managers.player:upgrade_value("weapon", "modded_spread_multiplier", 1))
 		end
 		return multiplier
+	end
+	
+	local old_damage_add = BlackMarketManager.damage_addend
+	function BlackMarketManager:damage_addend(name, category, silencer, detection_risk, current_state, blueprint)
+		local factory_id = managers.weapon_factory:get_factory_id_by_weapon_id(name)
+		local default_blueprint = factory_id and tweak_data.weapon.factory[factory_id].default_blueprint
+
+		local custom_stats = factory_id and managers.weapon_factory:get_custom_stats_from_weapon(factory_id, blueprint or default_blueprint)
+		
+		if custom_stats then
+			for part_id, stats in pairs(custom_stats) do
+				if stats.ignore_dmg_boosts then
+					return 0
+				end
+			end
+		end
+
+		local value = 0
+		if tweak_data.weapon[name] and tweak_data.weapon[name].ignore_damage_upgrades then
+			return value
+		end
+		value = value + managers.player:upgrade_value("player", "damage_addend", 0)
+		value = value + managers.player:upgrade_value("weapon", "damage_addend", 0)
+		value = value + managers.player:upgrade_value(category, "damage_addend", 0)
+		value = value + managers.player:upgrade_value(name, "damage_addend", 0)
+		return value
+	end
+	
+	local old_damage_mult = BlackMarketManager.damage_multiplier
+	function BlackMarketManager:damage_multiplier(name, category, silencer, detection_risk, current_state, blueprint)
+		local factory_id = managers.weapon_factory:get_factory_id_by_weapon_id(name)
+		local default_blueprint = factory_id and tweak_data.weapon.factory[factory_id].default_blueprint
+
+		local custom_stats = factory_id and managers.weapon_factory:get_custom_stats_from_weapon(factory_id, blueprint or default_blueprint)
+		
+		if custom_stats then
+			for part_id, stats in pairs(custom_stats) do
+				if stats.ignore_dmg_boosts then
+					return 1
+				end
+			end
+		end
+		local multiplier = 1
+		if tweak_data.weapon[name] and tweak_data.weapon[name].ignore_damage_upgrades then
+			return multiplier
+		end
+		multiplier = multiplier + (1 - managers.player:upgrade_value(category, "damage_multiplier", 1))
+		multiplier = multiplier + (1 - managers.player:upgrade_value(name, "damage_multiplier", 1))
+		multiplier = multiplier + (1 - managers.player:upgrade_value("player", "passive_damage_multiplier", 1))
+		multiplier = multiplier + (1 - managers.player:upgrade_value("weapon", "passive_damage_multiplier", 1))
+		if silencer then
+			multiplier = multiplier + (1 - managers.player:upgrade_value("weapon", "silencer_damage_multiplier", 1))
+		end
+		local detection_risk_damage_multiplier = managers.player:upgrade_value("player", "detection_risk_damage_multiplier")
+		multiplier = multiplier - managers.player:get_value_from_risk_upgrade(detection_risk_damage_multiplier, detection_risk)
+		if managers.player:has_category_upgrade("player", "overkill_health_to_damage_multiplier") then
+			local damage_ratio = managers.player:upgrade_value("player", "overkill_health_to_damage_multiplier", 1) - 1
+			multiplier = multiplier + damage_ratio
+		end
+		if not current_state or current_state:in_steelsight() then
+		else
+			multiplier = multiplier + (1 - managers.player:upgrade_value(category, "hip_fire_damage_multiplier", 1))
+		end
+		if blueprint and self:is_weapon_modified(managers.weapon_factory:get_factory_id_by_weapon_id(name), blueprint) then
+			multiplier = multiplier + (1 - managers.player:upgrade_value("weapon", "modded_damage_multiplier", 1))
+		end
+		return self:_convert_add_to_mul(multiplier)
 	end
 
 --}	
@@ -153,30 +224,57 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			self._burst_fire_rate_multiplier = self:weapon_tweak_data().BURST_FIRE_RATE_MULTIPLIER or 1
 		end
 		
-		self._damage_near = self:weapon_tweak_data().damage_near or 1000 -- 10 m
-		self._damage_far = self:weapon_tweak_data().damage_far or 20000 -- 200 m
-		self._damage_near = self._damage_near * 100
-		self._damage_far = self._damage_far * 100
-		self._damage_min = self:weapon_tweak_data().damage_min or 0.5 -- maximum 60% drop
+		self._damage_near = (self:weapon_tweak_data().damage_near or 10) * 100 -- 10 meters
+		self._damage_far = (self:weapon_tweak_data().damage_far or 80) * 100 -- 80 meters
+		self._damage_min = self:weapon_tweak_data().damage_min or 3.0 -- 30 damage
+		self._damage_near_set = nil
+		self._damage_far_set = nil
+		self._damage_min_set = nil
+		
 		self._recoil_speed = self:weapon_tweak_data().r_speed or 40
 		self._center_speed = self:weapon_tweak_data().c_speed or 6
 		self._recoil_recover = self:weapon_tweak_data().r_recover or 1
-		self._movement_penalty = self:weapon_tweak_data().weapon_movement_penalty or 1
+		
+		self._movement_penalty = self:weapon_tweak_data().weapon_movement_penalty or tweak_data.upgrades.weapon_movement_penalty[self:weapon_tweak_data().category] or 1
+		
 		self._min_shield_pen_dam = self:weapon_tweak_data().min_shield_pen_dam or nil
+		
 		self._reload_speed_mult = self:weapon_tweak_data().reload_speed_mult or 1
+		
 		self._ads_speed_mult = 1
+		
 		self._rof_mult = 1
+		
 		self._penetration_power = self:weapon_tweak_data().penetration_power or 0.5
 		self._penetration_damage = self:weapon_tweak_data().penetration_damage or 0.5
+		
 		self._starwars = nil
 		self._is_tracer = nil
+		
 		self._has_ap = nil
 		self._has_hp = nil
+		
 		self._use_sound = nil
+		
 		self._block_eq_aced = nil
-		self._disable_selector = false
+		
+		self._disable_selector = nil
+		
 		self._shield_damage = self:weapon_tweak_data().shield_damage or nil
+		
 		self._hipfire_mod = 1
+		
+		self._hs_mult = self:weapon_tweak_data().hs_mult or 1
+		
+		self._no_crits = self:weapon_tweak_data().no_crits or false
+		
+		self._stocker = 1
+				
+		self._ads_sms = self:weapon_tweak_data().ads_sms or 1
+		self._sms = self:weapon_tweak_data().sms or 1
+		
+		self._dual_mags = nil
+		self._ignore_dmg_boosts = nil
 		
 		local custom_stats = managers.weapon_factory:get_custom_stats_from_weapon(self._factory_id, self._blueprint)
 		for part_id, stats in pairs(custom_stats) do
@@ -187,14 +285,33 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 					self._movement_penalty = self._movement_penalty * stats.movement_speed
 				end
 			end
-			if stats.damage_near_mul then
+			if stats.hs_mult then
+				if self._hs_mult * stats.hs_mult > 1 then
+					self._hs_mult = 1
+				else
+					self._hs_mult = stats.hs_mult
+				end
+			end
+			if stats.damage_near_set then
+				self._damage_near_set = true
+				self._damage_near = stats.damage_near_set * 100
+			end
+			if stats.damage_far_set then
+				self._damage_far_set = true
+				self._damage_far = stats.damage_far_set * 100
+			end
+			if stats.damage_min_set then
+				self._damage_min_set = true
+				self._damage_min = stats.damage_min_set
+			end
+			if stats.damage_near_mul and not stats.damage_near_set then
 				self._damage_near = self._damage_near * stats.damage_near_mul
 			end
-			if stats.damage_far_mul then
+			if stats.damage_far_mul and not stats.damage_far_set then
 				self._damage_far = self._damage_far * stats.damage_far_mul
 			end
-			if stats.damage_min then
-				self._damage_min = self._damage_min * stats.damage_min
+			if stats.damage_min_mul and not stats.damage_min_set then
+				self._damage_min = self._damage_min * stats.damage_min_mul
 			end
 			if stats.reload_speed_mult then
 				self._reload_speed_mult = self._reload_speed_mult * stats.reload_speed_mult
@@ -228,6 +345,9 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			if stats.disable_selector then
 				self._disable_selector = stats.disable_selector
 			end
+			if stats.enable_selector then
+				self._enable_selector = stats.enable_selector
+			end
 			if stats.block_eq_aced then
 				self._block_eq_aced = stats.block_eq_aced
 			end
@@ -251,6 +371,28 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			end
 			if stats.hipfire_mod then
 				self._hipfire_mod = self._hipfire_mod * stats.hipfire_mod 
+			end
+			if stats.r_recover then
+				self._recoil_recover = self._recoil_recover * stats.r_recover 
+			end
+			if stats.no_crits then
+				self._no_crits = true
+			end
+			if stats.stocker then
+				self._stocker = self._stocker * stats.stocker
+			end
+			if stats.dual_mags then
+				self._dual_mags = true
+				self._alternate_reload = true
+			end
+			if stats.ignore_dmg_boosts then
+				self._ignore_dmg_boosts = true
+			end
+			if stats.ammo_pickup_min_set then
+				self._ammo_pickup[1] = stats.ammo_pickup_min_set
+			end
+			if stats.ammo_pickup_max_set then
+				self._ammo_pickup[2] = stats.ammo_pickup_max_set
 			end
 			if tweak_data.weapon.factory.parts[part_id].type ~= "ammo" then
 				if stats.ammo_pickup_min_mul then
@@ -284,7 +426,9 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			parent = self._obj_fire,
 			force_synch = self._muzzle_effect_table.force_synch or false
 		}
-							
+		
+		self._check_damage = self._current_stats and self._current_stats.damage or 0		
+		
 		self:_check_laser()
 		self:fire_mode()
 		self:can_toggle_firemode()
@@ -293,13 +437,15 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	function NewRaycastWeaponBase:can_toggle_firemode()
 		if self._disable_selector == true then
 			return false
+		elseif self._enable_selector == true then
+			return true
 		else
 			return tweak_data.weapon[self._name_id].CAN_TOGGLE_FIREMODE
 		end
 	end
-	
+		
 	function NewRaycastWeaponBase:update_damage()
-		if not tweak_data.weapon[self._name_id].ignore_damage_upgrades == true then
+		if not tweak_data.weapon[self._name_id].ignore_damage_upgrades or not self._ignore_dmg_boosts then
 			self._damage = ((self._current_stats and self._current_stats.damage or 0) + self:damage_addend()) * self:damage_multiplier()
 		else
 			self._damage = self._current_stats and self._current_stats.damage or 0
@@ -335,49 +481,33 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			dicks = 1.2162162162162162162162162162162
 		end		
 		if state._state_data.in_steelsight and not managers.player:has_category_upgrade("player", "steelsight_normal_movement_speed") then
-			if self:weapon_tweak_data().category == "pistol" then
-				mult = dicks * 0.95
-				if self:weapon_tweak_data().sub_category == "carbine" then
-						mult = dicks * 0.65
-					end
-			elseif self:weapon_tweak_data().category == "akimbo" then
-					mult = dicks * 0.85
-			elseif self:weapon_tweak_data().category == "assault_rifle" then
-					mult = dicks * 0.5
-					if self:weapon_tweak_data().sub_category == "battle_rifle" then
-						mult = dicks * 0.45
-					elseif self:weapon_tweak_data().sub_category == "carbine" then
-						mult = dicks * 0.6
-					end
-			elseif self:weapon_tweak_data().category == "smg" then
-					mult = dicks * 0.8
-					if self:weapon_tweak_data().sub_category == "pdw" then
-						mult = dicks * 0.75
-					end
-			elseif self:weapon_tweak_data().category == "shotgun" then
-					mult = dicks * 0.7
-			elseif self:weapon_tweak_data().category == "lmg" then
-					mult = dicks * 0.4
-					if self:weapon_tweak_data().sub_category == "gpmg" then
-						mult = dicks * 0.3
-					end
-			elseif self:weapon_tweak_data().category == "snp" then
-					mult = dicks * 0.475
-			end
-				
-			if self:weapon_tweak_data().ams then 
+			if self:weapon_tweak_data().ams then
 				mult = dicks * self:weapon_tweak_data().ams
+			else
+				mult = dicks * 0.5
 			end
 			
 			--bullpup bonus speed
 			if self:weapon_tweak_data().is_bullpup then 
 				mult = mult * 1.2
-			end			
+			end	
+			
+			--mult = mult * self._stocker
+		
 		end
 		
 		if (state._state_data.reload_expire_t or state._state_data.reload_enter_expire_t or state._state_data.reload_exit_expire_t) and self:weapon_tweak_data().rms then
 			mult = mult * self:weapon_tweak_data().rms
 		end
+		
+		if state._shooting then
+			if state._state_data.in_steelsight then
+				mult = mult * self._ads_sms
+			else
+				mult = mult * self._sms
+			end
+		end
+		
 		--if magic occurs, prevents modified steelsight speeds exceeding the walking/crouched state's speed
 		if mult > dicks then
 			mult = dicks
@@ -388,16 +518,17 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			
 	function NewRaycastWeaponBase:get_damage_falloff(damage, col_ray, user_unit, distance)
 		local dist = distance or col_ray.distance or mvector3.distance(col_ray.unit:position(), user_unit:position())
-		local min_damage = (((self._current_stats.damage / self._damage) * damage) * self._damage_min)
+		local fuck = ( (self._current_stats.damage / self._damage) * damage )
+		local min_damage = ( self._damage_min / fuck ) * fuck		
 		
 		if DMCWO.debug_range == true then
-			log("Dist: " .. tostring(dist/100) .. "\nDrop Start: " .. tostring(self._damage_near/100) .. "m\n\nInit Dmg: " .. tostring(damage * 10) .. "\nMin. Dmg at: " .. tostring(self._damage_far/100) .. "m \nMin. Dmg: " .. tostring(min_damage * 10) .. "\n")
+			log("Dist: " .. tostring(dist/100) .. "\nDrop Start: " .. tostring(self._damage_near/100) .. "m\n\nInit Dmg: " .. tostring(damage * 10) .. "\nMin. Dmg at: " .. tostring(self._damage_far/100) .. "m \nMin. Dmg: " .. tostring( (min_damage) * 10) .. "\n")
 		end
 		
 		if dist > self._damage_near and dist < self._damage_far then
 			damage = damage - (( dist - self._damage_near) / ( self._damage_far - self._damage_near ) * ( damage - min_damage ))
 		elseif dist >= self._damage_far then
-			damage = min_damage
+			damage = min_damage 
 		end
 		
 		if DMCWO.debug_range == true then
@@ -424,6 +555,9 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		mvector3.set(mvec_to, mvec_spread_direction)
 		mvector3.multiply(mvec_to, ray_distance)
 		mvector3.add(mvec_to, from_pos)
+		if DMCWO.debug_damage == true or self._ignore_dmg_boosts then
+			dmg_mul = 1
+		end
 		local damage = self:_get_current_damage(dmg_mul)
 		local ray_from_unit = shoot_through_data and alive(shoot_through_data.ray_from_unit) and shoot_through_data.ray_from_unit or nil
 		local col_ray = (ray_from_unit or World):raycast("ray", from_pos, mvec_to, "slot_mask", self._bullet_slotmask, "ignore_unit", self._setup.ignore_units)
@@ -431,7 +565,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		if shoot_through_data and col_ray and col_ray.unit then
 			total_distance = (shoot_through_data.total_distance + col_ray.distance) or col_ray.distance
 		end
-		
+				
 		if shoot_through_data and shoot_through_data.has_hit_wall then
 			if not col_ray then
 				return result
@@ -604,9 +738,8 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 						penetration_damage = 1
 					end
 					dmg_mul = ( dmg_mul or 1 ) * penetration_damage
-					spread_mul = ( spread_mul or 1 ) * 3
+					spread_mul = ( spread_mul or 1 ) * 2
 				end
-				
 				
 				mvector3.multiply( self._shoot_through_data.from, (is_shield and 20) or (is_wall and penetration) or 40)
 				mvector3.add( self._shoot_through_data.from, col_ray.position )
@@ -673,7 +806,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	
 	function NewRaycastWeaponBase:_laser_spread()
 		if self:_is_laser_on() and not (self:weapon_tweak_data().category == "shotgun" or self._name_id == "judge") then
-			return 0.85 --15% spread reduction
+			return 0.8 --20% spread reduction
 		else
 			return 1
 		end
@@ -707,9 +840,10 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	]]
 	
 	function NewRaycastWeaponBase:_get_spread(user_unit)
+		--local state = managers.player:player_unit():movement():current_state()
 		local current_state = user_unit:movement()._current_state
 		local spread_multiplier = self:spread_multiplier(current_state)
-		if not current_state:in_steelsight() then
+		if not ( current_state:in_steelsight() or current_state:_is_using_bipod() ) then
 			spread_multiplier = spread_multiplier * self:_laser_spread()
 		elseif tweak_data.weapon[self._name_id].always_hipfire == true then 
 			spread_multiplier = spread_multiplier * self:_laser_spread()
@@ -717,7 +851,12 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		if self._hipfire_mod and not current_state:in_steelsight() then
 			spread_multiplier = spread_multiplier * self._hipfire_mod
 		end
-		return self._spread * spread_multiplier
+		local spread = self._spread * spread_multiplier
+		if spread > 20 then
+			spread = 20
+		end
+		return spread
+		
 	end
 
 	--[[	fire rate multipler in-game stuff	]]--
@@ -740,16 +879,20 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			end
 		end
 		
-		return multiplier * (self:in_burst_mode() and self._burst_fire_rate_multiplier or 1)
+		return multiplier * ((self:in_burst_mode() and self._burst_fire_rate_multiplier) or 1)
 	end
 	
 		
 	--[[	Reload stuff	]]--
 	function NewRaycastWeaponBase:reload_speed_multiplier()
 		local multiplier = 1
-		
-		multiplier = multiplier * self._reload_speed_mult
-		
+		if self._dual_mags then
+			if self._alternate_reload == true then
+				multiplier = multiplier * self._reload_speed_mult
+			end
+		else
+			multiplier = multiplier * self._reload_speed_mult
+		end
 		multiplier = multiplier * managers.player:upgrade_value(self:weapon_tweak_data().category, "reload_speed_multiplier", 1)
 		multiplier = multiplier * managers.player:upgrade_value("weapon", "passive_reload_speed_multiplier", 1)
 		multiplier = multiplier * managers.player:upgrade_value(self._name_id, "reload_speed_multiplier", 1)
@@ -764,11 +907,10 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 
 	function NewRaycastWeaponBase:enter_steelsight_speed_multiplier()
 		local multiplier = 1
+		local ads_time = self:weapon_tweak_data().ADS_TIMER or 0.200
 		
-		if self:weapon_tweak_data().ADS_TIMER then
-			multiplier = multiplier / ( ( self:weapon_tweak_data().ADS_TIMER + tweak_data.player.TRANSITION_DURATION ) / tweak_data.player.TRANSITION_DURATION)
-		end
-				
+		multiplier = multiplier / ( ads_time / tweak_data.player.TRANSITION_DURATION)
+					
 		multiplier = multiplier * self._ads_speed_mult
 
 		multiplier = multiplier * managers.player:upgrade_value(self:weapon_tweak_data().category, "enter_steelsight_speed_multiplier", 1)
@@ -777,6 +919,6 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		
 		return multiplier
 	end
-	
+		
 --}
 end

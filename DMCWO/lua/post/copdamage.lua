@@ -1,22 +1,7 @@
 --[[
-v1.42.3
+v1.5
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
-
-function CopDamage:_dismember_condition(attack_data)
-	local dismember_victim = false
-	local target_is_spook = false
-	target_is_spook = attack_data.col_ray.unit and attack_data.col_ray.unit:base()._tweak_table == "spooc"
-	local criminal_name = managers.criminals:local_character_name()
-	local criminal_melee_weapon = managers.blackmarket:equipped_melee_weapon()
-	local weapon_charged = false
-	weapon_charged = attack_data.charge_lerp_value and attack_data.charge_lerp_value > 0.5
-	if target_is_spook and weapon_charged --[[and criminal_name == "dragon"]] and criminal_melee_weapon == "sandsteel" then
-		dismember_victim = true
-	end
-	return dismember_victim
-end
-
 function CopDamage:damage_bullet(attack_data)
 	if self._dead or self._invulnerable then
 		return
@@ -25,13 +10,13 @@ function CopDamage:damage_bullet(attack_data)
 		return "friendly_fire"
 	end
 	
-	--
 	local damage = attack_data.damage
 	local unit_type = self._unit:base()._tweak_table
-	local has_ap = attack_data.weapon_unit:base()._has_ap
-	local has_hp = attack_data.weapon_unit:base()._has_hp
-	--
 	
+	local has_ap = attack_data.weapon_unit:base()._has_ap or nil
+	local has_hp = attack_data.weapon_unit:base()._has_hp or nil
+	
+
 	if self._has_plate and attack_data.col_ray.body and attack_data.col_ray.body:name() == self._ids_plate_name then
 		local armor_pierce_roll = math.rand(1)
 		local armor_pierce_value = 0
@@ -68,25 +53,63 @@ function CopDamage:damage_bullet(attack_data)
 	local body_index = self._unit:get_body_index(attack_data.col_ray.body:name())
 	local head = self._head_body_name and attack_data.col_ray.body and attack_data.col_ray.body:name() == self._ids_head_body_name
 	
-	if unit_type == "tank" then 
+	if unit_type == "tank" then --Dozers
 		if has_ap then
-			damage = damage * 1.20
+			if head then
+			else
+				damage = damage * 1.2
+			end
+		elseif has_hp then
+			if head then
+				damage = damage * 0.6
+			else
+				damage = damage * 1.2
+			end
+		end
+	elseif unit_type == "city_swat" or unit_type == "phalanx_minion" then --Gensec SWAT and shields
+		if has_ap then
+			damage = damage * 1.2
 		elseif has_hp then
 			damage = damage * 0.6
 		end
-	elseif unit_type == "city_swat" then 
+	elseif unit_type == "phalanx_vip" then --Cpt. Winters
 		if has_ap then
-			damage = damage * 1.20
+			if head then
+			else
+				damage = damage * 1.2
+			end
 		elseif has_hp then
-			damage = damage * 0.6
+			if head then
+				damage = damage * 1.2
+			else
+				damage = damage * 0.6
+			end
 		end
-	elseif unit_type == "fbi_heavy_swat" then 
-		if has_ap and head then
-			damage = damage * 1.20
-		elseif has_hp and head then
-			damage = damage * 0.6
+	elseif unit_type == "fbi_heavy_swat" then --Tans/MFRs
+		if has_ap then
+			if head then
+				damage = damage * 1.2
+			else
+				damage = damage * 0.6
+			end
+		elseif has_hp then
+			if head then
+				damage = damage * 0.6
+			else
+				damage = damage * 1.2
+			end
+		end
+	else --other units
+		if has_ap then
+			if head then
+			else
+				damage = damage * 0.6
+			end
+		elseif has_hp then
+			damage = damage * 1.2
 		end
 	end
+	
 	
 	if self._unit:base():char_tweak().DAMAGE_CLAMP_BULLET then
 		damage = math.min(damage, self._unit:base():char_tweak().DAMAGE_CLAMP_BULLET)
@@ -96,9 +119,30 @@ function CopDamage:damage_bullet(attack_data)
 		damage = self._HEALTH_INIT
 	end
 	local headshot_multiplier = 1
+	
+	local hs_mult = attack_data.weapon_unit:base()._hs_mult or 1
+	
+	local no_crits = attack_data.weapon_unit:base()._no_crits or false
+	local stat_damage = attack_data.weapon_unit:base()._check_damage
+	local rays = attack_data.weapon_unit:base()._rays or 1
+	--[[
+	log("\n\nWeapon damage (w/o skills): " .. tostring(stat_damage * 10))
+	log("Raycast count: " .. tostring(rays))
+	log("Damage per ray: " .. tostring( (stat_damage * 10) / rays ))
+	]]
+	
 	if attack_data.attacker_unit == managers.player:player_unit() then
 		local critical_hit, crit_damage = self:roll_critical_hit(damage)
-		if critical_hit then
+		if stat_damage and rays and (stat_damage / rays) >= 8 then
+			no_crits = true		
+			--log("Damage per ray exceeds 80! Critical hits will not proc!!")
+		end
+		if unit_type == "tank" and not head then
+			no_crits = true		
+			--log("Ray did not hit the Tank's face! Critical hits will not proc!!")
+		end
+		
+		if critical_hit and no_crits ~= true then
 			managers.hud:on_crit_confirmed()
 			damage = crit_damage
 		else
@@ -112,17 +156,30 @@ function CopDamage:damage_bullet(attack_data)
 			managers.player:on_headshot_dealt()
 		end
 	end
+		
+		
+	local char_hs_mult
 	if self._damage_reduction_multiplier then
 		damage = damage * self._damage_reduction_multiplier
 	elseif head then
 		if self._char_tweak.headshot_dmg_mul then
-			damage = damage * self._char_tweak.headshot_dmg_mul * headshot_multiplier
+			char_hs_mult = (self._char_tweak.headshot_dmg_mul * headshot_multiplier) * hs_mult
+			if char_hs_mult < 1.1 then 
+				char_hs_mult = 1.1
+			end
 		else
-			damage = self._health * 10
+			char_hs_mult = (self._health * 10) * hs_mult
+			if char_hs_mult < 1.1 then 
+				char_hs_mult = 1.1
+			end
 		end
+		damage = damage * char_hs_mult
 	end
+	
+	damage = self:_apply_damage_reduction(damage)
 	local damage_percent = math.ceil(math.clamp(damage / self._HEALTH_INIT_PRECENT, 1, self._HEALTH_GRANULARITY))
 	damage = damage_percent * self._HEALTH_INIT_PRECENT
+	damage, damage_percent = self:_apply_min_health_limit(damage, damage_percent)
 	if damage >= self._health then
 		if head and damage > math.random(10) then
 			self:_spawn_head_gadget({
@@ -136,8 +193,8 @@ function CopDamage:damage_bullet(attack_data)
 			type = "death",
 			variant = attack_data.variant
 		}
-		self:die(attack_data.variant)
-		self:chk_killshot(attack_data.attacker_unit, attack_data.variant)
+		self:die(attack_data)
+		self:chk_killshot(attack_data.attacker_unit, "bullet")
 	else
 		attack_data.damage = damage
 		local result_type = self:get_damage_type(damage_percent, "bullet")
@@ -145,14 +202,14 @@ function CopDamage:damage_bullet(attack_data)
 			type = result_type,
 			variant = attack_data.variant
 		}
-		self._health = self._health - damage
-		self._health_ratio = self._health / self._HEALTH_INIT
+		self:_apply_damage_to_health(damage)
 	end
 	attack_data.result = result
 	attack_data.pos = attack_data.col_ray.position
 	if result.type == "death" then
 		local data = {
 			name = self._unit:base()._tweak_table,
+			stats_name = self._unit:base()._stats_name,
 			head_shot = head,
 			weapon_unit = attack_data.weapon_unit,
 			variant = attack_data.variant
@@ -161,7 +218,8 @@ function CopDamage:damage_bullet(attack_data)
 			managers.statistics:killed_by_anyone(data)
 		end
 		if attack_data.attacker_unit == managers.player:player_unit() then
-			self:_comment_death(attack_data.attacker_unit, self._unit:base()._tweak_table)
+			local special_comment = self:_check_special_death_conditions(attack_data.variant, attack_data.col_ray.body, attack_data.attacker_unit, attack_data.weapon_unit)
+			self:_comment_death(attack_data.attacker_unit, self._unit:base()._tweak_table, special_comment)
 			self:_show_death_hint(self._unit:base()._tweak_table)
 			local attacker_state = managers.player:current_state()
 			data.attacker_state = attacker_state
@@ -195,7 +253,7 @@ function CopDamage:damage_bullet(attack_data)
 			if server_info and server_info.owner_peer_id ~= managers.network:session():local_peer():id() then
 				local owner_peer = managers.network:session():peer(server_info.owner_peer_id)
 				if owner_peer then
-					owner_peer:send_queued_sync("sync_player_kill_statistic", data.name, data.head_shot and true or false, data.weapon_unit, data.variant)
+					owner_peer:send_queued_sync("sync_player_kill_statistic", data.name, data.head_shot and true or false, data.weapon_unit, data.variant, data.stats_name)
 				end
 			else
 				data.attacker_state = managers.player:current_state()
@@ -215,3 +273,41 @@ function CopDamage:damage_bullet(attack_data)
 	self:_on_damage_received(attack_data)
 	return result
 end
+
+--Melee damage mult code courtesy of SC
+local melee_original = CopDamage.damage_melee
+function CopDamage:damage_melee(attack_data)
+	local head = self._head_body_name and attack_data.col_ray.body and attack_data.col_ray.body:name() == self._ids_head_body_name
+	local damage = attack_data.damage
+	local headshot_multiplier = 1
+	if attack_data.attacker_unit == managers.player:player_unit() then
+		local critical_hit, crit_damage = self:roll_critical_hit(damage)
+		if critical_hit then
+			managers.hud:on_crit_confirmed()
+			damage = crit_damage
+		else
+			managers.hud:on_hit_confirmed()
+		end
+		headshot_multiplier = managers.player:upgrade_value("weapon", "passive_headshot_damage_multiplier", 1)
+		if tweak_data.character[self._unit:base()._tweak_table].priority_shout then
+			damage = damage * managers.player:upgrade_value("weapon", "special_damage_taken_multiplier", 1)
+		end
+		if head then
+			managers.player:on_headshot_dealt()
+		end
+	end
+	if self._damage_reduction_multiplier then
+		damage = damage * self._damage_reduction_multiplier
+	elseif head then
+		if self._char_tweak.headshot_dmg_mul then
+			damage = damage * self._char_tweak.headshot_dmg_mul * headshot_multiplier
+		else
+			damage = self._health * 10
+		end
+	end
+	
+	attack_data.damage = damage
+	
+	return melee_original(self, attack_data)
+end
+

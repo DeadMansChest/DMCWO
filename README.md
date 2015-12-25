@@ -1,13 +1,13 @@
-#DMC's Weapon Overhaul v1.42.3: The Bagger 288 edition
-####[A monstrous, titanic killing machine the likes of which the world has never seen!
-](https://www.youtube.com/watch?v=azEvfD4C6ow)
+#DMC's Weapon Overhaul v1.5: GAINAX edition
+####[I never really did follow Evangelion's story
+](https://www.youtube.com/watch?v=PgIzBX9oV80)
 ######[Hoxhud Hook Branch](https://github.com/DeadMansChest/DMCWO)
 ######[BLT Hook Branch](https://github.com/DeadMansChest/DMCWO/tree/BLT-Version)
-by: Don't Care Mister
+by: Dildo Man Can
 
 [UC Thread](http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html) 
 
-[Steam group](http://steamcommunity.com/groups/DMCWpnOverhaul)
+[Steam group](http://steamcommunity.com/groups/DMCWO)
 
 **_Not for use in Pasta Perfection_** 
 (Not that it really could, most of this is just tweaked LUA source values, something PP already does on top of stealing actual code)
@@ -26,8 +26,6 @@ tl;dr I got rid of the fucking dumb shitass meta bullshit that made the game all
 
 It also puts weapon classes in their place as all bullet weapons now have damage drop-off. For example something like a 9mm pistol will perform extremly poorly against a sniper perched way on the other side of the map because even if you do manage to hit them, you`ll be dealing only around 30% of your normal damage.
 
-NOTE: I didn't and won't be making concealment value modifications for vanilla attachments as that number is calculated by the host who more than likely won't be using this. I don't want to bring the false impression that you have "x" concealment when you really have "y" concealment.
-
 I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-ish (when the grind _really_ starts) for the first time, this batch of scripts changes the whole dynamic on how to build weapons, more than likely making your current builds non-optimal or flat-out obsolete.
 
 
@@ -37,15 +35,16 @@ I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-is
 * gir489 for LUA source code, LMG ironsights 
 * 420Munk for LUA source code
 * YaPh1l for LUA source code
-* LazyOzzy for the fixed shotgun pellet mechanics, fixed drop-off code, other code advice
+* LazyOzzy for the fixed shotgun pellet mechanics, fixed drop-off code, advice
   * Also for allowing me to include the burst-fire script
   * While not in this mod, the crosshair code to help me locate the center of the screen for centering optics
-* B1313 for the shotgun push physics, code advice
+* B1313 for the shotgun push physics, advice
 * old string hijack code thanks to hejoro
 * newer string hijack code thanks to Wobin Ralker and Melting Terminal
 * Lizard Foe for fixes made in gat_physics.lua
 * Harfatus/Olipro for the OG lua hook
 * Wilko for the BLT lua hook
+* SC for code, advice
 * IMFDB and Payday Wikia for weapon names and attachments I couldn't ID
 * /k/ anon for semi-solidifiying some of the attachment names
   Anon: Low Profile Suppressor might be a gemtec halo with a different attachment system but idk im getting buttflustered with you lol
@@ -60,7 +59,7 @@ I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-is
   * https://www.youtube.com/watch?v=5Qx_q_TCVoE
   * Illusion's newly announced game, Sexy Beach Premium Resort, will probably take the title as my big time-waster like AA2 was
     * :^)
-* Any and all users of this mod as they're pretty much telling OVK to consider rebalancing their weapons
+* Any and all users of this mod as they're pretty much telling OVK to consider re-rebalancing their weapons
 
 	
 Did I forget to credit you or improperly do so? Sorry if I did :> Bug the shit out of me, and tell me what I forgot to credit/I miscredited you for.

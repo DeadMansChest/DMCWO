@@ -1,5 +1,5 @@
 --[[
-v1.42.3
+v1.5
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -25,7 +25,7 @@ function FPCameraPlayerBase:recoil_kick( up, down, left, right )
 	local v
 	v = math.lerp( up, down, math.random() )
 	if self._recoil_kick.accumulated and (v + self._recoil_kick.accumulated) < 0 then
-		 v = 0
+		 v = v * -1
 	end
 	self._recoil_kick.accumulated = (self._recoil_kick.accumulated or 0 ) + v
 	if self._recoil_kick.accumulated < 0 then
@@ -39,6 +39,7 @@ end
 
 function FPCameraPlayerBase:_vertical_recoil_kick(t, dt)
 	local r_value = 0
+	local player_state = managers.player:current_state()
 	local weapon = self._parent_unit:inventory():equipped_unit()
 	local center_speed = weapon and self._parent_unit:inventory():equipped_unit():base()._center_speed
 	if center_speed < 5 then
@@ -53,6 +54,9 @@ function FPCameraPlayerBase:_vertical_recoil_kick(t, dt)
 	if self._recoil_kick.current and self._recoil_kick.current ~= self._recoil_kick.accumulated then
 		local n = math.step(self._recoil_kick.current, self._recoil_kick.accumulated, recoil_speed * dt)
 		r_value = n - self._recoil_kick.current
+		if player_state == "bipod" then
+			r_value = r_value * 0.75
+		end
 		self._recoil_kick.current = n
 	elseif self._recoil_wait then
 		self._recoil_wait = self._recoil_wait - dt
@@ -64,6 +68,9 @@ function FPCameraPlayerBase:_vertical_recoil_kick(t, dt)
 		local n = math.lerp(self._recoil_kick.to_reduce, 0, center_speed * dt)
 		r_value = -(self._recoil_kick.to_reduce - n)
 		self._recoil_kick.to_reduce = n
+		if player_state == "bipod" then
+			r_value = r_value * 0.75
+		end
 		if self._recoil_kick.to_reduce == 0 then
 			self._recoil_kick.to_reduce = nil
 		end
@@ -75,6 +82,7 @@ end
 
 function FPCameraPlayerBase:_horizonatal_recoil_kick(t, dt)
 	local r_value = 0
+	local player_state = managers.player:current_state()
 	local weapon = self._parent_unit:inventory():equipped_unit()
 	local center_speed = weapon and self._parent_unit:inventory():equipped_unit():base()._center_speed
 	if center_speed < 5 then
@@ -86,9 +94,13 @@ function FPCameraPlayerBase:_horizonatal_recoil_kick(t, dt)
 	if recoil_speed < 0 then
 		recoil_speed = 0
 	end
+	
 	if self._recoil_kick.h.current and self._recoil_kick.h.current ~= self._recoil_kick.h.accumulated then
 		local n = math.step(self._recoil_kick.h.current, self._recoil_kick.h.accumulated, recoil_speed * dt)
 		r_value = n - self._recoil_kick.h.current
+		if player_state == "bipod" then
+			r_value = r_value * 0.5
+		end
 		self._recoil_kick.h.current = n
 	elseif self._recoil_wait then
 		self._recoil_wait = self._recoil_wait - dt
@@ -100,6 +112,9 @@ function FPCameraPlayerBase:_horizonatal_recoil_kick(t, dt)
 		local n = math.lerp(self._recoil_kick.h.to_reduce, 0, center_speed * dt)
 		r_value = -(self._recoil_kick.h.to_reduce - n)
 		self._recoil_kick.h.to_reduce = n
+		if player_state == "bipod" then
+			r_value = r_value * 0.5
+		end
 		if self._recoil_kick.h.to_reduce == 0 then
 			self._recoil_kick.h.to_reduce = nil
 		end

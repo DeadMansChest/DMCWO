@@ -1,5 +1,5 @@
 --[[
-v1.42.3
+v1.5
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -34,6 +34,12 @@ function RaycastWeaponBase:fire(...)
 	if result then
 		self:play_tweak_data_sound("fire_single", "fire")
 		self:play_tweak_data_sound("stop_fire") --DMC did a thing here, that's it really
+		--[[
+			if not self:weapon_tweak_data().no_click and (self:get_ammo_remaining_in_clip() < (self:get_ammo_max_per_clip() * 0.25)) then
+			log("click")
+			self._sound_fire:post_event("wp_auto_switch_on")
+		end
+		]]
 	end
 	
 	return result

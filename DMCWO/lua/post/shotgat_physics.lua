@@ -1,5 +1,5 @@
 --[[
-v1.42.3
+v1.5
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -52,12 +52,6 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 		local autoaim, dodge_enemies = self:check_autoaim(from_pos, direction, self._range)
 		local weight = 0.1
 		local enemy_died = false
-		local pellets = self._rays
-		--[[
-		if self:in_burst_mode() then
-			pellets = pellets * 2
-		end
-		]]
 		
 		local function hit_enemy(col_ray)
 			if col_ray.unit:character_damage() and col_ray.unit:character_damage().is_head then
@@ -73,7 +67,7 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 		damage = damage / self._rays --split damage across all pellets
 		spread = spread
 		
-		for i = add_shoot_through_bullet and 2 or 1, pellets do
+		for i = add_shoot_through_bullet and 2 or 1, self._rays do
 			mvector3.set(mvec_spread_direction, mvec_direction)
 			if spread then
 				mvector3.spread(mvec_spread_direction, spread * (spread_mul or 1))

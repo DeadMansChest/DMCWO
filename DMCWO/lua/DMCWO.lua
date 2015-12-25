@@ -1,34 +1,27 @@
 --[[
 DMC's Weapon Overhaul
-v1.42.3
+v1.5
 BLT Hook Version
 ]]
 
---The native Windows notepad application likes to mess with the formatting/encryption and makes the script unreadable by the hook so I recommend something like Notepad++
-
-if not DMCWO then
-	DMCWO = DMCWO or {}
+if not _G.DMCWO then
+	_G.DMCWO = _G.DMCWO or {}
 end
-
---Set to true if you don't want the "rebalance" set up messages to print to the console/log
-DMCWO.Setup_Stfu = false 
 
 --Set to true if you don't want the random message printing to the console/log after the persist scripts set up
 DMCWO.stfu = false 
 
---Regardless of either setting, you will still be warned if you leave the TestVar for w/e "rebalance" script commented out/nil
-
 --[[ DEBUG/WIP TOGGLES ]]--{
 --Really these are just for me for development and testing purposes but I figure why not? The default setting for all of these are "false"
 
---REQUIRES THE ENGINE CONSOLE TO BE ENABLED (unless you feel like reading the log.txt)
+--I RECOMMEND THAT YOU ENABLE THE CONSOLE (unless you feel like reading the log)
 --YOU MAY GET PERFORMANCE DROPS WHILE USING THIS WITH AUTOMATIC FIRE
---If set to true, outputs various statistics from your last shot taken from a "newraycastweaponbase" gun
+--If set to true, outputs various statistics from your last shot taken from a "newraycastweaponbase" gun into the console/log
 --Shots into the open skybox are not tracked
 --Non-"newraycastweaponbase" guns are not tracked
 DMCWO.debug_range = false
 
---If set to true, disables ALL damage boosts from skills
+--If set to true, disables ALL damage boosts from skills (or at least tries to)
 DMCWO.debug_damage = false
 
 --If set to true, viewmodel positioning while UNAIMED is changed to emulate DOOM
@@ -40,9 +33,10 @@ DMCWO.doomguy = false
 --If set to true, gets rid of the ammo purse reload system for box magazine/belt fed weapons. Reloading before emptying your current magazine will discard any rounds left in that magazine.
 --The chambered round is taken into consideration (if the weapon is closed bolt) and will not be lost if doing a non-empty reload
 --The Beretta 682/Joceline is excluded from this despite using the "magazine" reload system as you keep your second shell loaded when you perform a non-empty reload.
---NOTE: This does NOT play well with Tasers. When you get tased, it runs the reload code to top up your mag before you dump it all. Guess what happens...
+--NOTE: This does NOT play well with Tasers. When you get tased, it runs the reload code to top up your mag before a Taser makes you dump it all. Guess what happens...
 --WIP
 DMCWO.no_ammo_purse = false
+
 --}
 
 --[[ STRING TOGGLES ]]--{
@@ -54,12 +48,12 @@ DMCWO.reelnaems = true
 
 --If set to true, Revolver Ocelot
 --NOTE: Revolver Ocelot
---NOTE 2: Revolver Ocelot
+--NOTE 2: (Revolver Ocelot)
 --NOTE 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
 --Default = false
 DMCWO.ocelot = false
 
---If set to true, renames/changes the description of weapons to their Upotte counter parts (if they've made an appearance)
+--If set to true, renames/changes the descriptions of weapons to their Upotte counter parts (if they've made an appearance)
 --NOTE: This is really fucking stupid
 --NOTE 2: Jiisuri is loev. Jiisuri is lyfe.
 --NOTE 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
@@ -79,9 +73,10 @@ DMCWO.sniper_tracers = false
 --Default = false
 DMCWO.light_show = false
 
---If set to true, you retain closer-to-vanilla total ammo counts.
+--If set to true, you retain closer-to-vanilla total ammo count.
 --I say "closer-to-vanilla" as mag capacities remain adjusted which can still influence total ammo.
---More or less just there if you're really paranoid about being questioned about your ammo when playing with the unknowing (but with that said, why are you playing pubs?)
+--More or less just there if you're really paranoid about being questioned about your ammo when playing with the unknowing 
+--With that said, why are you playing pubs?
 --Default = false
 DMCWO.vanilla_ammo = false
 
@@ -102,7 +97,7 @@ DMCWO.fix_pickup = false
 --If set to true, using the fists allows you to turn into Kenshiro from Hokuto No Ken (Fist of the North Star)
 --"AAAH-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA"
 --Default = false
-DMCWO.kenshiro = false
+DMCWO.kenshiro = true
 
 --If set to true, become Raiden
 DMCWO.RULESOFNATURE = false
@@ -116,7 +111,7 @@ DMCWO.RULESOFNATURE = false
 --Changes will ony take effect after you go through a loading screen or reboot the game
 
 --[General]--{
---If set to true, hides attachable rifle/SMG/LMG class muzzle brakes
+--If set to true, hides attachable AR/SMG/LMG class muzzle brakes
 --Default = false
 DMCWO.hide_brakes = false
 
@@ -262,9 +257,11 @@ DMCWO.barret_bipod = false
 --Random messages
 --Which line can you get in your log/console? :^)
 DMCWO.Strings = {
+"List of awful things to do to Kawaii:\n[x]Cloaker choking Kawaii\n[ ]Shields bashing into Kawaii\n[ ]Taser tasing Kawaii\n[ ]Dozer beating up Kawaii", 
 "Jiisuri is is mai raifu~", 
 "Don't get yourself in a pickle!", 
-"Kawaii heister when?",
+"Kawaii heister when?", --never ;_;
+"I'd a Kawaii",
 "\"My love for you is like a truck, Berserker\" \n\"Would you like some making fuck, Berserker\" \n\"My love for you is like a rock, Berserker\" \n\"Berserker\"",
 "\"I WILL GIVE YOU MY ALL\"",
 "Noep-roblems here!",
@@ -276,6 +273,9 @@ DMCWO.Strings = {
 "*tips fedora*",
 "\"At this moment I am euphoric...\"",
 "Guys, the thermal drill, go get it...",
+"Guys, the thermal drill, go get it...",
+"Guys, the thermal drill, go get it...",
+"\"I put sode\"",
 "ONE",
 "\"MOOOOM! GET THE CAMERAAAA!\"",
 "Butts",
@@ -309,8 +309,8 @@ DMCWO.Strings = {
 ">tfw I'm stuck with a toaster laptop",
 "\"I'm 12 and what is this?\"",
 "\"AH NU, CHEEKI BREEKI IV DAMKE!!\"",
-"\"What is love? Baby don't hurt me, don't hurt me, no more!v",
-"Pre-B CZ75 when?",
+"\"What is love? Baby don't hurt me, don't hurt me, no more!",
+"Pre-B CZ75 NOW",
 "My friend in the army lost his left arm to an explosion. Thankfully he's all right now.",
 "AA2 HGOTY, all year, every year",
 "\"Lightning bolt, lightning bolt, lightning bolt!!\"",
@@ -328,12 +328,22 @@ DMCWO.Strings = {
 "What're you doing reading this?",
 "\"SILENCIO?\"",
 "\"ECH\"",
-"\"ORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORA\"",
-"\"MUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDA\"",
-"\"RERORERORERORERORERORERORERORERORERORERORERORERO\"",
+"DumbMoronicCunt",
+"DudeMyCar",
+"DeanMannChester",
+"DefinitelyMakesClocks",
+"DemonMightCry",
+"DastardlyManiacalCorpse",
+"DeliciousMuffinCakes",
+"Don'tMindCarl",
+"\"LOLI HAET PIZZA\"",
+"\"ORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORA\"",
+"\"MUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDAMUDA\"",
+"\"RERORERORERORERORERORERORERORERORERORERORERORERORERORERORERORERORERORERORERORERORERORERORERORERO\"",
+"\"AAAATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATATA\"",
 "fugg da bolis :DDD",
 "That cop was one swood guy!",
-"\"YOOOOOOOOOOOOOOOOOOOOOOOO!\"", --https://www.youtube.com/watch?v=0T6go6EOuG4
+"\"YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!\"", --https://www.youtube.com/watch?v=0T6go6EOuG4
 "I'll Boku your Pico",
 "\"It's all ogre for you\"",
 "DMCWO.stfu = true",
@@ -342,9 +352,11 @@ DMCWO.Strings = {
 "\"GO! GO! GO! GO! GO! GO! GALO SENGEN!\"", --https://www.youtube.com/watch?v=1EKTw50Uf8M
 "<3",
 "\"Ka ka~\"", --https://www.youtube.com/watch?v=nCnd2tmhnuw
-"DMC's todo list for 20xx:\n-draw more\n-draw more porn\n-lrn2code\n-get a real PC",
+"DMC's todo list for 20xx:\n[x]draw more\n[x]draw more porn\n[ ]lrn2code\n[ ]get a real PC",
+"wich 2hu wud u fuk?",
 "\"Baka baka, baka baka\"",
 "Kek la Kek",
+"merde",
 "\"NUUUDIST BEECHOO\"",
 "\"Now its personel!\"",
 "Callie is better",
@@ -354,10 +366,21 @@ DMCWO.Strings = {
 "Why not both squid sisters?",
 "\"Are you a kid?\"\n\"Or a squid?\"",
 "\"YOU'RE A KID NOW, YOU'RE A SQUID NOW, YOU'RE A KID, YOU'RE A SQUID, YOU'RE A KID NOW\"",
-"\"SPLATATATATATATATATATATATATATATATAS SPLATOON\"",
+"\"SPLATATATATATATATATATATATATATATATA SPLATOON\"",
 "I'd an Inkling...",
 "Get your \"First Aid Kit\" here ~<3", -->tfw drawing lewd Kawaii pictures
 "I'd Nonon's nonos",
+";)",
+";)",
+"\"Your opinion, my choice\"",
+";)",
+";)",
+"COMPLETELY OVERKILL DISSAPOINTMENT",
+";)",
+";)",
+"\"Shame on you if you thought otherwise\"",
+";)",
+";)",
 "Based LazyOzzy",
 "Based Seven",
 "\"Dickbutt\"",
@@ -381,6 +404,13 @@ DMCWO.Strings = {
 "\"Gimme da chocolate, Hisao\"",
 "\"DOZER INCOMING\"",
 "More lood Kawaii pictures when?",
+"hOI!",
+"DETERMINATION",
+"NYEH NYEH NYEH!!!",
+"I'd a Frisk",
+"ANIME IS REAL",
+"ANIME IS NOT REAL",
+"Where are the knives?",
 "Why are fryfaced characters so good?",
 "shekelfest 2015",
 "You shit talking mai raifu, Slowpork?",
@@ -393,3 +423,12 @@ DMCWO.Strings = {
 "\"I DON'T BELIEVE IT\"",
 "\"HABEEB IT\"",
 }
+
+local rand_num = math.random(#DMCWO.Strings)
+if not DMCWO.stfu then
+	if not DMCWO.dongs then
+		log( "\n" .. tostring(DMCWO.Strings[rand_num]) .. "\n" )
+		DMCWO.dongs = true
+	end
+end
+
