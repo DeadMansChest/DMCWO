@@ -1,5 +1,5 @@
 --[[
-v1.5
+v1.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -120,8 +120,6 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 			end
 			if current_state:in_steelsight() and current_state:full_steelsight() then
 				multiplier = multiplier * (tweak_data.weapon[name].spread[current_state._moving and "moving_steelsight" or "steelsight"])
-			elseif current_state:_is_using_bipod() then
-				multiplier = ( multiplier * (tweak_data.weapon[name].spread[current_state._moving and "moving_steelsight" or "steelsight"]) ) * 0.5
 			else
 				multiplier = multiplier * (managers.player:upgrade_value(category, "hip_fire_spread_multiplier", 1))
 				if current_state._state_data.ducking then
@@ -129,6 +127,9 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 				else
 					multiplier = multiplier * (tweak_data.weapon[name].spread[current_state._moving and "moving_standing" or "standing"])
 				end
+			end
+			if current_state._state_data.using_bipod then
+				multiplier = multiplier * 0.5
 			end
 		end
 		if blueprint and self:is_weapon_modified(managers.weapon_factory:get_factory_id_by_weapon_id(name), blueprint) then
@@ -220,9 +221,16 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			self._has_auto = not self._locked_fire_mode and (self:can_toggle_firemode() or self:weapon_tweak_data().FIRE_MODE == "auto") and true or false
 			self._has_burst_fire = self._is_akimbo or (self:can_toggle_firemode() or self:weapon_tweak_data().BURST_FIRE) and self:weapon_tweak_data().BURST_FIRE ~= false
 			self._burst_size = (self._is_akimbo and 2) or self:weapon_tweak_data().BURST_FIRE or 3
-			self._adaptive_burst_size = self:weapon_tweak_data().ADAPTIVE_BURST_SIZE or false
+			self._adaptive_burst_size = self._adaptive_burst_size or self:weapon_tweak_data().ADAPTIVE_BURST_SIZE or true
 			self._burst_fire_rate_multiplier = self:weapon_tweak_data().BURST_FIRE_RATE_MULTIPLIER or 1
+			self._no_ads_burst = self:weapon_tweak_data().NO_ADS_BURST or false
+			self._burst_fire_recoil_mult = self:weapon_tweak_data().BURST_FIRE_RECOIL_MULTIPLIER or nil
+			self._no_reset_burst = self:weapon_tweak_data().NO_RESET_BURST or nil
 		end
+		
+		self._anim_speed_mult = self:weapon_tweak_data().anim_speed_mult or nil
+		self._burst_anim_speed_mult = self:weapon_tweak_data().burst_anim_speed_mult or nil
+		self._no_singlefire_anim = self:weapon_tweak_data().no_singlefire_anim or nil
 		
 		self._damage_near = (self:weapon_tweak_data().damage_near or 10) * 100 -- 10 meters
 		self._damage_far = (self:weapon_tweak_data().damage_far or 80) * 100 -- 80 meters
@@ -387,6 +395,12 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			end
 			if stats.ignore_dmg_boosts then
 				self._ignore_dmg_boosts = true
+			end
+			if stats.burst_size then
+				self._burst_size = stats.burst_size
+			end
+			if stats.force_burst then
+				self._adaptive_burst_size = false
 			end
 			if stats.ammo_pickup_min_set then
 				self._ammo_pickup[1] = stats.ammo_pickup_min_set
@@ -660,6 +674,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	
 		repeat
 			if col_ray and col_ray.unit then
+				
 				local kills
 				if hit_unit then
 					if not self._can_shoot_through_enemy then
@@ -715,6 +730,13 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 				local ray_from_unit = hit_unit and col_ray.unit
 				if is_shield then
 					dmg_mul = ( dmg_mul or 1 ) * (self._shield_damage or 0.10)
+					if col_ray.unit:name():t() == '@ID8816e70e510c8c2e@' then --fbi
+						dmg_mul = dmg_mul * 0.75
+					elseif col_ray.unit:name():t() == '@IDaf254947f0288a6c@' then --phalanx
+						dmg_mul = dmg_mul * 0.5
+					elseif col_ray.unit:name():t() == '@ID4a4a5e0034dd5340@' then --winters
+						dmg_mul = dmg_mul * 0.25
+					end
 				end
 
 				self._shoot_through_data.has_hit_wall = has_hit_wall or is_wall
@@ -791,7 +813,6 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 					self._laser_data = {}
 					self._laser_data.part_id = part_id
 					self._laser_data.unit = self._parts and self._parts[part_id] and alive(self._parts[part_id].unit) and self._parts[part_id].unit
-				else
 				end
 			end
 		end
@@ -805,44 +826,41 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	end
 	
 	function NewRaycastWeaponBase:_laser_spread()
-		if self:_is_laser_on() and not (self:weapon_tweak_data().category == "shotgun" or self._name_id == "judge") then
+		if self:_is_laser_on() then
 			return 0.8 --20% spread reduction
 		else
 			return 1
 		end
 	end
 	
-	--[[
-	function NewRaycastWeaponBase:_get_spread(user_unit)
-		local spread_multiplier = self:spread_multiplier()
-		local current_state = user_unit:movement()._current_state
-		if self._name_id ~= "flamethrower_mk2" then
-			if current_state._state_data.in_air and not	current_state:in_steelsight() then
-				spread_multiplier = spread_multiplier * 2
-			elseif current_state._state_data.in_air and	current_state:in_steelsight() then
-				spread_multiplier = spread_multiplier * 1.25
-			end
+	function NewRaycastWeaponBase:_get_min_spread()
+		local multiplier = 1
+		local current_state = managers.player:player_unit():movement()._current_state
+		multiplier = multiplier * (managers.player:upgrade_value("weapon", "spread_multiplier", 1))
+		multiplier = multiplier * (managers.player:upgrade_value(self:weapon_tweak_data().category, "spread_multiplier", 1))
+		multiplier = multiplier * (managers.player:upgrade_value("weapon", self:fire_mode() .. "_spread_multiplier", 1))
+		multiplier = multiplier * (managers.player:upgrade_value(self._name_id, "spread_multiplier", 1))
+		if self._silencer then
+			multiplier = multiplier * (managers.player:upgrade_value("weapon", "silencer_spread_multiplier", 1))
+			multiplier = multiplier * (managers.player:upgrade_value(self:weapon_tweak_data().category, "silencer_spread_multiplier", 1))
 		end
 		if current_state._moving then
-			spread_multiplier = spread_multiplier * managers.player:upgrade_value(self:weapon_tweak_data().category, "move_spread_multiplier", 1)
+			multiplier = multiplier * (managers.player:upgrade_value(self:weapon_tweak_data().category, "move_spread_multiplier", 1))
+			multiplier = multiplier * (managers.player:team_upgrade_value("weapon", "move_spread_multiplier", 1))
 		end
-		if current_state:in_steelsight() and tweak_data.weapon[self._name_id].always_hipfire == true then
-			return self._spread * tweak_data.weapon[self._name_id].spread[current_state._moving and "moving_steelsight" or "steelsight"] * spread_multiplier * self:_laser_spread()
-		elseif current_state:in_steelsight() then
-			return self._spread * tweak_data.weapon[self._name_id].spread[current_state._moving and "moving_steelsight" or "steelsight"] * spread_multiplier
+		if current_state._state_data.using_bipod then
+			multiplier = multiplier * 0.5
 		end
-		spread_multiplier = spread_multiplier * managers.player:upgrade_value(self:weapon_tweak_data().category, "hip_fire_spread_multiplier", 1)
-		if current_state._state_data.ducking then
-			return self._spread * tweak_data.weapon[self._name_id].spread[current_state._moving and "moving_crouching" or "crouching"] * spread_multiplier * self:_laser_spread()
-		end
-		return self._spread * tweak_data.weapon[self._name_id].spread[current_state._moving and "moving_standing" or "standing"] * spread_multiplier * self:_laser_spread()
+		multiplier = multiplier * ( self:weapon_tweak_data().spread[current_state._moving and "moving_steelsight" or "steelsight"])
+		local min_spread = multiplier * self._spread
+		return min_spread
 	end
-	]]
 	
 	function NewRaycastWeaponBase:_get_spread(user_unit)
-		--local state = managers.player:player_unit():movement():current_state()
+		--local state = managers.player:player_unit():movement()._current_state
 		local current_state = user_unit:movement()._current_state
 		local spread_multiplier = self:spread_multiplier(current_state)
+		local min_spread = self:_get_min_spread()
 		if not ( current_state:in_steelsight() or current_state:_is_using_bipod() ) then
 			spread_multiplier = spread_multiplier * self:_laser_spread()
 		elseif tweak_data.weapon[self._name_id].always_hipfire == true then 
@@ -852,13 +870,19 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			spread_multiplier = spread_multiplier * self._hipfire_mod
 		end
 		local spread = self._spread * spread_multiplier
-		if spread > 20 then
-			spread = 20
+		if spread > 25 then
+			spread = 25
+		elseif spread < min_spread then
+			spread = min_spread
 		end
 		return spread
-		
 	end
 
+	--[[	recoil multipler stuff	]]--
+	function NewRaycastWeaponBase:recoil_multiplier()
+		return managers.blackmarket:recoil_multiplier(self._name_id, self:weapon_tweak_data().category, self._silencer, self._blueprint) * ((self:in_burst_mode() and self._burst_fire_recoil_mult) or 1)
+	end
+	
 	--[[	fire rate multipler in-game stuff	]]--
 	function NewRaycastWeaponBase:fire_rate_multiplier()
 		local multiplier = self._rof_mult or 1
@@ -912,13 +936,21 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		multiplier = multiplier / ( ads_time / tweak_data.player.TRANSITION_DURATION)
 					
 		multiplier = multiplier * self._ads_speed_mult
-
-		multiplier = multiplier * managers.player:upgrade_value(self:weapon_tweak_data().category, "enter_steelsight_speed_multiplier", 1)
+		
+		if self:weapon_tweak_data().category == "assault_rifle" and self:weapon_tweak_data().sub_category == "battle_rifle" then
+			multiplier = multiplier * managers.player:upgrade_value("snp", "enter_steelsight_speed_multiplier", 1)
+		else
+			multiplier = multiplier * managers.player:upgrade_value(self:weapon_tweak_data().category, "enter_steelsight_speed_multiplier", 1)
+		end
 		multiplier = multiplier * managers.player:temporary_upgrade_value("temporary", "combat_medic_enter_steelsight_speed_multiplier", 1)
 		multiplier = multiplier * managers.player:upgrade_value(self._name_id, "enter_steelsight_speed_multiplier", 1)
 		
+		--[[ local state = managers.player:player_unit():movement():current_state()
+		if state._shooting then
+			multiplier = multiplier * 0.75
+		end ]]
 		return multiplier
 	end
-		
+			
 --}
 end

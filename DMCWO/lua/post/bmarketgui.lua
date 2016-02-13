@@ -1,5 +1,5 @@
 --[[
-v1.5
+v1.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -101,11 +101,14 @@ function BlackMarketGui:update_info_text()
 				if movement_penalty < 1 then
 					local penalty_as_string = string.format("%.2f", (movement_penalty * 100))
 					updated_texts[5].text = updated_texts[5].text .. managers.localization:to_upper_text("bm_menu_weapon_movement_penalty_info") .. penalty_as_string .. "%" 
+				end				
+				
+				if slot_data.global_value and slot_data.global_value == "normal" then
+					updated_texts[4].text = updated_texts[4].text .. managers.localization:text(tweak_data.weapon[slot_data.name].desc_id)
+				elseif slot_data.global_value and slot_data.global_value ~= "normal" then
+					updated_texts[4].text = updated_texts[4].text .. "\n".. managers.localization:text(tweak_data.weapon[slot_data.name].desc_id) 
 				end
-				--if weapon_tweak.has_description then
-					updated_texts[4].text = updated_texts[4].text .. "\n" .. managers.localization:text(tweak_data.weapon[slot_data.name].desc_id)
-					updated_texts[4].below_stats = true
-				--end
+				updated_texts[4].below_stats = true
 			else
 				local weapon_id = slot_data.name
 				local weapon_tweak = weapon_id and tweak_data.weapon[weapon_id].weapon_movement_penalty
@@ -166,7 +169,7 @@ function BlackMarketGui:update_info_text()
 		end
 		updated_texts[4].below_stats = true
 		if slot_data.global_value and slot_data.global_value == "normal" then
-			updated_texts[4].text = desc_text --Gotta make descriptions for all the melee weapons first
+			updated_texts[4].text = "dicksSD" --Gotta make descriptions for all the melee weapons first
 		elseif slot_data.global_value and slot_data.global_value ~= "normal" then
 			updated_texts[4].text = updated_texts[4].text .. "\n".. desc_text 
 		end

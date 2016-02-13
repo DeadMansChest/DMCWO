@@ -19,6 +19,8 @@ if RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		
 		if not self:is_npc() then
 			self._burst_rounds_remaining = 0
+			self._track_burst = nil
+			self._tracking = nil
 		end
 	end
 	
@@ -42,10 +44,15 @@ if RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	function NewRaycastWeaponBase:fire(...)
 		local result = fire_original(self, ...)
 		
-		if not self._is_akimbo and result and self:in_burst_mode() then
+		if not self._is_akimbo and result and self:in_burst_mode() then		
 			if self:clip_empty() then
 				self:cancel_burst(true)
 			else
+				if self._no_reset_burst and self._track_burst then
+					self._burst_rounds_remaining = self._track_burst
+					self._track_burst = nil
+					self._tracking = nil
+				end
 				self._burst_rounds_remaining = (self._burst_rounds_remaining <= 0 and self._burst_size or self._burst_rounds_remaining) - 1
 			end
 		end
@@ -90,6 +97,20 @@ if RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	end
 	
 	function NewRaycastWeaponBase:cancel_burst(force)
+		if self._no_reset_burst and not self._track_burst then
+			self._track_burst = self._burst_rounds_remaining
+		end
+		if self:clip_empty() and self:in_burst_mode() and self._track_burst and not self._tracking then
+			if self._track_burst == 0 then
+				self._track_burst = self._burst_size - 1
+			else
+				self._track_burst = self._track_burst - 1
+			end
+			self._tracking = true
+			if self._track_burst < 0 then
+				self._track_burst = 0
+			end
+		end
 		if self._adaptive_burst_size or force then
 			self._burst_rounds_remaining = 0
 		end

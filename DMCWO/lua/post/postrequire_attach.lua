@@ -1,5 +1,5 @@
 --[[
-v1.5
+v1.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -547,7 +547,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		stats = {
 			value = 10,
 			damage = 200,
-			total_ammo_mod = -66
+			total_ammo_mod = -100
 		},
 		custom_stats = {
 			bullet_class = "HeiapBulletBase",
@@ -572,9 +572,10 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		is_a_unlockable = true,
 		alt_icon = "guis/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_i_autofire",
 		stats = {
-			value = 10,
+			value = 8,
 			spread = 0,
 			recoil = 0,
+			extra_ammo = 0,
 		},
 		custom_stats = {has_burst_fire = true},
 		perks = {},
@@ -615,9 +616,15 @@ function WeaponFactoryTweakData:DMCWO_mods()
 	
 	table.insert(self.wpn_fps_pis_beretta.uses_parts, "burst_mod")
 	self.wpn_fps_pis_beretta.override.burst_mod = {
-		stats = { value = 10, spread = 0, recoil = -4 },
+		stats = { value = 8, spread = 0, recoil = -4 },
 		custom_stats = {has_burst_fire = true, disable_selector = true, block_eq_aced = true, hipfire_mod = 1.25, burst_rof_mult = 2},
 		desc_id = "burstfire_desc_raffica"
+	}
+	
+	table.insert(self.wpn_fps_ass_g36.uses_parts, "burst_mod")
+	self.wpn_fps_ass_g36.override.burst_mod = {
+		custom_stats = {burst_size = 3},
+		desc_id = "burstfire_desc_g36"
 	}
 	
 	self.parts.mac_slow = {
@@ -682,7 +689,8 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		'wpn_fps_sho_striker',
 		'wpn_fps_sho_ksg',
 		'wpn_fps_pis_judge',
-		'wpn_fps_sho_aa12'
+		'wpn_fps_sho_aa12',
+		'wpn_fps_shot_m37'
 	}	
 	for i, factory_id in ipairs(shotgat) do
 		table.insert(self[factory_id].uses_parts, "sho_birdshot")
@@ -911,6 +919,26 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		table.insert(self[factory_id].uses_parts, "shortdot_normal")
 	end
 	
+	self.parts.sniper_irons = {
+		pcs = {},
+		type = "sight",
+		name_id = "jonathan",
+		a_obj = "a_o",
+		unit = "units/pd2_dlc_berry/weapons/wpn_fps_snp_model70_pts/wpn_fps_snp_model70_iron_sight",
+		dlc = "dmcwo",
+		is_a_unlockable = true,
+		alt_icon = "guis/dlcs/berry/textures/pd2/blackmarket/icons/mods/wpn_fps_snp_model70_iron_sight",
+		stats = { value = 0, recoil = -1, concealment = 3 },
+		custom_stats = { ads_speed_mult = 1.05 },
+		forbids = {
+			"wpn_fps_upg_o_45iron"
+		}
+	}
+	
+	table.insert(self.wpn_fps_snp_msr.uses_parts, "sniper_irons")
+	table.insert(self.wpn_fps_snp_r93.uses_parts, "sniper_irons")
+	table.insert(self.wpn_fps_snp_m95.uses_parts, "sniper_irons")
+	
 end
 
 elseif RequiredScript == "lib/tweak_data/dlctweakdata" then
@@ -1087,6 +1115,28 @@ function DLCTweakData:init(...)
 		{
 			type_items = "weapon_mods",
 			item_entry = "m16_stock",
+			amount = 1
+		}
+	}
+	self.dmcwo_shortdot = {}
+	self.dmcwo_shortdot.free = true
+	self.dmcwo_shortdot.content = {}
+	self.dmcwo_shortdot.content.loot_global_value = "dmcwo"
+	self.dmcwo_shortdot.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "shortdot_normal",
+			amount = 1
+		}
+	}
+	self.dmcwo_irons = {}
+	self.dmcwo_irons.free = true
+	self.dmcwo_irons.content = {}
+	self.dmcwo_irons.content.loot_global_value = "dmcwo"
+	self.dmcwo_irons.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "sniper_irons",
 			amount = 1
 		}
 	}

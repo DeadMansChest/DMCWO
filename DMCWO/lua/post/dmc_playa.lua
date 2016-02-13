@@ -1,5 +1,5 @@
 --[[
-v1.5
+v1.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -13,7 +13,7 @@ function PlayerTweakData:_init_new_stances()
 	--[[ Viewmodel "Drag" ]]
 	--{
 	
-	local gun_drag = {'default','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','rpg7','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','m134','mateba','sub2000','asval','polymer','wa2000','hunter','baka','frankish','arblast','long','par','sparrow','model70'}
+	local gun_drag = {'default','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','rpg7','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','m134','mateba','sub2000','asval','polymer','wa2000','hunter','baka','frankish','arblast','long','par','sparrow','model70','m37','china'}
 	for i, wep_id in ipairs(gun_drag) do
 		self.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.000--75
 	
@@ -85,7 +85,7 @@ function PlayerTweakData:_init_new_stances()
 		self.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -2.5
 	end 
 	
-	local lightweight = {'mp7','mp9','amcar','new_mp5','p90','olympic','tec9','scorpion','cobray','asval','frankish'}
+	local lightweight = {'mp7','mp9','amcar','new_mp5','p90','olympic','tec9','scorpion','cobray','asval','frankish','m37'}
 	for i, wep_id in ipairs(lightweight) do
 			
 		self.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.15
@@ -131,7 +131,7 @@ function PlayerTweakData:_init_new_stances()
 		self.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -4
 	end 
 	
-	local heavy = {'r870','benelli','ak5','fal','galil','famas','spas12','mosin','m1928','l85a2','aa12','m32','winchester1874'}
+	local heavy = {'r870','benelli','ak5','fal','galil','famas','spas12','mosin','m1928','l85a2','aa12','m32','winchester1874','china'}
 	for i, wep_id in ipairs(heavy) do
 		self.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.3
 		self.stances[ wep_id ].standard.vel_overshot.yaw_neg = -5
@@ -338,6 +338,20 @@ function PlayerTweakData:_init_new_stances()
 			self.stances[wep_id].crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 			self.stances[wep_id].crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 		end
+		
+		--M37
+		pivot_shoulder_translation = Vector3(9.27651, 19.3937, -6.03765)
+		pivot_shoulder_rotation = Rotation(4.57709E-5, 5.5666E-4, -3.35693E-4)
+		pivot_head_translation = Vector3(6, 22, -6)
+		pivot_head_rotation = Rotation( 0, 0, -1 )
+		self.stances.m37.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+		self.stances.m37.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+		
+		pivot_head_translation = Vector3(4, 20, -4)
+		pivot_head_rotation = Rotation(-0,-0,-2)
+		self.stances.m37.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+		self.stances.m37.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+		
 		--Thumper
 		pivot_shoulder_translation = Vector3(8.49051, 38.6474, -5.09399)
 		pivot_shoulder_rotation = Rotation(0.0999949, -0.687702, 0.630304)
@@ -350,6 +364,19 @@ function PlayerTweakData:_init_new_stances()
 		pivot_head_rotation = Rotation(0, 0, -2)
 		self.stances.gre_m79.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 		self.stances.gre_m79.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+		
+		--MEI LING
+		pivot_shoulder_translation = Vector3(8.49051, 38.6474, -5.09399)
+		pivot_shoulder_rotation = Rotation(0.0999949, -0.687702, 0.630304)
+		pivot_head_translation = Vector3(6, 39, -4)
+		pivot_head_rotation = Rotation(0, 0, -1)
+		self.stances.china.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+		self.stances.china.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+		
+		pivot_head_translation = Vector3(4, 37, -2)
+		pivot_head_rotation = Rotation(0, 0, -2)
+		self.stances.china.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+		self.stances.china.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 		
 		--M134
 		pivot_shoulder_translation = Vector3(4.11438, 35.5734, -13.4323)
@@ -738,13 +765,7 @@ function PlayerTweakData:_init_new_stances()
 		pivot_head_rotation = Rotation( 0.2, 0.5, -1 )
 		self.stances.par.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 		self.stances.par.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-		
-		pivot_head_translation = Vector3( 0, 12, -20 )
-		pivot_head_rotation = Rotation(0, 0, 0)
-		self.stances.par.bipod.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-		self.stances.par.bipod.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-		self.stances.par.bipod.FOV = 63
-		
+				
 		--M249
 		pivot_shoulder_translation = Vector3(10.7056, 4.38842, -0.747177)
 		pivot_shoulder_rotation = Rotation(0.106618, -0.084954, 0.62858)
@@ -757,13 +778,7 @@ function PlayerTweakData:_init_new_stances()
 		pivot_head_rotation = Rotation( 0.2, 0.5, -2)
 		self.stances.m249.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 		self.stances.m249.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-		
-		pivot_head_translation = Vector3( 0, 25, -16 )
-		pivot_head_rotation = Rotation(0.5, 0.5, 0)
-		self.stances.m249.bipod.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-		self.stances.m249.bipod.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-		self.stances.m249.bipod.FOV = 63
-		
+				
 		--RPK
 		pivot_shoulder_translation = Vector3( 10.6725, 27.7166, -4.93564 )
 		pivot_shoulder_rotation = Rotation( 0.1067, -0.0850111, 0.629008 )
@@ -776,13 +791,7 @@ function PlayerTweakData:_init_new_stances()
 		pivot_head_rotation = Rotation( 0.2, 0.5, -2 )
 		self.stances.rpk.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 		self.stances.rpk.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-		
-		pivot_head_translation = Vector3( 0, 22, -5 )
-		pivot_head_rotation = Rotation(0, 0, 0)
-		self.stances.rpk.bipod.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-		self.stances.rpk.bipod.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-		self.stances.rpk.bipod.FOV = 63
-		
+				
 		--HK21
 		pivot_shoulder_translation = Vector3( 11.3874, 18.55, -2.08902 )
 		pivot_shoulder_rotation = Rotation( 3.03061, 1.08595, 1.87441 )
@@ -795,13 +804,7 @@ function PlayerTweakData:_init_new_stances()
 		pivot_head_rotation = Rotation( 3.5, 1.5, -2 )
 		self.stances.hk21.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 		self.stances.hk21.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-		
-		pivot_head_translation = Vector3( 0, 34, -7 )
-		pivot_head_rotation = Rotation(3, 2, 2)
-		self.stances.hk21.bipod.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-		self.stances.hk21.bipod.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-		self.stances.hk21.bipod.FOV = 63
-		
+				
 		--MG42
 		pivot_shoulder_translation = Vector3( 10.7806, 4.38612, 0 )
 		pivot_shoulder_rotation = Rotation( 0.106596, -0.0844502, 0.629187 )
@@ -814,12 +817,7 @@ function PlayerTweakData:_init_new_stances()
 		pivot_head_rotation = Rotation( 0.2, 0.5, -2)
 		self.stances.mg42.crouched.shoulders.translation =  pivot_head_translation - pivot_shoulder_translation:rotate_with( pivot_shoulder_rotation:inverse() ):rotate_with( pivot_head_rotation )
 		self.stances.mg42.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-		
-		pivot_head_translation = Vector3( 11, 12, -8 )
-		pivot_head_rotation = Rotation(0, 0, 0)
-		self.stances.mg42.bipod.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
-		self.stances.mg42.bipod.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
-		self.stances.mg42.bipod.FOV = 63
+			
 		--Winchester
 		pivot_shoulder_translation = Vector3(10.7128, 49.0468, -8.57197)
 		pivot_shoulder_rotation = Rotation(0.00173532, -0.0855528, 0.630742)
@@ -1005,7 +1003,17 @@ function PlayerTweakData:_init_new_stances()
 		self.stances.flamethrower_mk2.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 	end
 	
-	
+	--beepod
+	pivot_shoulder_translation = Vector3(10.7056, 4.38842, -0.747177)
+	pivot_shoulder_rotation = Rotation(0.106618, -0.084954, 0.62858)
+	pivot_head_translation = Vector3( 10.5, 17, -9 )
+	pivot_head_rotation = Rotation(0.0, 0.0, 0)
+	local bipod = {'rpk','m249','hk21','mg42','par'}
+	for i, wep_id in ipairs(bipod) do
+		self.stances[ wep_id ].bipod.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+		self.stances[ wep_id ].bipod.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+		self.stances[ wep_id ].bipod.FOV = 65
+	end
 	--}
 	
 	--[[ ADS Positioning ]]

@@ -1,5 +1,5 @@
 --[[
-v1.5
+v1.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -15,12 +15,23 @@ Real Weapon Names
 
 
 if RequiredScript == "lib/managers/localizationmanager" then
-
+	
+	--Wobin Ralker's string override doesn't seem to like showing the alterable skill values (like skill costs and what not) so I gotta use Wilko's localization stuff
+	Hooks:Add("LocalizationManagerPostInit", "localization_dmc", function(loc)
+	
+		loc:add_localized_strings( {
+			["menu_backstab_desc"] = "BASIC: ##$basic##\nYou gain a ##3%## critical hit chance for every ##3## points of concealment under ##35## up to ##30%##.\n\nACE: ##$pro##\nYou gain a ##3%## critical hit chance for every ##1## point of concealment under ##35## up to ##30%##.\n\nNote: Critical hits will not work against a Bulldozer's body, with grenade launchers or with weapons that deal ##80 or more## damage (per pellet if using a shotgun).\n\nSkills that increase damage to ##80 or more## (per pellet if using a shotgun) do not remove the ability for that weapon to land a critical hit.",
+			
+			["menu_rifleman_desc"] = "BASIC: ##$basic##\nThe time taken to aim down sights for assault rifles and carbines is ##50%## faster and the time taken to aim down sights for battle rifles and sniper rifles is ##25%## faster.\n\nACE: ##$pro##\nYour weapon zoom level is increased by ##25%## with assault rifles, carbines, battle rifles and sniper rifles."
+			
+		} )
+	
+	end)
+	
 	local text_original = LocalizationManager.text
 	local testAllStrings = false  --Set to true to show all string ID's, false to return to normal.
 	function LocalizationManager:text(string_id, ...)
 	
-		
 		--Movement penalty string
 		return string_id == "bm_menu_weapon_movement_penalty_info" and "Base move speed when drawn: "
 		
@@ -71,46 +82,46 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		--[[ WE UPOTTE NAO ]]--{
 		--[ Faculty ]
 		or DMCWO.upotte == true and string_id == "bm_w_m1928" and "Thompson-sensei"
-		or DMCWO.upotte == true and string_id == "bm_w_m1928_desc" and "An American elementary school teacher working at Seishou Academy. She's chambered in .45 ACP.\nCheerful but airheaded.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or DMCWO.upotte == true and string_id == "bm_w_m1928_desc" and "An American elementary school teacher working at Seishou Academy. She's chambered in .45 ACP.\nCheerful but airheaded.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--[ Elementary Schoolers ]
 		--MP5
 		or DMCWO.upotte == true and string_id == "bm_w_mp5" and "Empi"
-		or DMCWO.upotte == true and string_id == "bm_w_mp5_desc" and "A German elementary schooler attending Seishou Academy. She's chambered in 9mm.\nPresident of the elementary school student council.\nCan pierce thin walls.\n\nSwitch between full-auto/3-rnd burst/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or DMCWO.upotte == true and string_id == "bm_w_mp5_desc" and "A German elementary schooler attending Seishou Academy. She's chambered in 9mm.\nPresident of the elementary school student council.\nCan pierce thin walls.\n\nCan switch between full-auto, 3-rnd burst and semi-auto."
 		--M10
 		or DMCWO.upotte == true and string_id == "bm_w_mac10" and "Emten"
-		or DMCWO.upotte == true and string_id == "bm_w_mac10_desc" and "An American elementary schooler attending Seishou Academy. She's chambered in .45 ACP.\nMotor-mouthed and quite \"stacked\".\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or DMCWO.upotte == true and string_id == "bm_w_mac10_desc" and "An American elementary schooler attending Seishou Academy. She's chambered in .45 ACP.\nMotor-mouthed and quite \"stacked\".\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--[ Middleschoolers ]
 		--AUG
 		or DMCWO.upotte == true and string_id == "bm_w_aug" and "AUG"
-		or DMCWO.upotte == true and string_id == "bm_w_aug_desc" and "An Austrian middleschooler attending Seishou Academy. She's chambered in 5.56 NATO.\nStrict but reserved.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or DMCWO.upotte == true and string_id == "bm_w_aug_desc" and "An Austrian middleschooler attending Seishou Academy. She's chambered in 5.56 NATO.\nStrict but reserved.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--M16
 		or DMCWO.upotte == true and string_id == "bm_w_m16" and "Ichiroku"
-		or DMCWO.upotte == true and string_id == "bm_w_m16_desc" and "An American middleschooler attending Seishou Academy. She's chambered in 5.56 NATO.\nEnergetic and foul-mouthed.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or DMCWO.upotte == true and string_id == "bm_w_m16_desc" and "An American middleschooler attending Seishou Academy. She's chambered in 5.56 NATO.\nEnergetic and foul-mouthed.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--L85
 		or DMCWO.upotte == true and string_id == "bm_w_l85a2" and "Eru"
-		or DMCWO.upotte == true and string_id == "bm_w_l85a2_desc" and "A British middleschooler attending Seishou Academy. She's chambered in 5.56 NATO.\nShy and clumsy.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or DMCWO.upotte == true and string_id == "bm_w_l85a2_desc" and "A British middleschooler attending Seishou Academy. She's chambered in 5.56 NATO.\nShy and clumsy.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--M4A1
-		or DMCWO.upotte == true and string_id == "bm_w_m16" and "Em-Four"
-		or DMCWO.upotte == true and string_id == "bm_w_m16_desc" and "An American middleschooler attending Seishou Academy. She's chambered in 5.56 NATO.\nVice-president of the middleschool student council.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or DMCWO.upotte == true and string_id == "bm_w_m4" and "Em-Four"
+		or DMCWO.upotte == true and string_id == "bm_w_m4_desc" and "An American middleschooler attending Seishou Academy. She's chambered in 5.56 NATO.\nVice-president of the middleschool student council.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--AK74
 		or DMCWO.upotte == true and string_id == "bm_w_ak74" and "AK74"
-		or DMCWO.upotte == true and string_id == "bm_w_ak74_desc" and "A Russian middleschooler attending Red Steel Academy. She's chambered in 5.45x39.\nSerious and cunning.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or DMCWO.upotte == true and string_id == "bm_w_ak74_desc" and "A Russian middleschooler attending Red Steel Academy. She's chambered in 5.45x39.\nSerious and cunning.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--AKM
 		or DMCWO.upotte == true and string_id == "bm_w_akm" and "AKM"
-		or DMCWO.upotte == true and string_id == "bm_w_akm_desc" and "A Russian middleschooler attending Red Steel Academy. She's chambered in 7.62x39.\nMenacing and a bully.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or DMCWO.upotte == true and string_id == "bm_w_akm_desc" and "A Russian middleschooler attending Red Steel Academy. She's chambered in 7.62x39.\nMenacing and a bully.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--RPK
 		or DMCWO.upotte == true and string_id == "bm_w_rpk" and "RPK"
 		or DMCWO.upotte == true and string_id == "bm_w_rpk_desc" and "A Russian middleschooler attending Red Steel Academy. She's chambered in 7.62x39.\nAgressive but rather simple minded.\nCan pierce enemies and walls."
 		--[ Highschoolers ]
 		--G3
 		or DMCWO.upotte == true and string_id == "bm_w_g3" and "Jiisuri"
-		or DMCWO.upotte == true and string_id == "bm_w_g3_desc" and "A German highschooler attending Seishou Academy. She's chambered in 7.62 NATO.\nElegant but a bit of a klutz.\nCan pierce enemies, walls and shields.\nDMC's raifu, treat her well.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or DMCWO.upotte == true and string_id == "bm_w_g3_desc" and "A German highschooler attending Seishou Academy. She's chambered in 7.62 NATO.\nElegant but a bit of a klutz.\nCan pierce enemies, walls and shields.\nDMC's raifu, treat her well.\n\nCan switch between full-auto and semi-auto."
 		--M14
 		or DMCWO.upotte == true and string_id == "bm_w_m14" and "Ichiyon"
-		or DMCWO.upotte == true and string_id == "bm_w_m14_desc" and "An American highschooler attending Seishou Academy. She's chambered in 7.62 NATO.\nCarefree and filled with puns.\nCan pierce enemies, walls and shields.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or DMCWO.upotte == true and string_id == "bm_w_m14_desc" and "An American highschooler attending Seishou Academy. She's chambered in 7.62 NATO.\nCarefree and filled with puns.\nCan pierce enemies, walls and shields.\n\nCan switch between full-auto and semi-auto."
 		--FAL
 		or DMCWO.upotte == true and string_id == "bm_w_fal" and "Faaru"
-		or DMCWO.upotte == true and string_id == "bm_w_fal_desc" and "A Belgian highschooler attending Seishou Academy. She's chambered in 7.62 NATO.\nResponsible and lax.\nCan pierce enemies, walls and shields.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or DMCWO.upotte == true and string_id == "bm_w_fal_desc" and "A Belgian highschooler attending Seishou Academy. She's chambered in 7.62 NATO.\nResponsible and lax.\nCan pierce enemies, walls and shields.\n\nCan switch between full-auto and semi-auto."
 		--}
 		
 		--[[ REVOLVER OCELOT ]]--{
@@ -144,19 +155,19 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[GOLD SLAVSHIT]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_akm_gold" and "Gold Plated AKMS"
-		or string_id == "bm_w_akm_gold_desc" and "A Russian gold-plated assault rifle chambered in 7.62x39mm.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_akm_gold_desc" and "A Russian gold-plated assault rifle chambered in 7.62x39mm.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		
 		--[[JAM733]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_amcar" and "Colt M733 Commando"
-		or string_id == "bm_w_amcar_desc" and "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_amcar_desc" and "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		
 		--[[STEEL BALLS]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_ak74" and "Concern Kalashnikov AKS-74"
-		or string_id == "bm_w_ak74_desc" and "A Russian assault rifle chambered in 5.45x39mm.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_ak74_desc" and "A Russian assault rifle chambered in 5.45x39mm.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		
 		--[[JAM-4]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_m4" and "Colt M4A1" --"Safety Pins"
-		or string_id == "bm_w_m4_desc" and "An American assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_m4_desc" and "An American assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--Barrels
 		or string_id == "bm_wp_m4_uupg_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 		or string_id == "bm_wp_m4_uupg_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
@@ -174,7 +185,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[AUGLY]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_aug" and "Steyr AUG A2"
-		or string_id == "bm_w_aug_desc" and "An Austrian bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_aug_desc" and "An Austrian bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--A3 Tact. Foregrip
 		or DMCWO.reelnaems == true and string_id == "bm_wp_aug_fg_a3" and "A3 Rail"
 		or string_id == "bm_wp_aug_fg_a3_desc" and "##5% slower## ADS speeds."
@@ -183,7 +194,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[WHITE FLAG]] -- :^)
 		or DMCWO.reelnaems == true and string_id == "bm_w_famas" and "Nexter FAMAS F1" --"IS THAT A DEAGLE?"
-		or string_id == "bm_w_famas_desc" and "A French bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nSwitch between full-auto/3-rnd burst/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_famas_desc" and "A French bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto, 3-rnd burst and semi-auto."
 		or string_id == "bm_wp_famas_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 		or DMCWO.reelnaems == true and string_id == "bm_wp_famas_b_sniper" and "G2 Sniper Barrel"
 		or string_id == "bm_wp_famas_b_sniper_desc" and "##Sniper class barrel.##\n##30% longer## overall range.\n##10% greater## minimum damage.\n##10% slower## ADS speeds."
@@ -196,7 +207,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[JAM]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_l85a2" and "BAE L85A2" --"Eru"
-		or string_id == "bm_w_l85a2_desc" and "A British-German bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_l85a2_desc" and "A British-German bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		or DMCWO.reelnaems == true and string_id == "bm_wp_l85a2_b_long" and "Long Barrel"
 		or string_id == "bm_wp_l85a2_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 		
@@ -209,7 +220,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[CROATGAT]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_vhs" and "HS Produkt VHS-2"
-		or string_id == "bm_w_vhs_desc" and "A Croatian bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_vhs_desc" and "A Croatian bullpup assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		or DMCWO.reelnaems == true and string_id == "bm_wp_vhs_b_short" and "Short Barrel"
 		or string_id == "bm_wp_vhs_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 		
@@ -221,11 +232,11 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[SLAVSHIT]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_akm" and "Concern Kalashnikov AKMS"
-		or string_id == "bm_w_akm_desc" and "A Russian assault rifle chambered in 7.62x39mm.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_akm_desc" and "A Russian assault rifle chambered in 7.62x39mm.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		
 		--[[MELTGUN]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_g36" and "Heckler & Koch G36KV"
-		or string_id == "bm_w_g36_desc" and "A German carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nSwitch between full-auto/2-rnd burst/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_g36_desc" and "A German carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto, 2-rnd burst and semi-auto."
 		--Compact
 		or DMCWO.reelnaems == true and string_id == "bm_wp_g36_fg_c" and "G36c Kit"
 		or string_id == "bm_wp_g36_fg_c_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds."
@@ -238,7 +249,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[PUNS]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_m14" and "Springfield M14 DMR"
-		or string_id == "bm_w_m14_desc" and "A special DMR version of the American M14 battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_m14_desc" and "A special DMR version of the American M14 battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\n\nCan switch between full-auto and semi-auto."
 		--Abraham
 		or DMCWO.reelnaems == true and string_id == "bm_wp_m14_body_ebr" and "MK.14 Kit"
 		or string_id == "bm_wp_m14_body_ebr_desc" and "##5% slower## ADS speeds\n##5% slower## movement.\nROF ##raised## to ##750 RPM##"
@@ -247,13 +258,13 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[SWED]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_ak5" and "Bofors Ak 5" --"FNC's sexy swedish cousin"
-		or string_id == "bm_w_ak5_desc" and "A licensed Swedish copy of the Belgian FN FNC assault rifle, chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_ak5_desc" and "A licensed Swedish copy of the Belgian FN FNC assault rifle, chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--Karbin Ceres
 		or DMCWO.reelnaems == true and string_id == "bm_wp_ak5_fg_ak5c" and "Ak 5c Kit"
 		or string_id == "bm_wp_ak5_fg_ak5c_desc" and "ROF ##lowered## to ##650 RPM.##"
 		--Belgian Heat
 		or DMCWO.reelnaems == true and string_id == "bm_wp_ak5_fg_fnc" and "FN FNC Kit"
-		or string_id == "bm_wp_ak5_fg_fnc_desc" and "ROF ##raised## to ##700 RPM.##\nAllows for the burst fire mod to be attached."
+		or string_id == "bm_wp_ak5_fg_fnc_desc" and "ROF ##raised## to ##725 RPM.##\nAllows for the burst fire mod to be attached."
 		--Bertil
 		or DMCWO.reelnaems == true and string_id == "bm_wp_ak5_s_ak5b" and "Ak 5b Stock"
 		--Caesar
@@ -261,7 +272,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[JAM16]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_m16" and "Colt M16A4" --"Orange Slices", "IS THAT A FAMAS?"
-		or string_id == "bm_w_m16_desc" and "An American 5.56 NATO assault rifle.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_m16_desc" and "An American 5.56 NATO assault rifle.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--Railed
 		or DMCWO.reelnaems == true and string_id == "bm_wp_m16_fg_railed" and "Daniel Defense Lite Rail" --not a carbon copy, just based off of, if only for the delta ring dongle thing
 		or string_id == "bm_wp_m16_fg_railed_desc" and "##5% slower## ADS speeds."
@@ -271,7 +282,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[553 NO PANTSU]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_s552" and "SIG SG 552-2" --"SG550's Little Sister"
-		or string_id == "bm_w_s552_desc" and "A Swiss-made carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nSwitch between full-auto/3-rnd burst/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_s552_desc" and "A Swiss-made carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto, 3-rnd burst and semi-auto."
 		--Enhanced Foregrip
 		or DMCWO.reelnaems == true and string_id == "bm_wp_ass_s552_fg_standard_green" and "OD Green Handguard"
 		--Enhanced Grip
@@ -293,7 +304,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[EAG-H]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_scar" and "FN MK.17"
-		or string_id == "bm_w_scar_desc" and "A Belgian-American battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_scar_desc" and "A Belgian-American battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\n\nCan switch between full-auto and semi-auto."
 		--Sniper Stock
 		or DMCWO.reelnaems == true and string_id == "bm_wp_scar_s_sniper" and "MK.20 Stock"	
 		
@@ -306,7 +317,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[RIGHT ARM]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_fal" and "FN FAL"
-		or string_id == "bm_w_fal_desc" and "A Belgian battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\n\"Right arm of the free world.\"\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_fal_desc" and "A Belgian battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\n\"Right arm of the free world.\"\n\nCan switch between full-auto and semi-auto."
 		--CQB
 		or DMCWO.reelnaems == true and string_id == "bm_wp_fal_body_standard" and "DSA SA58 Handguard w/Short Barrel" --this might conflict with something since this is also the name_id of the receiver
 		or string_id == "bm_wp_fal_body_standard_desc" and "##10% shorter## overall range.\n##15% faster## ADS speeds.\n##5% faster## movement."
@@ -331,7 +342,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[BOTTLE OPENER]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_galil" and "IMI Galil ARM"
-		or string_id == "bm_w_galil_desc" and "An Israeli battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_galil_desc" and "An Israeli battle rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\n\nCan switch between full-auto and semi-auto."
 		--Sniper
 		or DMCWO.reelnaems == true and string_id == "bm_wp_galil_fg_sniper" and "IMI Galatz Handguard & Sniper Barrel"
 		or string_id == "bm_wp_galil_fg_sniper_desc" and "##Sniper class barrel.##\n##30% longer## overall range.\n##10% greater## minimum damage.\n##10% slower## ADS speeds.\nROF ##lowered## to ##630 RPM.##"
@@ -356,7 +367,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[MAI RAIFU (SHE'S MINE I TELL YOU)]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_g3" and "Heckler & Koch G3"
-		or string_id == "bm_w_g3_desc" and "A German battle rifle based off the Spanish CETME, chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_g3_desc" and "A German battle rifle based off the Spanish CETME, chambered in 7.62 NATO.\nCan pierce enemies, walls and shields.\n\nCan switch between full-auto and semi-auto."
 		--Assault Kit
 		or DMCWO.reelnaems == true and string_id == "bm_wp_g3_b_short" and "Short Barrel"
 		or string_id == "bm_wp_g3_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
@@ -430,7 +441,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[ELMER FUDD]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_huntsman" and "Mosconi Coach Gun"
-		or string_id == "bm_w_huntsman_desc" and "A side-by-side, break-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types.\n\nSwitch between single-trigger/dual-trigger by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_huntsman_desc" and "A side-by-side, break-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types.\n\nCan switch between single-trigger and dual-trigger."
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_huntsman_b_short" and "Sawn-Off Short Barrel"
 		or string_id == "bm_wp_huntsman_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
@@ -448,7 +459,8 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_w_r870" and "Remington Model 870" --"Remafdng"
 		or string_id == "bm_w_r870_desc" and "An American, tube fed, pump-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
 		--Extended Mag
-		or DMCWO.reelnaems == true and string_id == "bm_wp_r870_m_extended" and "R870 Extended Tube Magazine"
+		or DMCWO.reelnaems == true and string_id == "bm_wp_r870_m_extended" and "R870 Lighter Magazine Spring"
+		or string_id == "bm_wp_r870_m_extended_desc" and "##5% faster## reload speeds."
 		--Zombie Hunter
 		or DMCWO.reelnaems == true and string_id == "bm_wp_r870_fg_wood" and "Wooden Pump"
 		or string_id == "bm_wp_r870_fg_wood_desc" and "##5% slower## ADS speeds."
@@ -461,7 +473,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[CATS]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_saiga" and "Concern Kalashnikov Saiga-12K"
-		or string_id == "bm_w_saiga_desc" and "A Russian, magazine fed, fully automatic shotgun based off the AK platform, loaded with 12-gauge shells.\nCan be loaded with special ammo types.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_saiga_desc" and "A Russian, magazine fed, fully automatic shotgun based off the AK platform, loaded with 12-gauge shells.\nCan be loaded with special ammo types.\n\nCan switch between full-auto and semi-auto."
 		--Tact. Russian
 		or DMCWO.reelnaems == true and string_id == "bm_wp_saiga_fg_lowerrail" and "Ultimak AK Modular Rail Forend System"
 		or string_id == "bm_wp_saiga_fg_lowerrail_desc" and "##5% slower## ADS speeds."
@@ -518,7 +530,8 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_w_serbu" and "Short Remington Model 870"
 		or string_id == "bm_w_serbu_desc" and "An American, tube fed, pump-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
 		--Extended Mag
-		or DMCWO.reelnaems == true and string_id == "bm_wp_shorty_m_extended_short" and "Short R870 Extended Tube Magazine"
+		or DMCWO.reelnaems == true and string_id == "bm_wp_shorty_m_extended_short" and "R870 Light Magazine Spring"
+		or string_id == "bm_wp_shorty_m_extended_short_desc" and "##2.5% faster## reload speeds."
 		--Standard
 		or DMCWO.reelnaems == true and string_id == "bm_wp_r870_s_solid" and "Fixed Stock"
 		--Police Shorty
@@ -579,7 +592,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_w_usp" and "Heckler & Koch USP Tactical"
 		or DMCWO.reelnaems == true and string_id == "bm_w_x_usp" and "Akimbo H&K USP Tacticals"
 		or string_id == "bm_w_usp_desc" and "A German handgun chambered in .45 ACP.\nCan pierce enemies and walls."
-		or string_id == "bm_w_x_usp_desc" and "A pair of German handguns chambered in .45 ACP.\nCan pierce enemies and walls.\n\nSwitch between single-fire/dual-fire by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_x_usp_desc" and "A pair of German handguns chambered in .45 ACP.\nCan pierce enemies and walls.\n\nCan switch between single-fire and dual-fire."
 		--Ventilated .45 **don't know
 		--or string_id == "bm_wp_usp_co_comp_1" and "Ventilated .45 Compensator" --I question the existence of this compensator
 		--Velocity .45
@@ -597,7 +610,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_w_g22c" and "Glock 22C"
 		or DMCWO.reelnaems == true and string_id == "bm_w_x_g22c" and "Akimbo Glock 22Cs"
 		or string_id == "bm_w_g22c_desc" and "An Austrian handgun chambered in .40 S&W.\nCan pierce walls."
-		or string_id == "bm_w_x_g22c_desc" and "A pair of Austrian handguns chambered in .40 S&W.\nCan pierce walls.\n\nSwitch between single-fire/dual-fire by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_x_g22c_desc" and "A pair of Austrian handguns chambered in .40 S&W.\nCan pierce walls.\n\nCan switch between single-fire and dual-fire."
 		--Long Slide
 		or DMCWO.reelnaems == true and string_id == "bm_wp_g22c_b_long" and "Glock 35 Compensated Slide"
 		or string_id == "bm_wp_g22c_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
@@ -606,13 +619,13 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_w_glock_17" and "Glock 17"
 		or DMCWO.reelnaems == true and string_id == "bm_w_x_g17" and "Akimbo Glock 17s"
 		or string_id == "bm_w_glock_17_desc" and "An Austrian handgun chambered in 9mm.\nCan pierce thin walls."
-		or string_id == "bm_w_x_g17_desc" and "A pair of Austrian handguns chambered in 9mm.\nCan pierce thin walls.\n\nSwitch between single-fire/dual-fire by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_x_g17_desc" and "A pair of Austrian handguns chambered in 9mm.\nCan pierce thin walls.\n\nCan switch between single-fire and dual-fire."
 		
 		--[[GRENADE 26]]
 		or DMCWO.reelnaems == true and string_id == "bm_wp_pis_g26" and  "Glock 26"
 		or DMCWO.reelnaems == true and string_id == "bm_w_jowi" and  "Akimbo Glock 26s"
 		or string_id == "bm_wp_pis_g26_desc" and "An Austrian handgun chambered in 9mm.\nCan pierce thin walls."
-		or string_id == "bm_w_jowi_desc" and "A pair of Austrian handguns chambered in 9mm.\nCan pierce thin walls.\n\nSwitch between single-fire/dual-fire by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_jowi_desc" and "A pair of Austrian handguns chambered in 9mm.\nCan pierce thin walls.\n\nCan switch between single-fire and dual-fire."
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_g26_body_salient" and  "Stipled Tan Frame"
 		or DMCWO.reelnaems == true and string_id == "bm_wp_g26_b_custom" and  "Brushed Metal Frame"
@@ -623,7 +636,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_w_colt_1911" and "Springfield Operator 1911" 
 		or DMCWO.reelnaems == true and string_id == "bm_w_x_1911" and "Akimbo Springfield Operator 1911s" 
 		or string_id == "bm_w_colt_1911_desc" and "An American handgun chambered in .45 ACP.\nCan pierce enemies and walls."
-		or string_id == "bm_w_x_1911_desc" and "A pair of American handguns chambered in .45 ACP.\nCan pierce enemies and walls.\n\nSwitch between single-fire/dual-fire by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_x_1911_desc" and "A pair of American handguns chambered in .45 ACP.\nCan pierce enemies and walls.\n\nCan switch between single-fire and dual-fire."
 		
 		--Aggressor
 		or DMCWO.reelnaems == true and string_id == "bm_wp_1911_co_2" and "TCII Compensator" --Not 100% but seems to be based off of it
@@ -643,7 +656,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_w_b92fs" and "Beretta 92FS"
 		or DMCWO.reelnaems == true and string_id == "bm_w_x_b92fs" and "Akimbo Beretta 92s"	
 		or string_id == "bm_w_b92fs_desc" and "An Italian handgun chambered in 9mm.\nCan pierce thin walls."
-		or string_id == "bm_w_x_b92fs_desc" and "A pair of Italian handguns chambered in 9mm.\nCan pierce thin walls.\n\nSwitch between single-fire/dual-fire by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. ".\n\n\"Don't be stupid! This is more entertaining than Hollywood is ever gonna be! \""
+		or string_id == "bm_w_x_b92fs_desc" and "A pair of Italian handguns chambered in 9mm.\nCan pierce thin walls.\n\nCan switch between single-fire and dual-fire.\n\n\"Don't be stupid! This is more entertaining than Hollywood is ever gonna be! \""
 		--Professional
 		or DMCWO.reelnaems == true and string_id == "bm_wp_beretta_co_co1" and "SGS Compensator" --Original name was a reference to the movie "The Professional"
 		--Competitor
@@ -677,7 +690,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[GRENADE 18]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_glock_18c" and "Glock 18C"
-		or string_id == "bm_w_glock_18c_desc" and "An Austrian machine pistol chambered in 9mm.\nCan pierce thin walls.\nBenefits from pistol skills.\nIs not affected by Equilibrium Aced.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_glock_18c_desc" and "An Austrian machine pistol chambered in 9mm.\nCan pierce thin walls.\nBenefits from pistol skills.\nIs not affected by Equilibrium Aced.\n\nCan switch between full-auto and semi-auto."
 		--Ventilated **don't know
 		--or string_id == "bm_wp_g18c_co_1" and "Ventilated Compensator" --I question the existence of this compensator
 		--Velocity
@@ -687,7 +700,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_w_deagle" and "IMI Desert Eagle Mark XIX" --"IS THAT A M16?"
 		or DMCWO.reelnaems == true and string_id == "bm_w_x_deagle" and "Akimbo IMI Desert Eagles"
 		or string_id == "bm_w_deagle_desc" and "An Israeli-American handgun chambered in .50 AE.\nCan pierce enemies, walls and shields.\n\n\"I won't rely on anyone anymore!\""
-		or string_id == "bm_w_x_deagle_desc" and "A pair of Israeli-American handguns chambered in .50 AE.\nCan pierce enemies, walls and shields.\n\nSwitch between single-fire/dual-fire by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_x_deagle_desc" and "A pair of Israeli-American handguns chambered in .50 AE.\nCan pierce enemies, walls and shields.\n\nCan switch between single-fire and dual-fire."
 		--Mount
 		or DMCWO.reelnaems == true and string_id == "bm_wp_pis_deagle_extra" and "Desert Eagle Scope Mount"
 		--La Femme
@@ -759,7 +772,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 	
 		--[[EVENFASTERRUNONSENTENCES]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_cobray" and "Cobray M11/9"
-		or string_id == "bm_w_cobray_desc" and "An American machine pistol chambered in 9mm.\nCan pierce thin walls.\nBenefits from SMG skills.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_cobray_desc" and "An American machine pistol chambered in 9mm.\nCan pierce thin walls.\nBenefits from SMG skills.\n\nCan switch between full-auto and semi-auto."
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_cobray_ns_barrelext" and "MAC Barrel Extension"
 		or string_id == "bm_wp_cobray_ns_barrelext_desc" and "##10% slower## ADS speeds."
@@ -768,7 +781,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[RUNONSENTENCES]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_mac10" and "Ingram M10"
-		or string_id == "bm_w_mac10_desc" and "An American machine pistol chambered in .45 ACP.\nCan pierce enemies and walls\nBenefits from SMG skills.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_mac10_desc" and "An American machine pistol chambered in .45 ACP.\nCan pierce enemies and walls\nBenefits from SMG skills.\n\nCan switch between full-auto and semi-auto."
 		--Extended Mag
 		or DMCWO.reelnaems == true and string_id == "bm_wp_mac10_m_extended" and "30rnd M10 Magazine"
 		or string_id == "bm_wp_mac10_m_extended_desc" and "##5% slower## reload speeds."
@@ -780,7 +793,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[THOMPSON SENSEI]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_m1928" and "Auto-Ordnance M1928"
-		or string_id == "bm_w_m1928_desc" and "An American sub-machine gun chambered in .45 ACP.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_m1928_desc" and "An American sub-machine gun chambered in .45 ACP.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--Short Barrel
 		or DMCWO.reelnaems == true and string_id == "bm_wp_m1928_b_short" and "Short Barrel"	
 		or string_id == "bm_wp_m1928_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
@@ -795,12 +808,12 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		--Dis. Stock
 		or DMCWO.reelnaems == true and string_id == "bm_wp_m1928_s_discrete" and "Synthetic Stock"
 		or string_id == "bm_wp_m1928_s_discrete_desc" and "##2.5% faster## movement."
-		or string_id == "bm_wp_m1928_s_nostock" and "##5% faster## movement.\n##40% faster## movement while aiming."
+		or string_id == "bm_wp_m1928_s_nostock_desc" and "##5% faster## movement."
 		
 		
 		--[[MAI RAIFU'S LITTLE SISTER AND STUDENT COUNCIL PRESIDENT OF THE ELEMETARY SCHOOL]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_mp5" and "Heckler & Koch MP5A4" --"Empi"
-		or string_id == "bm_w_mp5_desc" and "A German sub-machine gun chambered in 9mm.\nCan pierce thin walls.\n\nSwitch between full-auto/3-rnd burst/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_mp5_desc" and "A German sub-machine gun chambered in 9mm.\nCan pierce thin walls.\n\nCan switch between full-auto, 3-rnd burst and semi-auto."
 		--Sehr Kurze
 		or DMCWO.reelnaems == true and string_id == "bm_wp_mp5_fg_m5k" and "MP5k Tri-Rail Kit"
 		or string_id == "bm_wp_mp5_fg_m5k_desc" and "##15% shorter## overall range.\n##5% faster## ADS speeds.\nROF ##raised## to ##900 RPM.##"
@@ -819,7 +832,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 	
 		--[[SLING STOCKS ARE 2LEWD]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_mp9" and "Brugger & Thomet TP9SF"
-		or string_id == "bm_w_mp9_desc" and "A Swiss-made machine pistol chambered in 9mm.\nBenefits from SMG skills.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_mp9_desc" and "A Swiss-made machine pistol chambered in 9mm.\nBenefits from SMG skills.\n\nCan switch between full-auto and semi-auto."
 		--Extended Mag
 		or DMCWO.reelnaems == true and string_id == "bm_wp_mp9_m_extended" and "30rnd MP9 Magazine"
 		or string_id == "bm_wp_mp9_m_extended_desc" and "##5% slower## reload speeds."
@@ -828,7 +841,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[IT STINGS]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_scorpion" and "CZ Skorpion vz. 61"
-		or string_id == "bm_w_scorpion_desc" and "A Czechoslovakian sub-machine gun chambered in .32 ACP.\nCan pierce thin walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_scorpion_desc" and "A Czechoslovakian sub-machine gun chambered in .32 ACP.\nCan pierce thin walls.\n\nCan switch between full-auto and semi-auto."
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_scorpion_m_extended" and "Dual Magazines"
 		or string_id == "bm_wp_scorpion_m_extended_desc" and "##20% faster## reload speeds."
@@ -840,7 +853,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[NOT THE STUDENT COUNCIL PRESIDENT (get FUCKED)]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_uzi" and "IMI Uzi"
-		or string_id == "bm_w_uzi_desc" and "An Israeli sub-machine gun chambered in 9mm.\nCan pierce thin walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_uzi_desc" and "An Israeli sub-machine gun chambered in 9mm.\nCan pierce thin walls.\n\nCan switch between full-auto and semi-auto."
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_uzi_s_solid" and "Wooden Stock"
 		
@@ -852,7 +865,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[B-BAKA]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_baka" and "IMI Micro Uzi"
-		or string_id == "bm_w_baka_desc" and "An Israeli machine pistol chambered in 9mm.\nCan pierce thin walls.\nBenefits from SMG skills.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_baka_desc" and "An Israeli machine pistol chambered in 9mm.\nCan pierce thin walls.\nBenefits from SMG skills.\n\nCan switch between full-auto and semi-auto."
 		
 		or string_id == "bm_wp_baka_b_smallsupp_desc" and "A ##small## suppressor for the Micro Uzi.\n##40% shorter## overall range.\n##5% slower## ADS speeds."
 		or string_id == "bm_wp_baka_b_midsupp_desc" and "A ##medium## suppressor for the Micro Uzi.\n##30% shorter## overall range.\n##7.5% slower## ADS speeds."
@@ -875,7 +888,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[NOT A STEN]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_sterling" and "Sterling L2A1"
-		or string_id == "bm_w_sterling_desc" and "A British sub-machine gun chambered in 9mm.\nCan pierce thin walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_sterling_desc" and "A British sub-machine gun chambered in 9mm.\nCan pierce thin walls.\n\nCan switch between full-auto and semi-auto."
 		--Supp. Barrel
 		or DMCWO.reelnaems == true and string_id == "bm_wp_sterling_b_suppressed" and "L34A1 Barrel"
 		or string_id == "bm_wp_sterling_b_suppressed_desc" and "##Internally suppressed## barrel.\n##10% slower## ADS speeds."
@@ -895,7 +908,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 	
 		--[[BABBY AR]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_olympic" and "Olympic Arms K23B Tactical"
-		or string_id == "bm_w_olympic_desc" and "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_olympic_desc" and "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		
 		--Railed Handguard
 		or DMCWO.reelnaems == true and string_id == "bm_wp_olympic_fg_railed" and "KAC Free Float Handguard" --a super short version at that, shares the delta ring so I'm assuming this is what it's based off of
@@ -905,14 +918,14 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[BABBY SLAVSHIT]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_akmsu" and "Soviet Union AKMSU"
-		or string_id == "bm_w_akmsu_desc" and "A Russian carbine chambered in 7.62x39mm.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_akmsu_desc" and "A Russian carbine chambered in 7.62x39mm.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--Moscow Special
 		or DMCWO.reelnaems == true and string_id == "bm_wp_akmsu_fg_rail" and "Samson K-Rail" --Seems to be loosely based off of the Samson K-Rail, it's the only thing that looked remotely like this
 		or string_id == "bm_wp_akmsu_fg_rail_desc" and "##5% slower## ADS speeds."
 		
 		--[[OVERPRICED 22LR]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_p90" and "FN P90 TR"
-		or string_id == "bm_w_p90_desc" and "A Belgian bullpup personal defence weapon chambered in 5.7x28mm.\nCan pierce enemies, walls and shields.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. ".\n\n\"Is a girl with a mechanical body ordinary?\""
+		or string_id == "bm_w_p90_desc" and "A Belgian bullpup personal defence weapon chambered in 5.7x28mm.\nCan pierce enemies, walls and shields.\n\nCan switch between full-auto and semi-auto.\n\n\"Is a girl with a mechanical body ordinary?\""
 		--Long Barrel
 		or DMCWO.reelnaems == true and string_id == "bm_wp_p90_b_long" and "PS90 Barrel"
 		or string_id == "bm_wp_p90_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
@@ -928,7 +941,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[YOU SUCK AND WE HATE YOU]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_mp7" and "Heckler & Koch MP7A2"
-		or string_id == "bm_w_mp7_desc" and "A German personal defence weapon chambered in 4.6x30mm.\nCan pierce enemies, walls and shields.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_mp7_desc" and "A German personal defence weapon chambered in 4.6x30mm.\nCan pierce enemies, walls and shields.\n\nCan switch between full-auto and semi-auto."
 		--B&T Suppressor
 		or DMCWO.reelnaems == true and string_id == "bm_wp_mp7_b_suppressed" and "B&T MP7 Rotex-II Suppressor"	
 		or string_id == "bm_wp_mp7_b_suppressed_desc" and "A ##specialized## suppressor for the MP7.\n##20% shorter## overall range.\n##7.5% slower## ADS speeds."	
@@ -939,12 +952,16 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_wp_mp7_s_long" and "Extended Stock"
 		
 		--[[DEMOMAN]]
-		or DMCWO.reelnaems == true and string_id == "bm_w_gre_m79" and "Springfield Armory M79"
+		or DMCWO.reelnaems == true and string_id == "bm_w_gre_m79" and "Springfield Armory M79 Grenade Launcher"
 		or string_id == "bm_w_gre_m79_desc" and "An American, single-shot, break-action grenade launcher loaded with 40mm grenades.\nCan fire incendiary rounds.\nDamage boosts from skills do not affect this weapon."
 		
 		--[[NADE SPAM]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_m32" and "Milkor Grenade Launcher"
-		or string_id == "bm_w_m32_desc" and "A South-African, cylinder-fed grenade launcher loaded with 40mm grenades.\nCan fire incendiary rounds.\nDamage boosts from skills do not affect this weapon."
+		or string_id == "bm_w_m32_desc" and "A South-African cylinder-fed grenade launcher loaded with 40mm grenades.\nCan fire incendiary rounds.\nDamage boosts from skills do not affect this weapon."
+		
+		--[[HONG MEI LING]]
+		or DMCWO.reelnaems == true and string_id == "bm_w_china" and "\"China Lake\" Grenade Launcher"
+		or string_id == "bm_w_china_desc" and "An American pump-action grenade launcher loaded with 40mm grenades.\nCan fire incendiary rounds.\nDamage boosts from skills do not affect this weapon."
 		
 		--[[REVOLVER OCELOT]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_peacemaker" and "Colt Single Action Army" --"Revolver Ocelot"
@@ -992,7 +1009,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[AS Val]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_asval" and "Tula Arms AS \"Val\""
-		or string_id == "bm_w_asval_desc" and "An internally suppressed Russian assault rifle, chambered in 9x39mm.\nCan pierce enemies and walls.\n\nSwitch between full-auto/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_asval_desc" and "An internally suppressed Russian assault rifle, chambered in 9x39mm.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--Short
 		or DMCWO.reelnaems == true and string_id == "bm_wp_asval_b_proto" and "Prototype Barrel"
 		or string_id == "bm_wp_asval_b_proto_desc" and "##Removes the suppressor.##\n##10% longer## overall range.\n##5% faster## ADS speeds."
@@ -1041,7 +1058,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[Vector]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_polymer" and "KRISS Vector SMG"
-		or string_id == "bm_w_polymer_desc" and "A recoil mitigating American sub-machine gun chambered in .45 ACP.\nCan pierce enemies and walls.\n\nSwitch between full-auto/2-rnd burst/semi-auto by pressing " .. managers.localization:btn_macro("weapon_firemode", true) .. "."
+		or string_id == "bm_w_polymer_desc" and "A recoil mitigating American sub-machine gun chambered in .45 ACP.\nCan pierce enemies and walls.\n\nCan switch between full-auto, 2-rnd burst and semi-auto."
 		--CRB
 		or DMCWO.reelnaems == true and string_id == "bm_wp_polymer_barrel_precision" and "CRB Barrel w/Shroud"
 		or string_id == "bm_wp_polymer_barrel_precision_desc" and "##20% longer## overall range.\n##10% slower## ADS speeds."
@@ -1054,11 +1071,16 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_w_sparrow_desc" and "An Israeli handgun based off the Czechoslovakian CZ-75, chambered in 9mm.\nCan pierce thin walls.\n\n\"Bang...\""
 		or DMCWO.reelnaems == true and string_id == "bm_wp_sparrow_body_941" and "IMI Jericho 941 F Kit"
 		or string_id == "bm_wp_sparrow_g_cowboy" and "Weighted Grip"
-		or string_id == "bm_wp_sparrow_g_cowboy_desc" and "\n\n\n\n                                   YOU'RE GONNA CARRY THAT WEIGHT."
+		or string_id == "bm_wp_sparrow_g_cowboy_desc" and "YOU'RE GONNA CARRY THAT WEIGHT."
 		
 		--[[Model 70]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_model70" and "Winchester Model 70"
-		or string_id == "bm_w_model70_desc" and "A American bolt-action rifle chambered in .300 Winchester Magnum.\nCan pierce enemies, walls and shields."
+		or string_id == "bm_w_model70_desc" and "An American bolt-action rifle chambered in .300 Winchester Magnum.\nCan pierce enemies, walls and shields."
+		
+		--[[Model 37]]
+		or DMCWO.reelnaems == true and string_id == "bm_w_m37" and "Ithaca Model 37 Homeland Security"
+		or string_id == "bm_w_m37_desc" and "An American, tube fed, pump-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types.\n\nCan be slam-fired for an increase in rate of fire at the cost of reduced accuracy and stability."
+		or string_id == "bm_wp_m37_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds."
 	
 		--[[WEAPON MODS]]
 		--Ported
@@ -1399,13 +1421,13 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		--[[FOREGRIPS]]
 		--VFG
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_vg_ass_smg_verticalgrip" and "Knights Armament Co. VFG"
-		or string_id == "bm_wp_mosin_iron_sight_desc" and "Remove the scope and use iron sights."
+		or string_id == "bm_wp_upg_vg_ass_smg_verticalgrip_desc" and "##20% less## recoil recovery."
 		--STUBBY
-		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_vg_ass_smg_verticalgrip" and "Tango Down QD Stubby VFG"
-		or string_id == "bm_wp_mosin_iron_sight_desc" and "Remove the scope and use iron sights."
+		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_vg_ass_smg_stubby" and "Tango Down QD Stubby VFG"
+		or string_id == "bm_wp_upg_vg_ass_smg_stubby_desc" and "##10% less## recoil recovery."
 		--AFG
-		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_vg_ass_smg_verticalgrip" and "Magpul AFG2"
-		or string_id == "bm_wp_mosin_iron_sight_desc" and "Remove the scope and use iron sights."
+		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_vg_ass_smg_afg" and "Magpul AFG 2"
+		or string_id == "bm_wp_upg_vg_ass_smg_afg_desc" and "##10% more## recoil recovery."
 		
 		
 		--Dragons Breath
@@ -1479,12 +1501,17 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "burstfire_desc_m16" and "Swaps out full-auto capabilities for ##3-round bursts.##\nROF ##raised## by ##5%.##"
 		or string_id == "burstfire_desc_g18" and "##Disables the effects of Equilibrium Aced.##\nSwaps out full-auto capabilities for ##3-round bursts.##\nROF ##raised## by ##5%.##"
 		or string_id == "burstfire_desc_raffica" and "##Disables the effects of Equilibrium Aced.##\nAllows this weapon to fire in ##3-round bursts## at ##1200 RPM.##\n##Semi-auto fire rate is unchanged.##"
+		or string_id == "burstfire_desc_g36" and "Switches out 2-round bursts for ##3-round bursts.##"
 		--MAC slow kit
 		or string_id == "mac_slow" and "MAC Slow Fire Kit"
 		or string_id == "mac_slow_desc" and "ROF ##lowered## to ##750 RPM.##"
-		--MAC slow kit
+		--C96 kit
 		or string_id == "schnellfeuer" and "M712 Schnellfeuer Kit"
 		or string_id == "schnellfeuer_desc" and "Allows for switching to ##full-auto.##\nROF ##raised## to ##1000 RPM.##\n##Disables the effects of Equilibrium Aced.##"
+		
+		--Sniper Irons
+		or string_id == "jonathan" and "Iron Sights"
+		or string_id == "jonathan_desc" and "Remove the scope and use iron sights."
 		
 		--boosts
 		or string_id == "bm_menu_bonus_concealment" and "Concealment Modifier"
@@ -1716,6 +1743,22 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		--Gatorade
 		or DMCWO.reelnaems == true and string_id == "bm_melee_gator" and "Gerber Gator Machete Pro"
 		or string_id == "bm_melee_gator_desc" and "They say you can last three weeks without food, and three days without water, but in a hostile environment you won't last three hours without a good blade at your side."
+		
+		--H'yuk
+		or string_id == "bm_melee_pitchfork_desc" and "Bidents, tridents, who cares? They're basically pitch forks. If Poseidon and Lucifer can use them, so can we. When the cops show up to interrupt your heisting, show them that villager spirit and chase them away like they are Frankenstein's Monster."
+		--BONK
+		or DMCWO.reelnaems == true and string_id == "bm_melee_scoutknife" and "Morakniv Classic Scout 39"
+		or string_id == "bm_melee_scoutknife_desc" and "Don't let the rusty and worn appearance turn you off. A knife is always a knife - and some say an old knife ages just like a good wine (no one has probably ever said that). Try it out and you'll see things will bleed."
+		--Shears
+		or DMCWO.reelnaems == true and string_id == "bm_melee_shawn" and "Antique Sheep Shears"
+		or string_id == "bm_melee_shawn_desc" and "Did you know that Sheep shearing is considered a sport? Maybe we should invent a new sport: cop shearing? No? Why not? Whatever... use them however you see fit, I guess..."
+		--WREX
+		or DMCWO.reelnaems == true and string_id == "bm_melee_stick" and "Shepherd's Crook"
+		or string_id == "bm_melee_stick_desc" and "Tired after a long heist? Want to look old and wise? Maybe smash a cop's face in? The Shepherd's cane can do it all."
+		
+		--NINE INCHES
+		or DMCWO.reelnaems == true and string_id == "bm_melee_nin" and "Paslode IM90i \"The Punder\""
+		or string_id == "bm_melee_nin_desc" and "The Pounder, Wolf's favorite nailgun. \n\nWhen people ask about the name, Wolf is quick to correct it to \"The Punder\" and as they say that he screams: \"Nailed it!\""
 			
 		or testAllStrings == true and string_id
 		or text_original(self, string_id, ...)

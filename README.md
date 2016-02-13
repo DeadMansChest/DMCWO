@@ -1,9 +1,8 @@
-#DMC's Weapon Overhaul v1.5: GAINAX edition
-####[I never really did follow Evangelion's story
-](https://www.youtube.com/watch?v=PgIzBX9oV80)
+#DMC's Weapon Overhaul v1.6: S2 Never edition
+####[Imashi please](https://www.youtube.com/watch?v=O17JfoxpqH0)
 ######[Hoxhud Hook Branch](https://github.com/DeadMansChest/DMCWO)
 ######[BLT Hook Branch](https://github.com/DeadMansChest/DMCWO/tree/BLT-Version)
-by: Dildo Man Can
+by: DiddleMyCunny
 
 [UC Thread](http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html) 
 
@@ -44,7 +43,8 @@ I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-is
 * Lizard Foe for fixes made in gat_physics.lua
 * Harfatus/Olipro for the OG lua hook
 * Wilko for the BLT lua hook
-* SC for code, advice
+* SC for melee HS and fire HS code, mod_override stuffs, advice
+* Zdann for mod_override stuffs
 * IMFDB and Payday Wikia for weapon names and attachments I couldn't ID
 * /k/ anon for semi-solidifiying some of the attachment names
   Anon: Low Profile Suppressor might be a gemtec halo with a different attachment system but idk im getting buttflustered with you lol
@@ -59,7 +59,7 @@ I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-is
   * https://www.youtube.com/watch?v=5Qx_q_TCVoE
   * Illusion's newly announced game, Sexy Beach Premium Resort, will probably take the title as my big time-waster like AA2 was
     * :^)
-* Any and all users of this mod as they're pretty much telling OVK to consider re-rebalancing their weapons
+* Any and all users of this mod as they're pretty much telling OVK to consider rebalancing their weapons
 
 	
 Did I forget to credit you or improperly do so? Sorry if I did :> Bug the shit out of me, and tell me what I forgot to credit/I miscredited you for.
@@ -81,8 +81,9 @@ Other LUA mods:
   * [Kail's PROJECT: Canary](http://steamcommunity.com/groups/projectcanary)
   * [Undeadsewer's Melee Overhaul REvamped (M.O.RE)](http://steamcommunity.com/groups/PD2_MORE)
   * [lekousin's Armor Overhaul](http://steamcommunity.com/groups/lekousinAO)
+  * [SC's Mod](http://steamcommunity.com/groups/sc_mod)
   * [SquareOne's instant bullet impact fix](http://www.unknowncheats.me/forum/payday-2/118472-fixing-bullet-delayed-hit-effects.html) 
-    * May cause frame drops on lower end PCs if you use shotgun rounds that have high ray counts
+    * May cause frame drops on lower end PCs if you use shotgun rounds that have high pellet counts
 
 Required for the following: [i am not a spy...'s bundle mod tool](http://steamcommunity.com/app/218620/discussions/15/540744936746354308/)
   * [i am not a spy...'s HD 3rd Person Weapons](http://steamcommunity.com/app/218620/discussions/15/558754900072790886/)
@@ -391,7 +392,7 @@ Renamed mod categories
 		
 Reclassed several weapons
   * The Para AR and AKMSU are now classed as "assault_rifles"
-    * They're still secondaries, only now they benefit from AR skills instead of the two SMG skills and appear under the renamed category "Assault Rifles & Carbines"
+    * They're still secondaries, only now they benefit from AR skills instead of the two SMG skills and appear under the category "Carbines"
   * The Judge is now classed as a "pistol"
     * Now benefits from pistol based skills
       * No longer benefits from shotgun skills, bumped the damage up to compensate
@@ -421,9 +422,9 @@ Keep in mind, parts of some guns may be missing after an uninstall. You can easi
 ##KNOWN ISSUES
 Any issues I know of but can't personally fix because I can't code will be listed here
 
-* Optics attached to the M249 and MG42 don't follow the feed cover when reloading.
+* Optics attached to the M249, M240 and MG42 don't follow the feed cover when reloading.
 
-* In rebalance_attach.lua, if "elcan_buis" is set to true, you'll see the 45 degree irons floating in the main menu. A side effect on how I got the BUIS toggle working.
+* In DMCWO.lua, if "elcan_buis" is set to true, you'll see the 45 degree irons floating in the main menu. A side effect on how I got the BUIS toggle working.
     * I also don't update this as often as I should so some guns may not work with it
 
 
@@ -436,11 +437,7 @@ If it is a bug with sight positioning, please give me:
   * The gun with the bugged optic
   * The bugged optic
 	
-If it's something else, tell me if:
-
-[DMCWO] All "rebalance" scripts are running!!
-
-is appearing in your log
+If it's something else, just tell me how it do the do (or rather how it don't do the do)
 	
 Thanks ;)
 

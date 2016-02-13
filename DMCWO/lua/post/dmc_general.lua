@@ -1,5 +1,5 @@
 --[[
-v1.5
+v1.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -25,17 +25,26 @@ function UpgradesTweakData:init()
 	self.values.akimbo.damage_addend = {1.5}
 	
 	--"Silent Killer" adjustments
-	self.values.weapon.silencer_damage_multiplier = { 1.125, 1.25}	--BASIC, ACE
+	--self.values.weapon.silencer_damage_multiplier = { 1.125, 1.25} --BASIC, ACE
 	--self.skill_descs.hitman.multibasic = "12.5%"
 	--self.skill_descs.hitman.multipro = "25%"
 	
 	--"The Professional" adjustments
 	self.values.weapon.silencer_recoil_multiplier = {0.90}
-	self.values.weapon.silencer_spread_multiplier = {0.85}
+	self.values.weapon.silencer_spread_multiplier = {0.90}
 	self.values.weapon.silencer_enter_steelsight_speed_multiplier = {1.25}
-	--self.skill_descs.silence_expert.multibasic = "10%"
-	--self.skill_descs.silence_expert.multipro = "15%"
-	--self.skill_descs.silence_expert.multipro2 = "25%"
+	self.skill_descs.silence_expert.multibasic = "10%"
+	self.skill_descs.silence_expert.multipro = "10%"
+	self.skill_descs.silence_expert.multipro2 = "25%"
+	
+	self.values.assault_rifle.enter_steelsight_speed_multiplier = {1.50}
+	self.values.snp.enter_steelsight_speed_multiplier = {1.25}
+	self.skill_descs.rifleman = { 
+		[1] = 2, 
+		[2] = 1, 
+		multibasic = "fuck", multibasic2 = "my", 
+		multipro = "ass"
+	}
 	
 	--"Mag Plus" adjustments
 	self.values.weapon.clip_ammo_increase = { 10, 20 }

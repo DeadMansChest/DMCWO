@@ -3,12 +3,13 @@
 	"description" : "Full overhaul of the weapons present in PD2"
 	"author" : "DeadMansChest/Noep",
 	"contact" : "steamid/qt3_14",
-	"version" : "1.5",
+	"version" : "1.60",
 	"priority" : 69,
 	"updates" : [
 		{
-			"revision" : 1.5,
+			"revision" : 1.60,
 			"identifier" : "dmcwo",
+			"install_dir" : "."
 		}
 	]
 	"hooks" : [
@@ -44,8 +45,9 @@
 		{ "hook_id" : "lib/managers/blackmarketmanager", "script_path" : "lua/post/gat_physics.lua" },
 		{ "hook_id" : "lib/managers/menu/blackmarketgui", "script_path" : "lua/post/gat_physics.lua" },
 		
-		{ "hook_id" : "lib/units/beings/player/playerdamage", "script_path" : "lua/post/playerstandard.lua" },
-		{ "hook_id" : "lib/units/beings/player/states/playerstandard", "script_path" : "lua/post/playerstandard.lua" },
+		{ "hook_id" : "lib/units/beings/player/playerdamage", "script_path" : "lua/post/playerstuff.lua" },
+		{ "hook_id" : "lib/units/beings/player/states/playerstandard", "script_path" : "lua/post/playerstuff.lua" },
+		{ "hook_id" : "lib/units/beings/player/states/playerbipod", "script_path" : "lua/post/playerstuff.lua" },
 		
 		{ "hook_id" : "lib/units/enemies/cop/copdamage", "script_path" : "lua/post/copdamage.lua" },
 		

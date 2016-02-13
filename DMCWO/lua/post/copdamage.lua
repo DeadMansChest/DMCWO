@@ -1,5 +1,5 @@
 --[[
-v1.5
+v1.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 function CopDamage:damage_bullet(attack_data)
@@ -274,20 +274,15 @@ function CopDamage:damage_bullet(attack_data)
 	return result
 end
 
---Melee damage mult code courtesy of SC
+if DMCWO.melee_hs == true then
+
+--Melee hsmult code courtesy of SC
 local melee_original = CopDamage.damage_melee
 function CopDamage:damage_melee(attack_data)
 	local head = self._head_body_name and attack_data.col_ray.body and attack_data.col_ray.body:name() == self._ids_head_body_name
 	local damage = attack_data.damage
 	local headshot_multiplier = 1
 	if attack_data.attacker_unit == managers.player:player_unit() then
-		local critical_hit, crit_damage = self:roll_critical_hit(damage)
-		if critical_hit then
-			managers.hud:on_crit_confirmed()
-			damage = crit_damage
-		else
-			managers.hud:on_hit_confirmed()
-		end
 		headshot_multiplier = managers.player:upgrade_value("weapon", "passive_headshot_damage_multiplier", 1)
 		if tweak_data.character[self._unit:base()._tweak_table].priority_shout then
 			damage = damage * managers.player:upgrade_value("weapon", "special_damage_taken_multiplier", 1)
@@ -310,4 +305,7 @@ function CopDamage:damage_melee(attack_data)
 	
 	return melee_original(self, attack_data)
 end
+
+end
+
 

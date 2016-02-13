@@ -1,6 +1,6 @@
 --[[
 DMC's Weapon Overhaul
-v1.5
+v1.6
 BLT Hook Version
 ]]
 
@@ -14,9 +14,9 @@ DMCWO.stfu = false
 --[[ DEBUG/WIP TOGGLES ]]--{
 --Really these are just for me for development and testing purposes but I figure why not? The default setting for all of these are "false"
 
---I RECOMMEND THAT YOU ENABLE THE CONSOLE (unless you feel like reading the log)
+--I RECOMMEND THAT YOU ENABLE THE ENGINE CONSOLE (unless you feel like reading the log)
 --YOU MAY GET PERFORMANCE DROPS WHILE USING THIS WITH AUTOMATIC FIRE
---If set to true, outputs various statistics from your last shot taken from a "newraycastweaponbase" gun into the console/log
+--If set to true, outputs various statistics from each shot taken from a "newraycastweaponbase" gun into the console/log
 --Shots into the open skybox are not tracked
 --Non-"newraycastweaponbase" guns are not tracked
 DMCWO.debug_range = false
@@ -49,7 +49,7 @@ DMCWO.reelnaems = true
 --If set to true, Revolver Ocelot
 --NOTE: Revolver Ocelot
 --NOTE 2: (Revolver Ocelot)
---NOTE 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
+--Revolver Ocelot 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
 --Default = false
 DMCWO.ocelot = false
 
@@ -64,7 +64,7 @@ DMCWO.upotte = false
 
 --[[ WEAPON TOGGLES ]]--{
 
---If set to true, you leave behind PD:TH sniper trails for the MSR, R93, Mosin, WA2000 and M95
+--If set to true, you leave behind PD:TH sniper trails for the MSR, R93, Mosin, WA2000, Model 70 and M95
 --Default = false
 DMCWO.sniper_tracers = false
 
@@ -76,7 +76,7 @@ DMCWO.light_show = false
 --If set to true, you retain closer-to-vanilla total ammo count.
 --I say "closer-to-vanilla" as mag capacities remain adjusted which can still influence total ammo.
 --More or less just there if you're really paranoid about being questioned about your ammo when playing with the unknowing 
---With that said, why are you playing pubs?
+--With that said, why are you playing pubs with this?
 --Default = false
 DMCWO.vanilla_ammo = false
 
@@ -90,14 +90,31 @@ DMCWO.reposed_vms = true
 --Default = false
 DMCWO.fix_pickup = false
 
+--If set to true, switches the Taurus Judge to act as a pistol and use pistol skills instead
+--NOTE: Damage is bumped up to emulate it having Shotgun Impact
+--NOTE 2: RoF is bogged down to require you needing Equilibrium Aced
+--Default = true
+DMCWO.judge_pistol = true
+
+--If set to true, gets rid of the rotational aspect of your viewmodel when the bipod is deployed, removing the janky ADS transition at the cost of, again, removing the rotational aspect when deployed
+--Default = false
+DMCWO.no_bipod_swivel = false
 --}
 
 --[[ MELEE TOGGLES ]]--{
 
+--If set to true, allows for melee weapons to benefit from headshot multipliers 
+--Thanks go to SC
+--Do not use this in conjunction with M.O.RE's melee headshot multipliers
+--Default = true
+DMCWO.melee_hs = true
+
 --If set to true, using the fists allows you to turn into Kenshiro from Hokuto No Ken (Fist of the North Star)
 --"AAAH-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA"
+--Aternatively, become Star Platinum
+--"ORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORA"
 --Default = false
-DMCWO.kenshiro = true
+DMCWO.kenshiroraoraora = false
 
 --If set to true, become Raiden
 DMCWO.RULESOFNATURE = false
@@ -370,6 +387,7 @@ DMCWO.Strings = {
 "I'd an Inkling...",
 "Get your \"First Aid Kit\" here ~<3", -->tfw drawing lewd Kawaii pictures
 "I'd Nonon's nonos",
+"\"Oyvey Shill\"",
 ";)",
 ";)",
 "\"Your opinion, my choice\"",
@@ -381,6 +399,7 @@ DMCWO.Strings = {
 "\"Shame on you if you thought otherwise\"",
 ";)",
 ";)",
+"$2.49",
 "Based LazyOzzy",
 "Based Seven",
 "\"Dickbutt\"",
@@ -406,7 +425,7 @@ DMCWO.Strings = {
 "More lood Kawaii pictures when?",
 "hOI!",
 "DETERMINATION",
-"NYEH NYEH NYEH!!!",
+"NYEH HEH HEH!",
 "I'd a Frisk",
 "ANIME IS REAL",
 "ANIME IS NOT REAL",
