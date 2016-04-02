@@ -1,7 +1,7 @@
 --[[
-v1.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
+
 function CopDamage:damage_bullet(attack_data)
 	if self._dead or self._invulnerable then
 		return
@@ -47,6 +47,14 @@ function CopDamage:damage_bullet(attack_data)
 		damage = damage * armor_pierce_value
 		if armor_pierce_roll >= armor_pierce_value then
 			return
+		end
+	elseif unit_type == "tank" then
+		if attack_data.col_ray.body then
+			if attack_data.col_ray.body:name() == Idstring("body_armor_chest") or attack_data.col_ray.body:name() == Idstring("body_armor_stomache") or attack_data.col_ray.body:name() == Idstring("body_armor_back") then
+				damage = damage * 0.1
+			elseif attack_data.col_ray.body:name() == Idstring("body_helmet_plate") then
+				damage = damage * 0.5
+			end
 		end
 	end
 	local result

@@ -1,17 +1,16 @@
 --[[
 DMC's Weapon Overhaul
-v1.6
-BLT Hook Version
+v1.70
 ]]
 
 if not _G.DMCWO then
 	_G.DMCWO = _G.DMCWO or {}
 end
 
---Set to true if you don't want the random message printing to the console/log after the persist scripts set up
+--Set to true if you don't want the random message printing to the console/log
 DMCWO.stfu = false 
 
---[[ DEBUG/WIP TOGGLES ]]--{
+--[[ DEBUG/WIP SETTINGS ]]--{
 --Really these are just for me for development and testing purposes but I figure why not? The default setting for all of these are "false"
 
 --I RECOMMEND THAT YOU ENABLE THE ENGINE CONSOLE (unless you feel like reading the log)
@@ -37,11 +36,34 @@ DMCWO.doomguy = false
 --WIP
 DMCWO.no_ammo_purse = false
 
+
+--If set to true, enables the ELCAN Specter to use the BUIS on the top of the optic. 
+--Default = false
+--NOTE: Enabling this will remove the 45 degree irons if they're attached, disallow it from being attached along with the ELCAN scope and will take the place as the first gadget you switch to with the laser and/or flashlight gadget becoming the second and/or third gadget you switch to
+--NOTE 2: You'll also get a floating 45 degree angle gadget in the main menu and mod screen, it's a side effect of having the BUIS actually work
+--WIP
+DMCWO.elcan_buis = false
+
+--[[
+If GEDDAN is set to true, weapons will now have a chance to jam
+	-No, it's not like having Goonmod's "Crappy Weapons" mutator
+		-But it's still a pain in the ass :^)
+	-To explain, after shooting your weapon a certain amount of times (this varies per weapon), it will become susceptible to jamming, forcing you to perform an "empty" reload
+	-Shooting while under the effects of Bulletstorm Basic/Aced will disable the chance for jamming for the length of its duration nor will it cause your jam chance to rise
+		-However, Swan Song will NOT disable the chance for jamming and shots fired in this state will still cause your jam chance to rise
+	-Your weapon's jam chance will eventually cap off at a certain percent (again, this varies per weapon)
+If both GEDDAN and l85a1_sim are both set to true, the L85A2 will perform more akin to the L85A1
+	-i.e. just use your secondary and/or melee instead
+	-Seriously though, how do you fuck up a rifle so bad that the GERMANS (H&K) can't fix it.
+WIP
+]]
+DMCWO.GEDDAN = false
+DMCWO.l85a1_sim = false
 --}
 
---[[ STRING TOGGLES ]]--{
+--[[ STRING SETTINGS ]]--{
 
---If set to true, renames/changes the description of weapons to their IRL counter parts
+--If set to true, renames weapons to their IRL counter parts
 --NOTE: This only affects weapon names. Descriptions are unchanged
 --Default = true
 DMCWO.reelnaems = true
@@ -51,25 +73,25 @@ DMCWO.reelnaems = true
 --NOTE 2: (Revolver Ocelot)
 --Revolver Ocelot 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
 --Default = false
-DMCWO.ocelot = false
+DMCWO.ocelot = true
 
 --If set to true, renames/changes the descriptions of weapons to their Upotte counter parts (if they've made an appearance)
---NOTE: This is really fucking stupid
+--NOTE: This is fucking stupid
 --NOTE 2: Jiisuri is loev. Jiisuri is lyfe.
 --NOTE 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
 --Default = false
-DMCWO.upotte = false
+DMCWO.upotte = true
 
 --}
 
---[[ WEAPON TOGGLES ]]--{
+--[[ WEAPON SETTINGS ]]--{
 
---If set to true, you leave behind PD:TH sniper trails for the MSR, R93, Mosin, WA2000, Model 70 and M95
+--If set to true, you leave behind PD:TH sniper trails for the MSR, G3 (if using the PSG-1 barrel), R93, Mosin, WA2000, Model 70 and M95
 --Default = false
 DMCWO.sniper_tracers = false
 
 --If set to true, ALL raycast firing guns (shotguns too) leave PD:TH sniper trails.
---NOTE: This is really fucking stupid
+--NOTE: This is REALLY fucking stupid
 --Default = false
 DMCWO.light_show = false
 
@@ -90,18 +112,21 @@ DMCWO.reposed_vms = true
 --Default = false
 DMCWO.fix_pickup = false
 
---If set to true, switches the Taurus Judge to act as a pistol and use pistol skills instead
---NOTE: Damage is bumped up to emulate it having Shotgun Impact
---NOTE 2: RoF is bogged down to require you needing Equilibrium Aced
+--If set to true, switches the Taurus Judge to act as a pistol and use pistol skills
+--NOTE: Damage and RoF are adjusted depending on the setting
 --Default = true
 DMCWO.judge_pistol = true
 
 --If set to true, gets rid of the rotational aspect of your viewmodel when the bipod is deployed, removing the janky ADS transition at the cost of, again, removing the rotational aspect when deployed
 --Default = false
 DMCWO.no_bipod_swivel = false
+
+--If set to true, enables burst memory for AR-15 rifles
+--Default = true
+DMCWO.ar15_burst_suckage = false
 --}
 
---[[ MELEE TOGGLES ]]--{
+--[[ MELEE SETTINGS ]]--{
 
 --If set to true, allows for melee weapons to benefit from headshot multipliers 
 --Thanks go to SC
@@ -123,29 +148,19 @@ DMCWO.RULESOFNATURE = false
 
 --}
 
---[[ ATTACHMENT TOGGLES ]]--{
+--[[ ATTACHMENT SETTINGS ]]--{
 --Pick and choose what you want, mostly eveything here is aesthetic. Only a few may change gameplay
 --Changes will ony take effect after you go through a loading screen or reboot the game
 
 --[General]--{
---If set to true, hides attachable AR/SMG/LMG class muzzle brakes
 --Default = false
 DMCWO.hide_brakes = false
 
---If set to true, hides attachable shotgun class muzzle brakes
 --Default = false
 DMCWO.hide_sg_brakes = false
 
---If set to true, hides the Flash Hider attachment for all pistols that can accept it. 
 --Default = false
 DMCWO.hide_pis_flash = false
-
---If set to true, enables the ELCAN Specter to use the BUIS on the top of the optic. 
---Default = false
---NOTE: Enabling this will remove the 45 degree irons if they're attached, disallow it from being attached along with the ELCAN scope and will take the place as the first gadget you switch to with the laser/flashlight gadget becoming the second and/or third gadget you switch to
---NOTE 2: You'll also get a floating 45 degree angle gadget in the main menu and mod screen, it's a side effect of having the BUIS actually work
---NOTE 3: Every now and then I might forget to update this for new weapons
-DMCWO.elcan_buis = false
 
 --if set to true, swaps the Magpul BUIS/Flip-up sights with the default ones from the KSG (Daniel Defence Irons)
 --NOTE: May be slightly misaligned, not a priority of mine to fix it.
@@ -292,9 +307,12 @@ DMCWO.Strings = {
 "Guys, the thermal drill, go get it...",
 "Guys, the thermal drill, go get it...",
 "Guys, the thermal drill, go get it...",
+"Guys, the thermal drill, go get it...",
+"Guys, the thermal drill, go get it...",
 "\"I put sode\"",
 "ONE",
 "\"MOOOOM! GET THE CAMERAAAA!\"",
+"\"GRAND DAD?!\"",
 "Butts",
 "\"But I poop from there!\"\n\"Not right now you don't!\"",
 "My Uncle survived a mustard gas attack and pepper spray. He's quite the seasoned veteran.",
@@ -315,6 +333,7 @@ DMCWO.Strings = {
 "ebin :DDD",
 "\"Nice meme\"",
 "\"CARLOS!!!\"",
+"kys",
 "\"That ain't Falco!\"",
 "\"What is a man?\"\n\"A miserable little pile of secrets...\"",
 "\"The cake is a lie\"",
@@ -386,6 +405,7 @@ DMCWO.Strings = {
 "\"SPLATATATATATATATATATATATATATATATA SPLATOON\"",
 "I'd an Inkling...",
 "Get your \"First Aid Kit\" here ~<3", -->tfw drawing lewd Kawaii pictures
+"\"THE SAFEWORD IS \'POLICE BRUTALITY!\'\"", --curiosity killed the cat, okay?
 "I'd Nonon's nonos",
 "\"Oyvey Shill\"",
 ";)",
@@ -397,6 +417,9 @@ DMCWO.Strings = {
 ";)",
 ";)",
 "\"Shame on you if you thought otherwise\"",
+";)",
+";)",
+"\"You don't get to decide balance\"",
 ";)",
 ";)",
 "$2.49",
@@ -414,6 +437,8 @@ DMCWO.Strings = {
 "ISHYGDDT",
 "\"Funco-chan!\"",
 "[x]Touch fluffy tail",
+"PUFFY VULVA",
+":B1:",
 "Kail: can you update dmcwo\nKail: thx\nRaifuism: no\nRaifuism: :^)\nKail: ill pay you\nRaifuism: pay me in :B1:s\nKail: ill pay you in sex\nRaifuism: again?", -- :^)
 "\"You expected a cute girl? Too bad! It's just me, text!\"",
 "\"SNAAAAAKE EEAAATERRRR!!!\"",
@@ -422,10 +447,14 @@ DMCWO.Strings = {
 "\"git gud\"",
 "\"Gimme da chocolate, Hisao\"",
 "\"DOZER INCOMING\"",
+"dat floor tho", --le Rustle faec
+"Rustle is a damn good artist",
+"\"CRAAAAAWLING IIIIN MY CRAAAAAAAAWL!!!\"",
 "More lood Kawaii pictures when?",
 "hOI!",
 "DETERMINATION",
 "NYEH HEH HEH!",
+"\"is this the flowey map?\"",
 "I'd a Frisk",
 "ANIME IS REAL",
 "ANIME IS NOT REAL",

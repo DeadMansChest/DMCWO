@@ -4,117 +4,11 @@ Used with permission
 ]]
 
 if RequiredScript == "lib/units/weapons/newraycastweaponbase" then
-
-	local init_original = NewRaycastWeaponBase.init
-	local _update_stats_values_original = NewRaycastWeaponBase._update_stats_values
-	local fire_rate_multiplier_original = NewRaycastWeaponBase.fire_rate_multiplier
-	local on_enabled_original = NewRaycastWeaponBase.on_enabled
-	local on_disabled_original = NewRaycastWeaponBase.on_disabled
-	local start_reload_original = NewRaycastWeaponBase.start_reload
-	local fire_original = NewRaycastWeaponBase.fire
-	local toggle_firemode_original = NewRaycastWeaponBase.toggle_firemode
-	
-	function NewRaycastWeaponBase:init(...)
-		init_original(self, ...)
-		
-		if not self:is_npc() then
-			self._burst_rounds_remaining = 0
-			self._track_burst = nil
-			self._tracking = nil
-		end
-	end
-	
-	--The "_update_stats_values" and "fire_rate_multiplier" functions were merged with gat_physics.lua
-	
-	function NewRaycastWeaponBase:on_enabled(...)
-		self:cancel_burst(true)
-		return on_enabled_original(self, ...)
-	end
-	
-	function NewRaycastWeaponBase:on_disabled(...)
-		self:cancel_burst(true)
-		return on_disabled_original(self, ...)
-	end
-	
-	function NewRaycastWeaponBase:start_reload(...)
-		self:cancel_burst(true)
-		return start_reload_original(self, ...)
-	end
-	
-	function NewRaycastWeaponBase:fire(...)
-		local result = fire_original(self, ...)
-		
-		if not self._is_akimbo and result and self:in_burst_mode() then		
-			if self:clip_empty() then
-				self:cancel_burst(true)
-			else
-				if self._no_reset_burst and self._track_burst then
-					self._burst_rounds_remaining = self._track_burst
-					self._track_burst = nil
-					self._tracking = nil
-				end
-				self._burst_rounds_remaining = (self._burst_rounds_remaining <= 0 and self._burst_size or self._burst_rounds_remaining) - 1
-			end
-		end
-		
-		return result
-	end
-	
-	--Semi-override
-	function NewRaycastWeaponBase:toggle_firemode(...)
-		return self._has_burst_fire and not self._locked_fire_mode and self:_check_toggle_burst() or toggle_firemode_original(self, ...)
-	end
-	
-	function NewRaycastWeaponBase:_check_toggle_burst()
-		if self:in_burst_mode() then
-			self:_set_burst_mode(false)
-			return true
-		elseif (self._fire_mode == Idstring("single")) or (self._fire_mode == Idstring("auto") and not self:can_toggle_firemode()) then
-			self:_set_burst_mode(true)
-			return true
-		end
-	end
- 
-	function NewRaycastWeaponBase:_set_burst_mode(status, skip_sound)
-		self._in_burst_mode = status
-		self._fire_mode = Idstring(status and "single" or self._has_auto and "auto" or "single")
-		if not skip_sound then
-			self._sound_fire:post_event(status and "wp_auto_switch_on" or self._has_auto and "wp_auto_switch_on" or "wp_auto_switch_off")
-		end
-		self:cancel_burst(true)
-	end
-	
-	function NewRaycastWeaponBase:can_use_burst_mode()
-		return self._has_burst_fire
-	end
-	
+			
 	function NewRaycastWeaponBase:in_burst_mode()
-		return self._fire_mode == Idstring("single") and self._in_burst_mode
+		return self._fire_mode == Idstring("auto") and self._in_burst_mode
 	end
 	
-	function NewRaycastWeaponBase:burst_rounds_remaining()
-		return self._burst_rounds_remaining > 0 and self._burst_rounds_remaining or false
-	end
-	
-	function NewRaycastWeaponBase:cancel_burst(force)
-		if self._no_reset_burst and not self._track_burst then
-			self._track_burst = self._burst_rounds_remaining
-		end
-		if self:clip_empty() and self:in_burst_mode() and self._track_burst and not self._tracking then
-			if self._track_burst == 0 then
-				self._track_burst = self._burst_size - 1
-			else
-				self._track_burst = self._track_burst - 1
-			end
-			self._tracking = true
-			if self._track_burst < 0 then
-				self._track_burst = 0
-			end
-		end
-		if self._adaptive_burst_size or force then
-			self._burst_rounds_remaining = 0
-		end
-	end
 	
 elseif RequiredScript == "lib/units/weapons/akimboweaponbase" then
 
@@ -153,15 +47,7 @@ elseif RequiredScript == "lib/units/weapons/akimboweaponbase" then
 				self._second_gun:base():_fire_sound()
 				managers.hud:set_ammo_amount(self:selection_index(), self:ammo_info())
 				self._second_gun:base():tweak_data_anim_play("fire")
-			end
-		end
-		
-		if result and self:in_burst_mode() then
-			if self:clip_empty() then
-				self._burst_rounds_remaining = 0
-			else			
-				self._burst_rounds_remaining = (self._burst_rounds_remaining <= 0 and self._burst_size or self._burst_rounds_remaining) - 1
-				self._burst_expire_t = Application:time() + self._native_fire_rate / self:fire_rate_multiplier() + 0.1
+				self._shotsfired = self._shotsfired + 1
 			end
 		end
 		
@@ -185,11 +71,11 @@ elseif RequiredScript == "lib/units/beings/player/states/playerstandard" then
 	local update_original = PlayerStandard.update
 	local _check_action_primary_attack_original = PlayerStandard._check_action_primary_attack
  
+	--[[
 	function PlayerStandard:update(t, ...)
 		update_original(self, t, ...)
 		self:_update_burst_fire(t)
 	end
-	
 	function PlayerStandard:_check_action_primary_attack(t, input, ...)
 		if self._trigger_down and not input.btn_primary_attack_state then
 			self._equipped_unit:base():cancel_burst()
@@ -198,12 +84,12 @@ elseif RequiredScript == "lib/units/beings/player/states/playerstandard" then
 		
 		return _check_action_primary_attack_original(self, t, input, ...)
 	end
-	
+	]]
 	--Override
 	function PlayerStandard:_check_action_weapon_firemode(t, input)
 		local wbase = self._equipped_unit:base()
 		if input.btn_weapon_firemode_press and wbase.toggle_firemode then
-			self:_check_stop_shooting()
+			--self:_check_stop_shooting()
 			if wbase:toggle_firemode() then
 				if wbase:in_burst_mode() then
 					managers.hud:set_teammate_weapon_firemode_burst(self._unit:inventory():equipped_selection())
@@ -213,13 +99,16 @@ elseif RequiredScript == "lib/units/beings/player/states/playerstandard" then
 			end
 		end
 	end
-	
-	
+	--[[
 	function PlayerStandard:_update_burst_fire(t)
-		if alive(self._equipped_unit) and self._equipped_unit:base():burst_rounds_remaining() then
+		if alive(self._equipped_unit) and self._equipped_unit:base():burst_rounds_remaining() and not self._equipped_unit:base()._auto_anim_burst then
 			self:_check_action_primary_attack(t, { btn_primary_attack_state = true, btn_primary_attack_press = true })
+		elseif alive(self._equipped_unit) and self._equipped_unit:base():burst_rounds_remaining() and self._equipped_unit:base()._auto_anim_burst then
+			log("FASDFDFASAASAFFDAAFASFAFADSFDASFADFADFADSASD")
+			self:_check_action_primary_attack(t, { btn_primary_attack_state = true })
 		end
 	end
+	]]
 	
 elseif RequiredScript == "lib/managers/hudmanagerpd2" then
 

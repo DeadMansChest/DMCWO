@@ -1,8 +1,6 @@
-#DMC's Weapon Overhaul v1.6: S2 Never edition
-####[Imashi please](https://www.youtube.com/watch?v=O17JfoxpqH0)
-######[Hoxhud Hook Branch](https://github.com/DeadMansChest/DMCWO)
-######[BLT Hook Branch](https://github.com/DeadMansChest/DMCWO/tree/BLT-Version)
-by: DiddleMyCunny
+#DMC's Weapon Overhaul v1.70: "My April Fools joke was me not updating" Edition
+####[I dunno](https://www.youtube.com/watch?v=qy_pK_bhsIY)
+by: DicksMakeCocks
 
 [UC Thread](http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html) 
 
@@ -34,6 +32,7 @@ I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-is
 * gir489 for LUA source code, LMG ironsights 
 * 420Munk for LUA source code
 * YaPh1l for LUA source code
+* Great Big Bushy Beard for LUA source code
 * LazyOzzy for the fixed shotgun pellet mechanics, fixed drop-off code, advice
   * Also for allowing me to include the burst-fire script
   * While not in this mod, the crosshair code to help me locate the center of the screen for centering optics
@@ -58,7 +57,7 @@ I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-is
   * I'm kidding. 10/10, 10/10, 100/100, Best game, BEST GAME
   * https://www.youtube.com/watch?v=5Qx_q_TCVoE
   * Illusion's newly announced game, Sexy Beach Premium Resort, will probably take the title as my big time-waster like AA2 was
-    * :^)
+    * Nvm, it was shite. Probably the most in-dpeth grill creator from them yet though...
 * Any and all users of this mod as they're pretty much telling OVK to consider rebalancing their weapons
 
 	
@@ -76,7 +75,7 @@ Scripts from based Ozzy:
     * It's now intergrated into this mod but if you don't want DMCWO then you can still have Ozzy's original script
 	
 Other LUA mods:
-  * [Karate F22's Better Weapon Stats GUI](http://steamcommunity.com/groups/PD2-BWS-GUI)
+  * [Karate F22's Better Weapon Stats GUI](http://steamcommunity.com/groups/PD2-BWS-GUI) (NO LONGER BEING UPDATED)
     * This is actually more or less of a requirement if you don't want the stats wigging out when you have skills affecting them too
   * [Kail's PROJECT: Canary](http://steamcommunity.com/groups/projectcanary)
   * [Undeadsewer's Melee Overhaul REvamped (M.O.RE)](http://steamcommunity.com/groups/PD2_MORE)
@@ -99,30 +98,30 @@ There are standalone versions of some parts of DMCWO available on [my Github rep
 	* Excuse the lewd avatar if it is a lewd one at the time
 	
 
-##Scripts
-**REQUIRED PERSIST SCRIPTS**:
-  * rebalance_general.lua:
-    * Required for rebalance.lua to run
-    * Changes the index tables to be more consistent rather than randomly go up to higher values halfway through the index
+##Scripts (at least what I can remember)
+  * dmc_general.lua:
     * Some skill adjustments
 		
-  * rebalance.lua:
-    * Needs rebalance_general.lua to make a successful run first before it runs itself
-    * Required for rebalance_attach.lua to run
+  * dmc_weapons.lua:
     * Gage Pack #2 LMG ironsight codes by gir489
     * Changes the base weapon stats for most weapons
-    * Properly aligns ironsights for some weapons (AK5, Deagle and a few others)
 		
-  * rebalance_attach.lua*:
-    * Needs rebalance.lua to make a successful run first before it runs itself
-    * Contains a bunch of toggles that affect the appearances of some guns and attachments
-    * Changes the stats for most weapon mods as well as fixing a few bugs in the base game
+  * dmc_weapon_mods.lua*:
+    * Changes the stats for most weapon mods as well as fixing a few attachment bugs in the base game
 	
+  * dmc_playa.lua*:
+    * Viewmodel changes
+    * Properly aligns ironsights for some weapons (AK5, Deagle and a few others)
 	
-**REQUIRED POSTREQUIRE SCRIPTS**:
   * postrequire_attach.lua
-    * Adds the additional attachments for some weapons
-	* Adds the specialized ammo for bullet weapons 
+    * Adds additional attachments for some weapons
+	
+  * playerstuff.lua
+    * This is chalk full redone functions so this is probably the biggest factor for incompatibilities with other mods
+    * Stuff relating to player states like sprintout times, etc.
+	
+  * copdamage.lua
+    * Mainly multiplers against armor plating and mutlipliers for AP and HP ammo
 	
   * soundsfix.lua
     * Original fix by 90e
@@ -136,6 +135,7 @@ There are standalone versions of some parts of DMCWO available on [my Github rep
   * gat_physics.lua
     * Damage drop-off for bullet weapons, fixed by LazyOzzy
     * Wall penetraton for all bullet weapons, based on damage and a few other variables
+    * A bunch of other shit like reload speeds, movement penalties and what not
 		
   * recoil_fix.lua:
     * This file can also be set up as a persistent script if you want to test different values without restarting each time you change it
@@ -148,23 +148,15 @@ There are standalone versions of some parts of DMCWO available on [my Github rep
     * Changes most weapons, weapon mods and melee weapons to use their IRL name
     * Also adds in rather vital descriptions to some attachments that modify guns beyond their stat charts
 	
-**OPTIONAL POSTREQUIRE SCRIPTS**:			
-  * tact_reload.lua:
-    * Made with the help of B1313
-    * Allows for round chambering on closed bolt weapons
-	
   * useable_drums.lua (Contained inside the "Extra" folder):
     * Makes drum mags attachable through the mod menu
       * They don't have icons and when dropped through a card they look weird as hell
 			
 			
 ##INSTALLING
-1. Nab Harfatus' LUA Hook if you haven't already (you can get it from HoxHud I think)
--OR-
 Nab Wilko's "BLT" LUA Hook if you haven't from here: http://paydaymods.com/download/
 
 2. Download the Repo contents as a zip and extract into your Payday 2 directory
-  * Be sure to dl the correct branch! Links you your hook's version are at the top of this readme!
 
 3. Run game, check log for errors. Report errors to me (steam_id/qt_314) if there are any
 
@@ -173,7 +165,7 @@ Nab Wilko's "BLT" LUA Hook if you haven't from here: http://paydaymods.com/downl
 
 Redone Accuracy and Stabilty stats!
   * These stats now scale from 0 to 99
-    * 90 accuracy is akin to 18 accuracy in the vanilla game for most weapons
+    * 90-ish accuracy is akin to 18 accuracy in the vanilla game for most weapons
 	* 80-ish stability is akin to 25 stability in the vanllia game
 	
 Additional attachments!!!
@@ -302,9 +294,7 @@ All bullet weapons now have damage drop-off
   * SMGS are less effective at range than ARs, etc...
 
 Muzzle brakes, handguards and everything else no longer magically alter damage (because stupid). Damage adjustments are now only changed via things that change the actual length of the barrel (HK21 handguard, actual barrel mods, etc.)
-  * Made damage reduction for all suppressors the same, instead, the larger suppressors will have added benefits like lower recoil and accuracy boosts at the cost of concealment
-    * Tweaked the "Silent Killer" skill to make suppressors not the best barrel extension to use
-      * This generally will make it so basic will nullify the damage reduction, give or take, while ace WILL boost damage (albeit slight, nothing big to push you past a damage breakpoint)
+  * Made damage reduction for all suppressors the same, instead, the larger suppressors will have reduced recoil/range penalties at the cost of concealment
     * Asepsis Suppressor has no benefits as a trade off for no damage reduction and lower concealment
   * All suppressors completely nullify threat and hurt your damage profile at range
     *The exception is frag rounds for shotguns which will max out any shotgun's threat regardless of suppressors
@@ -316,6 +306,7 @@ Corrected magazine capacities:
   * The FAMAS uses a proper 25 round magazine (from 30)
   * The HK21 uses a proper 100 round box magazine (from 150)
   * The MG42 uses a proper 50 round drum magazine (from 150)
+  * ...And several others
 
 Mag capacities were made consistent so mags like the AR Quadstack Mag will set ammo to 60 for all guns that can accept it
 
@@ -332,6 +323,7 @@ Better melee weapons
   * Higher damage for some (i.e. the Machete)
   * Bladed weapons under the "axe" category are changed to the "knife" category, allowing you to hurt dozers with them
   * Can actually help you conserve ammo
+  * Also makes "taser" melee wepons less cheesy
 
 Bullet penetration for most non-snipers!!
   * Surface penetration
@@ -369,9 +361,9 @@ Bullet penetration for most non-snipers!!
     * MP7
     * Shotguns using slugs
 
-Greatly reduced ADS sway for all weapons since it does nothing to the actual PoI
+Greatly reduced ADS sway for all weapons since it does nothing to the actual PoI (well now it does in vanilla but only when using an optic)
 
-True/false toggles for some asethetic mods (you can change them at the top of the rebalance_attach.lua)
+True/false toggles for some asethetic mods (you can change them in DMCWO.lua)
 
 Random fixes:
   * Tried my best at realigning all the optics and iron sights
@@ -395,7 +387,7 @@ Reclassed several weapons
     * They're still secondaries, only now they benefit from AR skills instead of the two SMG skills and appear under the category "Carbines"
   * The Judge is now classed as a "pistol"
     * Now benefits from pistol based skills
-      * No longer benefits from shotgun skills, bumped the damage up to compensate
+      * You can toggle this back in DMCWO.lua. Performance will be adjusted to depend on shotgun skills instead.
   * The Tec-9 is also a pistol now
 	
 	
@@ -410,9 +402,7 @@ Don't like the mod for w/e reason? You're following my advice about uninstalling
 
 4. Close the game
 
-5. Remove "DMCWO.lua" and the "DMCWO" folder inside lib/lua/
--OR-
-Remove the "DMCWO" folder inside mods/ (or disable the mod though the "Lua Mods" menu provided by the BLT hook
+5. Remove the "DMCWO" folder inside mods/ (or disable the mod though the "Lua Mods" menu provided by the BLT hook
 
 6. If you dun dang diddly did everything right, next time you boot up your game everything should be back to normal (or at least not make the game crash)
 

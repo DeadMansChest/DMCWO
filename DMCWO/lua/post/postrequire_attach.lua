@@ -1,5 +1,4 @@
 --[[
-v1.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -249,7 +248,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 	end
 	local nine_mm = {
 		'wpn_fps_jowi','wpn_fps_x_b92fs','wpn_fps_pis_x_g17',
-		'wpn_fps_pis_g17','wpn_fps_pis_beretta','wpn_fps_pis_g26','wpn_fps_smg_tec9',
+		'wpn_fps_pis_g17','wpn_fps_pis_beretta','wpn_fps_pis_g26','wpn_fps_smg_tec9','wpn_fps_pis_pl14',
 		'wpn_fps_pis_g18c','wpn_fps_smg_mp9',
 		'wpn_fps_smg_mp5','wpn_fps_smg_m45','wpn_fps_smg_uzi','wpn_fps_smg_sterling','wpn_fps_smg_cobray','wpn_fps_smg_baka',
 		'wpn_fps_ass_sub2000'
@@ -509,9 +508,9 @@ function WeaponFactoryTweakData:DMCWO_mods()
 	self.wpn_fps_snp_msr.override.win_300_ammo = {
 		stats = {
 			value = 7,
-			damage = 0,
+			damage = 4,
 			spread = 1,
-			recoil = 0,
+			recoil = -1,
 			total_ammo_mod = 0,
 			extra_ammo = -4
 		}
@@ -519,7 +518,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 	self.wpn_fps_snp_r93.override.win_300_ammo = {
 		stats = {
 			value = 7,
-			damage = -28,
+			damage = -12,
 			spread = -1,
 			recoil = 8,
 			total_ammo_mod = 200,
@@ -597,35 +596,43 @@ function WeaponFactoryTweakData:DMCWO_mods()
 	for i, factory_id in ipairs(swap_auto) do
 		table.insert(self[factory_id].uses_parts, "burst_mod")
 		self[factory_id].override.burst_mod = {
-			custom_stats = {has_burst_fire = true, disable_selector = true, rof_mult = 1.05},
+			stats = { value = 8, spread = 0, recoil = 3 },
+			custom_stats = {has_burst_fire = true, can_toggle_burst = true, rof_mult = 1.10, burst_delay = 0.08},
 			desc_id = "burstfire_desc_m16"
 		}
 	end
 	
 	table.insert(self.wpn_fps_ass_g3.uses_parts, "burst_mod")
 	
-	table.insert(self.wpn_fps_ass_ak5.uses_parts, "burst_mod")
-	self.wpn_fps_ass_ak5.override.burst_mod = {
-		desc_id = "burstfire_desc_ak5"
-	}
 	table.insert(self.wpn_fps_pis_g18c.uses_parts, "burst_mod")
 	self.wpn_fps_pis_g18c.override.burst_mod = {
-		custom_stats = {has_burst_fire = true, disable_selector = true, rof_mult = 1.05},
+		custom_stats = {has_burst_fire = true, can_toggle_burst = true, rof_mult = 1.05, burst_delay = 0.05},
 		desc_id = "burstfire_desc_g18"
 	}
 	
 	table.insert(self.wpn_fps_pis_beretta.uses_parts, "burst_mod")
 	self.wpn_fps_pis_beretta.override.burst_mod = {
 		stats = { value = 8, spread = 0, recoil = -4 },
-		custom_stats = {has_burst_fire = true, disable_selector = true, block_eq_aced = true, hipfire_mod = 1.25, burst_rof_mult = 2},
+		custom_stats = {has_burst_fire = true, can_toggle_burst = true, block_eq_aced = true, hipfire_mod = 1.25, burst_rof_mult = 2, burst_delay = 0.1},
 		desc_id = "burstfire_desc_raffica"
 	}
 	
 	table.insert(self.wpn_fps_ass_g36.uses_parts, "burst_mod")
 	self.wpn_fps_ass_g36.override.burst_mod = {
+		--[[
+		stats = { value = 8, spread = -4, recoil = -8, extra_ammo = 2 },
+		custom_stats = {burst_size = 4, burst_rof_mult = 1.6, force_burst = true, can_toggle_burst = true, burst_delay = 0.16},
+		]]
 		custom_stats = {burst_size = 3},
 		desc_id = "burstfire_desc_g36"
 	}
+	--[[ 
+	table.insert(self.wpn_fps_lmg_m249.uses_parts, "burst_mod")
+	self.wpn_fps_lmg_m249.override.burst_mod = {
+		stats = { value = 8, spread = -8, recoil = -18, extra_ammo = -140 },
+		custom_stats = {has_burst_fire = true, auto_burst = true,  burst_size = 6, burst_rof_mult = 1.1578947368421052631578947368421, force_burst = true, can_toggle_burst = true, burst_delay = 0.16},
+		desc_id = "burstfire_desc_g36"
+	} ]]
 	
 	self.parts.mac_slow = {
 		pcs = {},
@@ -662,7 +669,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		third_unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
 		dlc = "dmcwo",
 		is_a_unlockable = true,
-		alt_icon = "guis/textures/pd2/blackmarket/icons/deployables/ammo_bag",
+		alt_icon = "guis/dlcs/gage_pack_shotgun/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_a_custom_free",
 		stats = { 
 			value = 0, 
 			damage = -12, 
@@ -690,11 +697,69 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		'wpn_fps_sho_ksg',
 		'wpn_fps_pis_judge',
 		'wpn_fps_sho_aa12',
+		'wpn_fps_shot_huntsman',
+		'wpn_fps_shot_b682',
 		'wpn_fps_shot_m37'
 	}	
 	for i, factory_id in ipairs(shotgat) do
 		table.insert(self[factory_id].uses_parts, "sho_birdshot")
 	end
+	
+	self.wpn_fps_shot_huntsman.override.sho_birdshot = { 
+		stats = { 
+			value = 0, 
+			damage = -40, 
+			spread = -4, 
+			recoil = 8, 
+			total_ammo_mod = 50 
+		}
+	}
+	self.wpn_fps_shot_b682.override.sho_birdshot = { 
+		stats = { 
+			value = 0, 
+			damage = -40, 
+			spread = -4, 
+			recoil = 8, 
+			total_ammo_mod = 50 
+		}
+	}
+	
+	self.wpn_fps_sho_ksg.override.sho_birdshot = { 
+		stats = { 
+			value = 0, 
+			damage = -24, 
+			spread = -4, 
+			recoil = 8, 
+			total_ammo_mod = 50 
+		}
+	}
+	self.wpn_fps_shot_r870.override.sho_birdshot = { 
+		stats = { 
+			value = 0, 
+			damage = -24, 
+			spread = -4, 
+			recoil = 8, 
+			total_ammo_mod = 50 
+		}
+	}
+	self.wpn_fps_shot_m37.override.sho_birdshot = { 
+		stats = { 
+			value = 0, 
+			damage = -24, 
+			spread = -4, 
+			recoil = 8, 
+			total_ammo_mod = 50 
+		}
+	}
+	self.wpn_fps_shot_serbu.override.sho_birdshot = { 
+		stats = { 
+			value = 0, 
+			damage = -24, 
+			spread = -4, 
+			recoil = 8, 
+			total_ammo_mod = 50 
+		}
+	}
 	
 	self.wpn_fps_pis_judge.override.sho_birdshot = { 
 		desc_id = "bm_wp_upg_a_bird_judge",
@@ -716,7 +781,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 			damage = 52, 
 			spread = -8, 
 			recoil = -50, 
-			total_ammo_mod = -143,
+			total_ammo_mod = -144,
 			extra_ammo = -13
 		},
 		custom_stats = {
@@ -767,7 +832,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		stats = {
 			value = 10,
 			spread = -2, 
-			recoil = -6
+			recoil = -10
 		},
 		custom_stats = {rof_mult = 2.2222222222222222222222222222222, block_eq_aced = true, hipfire_mod = 1.2, enable_selector = true},
 		internal_part = true,
@@ -808,7 +873,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 	self.parts.shortdot_normal = {
 		pcs = {},
 		type = "sight",
-		name_id = "bm_wp_c96_sight",
+		name_id = "shortdot_normal",
 		a_obj = "a_o",
 		unit = "units/pd2_dlc_gage_snp/weapons/wpn_fps_upg_o_shortdot/wpn_fps_upg_o_shortdot",
 		third_unit = "units/pd2_dlc_gage_snp/weapons/wpn_fps_upg_o_shortdot/wpn_third_upg_o_shortdot",
@@ -865,6 +930,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 					
 			wpn_fps_smg_p90 = { translation = Vector3( 0.025,-27.5,-3.525 ) },
 			wpn_fps_smg_mp7 = { translation = Vector3( 0.025,-21.55,-3.47 ) },
+			wpn_fps_smg_sr2 = { translation = Vector3( 0, -11.6, -5.315 ) },
 					
 			wpn_fps_lmg_hk21 = { translation = Vector3( 0.0275,-25.8,-4.115 ) },
 			wpn_fps_lmg_m249 = { translation = Vector3( 0.02,-16.4,-4.355 ) },
@@ -906,7 +972,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		
 		"wpn_fps_smg_mp9","wpn_fps_smg_mp5","wpn_fps_smg_thompson","wpn_fps_smg_mac10","wpn_fps_smg_m45","wpn_fps_smg_uzi","wpn_fps_smg_scorpion","wpn_fps_smg_tec9","wpn_fps_smg_sterling","wpn_fps_smg_polymer",
 		
-		"wpn_fps_smg_p90","wpn_fps_smg_mp7",
+		"wpn_fps_smg_p90","wpn_fps_smg_mp7","wpn_fps_smg_sr2","wpn_fps_smg_x_sr2",
 		
 		"wpn_fps_shot_r870","wpn_fps_shot_saiga","wpn_fps_sho_ben","wpn_fps_sho_ksg","wpn_fps_shot_serbu","wpn_fps_sho_spas12","wpn_fps_sho_striker",
 		
@@ -939,6 +1005,136 @@ function WeaponFactoryTweakData:DMCWO_mods()
 	table.insert(self.wpn_fps_snp_r93.uses_parts, "sniper_irons")
 	table.insert(self.wpn_fps_snp_m95.uses_parts, "sniper_irons")
 	
+	self.parts.ak_45_mag = {
+		pcs = {},
+		type = "magazine",
+		name_id = "ak_45_mag",
+		a_obj = "a_m",
+		unit = "units/pd2_dlc_gage_lmg/weapons/wpn_fps_lmg_rpk_pts/wpn_fps_lmg_rpk_m_standard",
+		third_unit = "units/pd2_dlc_gage_lmg/weapons/wpn_third_lmg_rpk_pts/wpn_third_lmg_rpk_m_standard",
+		dlc = "dmcwo",
+		is_a_unlockable = true,
+		alt_icon = "guis/dlcs/big_bank/textures/pd2/blackmarket/icons/mods/wpn_fps_ass_fal_m_01",
+		stats = { value = 4, concealment = 3, extra_ammo = -30 },
+		custom_stats = { reload_speed_mult = 1.05 }
+	}
+		
+	--table.insert(self.wpn_fps_lmg_rpk.uses_parts, "ak_45_mag")
+	
+	local asdfs = { "wpn_fps_smg_akmsu","wpn_fps_ass_74","wpn_fps_ass_akm","wpn_fps_ass_akm_gold"}
+	for i, factory_id in ipairs(asdfs) do
+		table.insert(self[factory_id].uses_parts, "ak_45_mag")
+		self[factory_id].override.ak_45_mag = {
+			stats = {value = 4, concealment = -2, extra_ammo = 15},
+			custom_stats = {reload_speed_mult = 0.95},
+			desc_id = "ak_45_mag_akm_desc"
+		}
+	end
+	
+	self.parts.speakeasy = {
+		pcs = {},
+		type = "custom",
+		name_id = "speakeasy",
+		a_obj = "a_body",
+		unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		third_unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		dlc = "dmcwo",
+		is_a_unlockable = true,
+		alt_icon = "guis/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_i_autofire",
+		stats = {
+			value = 10,
+			spread = -2,
+			recoil = -8,
+			damage = -8,
+			extra_ammo = 0,
+		},
+		custom_stats = { 
+			fire_rate_init_count = 8, 
+			fire_rate_init_mult = 0.85, 
+			rof_mult = 1.4285714285714285714285714285714,			
+			damage_min_set = 1.6,		
+			damage_near_set = 12.8,
+			damage_far_set = 31.1,
+		},
+		perks = {
+			"fire_mode_auto"
+		},
+		internal_part = true,
+		sub_type = "autofire",
+		forbids = {
+		}
+	}
+	self.parts.asm1 = {
+		pcs = {},
+		type = "custom",
+		name_id = "asm1",
+		a_obj = "a_body",
+		unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		third_unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		dlc = "dmcwo",
+		is_a_unlockable = true,
+		alt_icon = "guis/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_i_autofire",
+		stats = {
+			value = 10,
+			spread = -1,
+			recoil = -8,
+			damage = -8,
+			extra_ammo = 0,
+		},
+		custom_stats = { 
+			burst_delay = 0.08, 
+			fire_rate_init_count = 8, 
+			fire_rate_init_mult = 1.3333333333333333333333333333333, 
+			rof_mult = 1.0714285714285714285714285714286,			
+			damage_min_set = 1.8,		
+			damage_near_set = 12.8,
+			damage_far_set = 31.1
+		},
+		perks = {
+			"fire_mode_auto"
+		},
+		internal_part = true,
+		sub_type = "autofire",
+		forbids = {
+		}
+	}
+	
+	table.insert(self.wpn_fps_smg_thompson.uses_parts, "asm1")
+	table.insert(self.wpn_fps_smg_thompson.uses_parts, "speakeasy")
+	
+	self.parts.an94_burst = {
+		pcs = {},
+		type = "custom",
+		name_id = "an94_burst",
+		a_obj = "a_body",
+		unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		third_unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		dlc = "dmcwo",
+		is_a_unlockable = true,
+		alt_icon = "guis/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_i_autofire",
+		stats = {
+			value = 10,
+			spread = 0,
+			recoil = 2,
+			damage = 0,
+			extra_ammo = 0,
+		},
+		custom_stats = { 
+			fire_rate_init_count = 2, 
+			fire_rate_init_mult = 3, 
+			burst_size = 2,
+			burst_rof_mult = 3, 
+			rof_mult = 0.92307692307692307692307692307692,
+			burst_delay = 0.1,
+			has_burst_fire = true
+		},
+		internal_part = true,
+		sub_type = "autofire",
+		forbids = {
+		}
+	}
+	
+	table.insert(self.wpn_fps_ass_74.uses_parts, "an94_burst")
 end
 
 elseif RequiredScript == "lib/tweak_data/dlctweakdata" then
@@ -959,6 +1155,17 @@ function DLCTweakData:init(...)
 		{
 			type_items = "weapon_mods",
 			item_entry = "hp_ammo",
+			amount = 1
+		}
+	}
+	self.dmcwo_ak_45 = {}
+	self.dmcwo_ak_45.free = true
+	self.dmcwo_ak_45.content = {}
+	self.dmcwo_ak_45.content.loot_global_value = "dmcwo"
+	self.dmcwo_ak_45.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "ak_45_mag",
 			amount = 1
 		}
 	}
@@ -1139,6 +1346,33 @@ function DLCTweakData:init(...)
 			item_entry = "sniper_irons",
 			amount = 1
 		}
+	}
+	self.dmcwo_an94_b = {}
+	self.dmcwo_an94_b.free = true
+	self.dmcwo_an94_b.content = {}
+	self.dmcwo_an94_b.content.loot_global_value = "dmcwo"
+	self.dmcwo_an94_b.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "an94_burst",
+			amount = 1
+		}
+	}
+	self.dmcwo_aw = {}
+	self.dmcwo_aw.free = true
+	self.dmcwo_aw.content = {}
+	self.dmcwo_aw.content.loot_global_value = "dmcwo"
+	self.dmcwo_aw.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "asm1",
+			amount = 1
+		},
+		{
+			type_items = "weapon_mods",
+			item_entry = "speakeasy",
+			amount = 1
+		},
 	}
 end
 

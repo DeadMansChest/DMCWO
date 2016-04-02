@@ -1,5 +1,4 @@
 --[[
-v1.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -9,21 +8,21 @@ local old_upgrades_init = UpgradesTweakData.init
 function UpgradesTweakData:init()
 	old_upgrades_init(self)
 	
-	self.explosive_bullet.curve_pow = 0.25
-	self.explosive_bullet.player_dmg_mul = 0.25
+	self.explosive_bullet.curve_pow = 0.1
+	self.explosive_bullet.player_dmg_mul = 0.5
 	self.explosive_bullet.camera_shake_max_mul = 5
 	
 	self.values.striker.reload_speed_multiplier = {1}
 		
 	--Armor flinch adjustments
-	self.values.player.body_armor.damage_shake[1] = 3
-	self.values.player.body_armor.damage_shake[2] = 2
-	self.values.player.body_armor.damage_shake[3] = 1
-	self.values.player.body_armor.damage_shake[4] = 0.95
-			
-	---Gunslinger adjustments
-	self.values.akimbo.damage_addend = {1.5}
-	
+	self.values.player.body_armor.damage_shake[1] = 2.000
+	self.values.player.body_armor.damage_shake[2] = 1.714
+	self.values.player.body_armor.damage_shake[3] = 1.429
+	self.values.player.body_armor.damage_shake[4] = 1.143
+	self.values.player.body_armor.damage_shake[5] = 0.857
+	self.values.player.body_armor.damage_shake[6] = 0.571
+	self.values.player.body_armor.damage_shake[7] = 0.286
+				
 	--"Silent Killer" adjustments
 	--self.values.weapon.silencer_damage_multiplier = { 1.125, 1.25} --BASIC, ACE
 	--self.skill_descs.hitman.multibasic = "12.5%"
@@ -32,13 +31,13 @@ function UpgradesTweakData:init()
 	--"The Professional" adjustments
 	self.values.weapon.silencer_recoil_multiplier = {0.90}
 	self.values.weapon.silencer_spread_multiplier = {0.90}
-	self.values.weapon.silencer_enter_steelsight_speed_multiplier = {1.25}
+	self.values.weapon.silencer_enter_steelsight_speed_multiplier = {1.50}
 	self.skill_descs.silence_expert.multibasic = "10%"
+	self.skill_descs.silence_expert.multibasic2 = "50%"
 	self.skill_descs.silence_expert.multipro = "10%"
-	self.skill_descs.silence_expert.multipro2 = "25%"
 	
-	self.values.assault_rifle.enter_steelsight_speed_multiplier = {1.50}
-	self.values.snp.enter_steelsight_speed_multiplier = {1.25}
+	self.values.assault_rifle.enter_steelsight_speed_multiplier = {1.40}
+	self.values.snp.enter_steelsight_speed_multiplier = {1.20}
 	self.skill_descs.rifleman = { 
 		[1] = 2, 
 		[2] = 1, 
@@ -47,9 +46,11 @@ function UpgradesTweakData:init()
 	}
 	
 	--"Mag Plus" adjustments
+--[[ 
 	self.values.weapon.clip_ammo_increase = { 10, 20 }
 	self.skill_descs.mag_plus.multibasic = "10"
 	self.skill_descs.mag_plus.multipro = "10"
+	]]
 	
 	--"Shotgun Impact" adjustments
 	self.values.shotgun.recoil_multiplier = { 0.90  }
@@ -62,8 +63,8 @@ function UpgradesTweakData:init()
 	--self.skill_descs.leadership.multibasic = "10%"
 	--self.skill_descs.leadership.multipro = "10%"
 	
-	self.values.snp.recoil_multiplier = {0.90}
-	self.values.assault_rifle.recoil_multiplier = {0.90}
+	--self.values.snp.recoil_multiplier = {0.90}
+	--self.values.assault_rifle.recoil_multiplier = {0.90}
 	--self.skill_descs.sharpshooter.multipro = "10%"
 	
 end
@@ -74,31 +75,43 @@ local old_eco_init = EconomyTweakData.init
 function EconomyTweakData:init()
 	old_eco_init(self)
 	for bonus,i in pairs(self.bonuses) do
-		self.bonuses[ bonus ].stats = {}
+		self.bonuses[ bonus ].stats = { value = 1}
 		self.bonuses[ bonus ].exp_multiplier = 1
 		self.bonuses[ bonus ].money_multiplier = 1
 		self.bonuses[ bonus ].name_id = "dmc_lolskinboosts"
 	end
 end
 
+elseif RequiredScript == "lib/tweak_data/blackmarket/projectilestweakdata" then
+
+	local old_proj_init = BlackMarketTweakData._init_projectiles
+	function BlackMarketTweakData:_init_projectiles()
+		old_proj_init(self)
+		for proj_id, i in pairs(self.projectiles) do
+			self.projectiles[proj_id].time_cheat = nil
+		end
+	end
+	
+	
 elseif RequiredScript == "lib/tweak_data/tweakdata" then
 
 
 	if not tweak_data then return end
 	
-	tweak_data.projectiles.wpn_prj_ace.launch_speed = 1000
+	tweak_data.projectiles.wpn_prj_ace.launch_speed = 1500
 	tweak_data.projectiles.wpn_prj_ace.adjust_z = 45
 	
 	tweak_data.projectiles.wpn_prj_four.launch_speed = 1200
 	tweak_data.projectiles.wpn_prj_four.adjust_z = 45
 
 	tweak_data.projectiles.rocket_frag.launch_speed = 3750
+	tweak_data.projectiles.launcher_rocket.range = 500
 	
 	tweak_data.projectiles.west_arrow.launch_speed = 2750
 	tweak_data.projectiles.west_arrow.adjust_z = -45
 	tweak_data.projectiles.bow_poison_arrow.launch_speed = 2500
 	tweak_data.projectiles.bow_poison_arrow.adjust_z = -45
-	tweak_data.projectiles.west_arrow_exp.launch_speed = 2250
+	tweak_data.projectiles.west_arrow_exp.launch_speed = 2500
 	tweak_data.projectiles.west_arrow_exp.adjust_z = -45
 	
 	tweak_data.projectiles.long_arrow.launch_speed = 3250
@@ -107,7 +120,7 @@ elseif RequiredScript == "lib/tweak_data/tweakdata" then
 	tweak_data.projectiles.long_poison_arrow.launch_speed = 3000
 	tweak_data.projectiles.long_poison_arrow.adjust_z = -45
 	tweak_data.projectiles.long_poison_arrow.damage = 7.5
-	tweak_data.projectiles.long_arrow_exp.launch_speed = 2750
+	tweak_data.projectiles.long_arrow_exp.launch_speed = 2000
 	tweak_data.projectiles.long_arrow_exp.adjust_z = -45
 	tweak_data.projectiles.long_arrow_exp.damage = 50
 	
@@ -116,7 +129,7 @@ elseif RequiredScript == "lib/tweak_data/tweakdata" then
 	tweak_data.projectiles.crossbow_poison_arrow.launch_speed = 2000
 	tweak_data.projectiles.crossbow_poison_arrow.adjust_z = 45
 	tweak_data.projectiles.crossbow_poison_arrow.damage = 3.25
-	tweak_data.projectiles.crossbow_arrow_exp.launch_speed = 1750
+	tweak_data.projectiles.crossbow_arrow_exp.launch_speed = 1000
 	tweak_data.projectiles.crossbow_arrow_exp.adjust_z = 45
 	
 	tweak_data.projectiles.frankish_arrow.launch_speed = 3000
@@ -125,7 +138,7 @@ elseif RequiredScript == "lib/tweak_data/tweakdata" then
 	tweak_data.projectiles.frankish_poison_arrow.launch_speed = 2750
 	tweak_data.projectiles.frankish_poison_arrow.adjust_z = 45
 	tweak_data.projectiles.frankish_poison_arrow.damage = 10
-	tweak_data.projectiles.frankish_arrow_exp.launch_speed = 2500
+	tweak_data.projectiles.frankish_arrow_exp.launch_speed = 2000
 	tweak_data.projectiles.frankish_arrow_exp.adjust_z = 45
 	tweak_data.projectiles.frankish_arrow_exp.damage = 32.5
 	
@@ -135,7 +148,7 @@ elseif RequiredScript == "lib/tweak_data/tweakdata" then
 	tweak_data.projectiles.arblast_poison_arrow.launch_speed = 3250
 	tweak_data.projectiles.arblast_poison_arrow.adjust_z = 45
 	tweak_data.projectiles.arblast_poison_arrow.damage = 20
-	tweak_data.projectiles.arblast_arrow_exp.launch_speed = 3000
+	tweak_data.projectiles.arblast_arrow_exp.launch_speed = 2500
 	tweak_data.projectiles.arblast_arrow_exp.adjust_z = 45
 	tweak_data.projectiles.arblast_arrow_exp.damage = 60
 
@@ -145,6 +158,7 @@ elseif RequiredScript == "lib/tweak_data/blackmarket/weaponskinstweakdata" then
 local old_skins_init = BlackMarketTweakData._init_weapon_skins
 function BlackMarketTweakData:_init_weapon_skins()
 	old_skins_init(self)
+	
 	for skin,i in pairs(self.weapon_skins) do
 		self.weapon_skins[ skin ].locked = nil
 		if self.weapon_skins[ skin ].rarity ~= "legendary" then	
@@ -152,6 +166,8 @@ function BlackMarketTweakData:_init_weapon_skins()
 			self.weapon_skins[ skin ].default_blueprint = nil
 		end
 	end
+	
+	
 end
 
 end

@@ -1,5 +1,4 @@
 --[[
-v1.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -169,7 +168,7 @@ function BlackMarketGui:update_info_text()
 		end
 		updated_texts[4].below_stats = true
 		if slot_data.global_value and slot_data.global_value == "normal" then
-			updated_texts[4].text = "dicksSD" --Gotta make descriptions for all the melee weapons first
+			updated_texts[4].text = desc_text --Gotta make descriptions for all the melee weapons first
 		elseif slot_data.global_value and slot_data.global_value ~= "normal" then
 			updated_texts[4].text = updated_texts[4].text .. "\n".. desc_text 
 		end
@@ -787,7 +786,7 @@ function BlackMarketGui:choose_weapon_buy_callback(data)
 	local item_categories = {}
 	for _, item in ipairs(blackmarket_items) do
 		local weapon_data = tweak_data.weapon[item.weapon_id]
-		local category = tweak_data.gui.buy_weapon_category_groups[weapon_data.category] or weapon_data.sub_category or weapon_data.category
+		local category = weapon_data.recategorize or tweak_data.gui.buy_weapon_category_groups[weapon_data.category] or weapon_data.category
 		item_categories[category] = item_categories[category] or {}
 		table.insert(item_categories[category], item)
 	end

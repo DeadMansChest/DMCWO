@@ -1,5 +1,4 @@
 --[[
-v1.6
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
@@ -9,7 +8,7 @@ function WeaponTweakData:_init_stats()
 	
 	--Mag capacity changes
 	self.stats.extra_ammo = {}
-	for i = -100, 100, 1 do
+	for i = -300, 300, 1 do
 		table.insert( self.stats.extra_ammo, i )
 	end
 	
@@ -60,17 +59,19 @@ function WeaponTweakData:_init_stats()
 			3.9,3.8,3.7,3.6,3.5,3.4,3.3,3.2,3.1,3.0,
 			2.9,2.8,2.7,2.6,2.5,2.4,2.3,2.2,2.1,2.0,
 			1.9,1.8,1.7,1.6,1.5,1.4,1.3,1.2,1.1,1.0,
-			0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1,0.025 --:^)
+			0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1,.09,
+			.08,.07,.06,.05,.04,.03,.02,.01 --:^)
 		}
 	end
 	
 	self.stats.spread_moving = {}
-	for i = -0.25, 5, 1 do
+	for i = 0, 5, 0.25 do
 		table.insert( self.stats.spread_moving, i )
 	end
 	
 end
 
+local obongo = _G.LuaNetworking
 local old_new_wep_init = WeaponTweakData._init_new_weapons
 function WeaponTweakData:_init_new_weapons(...)
 	old_new_wep_init(self,...)
@@ -161,7 +162,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	end
 	
 	if DMCWO.light_show == true then
-		local ink = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','b682','x_usp','x_g17','x_g22c','aa12','peacemaker','winchester1874','m134','mateba','sub2000','asval','polymer','wa2000','baka','par','sparrow','model70'}
+		local ink = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','b682','x_usp','x_g17','x_g22c','aa12','peacemaker','winchester1874','m134','mateba','sub2000','asval','polymer','wa2000','baka','par','sparrow','model70','m37'}
 		for i, wep_id in ipairs(ink) do
 			self[ wep_id ].has_trail = true
 		end
@@ -185,6 +186,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		self.glock_18c.AMMO_MAX = 153
 		self.glock_17.AMMO_MAX = 153
 		self.x_g17.AMMO_MAX = 187
+		self.pl14.AMMO_MAX = 150
 		self.b92fs.AMMO_MAX = 150
 		self.x_b92fs.AMMO_MAX = 180
 		self.sparrow.AMMO_MAX = 144
@@ -216,6 +218,8 @@ function WeaponTweakData:_init_new_weapons(...)
 		self.uzi.AMMO_MAX = 160
 		self.sterling.AMMO_MAX = 160
 		self.cobray.AMMO_MAX = 160
+		self.sr2.AMMO_MAX = 150
+		self.x_sr2.AMMO_MAX = 210
 		self.mac10.AMMO_MAX = 100
 		self.polymer.AMMO_MAX = 100
 		self.m1928.AMMO_MAX = 100
@@ -238,7 +242,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		self.ak74.AMMO_MAX = 150
 		self.akm.AMMO_MAX = 120
 		self.akm_gold.AMMO_MAX = 120
-		self.asval.AMMO_MAX = 160
+		self.asval.AMMO_MAX = 120
 		
 		self.saiga.AMMO_MAX = 60
 		self.aa12.AMMO_MAX = 56
@@ -305,7 +309,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	pickup_rate = {'ppk','scorpion'}
 	for i, wep_id in ipairs(pickup_rate) do
-		self[ wep_id ].AMMO_PICKUP = {1.90, 5.50}
+		self[ wep_id ].AMMO_PICKUP = {1.80, 5.50}
 	end
 	
 	pickup_rate = {'new_mp5','mp9','m45','glock_17','glock_18c','b92fs','tec9','uzi','sterling','g26','jowi','x_b92fs','cobray','x_g17','baka','sparrow'}
@@ -323,7 +327,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		self[ wep_id ].AMMO_PICKUP = {1.00, 4.20}
 	end
 	
-	pickup_rate = {'p90','mp7'}
+	pickup_rate = {'p90','mp7','sr2','x_sr2'}
 	for i, wep_id in ipairs(pickup_rate) do
 		self[ wep_id ].AMMO_PICKUP = {0.30, 2.80}
 	end
@@ -345,7 +349,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	for i, wep_id in ipairs(pickup_rate) do
 		self[ wep_id ].AMMO_PICKUP = {0.70, 4.10}
 	end
-	self.asval.AMMO_PICKUP = {0.60, 3.80}
+	self.asval.AMMO_PICKUP = {0.60, 3.60}
 	
 	pickup_rate = {'new_m14','scar','fal','galil','g3','msr'}
 	for i, wep_id in ipairs(pickup_rate) do
@@ -368,6 +372,12 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.r93.AMMO_PICKUP = {0.40, 0.90}
 	self.winchester1874.AMMO_PICKUP = {0.40, 1.70}
 	
+	pickup_rate = {'gre_m79','m32','china'}
+	for i, wep_id in ipairs(pickup_rate) do
+		self[ wep_id ].AMMO_PICKUP = {0.01, 0.55}
+	end
+	
+	self.flamethrower_mk2.AMMO_PICKUP = {0.0, 0.0}
 	--}
 	
 	--[[ MUSCLE DECK "PANIC" PERCENT CHANCES ]]
@@ -378,7 +388,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		self[ wep_id ].panic_suppression_chance = 0.01
 	end
 	
-	local low_panic = {'new_mp5','mp9','m45','glock_17','glock_18c','b92fs','uzi','g26','jowi','x_b92fs','plainsrider','hunter','baka','sparrow'}
+	local low_panic = {'new_mp5','mp9','m45','glock_17','glock_18c','b92fs','uzi','g26','jowi','x_b92fs','plainsrider','hunter','baka','sparrow','sr2','x_sr2','pl14'}
 	for i, wep_id in ipairs(low_panic) do
 		self[ wep_id ].panic_suppression_chance = 0.015
 	end
@@ -434,7 +444,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	--{
 	
 	--Burst fire stuff
-	local no_burst = {'glock_18c','mac10','m45','mp9','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','amcar','new_m4','m16','ak5','aug','saiga','new_m14','scar','fal','galil','g3','tec9','scorpion','uzi','sterling','m1928','l85a2','vhs','cobray','aa12','flamethrower_mk2','m32','asval','baka','c96','par','sparrow','model70','rpk','china'}
+	local no_burst = {'glock_18c','mac10','m45','mp9','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','amcar','new_m4','m16','ak5','aug','saiga','new_m14','scar','fal','galil','g3','tec9','scorpion','uzi','sterling','m1928','l85a2','vhs','cobray','aa12','flamethrower_mk2','m32','asval','baka','c96','par','sparrow','model70','rpk','china','sr2'}
 	for i, wep_id in ipairs(no_burst) do
 		self[ wep_id ].BURST_FIRE = false
 	end
@@ -464,26 +474,42 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	--[[ GENERAL STATS ]]
 	--{
-	local standard_stat_shit = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','rpg7','cobray','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','mateba','sub2000','asval','polymer','wa2000','hunter','baka','frankish','arblast','long','par','sparrow','model70','m37','china'}
+	local standard_stat_shit = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','rpg7','cobray','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','mateba','sub2000','asval','polymer','wa2000','hunter','baka','frankish','arblast','long','par','sparrow','model70','m37','china','sr2','x_sr2','pl14'}
 	for i, wep_id in ipairs(standard_stat_shit) do
 		self[ wep_id ].stats.zoom = 1
 		self[ wep_id ].stats.alert_size = 7
-		self[ wep_id ].stats.extra_ammo = 101
+		self[ wep_id ].stats.extra_ammo = 301
 		self[ wep_id ].stats.total_ammo_mod = 201
 	end
+	
+	standard_stat_shit = {'colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','s552','new_m14','x_deagle','x_1911','x_b92fs','jowi','g26','c96','sterling','m1928','hs2000','rpg7','cobray','x_usp','x_g17','x_g22c','hunter','frankish','arblast','sparrow','pl14'}
+	for i, wep_id in ipairs(standard_stat_shit) do
+		self[ wep_id ].lock_slide = true
+	end
+	
+	standard_stat_shit = {'x_deagle','x_1911','x_b92fs','jowi','x_usp','x_g17','x_g22c'}
+	for i, wep_id in ipairs(standard_stat_shit) do
+		self[ wep_id ].BURST_DELAY = 0.05
+		self[ wep_id ].force_burst = true
+		self[ wep_id ].CAN_TOGGLE_FIREMODE = true
+		self[ wep_id ].no_auto_anims = true
+		self[ wep_id ].AUTO_FIRE_RATE_MULTIPLIER = 0.5
+		self[ wep_id ].auto_anim_speed_mult = self[ wep_id ].AUTO_FIRE_RATE_MULTIPLIER
+		self[ wep_id ].AUTO_FIRE_RECOIL_MULTIPLIER = 2
+	end
 		
-	local enable_cstw = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','famas','galil','g3','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','cobray','x_usp','x_g17','x_g22c','peacemaker','winchester1874','mateba','sub2000','asval','polymer','baka','par','sparrow','model70'}
-	for i, wep_id in ipairs(enable_cstw) do
+	standard_stat_shit = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','famas','galil','g3','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','cobray','x_usp','x_g17','x_g22c','peacemaker','winchester1874','mateba','sub2000','asval','polymer','baka','par','sparrow','model70','sr2','x_sr2','pl14'}
+	for i, wep_id in ipairs(standard_stat_shit) do
 		self[ wep_id ].can_shoot_through_wall = true
 	end
 	
-	local enable_csts = {'mg42','hk21','new_m14','galil','fal','g3','scar','p90','mp7','x_deagle','deagle','peacemaker','new_raging_bull','m134','par','model70'}
-	for i, wep_id in ipairs(enable_csts) do
+	standard_stat_shit = {'mg42','hk21','new_m14','galil','fal','g3','scar','p90','mp7','x_deagle','deagle','peacemaker','new_raging_bull','m134','par','model70','sr2','x_sr2'}
+	for i, wep_id in ipairs(standard_stat_shit) do
 		self[ wep_id ].can_shoot_through_shield = true
 	end
 	
-	local enable_cste = {'new_raging_bull','deagle','colt_1911','usp','mac10','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','famas','galil','g3','x_deagle','x_1911','mg42','mosin','c96','m1928','l85a2','vhs','m134','x_usp','peacemaker','winchester1874','mateba','asval','polymer','par','model70'}
-	for i, wep_id in ipairs(enable_cste) do
+	standard_stat_shit = {'new_raging_bull','deagle','colt_1911','usp','mac10','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','famas','galil','g3','x_deagle','x_1911','mg42','mosin','c96','m1928','l85a2','vhs','m134','x_usp','peacemaker','winchester1874','mateba','asval','polymer','par','model70','sr2','x_sr2'}
+	for i, wep_id in ipairs(standard_stat_shit) do
 		self[ wep_id ].can_shoot_through_enemy = true
 	end
 	
@@ -500,7 +526,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.scorpion.r_speed = 65
 	self.scorpion.c_speed = 6.2
 	
-	local ammo_9mm = {'new_mp5','mp9','m45','glock_17','glock_18c','b92fs','tec9','uzi','sterling','g26','jowi','x_b92fs','cobray','x_g17','sub2000','baka','sparrow'}
+	local ammo_9mm = {'new_mp5','mp9','m45','glock_17','glock_18c','b92fs','tec9','uzi','sterling','g26','jowi','x_b92fs','cobray','x_g17','sub2000','baka','sparrow','pl14'}
 	for i, wep_id in ipairs(ammo_9mm) do
 		self[ wep_id ].penetration_power = 0.4
 		self[ wep_id ].penetration_damage = 0.4
@@ -536,6 +562,9 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.sub2000.r_recover = 0.4
 	self.sub2000.r_speed = 120
 	self.sub2000.c_speed = 6
+	self.pl14.r_recover = 0.5
+	self.pl14.r_speed = 86
+	self.pl14.c_speed = 5.5
 	self.b92fs.r_recover = 0.65
 	self.b92fs.r_speed = 90
 	self.b92fs.c_speed = 5.7
@@ -655,6 +684,21 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.p90.r_speed = 80
 	self.p90.c_speed = 5.5
 	
+	self.sr2.penetration_power = 1.0
+	self.sr2.penetration_damage = 0.65
+	self.sr2.min_shield_pen_dam = 1
+	self.sr2.shield_damage = 0.15
+	self.sr2.r_recover = 0.6
+	self.sr2.r_speed = 82.5
+	self.sr2.c_speed = 5.25
+	self.x_sr2.penetration_power = 1.0
+	self.x_sr2.penetration_damage = 0.65
+	self.x_sr2.min_shield_pen_dam = 1
+	self.x_sr2.shield_damage = 0.15
+	self.x_sr2.r_recover = 0.6
+	self.x_sr2.r_speed = 92.5
+	self.x_sr2.c_speed = 5
+	
 	local ammo_slug = {'r870','serbu','benelli','ksg','striker','huntsman','spas12','judge','b682','saiga','aa12','m37'}
 	for i, wep_id in ipairs(ammo_slug) do
 		self[ wep_id ].penetration_power = 0.5 --Only relevant if you're using slugs!!
@@ -757,19 +801,19 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.akmsu.c_speed = 5.4
 	self.ak74.r_recover = 0.7
 	self.ak74.r_speed = 90
-	self.ak74.c_speed = 5.2
+	self.ak74.c_speed = 5.3
 	self.akm.r_recover = 0.675
-	self.akm.r_speed = 125
-	self.akm.c_speed = 5.1
+	self.akm.r_speed = 120
+	self.akm.c_speed = 5.25
 	self.akm_gold.r_recover = 0.8
-	self.akm_gold.r_speed = 115
+	self.akm_gold.r_speed = 110
 	self.akm_gold.c_speed = 5.5
 	self.rpk.r_recover = 0.5
-	self.rpk.r_speed = 120
+	self.rpk.r_speed = 110
 	self.rpk.c_speed = 5.2
-	self.asval.r_recover = 0.7
-	self.asval.r_speed = 95
-	self.asval.c_speed = 5.5
+	self.asval.r_recover = 0.45
+	self.asval.r_speed = 125
+	self.asval.c_speed = 5.1
 	
 	local ammo_rifle = {'new_m14','scar','fal','galil','g3','msr','hk21','m134','wa2000','par','model70'}
 	for i, wep_id in ipairs(ammo_rifle) do
@@ -810,18 +854,18 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m134.c_speed = 5
 	
 	self.msr.min_shield_pen_dam = nil
-	self.msr.shield_damage = 0.25
+	self.msr.shield_damage = 0.30
 	self.msr.r_recover = 0.55
 	self.msr.r_speed = 130
 	self.msr.c_speed = 5.2
 	
-	self.wa2000.shield_damage = 0.15
+	self.wa2000.shield_damage = 0.175
 	self.wa2000.r_recover = 0.35
 	self.wa2000.r_speed = 145
 	self.wa2000.c_speed = 5.05
 	
 	self.model70.min_shield_pen_dam = nil
-	self.model70.shield_damage = 0.30
+	self.model70.shield_damage = 0.35
 	self.model70.r_recover = 0.45
 	self.model70.r_speed = 135
 	self.model70.c_speed = 5.2
@@ -836,14 +880,14 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.mosin.penetration_power = 0.85
 	self.mosin.penetration_damage = 0.9
-	self.mosin.shield_damage = 0.35
+	self.mosin.shield_damage = 0.40
 	self.mosin.r_recover = 0.5
 	self.mosin.r_speed = 130
 	self.mosin.c_speed = 5.15
 	
 	self.r93.penetration_power = 0.95
 	self.r93.penetration_damage = 0.95
-	self.r93.shield_damage = 0.40
+	self.r93.shield_damage = 0.45
 	self.r93.r_recover = 0.45
 	self.r93.r_speed = 140
 	self.r93.c_speed = 5.1
@@ -873,57 +917,57 @@ function WeaponTweakData:_init_new_weapons(...)
 	end
 		
 	
-	local weight = {}
-	weight = {'ak74','s552','new_m4','vhs','saiga','scar','aug','famas','r870','benelli','ak5','spas12','m16','mosin','striker','b682','model70','china'}
-	for i, wep_id in ipairs(weight) do
+	local worth_the_weight = {}
+	worth_the_weight = {'ak74','s552','new_m4','vhs','saiga','scar','aug','famas','r870','benelli','ak5','spas12','m16','mosin','striker','b682','model70'}
+	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.95
 	end
-	weight = {'akm','fal','galil','winchester1874','m1928'}
-	for i, wep_id in ipairs(weight) do
+	worth_the_weight = {'akm','fal','galil','winchester1874','m1928'}
+	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.925
 	end	
-	weight = {'akm_gold','g3','rpk','new_m14','l85a2','aa12'}
-	for i, wep_id in ipairs(weight) do
+	worth_the_weight = {'akm_gold','g3','rpk','new_m14','l85a2','aa12','china'}
+	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.9
 	end
-	weight = {'m32'}
-	for i, wep_id in ipairs(weight) do
+	worth_the_weight = {'m32'}
+	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.875
 	end
 	
-	weight = {'msr'}
-	for i, wep_id in ipairs(weight) do
+	worth_the_weight = {'msr'}
+	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.85
 	end
-	weight = {'r93','rpg7','flamethrower_mk2'}
-	for i, wep_id in ipairs(weight) do
+	worth_the_weight = {'r93','rpg7','flamethrower_mk2'}
+	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.825
 	end
 	
-	weight = {'wa2000'}
-	for i, wep_id in ipairs(weight) do
+	worth_the_weight = {'wa2000'}
+	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.8
 	end
 	
-	weight = {'m249'}
-	for i, wep_id in ipairs(weight) do
+	worth_the_weight = {'m249'}
+	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.775
 	end
 	
-	weight = {'hk21'}
-	for i, wep_id in ipairs(weight) do
+	worth_the_weight = {'hk21'}
+	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.75
 	end
-	weight = {'m95'}
-	for i, wep_id in ipairs(weight) do
+	worth_the_weight = {'m95'}
+	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.725
 	end
-	weight = {'mg42','par'}
-	for i, wep_id in ipairs(weight) do
+	worth_the_weight = {'mg42','par'}
+	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.7
 	end
-	weight = {'m134'}
-	for i, wep_id in ipairs(weight) do
+	worth_the_weight = {'m134'}
+	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.675
 	end
 	
@@ -931,8 +975,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	local stock = {}
 	stock = {
-		'new_raging_bull','deagle','peacemaker','mateba','judge','x_deagle',
-		'colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','x_1911','x_b92fs','jowi','g26','c96','hs2000','x_usp','x_g17','x_g22c','sparrow',	
+		'new_raging_bull','deagle','peacemaker','mateba','judge',
+		'colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','g26','c96','hs2000','sparrow','pl14',	
 		'hunter',
 		'saw','saw_secondary'
 	}
@@ -942,13 +986,16 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	stock = {
-		'm1928','mac10','mp9','tec9','scorpion','cobray','baka','m45','new_mp5','uzi','sterling','polymer',
+		'x_deagle',
+		'x_1911','x_b92fs','jowi','x_usp','x_g17','x_g22c',
+		'm1928','mac10','mp9','tec9','scorpion','cobray','baka','m45','new_mp5','uzi','sterling','polymer','sr2'
 	}
 	for i, wep_id in ipairs(stock) do
 		self[ wep_id ].ams = 0.75
 	end
 		
 	stock = {
+		'x_sr2',
 		'mp7','p90',
 		'serbu','striker','aa12','saiga','r870','huntsman','benelli','ksg','spas12','b682','m37'
 	}
@@ -962,7 +1009,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		'gre_m79','china'
 	}
 	for i, wep_id in ipairs(stock) do
-		self[ wep_id ].ams = 0.55
+		self[ wep_id ].ams = 0.575
 	end
 		
 	stock = {
@@ -972,7 +1019,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		'm32'
 	}
 	for i, wep_id in ipairs(stock) do
-		self[ wep_id ].ams = 0.45
+		self[ wep_id ].ams = 0.50
 	end
 		
 	stock = {		
@@ -985,25 +1032,103 @@ function WeaponTweakData:_init_new_weapons(...)
 		'rpg7'
 	}
 	for i, wep_id in ipairs(stock) do
-		self[ wep_id ].ams = 0.35
+		self[ wep_id ].ams = 0.40
 	end
 		
 	--}
 	
+	--[[ JAMMIN ]]
+	--{
+	local anal = {}
+	anal = {'colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','ak5','s552','g36','aug','saiga','new_m14','scar','fal','hk21','rpk','famas','galil','g3','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','cobray','x_usp','x_g17','x_g22c','aa12','sub2000','polymer','wa2000','hunter','baka','frankish','arblast','long','par','sparrow'}
+	anal = {
+		'tec9'
+	}
+	for i, wep_id in ipairs(anal) do
+		self[ wep_id ].jam_start = 125
+		self[ wep_id ].jam_add = 0.0005
+		self[ wep_id ].jam_cap = 0.05
+		self[ wep_id ].jam_cd = 15
+	end	
+	anal = {
+		'deagle',
+		'x_deagle'
+	}
+	for i, wep_id in ipairs(anal) do
+		self[ wep_id ].jam_start = 75
+		self[ wep_id ].jam_add = 0.000075
+		self[ wep_id ].jam_cap = 0.025
+		self[ wep_id ].jam_cd = 5
+	end	
+	anal = {
+		'olympic',
+		'amcar','m16','new_m4',
+	}
+	for i, wep_id in ipairs(anal) do
+		self[ wep_id ].jam_start = 250
+		self[ wep_id ].jam_add = 0.000075
+		self[ wep_id ].jam_cap = 0.015
+		self[ wep_id ].jam_cd = 15
+	end	
+	anal = {
+		'm249'
+	}
+	for i, wep_id in ipairs(anal) do
+		self[ wep_id ].jam_start = 350
+		self[ wep_id ].jam_add = 0.000125
+		self[ wep_id ].jam_cap = 0.02
+		self[ wep_id ].jam_cd = 30
+	end	
+	anal = {
+		'akmsu',
+		'akm','akm_gold','ak74','asval'
+	}
+	for i, wep_id in ipairs(anal) do
+		self[ wep_id ].jam_start = 250
+		self[ wep_id ].jam_add = 0.00005
+		self[ wep_id ].jam_cap = 0.01
+		self[ wep_id ].jam_cd = 15
+	end
+	anal = {
+		'new_raging_bull','judge','peacemaker','mateba',
+		'msr','r93','m95','winchester1874','mosin','model70',
+		'c96',
+		'r870','huntsman','benelli','ksg','serbu','striker','b682','spas12','m37',
+		'rpg7','flamethrower_mk2','m32','china','gre_m79',
+		'plainsrider','hunter','frankish','arblast','long'
+	}
+	for i, wep_id in ipairs(anal) do
+		self[ wep_id ].jam_start = nil
+	end
+	if DMCWO.l85a1_sim == true then
+		anal = {
+			'l85a2'
+		}
+		for i, wep_id in ipairs(anal) do
+			self[ wep_id ].jam_start = 50
+			self[ wep_id ].jam_add = 0.00015
+			self[ wep_id ].jam_cap = 0.15
+			self[ wep_id ].jam_cd = 10
+		end
+	end
+	--}
 	
 	--[[ EQUIP TIMERS ]]
 	--{
 	self.m1928.timers.equip = 1.1
 	self.m1928.equip = 0.85
 	self.m1928.unequip = 0.6
+	self.m1928.sprintout_time = 0.400
 	self.flamethrower_mk2.equip = 1.25
 	self.flamethrower_mk2.unequip = 0.6
+	self.flamethrower_mk2.sprintout_time = 0.600
 	self.rpg7.equip = 1.5
 	self.rpg7.unequip = 1
+	self.rpg7.sprintout_time = 0.65
 	
 	local eq_time
 	eq_time = {
-	'hunter','ppk','g26','glock_17','glock_18c','b92fs','sparrow',
+	'hunter','ppk','g26','glock_17','glock_18c','b92fs','sparrow','pl14',
 	'g22c','p226','hs2000',
 	'colt_1911','usp',
 	'c96',
@@ -1014,46 +1139,68 @@ function WeaponTweakData:_init_new_weapons(...)
 	end 
 	self.hunter.equip = 0.5
 	self.hunter.unequip = 0.9
+	self.hunter.sprintout_time = 0.110
 	self.ppk.equip = 0.5
 	self.ppk.unequip = 0.8
+	self.ppk.sprintout_time = 0.095
 	self.g26.equip = 0.5
 	self.g26.unequip = 0.8
+	self.g26.sprintout_time = 0.110
 	self.glock_17.equip = 0.65
 	self.glock_17.unequip = 1
+	self.glock_17.sprintout_time = 0.120
 	self.glock_18c.equip = 0.65
 	self.glock_18c.unequip = 1
+	self.glock_18c.sprintout_time =  0.135
 	self.b92fs.equip = 0.65
 	self.b92fs.unequip = 1
+	self.b92fs.sprintout_time = 0.135
 	self.sparrow.equip = 0.65
 	self.sparrow.unequip = 1
+	self.sparrow.sprintout_time = 0.120
+	self.pl14.equip = 0.65
+	self.pl14.unequip = 1
+	self.pl14.sprintout_time = 0.140
 	self.g22c.equip = 0.75
 	self.g22c.unequip = 1
+	self.g22c.sprintout_time = 0.145
 	self.p226.equip = 0.75
 	self.p226.unequip = 1
+	self.p226.sprintout_time = 0.150
 	self.hs2000.equip = 0.75
 	self.hs2000.unequip = 1
+	self.hs2000.sprintout_time = 0.155
 	self.colt_1911.equip = 0.8
 	self.colt_1911.unequip = 1
+	self.colt_1911.sprintout_time = 0.165
 	self.usp.equip = 0.8
 	self.usp.unequip = 1
+	self.usp.sprintout_time = 0.170
 	self.c96.equip = 0.8
 	self.c96.unequip = 1
+	self.c96.sprintout_time = 0.180
 	self.mateba.equip = 0.85
 	self.mateba.unequip = 1
+	self.mateba.sprintout_time = 0.200
 	self.new_raging_bull.equip = 0.85
 	self.new_raging_bull.unequip = 1
+	self.new_raging_bull.sprintout_time = 0.240
 	self.judge.equip = 0.85
 	self.judge.unequip = 1
+	self.judge.sprintout_time = 0.225
 	self.peacemaker.equip = 0.9
 	self.peacemaker.unequip = 1.1
+	self.peacemaker.sprintout_time = 0.260
 	self.deagle.equip = 0.9
 	self.deagle.unequip = 1.1
+	self.deagle.sprintout_time = 0.310
 	
 	
 	eq_time = {
 	'scorpion',
 	'baka','mp9','tec9',
 	'mac10',
+	'sr2',
 	'mp7'
 	}
 	for i, wep_id in ipairs(eq_time) do
@@ -1061,16 +1208,25 @@ function WeaponTweakData:_init_new_weapons(...)
 	end 
 	self.tec9.equip = 1.1
 	self.tec9.unequip = 0.6
+	self.tec9.sprintout_time = 0.300
 	self.scorpion.equip = 1.1
 	self.scorpion.unequip = 0.6
+	self.scorpion.sprintout_time = 0.270
 	self.baka.equip = 1.1
 	self.baka.unequip = 0.6
+	self.baka.sprintout_time = 0.270
 	self.mp9.equip = 1.1
 	self.mp9.unequip = 0.6
+	self.mp9.sprintout_time = 0.275
 	self.mac10.equip = 1.1
 	self.mac10.unequip = 0.6
+	self.mac10.sprintout_time = 0.300
+	self.sr2.equip = 1.2
+	self.sr2.unequip = 0.6
+	self.sr2.sprintout_time = 0.360
 	self.mp7.equip = 1.3
 	self.mp7.unequip = 0.6
+	self.mp7.sprintout_time = 0.360
 	
 	
 	eq_time = {
@@ -1079,6 +1235,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	'x_1911','x_usp',
 	'x_deagle',
 	
+	'x_sr2',
 	'mosin'
 	}
 	for i, wep_id in ipairs(eq_time) do
@@ -1086,21 +1243,32 @@ function WeaponTweakData:_init_new_weapons(...)
 	end 
 	self.jowi.equip = 0.5
 	self.jowi.unequip = 0.8
+	self.jowi.sprintout_time = 0.330
 	self.x_g17.equip = 0.65
 	self.x_g17.unequip = 1
+	self.x_g17.sprintout_time = 0.385
 	self.x_b92fs.equip = 0.65
 	self.x_b92fs.unequip = 1
+	self.x_b92fs.sprintout_time = 0.400
 	self.x_g22c.equip = 0.75
 	self.x_g22c.unequip = 1
+	self.x_g22c.sprintout_time = 0.430
 	self.x_1911.equip = 0.8
 	self.x_1911.unequip = 1
+	self.x_1911.sprintout_time = 0.470
 	self.x_usp.equip = 0.8
 	self.x_usp.unequip = 1
+	self.x_usp.sprintout_time = 0.490
 	self.x_deagle.equip = 0.9
 	self.x_deagle.unequip = 1.2
+	self.x_deagle.sprintout_time = 0.520
 	
+	self.x_sr2.equip = 2
+	self.x_sr2.unequip = 0.9
+	self.x_sr2.sprintout_time = 0.580
 	self.mosin.equip = 2.2
 	self.mosin.unequip = 0.6
+	self.mosin.sprintout_time = 0.495
 
 	
 	
@@ -1108,6 +1276,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	'new_mp5','m45','uzi','sterling','cobray',
 	'polymer',
 	'olympic','akmsu',
+	
 	'amcar','g36','s552',
 	'new_m4','m16','ak5',
 	'asval','ak74','akm','akm_gold',
@@ -1118,69 +1287,98 @@ function WeaponTweakData:_init_new_weapons(...)
 	for i, wep_id in ipairs(eq_time) do
 		self[ wep_id ].timers.equip = 0.5
 	end 
-	self.cobray.equip = 1.2
+	self.cobray.equip = 1.3
 	self.cobray.unequip = 0.6
-	self.uzi.equip = 1.2
+	self.cobray.sprintout_time = 0.340
+	self.uzi.equip = 1.3
 	self.uzi.unequip = 0.6
-	self.new_mp5.equip = 1.35
+	self.uzi.sprintout_time = 0.340
+	self.new_mp5.equip = 1.45
 	self.new_mp5.unequip = 0.6
-	self.m45.equip = 1.35
+	self.new_mp5.sprintout_time = 0.350
+	self.m45.equip = 1.45
 	self.m45.unequip = 0.6
-	self.sterling.equip = 1.35
+	self.m45.sprintout_time = 0.350
+	self.sterling.equip = 1.45
 	self.sterling.unequip = 0.6
-	self.polymer.equip = 1.35
+	self.sterling.sprintout_time = 0.350
+	self.polymer.equip = 1.45
 	self.polymer.unequip = 0.6
+	self.polymer.sprintout_time = 0.380
 	
-	self.p90.equip = 1.4
+	self.p90.equip = 1.5
 	self.p90.unequip = 0.6
+	self.p90.sprintout_time = 0.340
 	
 	self.olympic.equip = 1.55
 	self.olympic.unequip = 0.6
+	self.olympic.sprintout_time = 0.390
 	self.akmsu.equip = 1.55
 	self.akmsu.unequip = 0.6
+	self.akmsu.sprintout_time = 0.400
 	self.amcar.equip = 1.55
 	self.amcar.unequip = 0.6
+	self.amcar.sprintout_time = 0.415
 	self.g36.equip = 1.55
 	self.g36.unequip = 0.6
+	self.g36.sprintout_time = 0.400
 	self.s552.equip = 1.55
 	self.s552.unequip = 0.6
+	self.s552.sprintout_time = 0.420
 	
 	self.new_m4.equip = 1.6
 	self.new_m4.unequip = 0.6
+	self.new_m4.sprintout_time = 0.420
 	self.m16.equip = 1.6
 	self.m16.unequip = 0.6
+	self.m16.sprintout_time = 0.435
 	self.ak5.equip = 1.6
 	self.ak5.unequip = 0.6
+	self.ak5.sprintout_time = 0.435
 	self.asval.equip = 1.6
 	self.asval.unequip = 0.6
+	self.asval.sprintout_time = 0.435
 	self.ak74.equip = 1.6
 	self.ak74.unequip = 0.6
+	self.ak74.sprintout_time = 0.440
 	self.akm.equip = 1.6
 	self.akm.unequip = 0.6
+	self.akm.sprintout_time = 0.455
 	self.akm_gold.equip = 1.6
 	self.akm_gold.unequip = 0.6	
+	self.akm_gold.sprintout_time = 0.460
 	
 	self.serbu.equip = 1.45
 	self.serbu.unequip = 0.6
+	self.serbu.sprintout_time = 0.365
 	self.saiga.equip = 1.6
 	self.saiga.unequip = 0.6
+	self.saiga.sprintout_time = 0.450
 	self.aa12.equip = 1.6
 	self.aa12.unequip = 0.6
+	self.aa12.sprintout_time = 0.490
 	self.huntsman.equip = 1.6
 	self.huntsman.unequip = 0.6
+	self.huntsman.sprintout_time = 0.380
 	self.b682.equip = 1.6
 	self.b682.unequip = 0.6
+	self.b682.sprintout_time = 0.430
 	self.benelli.equip = 1.6
 	self.benelli.unequip = 0.6
+	self.benelli.sprintout_time = 0.440
 	self.spas12.equip = 1.6
 	self.spas12.unequip = 0.6
+	self.spas12.sprintout_time = 0.455
 	self.r870.equip = 1.6
 	self.r870.unequip = 0.6
+	self.r870.sprintout_time = 0.440
 	self.ksg.equip = 1.6
 	self.ksg.unequip = 0.6
+	self.ksg.sprintout_time = 0.380
 	
 	self.scar.equip = 1.6
 	self.scar.unequip = 0.6
+	self.scar.sprintout_time = 0.455
 	
 	
 	eq_time = {
@@ -1192,21 +1390,29 @@ function WeaponTweakData:_init_new_weapons(...)
 	end 
 	self.vhs.equip = 1.7
 	self.vhs.unequip = 0.6
+	self.vhs.sprintout_time = 0.420
 	self.famas.equip = 1.7
 	self.famas.unequip = 0.6
+	self.famas.sprintout_time = 0.425
 	self.aug.equip = 1.7
 	self.aug.unequip = 0.6
+	self.aug.sprintout_time = 0.425
 	self.l85a2.equip = 1.7
 	self.l85a2.unequip = 0.6
+	self.l85a2.sprintout_time = 0.435
 	
 	self.plainsrider.equip = 1.5
 	self.plainsrider.unequip = 0.6
+	self.plainsrider.sprintout_time = 0.350
 	self.long.equip = 1.6
 	self.long.unequip = 0.6
+	self.long.sprintout_time = 0.390
 	self.frankish.equip = 1.6
 	self.frankish.unequip = 0.6
+	self.frankish.sprintout_time = 0.350
 	self.arblast.equip = 1.7
 	self.arblast.unequip = 0.6
+	self.arblast.sprintout_time = 0.390
 	
 	
 	eq_time = {
@@ -1219,26 +1425,36 @@ function WeaponTweakData:_init_new_weapons(...)
 	end 
 	self.fal.equip = 1.6
 	self.fal.unequip = 0.6
+	self.fal.sprintout_time = 0.460
 	self.galil.equip = 1.6
 	self.galil.unequip = 0.6
+	self.galil.sprintout_time = 0.470	
 	self.new_m14.equip = 1.7
 	self.new_m14.unequip = 0.6
+	self.new_m14.sprintout_time = 0.475	
 	self.g3.equip = 1.7
 	self.g3.unequip = 0.6
+	self.g3.sprintout_time = 0.480
 	
 	self.winchester1874.equip = 1.6
 	self.winchester1874.unequip = 0.6
+	self.winchester1874.sprintout_time = 0.480
 	self.msr.equip = 1.6
 	self.msr.unequip = 0.6	
+	self.msr.sprintout_time = 0.520
 	self.model70.equip = 1.7
 	self.model70.unequip = 0.6
+	self.model70.sprintout_time = 0.535
 	
 	self.m32.equip = 1.7
 	self.m32.unequip = 0.6
+	self.m32.sprintout_time = 0.570
 	self.gre_m79.equip = 1.6
 	self.gre_m79.unequip = 0.6
+	self.gre_m79.sprintout_time = 0.500	
 	self.china.equip = 1.5
 	self.china.unequip = 0.6
+	self.china.sprintout_time = 0.550
 	
 	
 	eq_time = {
@@ -1249,6 +1465,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	end
 	self.striker.equip = 1.3
 	self.striker.unequip = 0.6
+	self.striker.sprintout_time = 0.435	
 	
 	
 	eq_time = {
@@ -1259,6 +1476,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	end
 	self.r93.equip = 1.6
 	self.r93.unequip = 0.6
+	self.r93.sprintout_time = 0.570	
 	
 	
 	eq_time = {
@@ -1269,6 +1487,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	end
 	self.rpk.equip = 1.3
 	self.rpk.unequip = 0.6
+	self.rpk.sprintout_time = 0.520
 		
 	
 	eq_time = {
@@ -1282,14 +1501,18 @@ function WeaponTweakData:_init_new_weapons(...)
 	end
 	self.sub2000.equip = 1.25
 	self.sub2000.unequip = 0.6
+	self.sub2000.sprintout_time = 0.370	
 	
 	self.m95.equip = 1.45
 	self.m95.unequip = 0.6
+	self.m95.sprintout_time = 0.600
 	self.wa2000.equip = 1.2
 	self.wa2000.unequip = 0.6
+	self.wa2000.sprintout_time = 0.570
 	
 	self.m37.equip = 1.1
 	self.m37.unequip = 0.6
+	self.m37.sprintout_time = 0.390	
 	
 	eq_time = {
 	'm249','hk21','par','mg42',
@@ -1300,15 +1523,20 @@ function WeaponTweakData:_init_new_weapons(...)
 	end
 	self.m249.equip = 1.0
 	self.m249.unequip = 0.6
+	self.m249.sprintout_time = 0.585
 	self.hk21.equip = 1.0
 	self.hk21.unequip = 0.6
+	self.hk21.sprintout_time = 0.615
 	self.par.equip = 1.0
 	self.par.unequip = 0.6
+	self.par.sprintout_time = 0.615
 	self.mg42.equip = 1.0
 	self.mg42.unequip = 0.6
+	self.mg42.sprintout_time = 0.635
 	
 	self.m134.equip = 1.0
 	self.m134.unequip = 0.6	
+	self.m134.sprintout_time = 0.650	
 	--}
 	
 	
@@ -1327,16 +1555,17 @@ function WeaponTweakData:_init_new_weapons(...)
 			damage = 10,
 			concealment = 16,
 			value = 1,
-			extra_ammo = 101,
+			extra_ammo = 301,
 			total_ammo_mod = 201,
 		}
 	self.saw_secondary.stats = deep_clone(self.saw.stats)
 		
 		
 	--[[     M32     ]]--
-	self.m32.ADS_TIMER = 0.320
+	self.m32.ADS_TIMER = 0.420
 	self.m32.reload_speed_mult = 1.2
 	self.m32.rms = 0.75
+	self.m32.recategorize = "nadeshot"
 	
 	self.m32.kick.standing = {0.7, 0.6, -0.35, 0.35}
 	self.m32.kick.crouching = self.m32.kick.standing
@@ -1352,6 +1581,12 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m32.shake.fire_multiplier = 0.9
 	self.m32.shake.fire_steelsight_multiplier = -0.9
 	
+	--[[
+	if not obongo:IsClient() then	
+		self.m32.fire_mode_data.fire_rate = 0.6
+	end
+	]]
+	
 	self.m32.stats_modifiers = {
 			damage = 3.4,
 		}
@@ -1359,12 +1594,14 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m32.stats.alert_size = 9
 	self.m32.stats.suppression = 2
 	self.m32.stats.spread = 56
-	self.m32.stats.recoil = 56
+	self.m32.stats.recoil = 55
 	self.m32.stats.damage = 40
 	
 	
 	--[[     M79     ]]--	
-	self.gre_m79.ADS_TIMER = 0.250
+	self.gre_m79.ADS_TIMER = 0.300
+	self.gre_m79.recategorize = "nadeshot"
+	
 	self.gre_m79.kick.standing = {0.7, 0.65, -0.075, 0.075}
 	self.gre_m79.kick.crouching = self.gre_m79.kick.standing
 	self.gre_m79.kick.steelsight = self.gre_m79.kick.standing
@@ -1388,14 +1625,15 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.gre_m79.stats.alert_size = 9
 	self.gre_m79.stats.suppression = 2
 	self.gre_m79.stats.spread = 70
-	self.gre_m79.stats.recoil = 46
+	self.gre_m79.stats.recoil = 45
 	self.gre_m79.stats.damage = 40
 	
 	
 	--[[     HONG MEI-LING     ]]--	
-	self.china.ADS_TIMER = 0.285
+	self.china.ADS_TIMER = 0.380
 	self.china.rms = 0.75
 	self.china.anim_speed_mult = 0.65
+	self.china.recategorize = "nadeshot"
 	
 	self.china.timers.shotgun_reload_enter = 0.5
 	self.china.timers.shotgun_reload_shell = 0.8
@@ -1427,6 +1665,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.china.stats.spread = 66
 	self.china.stats.recoil = 50
 	self.china.stats.damage = 40
+	self.china.stats.concealment = 15
 	
 	
 	
@@ -1435,6 +1674,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m134.rms = 0.5
 	self.m134.ads_sms = 0.25
 	self.m134.sms = 0.5
+	self.m134.anim_delay = 0.4
+	self.m134.recategorize = "gatgat"
 	
 	self.m134.kick.standing = {0.6, -0.3, -0.55, 0.55}
 	self.m134.kick.crouching = self.m134.kick.standing
@@ -1459,20 +1700,23 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m134.armor_piercing_chance = 0.25
 	
 	self.m134.damage_near = 5
-	self.m134.damage_far = 80
+	self.m134.damage_far = 75
 	self.m134.damage_min = 3.0
 	
 	self.m134.stats.damage = 36
 	self.m134.stats.spread = 21
 	self.m134.stats.recoil = 59
 	self.m134.stats.suppression = 0
+	self.m134.stats.concealment = 1
 	
 	
 	
 	--[[     ENEMY RPG!!! GET DOOOOWWWWN!!!!     ]]--
-	self.rpg7.ADS_TIMER = 0.450
+	self.rpg7.ADS_TIMER = 0.485
 	self.rpg7.reload_speed_mult = 1.2
-	self.rpg7.rms = 0.5
+	self.rpg7.rms = 0.40
+	self.rpg7.recategorize = "nadeshot"
+	self.rpg7.ads_fire_only = true
 	
 	self.rpg7.kick.standing = {1.05, 0.3, -0.075, 0.075 }
 	self.rpg7.kick.crouching = self.rpg7.kick.standing
@@ -1497,6 +1741,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.rpg7.stats.spread = 66
 	self.rpg7.stats.recoil = 45
 	self.rpg7.stats.suppression = 0
+	self.rpg7.stats.concealment = 1
 	
 	
 	
@@ -1504,6 +1749,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.flamethrower_mk2.ADS_TIMER = 0.350
 	self.flamethrower_mk2.ads_sms = 0.5
 	self.flamethrower_mk2.sms = 0.5
+	self.flamethrower_mk2.recategorize = "flammen"
 	
 	self.flamethrower_mk2.spread.standing = 0.6
 	self.flamethrower_mk2.spread.crouching = self.flamethrower_mk2.spread.standing
@@ -1514,20 +1760,23 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.flamethrower_mk2.CLIP_AMMO_MAX = 100
 	
-	self.flamethrower_mk2.rays = 20
+	self.flamethrower_mk2.rays = 25
 	self.flamethrower_mk2.fire_mode_data.fire_rate = 0.06
-	self.flamethrower_mk2.fire_dot_data.dot_trigger_chance = 30
+	self.flamethrower_mk2.fire_dot_data.dot_trigger_chance = 50
 	self.flamethrower_mk2.fire_dot_data.dot_trigger_max_distance = 1000
+	self.flamethrower_mk2.fire_dot_data.dot_damage = 1.5
+	self.flamethrower_mk2.flame_max_range = 2000
 	
 	self.flamethrower_mk2.stats.recoil = 100
 	self.flamethrower_mk2.stats.spread = 31
 	self.flamethrower_mk2.stats.damage = 12
-	self.flamethrower_mk2.flame_max_range = 2000
+	self.flamethrower_mk2.stats.concealment = 5
 	
 	
 	
 	--[[     IN THE KNEE     ]]		
-	self.plainsrider.reload_speed_mult = 0.8
+	self.plainsrider.reload_speed_mult = 0.5
+	self.plainsrider.recategorize = "robinhood"
 	
 	self.plainsrider.kick.standing = {0.375, 0.125, 0.25, 0.25}
 	self.plainsrider.kick.crouching = self.plainsrider.kick.standing
@@ -1553,7 +1802,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     THAT'S WHAT SHE SAID     ]]--
-	self.long.reload_speed_mult = 1.2
+	self.long.reload_speed_mult = 1.5
+	self.long.recategorize = "robinhood"
 	
 	self.long.kick.standing = {0.75, 0.25, 0.5, 0.5}
 	self.long.kick.crouching = self.long.kick.standing
@@ -1581,6 +1831,9 @@ function WeaponTweakData:_init_new_weapons(...)
 	--[[     X BOW'N GIVE IT TO YA     ]]--
 	self.hunter.ADS_TIMER = 0.085
 	self.hunter.reload_speed_mult = 1.1
+	self.hunter.recategorize = "xbow"
+	self.hunter.sub_category = "pistol"
+	self.hunter.no_auto_anims = true
 	
 	self.hunter.kick.standing = {0.4, 0.2, 0.2, 0.2}
 	self.hunter.kick.crouching = self.hunter.kick.standing
@@ -1596,7 +1849,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.hunter.shake.fire_multiplier = 1
 	self.hunter.shake.fire_steelsight_multiplier = -1
 	
-	self.hunter.fire_mode_data.fire_rate = 0.3
+	self.hunter.fire_mode_data.fire_rate = 0.15
 	
 	self.hunter.stats_modifiers = {}
 		
@@ -1607,6 +1860,9 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	--[[     Basic Crossbow     ]]--
 	self.frankish.ADS_TIMER = 0.150
+	self.frankish.recategorize = "xbow"
+	self.frankish.no_auto_anims = true
+	
 	self.frankish.kick.standing = {0.4, 0.2, 0.2, 0.2}
 	self.frankish.kick.crouching = self.frankish.kick.standing
 	self.frankish.kick.steelsight = self.frankish.kick.standing
@@ -1621,7 +1877,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.frankish.shake.fire_multiplier = 1.8
 	self.frankish.shake.fire_steelsight_multiplier = -1.8
 	
-	self.frankish.fire_mode_data.fire_rate = 0.4
+	self.frankish.fire_mode_data.fire_rate = 0.2
 	
 	self.frankish.timers.reload_not_empty = 1.6
 	self.frankish.timers.reload_empty = 1.6
@@ -1637,6 +1893,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.arblast.ADS_TIMER = 0.250
 	self.arblast.reload_speed_mult = 0.6
 	self.arblast.rms = 0.5
+	self.arblast.recategorize = "xbow"
+	self.arblast.no_auto_anims = true
 	
 	self.arblast.kick.standing = {0.4, 0.2, 0.2, 0.2}
 	self.arblast.kick.crouching = self.arblast.kick.standing
@@ -1652,7 +1910,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.arblast.shake.fire_multiplier = 2.2
 	self.arblast.shake.fire_steelsight_multiplier = -2.2
 	
-	self.arblast.fire_mode_data.fire_rate = 0.6
+	self.arblast.fire_mode_data.fire_rate = 0.3
 	
 	self.arblast.timers.reload_not_empty = 3.1
 	self.arblast.timers.reload_empty = 3.1
@@ -1677,7 +1935,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.ppk.kick.crouching = self.ppk.kick.standing
 	self.ppk.kick.steelsight = self.ppk.kick.standing
 	
-	self.ppk.CLIP_AMMO_MAX = 8
+	self.ppk.CLIP_AMMO_MAX = 7
 	
 	self.ppk.spread.standing = 0.6
 	self.ppk.spread.crouching = 0.4
@@ -1705,7 +1963,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	--[[     Grenade 18C     ]]--
 	self.glock_18c.ADS_TIMER = 0.100
 	
-	self.glock_18c.sub_category = "mach_pis"
+	self.glock_18c.recategorize = "mach_pis"
 	
 	self.glock_18c.upgrade_blocks = {
 			pistol = {
@@ -1759,8 +2017,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.glock_17.fire_mode_data.fire_rate = 0.09230769230769230769230769230769
 	
-	self.glock_17.shake.fire_multiplier = 1
-	self.glock_17.shake.fire_steelsight_multiplier = -1
+	self.glock_17.shake.fire_multiplier = 0.7
+	self.glock_17.shake.fire_steelsight_multiplier = -0.7
 	
 	self.glock_17.damage_near = 6
 	self.glock_17.damage_far = 38
@@ -1772,22 +2030,22 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.glock_17.stats.suppression = 16
 	
 	--[[     Grenade 17     ]]--
-	self.x_g17.ADS_TIMER = 0.150
+	self.x_g17.ADS_TIMER = 0.100 * 1.5
 	
 	self.x_g17.kick.standing = {0.35, -0.05, -0.3, 0.3 }
 	self.x_g17.kick.crouching = self.x_g17.kick.standing
 	self.x_g17.kick.steelsight = self.x_g17.kick.standing
 	
-	self.x_g17.spread.standing = 0.55 * 1
-	self.x_g17.spread.crouching = 0.45 * 1
-	self.x_g17.spread.steelsight = 0.1 * 1
+	self.x_g17.spread.standing = 0.55
+	self.x_g17.spread.crouching = 0.45
+	self.x_g17.spread.steelsight = 0.2
 	self.x_g17.spread.moving_standing = self.x_g17.spread.standing * 1.2
 	self.x_g17.spread.moving_crouching = self.x_g17.spread.crouching * 1.2
 	self.x_g17.spread.moving_steelsight = self.x_g17.spread.steelsight * 1.2
 	
 	self.x_g17.CLIP_AMMO_MAX = 17 * 2
 	
-	self.x_g17.fire_mode_data.fire_rate = 0.09230769230769230769230769230769 / 1.5
+	self.x_g17.fire_mode_data.fire_rate = 0.09230769230769230769230769230769 / 1.25
 	
 	self.x_g17.shake.always_hipfire = true
 	
@@ -1805,6 +2063,39 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	
+	--[[     145 damage 9mm :^)     ]]--
+	self.pl14.ADS_TIMER = 0.110
+	self.pl14.reload_speed_mult = 0.9
+	
+	self.pl14.kick.standing = {0.55, -0.15, -0.15, 0.15}
+	self.pl14.kick.crouching = self.pl14.kick.standing
+	self.pl14.kick.steelsight = self.pl14.kick.standing
+	
+	self.pl14.CLIP_AMMO_MAX = 15
+	
+	self.pl14.spread.standing = 0.9
+	self.pl14.spread.crouching = 0.8
+	self.pl14.spread.steelsight = 0.1
+	self.pl14.spread.moving_standing = self.pl14.spread.standing * 1.35
+	self.pl14.spread.moving_crouching = self.pl14.spread.crouching * 1.35
+	self.pl14.spread.moving_steelsight = self.pl14.spread.steelsight * 1.35
+	
+	self.pl14.fire_mode_data.fire_rate = 0.10526315789473684210526315789474
+	
+	self.pl14.shake.fire_multiplier = 1.1
+	self.pl14.shake.fire_steelsight_multiplier = -1.1
+	
+	self.pl14.damage_near = 10
+	self.pl14.damage_far = 50
+	self.pl14.damage_min = 1.35
+		
+	self.pl14.stats.damage = 14
+	self.pl14.stats.spread = 72
+	self.pl14.stats.recoil = 77
+	self.pl14.stats.suppression = 16
+	
+	
+	
 	--[[     Bardoda     ]]--
 	self.b92fs.ADS_TIMER = 0.100
 	
@@ -1817,14 +2108,14 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.b92fs.spread.standing = 0.95
 	self.b92fs.spread.crouching = 0.75
 	self.b92fs.spread.steelsight = 0.1
-	self.b92fs.spread.moving_standing = self.b92fs.spread.standing * 1.4
-	self.b92fs.spread.moving_crouching = self.b92fs.spread.crouching * 1.4
-	self.b92fs.spread.moving_steelsight = self.b92fs.spread.steelsight * 1.4
+	self.b92fs.spread.moving_standing = self.b92fs.spread.standing * 1.3
+	self.b92fs.spread.moving_crouching = self.b92fs.spread.crouching * 1.3
+	self.b92fs.spread.moving_steelsight = self.b92fs.spread.steelsight * 1.3
 	
 	self.b92fs.fire_mode_data.fire_rate = 0.1
 	
-	self.b92fs.shake.fire_multiplier = 1
-	self.b92fs.shake.fire_steelsight_multiplier = -1
+	self.b92fs.shake.fire_multiplier = 0.85
+	self.b92fs.shake.fire_steelsight_multiplier = -0.85
 	
 	self.b92fs.damage_near = 11
 	self.b92fs.damage_far = 42
@@ -1838,7 +2129,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		
 	
 	--[[     Revy     ]]--
-	self.x_b92fs.ADS_TIMER = 0.150
+	self.x_b92fs.ADS_TIMER = 0.100 * 1.5
 	
 	self.x_b92fs.kick.standing = {0.45, 0.25, -0.15, 0.15}
 	self.x_b92fs.kick.crouching = self.x_b92fs.kick.standing
@@ -1846,19 +2137,19 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.x_b92fs.CLIP_AMMO_MAX = 15 * 2
 	
-	self.x_b92fs.spread.standing = 0.95 * 1
-	self.x_b92fs.spread.crouching = 0.75 * 1
-	self.x_b92fs.spread.steelsight = 0.1 * 1
-	self.x_b92fs.spread.moving_standing = self.x_b92fs.spread.standing * 1.4
-	self.x_b92fs.spread.moving_crouching = self.x_b92fs.spread.crouching * 1.4
-	self.x_b92fs.spread.moving_steelsight = self.x_b92fs.spread.steelsight * 1.4
+	self.x_b92fs.spread.standing = 0.95
+	self.x_b92fs.spread.crouching = 0.75
+	self.x_b92fs.spread.steelsight = 0.2
+	self.x_b92fs.spread.moving_standing = self.x_b92fs.spread.standing * 1.3
+	self.x_b92fs.spread.moving_crouching = self.x_b92fs.spread.crouching * 1.3
+	self.x_b92fs.spread.moving_steelsight = self.x_b92fs.spread.steelsight * 1.3
 	
 	self.x_b92fs.always_hipfire = true
 	
-	self.x_b92fs.fire_mode_data.fire_rate = 0.1 / 1.5
+	self.x_b92fs.fire_mode_data.fire_rate = 0.1 / 1.25
 	
-	self.x_b92fs.shake.fire_multiplier = 1.3
-	self.x_b92fs.shake.fire_steelsight_multiplier = -1.3
+	self.x_b92fs.shake.fire_multiplier = 1.2
+	self.x_b92fs.shake.fire_steelsight_multiplier = -1.2
 	
 	self.x_b92fs.damage_near = 11
 	self.x_b92fs.damage_far = 42
@@ -1892,8 +2183,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.sparrow.armor_piercing_chance = 0.1
 	
-	self.sparrow.shake.fire_multiplier = 1.2
-	self.sparrow.shake.fire_steelsight_multiplier = -1.2
+	self.sparrow.shake.fire_multiplier = 1
+	self.sparrow.shake.fire_steelsight_multiplier = -1
 	
 	self.sparrow.damage_near = 8
 	self.sparrow.damage_far = 40
@@ -1923,8 +2214,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.g26.CLIP_AMMO_MAX = 10
 		
-	self.g26.shake.fire_multiplier = 0.8
-	self.g26.shake.fire_steelsight_multiplier = -0.8
+	self.g26.shake.fire_multiplier = 0.6
+	self.g26.shake.fire_steelsight_multiplier = -0.6
 	
 	self.g26.fire_mode_data.fire_rate = 0.09009009009009009009009009009009
 	
@@ -1940,15 +2231,15 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     Akimbo Glocknades     ]]--
-	self.jowi.ADS_TIMER = 0.1275
+	self.jowi.ADS_TIMER = 0.085 * 1.5
 	
 	self.jowi.kick.standing = {0.4, -0.1, -0.25, 0.25}
 	self.jowi.kick.crouching = self.jowi.kick.standing
 	self.jowi.kick.steelsight = self.jowi.kick.standing
 	
-	self.jowi.spread.standing = 0.4 * 1
-	self.jowi.spread.crouching = 0.35 * 1
-	self.jowi.spread.steelsight = 0.1 * 1
+	self.jowi.spread.standing = 0.4
+	self.jowi.spread.crouching = 0.35
+	self.jowi.spread.steelsight = 0.1
 	self.jowi.spread.moving_standing = self.jowi.spread.standing * 1.1
 	self.jowi.spread.moving_crouching = self.jowi.spread.crouching * 1.1
 	self.jowi.spread.moving_steelsight = self.jowi.spread.steelsight * 1.1
@@ -1957,12 +2248,12 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.jowi.reload_speed_mult = 1.1
 	
-	self.jowi.shake.fire_multiplier = 1.1
-	self.jowi.shake.fire_steelsight_multiplier = 1.1
+	self.jowi.shake.fire_multiplier = 0.9
+	self.jowi.shake.fire_steelsight_multiplier = -0.9
 	
 	self.jowi.always_hipfire = true
 	
-	self.jowi.fire_mode_data.fire_rate = 0.09009009009009009009009009009009 / 1.5
+	self.jowi.fire_mode_data.fire_rate = 0.09009009009009009009009009009009 / 1.25
 	
 	self.jowi.damage_near = 12
 	self.jowi.damage_far = 34
@@ -2030,7 +2321,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.g22c.CLIP_AMMO_MAX = 15
 	
-	self.g22c.fire_mode_data.fire_rate = 0.10344827586206896551724137931034
+	self.g22c.fire_mode_data.fire_rate = 0.10909090909090909090909090909091
 	
 	self.g22c.shake.fire_multiplier = 1
 	self.g22c.shake.fire_steelsight_multiplier = -1
@@ -2049,15 +2340,15 @@ function WeaponTweakData:_init_new_weapons(...)
 		
 	
 	--[[     Akimbo Grenade 22C     ]]--
-	self.x_g22c.ADS_TIMER = 0.165
+	self.x_g22c.ADS_TIMER = 0.110 * 1.5
 	
 	self.x_g22c.kick.standing = { 0.25, -0.15, -0.3, 0.3 }
 	self.x_g22c.kick.crouching = self.x_g22c.kick.standing
 	self.x_g22c.kick.steelsight = self.x_g22c.kick.standing
 	
-	self.x_g22c.spread.standing = 1.05 * 1
-	self.x_g22c.spread.crouching = 0.7 * 1
-	self.x_g22c.spread.steelsight = 0.1 * 1
+	self.x_g22c.spread.standing = 1.05
+	self.x_g22c.spread.crouching = 0.7
+	self.x_g22c.spread.steelsight = 0.2
 	self.x_g22c.spread.moving_standing = self.x_g22c.spread.standing * 1.15
 	self.x_g22c.spread.moving_crouching = self.x_g22c.spread.crouching * 1.15
 	self.x_g22c.spread.moving_steelsight = self.x_g22c.spread.steelsight * 1.15
@@ -2066,7 +2357,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.x_g22c.always_hipfire = true
 	
-	self.x_g22c.fire_mode_data.fire_rate = 0.10344827586206896551724137931034 / 1.5
+	self.x_g22c.fire_mode_data.fire_rate = 0.10909090909090909090909090909091 / 1.25
 	
 	self.x_g22c.shake.fire_multiplier = 1
 	self.x_g22c.shake.fire_steelsight_multiplier = -1
@@ -2100,7 +2391,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.p226.spread.moving_crouching = self.p226.spread.crouching * 1.25
 	self.p226.spread.moving_steelsight = self.p226.spread.steelsight * 1.25
 	
-	self.p226.fire_mode_data.fire_rate = 0.11111111111111111111111111111111
+	self.p226.fire_mode_data.fire_rate = 0.11320754716981132075471698113208
 	
 	self.p226.CLIP_AMMO_MAX = 13
 	
@@ -2182,7 +2473,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.colt_1911.shake.fire_steelsight_multiplier = -1.5
 	
 	self.colt_1911.damage_near = 12
-	self.colt_1911.damage_far = 54
+	self.colt_1911.damage_far = 50
 	self.colt_1911.damage_min = 1.65
 	
 	self.colt_1911.stats.damage = 20
@@ -2193,22 +2484,22 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     DOUBLE THE STOPPAN POWAH     ]]--
-	self.x_1911.ADS_TIMER = 0.180
+	self.x_1911.ADS_TIMER = 0.120 * 1.5
 	
 	self.x_1911.kick.standing = { 0.3, 0.15, -0.275, 0.275 }
 	self.x_1911.kick.crouching = self.x_1911.kick.standing
 	self.x_1911.kick.steelsight = self.x_1911.kick.standing
 	
-	self.x_1911.spread.standing = 0.65 * 1
-	self.x_1911.spread.crouching = 0.5 * 1
-	self.x_1911.spread.steelsight = 0.1 * 1
+	self.x_1911.spread.standing = 0.65
+	self.x_1911.spread.crouching = 0.5
+	self.x_1911.spread.steelsight = 0.2
 	self.x_1911.spread.moving_standing = self.x_1911.spread.standing * 1.1
 	self.x_1911.spread.moving_crouching = self.x_1911.spread.crouching * 1.1
 	self.x_1911.spread.moving_steelsight = self.x_1911.spread.steelsight * 1.1
 	
 	self.x_1911.CLIP_AMMO_MAX = 8 * 2
 	
-	self.x_1911.fire_mode_data.fire_rate = 0.13186813186813186813186813186813 / 1.5
+	self.x_1911.fire_mode_data.fire_rate = 0.13186813186813186813186813186813 / 1.25
 	
 	self.x_1911.always_hipfire = true
 	
@@ -2218,7 +2509,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.x_1911.shake.fire_steelsight_multiplier = 1.6
 	
 	self.x_1911.damage_near = 12
-	self.x_1911.damage_far = 54
+	self.x_1911.damage_far = 50
 	self.x_1911.damage_min = 1.65
 	
 	self.x_1911.stats.damage = 20
@@ -2264,23 +2555,23 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.usp.stats.suppression = 10
 	
 	--[[     AKIMBO USP     ]]--
-	self.x_usp.ADS_TIMER = 0.180
+	self.x_usp.ADS_TIMER = 0.120 * 1.5
 	self.x_usp.reload_speed_mult = 0.9
 	
 	self.x_usp.kick.standing = { 0.35, 0.2, -0.225, 0.225 }
 	self.x_usp.kick.crouching = self.x_usp.kick.standing
 	self.x_usp.kick.steelsight = self.x_usp.kick.standing
 	
-	self.x_usp.spread.standing = 0.85 * 1
-	self.x_usp.spread.crouching = 0.7 * 1
-	self.x_usp.spread.steelsight = 0.1 * 1
+	self.x_usp.spread.standing = 0.85
+	self.x_usp.spread.crouching = 0.7
+	self.x_usp.spread.steelsight = 0.2
 	self.x_usp.spread.moving_standing = self.x_usp.spread.standing * 1.3
 	self.x_usp.spread.moving_crouching = self.x_usp.spread.crouching * 1.3
 	self.x_usp.spread.moving_steelsight = self.x_usp.spread.steelsight * 1.3
 	
 	self.x_usp.CLIP_AMMO_MAX = 12 * 2
 	
-	self.x_usp.fire_mode_data.fire_rate = 0.14117647058823529411764705882353 / 1.5
+	self.x_usp.fire_mode_data.fire_rate = 0.14117647058823529411764705882353 / 1.25
 	
 	self.x_usp.always_hipfire = true
 	
@@ -2302,6 +2593,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	--[[     C Nien-ty Six     ]]--	
 	self.c96.ADS_TIMER = 0.120
+	self.c96.reload_speed_mult = 1.1
 	
 	self.c96.kick.standing = { 0.6, 0.45, -0.225, 0.225 }
 	self.c96.kick.crouching = self.c96.kick.standing
@@ -2321,19 +2613,19 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.c96.shake.fire_multiplier = 1.3
 	self.c96.shake.fire_steelsight_multiplier = -1.3
 	
-	self.c96.damage_near = 10
+	self.c96.damage_near = 14
 	self.c96.damage_far = 60
 	self.c96.damage_min = 1.8
 		
 	self.c96.stats.damage = 20
 	self.c96.stats.spread = 71
-	self.c96.stats.recoil = 45
+	self.c96.stats.recoil = 49
 	self.c96.stats.suppression = 11
 	
 	
 	
 	--[[     TOGUSA     ]]--
-	self.mateba.sub_category = "revolvo"
+	self.mateba.recategorize = "revolvo"
 	
 	self.mateba.ADS_TIMER = 0.150
 	
@@ -2364,11 +2656,11 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.mateba.stats.damage = 36
 	self.mateba.stats.spread = 68
-	self.mateba.stats.recoil = 39
+	self.mateba.stats.recoil = 36
 	self.mateba.stats.suppression = 9
 	
 	--[[     HUEHUEHUEHUEHUE     ]]--
-	self.new_raging_bull.sub_category = "revolvo"
+	self.new_raging_bull.recategorize = "revolvo"
 	
 	self.new_raging_bull.ADS_TIMER = 0.180
 	
@@ -2400,13 +2692,13 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.new_raging_bull.stats.damage = 48
 	self.new_raging_bull.stats.spread = 76
-	self.new_raging_bull.stats.recoil = 21
+	self.new_raging_bull.stats.recoil = 19
 	self.new_raging_bull.stats.suppression = 6
 	
 	
 	
 	--[[     REVOLVER OCELOT     ]]--
-	self.peacemaker.sub_category = "revolvo" --ocelot
+	self.peacemaker.recategorize = "revolvo" --ocelot
 	
 	self.peacemaker.ADS_TIMER = 0.200
 	
@@ -2453,7 +2745,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.deagle.kick.steelsight = self.deagle.kick.standing
 	
 	self.deagle.spread.standing = 1.4
-	self.deagle.spread.crouching = 1
+	self.deagle.spread.crouching = 1.2
 	self.deagle.spread.steelsight = 0.1
 	self.deagle.spread.moving_standing = self.deagle.spread.standing * 1.35
 	self.deagle.spread.moving_crouching = self.deagle.spread.crouching * 1.35
@@ -2486,19 +2778,19 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     DUAL FAMAS     ]]--
-	self.x_deagle.ADS_TIMER = 0.225
+	self.x_deagle.ADS_TIMER = 0.225 * 1.5
 	
 	self.x_deagle.kick.standing = { 0.3, 0.7, -0.5, 0.5 }
 	self.x_deagle.kick.crouching = self.x_deagle.kick.standing
 	self.x_deagle.kick.steelsight = self.x_deagle.kick.standing
 	
-	self.x_deagle.spread.standing = 1.4 * 1
-	self.x_deagle.spread.crouching = 1 * 1
-	self.x_deagle.spread.steelsight = 0.1 * 1
+	self.x_deagle.spread.standing = 1.4
+	self.x_deagle.spread.crouching = 1.2
+	self.x_deagle.spread.steelsight = 0.2
 	self.x_deagle.spread.moving_standing = self.x_deagle.spread.standing * 1.35
 	self.x_deagle.spread.moving_crouching = self.x_deagle.spread.crouching * 1.35
 	self.x_deagle.spread.moving_steelsight = self.x_deagle.spread.steelsight * 1.35
-	
+		
 	self.x_deagle.CLIP_AMMO_MAX = 7 * 2
 	
 	self.x_deagle.muzzleflash = "effects/payday2/particles/weapons/big_762_auto_fps"
@@ -2506,7 +2798,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.x_deagle.shake.fire_multiplier = 4.2
 	self.x_deagle.shake.fire_steelsight_multiplier = 4.2
 	
-	self.x_deagle.fire_mode_data.fire_rate = 0.3 / 1.5
+	self.x_deagle.fire_mode_data.fire_rate = 0.3 / 1.25
 	
 	self.x_deagle.armor_piercing_chance = 0.2
 	
@@ -2532,7 +2824,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	--[[     JUDY     ]]--
 	self.judge.ADS_TIMER = 0.180
 	
-	self.judge.sub_category = "revolvo"
+	self.judge.recategorize = "revolvo"
 	
 	self.judge.kick.standing = {0.52, 0.68, -0.4, 0.4 }
 	self.judge.kick.crouching = self.judge.kick.standing
@@ -2567,7 +2859,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		
 	self.judge.stats.damage = 36
 	self.judge.stats.spread = 46
-	self.judge.stats.recoil = 41
+	self.judge.stats.recoil = 34
 	self.judge.stats.suppression = 4
 	
 	if DMCWO.judge_pistol == true then
@@ -2583,6 +2875,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	--{
 	--[[     GLORIOUS CZECHNOLOGY     ]]--
 	self.scorpion.ADS_TIMER = 0.150
+	self.scorpion.reload_speed_mult = 1.2
 	
 	self.scorpion.kick.standing = { 0.3, -0.15, -0.275, 0.275 }
 	self.scorpion.kick.crouching = self.scorpion.kick.standing
@@ -2614,7 +2907,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	--[[     Loli no pantsu     ]]--
 	self.mp9.ADS_TIMER = 0.150
 	
-	self.mp9.sub_category = "mach_pis"
+	self.mp9.recategorize = "mach_pis"
 	
 	self.mp9.kick.standing = {-0.2, 0.3, -0.25, 0.25 }
 	self.mp9.kick.crouching = self.mp9.kick.standing
@@ -2647,6 +2940,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	--[[     I'd G3's little sister     ]]--
 	self.new_mp5.ADS_TIMER = 0.160
+	self.new_mp5.reload_speed_mult = 1.05
 	
 	self.new_mp5.kick.standing = {0.35, -0.15, -0.25, 0.25 }
 	self.new_mp5.kick.crouching = self.new_mp5.kick.standing
@@ -2698,8 +2992,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m45.damage_min = 1.4
 	
 	self.m45.stats.damage = 16
-	self.m45.stats.spread = 63
-	self.m45.stats.recoil = 81
+	self.m45.stats.spread = 59
+	self.m45.stats.recoil = 86
 	self.m45.stats.suppression = 14
 	
 	
@@ -2730,7 +3024,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.uzi.stats.damage = 16
 	self.uzi.stats.spread = 61
-	self.uzi.stats.recoil = 86
+	self.uzi.stats.recoil = 81
 	self.uzi.stats.suppression = 14
 	
 	
@@ -2738,7 +3032,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	--[[     (9) BALL     ]]--
 	self.baka.ADS_TIMER = 0.150
 	
-	self.baka.sub_category = "mach_pis"
+	self.baka.recategorize = "mach_pis"
 	
 	self.baka.kick.standing = { 0.05, 0.35, -0.3, 0.3 }
 	self.baka.kick.crouching = self.baka.kick.standing
@@ -2756,14 +3050,15 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.baka.damage_min = 1.25
 	
 	self.baka.stats.damage = 16
-	self.baka.stats.spread = 59
-	self.baka.stats.recoil = 62
+	self.baka.stats.spread = 55
+	self.baka.stats.recoil = 61
 	self.baka.stats.suppression = 10
 	
 	
 	
 	--[[     Star Wars     ]]--
 	self.sterling.ADS_TIMER = 0.170
+	self.sterling.no_auto_anims = true
 	
 	self.sterling.kick.standing = { -0.25, 0.55, -0.1, 0.1 }
 	self.sterling.kick.crouching = self.sterling.kick.standing
@@ -2790,10 +3085,11 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     M10's littler sister     ]]--
-	self.cobray.sub_category = "mach_pis"
+	self.cobray.recategorize = "mach_pis"
+	--self.cobray.no_auto_anims = true
 	
 	self.cobray.ADS_TIMER = 0.170
-	self.cobray.reload_speed_mult = 1.1
+	self.cobray.reload_speed_mult = 1.125
 	
 	self.cobray.kick.standing = { -0.05, 0.45, -0.25, 0.25 }
 	self.cobray.kick.crouching = self.cobray.kick.standing
@@ -2821,7 +3117,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     ILIKESHOOTINGTHINGSREALLYREALLYFASTFASTERTHANSANICAMITOOFASTFORYOUTOOBADDEALWITHIT     ]]--
-	self.mac10.sub_category = "mach_pis"
+	self.mac10.recategorize = "mach_pis"
+	--self.mac10.no_auto_anims = true
 	
 	self.mac10.ADS_TIMER = 0.170
 	
@@ -2841,7 +3138,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.mac10.fire_mode_data.fire_rate = 0.0521739130434
 	
-	self.mac10.armor_piercing_chance = 0.1
+	self.mac10.armor_piercing_chance = 0.05
 	
 	self.mac10.CLIP_AMMO_MAX = 20
 	
@@ -2876,9 +3173,11 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.polymer.reload_speed_mult = 0.85
 	
-	self.polymer.armor_piercing_chance = 0.1
+	self.polymer.armor_piercing_chance = 0.05
 	
 	self.polymer.BURST_FIRE = 2
+	self.polymer.BURST_FIRE_RATE_MULTIPLIER = 1.1
+	self.polymer.BURST_DELAY = 0.05
 	
 	self.polymer.CLIP_AMMO_MAX = 25
 	
@@ -2891,7 +3190,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.polymer.stats.damage = 22
 	self.polymer.stats.spread = 61
-	self.polymer.stats.recoil = 76
+	self.polymer.stats.recoil = 75
 	self.polymer.stats.suppression = 9
 		
 	
@@ -2912,10 +3211,10 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.m1928.sounds.enter_steelsight = "primary_steel_sight_enter"
 	self.m1928.sounds.leave_steelsight = "primary_steel_sight_exit"
-	
+		
 	self.m1928.fire_mode_data.fire_rate = 0.08571428571428571428571428571429
 	
-	self.m1928.armor_piercing_chance = 0.1
+	self.m1928.armor_piercing_chance = 0.05
 	
 	self.m1928.CLIP_AMMO_MAX = 50
 	
@@ -2924,7 +3223,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.m1928.damage_near = 13
 	self.m1928.damage_far = 67.5
-	self.m1928.damage_min = 1.7
+	self.m1928.damage_min = 1.8
 	
 	self.m1928.stats.damage = 22
 	self.m1928.stats.spread = 65
@@ -2933,11 +3232,11 @@ function WeaponTweakData:_init_new_weapons(...)
 	--}
 	
 	
-		
+	
 	-----------------------[[PDWS]]-----------------------
 	--{
 	--[[     I'd this little sister too (I'd all the H&K gun girls tbh)     ]]--
-	self.mp7.sub_category = "pdw"
+	self.mp7.recategorize = "pdw"
 	self.mp7.ADS_TIMER = 0.190
 	self.mp7.reload_speed_mult = 1.15
 	
@@ -2945,12 +3244,12 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.mp7.kick.crouching = self.mp7.kick.standing
 	self.mp7.kick.steelsight = self.mp7.kick.standing
 	
-	self.mp7.spread.standing = 1.1
-	self.mp7.spread.crouching = 0.6
+	self.mp7.spread.standing = 1.0
+	self.mp7.spread.crouching = 0.75
 	self.mp7.spread.steelsight = 0.1
-	self.mp7.spread.moving_standing = self.mp7.spread.standing * 1.15
-	self.mp7.spread.moving_crouching = self.mp7.spread.crouching * 1.15
-	self.mp7.spread.moving_steelsight = self.mp7.spread.steelsight * 1.15
+	self.mp7.spread.moving_standing = self.mp7.spread.standing * 1.1
+	self.mp7.spread.moving_crouching = self.mp7.spread.crouching * 1.1
+	self.mp7.spread.moving_steelsight = self.mp7.spread.steelsight * 1.1
 	
 	self.mp7.armor_piercing_chance = 0.45
 	
@@ -2973,7 +3272,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     Overpriced .22LR     ]]--
-	self.p90.sub_category = "pdw"
+	self.p90.recategorize = "pdw"
 	
 	self.p90.reload_speed_mult = 0.70
 	self.p90.ADS_TIMER = 0.170
@@ -2982,30 +3281,100 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.p90.kick.crouching = self.p90.kick.standing
 	self.p90.kick.steelsight = self.p90.kick.standing
 	
-	self.p90.spread.standing = 1.0
-	self.p90.spread.crouching = 0.5
+	self.p90.spread.standing = 0.8
+	self.p90.spread.crouching = 0.6
 	self.p90.spread.steelsight = 0.1
-	self.p90.spread.moving_standing = self.p90.spread.standing * 1.1
-	self.p90.spread.moving_crouching = self.p90.spread.crouching * 1.1
-	self.p90.spread.moving_steelsight = self.p90.spread.steelsight * 1.1
+	self.p90.spread.moving_standing = self.p90.spread.standing * 1.075
+	self.p90.spread.moving_crouching = self.p90.spread.crouching * 1.075
+	self.p90.spread.moving_steelsight = self.p90.spread.steelsight * 1.075
 	
 	self.p90.armor_piercing_chance = 0.5
 	
-	self.p90.fire_mode_data.fire_rate = 0.066666666666
+	self.p90.fire_mode_data.fire_rate = 0.06666666666666666666666666666667
 	
 	self.p90.shake.fire_multiplier = 0.57
 	self.p90.shake.fire_steelsight_multiplier = -0.57
 	
 	self.p90.CLIP_AMMO_MAX = 50
 	
-	self.p90.damage_near = 22
-	self.p90.damage_far = 80
+	self.p90.damage_near = 20
+	self.p90.damage_far = 85
 	self.p90.damage_min = 2.0
 	
 	self.p90.stats.damage = 13
 	self.p90.stats.spread = 79
 	self.p90.stats.recoil = 81
 	self.p90.stats.suppression = 13
+	
+	
+	
+	--[[     Saint's Row 2     ]]--
+	self.sr2.recategorize = "pdw"
+	self.sr2.ADS_TIMER = 0.180
+	self.sr2.reload_speed_mult = 1.05
+	
+	self.sr2.kick.standing = { -0.1, 0.4, -0.15, 0.35 }
+	self.sr2.kick.crouching = self.sr2.kick.standing
+	self.sr2.kick.steelsight = self.sr2.kick.standing
+	
+	self.sr2.spread.standing = 1.1
+	self.sr2.spread.crouching = 0.8
+	self.sr2.spread.steelsight = 0.1
+	self.sr2.spread.moving_standing = self.sr2.spread.standing * 1.15
+	self.sr2.spread.moving_crouching = self.sr2.spread.crouching * 1.15
+	self.sr2.spread.moving_steelsight = self.sr2.spread.steelsight * 1.15
+	
+	self.sr2.shake.fire_multiplier = 0.8
+	self.sr2.shake.fire_steelsight_multiplier = -0.8
+	
+	self.sr2.fire_mode_data.fire_rate = 0.06666666666666666666666666666667
+	
+	self.sr2.armor_piercing_chance = 0.10
+	
+	self.sr2.CLIP_AMMO_MAX = 30
+	
+	self.sr2.damage_near = 5
+	self.sr2.damage_far = 50
+	self.sr2.damage_min = 1.25
+	
+	self.sr2.stats.damage = 16
+	self.sr2.stats.spread = 65
+	self.sr2.stats.recoil = 78
+	self.sr2.stats.suppression = 14
+	--Akimbo'd
+	self.x_sr2.ADS_TIMER = 0.180 * 1.5
+	self.x_sr2.reload_speed_mult = 0.8
+	self.x_sr2.force_burst = true
+	self.x_sr2.no_singlefire_anim = true
+	
+	self.x_sr2.kick.standing = { -0.1, 0.4, -0.15, 0.35 }
+	self.x_sr2.kick.crouching = self.x_sr2.kick.standing
+	self.x_sr2.kick.steelsight = self.x_sr2.kick.standing
+	
+	self.x_sr2.spread.standing = 1.1
+	self.x_sr2.spread.crouching = 0.8
+	self.x_sr2.spread.steelsight = 0.2
+	self.x_sr2.spread.moving_standing = self.x_sr2.spread.standing * 1.15
+	self.x_sr2.spread.moving_crouching = self.x_sr2.spread.crouching * 1.15
+	self.x_sr2.spread.moving_steelsight = self.x_sr2.spread.steelsight * 1.15
+	
+	self.x_sr2.shake.fire_multiplier = 0.8
+	self.x_sr2.shake.fire_steelsight_multiplier = -0.8
+	
+	self.x_sr2.fire_mode_data.fire_rate = 0.06666666666666666666666666666667 / 2
+	
+	self.x_sr2.armor_piercing_chance = 0.10
+	
+	self.x_sr2.CLIP_AMMO_MAX = 30 * 2
+	
+	self.x_sr2.damage_near = 5
+	self.x_sr2.damage_far = 50
+	self.x_sr2.damage_min = 1.25
+	
+	self.x_sr2.stats.damage = 16
+	self.x_sr2.stats.spread = 51
+	self.x_sr2.stats.recoil = 61
+	self.x_sr2.stats.suppression = 14
 	--}
 	
 		
@@ -3014,7 +3383,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	--{
 	--[[     I'm Special     ]]--
 	self.olympic.category = "assault_rifle"
-	self.olympic.sub_category = "carbine"
+	self.olympic.recategorize = "carbine"
 	
 	self.olympic.ADS_TIMER = 0.210
 	
@@ -3039,7 +3408,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.olympic.damage_near = 10
 	self.olympic.damage_far = 67.5
-	self.olympic.damage_min = 2.15
+	self.olympic.damage_min = 2.25
 	
 	self.olympic.stats.damage = 16
 	self.olympic.stats.spread = 61
@@ -3050,7 +3419,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	--[[     Krink     ]]--
 	self.akmsu.category = "assault_rifle"
-	self.akmsu.sub_category = "carbine"
+	self.akmsu.recategorize = "carbine"
 	
 	self.akmsu.ADS_TIMER = 0.220
 	
@@ -3073,18 +3442,18 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.akmsu.damage_near = 12
 	self.akmsu.damage_far = 70
-	self.akmsu.damage_min = 3.65
+	self.akmsu.damage_min = 3.5
 	
 	self.akmsu.stats.damage = 24
 	self.akmsu.stats.spread = 65
-	self.akmsu.stats.recoil = 68
+	self.akmsu.stats.recoil = 64
 	self.akmsu.stats.suppression = 9
 	
 	
 	
 	--[[     SUBMARINE 2000     ]]--
 	self.sub2000.category = "pistol"
-	self.sub2000.sub_category = "carbine"
+	self.sub2000.recategorize = "carbine"
 	
 	self.sub2000.ADS_TIMER = 0.200
 	
@@ -3116,7 +3485,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     Heat     ]]--
-	self.amcar.sub_category = "carbine"
+	self.amcar.recategorize = "carbine"
 	
 	self.amcar.ADS_TIMER = 0.220
 	
@@ -3142,7 +3511,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.amcar.damage_near = 11
 	self.amcar.damage_far = 68
-	self.amcar.damage_min = 2.25
+	self.amcar.damage_min = 2.5
 	
 	self.amcar.stats.damage = 16
 	self.amcar.stats.spread = 71
@@ -3153,7 +3522,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     Meltgun     ]]--
-	self.g36.sub_category = "carbine"
+	self.g36.recategorize = "carbine"
 	
 	self.g36.ADS_TIMER = 0.210
 	
@@ -3180,7 +3549,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.g36.damage_near = 13
 	self.g36.damage_far = 72
-	self.g36.damage_min = 2.4
+	self.g36.damage_min = 2.5
 	
 	self.g36.stats.damage = 16
 	self.g36.stats.spread = 75
@@ -3190,11 +3559,11 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     Shigu     ]]--
-	self.s552.sub_category = "carbine"
+	self.s552.recategorize = "carbine"
 	
 	self.s552.ADS_TIMER = 0.225
 	
-	self.s552.kick.standing = {0.6, -0.225, -0.3375, 0.3375}
+	self.s552.kick.standing = {0.575, -0.25, -0.3375, 0.3375}
 	self.s552.kick.crouching = self.s552.kick.standing
 	self.s552.kick.steelsight = self.s552.kick.standing
 	
@@ -3219,11 +3588,11 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.s552.damage_near = 16
 	self.s552.damage_far = 78
-	self.s552.damage_min = 2.6
+	self.s552.damage_min = 2.75
 	
 	self.s552.stats.damage = 16
 	self.s552.stats.spread = 78
-	self.s552.stats.recoil = 71
+	self.s552.stats.recoil = 72
 	self.s552.stats.suppression = 9
 		--}
 	
@@ -3255,6 +3624,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.famas.BURST_FIRE = 3
 	self.famas.BURST_FIRE_RATE_MULTIPLIER = 1.1
+	self.famas.BURST_DELAY = 0.1
 	
 	self.famas.shake.fire_multiplier = 0.9
 	self.famas.shake.fire_steelsight_multiplier = -0.9
@@ -3265,7 +3635,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.famas.stats.damage = 17
 	self.famas.stats.spread = 79
-	self.famas.stats.recoil = 68
+	self.famas.stats.recoil = 70
 	self.famas.stats.suppression = 10
 		
 	
@@ -3273,6 +3643,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	--[[     Rewinding [<<]    ]]--
 	self.vhs.ads_sms = 0.80
 	self.vhs.ADS_TIMER = 0.230
+	self.vhs.reload_speed_mult = 1.1
 	
 	self.vhs.kick.standing = { -0.30, 0.50, -0.35, 0.35 }
 	self.vhs.kick.crouching = self.vhs.kick.standing
@@ -3289,9 +3660,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.vhs.sounds.leave_steelsight = "secondary_steel_sight_exit"
 	
 	self.vhs.CLIP_AMMO_MAX = 30
-	
-	self.vhs.reload_speed_mult = 1.1
-	
+		
 	self.vhs.fire_mode_data.fire_rate = 0.07228915662650602409638554216867	
 	
 	self.vhs.armor_piercing_chance = 0.075
@@ -3312,7 +3681,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	--[[     Safety pins     ]]--
 	self.new_m4.ads_sms = 0.80
-	self.new_m4.ADS_TIMER = 0.250
+	self.new_m4.ADS_TIMER = 0.245
 	
 	self.new_m4.kick.standing = { -0.125, 0.525, -0.425, 0.425}
 	self.new_m4.kick.crouching = self.new_m4.kick.standing
@@ -3320,12 +3689,12 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.new_m4.NO_RESET_BURST = true
 	
-	self.new_m4.spread.standing = 2.3
+	self.new_m4.spread.standing = 2.2
 	self.new_m4.spread.crouching = 2
 	self.new_m4.spread.steelsight = 0.1
-	self.new_m4.spread.moving_standing = self.new_m4.spread.standing * 1.2
-	self.new_m4.spread.moving_crouching = self.new_m4.spread.standing * 1.2
-	self.new_m4.spread.moving_steelsight = self.new_m4.spread.steelsight * 1.2
+	self.new_m4.spread.moving_standing = self.new_m4.spread.standing * 1.175
+	self.new_m4.spread.moving_crouching = self.new_m4.spread.standing * 1.175
+	self.new_m4.spread.moving_steelsight = self.new_m4.spread.steelsight * 1.175
 	
 	self.new_m4.fire_mode_data.fire_rate = 0.08571428571428571428571428571429
 	
@@ -3333,23 +3702,23 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.new_m4.timers.reload_not_empty = 2.5
 	
-	self.new_m4.shake.fire_multiplier = 0.7
-	self.new_m4.shake.fire_steelsight_multiplier = -0.7
+	self.new_m4.shake.fire_multiplier = 0.6
+	self.new_m4.shake.fire_steelsight_multiplier = -0.6
 	
 	self.new_m4.damage_near = 15
 	self.new_m4.damage_far = 72
 	self.new_m4.damage_min = 2.75
 	
 	self.new_m4.stats.damage = 17
-	self.new_m4.stats.spread = 72
-	self.new_m4.stats.recoil = 81
+	self.new_m4.stats.spread = 73
+	self.new_m4.stats.recoil = 83
 	self.new_m4.stats.suppression = 10
 	
 	
 	
 	--[[     Ichiroku     ]]--
 	self.m16.ads_sms = 0.80
-	self.m16.ADS_TIMER = 0.255
+	self.m16.ADS_TIMER = 0.260
 	
 	self.m16.NO_RESET_BURST = true
 	
@@ -3360,7 +3729,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m16.spread.moving_crouching = self.m16.spread.crouching * 1.275
 	self.m16.spread.moving_steelsight = self.m16.spread.steelsight * 1.275
 	
-	self.m16.kick.standing = { 0.075, 0.525, -0.45, 0.45}
+	self.m16.kick.standing = { -0.075, 0.525, -0.45, 0.45}
 	self.m16.kick.crouching = self.m16.kick.standing
 	self.m16.kick.steelsight = self.m16.kick.standing
 	
@@ -3379,7 +3748,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.m16.stats.damage = 18
 	self.m16.stats.spread = 82
-	self.m16.stats.recoil = 71
+	self.m16.stats.recoil = 73
 	self.m16.stats.suppression = 10
 	
 	
@@ -3388,7 +3757,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.aug.ads_sms = 0.80
 	self.aug.ADS_TIMER = 0.225
 	
-	self.aug.kick.standing = {0.45, 0.3, -0.3375, 0.3375}
+	self.aug.kick.standing = {0.625, -0.2, -0.325, 0.35}
 	self.aug.kick.crouching = self.aug.kick.standing
 	self.aug.kick.steelsight = self.aug.kick.standing
 	
@@ -3417,7 +3786,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.aug.stats.damage = 18
 	self.aug.stats.spread = 84
-	self.aug.stats.recoil = 71
+	self.aug.stats.recoil = 73
 	self.aug.stats.suppression = 10
 		
 	
@@ -3425,6 +3794,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	--[[     Close enough to being Funco     ]]--
 	self.ak5.ads_sms = 0.80
 	self.ak5.ADS_TIMER = 0.260
+	self.ak5.reload_speed_mult = 0.9
 	
 	self.ak5.kick.standing = { 0.4125, -0.1875, -0.45, 0.45 }
 	self.ak5.kick.crouching = self.ak5.kick.standing
@@ -3484,7 +3854,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.l85a2.damage_near = 20
 	self.l85a2.damage_far = 100
-	self.l85a2.damage_min = 3.0
+	self.l85a2.damage_min = 2.75
 	
 	self.l85a2.stats.damage = 17
 	self.l85a2.stats.spread = 85
@@ -3517,11 +3887,11 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.ak74.damage_near = 15
 	self.ak74.damage_far = 82.5
-	self.ak74.damage_min = 3.625
+	self.ak74.damage_min = 3.5
 	
 	self.ak74.stats.damage = 19
 	self.ak74.stats.spread = 74
-	self.ak74.stats.recoil = 72
+	self.ak74.stats.recoil = 71
 	self.ak74.stats.suppression = 9
 	
 	
@@ -3547,13 +3917,13 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.asval.shake.fire_multiplier = 0.7
 	self.asval.shake.fire_steelsight_multiplier = -0.7
 	
-	self.asval.damage_near = 17.5
-	self.asval.damage_far = 70
-	self.asval.damage_min = 3.0
+	self.asval.damage_near = 12
+	self.asval.damage_far = 67.5
+	self.asval.damage_min = 3.925
 	
-	self.asval.stats.damage = 18
+	self.asval.stats.damage = 24
 	self.asval.stats.spread = 76
-	self.asval.stats.recoil = 72
+	self.asval.stats.recoil = 67
 	self.asval.stats.suppression = 10
 	
 	
@@ -3582,6 +3952,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.akm.shake.fire_multiplier = 1.1
 	self.akm.shake.fire_steelsight_multiplier = -1.1
 	
+	--[[ self.akm.fire_rate_init_count = 4
+	self.akm.fire_rate_init_mult = 3 ]]
 	self.akm.fire_mode_data.fire_rate = 0.1
 	
 	self.akm.damage_near = 14
@@ -3590,7 +3962,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.akm.stats.damage = 24
 	self.akm.stats.spread = 71
-	self.akm.stats.recoil = 67
+	self.akm.stats.recoil = 66
 	self.akm.stats.suppression = 8
 	
 	
@@ -3629,8 +4001,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.akm_gold.damage_min = 3.925
 	
 	self.akm_gold.stats.damage = 24
-	self.akm_gold.stats.spread = 69
-	self.akm_gold.stats.recoil = 73
+	self.akm_gold.stats.spread = 71
+	self.akm_gold.stats.recoil = 71
 	self.akm_gold.stats.suppression = 8
 	
 	--}
@@ -3643,7 +4015,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.saiga.reload_speed_mult = 1.05
 	self.saiga.ADS_TIMER = 0.275
 	
-	self.saiga.spread.standing = 1.1
+	self.saiga.spread.standing = 1.15
 	self.saiga.spread.crouching = self.saiga.spread.standing * 0.8
 	self.saiga.spread.steelsight = 0.3
 	self.saiga.spread.moving_standing = self.saiga.spread.standing
@@ -3682,7 +4054,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     Auto Ass 12     ]]--
-	self.aa12.ADS_TIMER = 0.325
+	self.aa12.ADS_TIMER = 0.330
+	self.aa12.reload_speed_mult = 1.025
 	
 	self.aa12.spread.standing = 1.4
 	self.aa12.spread.crouching = self.aa12.spread.standing * 0.8
@@ -3728,7 +4101,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.r870.anim_speed_mult = 0.9
 	self.r870.ADS_TIMER = 0.265
 	
-	self.r870.spread.standing = 1.25
+	self.r870.spread.standing = 1.40
 	self.r870.spread.crouching = self.r870.spread.standing * 0.8
 	self.r870.spread.steelsight = 0.3
 	self.r870.spread.moving_standing = self.r870.spread.standing
@@ -3785,7 +4158,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.ksg.armor_piercing_chance = 0.1
 	
-	self.ksg.spread.standing = 1.15
+	self.ksg.spread.standing = 1.2
 	self.ksg.spread.crouching = self.ksg.spread.standing * 0.8
 	self.ksg.spread.steelsight = 0.3
 	self.ksg.spread.moving_standing = self.ksg.spread.standing
@@ -3838,6 +4211,10 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.huntsman.BURST_FIRE = 2
 	self.huntsman.BURST_FIRE_RATE_MULTIPLIER = 100
+	self.huntsman.CAN_TOGGLE_BURST = true
+	self.huntsman.no_auto_anims = true
+	self.huntsman.NO_RESET_BURST = true
+	self.huntsman.BURST_DELAY = 0.2
 	
 	self.huntsman.CLIP_AMMO_MAX = 2
 	
@@ -3983,12 +4360,15 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m37.ADS_TIMER = 0.250
 	
  	self.m37.NO_ADS_BURST = true
+ 	self.m37.no_auto_anims = true
+	self.m37.CAN_TOGGLE_BURST = true
 	self.m37.BURST_FIRE = 100
 	self.m37.BURST_FIRE_RATE_MULTIPLIER = 1.8
 	self.m37.burst_anim_speed_mult = self.m37.BURST_FIRE_RATE_MULTIPLIER
 	self.m37.BURST_FIRE_RECOIL_MULTIPLIER = 1.50
+	self.m37.BURST_FIRE_HIP_MULTIPLIER = 2
 	
-	self.m37.spread.standing = 1.3
+	self.m37.spread.standing = 1.4
 	self.m37.spread.crouching = self.m37.spread.standing * 0.8
 	self.m37.spread.steelsight = 0.3
 	self.m37.spread.moving_standing = self.m37.spread.standing
@@ -4004,7 +4384,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m37.rays = 8
 	
 	self.m37.damage_near = 9
-	self.m37.damage_far = 38
+	self.m37.damage_far = 35
 	
 	self.m37.fire_mode_data.fire_rate = 0.6
 	
@@ -4095,7 +4475,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.striker.fire_mode_data.fire_rate = 0.13333333333333333333333333333333
 	
 	self.striker.damage_near = 6
-	self.striker.damage_far = 32
+	self.striker.damage_far = 30
 	
 	self.striker.muzzleflash = "effects/payday2/particles/weapons/big_762_auto_fps"
 	
@@ -4114,9 +4494,9 @@ function WeaponTweakData:_init_new_weapons(...)
 	-----------------------[[BRs]]-----------------------
 	--{
 	--[[     EAG-H     ]]--
-	self.scar.sub_category = "battle_rifle"
+	self.scar.recategorize = "battle_rifle"
 	self.scar.ads_sms = 0.80
-	self.scar.ADS_TIMER = 0.280
+	self.scar.ADS_TIMER = 0.290
 	
 	self.scar.spread.standing = 3.3
 	self.scar.spread.crouching = 2.8
@@ -4160,10 +4540,11 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	--[[     Jiisuri is mai raifu~     ]]--
 	--Better treat her with respect, fuckers
-	self.g3.sub_category = "battle_rifle"
+	self.g3.recategorize = "battle_rifle"
 	self.g3.ads_sms = 0.65
 	self.g3.sms = 0.85
-	self.g3.ADS_TIMER = 0.310
+	self.g3.ADS_TIMER = 0.315
+	self.g3.reload_speed_mult = 1.05
 	
 	self.g3.kick.standing = { 0.9 , -0.3, -0.4, 0.4}
 	self.g3.kick.crouching = self.g3.kick.standing
@@ -4209,10 +4590,10 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     Faru Nee-san     ]]--
-	self.fal.sub_category = "battle_rifle"
+	self.fal.recategorize = "battle_rifle"
 	self.fal.ads_sms = 0.65
 	self.fal.sms = 0.85
-	self.fal.ADS_TIMER = 0.290
+	self.fal.ADS_TIMER = 0.300
 	
 	self.fal.spread.standing = 3.7
 	self.fal.spread.crouching = 3.5
@@ -4255,10 +4636,10 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     Galil-chan     ]]--
-	self.galil.sub_category = "battle_rifle"
+	self.galil.recategorize = "battle_rifle"
 	self.galil.ads_sms = 0.65
 	self.galil.sms = 0.85
-	self.galil.ADS_TIMER = 0.300
+	self.galil.ADS_TIMER = 0.305
 	
 	self.galil.reload_speed_mult = 0.925
 	
@@ -4266,12 +4647,12 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.galil.kick.crouching = self.galil.kick.standing
 	self.galil.kick.steelsight = self.galil.kick.standing
 	
-	self.galil.spread.standing = 4.6
-	self.galil.spread.crouching = 4.4
+	self.galil.spread.standing = 3.8
+	self.galil.spread.crouching = 3.6
 	self.galil.spread.steelsight = 0.1
-	self.galil.spread.moving_standing = self.galil.spread.standing * 1.3
-	self.galil.spread.moving_crouching = self.galil.spread.crouching * 1.3
-	self.galil.spread.moving_steelsight = self.galil.spread.steelsight * 1.3
+	self.galil.spread.moving_standing = self.galil.spread.standing * 1.275
+	self.galil.spread.moving_crouching = self.galil.spread.crouching * 1.275
+	self.galil.spread.moving_steelsight = self.galil.spread.steelsight * 1.275
 	
 	self.galil.fire_mode_data.fire_rate = 0.08823529411764705882352941176471
 	
@@ -4303,13 +4684,13 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     Puns     ]]--
-	self.new_m14.sub_category = "battle_rifle"
+	self.new_m14.recategorize = "battle_rifle"
 	self.new_m14.ads_sms = 0.65
 	self.new_m14.sms = 0.85
-	self.new_m14.ADS_TIMER = 0.320
+	self.new_m14.ADS_TIMER = 0.325
 	
-	self.new_m14.spread.standing = 6.0
-	self.new_m14.spread.crouching = 5.8
+	self.new_m14.spread.standing = 5.6
+	self.new_m14.spread.crouching = 5.4
 	self.new_m14.spread.steelsight = 0.1
 	self.new_m14.spread.moving_standing = self.new_m14.spread.standing * 1.2
 	self.new_m14.spread.moving_crouching = self.new_m14.spread.crouching * 1.2
@@ -4340,7 +4721,7 @@ function WeaponTweakData:_init_new_weapons(...)
 			
 	self.new_m14.stats.damage = 24
 	self.new_m14.stats.spread = 90
-	self.new_m14.stats.recoil = 48
+	self.new_m14.stats.recoil = 50
 	self.new_m14.stats.suppression = 3
 	--}	
 		
@@ -4353,7 +4734,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m249.sms = 0.70
 	self.m249.rms = 0.85
 	self.m249.reload_speed_mult = 0.85
-	self.m249.ADS_TIMER = 0.350
+	self.m249.ADS_TIMER = 0.360
 	
 	self.m249.kick.standing = { -0.225, 0.375, -0.45, 0.45}
 	self.m249.kick.crouching = self.m249.kick.standing
@@ -4391,8 +4772,9 @@ function WeaponTweakData:_init_new_weapons(...)
 	--[[     Longcat     ]]--
 	self.rpk.ads_sms = 0.50
 	self.rpk.sms = 0.70
-	self.rpk.ADS_TIMER = 0.310
+	self.rpk.ADS_TIMER = 0.315
 	self.rpk.reload_speed_mult = 0.9
+	self.rpk.anim_req_scope = true
 	
 	self.rpk.kick.standing = { -0.3, 0.675, -0.2625, 0.2625}
 	self.rpk.kick.crouching = self.rpk.kick.standing
@@ -4424,8 +4806,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.rpk.armor_piercing_chance = 0.15
 	
-	self.rpk.damage_near = 18
-	self.rpk.damage_far = 100
+	self.rpk.damage_near = 24
+	self.rpk.damage_far = 120
 	self.rpk.damage_min = 4.25
 	
 	self.rpk.stats.damage = 24
@@ -4436,12 +4818,12 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     Related to mai raifu     ]]--
-	self.hk21.sub_category = "gpmg"
+	self.hk21.recategorize = "gpmg"
 	self.hk21.reload_speed_mult = 0.85
 	self.hk21.rms = 0.75
 	self.hk21.ads_sms = 0.50
 	self.hk21.sms = 0.70
-	self.hk21.ADS_TIMER = 0.370
+	self.hk21.ADS_TIMER = 0.375
 	
 	self.hk21.kick.standing = { 0.7, -0.3, -0.5, 0.5}
 	self.hk21.kick.crouching = self.hk21.kick.standing
@@ -4483,12 +4865,14 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     More Swede Guns     ]]--
-	self.par.sub_category = "gpmg"
+	self.par.recategorize = "gpmg"
 	self.par.reload_speed_mult = 0.85
 	self.par.rms = 0.7
 	self.par.ads_sms = 0.50
 	self.par.sms = 0.70
-	self.par.ADS_TIMER = 0.385
+	self.par.ADS_TIMER = 0.400
+	self.par.anim_req_scope = true
+	self.par.no_singlefire_anim = true
 	
 	self.par.kick.standing = { 0.5, -0.25, -0.65, 0.65 }
 	self.par.kick.crouching = self.par.kick.standing 
@@ -4531,11 +4915,12 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     Kerberos (kinda)     ]]--
-	self.mg42.sub_category = "gpmg"
+	self.mg42.recategorize = "gpmg"
 	self.mg42.rms = 0.6
 	self.mg42.ads_sms = 0.50
 	self.mg42.sms = 0.70
-	self.mg42.ADS_TIMER = 0.400
+	self.mg42.ADS_TIMER = 0.425
+	self.mg42.no_singlefire_anim = true
 	
 	self.mg42.kick.standing = { 0.4, -0.2, -0.45, 0.45 }
 	self.mg42.kick.crouching = { 0.2, -0.1, -0.225, 0.225 }
@@ -4610,16 +4995,17 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	--[[     (P)MSR     ]]--
-	self.msr.ADS_TIMER = 0.320
+	self.msr.ADS_TIMER = 0.330
+	self.msr.anim_speed_mult = 1.05
 	
-	self.msr.spread.standing = 10
+	self.msr.spread.standing = 12
 	self.msr.spread.crouching = self.msr.spread.standing * 0.75
 	self.msr.spread.steelsight = 0.1
-	self.msr.spread.moving_standing = self.msr.spread.standing * 1.25
-	self.msr.spread.moving_crouching = self.msr.spread.crouching * 1.25
-	self.msr.spread.moving_steelsight = self.msr.spread.steelsight * 1.25
+	self.msr.spread.moving_standing = self.msr.spread.standing * 1.2
+	self.msr.spread.moving_crouching = self.msr.spread.crouching * 1.2
+	self.msr.spread.moving_steelsight = self.msr.spread.steelsight * 1.2
 	
-	self.msr.fire_mode_data.fire_rate = 0.92307692307692307692307692307692
+	self.msr.fire_mode_data.fire_rate = 1
 	
 	self.msr.sounds.enter_steelsight = "primary_steel_sight_enter"
 	self.msr.sounds.leave_steelsight = "primary_steel_sight_exit"
@@ -4644,17 +5030,18 @@ function WeaponTweakData:_init_new_weapons(...)
 	}
 			
 	self.msr.stats.damage = 32
-	self.msr.stats.spread = 96
+	self.msr.stats.spread = 101
 	self.msr.stats.recoil = 28
 	self.msr.stats.suppression = 5
+	self.msr.stats.concealment = 8
 	
 	
 	--[[     47     ]]--
 	self.wa2000.reload_speed_mult = 1.1
-	self.wa2000.ADS_TIMER = 0.330
+	self.wa2000.ADS_TIMER = 0.350
 	
-	self.wa2000.spread.standing = 12
-	self.wa2000.spread.crouching = self.wa2000.spread.standing * 0.825
+	self.wa2000.spread.standing = 16
+	self.wa2000.spread.crouching = self.wa2000.spread.standing * 0.75
 	self.wa2000.spread.steelsight = 0.1
 	self.wa2000.spread.moving_standing = self.wa2000.spread.standing * 1.15
 	self.wa2000.spread.moving_crouching = self.wa2000.spread.crouching * 1.15
@@ -4684,22 +5071,24 @@ function WeaponTweakData:_init_new_weapons(...)
 	}
 			
 	self.wa2000.stats.damage = 36
-	self.wa2000.stats.spread = 91
+	self.wa2000.stats.spread = 98
 	self.wa2000.stats.recoil = 22
 	self.wa2000.stats.suppression = 6
+	self.wa2000.stats.concealment = 10
 		
 		
 		--[[     Win M70     ]]--
-	self.model70.ADS_TIMER = 0.340
+	self.model70.anim_speed_mult = 0.9
+	self.model70.ADS_TIMER = 0.335
 	
-	self.model70.spread.standing = 12
+	self.model70.spread.standing = 14
 	self.model70.spread.crouching = self.model70.spread.standing * 0.75
 	self.model70.spread.steelsight = 0.1
-	self.model70.spread.moving_standing = self.model70.spread.standing * 1.15
-	self.model70.spread.moving_crouching = self.model70.spread.crouching * 1.15
-	self.model70.spread.moving_steelsight = self.model70.spread.steelsight * 1.15
+	self.model70.spread.moving_standing = self.model70.spread.standing * 1.25
+	self.model70.spread.moving_crouching = self.model70.spread.crouching * 1.25
+	self.model70.spread.moving_steelsight = self.model70.spread.steelsight * 1.25
 	
-	self.model70.fire_mode_data.fire_rate = 1
+	self.model70.fire_mode_data.fire_rate = 1.0909090909090909090909090909091
 	
 	self.model70.sounds.enter_steelsight = "primary_steel_sight_enter"
 	self.model70.sounds.leave_steelsight = "primary_steel_sight_exit"
@@ -4723,23 +5112,24 @@ function WeaponTweakData:_init_new_weapons(...)
 	}
 			
 	self.model70.stats.damage = 36
-	self.model70.stats.spread = 97
+	self.model70.stats.spread = 104
 	self.model70.stats.recoil = 22
 	self.model70.stats.suppression = 6
 	
 	
 	
 	--[[     MOIST NUGGET     ]]--
+	self.mosin.anim_speed_mult = 0.9
 	self.mosin.ADS_TIMER = 0.350
 	
 	self.mosin.spread.standing = 10
-	self.mosin.spread.crouching = self.mosin.spread.standing / 1.4
+	self.mosin.spread.crouching = self.mosin.spread.standing * 0.8
 	self.mosin.spread.steelsight = 0.1
-	self.mosin.spread.moving_standing = self.mosin.spread.standing * 1.45
-	self.mosin.spread.moving_crouching = self.mosin.spread.crouching * 1.45
-	self.mosin.spread.moving_steelsight = self.mosin.spread.steelsight * 1.45
+	self.mosin.spread.moving_standing = self.mosin.spread.standing * 1.3
+	self.mosin.spread.moving_crouching = self.mosin.spread.crouching * 1.3
+	self.mosin.spread.moving_steelsight = self.mosin.spread.steelsight * 1.3
 	
-	self.mosin.fire_mode_data.fire_rate = 1.0909090909090909090909090909091
+	self.mosin.fire_mode_data.fire_rate = 1.2
 	
 	self.mosin.sounds.enter_steelsight = "primary_steel_sight_enter"
 	self.mosin.sounds.leave_steelsight = "primary_steel_sight_exit"
@@ -4766,23 +5156,25 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.mosin.stats.value = 2
 	self.mosin.stats.damage = 24
-	self.mosin.stats.spread = 94
+	self.mosin.stats.spread = 95
 	self.mosin.stats.recoil = 19
 	self.mosin.stats.suppression = 5
+	self.mosin.stats.concealment = 10
 	
 	
 	
 	--[[     R63     ]]--
-	self.r93.ADS_TIMER = 0.360
+	self.r93.ADS_TIMER = 0.375
+	self.r93.anim_speed_mult = 0.9
 	
-	self.r93.spread.standing = 14
-	self.r93.spread.crouching = self.r93.spread.standing / 1.3
+	self.r93.spread.standing = 18
+	self.r93.spread.crouching = self.r93.spread.standing * 0.85
 	self.r93.spread.steelsight = 0.1
 	self.r93.spread.moving_standing = self.r93.spread.standing * 1.5
 	self.r93.spread.moving_crouching = self.r93.spread.crouching * 1.5
 	self.r93.spread.moving_steelsight = self.r93.spread.steelsight * 1.5
 	
-	self.r93.fire_mode_data.fire_rate = 1.2
+	self.r93.fire_mode_data.fire_rate = 1.3333333333333333333333333333333
 	
 	self.r93.sounds.enter_steelsight = "primary_steel_sight_enter"
 	self.r93.sounds.leave_steelsight = "primary_steel_sight_exit"
@@ -4806,22 +5198,24 @@ function WeaponTweakData:_init_new_weapons(...)
 		}
 	
 	self.r93.stats.damage = 30
-	self.r93.stats.spread = 99
+	self.r93.stats.spread = 108
 	self.r93.stats.recoil = 10
 	self.r93.stats.suppression = 4
+	self.r93.stats.concealment = 3
 	
 	
 	--[[     SHITTER BAIT     ]]--
-	self.m95.sub_category = "anti_mat"
+	self.m95.recategorize = "anti_mat"
 	self.m95.rms = 0.75
-	self.m95.ADS_TIMER = 0.380
+	self.m95.ADS_TIMER = 0.425
+	self.m95.anim_speed_mult = 0.90
 	
-	self.m95.spread.standing = 16
-	self.m95.spread.crouching = self.m95.spread.standing / 1.2
+	self.m95.spread.standing = 20
+	self.m95.spread.crouching = self.m95.spread.standing * 0.9
 	self.m95.spread.steelsight = 0.1
-	self.m95.spread.moving_standing = self.m95.spread.standing * 1.7
-	self.m95.spread.moving_crouching = self.m95.spread.crouching * 1.7
-	self.m95.spread.moving_steelsight = self.m95.spread.steelsight * 1.7
+	self.m95.spread.moving_standing = self.m95.spread.standing * 1.75
+	self.m95.spread.moving_crouching = self.m95.spread.crouching * 1.75
+	self.m95.spread.moving_steelsight = self.m95.spread.steelsight * 1.75
 	
 	self.m95.kick.standing = {1.125, 1.625, 0.875, 1.375 }
 	self.m95.kick.crouching = self.m95.kick.standing
@@ -4830,7 +5224,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m95.sounds.enter_steelsight = "lmg_steelsight_enter"
 	self.m95.sounds.leave_steelsight = "lmg_steelsight_exit"
 	
-	self.m95.fire_mode_data.fire_rate = 0.75
+	self.m95.fire_mode_data.fire_rate = 1.5
 	
 	self.m95.shake.fire_multiplier = 4.5
 	self.m95.shake.fire_steelsight_multiplier = -4.5
@@ -4850,7 +5244,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		}
 	
 	self.m95.stats.damage = 96
-	self.m95.stats.spread = 97
+	self.m95.stats.spread = 103
 	self.m95.stats.recoil = 5
 	self.m95.stats.suppression = 2
 	--}
