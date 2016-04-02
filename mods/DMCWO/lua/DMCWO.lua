@@ -153,12 +153,15 @@ DMCWO.RULESOFNATURE = false
 --Changes will ony take effect after you go through a loading screen or reboot the game
 
 --[General]--{
+--If set to true, hides attachable AR/SMG/LMG class muzzle brakes or replaces them with a barrel's default brake (if it had one to begin with)
 --Default = false
 DMCWO.hide_brakes = false
 
+--If set to true, hides attachable shotgun class muzzle brakes or replaces them with a barrel's default brake (if it had one to begin with)
 --Default = false
 DMCWO.hide_sg_brakes = false
 
+--If set to true, hides the Flash Hider attachment for all pistols that can accept it or replaces them with a barrel's default brake (if it had one to begin with)
 --Default = false
 DMCWO.hide_pis_flash = false
 
@@ -169,8 +172,8 @@ DMCWO.buis_swap = false
 
 --[AK type weapons]--{
 --If set to true, when low power optics are attached to an AK type weapon, the gun is pulled up closer for optics to be in-line with the other guns. 
---Default = false
 --NOTE: Higher powered optics like the Specter, ACOG, Short Dot and Leupold will always be held close to the player camera while ADS, regardless of this being true or false
+--Default = false
 DMCWO.ak_optics = false
 
 --If set to true, all occurences of the underfolding stock being default on AK type weapons is changed to the sidefolding stock and the sidefolding stock attachment is changed to the Underfolder. Makes more sense from a stability standpoint too
