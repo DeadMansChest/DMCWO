@@ -234,6 +234,180 @@ elseif RequiredScript == "lib/managers/blackmarketmanager" then
 	end
 
 --}	
+elseif RequiredScript == "lib/units/weapons/flamethrowereffectextension" then
+--{
+	
+	local old_effect_update = FlamethrowerEffectExtension.update
+	function FlamethrowerEffectExtension:update(...)
+		if FlamethrowerEffectExtension.super.flame_max_range then
+			self._flame_max_range = FlamethrowerEffectExtension.super.flame_max_range
+		end
+		old_effect_update(self, ...)
+	end
+
+--}
+elseif RequiredScript == "lib/units/weapons/newflamethrowerbase" then
+--{	
+	function NewFlamethrowerBase:_update_stats_values()
+		NewFlamethrowerBase.super._update_stats_values(self)
+		--self:setup_default() --why was this here
+		if self._ammo_data and self._ammo_data.rays ~= nil then
+			self._rays = self._ammo_data.rays
+		end
+	end
+		
+	function NewFlamethrowerBase:get_damage_falloff(damage, col_ray, user_unit)
+		local dist = col_ray.distance or mvector3.distance(col_ray.unit:position(), user_unit:position())
+		local fuck = ( (self._current_stats.damage / self._damage) * damage )
+		
+		if DMCWO.debug_range == true then
+			log("Dist: " .. tostring(dist/100) .. "\nDrop Start: " .. tostring(self._damage_near/100) .. "m\n\nInit Dmg: " .. tostring(damage * 10) .. "\nMin. Dmg at: " .. tostring(self._flame_max_range/100) .. "m \nMin. Dmg: " .. tostring( (0) * 10) .. "\n")
+		end
+		if dist > 500 and dist < self._flame_max_range then
+			damage = damage - (( dist/self._flame_max_range ) *  damage )
+		elseif dist >= self._flame_max_range then
+			damage = 0 
+		end
+		if DMCWO.debug_range == true then
+			log("Impact Dmg: " .. tostring(damage * 10) .. "\n\n") --Damage on impact
+		end
+		return damage
+	end
+	
+	local mvec_to = Vector3()
+	local mvec_direction = Vector3()
+	local mvec_spread_direction = Vector3()
+	function NewFlamethrowerBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, shoot_player, spread_mul, autohit_mul, suppr_mul, shoot_through_data)
+		if self._rays == 1 then
+			local result = NewFlamethrowerBase.super._fire_raycast(self, user_unit, from_pos, direction, dmg_mul, shoot_player, spread_mul, autohit_mul, suppr_mul, shoot_through_data)
+			return result
+		end
+		local result = {}
+		local hit_enemies = {}
+		local hit_something, col_rays
+		if self._alert_events then
+			col_rays = {}
+		end
+		local damage = self:_get_current_damage(dmg_mul)
+		local autoaim, dodge_enemies = self:check_autoaim(from_pos, direction, self._range)
+		local weight = 0.1
+		local enemy_died = false
+		local function hit_enemy(col_ray)
+			if col_ray.unit:character_damage() and col_ray.unit:character_damage().is_head then
+				local enemy_key = col_ray.unit:key()
+				if not hit_enemies[enemy_key] or col_ray.unit:character_damage():is_head(col_ray.body) then
+					hit_enemies[enemy_key] = col_ray
+				end
+			else
+				self._bullet_class:on_collision(col_ray, self._unit, user_unit, damage)
+			end
+		end
+		local spread = self:_get_spread(user_unit)
+		mvector3.set(mvec_direction, direction)
+		if spread then
+		end
+		for i = 1, self._rays do
+			mvector3.set(mvec_spread_direction, mvec_direction)
+			if spread then
+				mvector3.spread(mvec_spread_direction, spread * (spread_mul or 1))
+			end
+			mvector3.set(mvec_to, mvec_spread_direction)
+			mvector3.multiply(mvec_to, 20000)
+			mvector3.add(mvec_to, from_pos)
+			local search_for_targets = true
+			local raycast_from = from_pos
+			local raycast_to = mvec_to
+			local raycast_ignore_units = clone(self._setup.ignore_units)
+			local test_color = 1
+			local col_ray, test_last_raycast_hit_position
+			while search_for_targets do
+				col_ray = World:raycast("ray", raycast_from, raycast_to, "slot_mask", self._bullet_slotmask, "ignore_unit", raycast_ignore_units)
+				if test_last_raycast_hit_position == nil then
+					test_last_raycast_hit_position = raycast_from
+				end
+				if col_rays then
+					if col_ray then
+						if col_ray then
+							test_last_raycast_hit_position = col_ray.hit_position
+						end
+						if col_ray.distance > self._flame_max_range then
+							search_for_targets = false
+							break
+						elseif col_ray.unit:in_slot(managers.slot:get_mask("world_geometry")) then
+							table.insert(col_rays, col_ray)
+							search_for_targets = false
+						elseif col_ray.unit:in_slot(managers.slot:get_mask("melee_equipment")) then
+							table.insert(col_rays, col_ray)
+							search_for_targets = false
+						else
+							table.insert(raycast_ignore_units, col_ray.unit)
+						end
+					else
+						local ray_to = mvector3.copy(raycast_to)
+						local spread_direction = mvector3.copy(mvec_spread_direction)
+						table.insert(col_rays, {position = ray_to, ray = spread_direction})
+						search_for_targets = false
+					end
+				end
+				if self._autoaim and autoaim then
+					if col_ray and col_ray.unit:in_slot(managers.slot:get_mask("enemies")) then
+						self._autohit_current = (self._autohit_current + weight) / (1 + weight)
+						hit_enemy(col_ray)
+						autoaim = false
+					else
+						autoaim = false
+						local autohit = self:check_autoaim(from_pos, direction, self._range)
+						if autohit then
+							local autohit_chance = 1 - math.clamp((self._autohit_current - self._autohit_data.MIN_RATIO) / (self._autohit_data.MAX_RATIO - self._autohit_data.MIN_RATIO), 0, 1)
+							if autohit_chance > math.random() then
+								self._autohit_current = (self._autohit_current + weight) / (1 + weight)
+								hit_something = true
+								hit_enemy(autohit)
+							else
+								self._autohit_current = self._autohit_current / (1 + weight)
+							end
+						elseif col_ray then
+							hit_something = true
+							hit_enemy(col_ray)
+						end
+					end
+				elseif col_ray then
+					hit_something = true
+					hit_enemy(col_ray)
+				end
+			end
+		end
+		for _, col_ray in pairs(hit_enemies) do
+			local damage = self:get_damage_falloff(damage, col_ray, user_unit)
+			if damage > 0 then
+				local result = self._bullet_class:on_collision(col_ray, self._unit, user_unit, damage)
+				if not result or result.type == "death" then
+				end
+			end
+		end
+		if dodge_enemies and self._suppression then
+			for enemy_data, dis_error in pairs(dodge_enemies) do
+				enemy_data.unit:character_damage():build_suppression(suppr_mul * dis_error * self._suppression, self._panic_suppression_chance)
+			end
+		end
+		result.hit_enemy = next(hit_enemies) and true or false
+		if self._alert_events then
+			result.rays = #col_rays > 0 and col_rays
+		end
+		managers.statistics:shot_fired({
+			hit = false,
+			weapon_unit = self._unit
+		})
+		for _, _ in pairs(hit_enemies) do
+			managers.statistics:shot_fired({
+				hit = true,
+				weapon_unit = self._unit,
+				skip_bullet_count = true
+			})
+		end
+		return result
+	end
+--}
 elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 --{	
 
@@ -277,12 +451,19 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		self._no_singlefire_anim = self:weapon_tweak_data().no_singlefire_anim or nil
 		self._no_auto_anims = self:weapon_tweak_data().no_auto_anims or nil
 		
+		self._damage_bonus_range = self:weapon_tweak_data().damage_bonus_range or nil
+		if self._damage_bonus_range then 
+			self._damage_bonus_range = self._damage_bonus_range * 100
+			self._damage_bonus = self:weapon_tweak_data().damage_bonus or 2
+		end
 		self._damage_near = (self:weapon_tweak_data().damage_near or 10) * 100 -- 10 meters
 		self._damage_far = (self:weapon_tweak_data().damage_far or 80) * 100 -- 80 meters
 		self._damage_min = self:weapon_tweak_data().damage_min or 3.0 -- 30 damage
 		self._damage_near_set = nil
 		self._damage_far_set = nil
 		self._damage_min_set = nil
+		
+		self._flame_max_range = self:weapon_tweak_data().flame_max_range or nil
 		
 		self._recoil_speed = self:weapon_tweak_data().r_speed or 40
 		self._center_speed = self:weapon_tweak_data().c_speed or 6
@@ -379,6 +560,9 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			end
 			if stats.damage_near_mul and not stats.damage_near_set then
 				self._damage_near = self._damage_near * stats.damage_near_mul
+				if self._damage_bonus_range then 
+					self._damage_bonus_range = self._damage_bonus_range * stats.damage_near_mul
+				end
 			end
 			if stats.damage_far_mul and not stats.damage_far_set then
 				self._damage_far = self._damage_far * stats.damage_far_mul
@@ -418,8 +602,8 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			if stats.can_toggle_burst then
 				self._can_toggle_burst = stats.can_toggle_burst
 			end
-			if stats.enable_selector then
-				self._enable_selector = stats.enable_selector
+			if stats.can_switch_selector then
+				self._can_switch_selector = stats.can_switch_selector
 			end
 			if stats.block_eq_aced then
 				self._block_eq_aced = stats.block_eq_aced
@@ -494,6 +678,16 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 			if stats.fire_rate_init_mult  then
 				self._fire_rate_init_mult = stats.fire_rate_init_mult
 			end
+			if self._flame_max_range and stats.flame_max_range_set then
+				self._flame_max_range = stats.flame_max_range_set
+				NewRaycastWeaponBase.flame_max_range = stats.flame_max_range_set
+			end
+			if stats.block_b_storm then
+				if not self:weapon_tweak_data().sub_category then
+					 self:weapon_tweak_data().sub_category = {}
+				end
+				self:weapon_tweak_data().sub_category = "grenade_launcher"
+			end
 			if stats.ammo_pickup_min_set then
 				self._ammo_pickup[1] = stats.ammo_pickup_min_set
 			end
@@ -507,9 +701,25 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 				if stats.ammo_pickup_max_mul then
 					self._ammo_data.ammo_pickup_max_mul = self._ammo_data.ammo_pickup_max_mul and self._ammo_data.ammo_pickup_max_mul * stats.ammo_pickup_max_mul or stats.ammo_pickup_max_mul
 				end
+				if stats.fire_dot_data then
+					self._ammo_data.fire_dot_data = stats.fire_dot_data
+				end
 			end
 		end
-	
+		
+		local pickup_type = tweak_data.levels:get_ai_group_type()		
+		if pickup_type == "america" then
+			if self:weapon_tweak_data().nato then
+				self._ammo_pickup[1] = self._ammo_pickup[1] * 1.5
+				self._ammo_pickup[2] = self._ammo_pickup[2] * 1.5
+			end
+		elseif pickup_type == "russia" then
+			if self:weapon_tweak_data().warsaw then
+				self._ammo_pickup[1] = self._ammo_pickup[1] * 1.5
+				self._ammo_pickup[2] = self._ammo_pickup[2] * 1.5
+			end
+		end
+		
 		--[[
 		track_weight = 1
 		if self._movement_penalty < track_weight then
@@ -562,8 +772,12 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	function NewRaycastWeaponBase:can_toggle_firemode()
 		if self._can_toggle_burst == true then
 			return false
-		elseif self._enable_selector == true then
-			return true
+		elseif self._can_switch_selector then
+			if self._can_switch_selector == false then
+				return false
+			elseif self._can_switch_selector == true then
+				return true
+			end
 		else
 			return tweak_data.weapon[self._name_id].CAN_TOGGLE_FIREMODE
 		end
@@ -632,8 +846,7 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	function NewRaycastWeaponBase:fire(...)	
 		local result = {}
 		if DMCWO.GEDDAN == true then 
-			local consume_ammo = self:weapon_tweak_data().category == "grenade_launcher" or self:weapon_tweak_data().sub_category == "grenade_launcher"
-			consume_ammo = consume_ammo or not managers.player:has_activate_temporary_upgrade("temporary", "no_ammo_cost")
+			local consume_ammo = not managers.player:has_activate_temporary_upgrade("temporary", "no_ammo_cost")
 			if consume_ammo and self._jam_start and not self._starwars then
 				self._jam_shotsfired = self._jam_shotsfired + 1
 				--log( "shots fired: " .. tostring(self._jam_shotsfired) )
@@ -764,13 +977,18 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 	function NewRaycastWeaponBase:get_damage_falloff(damage, col_ray, user_unit, distance)
 		local dist = distance or col_ray.distance or mvector3.distance(col_ray.unit:position(), user_unit:position())
 		local fuck = ( (self._current_stats.damage / self._damage) * damage )
-		local min_damage = ( self._damage_min / fuck ) * fuck		
+		local min_damage = self._damage_min or 0
+		if min_damage > damage then
+			min_damage = damage
+		end
 		
 		if DMCWO.debug_range == true then
 			log("Dist: " .. tostring(dist/100) .. "\nDrop Start: " .. tostring(self._damage_near/100) .. "m\n\nInit Dmg: " .. tostring(damage * 10) .. "\nMin. Dmg at: " .. tostring(self._damage_far/100) .. "m \nMin. Dmg: " .. tostring( (min_damage) * 10) .. "\n")
 		end
 		
-		if dist > self._damage_near and dist < self._damage_far then
+		if self._damage_bonus_range and dist < self._damage_bonus_range then
+			damage = damage + (self._damage_bonus or 0)
+		elseif dist > self._damage_near and dist < self._damage_far then
 			damage = damage - (( dist - self._damage_near) / ( self._damage_far - self._damage_near ) * ( damage - min_damage ))
 		elseif dist >= self._damage_far then
 			damage = min_damage 
@@ -870,14 +1088,14 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		end
 		if col_ray then
 			local tracer_dist = total_distance or col_ray.distance
-			if (col_ray and tracer_dist > 0 or not col_ray) and alive(self._obj_fire) and not shoot_through_data then
+			if (col_ray and tracer_dist > 300 or not col_ray) and alive(self._obj_fire) and not shoot_through_data then
 				self._obj_fire:m_position(self._trail_effect_table.position)
 				mvector3.set(self._trail_effect_table.normal, mvec_spread_direction)
-				if self:weapon_tweak_data().has_trail == true or self._starwars == true then
+				if self:weapon_tweak_data().has_trail == true or self._starwars == true or self._is_tracer == true then
 					self._trail_effect_table.effect = Idstring("effects/particles/weapons/sniper_trail")
 				end
 				local clamp_dist = tracer_dist
-				if self._starwars then
+				if self._starwars or self._is_tracer then
 					clamp_dist = 0.01
 				end
 				local trail = World:effect_manager():spawn(self._trail_effect_table)
@@ -888,11 +1106,11 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 		elseif not col_ray then
 			self._obj_fire:m_position(self._trail_effect_table.position)
 			mvector3.set(self._trail_effect_table.normal, mvec_spread_direction)
-			if self:weapon_tweak_data().has_trail == true or self._starwars == true then
+			if self:weapon_tweak_data().has_trail == true or self._starwars == true or self._is_tracer == true then
 				self._trail_effect_table.effect = Idstring("effects/particles/weapons/sniper_trail")
 			end
 			local clamp_dist = 0.5
-			if self._starwars then
+			if self._starwars or self._is_tracer then
 				clamp_dist = 0.01
 			end
 			local trail = World:effect_manager():spawn(self._trail_effect_table)
@@ -961,11 +1179,11 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 				local ray_from_unit = hit_unit and col_ray.unit
 				if is_shield then
 					dmg_mul = ( dmg_mul or 1 ) * (self._shield_damage or 0.10)
-					if col_ray.unit:name():t() == '@ID8816e70e510c8c2e@' then --fbi
+					if col_ray.unit:name():key() == '8816e70e510c8c2e' then --fbi
 						dmg_mul = dmg_mul * 0.75
-					elseif col_ray.unit:name():t() == '@IDaf254947f0288a6c@' then --phalanx
+					elseif col_ray.unit:name():key() == 'af254947f0288a6c' or col_ray.unit:name():key() == '63c0a27ecd41fc5e' then --phalanx/russian
 						dmg_mul = dmg_mul * 0.5
-					elseif col_ray.unit:name():t() == '@ID4a4a5e0034dd5340@' then --winters
+					elseif col_ray.unit:name():key() == '4a4a5e0034dd5340' then --winters
 						dmg_mul = dmg_mul * 0.25
 					end
 				end
@@ -1132,7 +1350,9 @@ elseif RequiredScript == "lib/units/weapons/newraycastweaponbase" then
 
 	--[[	recoil multipler stuff	]]--
 	function NewRaycastWeaponBase:recoil_multiplier()
-		return managers.blackmarket:recoil_multiplier(self._name_id, self:weapon_tweak_data().category, self:weapon_tweak_data().sub_category, self._silencer, self._blueprint) * ((self:in_burst_mode() and self._burst_fire_recoil_mult) or (self._firemode == Idstring("auto") and not self:in_burst_mode() and self._auto_fire_recoil_mult) or 1)
+		local current_state = managers.player:player_unit():movement()._current_state
+		return managers.blackmarket:recoil_multiplier(self._name_id, self:weapon_tweak_data().category, self:weapon_tweak_data().sub_category, self._silencer, self._blueprint) * ((current_state and current_state._state_data.in_air and 2) or 1)
+		* ((current_state and current_state._state_data.ducking and 0.7) or 1) * ((self:in_burst_mode() and self._burst_fire_recoil_mult) or (self._firemode == Idstring("auto") and not self:in_burst_mode() and self._auto_fire_recoil_mult) or 1)
 	end
 	
 	--[[	fire rate multipler in-game stuff	]]--

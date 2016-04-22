@@ -13,8 +13,6 @@ function UpgradesTweakData:init()
 	self.explosive_bullet.camera_shake_max_mul = 5
 	
 	self.values.striker.reload_speed_multiplier = {1}
-		
-	--Armor flinch adjustments
 	self.values.player.body_armor.damage_shake[1] = 2.000
 	self.values.player.body_armor.damage_shake[2] = 1.714
 	self.values.player.body_armor.damage_shake[3] = 1.429
@@ -22,20 +20,14 @@ function UpgradesTweakData:init()
 	self.values.player.body_armor.damage_shake[5] = 0.857
 	self.values.player.body_armor.damage_shake[6] = 0.571
 	self.values.player.body_armor.damage_shake[7] = 0.286
-				
-	--"Silent Killer" adjustments
-	--self.values.weapon.silencer_damage_multiplier = { 1.125, 1.25} --BASIC, ACE
-	--self.skill_descs.hitman.multibasic = "12.5%"
-	--self.skill_descs.hitman.multipro = "25%"
-	
-	--"The Professional" adjustments
 	self.values.weapon.silencer_recoil_multiplier = {0.90}
 	self.values.weapon.silencer_spread_multiplier = {0.90}
 	self.values.weapon.silencer_enter_steelsight_speed_multiplier = {1.50}
 	self.skill_descs.silence_expert.multibasic = "10%"
 	self.skill_descs.silence_expert.multibasic2 = "50%"
 	self.skill_descs.silence_expert.multipro = "10%"
-	
+	self.values.player.passive_health_regen = {0.015}
+	self.specialization_descs[2][9].multiperk2 = "1.5%"
 	self.values.assault_rifle.enter_steelsight_speed_multiplier = {1.40}
 	self.values.snp.enter_steelsight_speed_multiplier = {1.20}
 	self.skill_descs.rifleman = { 
@@ -44,29 +36,26 @@ function UpgradesTweakData:init()
 		multibasic = "fuck", multibasic2 = "my", 
 		multipro = "ass"
 	}
-	
-	--"Mag Plus" adjustments
---[[ 
-	self.values.weapon.clip_ammo_increase = { 10, 20 }
-	self.skill_descs.mag_plus.multibasic = "10"
-	self.skill_descs.mag_plus.multipro = "10"
-	]]
-	
-	--"Shotgun Impact" adjustments
-	self.values.shotgun.recoil_multiplier = { 0.90  }
-	self.values.shotgun.damage_multiplier = { 1.25 }
+	self.damage_to_hot_data.stacking_cooldown = 3
+	self.specialization_descs[11][1].multiperk4 = "3"
+	self.values.shotgun.recoil_multiplier = {0.90}
+	self.values.shotgun.damage_multiplier = {1.25}
 	self.skill_descs.shotgun_impact.multibasic = "10%"
 	self.skill_descs.shotgun_impact.multipro = "25%"
-	
 	self.values.team.pistol.recoil_multiplier = {0.90}
-	self.values.team.weapon.recoil_multiplier = {0.90}
-	--self.skill_descs.leadership.multibasic = "10%"
-	--self.skill_descs.leadership.multipro = "10%"
-	
-	--self.values.snp.recoil_multiplier = {0.90}
-	--self.values.assault_rifle.recoil_multiplier = {0.90}
-	--self.skill_descs.sharpshooter.multipro = "10%"
-	
+	self.values.team.weapon.recoil_multiplier = {0.90}	
+end
+
+elseif RequiredScript == "lib/tweak_data/skilltreetweakdata" then
+
+local old_skill_init = SkillTreeTweakData.init
+function SkillTreeTweakData:init()
+	old_skill_init(self)
+	if DMCWO.GEDDAN == true then
+		self.skills.ammo_reservoir["desc_id"] = "menu_ammo_reservoir_desc_jam"
+		self.skills.ammo_reservoir["desc_id"] = "menu_perseverance_desc_jam"
+	end
+	self.specializations[10][1].upgrades = {"temporary_loose_ammo_restore_health_1"}
 end
 
 elseif RequiredScript == "lib/tweak_data/economytweakdata" then
@@ -93,6 +82,54 @@ elseif RequiredScript == "lib/tweak_data/blackmarket/projectilestweakdata" then
 	end
 	
 	
+elseif RequiredScript == "lib/managers/moneymanager" then
+
+	function MoneyManager:get_weapon_price(weapon_id)
+		local pc = self:_get_weapon_pc(weapon_id)
+		if not tweak_data.money_manager.weapon_cost[pc] then
+			if pc and pc > #tweak_data.money_manager.weapon_cost then
+				pc = #tweak_data.money_manager.weapon_cost
+			else
+				pc = 1
+			end
+		end
+		if tweak_data.weapon[weapon_id] and tweak_data.weapon[weapon_id].bmp then
+			pc = tweak_data.weapon[weapon_id].bmp 
+		end
+		local cost = self:get_tweak_value("money_manager", "weapon_cost", pc)
+		local cost_multiplier = 1
+		do
+			local weapon_tweak_data = tweak_data.weapon[weapon_id]
+			local category = weapon_tweak_data and weapon_tweak_data.category
+			cost_multiplier = cost_multiplier * (category and tweak_data.upgrades.weapon_cost_multiplier[category] or 1)
+		end
+		return math.round(cost * cost_multiplier)
+	end
+	
+	function MoneyManager:get_weapon_price_modified(weapon_id)
+		local pc = self:_get_weapon_pc(weapon_id)
+		if not tweak_data.money_manager.weapon_cost[pc] then
+			if pc and pc > #tweak_data.money_manager.weapon_cost then
+				pc = #tweak_data.money_manager.weapon_cost
+			else
+				pc = 1
+			end
+		end
+		if tweak_data.weapon[weapon_id] and tweak_data.weapon[weapon_id].bmp then
+			pc = tweak_data.weapon[weapon_id].bmp 
+		end
+		local cost = self:get_tweak_value("money_manager", "weapon_cost", pc)
+		local cost_multiplier = 1
+		cost_multiplier = cost_multiplier * managers.player:upgrade_value("player", "buy_cost_multiplier", 1)
+		cost_multiplier = cost_multiplier * managers.player:upgrade_value("player", "crime_net_deal", 1)
+		do
+			local weapon_tweak_data = tweak_data.weapon[weapon_id]
+			local category = weapon_tweak_data and weapon_tweak_data.category
+			cost_multiplier = cost_multiplier * (category and tweak_data.upgrades.weapon_cost_multiplier[category] or 1)
+		end
+		return math.round(cost * cost_multiplier)
+	end
+
 elseif RequiredScript == "lib/tweak_data/tweakdata" then
 
 
@@ -105,6 +142,7 @@ elseif RequiredScript == "lib/tweak_data/tweakdata" then
 	tweak_data.projectiles.wpn_prj_four.adjust_z = 45
 
 	tweak_data.projectiles.rocket_frag.launch_speed = 3750
+	tweak_data.projectiles.launcher_rocket.damage = 900
 	tweak_data.projectiles.launcher_rocket.range = 500
 	
 	tweak_data.projectiles.west_arrow.launch_speed = 2750

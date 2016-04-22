@@ -12,7 +12,7 @@ function PlayerTweakData:_init_new_stances()
 	--[[ Viewmodel "Drag" ]]
 	--{
 	
-	local gun_drag = {'default','saw','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','rpg7','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','m134','mateba','sub2000','asval','polymer','wa2000','hunter','baka','frankish','arblast','long','par','sparrow','model70','m37','china','sr2','x_sr2','pl14'}
+	local gun_drag = {'default','saw','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','cobray','rpg7','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','m134','mateba','sub2000','asval','polymer','wa2000','hunter','baka','frankish','arblast','long','par','sparrow','model70','m37','china','sr2','x_sr2','pl14','x_mp5','x_akmsu'}
 	for i, wep_id in ipairs(gun_drag) do
 		self.stances[ wep_id ].steelsight.shakers.breathing.amplitude = 0.000--75
 	
@@ -84,7 +84,7 @@ function PlayerTweakData:_init_new_stances()
 		self.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -2.5
 	end 
 	
-	local lightweight = {'mp7','mp9','amcar','new_mp5','p90','olympic','tec9','scorpion','cobray','asval','frankish','m37','sr2','x_sr2'}
+	local lightweight = {'mp7','mp9','amcar','new_mp5','p90','olympic','tec9','scorpion','cobray','asval','frankish','m37','sr2','x_sr2','x_mp5'}
 	for i, wep_id in ipairs(lightweight) do
 			
 		self.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.15
@@ -100,7 +100,7 @@ function PlayerTweakData:_init_new_stances()
 		self.stances[ wep_id ].crouched.vel_overshot.pitch_pos = -3
 	end 
 	
-	local med_weight = {'mac10','akmsu','new_m4','ak74','g36','gre_m79','ksg','sterling','polymer','model70'}
+	local med_weight = {'mac10','akmsu','new_m4','ak74','g36','gre_m79','ksg','sterling','polymer','model70','x_akmsu'}
 	for i, wep_id in ipairs(med_weight) do	
 		self.stances[ wep_id ].standard.shakers.breathing.amplitude = 0.2
 		self.stances[ wep_id ].standard.vel_overshot.yaw_neg = -4
@@ -1268,9 +1268,9 @@ function PlayerTweakData:_init_new_stances()
 	self.stances.sub2000.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 	
 	--VHS
-	pivot_shoulder_translation = Vector3(9.03345, 8.6005, -0.539231)
-	pivot_shoulder_rotation = Rotation(4.59354E-5, 5.80963E-4, -3.20432E-4)
-	pivot_head_translation = Vector3(0, 11, 0.05)
+	pivot_shoulder_translation = Vector3(9.43018, 11.2164, -1.79026)
+	pivot_shoulder_rotation = Rotation(4.53633E-5, 3.16602E-4, -3.38188E-4)
+	pivot_head_translation = Vector3(0, 11, 0.1)
 	pivot_head_rotation = Rotation(0, 0, 0)
 	self.stances.vhs.steelsight.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 	self.stances.vhs.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()

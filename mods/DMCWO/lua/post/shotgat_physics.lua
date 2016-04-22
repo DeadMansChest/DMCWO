@@ -89,14 +89,14 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 			
 			if col_ray then
 				local tracer_dist = col_ray.distance
-				if (col_ray and tracer_dist > 0 or not col_ray) and alive(self._obj_fire) and not shoot_through_data then
+				if (col_ray and tracer_dist > 300 or not col_ray) and alive(self._obj_fire) and not shoot_through_data then
 					self._obj_fire:m_position(self._trail_effect_table.position)
 					mvector3.set(self._trail_effect_table.normal, mvec_spread_direction)
-					if self:weapon_tweak_data().has_trail == true or self._starwars == true then
+					if self:weapon_tweak_data().has_trail == true or self._starwars == true or self._is_tracer == true then
 						self._trail_effect_table.effect = Idstring("effects/particles/weapons/sniper_trail")
 					end
 					local clamp_dist = tracer_dist
-					if self._starwars then
+					if self._starwars or self._is_tracer then
 						clamp_dist = 0.01
 					end
 					local trail = World:effect_manager():spawn(self._trail_effect_table)
@@ -107,11 +107,11 @@ if RequiredScript == "lib/units/weapons/shotgun/newshotgunbase" then
 			elseif not col_ray then
 				self._obj_fire:m_position(self._trail_effect_table.position)
 				mvector3.set(self._trail_effect_table.normal, mvec_spread_direction)
-				if self:weapon_tweak_data().has_trail == true or self._starwars == true then
+				if self:weapon_tweak_data().has_trail == true or self._starwars == true or self._is_tracer == true then
 					self._trail_effect_table.effect = Idstring("effects/particles/weapons/sniper_trail")
 				end
 				local clamp_dist = 0.5
-				if self._starwars then
+				if self._starwars or self._is_tracer then
 					clamp_dist = 0.01
 				end
 				local trail = World:effect_manager():spawn(self._trail_effect_table)

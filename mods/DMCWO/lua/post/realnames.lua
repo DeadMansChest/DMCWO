@@ -19,11 +19,19 @@ if RequiredScript == "lib/managers/localizationmanager" then
 	Hooks:Add("LocalizationManagerPostInit", "localization_dmc", function(loc)
 	
 		loc:add_localized_strings( {
-			["menu_backstab_desc"] = "BASIC: ##$basic##\nYou gain a ##3%## critical hit chance for every ##3## points of concealment under ##35## up to ##30%##.\n\nACE: ##$pro##\nYou gain a ##3%## critical hit chance for every ##1## point of concealment under ##35## up to ##30%##.\n\nNote: Critical hits will not work against a Bulldozer's body, with grenade launchers or with weapons that deal ##80 or more## damage (per pellet if using a shotgun).\n\nSkills that increase damage to ##80 or more## (per pellet if using a shotgun) do not remove the ability for that weapon to land a critical hit.",
+			["menu_backstab_desc"] = "BASIC: ##$basic##\nYou gain a ##3%## critical hit chance for every ##3## points of concealment under ##35## up to ##30%##.\n\nACE: ##$pro##\nYou gain a ##3%## critical hit chance for every ##1## point of concealment under ##35## up to ##30%##.\n\nNote: Critical hits will not work against a Bulldozer's body, with explosives or with weapons that deal ##80 or more## damage (per pellet for shotguns).\n\nSkills that increase damage to ##80 or more## (per pellet for shotguns) do not remove the ability for that weapon to land a critical hit.",
 			
-			["menu_rifleman_desc"] = "BASIC: ##$basic##\nThe time taken to aim down sights for assault rifles and carbines is ##40%## faster and the time taken to aim down sights for battle rifles and sniper rifles is ##20%## faster.\n\nACE: ##$pro##\nYour weapon zoom level is increased by ##25%## with assault rifles, carbines, battle rifles and sniper rifles."
+			["menu_rifleman_desc"] = "BASIC: ##$basic##\nThe time taken to aim down sights for assault rifles and carbines is ##40%## faster and the time taken to aim down sights for battle rifles and sniper rifles is ##20%## faster.\n\nACE: ##$pro##\nYour weapon zoom level is increased by ##25%## with assault rifles, carbines, battle rifles and sniper rifles.",
 			
-			--["menu_bulletstorm_desc"] = "BASIC: ##$basic##\nThe time taken to aim down sights for assault rifles and carbines is ##40%## faster and the time taken to aim down sights for battle rifles and sniper rifles is ##20%## faster.\n\nACE: ##$pro##\nYour weapon zoom level is increased by ##25%## with assault rifles, carbines, battle rifles and sniper rifles."
+			["menu_deck10_1_desc"] = "Ammo packs you pick up also yield medical supplies and heals you for ##$multiperk## to ##$multiperk2## health.\n\nCannot occur more than once every ##$multiperk3## seconds.",
+			
+			["menu_ammo_reservoir_desc"] = "BASIC: ##$basic##\nDirectly after you deploy an ammo bag, you can fire your weapon for ##$multibasic## seconds without depleting your ammo.\n\nACE: ##$pro##\nYou can fire ##$multipro## seconds longer without depleting your ammo.\n\nNote: Does not apply to grenade launchers, rockets, explosive shells and explosive arrows/bolts.",
+			
+			["menu_ammo_reservoir_desc_jam"] = "BASIC: ##$basic##\nDirectly after you deploy an ammo bag, you can fire your weapon for ##$multibasic## seconds without depleting your ammo, jamming or increasing your weapon's jam chance.\n\nACE: ##$pro##\nYou can fire ##$multipro## seconds longer without depleting your ammo, jamming or increasing your weapon's jam chance.\n\nNote: Does not apply to grenade launchers, rockets, explosive shells and explosive arrows/bolts.",
+			
+			["menu_perseverance_desc"] = "BASIC: ##$basic##\nWhen your health reaches ##$multibasic##, instead of instantly going down, you can fight for ##$multibasic2## seconds with a ##$multibasic3## movement speed penalty.\n\nACE: ##$pro##\nYou no longer need to reload and can fight for an additional ##$multipro## seconds.\n\nNote: Does not apply to grenade launchers, rockets, explosive shells and explosive arrows/bolts.",
+			
+			["menu_perseverance_desc_jam"] = "BASIC: ##$basic##\nWhen your health reaches ##$multibasic##, instead of instantly going down, you can fight for ##$multibasic2## seconds with a ##$multibasic3## movement speed penalty.\n\nACE: ##$pro##\nYou no longer need to reload and can fight for an additional ##$multipro## seconds.\n\nNote: Does not apply to grenade launchers, rockets, explosive shells, explosive arrows/bolts, your weapon can still jam and your weapon's jam chance will still increase when shooting while in this state."
 			
 		} )
 	
@@ -71,7 +79,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "menu_nadeshot" and "Launchers"
 		or string_id == "menu_robinhood" and "Bows"
 		or string_id == "menu_xbow" and "Crossbows"
-		or string_id == "menu_flammen" and "Flamethrowers"
+		or string_id == "menu_flammenwaffer" and "Flamethrowers"
 		or string_id == "menu_gatgat" and "Gatling Guns"
 		
 		--real categories
@@ -133,17 +141,17 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		--[[ REVOLVER OCELOT ]]--{
 		--[[REVOLVER OCELOT]]
 		or DMCWO.ocelot == true and string_id == "bm_w_peacemaker" and "Revolver Ocelot"
-		or DMCWO.ocelot == true and string_id == "bm_w_peacemaker_desc" and "Revolver Ocelot"
+		or string_id == "bm_w_peacemaker_desc" and "An American single-action Revolver Ocelot with well greased chambers.\nCan torture enemies, and snakes.\nBenefits from Revolver Ocelot skills.\n\n(Revolver Ocelot)"
 		--Long
-		or DMCWO.ocelot == true and string_id == "bm_wp_peacemaker_barrel_long" and "Revolver Ocelot"
-		or DMCWO.ocelot == true and string_id == "bm_wp_peacemaker_barrel_long_desc" and "Revolver Ocelot"
+		or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_barrel_long" and "12\" Revolver Ocelot"
+		or string_id == "bm_wp_peacemaker_barrel_long_desc" and "##20% longer## Revolver Ocelot.\n##5% slower## Revolver Ocelot."
 		--Short
-		or DMCWO.ocelot == true and string_id == "bm_wp_peacemaker_barrel_short" and "Revolver Ocelot"
-		or DMCWO.ocelot == true and string_id == "bm_wp_peacemaker_barrel_short_desc" and "Revolver Ocelot" 
+		or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_barrel_short" and "5.5\" Revolver Ocelot"
+		or string_id == "bm_wp_peacemaker_barrel_short_desc" and "##10% shorter## Revolver Ocelot.\n##5% faster## Revolver Ocelot." 
 		--Grip
-		or DMCWO.ocelot == true and string_id == "bm_wp_peacemaker_handle_bling" and "Revolver Ocelot"
+		or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_handle_bling" and "Engraved Revolver Ocelot Grips"
 		--Stock
-		or DMCWO.ocelot == true and string_id == "bm_wp_peacemaker_rifle_stock" and "Revolver Ocelot"
+		or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_rifle_stock" and "Revolver Ocelot Stock"
 		--}
 		
 		--[[BRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRT]]
@@ -151,9 +159,9 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_w_m134_desc" and "A 7.62 NATO, electrically powered gatling gun with high suppressive capabilities.\nCan pierce enemies, walls and shields."
 		or string_id == "bm_wp_m134_body_upper_light_desc" and "##20% faster## movement.\n##10% faster## reload speeds."
 		or DMCWO.reelnaems == true and string_id == "bm_wp_m134_barrel_extreme" and "Anti-Air Barrel"
-		or string_id == "bm_wp_m134_barrel_extreme_desc" and "##15% longer## overall range.\n##10% slower## ADS speeds.\n##10% slower## movement."
+		or string_id == "bm_wp_m134_barrel_extreme_desc" and "##15% longer## overall range.\n##10% slower## ADS speeds.\n##15% slower## movement."
 		or DMCWO.reelnaems == true and string_id == "bm_wp_m134_barrel_short" and "Compact Barrel"
-		or string_id == "bm_wp_m134_barrel_short_desc" and "##20% shorter## overall range.\n##5% faster## ADS speeds.\n##20% faster## movement."
+		or string_id == "bm_wp_m134_barrel_short_desc" and "##25% shorter## overall range.\n##10% faster## ADS speeds.\n##20% faster## movement."
 		
 		--[[WE TERRORIST NAO]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_rpg7" and "Bazalt RPG-7"
@@ -176,7 +184,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_w_m4_desc" and "An American assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
 		--Barrels
 		or string_id == "bm_wp_m4_uupg_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
-		or string_id == "bm_wp_m4_uupg_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+		or string_id == "bm_wp_m4_uupg_b_short_desc" and "##15% shorter## overall range.\n##5% faster## ADS speeds." 
 		--Suppressed Barrel
 		or DMCWO.reelnaems == true and string_id == "bm_wp_m4_uupg_b_sd" and "Suppressed Barrel" 
 		or string_id == "bm_wp_m4_uupg_b_sd_desc" and "##Internally suppressed## barrel.\n##10% slower## ADS speeds." 
@@ -195,7 +203,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		--A3 Tact. Foregrip
 		or DMCWO.reelnaems == true and string_id == "bm_wp_aug_fg_a3" and "A3 Rail"
 		or string_id == "bm_wp_aug_fg_a3_desc" and "##5% slower## ADS speeds."
-		or string_id == "bm_wp_aug_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+		or string_id == "bm_wp_aug_b_short_desc" and "##20% shorter## overall range.\n##5% faster## ADS speeds." 
 		or string_id == "bm_wp_aug_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 		
 		--[[WHITE FLAG]] -- :^)
@@ -205,7 +213,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_wp_famas_b_sniper" and "G2 Sniper Barrel"
 		or string_id == "bm_wp_famas_b_sniper_desc" and "##Sniper class barrel.##\n##30% longer## overall range.\n##10% greater## minimum damage.\n##10% slower## ADS speeds."
 		or DMCWO.reelnaems == true and string_id == "bm_wp_famas_b_short" and "G2 Commando Barrel" 
-		or string_id == "bm_wp_famas_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+		or string_id == "bm_wp_famas_b_short_desc" and "##20% shorter## overall range.\n##5% faster## ADS speeds." 
 		or string_id == "bm_wp_famas_b_suppressed_desc" and "##Internally suppressed## barrel.\n##10% slower## ADS speeds."
 		--Retro Grip
 		or DMCWO.reelnaems == true and string_id == "bm_wp_famas_g_retro" and "G1 Kit"
@@ -218,7 +226,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_l85a2_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_l85a2_b_short" and "Short Barrel"
-		or string_id == "bm_wp_l85a2_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+		or string_id == "bm_wp_l85a2_b_short_desc" and "##15% shorter## overall range.\n##5% faster## ADS speeds." 
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_l85a2_g_worn" and "Taped Pistol Grip"
 		or DMCWO.reelnaems == true and string_id == "bm_wp_l85a2_fg_short" and "Daniel Defense L85 Quad Rail"
@@ -316,7 +324,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		--Sniper Stock
 		or DMCWO.reelnaems == true and string_id == "bm_wp_scar_s_sniper" and "MK.20 Stock"	
 		
-		or string_id == "bm_wp_scar_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
+		or string_id == "bm_wp_scar_b_long_desc" and "##20% longer## overall range.\n##5% slower## ADS speeds."
 		
 		or string_id == "bm_wp_scar_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 		--Rail Extension
@@ -407,7 +415,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_w_msr_desc" and "An American bolt-action rifle chambered in 7.62 NATO.\nCan pierce enemies, walls and shields."
 		--Suppressor
 		or DMCWO.reelnaems == true and string_id == "bm_wp_snp_msr_ns_suppressor" and "AAC TiTAN-QD Suppressor"
-		or string_id == "bm_wp_snp_msr_ns_suppressor_desc" and "A ##large## suppressor.\n##20% shorter## overall range.\n##10% slower## ADS speeds."
+		or string_id == "bm_wp_snp_msr_ns_suppressor_desc" and "A ##large## suppressor.\n##10% shorter## overall range.\n##10% slower## ADS speeds."
 		or string_id == "bm_wp_snp_msr_b_long_desc" and "##15% longer## overall range.\n##10% slower## ADS speeds."
 		--Aluminum Body
 		or DMCWO.reelnaems == true and string_id == "bm_wp_msr_body_msr" and "MSR Aluminum Stock & Receiver"
@@ -419,14 +427,14 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		or string_id == "bm_wp_r93_b_short_desc" and  "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 		or DMCWO.reelnaems == true and string_id == "bm_wp_r93_b_suppressed" and  "Harvester Big Bore 338 Suppressor"
-		or string_id == "bm_wp_r93_b_suppressed_desc" and  "A ##large## suppressor.\n##20% shorter## overall range.\n##10% slower## ADS speeds."
+		or string_id == "bm_wp_r93_b_suppressed_desc" and  "A ##large## suppressor.\n##10% shorter## overall range.\n##10% slower## ADS speeds."
 		--Wooden Body
 		or DMCWO.reelnaems == true and string_id == "bm_wp_r93_body_wood" and "Long Range Sporter 2 Stock"
 		or string_id == "bm_wp_r93_body_wood_desc" and "##2.5% slower## ADS speeds."
 		
 		--[[FIDDY CAL]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_m95" and "Barrett M95"
-		or string_id == "bm_w_m95_desc" and "An American .50 BMG, bolt-action, bullpup anti-materiel rifle.\nCan pierce enemies, walls and shields.\nSkill damage boosts and critical hits do not affect this weapon."
+		or string_id == "bm_w_m95_desc" and "An American .50 BMG, bolt-action, bullpup anti-materiel rifle.\nCan pierce enemies, walls and shields.\nThis weapon does not benefit from damage boosts from skills and cannot deal critical hits."
 		--Tank Buster
 		or DMCWO.reelnaems == true and string_id == "bm_wp_m95_b_barrel_long" and "Long Barrel w/AW50F Muzzle Brake"
 		or string_id == "bm_wp_m95_b_barrel_long_desc" and "##15% longer## overall range.\n##10% slower## ADS speeds.\n##5% slower## movement."
@@ -441,8 +449,8 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		or string_id == "bm_wp_mosin_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 		
-		or DMCWO.reelnaems == true and string_id == "bm_wp_mosin_b_sniper" and "\"Bramit\" Device"
-		or string_id == "bm_wp_mosin_b_sniper_desc" and "A ##large## 7.62x54R suppressor.\n##20% shorter## overall range.\n##7.5% slower## ADS speeds."
+		or DMCWO.reelnaems == true and string_id == "bm_wp_mosin_b_sniper" and "Nagant Suppressor"--"\"Bramit\" Device"
+		or string_id == "bm_wp_mosin_b_sniper_desc" and "A ##large## 7.62x54R suppressor.\n##10% shorter## overall range.\n##7.5% slower## ADS speeds."
 		--Black Stock
 		or DMCWO.reelnaems == true and string_id == "bm_wp_mosin_body_conceal" and "Black Synthetic Stock"
 		
@@ -452,14 +460,14 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_w_huntsman_desc" and "A side-by-side, break-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types.\n\nCan switch between single-trigger and dual-trigger."
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_huntsman_b_short" and "Sawn-Off Short Barrel"
-		or string_id == "bm_wp_huntsman_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+		or string_id == "bm_wp_huntsman_b_short_desc" and "##20% shorter## overall range.\n##5% faster## ADS speeds." 
 		or DMCWO.reelnaems == true and string_id == "bm_wp_huntsman_s_short" and "Sawn-Off Stock"
 		
 		--[[BARDODA SHOTGAT]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_b682" and "Beretta 682"
 		or string_id == "bm_w_b682_desc" and "An Italian, over-under, break-action shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
 		or DMCWO.reelnaems == true and string_id == "bm_wp_b682_b_short" and "Sawn-Off Short Barrel"
-		or string_id == "bm_wp_b682_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+		or string_id == "bm_wp_b682_b_short_desc" and "##20% shorter## overall range.\n##5% faster## ADS speeds." 
 		or DMCWO.reelnaems == true and string_id == "bm_wp_b682_s_short" and "Sawn-Off Stock"
 		or DMCWO.reelnaems == true and string_id == "bm_wp_b682_s_ammopouch" and "Ammo Pouch"
 		
@@ -506,7 +514,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_ben_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 		--Short Barrel
 		or DMCWO.reelnaems == true and string_id == "bm_wp_ben_b_short" and "NFA Barrel w/4-Shot Tube"
-		or string_id == "bm_wp_ben_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+		or string_id == "bm_wp_ben_b_short_desc" and "##20% shorter## overall range.\n##5% faster## ADS speeds." 
 		--Collapsed Stock
 		or DMCWO.reelnaems == true and string_id == "bm_wp_ben_s_collapsed" and "M1014 Collapsed Stock"
 		--Solid Stock
@@ -520,7 +528,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_ksg_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
 		--Short Barrel
 		or DMCWO.reelnaems == true and string_id == "bm_wp_ksg_b_short" and "Patrol Barrel w/2x 6-Shot Tubes"
-		or string_id == "bm_wp_ksg_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+		or string_id == "bm_wp_ksg_b_short_desc" and "##15% shorter## overall range.\n##5% faster## ADS speeds." 
 		
 		--[[WHY DON'T YOU TAKE A SEAT OVER THERE?]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_spas12" and "Franchi SPAS-12"
@@ -565,7 +573,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		--Solid Stock
 		or DMCWO.reelnaems == true and string_id == "bm_wp_m249_s_solid" and "M249 Solid Stock"
 		--LB
-		or string_id == "bm_wp_m249_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
+		or string_id == "bm_wp_m249_b_long_desc" and "##10% longer## overall range.\n##5% slower## ADS speeds."
 		
 		--[[RELATED TO RAIFU]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_hk21" and "Heckler & Koch HK21E" --"Related to mai raifu"
@@ -576,7 +584,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_wp_hk21_g_ergo" and "HK21 Ergo Grip"
 		or string_id == "bm_wp_hk21_g_ergo_desc" and "##5% faster## ADS speeds." 
 		--LB
-		or string_id == "bm_wp_hk21_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
+		or string_id == "bm_wp_hk21_b_long_desc" and "##10% longer## overall range.\n##5% slower## ADS speeds."
 		
 		--[[KERBEROS]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_mg42" and "Mauser Maschinengewehr 42"
@@ -646,20 +654,24 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_w_x_1911" and "Akimbo Springfield Operator 1911s" 
 		or string_id == "bm_w_colt_1911_desc" and "An American handgun chambered in .45 ACP.\nCan pierce enemies and walls."
 		or string_id == "bm_w_x_1911_desc" and "A pair of American handguns chambered in .45 ACP.\nCan pierce enemies and walls.\n\nCan switch between single-fire, dual-fire and auto-fire.\n\nWhile auto-firing, ROF is lowered by 50% and the effects of Equilibrium Aced are not accounted for."
-		
 		--Aggressor
 		or DMCWO.reelnaems == true and string_id == "bm_wp_1911_co_2" and "TCII Compensator" --Not 100% but seems to be based off of it
 		--Punisher
 		or DMCWO.reelnaems == true and string_id == "bm_wp_1911_co_1" and "Clark Heavy Pinmaster" --Not 100% but seems to be based off of it
 		--Ergo Grip
+		or DMCWO.reelnaems == true and string_id == "bm_wp_1911_g_ergo" and "Pachmayr 1911 Grip" 
 		or string_id == "bm_wp_1911_g_ergo_desc" and "##5% faster## ADS speeds." 
+		--Wood Grip
+		or DMCWO.reelnaems == true and string_id == "bm_wp_1911_g_bling" and "Walnut Grips." 
+		--Engraved Grip
+		or DMCWO.reelnaems == true and string_id == "bm_wp_1911_g_engraved" and "Custom Engraved 1911 Grips" 
 		--Long
 		or DMCWO.reelnaems == true and string_id == "bm_wp_1911_b_long" and "Compensated Long Barrel & Slide" 
 		or string_id == "bm_wp_1911_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 		--Vented
 		or DMCWO.reelnaems == true and string_id == "bm_wp_1911_b_vented" and "Compensated Two-Tone Slide"
-		or DMCWO.reelnaems == true and string_id == "bm_wp_1911_m_extended" and "12rnd 1911 Magazine"
-		or string_id == "bm_wp_1911_m_extended_desc" and "##5% slower## reload speeds."
+		or DMCWO.reelnaems == true and string_id == "bm_wp_1911_m_extended" and "10rnd 1911 Magazine"
+		or string_id == "bm_wp_1911_m_extended_desc" and "##2.5% slower## reload speeds."
 		
 		--[[BARDODA]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_b92fs" and "Beretta 92FS"
@@ -675,6 +687,10 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_beretta_m_extended_desc" and "##5% slower## reload speeds."
 		--Elite Slide
 		or DMCWO.reelnaems == true and string_id == "bm_wp_beretta_sl_brigadier" and "Brigadier Elite Slide"
+		--Ergo
+		or DMCWO.reelnaems == true and string_id == "bm_wp_beretta_g_ergo" and "Walnut Ergo Grips"
+		--Engraved
+		or DMCWO.reelnaems == true and string_id == "bm_wp_beretta_g_engraved" and "Custom Engraved 92FS Grips"
 			
 		--[[HUEHUEHUEHUE]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_raging_bull" and "Taurus Raging Bull"
@@ -684,14 +700,14 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		--Aggressor
 		or DMCWO.reelnaems == true and string_id == "bm_wp_rage_b_comp1" and "S&W V-Compensator"
 		--Pocket
-		or DMCWO.reelnaems == true and string_id == "bm_wp_rage_b_short" and "Snub Nose Short Barrel"
-		or string_id == "bm_wp_rage_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+		or DMCWO.reelnaems == true and string_id == "bm_wp_rage_b_short" and "Snub Nose Barrel"
+		or string_id == "bm_wp_rage_b_short_desc" and "##25% shorter## overall range.\n##5% faster## ADS speeds." 
 		--Ventilated
 		or DMCWO.reelnaems == true and string_id == "bm_wp_rage_b_comp2" and "S&W Muzzle Compensator"
 		or string_id == "bm_wp_rage_b_comp2_desc" and "Vents muzzle flash to the sides."
 		--Overcompensating
 		or DMCWO.reelnaems == true and string_id == "bm_wp_rage_b_long" and "Long Barrel"
-		or string_id == "bm_wp_rage_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
+		or string_id == "bm_wp_rage_b_long_desc" and "##10% longer## overall range.\n##5% slower## ADS speeds." 
 		
 		--[[HUEHUEHUEHUE BUT IT'S A SHOTGUN]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_judge" and "Taurus 4510PLYFS"
@@ -719,7 +735,10 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_wp_deagle_co_long" and "Custom Barrel Weight" --Attachment is a reference to the Boondock Saints
 		or string_id == "bm_wp_deagle_co_long_desc" and "##5% slower## ADS speeds." 
 		--Ergo
+		or DMCWO.reelnaems == true and string_id == "bm_wp_deagle_g_ergo" and "Pachmayr Desert Eagle Grip" --These don't exist but it's the same model from the 1911 but enlarged so w/e
 		or string_id == "bm_wp_deagle_g_ergo_desc" and "##5% faster## ADS speeds." 
+		--Bling
+		or DMCWO.reelnaems == true and string_id == "bm_wp_deagle_g_bling" and "Desert Eagle Pearl Grips"
 		--Extended Mag
 		or DMCWO.reelnaems == true and string_id == "bm_wp_deagle_m_extended" and "10rnd Desert Eagle Magazine" --Given the length of the mag and considering the .50 AE variant is single stack only, this is the only choice. Not that it matters that there's more ammo than what's stated *cough* 1911 12rnd Mag *cough*
 		or string_id == "bm_wp_deagle_m_extended_desc" and "##5% slower## reload speeds." 
@@ -770,7 +789,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_w_c96_desc" and "A German handgun chambered in 7.63x25mm that can be converted to full-auto.\nCan pierce enemies and walls."
 		--Long Barrel
 		or DMCWO.reelnaems == true and string_id == "bm_wp_c96_b_long" and "Carbine Barrel"
-		or string_id == "bm_wp_c96_b_long_desc" and "##15% longer## overall range.\n##10% slower## ADS speeds."
+		or string_id == "bm_wp_c96_b_long_desc" and "##20% longer## overall range.\n##10% slower## ADS speeds."
 		--Han Solo
 		or DMCWO.reelnaems == true and string_id == "bm_wp_c96_nozzle" and "DL-44 Muzzle"
 		or string_id == "bm_wp_c96_nozzle_desc" and "Fire \"special\" rounds.\n##Can only penetrate body armor.##\nROF ##lowered## to ##250 RPM.##"
@@ -787,7 +806,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_wp_cobray_ns_barrelext" and "MAC Barrel Extension"
 		or string_id == "bm_wp_cobray_ns_barrelext_desc" and "##10% slower## ADS speeds."
 		or DMCWO.reelnaems == true and string_id == "bm_wp_cobray_ns_silencer" and "SIONICS Suppressor"	
-		or string_id == "bm_wp_cobray_ns_silencer_desc" and "A ##specialized## suppressor.\n##20% shorter## overall range.\n##10% slower## ADS speeds."	
+		or string_id == "bm_wp_cobray_ns_silencer_desc" and "A ##specialized## suppressor.\n##10% shorter## overall range.\n##10% slower## ADS speeds."	
 		
 		--[[RUNONSENTENCES]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_mac10" and "Ingram M10"
@@ -823,7 +842,9 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[MAI RAIFU'S LITTLE SISTER AND STUDENT COUNCIL PRESIDENT OF THE ELEMETARY SCHOOL]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_mp5" and "Heckler & Koch MP5A4" --"Empi"
+		or DMCWO.reelnaems == true and string_id == "bm_w_x_mp5" and "Akimbo MP5A4s" --"Empi"
 		or string_id == "bm_w_mp5_desc" and "A German sub-machine gun chambered in 9x19mm.\nCan pierce thin walls.\n\nCan switch between full-auto, 3-rnd burst and semi-auto."
+		or string_id == "bm_w_x_mp5_desc" and "A pair of German sub-machine guns chambered in 9x19mm.\nCan pierce thin walls.\n\nCan switch between full-auto, semi-auto (dual-fired) and semi-auto (alternating)."
 		--Sehr Kurze
 		or DMCWO.reelnaems == true and string_id == "bm_wp_mp5_fg_m5k" and "MP5k Tri-Rail Kit"
 		or string_id == "bm_wp_mp5_fg_m5k_desc" and "##15% shorter## overall range.\n##5% faster## ADS speeds.\nROF ##raised## to ##900 RPM.##"
@@ -859,7 +880,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_scorpion_g_ergo_desc" and "##5% faster## ADS speeds."
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_scorpion_b_suppressed" and "Skorpion Suppressor"
-		or string_id == "bm_wp_scorpion_b_suppressed_desc" and "A ##specialized## suppressor for the Skorpion.\n##20% shorter## overall range.\n##7.5% slower## ADS speeds."
+		or string_id == "bm_wp_scorpion_b_suppressed_desc" and "A ##specialized## suppressor for the Skorpion.\n##10% shorter## overall range.\n##7.5% slower## ADS speeds."
 		
 		--[[NOT THE STUDENT COUNCIL PRESIDENT (get FUCKED)]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_uzi" and "IMI Uzi"
@@ -871,15 +892,15 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_uzi_fg_rail_desc" and "##5% faster## ADS speeds." 
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_uzi_b_suppressed" and "IMI Two-Stage Suppressor" --It's IMI made but it was never imported. No idea what the model name is.
-		or string_id == "bm_wp_uzi_b_suppressed_desc" and "A ##specialized## suppressor for the Uzi.\n##20% shorter## overall range.\n##7.5% slower## ADS speeds."
+		or string_id == "bm_wp_uzi_b_suppressed_desc" and "A ##specialized## suppressor for the Uzi.\n##10% shorter## overall range.\n##7.5% slower## ADS speeds."
 		
 		--[[B-BAKA]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_baka" and "IMI Micro Uzi"
 		or string_id == "bm_w_baka_desc" and "An Israeli machine pistol chambered in 9x19mm.\nCan pierce thin walls.\nBenefits from SMG skills.\n\nCan switch between full-auto and semi-auto."
 		
-		or string_id == "bm_wp_baka_b_smallsupp_desc" and "A ##small## suppressor for the Micro Uzi.\n##40% shorter## overall range.\n##5% slower## ADS speeds."
-		or string_id == "bm_wp_baka_b_midsupp_desc" and "A ##medium## suppressor for the Micro Uzi.\n##30% shorter## overall range.\n##7.5% slower## ADS speeds."
-		or string_id == "bm_wp_baka_b_longsupp_desc" and "A ##large## suppressor for the Micro Uzi.\n##20% shorter## overall range.\n##10% slower## ADS speeds."
+		or string_id == "bm_wp_baka_b_smallsupp_desc" and "A ##small## suppressor for the Micro Uzi.\n##30% shorter## overall range.\n##5% slower## ADS speeds."
+		or string_id == "bm_wp_baka_b_midsupp_desc" and "A ##medium## suppressor for the Micro Uzi.\n##20% shorter## overall range.\n##7.5% slower## ADS speeds."
+		or string_id == "bm_wp_baka_b_longsupp_desc" and "A ##large## suppressor for the Micro Uzi.\n##10% shorter## overall range.\n##10% slower## ADS speeds."
 		
 		--[[S-COOL SHOOTINGS]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_tec9" and "Intratec TEC-9"
@@ -912,9 +933,9 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_wp_sterling_b_e11" and "BlasTech E-11 Barrel"
 		or string_id == "bm_wp_sterling_b_e11_desc" and "Fire \"special\" rounds.\n##Can only penetrate body armor.##\nLocks fire mode to ##semi-auto.##\nROF ##lowered## to ##300 RPM.##"
 		
-		or string_id == "bm_wp_sterling_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
+		or string_id == "bm_wp_sterling_b_long_desc" and "##10% longer## overall range.\n##5% slower## ADS speeds."
 		
-		or string_id == "bm_wp_sterling_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+		or string_id == "bm_wp_sterling_b_short_desc" and "##25% shorter## overall range.\n##5% faster## ADS speeds." 
 		--10rnd Mag
 		or DMCWO.reelnaems == true and string_id == "bm_wp_sterling_m_short" and "10rnd L2A1 Magazine"
 		or string_id == "bm_wp_sterling_m_short_desc" and "##20% faster## reload speeds."
@@ -934,7 +955,9 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--[[BABBY SLAVSHIT]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_akmsu" and "Soviet Union AKMSU"
+		or DMCWO.reelnaems == true and string_id == "bm_w_x_akmsu" and "Akimbo AKMSUs"
 		or string_id == "bm_w_akmsu_desc" and "A Russian carbine chambered in 7.62x39mm.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
+		or string_id == "bm_w_x_akmsu_desc" and "A pair of Russian carbines chambered in 7.62x39mm.\nCan pierce enemies and walls.\n\nCan switch between full-auto, semi-auto (dual-fired) and semi-auto (alternating)."
 		--Moscow Special
 		or DMCWO.reelnaems == true and string_id == "bm_wp_akmsu_fg_rail" and "Samson K-Rail" --Seems to be loosely based off of the Samson K-Rail, it's the only thing that looked remotely like this
 		or string_id == "bm_wp_akmsu_fg_rail_desc" and "##5% slower## ADS speeds."
@@ -950,7 +973,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_w_m45" and "Carl Gustaf Kpist M/45"
 		or string_id == "bm_w_m45_desc" and "A Swedish sub-machine gun chambered in 9x19mm.\nCan pierce thin walls."
 		--Short Barrel
-		or string_id == "bm_wp_smg_m45_b_small_desc" and "##10% shorter## overall range.\n##7.5% faster## ADS speeds." 
+		or string_id == "bm_wp_smg_m45_b_small_desc" and "##20% shorter## overall range.\n##7.5% faster## ADS speeds." 
 		--Extended Mag
 		or DMCWO.reelnaems == true and string_id == "bm_wp_smg_m45_m_extended" and "50rnd M/45 Magazine"
 		or string_id == "bm_wp_smg_m45_m_extended_desc" and "##10% slower## reload speeds." 
@@ -960,7 +983,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_w_mp7_desc" and "A German personal defence weapon chambered in 4.6x30mm.\nCan pierce enemies, walls and shields.\n\nCan switch between full-auto and semi-auto."
 		--B&T Suppressor
 		or DMCWO.reelnaems == true and string_id == "bm_wp_mp7_b_suppressed" and "B&T MP7 Rotex-II Suppressor"	
-		or string_id == "bm_wp_mp7_b_suppressed_desc" and "A ##specialized## suppressor for the MP7.\n##20% shorter## overall range.\n##7.5% slower## ADS speeds."	
+		or string_id == "bm_wp_mp7_b_suppressed_desc" and "A ##specialized## suppressor for the MP7.\n##10% shorter## overall range.\n##7.5% slower## ADS speeds."	
 		--Extended Mag
 		or DMCWO.reelnaems == true and string_id == "bm_wp_mp7_m_extended" and "MP7 40rnd Magazine"
 		or string_id == "bm_wp_mp7_m_extended_desc" and "##5% slower## reload speeds."
@@ -984,12 +1007,12 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_w_peacemaker_desc" and "An American single-action revolver chambered in .45 Colt.\nCan pierce enemies, walls and shields.\nBenefits from pistol skills.\n\n\"This is the best handgun ever made\""
 		--Long
 		or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_barrel_long" and "12\" Barrel"
-		or string_id == "bm_wp_peacemaker_barrel_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
+		or string_id == "bm_wp_peacemaker_barrel_long_desc" and "##20% longer## overall range.\n##5% slower## ADS speeds."
 		--Short
 		or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_barrel_short" and "5.5\" Barrel"
 		or string_id == "bm_wp_peacemaker_barrel_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
 		--Grip
-		or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_handle_bling" and "Engraved Grip"
+		or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_handle_bling" and "Engraved SAA Grips"
 		--Stock
 		or DMCWO.reelnaems == true and string_id == "bm_wp_peacemaker_rifle_stock" and "Skeletal Stock"
 			
@@ -1001,7 +1024,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_winchester_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 		--Supp
 		or DMCWO.reelnaems == true and string_id == "bm_wp_winchester_b_suppressed" and "Suppressor"
-		or string_id == "bm_wp_winchester_b_suppressed_desc" and "A ##medium## suppressor.\n##20% shorter## overall range.\n##7.5% slower## ADS speeds."
+		or string_id == "bm_wp_winchester_b_suppressed_desc" and "A ##medium## suppressor.\n##10% shorter## overall range.\n##7.5% slower## ADS speeds."
 		
 		or string_id == "bm_wp_winchester_sniper_scope_desc" and "High power scope\n##10% slower## ADS speeds."
 		
@@ -1009,19 +1032,23 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_w_plainsrider_desc" and "A wooden bow and arrow.\nCan fire explosive tipped arrows.\nNon-exploded arrows can be retrieved and fired again.\nNo police ammobox pickups."
 		
 		--[[TOASTY]]
-		or string_id == "bm_w_flamethrower_mk2_desc" and "A flamethrower capable of shooting out to 20 meters.\n30% chance to set your target aflame.\nNo police ammobox pickups."
-	
+		or string_id == "bm_w_flamethrower_mk2_desc" and "A gasoline flamethrower capable of shooting out to 20 meters.\nCan also use propane and napalm.\n50% chance to set targets aflame within 15 meters.\nThis weapon cannot deal critical hits.\nNo police ammobox pickups."
+		or string_id == "bm_wp_fla_mk2_mag_rare" and "Propane"
+		or string_id == "bm_wp_fla_mk2_mag_rare_desc" and "Use propane as fuel instead of gasoline.\nEffective range ##decreased to 10 meters.\n25% chance## to set targets aflame within ##7.5 meters.##"
+		or string_id == "bm_wp_fla_mk2_mag_welldone" and "Napalm"
+		or string_id == "bm_wp_fla_mk2_mag_welldone_desc" and "Use napalm as fuel instead of gasoline.\nEffective range ##increased to 30 meters.\n75% chance## to set targets aflame within ##22.5 meters.##"
+		
 		--[[TOGUSA]] --GiTS references abound!
 		or DMCWO.reelnaems == true and string_id == "bm_w_mateba" and "Mateba 2006M"
 		or string_id == "bm_w_mateba_desc" and "An Italian revolver chambered in .357 Magnum.\nCan pierce enemies and walls\nBenefits from pistol skills.\n\n\"Ангелы и демоны кружили надо мной,\nРазбивали тернии и звёздные пути,\nНе знает счастья только тот,\nКто его зова понять не смог\""
 		--Long
-		or DMCWO.reelnaems == true and string_id == "bm_wp_2006m_b_long" and "Major Barrel"
-		or string_id == "bm_wp_2006m_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
+		or DMCWO.reelnaems == true and string_id == "bm_wp_2006m_b_long" and "8\" Barrel"
+		or string_id == "bm_wp_2006m_b_long_desc" and "##10% longer## overall range.\n##5% slower## ADS speeds."
 		--Med
-		or DMCWO.reelnaems == true and string_id == "bm_wp_2006m_b_medium" and "Batou Barrel"
+		or DMCWO.reelnaems == true and string_id == "bm_wp_2006m_b_medium" and "5\" Barrel"
 		--Short
-		or DMCWO.reelnaems == true and string_id == "bm_wp_2006m_b_short" and "Togusa Barrel"
-		or string_id == "bm_wp_2006m_b_short_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds." 
+		or DMCWO.reelnaems == true and string_id == "bm_wp_2006m_b_short" and "2\" Barrel"
+		or string_id == "bm_wp_2006m_b_short_desc" and "##15% shorter## overall range.\n##5% faster## ADS speeds." 
 		
 		--[[AS Val]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_asval" and "Tula Arms AS \"Val\""
@@ -1042,7 +1069,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_wp_sub2000_fg_railed" and "Red Lion R6 Handguard"
 		or string_id == "bm_wp_sub2000_fg_railed_desc" and "##5% slower## ADS speeds."
 		or DMCWO.reelnaems == true and string_id == "bm_wp_sub2000_fg_suppressed" and "Quad Rail Handguard w/Suppressor"
-		or string_id == "bm_wp_sub2000_fg_suppressed_desc" and "A ##large## 9mm suppressor.\n##20% shorter## overall range.\n##10% slower## ADS speeds."
+		or string_id == "bm_wp_sub2000_fg_suppressed_desc" and "A ##large## 9mm suppressor.\n##10% shorter## overall range.\n##10% slower## ADS speeds."
 		
 		--XXX Boner
 		or DMCWO.reelnaems == true and string_id == "bm_w_hunter" and "Avalanche CB1-50 Pistol Grip Crossbow"
@@ -1062,7 +1089,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_wa2000_b_long_desc" and "##15% longer## overall range.\n##7.5% slower## ADS speeds."
 		--Supp.
 		or DMCWO.reelnaems == true and string_id == "bm_wp_wa2000_b_suppressed" and "Suppressor"
-		or string_id == "bm_wp_wa2000_b_suppressed_desc" and "A ##large## suppressor.\n##20% shorter## overall range.\n##10% slower## ADS speeds."
+		or string_id == "bm_wp_wa2000_b_suppressed_desc" and "A ##large## suppressor.\n##10% shorter## overall range.\n##10% slower## ADS speeds."
 		--Light
 		or DMCWO.reelnaems == true and string_id == "bm_wp_wa2000_g_light" and "Lightweight Furniture"
 		or string_id == "bm_wp_wa2000_g_light_desc" and "##5% faster## ADS speeds.\n##10% faster## movement."
@@ -1080,7 +1107,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_polymer_barrel_precision_desc" and "##20% longer## overall range.\n##10% slower## ADS speeds."
 		--Supp
 		or DMCWO.reelnaems == true and string_id == "bm_wp_polymer_ns_silencer" and "Defiance HPS 4GSK Suppressor"
-		or string_id == "bm_wp_polymer_ns_silencer_desc" and "A ##specialized## suppressor.\n##20% shorter## overall range.\n##10% slower## ADS speeds."
+		or string_id == "bm_wp_polymer_ns_silencer_desc" and "A ##specialized## suppressor.\n##10% shorter## overall range.\n##10% slower## ADS speeds."
 		
 		--[[JERRY CAN]]
 		or DMCWO.reelnaems == true and string_id == "bm_w_sparrow" and "IMI Jericho 941 RPL"
@@ -1122,13 +1149,13 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_aug_body_f90_desc" and "ROF ##raised## to ##850 RPM.##"
 		--SALVO
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_sho_salvo_large" and "SilencerCo Salvo 12 Suppressor"
-		or string_id == "bm_wp_upg_ns_sho_salvo_large_desc" and "A ##large## shotgun suppressor.\n##20% shorter## overall range.\n##10% slower## ADS speeds."
+		or string_id == "bm_wp_upg_ns_sho_salvo_large_desc" and "A ##large## shotgun suppressor.\n##10% shorter## overall range.\n##10% slower## ADS speeds."
 		--MP9 Suppressor
 		or DMCWO.reelnaems == true and string_id == "bm_wp_mp9_b_suppressed" and "B&T MP9 QD Suppressor"
 		or string_id == "bm_wp_mp9_b_suppressed_desc" and "##Internally suppressed## barrel.\n##20% slower## ADS speeds."
 		--BIG BOSS
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_pis_jungle" and "Big Boss Suppressor"
-		or string_id == "bm_wp_upg_ns_pis_jungle_desc" and "A ##large## pistol suppressor.\n##20% shorter## overall range.\n##10% slower## ADS speeds."
+		or string_id == "bm_wp_upg_ns_pis_jungle_desc" and "A ##large## pistol suppressor.\n##10% shorter## overall range.\n##10% slower## ADS speeds."
 		--Filter
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_filter" and "Filter Suppressor"
 		or string_id == "bm_wp_upg_ns_ass_filter_desc" and "An ##improvised## pistol suppressor.\n##10% shorter## overall range.\n##10% slower## ADS speeds."
@@ -1165,7 +1192,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_upg_ak_m_uspalm_desc" and "##5% faster## reload speeds."
 		--PBS Suppressor
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_pbs1" and "PBS-1 Suppressor"
-		or string_id == "bm_wp_upg_ns_ass_pbs1_desc" and "##15% shorter## overall range.\n##20% slower## ADS speeds."
+		or string_id == "bm_wp_upg_ns_ass_pbs1_desc" and "##10% shorter## overall range.\n##20% slower## ADS speeds."
 		--DMR Kit
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ass_ak_b_zastava" and "Zastava M76 Barrel"
 		or string_id == "bm_wp_upg_ass_ak_b_zastava_desc" and "##Sniper class barrel.##\n##30% longer## overall range.\n##10% greater## minimum damage.\n##10% slower## ADS speeds."
@@ -1205,7 +1232,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--Bipod
 		or string_id == "bm_wp_upg_lmg_lionbipod" and "Bipod"
-		or string_id == "bm_wp_upg_lmg_lionbipod_desc_pc" and "Toggle bipod deployment by pressing " .. managers.localization:btn_macro("deploy_bipod", true) .. ".\n##75% less## vertical recoil ##when deployed.\n50% less## horizontal recoil ##when deployed.\n7.5% slower## ADS speeds."
+		or string_id == "bm_wp_upg_lmg_lionbipod_desc_pc" and "Deployable bipod.\n##75% less## vertical recoil ##when deployed.\n50% less## horizontal recoil ##when deployed.\n7.5% slower## ADS speeds."
 		
 		--Single Fire
 		or string_id == "bm_wp_upg_i_singlefire" and "Single Fire Mod"
@@ -1219,31 +1246,32 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		
 		--Pistol Light
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_pis_tlr1" and "Streamlight TLR1"
-		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_pis_tlr1_desc" and "Toggleable flashlight."
+		or string_id == "bm_wp_upg_fl_pis_tlr1_desc" and "Toggleable flashlight."
 		--Pistol Laser
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_pis_laser" and "Aim Sports LH002 Laser Sight" 
 		or string_id == "bm_wp_upg_fl_pis_laser_desc" and "Toggleable laser/flashlight.\n##15% tighter## hipfire while the ##laser is on.##"
 		--Pistol Laser
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_x400v" and "SureFire X400V-IRC"
-		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_x400v_desc" and "Toggleable laser/flashlight.\n##15% tighter## hipfire while the ##laser is on.##"
-		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_crimson_desc" and "Toggleable laser.\n##15% tighter## hipfire while the ##laser is on.##"
+		or string_id == "bm_wp_upg_fl_x400v_desc" and "Toggleable laser/flashlight.\n##15% tighter## hipfire while the ##laser is on.##"
+		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_crimson" and "Crimson Trace CMR-201"
+		or string_id == "bm_wp_upg_fl_crimson_desc" and "Toggleable laser.\n##15% tighter## hipfire while the ##laser is on.##"
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_pis_g_laser" and "Crimson Trace Glock Laser Grip"
-		or DMCWO.reelnaems == true and string_id == "bm_wp_pis_g_laser_desc" and "Toggleable laser.\n##15% tighter## hipfire while the ##laser is on.##"
+		or string_id == "bm_wp_pis_g_laser_desc" and "Toggleable laser.\n##15% tighter## hipfire while the ##laser is on.##"
 		or DMCWO.reelnaems == true and string_id == "bm_wp_pis_g_beavertail" and "Beavertail Grip Extension"
 		
 		--Assault Light
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_smg_sho_surefire" and "Surefire Scout Light" 
-		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_smg_sho_surefire_desc" and "Toggleable flashlight."
+		or string_id == "bm_wp_upg_fl_ass_smg_sho_surefire_desc" and "Toggleable flashlight."
 		--Compact Laser
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_laser" and "Offset Laser Mount & Sight"
-		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_laser_desc" and "Toggleable laser.\n##15% tighter## hipfire while the ##laser is on.##"
+		or string_id == "bm_wp_upg_fl_ass_laser_desc" and "Toggleable laser.\n##15% tighter## hipfire while the ##laser is on.##"
 		--Tactical Laser
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_smg_sho_peqbox" and "Insight Technology AN/PEQ-5"
-		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_smg_sho_peqbox_desc" and "Toggleable laser.\n##15% tighter## hipfire while the ##laser is on.##"
+		or string_id == "bm_wp_upg_fl_ass_smg_sho_peqbox_desc" and "Toggleable laser.\n##15% tighter## hipfire while the ##laser is on.##"
 		--Military Laser 
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_peq15" and "Insight Technology AN/PEQ-15"
-		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_fl_ass_peq15_desc" and "Toggleable laser/flashlight by pressing.\n##15% tighter## hipfire while the ##laser is on.##"
+		or string_id == "bm_wp_upg_fl_ass_peq15_desc" and "Toggleable laser/flashlight by pressing.\n##15% tighter## hipfire while the ##laser is on.##"
 	
 		--Shark Teeth
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_shot_shark" and "Tromix Shark Breaching Brake"
@@ -1256,35 +1284,35 @@ if RequiredScript == "lib/managers/localizationmanager" then
 	
 		--Low Profile Suppressor
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_smg_small" and "GemTech HALO Suppressor" --not 100% but I can't find any other suppressor that is similar to this one's two-piece construction and the ability to wrap around an A2 style muzzle brake
-		or string_id == "bm_wp_upg_ns_ass_smg_small_desc" and "A ##small## pistol suppressor.\n##50% shorter## overall range."
+		or string_id == "bm_wp_upg_ns_ass_smg_small_desc" and "A ##small## pistol suppressor.\n##40% shorter## overall range."
 		--Medium Suppressor
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_smg_medium" and "Small Arms Industries M80 Suppressor" --Thanks Overkill for being vauge as fuck, I'm surprised I even found this
-		or string_id == "bm_wp_upg_ns_ass_smg_medium_desc" and "A ##medium## suppressor.\n##40% shorter## overall range.\n##5% slower## ADS speeds."
+		or string_id == "bm_wp_upg_ns_ass_smg_medium_desc" and "A ##medium## suppressor.\n##30% shorter## overall range.\n##5% slower## ADS speeds."
 		--Bigger the Better **Don't know
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_ass_smg_large" and "Large Suppressor"
-		or string_id == "bm_wp_upg_ns_ass_smg_large_desc" and "A ##large## suppressor.\n##30% shorter## overall range.\n##7.5% slower## ADS speeds."
+		or string_id == "bm_wp_upg_ns_ass_smg_large_desc" and "A ##large## suppressor.\n##20% shorter## overall range.\n##7.5% slower## ADS speeds."
 		
 		--Size Doesn't Matter 
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_pis_small" and "Thompson Machine Poseidon Suppressor"	
-		or string_id == "bm_wp_upg_ns_pis_small_desc" and "A ##small## pistol suppressor.\n##50% shorter## overall range."	
+		or string_id == "bm_wp_upg_ns_pis_small_desc" and "A ##small## pistol suppressor.\n##40% shorter## overall range."	
 		--Standard Issue
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_pis_medium" and "GemTech SFN Suppressor" --Close enough... it's sectioned similarly enough for me to just name it this
-		or string_id == "bm_wp_upg_ns_pis_medium_desc" and "A ##medium## pistol suppressor.\n##40% shorter## overall range.\n##5% slower## ADS speeds."
+		or string_id == "bm_wp_upg_ns_pis_medium_desc" and "A ##medium## pistol suppressor.\n##30% shorter## overall range.\n##5% slower## ADS speeds."
 		--Monolith 
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_pis_large" and "SilencerCo Osprey Suppressor"
-		or string_id == "bm_wp_upg_ns_pis_large_desc" and "A ##large## pistol suppressor.\n##30% shorter## overall range.\n##7.5% slower## ADS speeds."
+		or string_id == "bm_wp_upg_ns_pis_large_desc" and "A ##large## pistol suppressor.\n##20% shorter## overall range.\n##7.5% slower## ADS speeds."
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_medium_gem" and "GemTech Blackside Suppressor"
-		or string_id == "bm_wp_upg_ns_medium_gem_desc" and "A ##medium## pistol suppressor.\n##40% shorter## overall range.\n##5% slower## ADS speeds."
+		or string_id == "bm_wp_upg_ns_medium_gem_desc" and "A ##medium## pistol suppressor.\n##30% shorter## overall range.\n##5% slower## ADS speeds."
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_large_kac" and "KAC MK.23 Suppressor"
-		or string_id == "bm_wp_upg_ns_large_kac_desc" and "A ##large## pistol suppressor.\n##30% shorter## overall range.\n##7.5% slower## ADS speeds."
+		or string_id == "bm_wp_upg_ns_large_kac_desc" and "A ##large## pistol suppressor.\n##20% shorter## overall range.\n##7.5% slower## ADS speeds."
 		
-		or string_id == "bm_wp_upg_ns_pis_medium_slim_desc" and "A ##specialized## pistol suppressor.\n##20% shorter## overall range.\n##7.5% slower## ADS speeds."
+		or string_id == "bm_wp_upg_ns_pis_medium_slim_desc" and "A ##specialized## pistol suppressor.\n##10% shorter## overall range.\n##7.5% slower## ADS speeds."
 		
 		--Shotgun Suppressor
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_shot_thick" and "Shotgun Suppressor"
-		or string_id == "bm_wp_upg_ns_shot_thick_desc" and "A ##medium## shotgun suppressor.\n##30% shorter## overall range.\n##5% slower## ADS speeds."
+		or string_id == "bm_wp_upg_ns_shot_thick_desc" and "A ##medium## shotgun suppressor.\n##20% shorter## overall range.\n##5% slower## ADS speeds."
 		
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_ns_meatgrinder" and "Standoff Muzzle Device"
 		
@@ -1466,6 +1494,8 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_vg_ass_smg_afg" and "Magpul AFG 2"
 		or string_id == "bm_wp_upg_vg_ass_smg_afg_desc" and "##10% more## recoil recovery."
 		
+		or string_id == "vfg_akimbo" and "Uhh..."
+		
 		
 		--Dragons Breath
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_a_dragons_breath" and "Dragon's Breath Rounds"
@@ -1473,7 +1503,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_upg_a_dragons_breath_auto" and "Pellets capable of ##setting targets on fire.##\nFire ##8 pellets.##\n##50% chance## to set targets aflame within ##30m.##\nROF ##lowered## by ##10%.##"
 		--AP Slug
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_a_slug" and "Armor Piercing SABOT Slugs"
-		or string_id == "bm_wp_upg_a_slug_desc" and "A slug capable of ##piercing through enemies, walls and shields.\nNo critical hits.##\n##150% longer## drop-off range."
+		or string_id == "bm_wp_upg_a_slug_desc" and "A slug capable of ##piercing through enemies, walls and shields.\n##150% longer## drop-off range."
 		--Birdshot (originally the free 000 Buck)
 		or string_id == "bm_wp_upg_a_bird" and "Birdshot"
 		or string_id == "bm_wp_upg_a_bird_desc" and "Shoot tiny pellets for ##greater pellet coverage.##\nShoot ##50 pellets.##\n##CAN CAUSE FPS DROPS ON LOW END SYSTEMS##"
@@ -1488,7 +1518,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_wp_upg_a_piercing_judge" and "Darts capable of ##penetrating MFR armor.##\nFire ##10 darts.##\n##40% longer## max damage range."
 		--HE
 		or DMCWO.reelnaems == true and string_id == "bm_wp_upg_a_explosive" and "Fragmentation Rounds"
-		or string_id == "bm_wp_upg_a_explosive_desc" and "Fin stabilized rounds that ##explode on impact.\nNo critical hits.##\nShoot ##1 explosive## projectile.\n##2 meter## blast radius."
+		or string_id == "bm_wp_upg_a_explosive_desc" and "Fin stabilized rounds that ##explode on impact.\nInfinite ammo effects and critical hits are disabled.##\nShoot ##1 explosive## projectile.\n##2 meter## blast radius."
 		
 		--Hollow Points
 		or string_id == "bullet_hollow" and "Hollow Point Ammunition"
@@ -1519,7 +1549,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bullet_300_win_r93_desc" and "Rechambers this weapon in .300 Winchester Magnum.\n##10% shorter## overall range."
 		--300 Winchester
 		or string_id == "bullet_beo" and ".50 Beowulf Ammunition"
-		or string_id == "bullet_beo_desc" and "##Requires the Beowulf Barrel and 20rnd STANAG.##\n##No critical hits or suppressors.##\n##25% longer## max damage range.\n##25% shorter## drop-off range."
+		or string_id == "bullet_beo_desc" and "##Requires the Beowulf Barrel.##\n##No suppressors.##\n##25% longer## max damage range.\n##25% shorter## drop-off range."
 		
 		--Taser
 		or string_id == "shell_taser" and "Taser Rounds"
@@ -1567,11 +1597,14 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		--AN94
 		or string_id == "an94_burst" and "94 Kit"
 		or string_id == "an94_burst_desc" and "Allows this weapon switch to ##2-round bursts.##\nBase ROF ##lowered## to ##600 RPM.##\nThe first ##2## shots in a burst start at ##1800 RPM.##"
+		--AN94
+		or string_id == "casanave" and "HMWS Kit"
+		or string_id == "casanave_desc" and "ROF ##lowered## to ##550 RPM.##"
 		
 		--boosts
 		or string_id == "bm_menu_bonus_concealment" and "Concealment Modifier"
 		or string_id == "bm_menu_bonus_concealment_desc" and ""
-		or string_id == "bm_menu_bonus_concealment_fire" and "##5% slower## movement."
+		or string_id == "bm_menu_bonus_concealment_1_fire" and "##5% slower## movement."
 		
 		or string_id == "bm_menu_bonus_spread" and "Accuracy Modifier"
 		or string_id == "bm_menu_bonus_spread_desc" and ""
@@ -1579,11 +1612,11 @@ if RequiredScript == "lib/managers/localizationmanager" then
 		or string_id == "bm_menu_bonus_recoil" and "Stability Modifier"
 		or string_id == "bm_menu_bonus_recoil_desc" and ""
 		
-		or string_id == "bm_menu_bonus_damage" and "Range Modifier"
+		or string_id == "bm_menu_bonus_damage" and "Firerate Modifier"
 		or string_id == "bm_menu_bonus_damage_desc" and ""
-		or string_id == "bm_menu_bonus_damage_1" and "##5% longer## overall range."
-		or string_id == "bm_menu_bonus_damage_1_fire" and "##5% slower## movement."
-		or string_id == "bm_menu_bonus_damage_2" and "##10% longer## overall range."
+		or string_id == "bm_menu_bonus_damage_1" and "ROF ##raised## by ##15%.##"
+		or string_id == "bm_menu_bonus_damage_1_fire" and "ROF ##raised## by ##50%.\n10% slower## movement."
+		or string_id == "bm_menu_bonus_damage_2" and "ROF ##raised## by ##30%.##"
 		
 		or string_id == "bm_menu_bonus_total_ammo" and "Total Ammo Modifier"
 		or string_id == "bm_menu_bonus_total_ammo_desc" and ""
@@ -1825,7 +1858,7 @@ if RequiredScript == "lib/managers/localizationmanager" then
 			
 		or testAllStrings == true and string_id
 		or text_original(self, string_id, ...)
-		
+				
 	end
 
 

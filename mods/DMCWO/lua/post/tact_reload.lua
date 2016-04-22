@@ -17,7 +17,7 @@ if RequiredScript == "lib/tweak_data/weapontweakdata" then
 			self[ wep_id ].tactical_reload = 1
 		end
 	
-		local tact_akimbo = {'x_deagle','x_1911','x_b92fs','jowi','x_usp','x_g17','x_g22c','x_sr2'}
+		local tact_akimbo = {'x_deagle','x_1911','x_b92fs','jowi','x_usp','x_g17','x_g22c','x_sr2','x_mp5','x_akmsu'}
 		for i, wep_id in ipairs(tact_akimbo) do
 			self[ wep_id ].tactical_reload = 2
 		end

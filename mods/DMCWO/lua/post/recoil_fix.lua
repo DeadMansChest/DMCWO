@@ -38,7 +38,7 @@ end
 
 function FPCameraPlayerBase:_vertical_recoil_kick(t, dt)
 	local r_value = 0
-	local player_state = managers.player:player_unit():movement():current_state()
+	local player_state = self._parent_unit:movement():current_state()
 	local weapon = self._parent_unit:inventory():equipped_unit()
 	local center_speed = weapon and self._parent_unit:inventory():equipped_unit():base()._center_speed
 	if center_speed < 5 then
@@ -80,7 +80,7 @@ end
 
 function FPCameraPlayerBase:_horizonatal_recoil_kick(t, dt)
 	local r_value = 0
-	local player_state = managers.player:player_unit():movement():current_state()
+	local player_state = self._parent_unit:movement():current_state()
 	local weapon = self._parent_unit:inventory():equipped_unit()
 	local center_speed = weapon and self._parent_unit:inventory():equipped_unit():base()._center_speed
 	if center_speed < 5 then

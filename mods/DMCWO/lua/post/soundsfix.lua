@@ -8,6 +8,9 @@ tweak_data.weapon.mg42.sounds.fire = "mg42_fire"
 tweak_data.weapon.mg42.sounds.fire_single = "mg42_fire"
 tweak_data.weapon.m134.sounds.fire = "minigun_fire"
 tweak_data.weapon.m134.sounds.fire_single = "minigun_fire"
+tweak_data.weapon.x_sr2.sounds.fire_single = "sr2_x_fire"
+tweak_data.weapon.x_mp5.sounds.fire_single = "mp5_x_fire"
+tweak_data.weapon.x_akmsu.sounds.fire_single = "akmsu_x_fire"
 
 -- Header comment that will likely be deleted. This was made by 90e.
 -- Reverb fixed by Doctor Mister Cool

@@ -496,7 +496,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 			damage_far_mul = 1.15, 
 			damage_far_mul = 1.15,
 			ammo_pickup_min_set = 0.50, 
-			ammo_pickup_max_set = 2.40,
+			ammo_pickup_max_set = 2.20,
 		},
 		internal_part = true,
 		sub_type = "singlefire"
@@ -528,7 +528,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 			damage_far_mul = 0.90, 
 			damage_far_mul = 0.90,
 			ammo_pickup_min_set = 0.50, 
-			ammo_pickup_max_set = 2.40,
+			ammo_pickup_max_set = 2.20,
 		},
 		desc_id = "bullet_300_win_r93_desc"
 	}
@@ -765,6 +765,23 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		desc_id = "bm_wp_upg_a_bird_judge",
 		custom_stats = { rays = 30, damage_near_mul = 0.5, ammo_pickup_min_mul = 1.025, ammo_pickup_max_mul = 1.05, damage_far_mul = 0.9}
 	}
+	self.parts.beowulf_block = {
+		type = "extra",
+		name_id = "bullet_beo",
+		a_obj = "a_body",
+		unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		stats = { value = 1	},
+		forbids = { "beowulf" }
+	}
+	
+	weapon_factory_ids = { "wpn_fps_m4_uupg_b_short", "wpn_fps_m4_uupg_b_long","wpn_fps_m4_uupg_b_medium_vanilla","wpn_fps_m4_uupg_b_sd" }
+	
+	for i, factory_id in ipairs(weapon_factory_ids) do
+		if not self.parts[factory_id].adds then
+			self.parts[factory_id].adds = {}
+		end
+		table.insert(self.parts[factory_id].adds, "beowulf_block")
+	end
 	
 	self.parts.beowulf = {
 		pcs = {},
@@ -800,10 +817,15 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		internal_part = true,
 		sub_type = "ammo_poison",
 		forbids = {
-			"wpn_fps_m4_uupg_b_short", "wpn_fps_m4_uupg_b_long","wpn_fps_m4_uupg_b_medium_vanilla","wpn_fps_m4_uupg_b_sd",
 			"wpn_fps_upg_ns_ass_smg_large","wpn_fps_upg_ns_ass_smg_medium","wpn_fps_upg_ns_ass_smg_small",
-			"wpn_fps_m4_uupg_m_std_vanilla","wpn_fps_m4_uupg_m_std","wpn_fps_upg_m4_m_pmag","wpn_fps_upg_m4_m_quad","wpn_fps_upg_m4_m_drum","wpn_fps_ass_l85a2_m_emag","wpn_fps_upg_m4_m_l5",
+			"wpn_fps_m4_uupg_m_std","wpn_fps_upg_m4_m_pmag","wpn_fps_upg_m4_m_quad","wpn_fps_upg_m4_m_drum","wpn_fps_ass_l85a2_m_emag","wpn_fps_upg_m4_m_l5",
 		},
+		override = {
+			wpn_fps_m4_uupg_m_std_vanilla = {
+				unit = "units/payday2/weapons/wpn_fps_upg_m4_reusable/wpn_fps_upg_m4_m_straight",
+				third_unit = "units/payday2/weapons/wpn_third_ass_m4_pts/wpn_third_m4_uupg_m_std"
+			}
+		}
 	}
 	for i, factory_id in ipairs(self.parts.beowulf.forbids) do
 		if not self.parts[factory_id].forbids then
@@ -812,12 +834,30 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		table.insert(self.parts[factory_id].forbids, "beowulf")
 	end
 	
-	local nato_ar_br = {
+	weapon_factory_ids = {
 		'wpn_fps_ass_m4','wpn_fps_ass_m16'
 	}
-	for i, factory_id in ipairs(nato_ar_br) do
+	for i, factory_id in ipairs(weapon_factory_ids) do
 		table.insert(self[factory_id].uses_parts, "beowulf")
 	end
+	
+	self.wpn_fps_ass_m4.override.beowulf = { 
+		stats = { value = 10, damage = 52, spread = -8, recoil = -50, total_ammo_mod = -144, extra_ammo = -23 },
+		custom_stats = {
+			damage_far_mul = 0.75,
+			damage_min_mul = 1.15,
+			r_recover = 0.5,
+			ammo_pickup_min_mul = 0.15,
+			ammo_pickup_max_mul = 0.15,
+			penetration_power_mult = 2,
+			penetration_damage_mult = 2,
+			no_crits = true,
+			can_shoot_through_enemy = true,
+			can_shoot_through_shield = true,
+			armor_piercing_add = 1,
+			reload_speed_mult = 1.15
+		}
+	}
 	
 	self.parts.schnellfeuer = {
 		pcs = {},
@@ -832,9 +872,9 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		stats = {
 			value = 10,
 			spread = -2, 
-			recoil = -10
+			recoil = -12
 		},
-		custom_stats = {rof_mult = 2.2222222222222222222222222222222, block_eq_aced = true, hipfire_mod = 1.2, enable_selector = true},
+		custom_stats = {rof_mult = 2.2222222222222222222222222222222, block_eq_aced = true, hipfire_mod = 1.2, can_switch_selector = true},
 		internal_part = true,
 		sub_type = "autofire",
 		forbids = {
@@ -863,10 +903,10 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		stats = {value = 2, recoil = 4, concealment = -3}
 	}
 	
-	local ar15 = {
+	weapon_factory_ids = {
 		'wpn_fps_ass_amcar','wpn_fps_smg_olympic','wpn_fps_ass_m4'
 	}
-	for i, factory_id in ipairs(ar15) do
+	for i, factory_id in ipairs(weapon_factory_ids) do
 		table.insert(self[factory_id].uses_parts, "m16_stock")
 	end
 	
@@ -881,7 +921,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		dlc = "dmcwo",
 		is_a_unlockable = true,
 		alt_icon = "guis/dlcs/gage_pack_historical/textures/pd2/blackmarket/icons/mods/wpn_fps_pis_c96_sight",
-		stats = { value = 1, zoom = 8, recoil = 1, concealment = -3},
+		stats = { value = 8, zoom = 8, recoil = 1, concealment = -3},
 		custom_stats = { ads_speed_mult = 0.925 },
 		forbids = { "wpn_fps_amcar_uupg_body_upperreciever",  "wpn_fps_ass_scar_o_flipups_up", "wpn_fps_ass_m16_o_handle_sight", "wpn_fps_ass_l85a2_o_standard","wpn_fps_ass_sub2000_o_back","wpn_fps_m4_uupg_o_flipup","loli_butts"  },
 		texture_switch = {
@@ -957,12 +997,12 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		}
 	}
 	
-	local weapon_factory_ids = {
+	weapon_factory_ids = {
 		"wpn_fps_lmg_mg42","wpn_fps_lmg_hk21","wpn_fps_lmg_m249","wpn_fps_lmg_rpk","wpn_fps_lmg_par",
 		
 		"wpn_fps_ass_74","wpn_fps_ass_akm","wpn_fps_ass_akm_gold","wpn_fps_smg_akmsu","wpn_fps_ass_asval",
 		
-		"wpn_fps_smg_olympic","wpn_fps_ass_amcar","wpn_fps_ass_s552","wpn_fps_ass_g36","wpn_fps_ass_sub2000",
+		"wpn_fps_smg_olympic","wpn_fps_ass_amcar","wpn_fps_ass_s552","wpn_fps_ass_g36","wpn_fps_ass_sub2000","wpn_fps_smg_x_akmsu",
 		
 		"wpn_fps_ass_aug","wpn_fps_ass_famas","wpn_fps_ass_l85a2","wpn_fps_ass_vhs",
 		
@@ -970,7 +1010,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		
 		"wpn_fps_ass_m14","wpn_fps_ass_fal","wpn_fps_ass_galil","wpn_fps_ass_g3","wpn_fps_ass_scar",
 		
-		"wpn_fps_smg_mp9","wpn_fps_smg_mp5","wpn_fps_smg_thompson","wpn_fps_smg_mac10","wpn_fps_smg_m45","wpn_fps_smg_uzi","wpn_fps_smg_scorpion","wpn_fps_smg_tec9","wpn_fps_smg_sterling","wpn_fps_smg_polymer",
+		"wpn_fps_smg_mp9","wpn_fps_smg_mp5","wpn_fps_smg_thompson","wpn_fps_smg_mac10","wpn_fps_smg_m45","wpn_fps_smg_uzi","wpn_fps_smg_scorpion","wpn_fps_smg_tec9","wpn_fps_smg_sterling","wpn_fps_smg_polymer","wpn_fps_smg_x_mp5",
 		
 		"wpn_fps_smg_p90","wpn_fps_smg_mp7","wpn_fps_smg_sr2","wpn_fps_smg_x_sr2",
 		
@@ -1021,7 +1061,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		
 	--table.insert(self.wpn_fps_lmg_rpk.uses_parts, "ak_45_mag")
 	
-	local asdfs = { "wpn_fps_smg_akmsu","wpn_fps_ass_74","wpn_fps_ass_akm","wpn_fps_ass_akm_gold"}
+	local asdfs = { "wpn_fps_smg_akmsu","wpn_fps_ass_74","wpn_fps_ass_akm","wpn_fps_ass_akm_gold",'wpn_fps_smg_x_akmsu'}
 	for i, factory_id in ipairs(asdfs) do
 		table.insert(self[factory_id].uses_parts, "ak_45_mag")
 		self[factory_id].override.ak_45_mag = {
@@ -1135,6 +1175,32 @@ function WeaponFactoryTweakData:DMCWO_mods()
 	}
 	
 	table.insert(self.wpn_fps_ass_74.uses_parts, "an94_burst")
+	
+	self.parts.casanave = {
+		pcs = {},
+		type = "custom",
+		name_id = "casanave",
+		a_obj = "a_body",
+		unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		third_unit = "units/payday2/weapons/wpn_upg_dummy/wpn_upg_dummy",
+		dlc = "dmcwo",
+		is_a_unlockable = true,
+		alt_icon = "guis/textures/pd2/blackmarket/icons/mods/wpn_fps_upg_i_autofire",
+		stats = {
+			value = 5,
+			spread = 0,
+			recoil = 2
+		},
+		custom_stats = { 
+			rof_mult = 0.84615384615384615384615384615385
+		},
+		internal_part = true,
+		sub_type = "autofire",
+		forbids = {
+		}
+	}
+	
+	table.insert(self.wpn_fps_ass_fal.uses_parts, "casanave")
 end
 
 elseif RequiredScript == "lib/tweak_data/dlctweakdata" then
@@ -1374,6 +1440,17 @@ function DLCTweakData:init(...)
 			amount = 1
 		},
 	}
+	self.dmcwo_sc2010 = {}
+	self.dmcwo_sc2010.free = true
+	self.dmcwo_sc2010.content = {}
+	self.dmcwo_sc2010.content.loot_global_value = "dmcwo"
+	self.dmcwo_sc2010.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "casanave",
+			amount = 1
+		}
+	}
 end
 
 elseif RequiredScript == "lib/tweak_data/lootdroptweakdata" then
@@ -1381,14 +1458,19 @@ elseif RequiredScript == "lib/tweak_data/lootdroptweakdata" then
 old_loot = LootDropTweakData.init
 function LootDropTweakData:init(tweak_data)
 	old_loot(self, tweak_data)
+	for loot_value, i in pairs(self.global_values) do
+		if self.global_values[ loot_value ].value_multiplier then	
+			self.global_values[ loot_value ].value_multiplier = tweak_data:get_value("money_manager", "global_value_multipliers", "superior")
+		end
+	end
 	self.global_values.dmcwo = {}
 	self.global_values.dmcwo.name_id = "loot_dmcwo"
 	self.global_values.dmcwo.desc_id = "loot_dmcwo_desc"
 	self.global_values.dmcwo.color = Color('FF0080')
 	self.global_values.dmcwo.dlc = false
 	self.global_values.dmcwo.chance = 1
-	self.global_values.dmcwo.value_multiplier = tweak_data:get_value("money_manager", "global_value_multipliers", "infamous")
-	self.global_values.dmcwo.durability_multiplier = 3
+	self.global_values.dmcwo.value_multiplier = tweak_data:get_value("money_manager", "global_value_multipliers", "superior")
+	self.global_values.dmcwo.durability_multiplier = 1
 	self.global_values.dmcwo.drops = false
 	self.global_values.dmcwo.track = false
 	self.global_values.dmcwo.sort_number = 200

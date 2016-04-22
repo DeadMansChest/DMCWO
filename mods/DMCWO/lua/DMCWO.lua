@@ -73,14 +73,14 @@ DMCWO.reelnaems = true
 --NOTE 2: (Revolver Ocelot)
 --Revolver Ocelot 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
 --Default = false
-DMCWO.ocelot = true
+DMCWO.ocelot = false
 
 --If set to true, renames/changes the descriptions of weapons to their Upotte counter parts (if they've made an appearance)
 --NOTE: This is fucking stupid
 --NOTE 2: Jiisuri is loev. Jiisuri is lyfe.
 --NOTE 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
 --Default = false
-DMCWO.upotte = true
+DMCWO.upotte = false
 
 --}
 
@@ -142,9 +142,15 @@ DMCWO.melee_hs = true
 DMCWO.kenshiroraoraora = false
 
 --If set to true, become Raiden
+--To be more descriptive, doubles the swing speed of the katana but you deal half the damage/knockdown
+--Default = false
 DMCWO.RULESOFNATURE = false
 --AND THEY RUN WHEN THE SUN COMES UP
 --WITH THEIR LIVES ON THE LINE
+
+--If set to true, all characters can dice up cloakers with the katana
+--Default = false
+DMCWO.all_dismember_cloaker = false
 
 --}
 

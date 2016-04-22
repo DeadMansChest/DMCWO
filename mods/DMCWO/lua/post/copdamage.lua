@@ -2,7 +2,9 @@
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
+
 function CopDamage:damage_bullet(attack_data)
+	self._attack_data = attack_data
 	if self._dead or self._invulnerable then
 		return
 	end
@@ -129,28 +131,11 @@ function CopDamage:damage_bullet(attack_data)
 	local headshot_multiplier = 1
 	
 	local hs_mult = attack_data.weapon_unit:base()._hs_mult or 1
-	
-	local no_crits = attack_data.weapon_unit:base()._no_crits or false
-	local stat_damage = attack_data.weapon_unit:base()._check_damage
-	local rays = attack_data.weapon_unit:base()._rays or 1
-	--[[
-	log("\n\nWeapon damage (w/o skills): " .. tostring(stat_damage * 10))
-	log("Raycast count: " .. tostring(rays))
-	log("Damage per ray: " .. tostring( (stat_damage * 10) / rays ))
-	]]
-	
+		
 	if attack_data.attacker_unit == managers.player:player_unit() then
 		local critical_hit, crit_damage = self:roll_critical_hit(damage)
-		if stat_damage and rays and (stat_damage / rays) >= 8 then
-			no_crits = true		
-			--log("Damage per ray exceeds 80! Critical hits will not proc!!")
-		end
-		if unit_type == "tank" and not head then
-			no_crits = true		
-			--log("Ray did not hit the Tank's face! Critical hits will not proc!!")
-		end
-		
-		if critical_hit and no_crits ~= true then
+	
+		if critical_hit then
 			managers.hud:on_crit_confirmed()
 			damage = crit_damage
 		else
@@ -282,38 +267,126 @@ function CopDamage:damage_bullet(attack_data)
 	return result
 end
 
-if DMCWO.melee_hs == true then
+local orig_damage_tase = CopDamage.damage_tase
+function CopDamage:damage_tase(attack_data)
+	self._attack_data = attack_data
+	return orig_damage_tase(self, attack_data)
+end
 
---Melee hsmult code courtesy of SC
+local orig_damage_explosion = CopDamage.damage_explosion
+function CopDamage:damage_explosion(attack_data)
+	self._attack_data = attack_data
+	return orig_damage_explosion(self, attack_data)
+end
+
+local orig_damage_fire = CopDamage.damage_fire
+function CopDamage:damage_fire(attack_data)
+	self._attack_data = attack_data
+	return orig_damage_fire(self, attack_data)
+end
+
+local orig_damage_dot = CopDamage.damage_dot
+function CopDamage:damage_dot(attack_data)
+	self._attack_data = attack_data
+	return orig_damage_dot(self, attack_data)
+end
+
 local melee_original = CopDamage.damage_melee
-function CopDamage:damage_melee(attack_data)
-	local head = self._head_body_name and attack_data.col_ray.body and attack_data.col_ray.body:name() == self._ids_head_body_name
-	local damage = attack_data.damage
-	local headshot_multiplier = 1
-	if attack_data.attacker_unit == managers.player:player_unit() then
-		headshot_multiplier = managers.player:upgrade_value("weapon", "passive_headshot_damage_multiplier", 1)
-		if tweak_data.character[self._unit:base()._tweak_table].priority_shout then
-			damage = damage * managers.player:upgrade_value("weapon", "special_damage_taken_multiplier", 1)
+if DMCWO.melee_hs == true then
+	--Melee hsmult code courtesy of SC
+	function CopDamage:damage_melee(attack_data)
+		self._attack_data = attack_data
+		
+		local head = self._head_body_name and attack_data.col_ray.body and attack_data.col_ray.body:name() == self._ids_head_body_name
+		local damage = attack_data.damage
+		local damage_effect = attack_data.damage_effect
+		local headshot_multiplier = 1
+		if attack_data.attacker_unit == managers.player:player_unit() then
+			headshot_multiplier = managers.player:upgrade_value("weapon", "passive_headshot_damage_multiplier", 1)
+			if tweak_data.character[self._unit:base()._tweak_table].priority_shout then
+				damage = damage * managers.player:upgrade_value("weapon", "special_damage_taken_multiplier", 1)
+			end
+			if head then
+				managers.player:on_headshot_dealt()
+			end
 		end
-		if head then
-			managers.player:on_headshot_dealt()
+		if self._damage_reduction_multiplier then
+			damage = damage * self._damage_reduction_multiplier
+			damage_effect = damage_effect * self._damage_reduction_multiplier
+		elseif head then
+			if self._char_tweak.headshot_dmg_mul then
+				damage = damage * self._char_tweak.headshot_dmg_mul * headshot_multiplier
+				damage_effect = damage_effect * self._char_tweak.headshot_dmg_mul * headshot_multiplier
+			else
+				damage = self._health * 10
+				damage_effect = self._health * 10
+			end
 		end
-	end
-	if self._damage_reduction_multiplier then
-		damage = damage * self._damage_reduction_multiplier
-	elseif head then
-		if self._char_tweak.headshot_dmg_mul then
-			damage = damage * self._char_tweak.headshot_dmg_mul * headshot_multiplier
-		else
-			damage = self._health * 10
-		end
-	end
+		
+		local target_is_spook = (alive(attack_data.col_ray.unit) and attack_data.col_ray.unit:base() and attack_data.col_ray.unit:base()._tweak_table == "spooc") or nil
+		local can_counter_spooc = managers.player:has_category_upgrade("player", "counter_strike_spooc")
 	
-	attack_data.damage = damage
-	
-	return melee_original(self, attack_data)
+		if not target_is_spook then
+			attack_data.damage_effect = damage_effect	
+		elseif target_is_spook and can_counter_spooc then
+			attack_data.damage_effect = damage_effect
+		end
+		attack_data.damage = damage
+		
+		return melee_original(self, attack_data)
+	end
+else
+	function CopDamage:damage_melee(attack_data)
+		self._attack_data = attack_data
+		return melee_original(self, attack_data)
+	end
 end
 
+local critical_hit_original = CopDamage.roll_critical_hit
+function CopDamage:roll_critical_hit(damage)
+	local unit_type = self._unit:base()._tweak_table
+	if self._attack_data then
+		local head = self._head_body_name and self._attack_data.col_ray.body and self._attack_data.col_ray.body:name() == self._ids_head_body_name
+		if self._attack_data.weapon_unit then
+			local no_crits = self._attack_data.weapon_unit:base()._no_crits or false
+			local stat_damage = self._attack_data.weapon_unit:base()._check_damage
+			local rays = self._attack_data.weapon_unit:base()._rays or 1
+		end
+	else
+		return false, damage
+	end
+	self._attack_data = nil
+	if stat_damage and rays and (stat_damage / rays) >= 8 then
+		no_crits = true		
+		--log("Damage per ray exceeds 80! Critical hits will not proc!!")
+	end
+	if unit_type == "tank" and not head then
+		no_crits = true		
+		--log("Ray did not hit the Tank's face! Critical hits will not proc!!")
+	end
+	if no_crits then
+		return false, damage
+	else
+		return critical_hit_original(self, damage)
+	end
 end
+
+if DMCWO.all_dismember_cloaker == true then
+	function CopDamage:_dismember_condition(attack_data)
+		local dismember_victim = false
+		local target_is_spook = false
+		target_is_spook = alive(attack_data.col_ray.unit) and attack_data.col_ray.unit:base() and attack_data.col_ray.unit:base()._tweak_table == "spooc"
+		local criminal_name = managers.criminals:local_character_name()
+		local criminal_melee_weapon = managers.blackmarket:equipped_melee_weapon()
+		local weapon_charged = false
+		weapon_charged = attack_data.charge_lerp_value and attack_data.charge_lerp_value > 0.5
+		if target_is_spook and weapon_charged and criminal_melee_weapon == "sandsteel" then
+			dismember_victim = true
+		end
+		return dismember_victim
+	end
+end
+
+
 
 
