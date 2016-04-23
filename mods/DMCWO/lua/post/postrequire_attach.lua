@@ -236,7 +236,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 			
 	local ru_ammo = {
 		'wpn_fps_lmg_rpk',
-		'wpn_fps_smg_akmsu',
+		'wpn_fps_smg_akmsu','wpn_fps_smg_x_akmsu',
 		'wpn_fps_ass_74','wpn_fps_ass_akm','wpn_fps_ass_akm_gold',
 		'wpn_fps_snp_mosin'
 	}
@@ -250,7 +250,7 @@ function WeaponFactoryTweakData:DMCWO_mods()
 		'wpn_fps_jowi','wpn_fps_x_b92fs','wpn_fps_pis_x_g17',
 		'wpn_fps_pis_g17','wpn_fps_pis_beretta','wpn_fps_pis_g26','wpn_fps_smg_tec9','wpn_fps_pis_pl14',
 		'wpn_fps_pis_g18c','wpn_fps_smg_mp9',
-		'wpn_fps_smg_mp5','wpn_fps_smg_m45','wpn_fps_smg_uzi','wpn_fps_smg_sterling','wpn_fps_smg_cobray','wpn_fps_smg_baka',
+		'wpn_fps_smg_mp5','wpn_fps_smg_m45','wpn_fps_smg_uzi','wpn_fps_smg_sterling','wpn_fps_smg_cobray','wpn_fps_smg_baka','wpn_fps_smg_x_mp5',
 		'wpn_fps_ass_sub2000'
 	}
 	for i, factory_id in ipairs(nine_mm) do
@@ -344,7 +344,9 @@ function WeaponFactoryTweakData:DMCWO_mods()
 	
 	local other_guns = {
 		'wpn_fps_lmg_mg42',
-		'wpn_fps_pis_c96'
+		'wpn_fps_pis_c96',
+		'wpn_fps_smg_sr2',
+		'wpn_fps_smg_x_sr2',
 	}	
 	for i, factory_id in ipairs(other_guns) do
 		table.insert(self[factory_id].uses_parts, "low_ammo")
