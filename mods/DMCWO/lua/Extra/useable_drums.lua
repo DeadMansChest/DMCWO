@@ -27,7 +27,11 @@ local old_saiga_init = WeaponFactoryTweakData._init_saiga
 function WeaponFactoryTweakData:_init_saiga()
 	old_saiga_init(self)
 	self.parts.wpn_upg_saiga_m_20rnd = {
-		pcs = {20, 30, 40},
+		pcs = {
+				20,
+				30,
+				40
+			},
 		type = "magazine",
 		name_id = "bm_wp_saiga_m_20rnd",
 		a_obj = "a_m",
