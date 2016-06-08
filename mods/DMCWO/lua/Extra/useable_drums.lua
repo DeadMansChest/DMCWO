@@ -26,11 +26,21 @@ local old_saiga_init = WeaponFactoryTweakData._init_saiga
 	
 function WeaponFactoryTweakData:_init_saiga()
 	old_saiga_init(self)
-	self.parts.wpn_upg_saiga_m_20rnd.pcs = {
-			20,
-			30,
-			40
+	self.parts.wpn_upg_saiga_m_20rnd = {
+		pcs = {20, 30, 40},
+		type = "magazine",
+		name_id = "bm_wp_saiga_m_20rnd",
+		a_obj = "a_m",
+		unit = "units/payday2/weapons/wpn_fps_shot_saiga_pts/wpn_upg_saiga_m_20rnd",
+		stats = {value = 1, extra_ammo = 6},
+		animations = {
+			reload = "reload",
+			reload_not_empty = "reload_not_empty"
 		}
+	}
+	
+	self.parts.wpn_upg_saiga_m_20rnd.third_unit = "units/payday2/weapons/wpn_third_shot_saiga_pts/wpn_third_saiga_m_20rnd"
+	table.insert(self.wpn_fps_shot_saiga.uses_parts, "wpn_upg_saiga_m_20rnd")
 end
 
 local old_ak_init = WeaponFactoryTweakData._init_ak_parts
