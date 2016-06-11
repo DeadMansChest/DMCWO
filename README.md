@@ -1,32 +1,38 @@
-#DMC's Weapon Overhaul v1.70: "My April Fools joke was me not updating" Edition
-####[I dunno](https://www.youtube.com/watch?v=qy_pK_bhsIY)
-by: DicksMakeCocks
-
-[UC Thread](http://www.unknowncheats.me/forum/payday-2/118582-dmcs-weapon-overhaul.html) 
-
+#DMC's Weapon Overhaul v1.80: "Me, Me, Pump-a-rum" Edition
+####[I'd pump her rum if you know what I mean ;)](https://www.youtube.com/watch?v=1wTndUgskZQ)
 [Steam group](http://steamcommunity.com/groups/DMCWO)
 
-**_Not for use in Pasta Perfection_** 
-(Not that it really could, most of this is just tweaked LUA source values, something PP already does on top of stealing actual code)
 
 ##DISCLAIMER
 Despite being out of pre-release, I'm still changing things left right and center, don't get too used to things
-Also don't blame me if OVK or other players get on your case, use this mod in pubs at your own risk.
+Also don't blame me if OVK or other players get on your case, use this mod in pubs at your own risk. Which brings me to...
+
+#WARNING BELOW
+I **CANNOT** stress this enough, 
+
+**BACK UP YOUR SAVE** 
+
+More so because this is modding 101. This mod is unlikely to break your save but better safe than sorry now, huh?
+#WARNING ABOVE
+
+
+
+Got that? Okay...
+
 
 
 ##What do?
-This mod is **NOT** meant to make the game easier (or at least not a whole lot easier) but _I'd still class this as a form of cheating_.
+This mod is **NOT** meant to make the game easier (or at least not a whole lot easier) but if you're against any form of gameplay changing mods then you'll probably want to avoid this.
 
-The point of this mod is to fully overhaul and "rebalance" the weapons in PD2 so that nothing is truely useless (RPK/HK21, AK5/AMCAR, Reinfeld), horribly overpowered compared to other weapons similar to themselves like the M249 (as of the courier pack), the CAR-4 (even more so with the courier pack) or the Locomotive (the best fucking shotgun, nothing beats it) or become some ugly as fuck thing to make a decent build.
+The point of this mod is to fully overhaul the weapons in PD2 in a semi-realistic approach and made it so you don't have to worry too much about making an eldritch abomination of a gun. You should be perfectly capable running the base gun.
 
-tl;dr I got rid of the fucking dumb shitass meta bullshit that made the game all of 4-5 guns and made it so you don't have to worry too much about making an eldritch abomination of a gun. You should be perfectly capable running the base gun.
-
-It also puts weapon classes in their place as all bullet weapons now have damage drop-off. For example something like a 9mm pistol will perform extremly poorly against a sniper perched way on the other side of the map because even if you do manage to hit them, you`ll be dealing only around 30% of your normal damage.
+It also puts weapon classes in their place as all bullet weapons now have damage drop-off. For example something like a 9mm pistol will perform extremely poorly against a sniper perched way on the other side of the map because even if you do manage to hit them, you`ll be dealing only around 20-30% of your normal damage.
 
 I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-ish (when the grind _really_ starts) for the first time, this batch of scripts changes the whole dynamic on how to build weapons, more than likely making your current builds non-optimal or flat-out obsolete.
 
 
 ##CREDITS & THANKS
+* UnknownCheats as a whole <3
 * v00d00 for the LUA source code
 * 90e for the LUA source code, base code for the fixed fire loop sounds
 * gir489 for LUA source code, LMG ironsights 
@@ -57,7 +63,7 @@ I **HIGHLY** recommend you **NOT** try this mod until after reaching level 85-is
   * I'm kidding. 10/10, 10/10, 100/100, Best game, BEST GAME
   * https://www.youtube.com/watch?v=5Qx_q_TCVoE
   * Illusion's newly announced game, Sexy Beach Premium Resort, will probably take the title as my big time-waster like AA2 was
-    * Nvm, it was shite. Probably the most in-dpeth grill creator from them yet though...
+    * Nvm, it was pretty shite. Probably the most in-depth grill creator from them yet though...
 * Any and all users of this mod as they're pretty much telling OVK to consider rebalancing their weapons
 
 	
@@ -96,326 +102,48 @@ mod_override things:
 ##Standalone Parts
 There are standalone versions of some parts of DMCWO available on [my Github repo](https://github.com/DeadMansChest) if you don't want (or like) the whole shebang DMCWO offers.
 	* Excuse the lewd avatar if it is a lewd one at the time
-	
-
-##Scripts (at least what I can remember)
-  * dmc_general.lua:
-    * Some skill adjustments
-		
-  * dmc_weapons.lua:
-    * Gage Pack #2 LMG ironsight codes by gir489
-    * Changes the base weapon stats for most weapons
-		
-  * dmc_weapon_mods.lua*:
-    * Changes the stats for most weapon mods as well as fixing a few attachment bugs in the base game
-	
-  * dmc_playa.lua*:
-    * Viewmodel changes
-    * Properly aligns ironsights for some weapons (AK5, Deagle and a few others)
-	
-  * postrequire_attach.lua
-    * Adds additional attachments for some weapons
-	
-  * playerstuff.lua
-    * This is chalk full redone functions so this is probably the biggest factor for incompatibilities with other mods
-    * Stuff relating to player states like sprintout times, etc.
-	
-  * copdamage.lua
-    * Mainly multiplers against armor plating and mutlipliers for AP and HP ammo
-	
-  * soundsfix.lua
-    * Original fix by 90e
-    * Makes all guns use their single fire sound on a per shot basis in place of the constantly desyncing full auto loop sound
-	
-  * shotgat_physics.lua
-    * Fixed shotgun mechanics from LazyOzzy
-    * Shotgun physics from B1313
-    * Makes shotguns deal damage on a per pellet basis	
-		
-  * gat_physics.lua
-    * Damage drop-off for bullet weapons, fixed by LazyOzzy
-    * Wall penetraton for all bullet weapons, based on damage and a few other variables
-    * A bunch of other shit like reload speeds, movement penalties and what not
-		
-  * recoil_fix.lua:
-    * This file can also be set up as a persistent script if you want to test different values without restarting each time you change it
-    * Reduces the floaty/ghost recoil you experience for some weapons, mainly high recoil weapons that have a high ROF
-    * Contains a multiplier value you can adjust which changes how much recoil you recover from. 
-			1 = 100% recoil recovery, your gun will settle down back to its original postion from where you initially fired from provided you didnt try to compensate
-			0 = 0% recoil recovery, your gun will stay wherever recoil brings you
-			
-  * realnames.lua:
-    * Changes most weapons, weapon mods and melee weapons to use their IRL name
-    * Also adds in rather vital descriptions to some attachments that modify guns beyond their stat charts
-	
-  * useable_drums.lua (Contained inside the "Extra" folder):
-    * Makes drum mags attachable through the mod menu
-      * They don't have icons and when dropped through a card they look weird as hell
-			
+				
 			
 ##INSTALLING
-Nab Wilko's "BLT" LUA Hook if you haven't from here: http://paydaymods.com/download/
-
-2. Download the Repo contents as a zip and extract into your Payday 2 directory
-
+1. Nab Wilko's "BLT" LUA Hook if you haven't from here: http://paydaymods.com/download/
+2. Download the contents as a zip and extract into your Payday 2 directory
 3. Run game, check log for errors. Report errors to me (steam_id/qt_314) if there are any
 
 
 ##General Changes
-
-Redone Accuracy and Stabilty stats!
-  * These stats now scale from 0 to 99
-    * 90-ish accuracy is akin to 18 accuracy in the vanilla game for most weapons
-	* 80-ish stability is akin to 25 stability in the vanllia game
-	
-Additional attachments!!!
-  * LMGs:
-    * HK21:
-      * Optics for ARs
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-      * Wood Stock from the G3
-    * M249:
-      * Optics for ARs
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-    * RPK:
-      * Optics for ARs
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-      * AK-type pistol grips
-      * PSL Stock
-      * Side-Folding AK stock
-    * etc...
-	
-  * Assault Rifles:
-    * K23B (secondary):
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-      * Solid Stock from the Loco (appears as the M16's solid stock)
-      * Folding Stock from the M4A1
-    * M733:
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-      * Vector Optics RIS Handguard from the K23B (takes the appearance of the default M4A1 railed handguard)
-      * VLTOR Upper Reciever
-      * AR-type pistol grips
-      * Solid Stock from the Loco (appears as the M16's solid stock)
-      * Folding Stock from the M4A1
-    * M4A1
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-      * Solid Stock from the Loco (appears as the M16's solid stock)
-    * AKS-74:
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-      * Solid Stock from the Loco (appears as the RPK's wood stock)
-      * Polymer handguard from the RPK
-    * AKMS (& Gold variant)
-      * 75-round Drum Magazine (if you use useable_drums.lua)
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-      * Solid Stock from the Loco (appears as the RPK's wood stock)
-      * Polymer handguard from the RPK
-    * AKMSU (secondary):
-      * 75-round Drum Magazine (if you use useable_drums.lua)
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-      * Solid Stock from the Loco (appears as the RPK's wood stock)
-    * etc...
-	
-  * Battle Rifles:
-    * M14 DMR:
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-    * FN FAL:
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-    * H&K G3:
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-      * Retractable Stock from the MP5A4
-    * Galil ARM:
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-    * etc...
-		
-  * Shotguns:
-    * R870:
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-      * Loco Tube extension (+1 round)
-    * Short R870 (Loco):
-      * Leupold Scope
-      * 45 degree sights
-      * Shortdot Scope from the C96
-      * R870 Tube extension (+2 rounds)
-
-  * And more... a word of warning though
-
-#WARNING BELOW
-I **CANNOT** stress this enough, 
-
-**BACK UP YOUR SAVE** (more so because this is modding 101, this is unlikely to break your save, even if you don't heed my warning below)
-
-and 
-
-**DO NOT REMOVE OR DISABLE "postrequire_attach.lua"**
-
-If you have ANY of the extra attachments attached to your current gun(s), there is a chance you'll crash if you try to play using it or equip another gun with extra attachments attached.
-
-With that said, UNINSTALL or DISABLE this mod if a major game update is planned to be released soon and you want to play it immediately.
-This mod *WILL* break new weapons as the mod *WILL NOT* have the new entries for any new weapons/attachments and as a result make then very buggy to use if not completely unuseable, if any (which in that case you should be safe to keep this installed. Wouldn't take the risk, IMO).
-
-I'm not gonna take heat if your game crashes because of this, I'll have warned you several times by the time you read this whole readme.
-
-There is an uninstall guide further down
-#WARNING ABOVE
-
-Got that? Okay...
-
-All bullet weapons now have damage drop-off
-  * They will never hit 0 damage like shotguns do
-  * Pistols are less effective at range than say, an SMG
-  * SMGS are less effective at range than ARs, etc...
-
-Muzzle brakes, handguards and everything else no longer magically alter damage (because stupid). Damage adjustments are now only changed via things that change the actual length of the barrel (HK21 handguard, actual barrel mods, etc.)
-  * Made damage reduction for all suppressors the same, instead, the larger suppressors will have reduced recoil/range penalties at the cost of concealment
-    * Asepsis Suppressor has no benefits as a trade off for no damage reduction and lower concealment
-  * All suppressors completely nullify threat and hurt your damage profile at range
-    *The exception is frag rounds for shotguns which will max out any shotgun's threat regardless of suppressors
-
-Longer barrels increase stats for concealment, shorter ones vice versa
-	
-Corrected magazine capacities:
-  * The Olympic AR and M16 use proper 20 round magazines (from 25 and 30)
-  * The FAMAS uses a proper 25 round magazine (from 30)
-  * The HK21 uses a proper 100 round box magazine (from 150)
-  * The MG42 uses a proper 50 round drum magazine (from 150)
-  * ...And several others
-
-Mag capacities were made consistent so mags like the AR Quadstack Mag will set ammo to 60 for all guns that can accept it
-
-Shotguns now do damage per pellet instead of dealing full damage as long as one pellet hits (Thanks to LazyOzzy). As a result, shotgun pellet damage has been nerfed down to the 20s since dealing 65 damage for all 8 pellets is far too much but overall does more damage if all land on target.
-  * Shotgun pellet count was changed to 8 for all shotguns
-    * Excluding the Judge which shoots 5 pellets
-    * Pellet count will vary depending on the special ammo used
-  * Shotgun pellet range was increased, around 20-40m in game, drop off was made to start much, much earlier to compensate
-  * More realistic spread patterns for shotguns. Git gud at aiming!
-  * Damage stat was changed to show damage if all pellets hit within optimal range
-			
-Better melee weapons
-  * Higher swing/stab speeds
-  * Higher damage for some (i.e. the Machete)
-  * Bladed weapons under the "axe" category are changed to the "knife" category, allowing you to hurt dozers with them
-  * Can actually help you conserve ammo
-  * Also makes "taser" melee wepons less cheesy
-
-Bullet penetration for most non-snipers!!
-  * Surface penetration
-    * All bullet weapons (penetration power varies)
-    * Shotguns using slugs
-  * Enemy penetration
-    * All (Sniper) rifles
-    * All Assault rifles
-    * All LMGs
-    * All Battle Rifles
-    * Mac 10
-    * P90
-    * MP7
-    * AKMSU
-    * Olympic AR
-    * USP Tactical
-    * 1911
-    * Raging Bull
-    * Colt SAA
-    * Desert Eagle
-    * C96
-    * 2006M
-    * Shotguns using slugs
-  * Tan armor penetration (penetration chance varies by weapon)
-  * Shield penetration
-    * All (Sniper) rifles
-    * All Battle Rifles
-    * HK21
-    * MG42
-    * Raging Bull
-    * Colt SAA
-    * 2006M
-    * Desert Eagle
-    * P90
-    * MP7
-    * Shotguns using slugs
-
-Greatly reduced ADS sway for all weapons since it does nothing to the actual PoI (well now it does in vanilla but only when using an optic)
-
-True/false toggles for some asethetic mods (you can change them in DMCWO.lua)
-
-Random fixes:
-  * Tried my best at realigning all the optics and iron sights
-  * G18 slide now moves while aiming and shooting
-  * 1911 irons now move while aiming and shooting
-  * Removed the gadget rail attachment on some guns that would otherwise be pointless and clip through some attachments/guns
-  * Changed the Saiga reciever cover to the AK74 receiver to better ressemble an actual Saiga
-  * All battle rifles start on semi-auto, not just the M14
-  * The G18 starts on semi-auto to prevent accidental mag dumping upon starting
-  * Mosin now has a mount for the Theia/Leupold Scope
-  * And a bunch of other things
-	
-Renamed almost everything with their IRL counterparts (or the closest thing)
-
-Fleshed out weapon categories
-
-Renamed mod categories
-		
-Reclassed several weapons
-  * The Para AR and AKMSU are now classed as "assault_rifles"
-    * They're still secondaries, only now they benefit from AR skills instead of the two SMG skills and appear under the category "Carbines"
-  * The Judge is now classed as a "pistol"
-    * Now benefits from pistol based skills
-      * You can toggle this back in DMCWO.lua. Performance will be adjusted to depend on shotgun skills instead.
-  * The Tec-9 is also a pistol now
+* Redone Accuracy and Stabilty stats
+* Additional attachments
+* All bullet weapons now have damage drop-off
+* Muzzle brakes, handguards and everything else no longer magically alter damage (because that's just stupid). Damage adjustments are now only changed via things that change the actual length of the barrel (HK21 handguard, actual barrel mods, etc.)
+* Corrected magazine capacities
+* Mag capacities were made consistent so mags like the AR Quadstack Mag will set ammo to 60 for all guns that can accept it
+* Shotguns now do damage per pellet instead of dealing full damage as long as one pellet hits (Thanks to LazyOzzy). As a result, shotgun pellet damage has been nerfed down to the 20s since dealing 65 damage for all 8 pellets is far too much but overall does more damage if all land on target.		
+* Slightly more believable melee weapons
+* Bullet penetration for most non-snipers!!
+* Greatly reduced ADS sway for all weapons since it does nothing to the actual PoI (well now it does in vanilla but only when using an optic)
+* True/false toggles for some aesthetic mods (you can change them in DMCWO.lua)
+* Random fixes
+* Renamed almost everything with their IRL counterparts (or the closest thing)
+* Fleshed out weapon categories
+* Renamed mod categories
+* Reclassed several weapons
 	
 	
 ##UNINSTALLING
 Don't like the mod for w/e reason? You're following my advice about uninstalling/disabling this mod if an update is known to come out soon? Penis? Read below:
 
-1. REMOVE ANY OF THE EXTRA ATTACHMENTS NOT NORMALLY AVAILABLE ON GUNS IN THE VANILLA GAME
+1. Close the game
+2. Remove the "DMCWO" folder inside mods/ (or disable the mod though the "Lua Mods" menu provided by the BLT hook
+3. If you dun dang diddly did everything right, next time you boot up your game everything should be back to normal (or at least not make the game crash)
 
-2. REMOVE ANY OF THE EXTRA ATTACHMENTS NOT NORMALLY AVAILABLE ON GUNS IN THE VANILLA GAME
-
-3. REMOVE ANY OF THE EXTRA ATTACHMENTS NOT NORMALLY AVAILABLE ON GUNS IN THE VANILLA GAME, SERIOUSLY
-
-4. Close the game
-
-5. Remove the "DMCWO" folder inside mods/ (or disable the mod though the "Lua Mods" menu provided by the BLT hook
-
-6. If you dun dang diddly did everything right, next time you boot up your game everything should be back to normal (or at least not make the game crash)
-
-Keep in mind, parts of some guns may be missing after an uninstall. You can easily fix this by selling and repurchasing the gun
+Keep in mind, parts of some guns and sometimes the gun itself may be missing after an uninstall. This is because OVK inserted code in a recent update to delete weapons with invalid attachments attached to them, to avoid crashes.
 
 
 ##KNOWN ISSUES
 Any issues I know of but can't personally fix because I can't code will be listed here
 
 * Optics attached to the M249, M240 and MG42 don't follow the feed cover when reloading.
-
 * In DMCWO.lua, if "elcan_buis" is set to true, you'll see the 45 degree irons floating in the main menu. A side effect on how I got the BUIS toggle working.
-    * I also don't update this as often as I should so some guns may not work with it
 
 
 ##BUG REPORTING
@@ -423,9 +151,9 @@ Please notify me of any bugs/issues not listed above. I will say now, bugs are m
 
 If it is a bug with sight positioning, please give me:
 
-  * Any other toggle that changes sights and/or their positioning (if the weapon in question is associated with any of them)
-  * The gun with the bugged optic
-  * The bugged optic
+* Any other toggle that changes sights and/or their positioning (if the weapon in question is associated with any of them)
+* The gun with the bugged optic
+* The bugged optic
 	
 If it's something else, just tell me how it do the do (or rather how it don't do the do)
 	
