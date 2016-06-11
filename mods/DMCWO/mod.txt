@@ -8,7 +8,7 @@
 	"updates" : [
 		{
 			"revision" : 1.80,
-			"identifier" : "dmcwo_beta",
+			"identifier" : "dmcwo",
 			"install_dir" : "."
 		}
 	]
