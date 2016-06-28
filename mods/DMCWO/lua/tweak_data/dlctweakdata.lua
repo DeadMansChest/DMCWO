@@ -307,4 +307,40 @@ function DLCTweakData:init(...)
 			amount = 1
 		}
 	}
+	self.drums = {}
+	self.drums.free = true
+	self.drums.content = {}
+	self.drums.content.loot_global_value = "normal"
+	self.drums.content.loot_drops = {
+		{
+			type_items = "weapon_mods",
+			item_entry = "wpn_fps_upg_vg_ass_smg_afg",
+			amount = 1
+		},
+		{
+			type_items = "weapon_mods",
+			item_entry = "wpn_fps_upg_vg_ass_smg_stubby",
+			amount = 1
+		},
+		{
+			type_items = "weapon_mods",
+			item_entry = "wpn_fps_upg_vg_ass_smg_verticalgrip",
+			amount = 1
+		},
+		{
+			type_items = "weapon_mods",
+			item_entry = "wpn_fps_upg_m4_m_drum",
+			amount = 1
+		},
+		{
+			type_items = "weapon_mods",
+			item_entry = "wpn_fps_upg_ak_m_quad",
+			amount = 1
+		},
+		{
+			type_items = "weapon_mods",
+			item_entry = "wpn_fps_smg_mp5_m_drum",
+			amount = 1
+		}
+	}
 end

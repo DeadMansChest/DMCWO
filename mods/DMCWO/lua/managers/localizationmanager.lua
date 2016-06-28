@@ -18,8 +18,11 @@ Hooks:Add("LocalizationManagerPostInit", "localization_dmc", function(loc)
 	loc:add_localized_strings( {
 		["menu_backstab_desc"] = "BASIC: ##$basic##\nYou gain a ##3%## critical hit chance for every ##3## points of concealment under ##35## up to ##30%##.\n\nACE: ##$pro##\nYou gain a ##3%## critical hit chance for every ##1## point of concealment under ##35## up to ##30%##.\n\nNote: Critical hits will not work against a Bulldozer's body, with explosives or with weapons that deal ##80 or more## damage (per pellet for shotguns).\n\nSkills that increase damage to ##80 or more## (per pellet for shotguns) do not remove the ability for that weapon to land a critical hit.",
 		
+		--Hitman
+		["menu_deck5_3_desc"] = "Akimbo weapons now instead have a have a ##25%## stability penalty.\n\n\Your armor recovery rate is increased by an additional ##10%##.",
+		["menu_deck5_9_desc"] = "You no longer have a stability penalty with Akimbo weapons and increases the ammo capacity of your Akimbo weapons to ##125%##.\n\n\Your armor recovery rate is increased by an additional ##10%##.\n\n\Deck completion Bonus: Your chance of getting a higher quality item during PAYDAY is increased by ##10%##.",
 		--Gambler
-		["menu_deck10_1_desc"] = "Ammo packs you pick up also yield medical supplies and heals you for ##$multiperk## to ##$multiperk2## health.\n\nCannot occur more than once every ##$multiperk3## seconds.",
+		["menu_deck10_1_desc"] = "Ammo supplies you pick up also yield medical supplies and heal you for ##8## to ##12## health.\n\n\This cannot occur more than once every ##4## seconds.",
 		
 		--Bipod Description
 		["bm_wp_upg_lmg_lionbipod_desc_pc"] = "A bipod that can be deployed by pressing $BTN_BIPOD.\n\n##75% less## vertical recoil ##when deployed.\n50% less## horizontal recoil ##when deployed.\n7.5% slower## ADS speeds.",
@@ -41,10 +44,10 @@ Hooks:Add("LocalizationManagerPostInit", "localization_dmc", function(loc)
 		
 		["bm_wpn_fps_upg_o_45iron_desc"] = "Allows for switching beteen your main sight and angled iron sights by pressing $BTN_GADGET.",
 		
-		["menu_infamy_desc_ghost"] = "Modern assassin that carries out death sentences - for the right price.\n\nBONUSES:\nExperience gained is increased by ##5%##.",
-		["menu_infamy_desc_enforcer"] = "Used in crimes that requires the Enforcer to get his hands dirty.\n\nBONUSES:\nExperience gained is increased by ##5%##.",
-		["menu_infamy_desc_technician"] = "Cold, calculating and a master of forced disappearances, dead or alive.\n\nBONUSES:\nExperience gained is increased by ##5%##.",
-		["menu_infamy_desc_mastermind"] = "Known to cause moral chaos and sway even the most devoted lawman.\n\nBONUSES:\nExperience gained is increased by ##5%##.",
+		["menu_infamy_desc_ghost_dmc"] = "Modern assassin that carries out death sentences - for the right price.\n\nBONUSES:\nExperience gained is increased by ##5%##.",
+		["menu_infamy_desc_enforcer_dmc"] = "Used in crimes that requires the Enforcer to get his hands dirty.\n\nBONUSES:\nExperience gained is increased by ##5%##.",
+		["menu_infamy_desc_technician_dmc"] = "Cold, calculating and a master of forced disappearances, dead or alive.\n\nBONUSES:\nExperience gained is increased by ##5%##.",
+		["menu_infamy_desc_mastermind_dmc"] = "Known to cause moral chaos and sway even the most devoted lawman.\n\nBONUSES:\nExperience gained is increased by ##5%##.",
 		
 		--[[   MASTERMIND   ]]--
 		--{
@@ -123,7 +126,7 @@ Hooks:Add("LocalizationManagerPostInit", "localization_dmc", function(loc)
 				
 				--Body Expertise
 				["menu_single_shot_ammo_return_dmc"] = "Body Expertise",
-				["menu_single_shot_ammo_return_desc_dmc"] = "BASIC: ##$basic##\nYou can now pierce body armor.\n\nACE: ##$pro##\n##25%## of the enemy's headshot multiplier is applied to the enemy's body.\n\nThis skill is only activated by SMGs, MGs or rifles fired automatically.",				
+				["menu_single_shot_ammo_return_desc_dmc"] = "BASIC: ##$basic##\nYou can now pierce body armor.\n\n##25%## of the enemy's headshot multiplier is applied to the enemy's body.\n\nThis skill is only activated by SMGs, MGs or rifles fired automatically.\n\nACE: ##$pro##\n##50%## of an enemy's headshot multiplier is now applied to the enemy's body.",				
 			--}
 		--}
 		
@@ -161,7 +164,7 @@ Hooks:Add("LocalizationManagerPostInit", "localization_dmc", function(loc)
 				
 				--Stun Resistance
 				["menu_oppressor_dmc"] = "Stun Resistance",
-				["menu_oppressor_desc_dmc"] = "BASIC: ##$basic##\nReduces your camera shake by ##50%## when you are damaged by enemy fire.\n\nACE: ##$pro##\nReduces the visual effect duration of flashbangs by ##75%##.",
+				["menu_oppressor_desc_dmc"] = "BASIC: ##$basic##\nThe steadiness of your armor is increased by ##10##.\n\nACE: ##$pro##\nReduces the visual effect duration of flashbangs by ##75%##.",
 				
 				--Die Hard
 				["menu_show_of_force_dmc"] = "Die Hard",
@@ -175,7 +178,7 @@ Hooks:Add("LocalizationManagerPostInit", "localization_dmc", function(loc)
 				["menu_iron_man_desc_dmc"] = "BASIC: ##$basic##\nYou gain ##25%## extra health.\n\nACE: ##$pro##\nYou gain an additional ##25%## extra health.",
 				--Bullseye
 				["menu_prison_wife_dmc"] = "Bullseye",
-				["menu_prison_wife_desc_dmc"] = "BASIC: ##$basic##\nYou regenerate ##10## armor for each successful headshot. This effect cannot occur more than once every ##2## seconds.\n\nACE: ##$pro##\nYou now regenerate ##35## armor for each successful headshot.",
+				["menu_prison_wife_desc_dmc"] = "BASIC: ##$basic##\nYou regenerate ##5## armor for each successful headshot. This effect cannot occur more than once every ##2## seconds.\n\nACE: ##$pro##\nYou now regenerate ##35## armor for each successful headshot.",
 				
 				--Iron Man
 				["menu_juggernaut_dmc"] = "Iron Man",
@@ -240,7 +243,7 @@ Hooks:Add("LocalizationManagerPostInit", "localization_dmc", function(loc)
 				
 				--Tower Defense
 				["menu_tower_defense_dmc"] = "Tower Defense",
-				["menu_tower_defense_desc_dmc"] = "BASIC: ##$basic##\nYou can now carry a maximum of ##$multibasic## sentry guns.\n\nACE: ##$pro##\nYou can now carry a maximum of ##$multipro## sentry guns.",
+				["menu_tower_defense_desc_dmc"] = "BASIC: ##$basic##\nYou can now carry a maximum of ##2## sentry guns.\n\nACE: ##$pro##\nYou can now carry a maximum of ##3## sentry guns.",
 			--}
 			
 			--[[   BREACHER SUBTREE   ]]--
@@ -271,7 +274,7 @@ Hooks:Add("LocalizationManagerPostInit", "localization_dmc", function(loc)
 			--[[   BATTLE SAPPER SUBTREE   ]]--
 			--{
 				--Subtree Name
-				["st_menu_technician_auto"] = "Battle Sapper",
+				["st_menu_technician_auto"] = "Combat Engineer",
 				
 				--Nerves of Steel (Steady Grip)	
 				["menu_steady_grip_dmc"] = "Nerves of Steel",
@@ -279,7 +282,7 @@ Hooks:Add("LocalizationManagerPostInit", "localization_dmc", function(loc)
 				
 				--Sharpshooter (Heavy Impact)
 				["menu_heavy_impact_dmc"] = "Sharpshooter",
-				["menu_heavy_impact_desc_dmc"] = "BASIC: ##$basic##\nYour accuracy with semi-automatic weapons is increased by ##5##.\n\nACE: ##$pro##\nYour stability for all rifles is increased by ##4##.\n\nYou retain full movement speed while aiming down your sights.",
+				["menu_heavy_impact_desc_dmc"] = "BASIC: ##$basic##\nYour accuracy with semi-automatic weapons is increased by ##4##.\n\nACE: ##$pro##\nYour stability for all rifles is increased by ##4##.\n\nYou retain full movement speed while aiming down your sights.",
 				--Spotter (Fire Control)
 				["menu_fire_control_dmc"] = "Spotter",
 				["menu_fire_control_desc_dmc"] = "BASIC: ##$basic##\nSpecial enemies marked by you take ##15%## more damage.\n\nACE: ##$pro##\nEnemies you mark take an additional ##25%## damage when further away than ##25## meters.",
@@ -333,9 +336,9 @@ Hooks:Add("LocalizationManagerPostInit", "localization_dmc", function(loc)
 				--Evasion
 				["menu_awareness_dmc"] = "Evasion",
 				["menu_awareness_desc_dmc"] = "BASIC: ##$basic##\nYou gain ##10%## additional movement speed and ##20%## ladder climbing speed. \n\nACE: ##$pro##\nYou gain the ability to sprint in any direction.\n\nYour fall damage is reduced by ##75%## and you only take armor damage from falling from non-fatal heights.",
-				--Thick Skin
-				["menu_thick_skin_dmc"] = "Thick Skin",
-				["menu_thick_skin_desc_dmc"] = "BASIC: ##$basic##\nYour steadiness is increased by ##15##.\n\nACE: ##$pro##\nIncreases the armor of all ballistic vests by ##20##.",
+				--Deep Pockets (Thick Skin)
+				["menu_thick_skin_dmc"] = "Deep Pockets",
+				["menu_thick_skin_desc_dmc"] = "BASIC: ##$basic##\nIncreases the concealment of melee weapons by ##2##.\n\nACE: ##$pro##\nIncreases the armor of all ballistic vests by ##20##.\n\nIncreases the concealment of all ballistic vests by ##4##.",
 				
 				--Moving Target (Dire Need)
 				["menu_dire_need_dmc"] = "Moving Target",
@@ -351,27 +354,27 @@ Hooks:Add("LocalizationManagerPostInit", "localization_dmc", function(loc)
 			
 			--[[   SILENT KILLER SUBTREE   ]]--
 			--{
-				--Shinobi (Camouflage)
-				["menu_scavenger_dmc"] = "Shinobi",
-				["menu_scavenger_desc_dmc"] = "BASIC: ##$basic##\nYour crouch speed is increased by ##10%##.\n\nYou deal ##5%## more damage against special enemies. \n\nACE: ##$pro##\nYour walk speed is increased by ##25%##.",
+				--Second Wind
+				["menu_scavenger_dmc"] = "Second Wind",
+				["menu_scavenger_desc_dmc"] = "BASIC: ##$basic##\nWhen your armor breaks you gain ##15%## speed for ##5## seconds.\n\nACE: ##$pro##\nWhen your armor breaks you gain ##30%## speed for ##8## seconds.",
 				
-				--Hidden Blade (Optic Illusions)
-				["menu_optic_illusions_dmc"] = "Hidden Blade",
-				["menu_optic_illusions_desc_dmc"] = "BASIC: ##$basic##\nIncreases the concealment of melee weapons by ##2##.\n\nACE: ##$pro##\nIncreases the concealment of all ballistic vests by ##4##.",
+				--Optical Illusions
+				["menu_optic_illusions_dmc"] = "Optical Illusions",
+				["menu_optic_illusions_desc_dmc"] = "BASIC: ##$basic##\nYou gain ##1## concealment for each suppressed weapon you equip.\n\nACE: ##$pro##\nSuppressors with a concealment penalty have their concealment penalty reduced by a maximum ##2##.",
 				--The Professional
 				["menu_silence_expert_dmc"] = "The Professional",
 				["menu_silence_expert_desc_dmc"] = "BASIC: ##$basic##\nYou gain ##8## weapon stability with suppressed weapons.\n\nACE: ##$pro##\nYou gain ##5## weapon accuracy and a ##50%## ADS speed increase with suppressed weapons.",
 				
-				--Optical Illusions (Low Blow)
-				["menu_backstab_dmc"] = "Optical Illusions",
-				["menu_backstab_desc_dmc"] = "BASIC: ##$basic##\nYou gain ##1## concealment for each suppressed weapon you equip.\n\nACE: ##$pro##\nSuppressors with a concealment penalty have their concealment penalty reduced by a maximum ##2##.",
+				--Dire Need
+				["menu_backstab_dmc"] = "Dire Need",
+				["menu_backstab_desc_dmc"] = "BASIC: ##$basic##\nWhen your armor is fully depleted, the first shot on every enemy will cause that enemy to stagger.\n\nThis effect ends when your armor regenerates.\n\nACE: ##$pro##\nThe effect persists for ##5## seconds after your armor has regenerated.",
 				--Subsonic Rounds
 				["menu_hitman_dmc"] = "Subsonic Rounds",
 				["menu_hitman_desc_dmc"] = "BASIC: ##$basic##\nReduces the range penalty of non-internally suppressed weapons by ##25%##.\n\nACE: ##$pro##\nReduces the range penalty of non-internally suppressed weapons by ##50%##.\n\nNote: Suppressor range penalties will only be negated and ##will not add bonus range##.",
 				
 				--Low Blow (Unseen Strike)
 				["menu_unseen_strike_dmc"] = "Low Blow",
-				["menu_unseen_strike_desc_dmc"] = "BASIC: ##$basic##\nYou gain a ##3%## critical hit chance for every ##3## points of concealment under ##35## up to a maximum of ##30%##.\n\nACE: ##$pro##\nYou gain a ##3%## critical hit chance for every ##1## point of concealment under ##35## up to a maximum of ##30%##.",
+				["menu_unseen_strike_desc_dmc"] = "BASIC: ##$basic##\nYou gain a ##3%## critical hit chance for every ##3## points of concealment under ##35## up to a maximum of ##30%##.\n\nACE: ##$pro##\nYou gain a ##3%## critical hit chance for every ##1## point of concealment under ##35## up to a maximum of ##30%##.\n\nNote: Crits will not work on a Bulldozer's body, with explosives or with weapons that deal ##80+## damage (per pellet for shotguns).\n\nSkills that increase damage to ##80 or more## (per pellet for shotguns) do not disable crits.",
 			
 			--}
 		--}
@@ -600,7 +603,7 @@ function LocalizationManager:text(string_id, ...)
 	
 	--[[JAM733]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_amcar" and "Colt M733 Commando"
-	or string_id == "bm_w_amcar_desc" and "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
+	or string_id == "bm_w_amcar_desc" and "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto.\nBenefits from rifle skills."
 	
 	--[[STEEL BALLS]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_ak74" and "Concern Kalashnikov AKS-74"
@@ -677,7 +680,7 @@ function LocalizationManager:text(string_id, ...)
 	
 	--[[MELTGUN]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_g36" and "Heckler & Koch G36KV"
-	or string_id == "bm_w_g36_desc" and "A German carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto, 2-rnd burst and semi-auto."
+	or string_id == "bm_w_g36_desc" and "A German carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto, 2-rnd burst and semi-auto.\nBenefits from rifle skills."
 	--Compact
 	or DMCWO.reelnaems == true and string_id == "bm_wp_g36_fg_c" and "G36c Kit"
 	or string_id == "bm_wp_g36_fg_c_desc" and "##10% shorter## overall range.\n##5% faster## ADS speeds."
@@ -725,7 +728,7 @@ function LocalizationManager:text(string_id, ...)
 	
 	--[[553 NO PANTSU]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_s552" and "SIG SG 552-2" --"SG550's Little Sister"
-	or string_id == "bm_w_s552_desc" and "A Swiss-made carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto, 3-rnd burst and semi-auto."
+	or string_id == "bm_w_s552_desc" and "A Swiss-made carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto, 3-rnd burst and semi-auto.\nBenefits from rifle skills."
 	--Enhanced Foregrip
 	or DMCWO.reelnaems == true and string_id == "bm_wp_ass_s552_fg_standard_green" and "OD Green Handguard"
 	--Enhanced Grip
@@ -935,7 +938,7 @@ function LocalizationManager:text(string_id, ...)
 	
 	--[[M1014]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_benelli" and "Benelli M4"
-	or string_id == "bm_w_benelli_desc" and "An Italian, tube fed, semi automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
+	or string_id == "bm_w_benelli_desc" and "An Italian, tube fed, semi-automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
 	--Long Barrel
 	or DMCWO.reelnaems == true and string_id == "bm_wp_ben_b_long" and "Long Barrel w/7-Shot Tube"
 	or string_id == "bm_wp_ben_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
@@ -959,13 +962,13 @@ function LocalizationManager:text(string_id, ...)
 	
 	--[[WHY DON'T YOU TAKE A SEAT OVER THERE?]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_spas12" and "Franchi SPAS-12"
-	or string_id == "bm_w_spas12_desc" and "An Italian, tube fed, semi automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types.\n\n\"I have no need for filthy language and idle threats...\""
+	or string_id == "bm_w_spas12_desc" and "An Italian, tube fed shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types.\n\nCan switch between pump-action and semi-automatic fire.\n\n\"I have no need for filthy language and idle threats...\""
 	or DMCWO.reelnaems == true and string_id == "bm_wp_spas12_b_long" and "SPAS-12 8-Shot Tube Magazine"
 	or string_id == "bm_wp_spas12_b_long_desc" and "##5% slower## ADS speeds."
 	
 	--[[STREET SWEEPER]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_striker" and "Armsel Striker"
-	or string_id == "bm_w_striker_desc" and "A South-African, cylinder fed, semi automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
+	or string_id == "bm_w_striker_desc" and "A South-African, cylinder fed, semi-automatic shotgun loaded with 12-gauge shells.\nCan be loaded with special ammo types."
 	or DMCWO.reelnaems == true and string_id == "bm_wp_striker_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 	or string_id == "bm_wp_striker_b_suppressed_desc" and "##Internally suppressed## barrel.\nReduces the weapon's sound radius to ##2 meters.\n10% slower## ADS speeds." 
 	
@@ -1348,6 +1351,8 @@ function LocalizationManager:text(string_id, ...)
 	or string_id == "bm_w_sr2_desc" and "A Russian PDW chambered in 9x21mm.\nCan pierce enemies, walls and shields.\n\nCan switch between full-auto and semi-auto."
 	or DMCWO.reelnaems == true and string_id == "bm_w_x_sr2" and "Akimbo SR-2Ms"
 	or string_id == "bm_w_x_sr2_desc" and "A pair of Russian PDWs chambered in 9x21mm.\nCan pierce enemies, walls and shields.\n\nCan switch between full-auto, semi-auto (dual-fired) and semi-auto (alternating)."
+	--Suppressor
+	or string_id == "bm_wp_sr2_ns_silencer_desc" and "A ##specialized## suppressor for the SR-2M.\nReduces the weapon's sound radius to ##2 meters.\n10% shorter## overall range.\n##7.5% slower## ADS speeds."
 	
 	--[[NOT A STEN]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_sterling" and "Sterling L2A1"
@@ -1371,7 +1376,7 @@ function LocalizationManager:text(string_id, ...)
 
 	--[[BABBY AR]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_olympic" and "Olympic Arms K23B Tactical"
-	or string_id == "bm_w_olympic_desc" and "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
+	or string_id == "bm_w_olympic_desc" and "An American carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto.\nBenefits from rifle skills."
 	
 	--Railed Handguard
 	or DMCWO.reelnaems == true and string_id == "bm_wp_olympic_fg_railed" and "KAC Free Float Handguard" --a super short version at that, shares the delta ring so I'm assuming this is what it's based off of
@@ -1382,8 +1387,8 @@ function LocalizationManager:text(string_id, ...)
 	--[[BABBY SLAVSHIT]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_akmsu" and "Soviet Union AKMSU"
 	or DMCWO.reelnaems == true and string_id == "bm_w_x_akmsu" and "Akimbo AKMSUs"
-	or string_id == "bm_w_akmsu_desc" and "A Russian carbine chambered in 7.62x39mm.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
-	or string_id == "bm_w_x_akmsu_desc" and "A pair of Russian carbines chambered in 7.62x39mm.\nCan pierce enemies and walls.\n\nCan switch between full-auto, semi-auto (dual-fired) and semi-auto (alternating)."
+	or string_id == "bm_w_akmsu_desc" and "A Russian carbine chambered in 7.62x39mm.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto.\nBenefits from rifle skills."
+	or string_id == "bm_w_x_akmsu_desc" and "A pair of Russian carbines chambered in 7.62x39mm.\nCan pierce enemies and walls.\n\nCan switch between full-auto, semi-auto (dual-fired) and semi-auto (alternating).\nBenefits from rifle skills."
 	--Moscow Special
 	or DMCWO.reelnaems == true and string_id == "bm_wp_akmsu_fg_rail" and "Samson K-Rail" --Seems to be loosely based off of the Samson K-Rail, it's the only thing that looked remotely like this
 	or string_id == "bm_wp_akmsu_fg_rail_desc" and "##5% slower## ADS speeds."
@@ -1545,6 +1550,8 @@ function LocalizationManager:text(string_id, ...)
 	--[[Model 70]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_model70" and "Winchester Model 70"
 	or string_id == "bm_w_model70_desc" and "An American bolt-action rifle chambered in .300 Winchester Magnum.\nCan pierce enemies, walls and shields."
+	--Suppressor
+	or string_id == "bm_wp_model70_ns_suppressor_desc" and "A ##large## suppressor.\nReduces the weapon's sound radius to ##2 meters.\n20% shorter## overall range.\n##10% slower## ADS speeds."
 	
 	--[[Model 37]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_m37" and "Ithaca Model 37 Homeland Security"
@@ -1563,11 +1570,28 @@ function LocalizationManager:text(string_id, ...)
 
 	--[[LOL DRUMS]]
 	or DMCWO.reelnaems == true and string_id == "bm_w_tecci" and "Heckler & Koch HK416-C"
-	or DMCWO.reelnaems == true and string_id == "bm_w_tecci_desc" and "A German carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto."
+	or string_id == "bm_w_tecci_desc" and "A German carbine chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto and semi-auto.\nBenefits from rifle skills."
 	or DMCWO.reelnaems == true and string_id == "bm_wp_tecci_b_long" and "Long Barrel"
 	or string_id == "bm_wp_tecci_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds." 
 	or DMCWO.reelnaems == true and string_id == "bm_wp_tecci_ns_special" and "JPE Recoil Eliminator Muzzle Brake"
 	or string_id == "bm_wp_tecci_ns_special_desc" and "Vents muzzle flash to the sides." 
+	
+	--[[Muh Range]]
+	or DMCWO.reelnaems == true and string_id == "bm_w_boot" and "Winchester Model 1887"
+	or string_id == "bm_w_boot_desc" and "An American lever-action shotgun loaded with 10-gauge shells.\nCan be loaded with special ammo types."
+	--Long Barrel
+	or string_id == "bm_wp_boot_b_long_desc" and "##15% longer## overall range.\n##5% slower## ADS speeds."
+	--Short Barrel
+	or string_id == "bm_wp_boot_b_short_desc" and "##20% shorter## overall range.\n##5% faster## ADS speeds." 
+	--Body
+	or DMCWO.reelnaems == true and string_id == "bm_wp_boot_body_exotic" and "Case Hardened Reciever"
+	
+	--[[Not the same Bren]]
+	or DMCWO.reelnaems == true and string_id == "bm_w_hajk" and "CZ 805 BREN"
+	or string_id == "bm_w_hajk_desc" and "A Czechoslovakian assault rifle chambered in 5.56 NATO.\nCan pierce enemies and walls.\n\nCan switch between full-auto, 2-rnd burst and semi-auto.\nBenefits from rifle skills."
+	--Short Barrel
+	or DMCWO.reelnaems == true and string_id == "bm_wp_hajk_b_short" and "A2 Barrel"
+	or string_id == "bm_wp_hajk_b_short_desc" and "##15% shorter## overall range.\n##5% faster## ADS speeds." 
 	
 	--[[WEAPON MODS]]
 	--Ported
@@ -2299,9 +2323,12 @@ function LocalizationManager:text(string_id, ...)
 	--ALSO ZAP ZAP MOTHERFUCKER
 	or string_id == "bm_melee_zeus_desc" and "A pair of homebrew knuckle dusters capable of stunning your enemies."
 	
-	--ALSO ZAP ZAP MOTHERFUCKER
+	--flippity floop
 	or DMCWO.reelnaems == true and string_id == "bm_melee_wing" and "Benchmade Model 42 Balisong"
-	or string_id == "bm_melee_wing_desc" and "Wing is the name of Sydney's melee knife.\n\nIt's a butterfly knife made by Benchmade, which she never leaves home without as it has saved her life more times than she can count. Those who know her also know the story of how she got it from another gang leader. Got it from his throat. So people seldom mess with her when she whips it out. Wing is a nifty little thing and Sydney loves showing off her skills. And everybody knows that when Wing starts flapping - chaos will come."
+	or string_id == "bm_melee_wing_desc" and "Wing is the name of Sydney's melee knife.\n\nIt's a butterfly knife made by Benchmade, which she never leaves home without as it has saved her life more times than she can count. Those who know her also know the story of how she got it from another gang leader. Got it from his throat. So people seldom mess with her when she whips it out. Wing is a nifty little thing and Sydney loves showing off her skills. And everybody knows that when Wing starts flapping - chaos will come."--flippity floop
+	
+	--PICKLES
+	or string_id == "bm_melee_road_desc" and "The Chain Whip is Rust’s melee weapon of choice. Rust is a fan of old school pain-inducing instruments. The actual Chain Whip itself was bought, not stolen, by Rust at a hardware store. He felt that a tool this important was worth paying for. It provides a certain classy touch to the whooshing sound it makes as it’s whipping across yet another face."
 		
 	or testAllStrings == true and string_id
 	or text_original(self, string_id, ...)

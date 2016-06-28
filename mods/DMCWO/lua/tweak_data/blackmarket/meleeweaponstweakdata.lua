@@ -66,6 +66,18 @@ function BlackMarketTweakData:_init_melee_weapons()
 		self.melee_weapons[melee_id].expire_t = 0.9
 		self.melee_weapons[melee_id].melee_damage_delay = 0.1
 	end
+	--melee_road
+	melee_anim = {
+		'road'
+	}
+	for i, melee_id in ipairs(melee_anim) do
+		self.melee_weapons[melee_id].anim_global_param = "melee_road"
+		self.melee_weapons[melee_id].align_objects = {"a_weapon_right"}
+		self.melee_weapons[melee_id].anim_attack_vars = { "var1","var2","var3","var4"}
+		self.melee_weapons[melee_id].expire_t = 0.8
+		self.melee_weapons[melee_id].repeat_expire_t = 0.8
+		self.melee_weapons[melee_id].melee_damage_delay = 0.375
+	end
 	--melee_psycho
 	melee_anim = {
 		'chef','shawn'
@@ -998,6 +1010,15 @@ function BlackMarketTweakData:_init_melee_weapons()
 	self.melee_weapons.shillelagh.stats.min_damage_effect = 1.2
 	self.melee_weapons.shillelagh.stats.max_damage_effect = 2.4
 	self.melee_weapons.shillelagh.stats.range = 145
+	--Rusty chain thing
+	self.melee_weapons.road.type = "axe"
+	self.melee_weapons.road.speed_mult = 0.9
+	self.melee_weapons.road.stats.charge_time = 3
+	self.melee_weapons.road.stats.min_damage = 9
+	self.melee_weapons.road.stats.max_damage = 16
+	self.melee_weapons.road.stats.min_damage_effect = 0.8
+	self.melee_weapons.road.stats.max_damage_effect = 2
+	self.melee_weapons.road.stats.range = 190
 	--Shovel
 	self.melee_weapons.shovel.type = "axe"
 	self.melee_weapons.shovel.speed_mult = 0.875

@@ -13,9 +13,7 @@ function UpgradesTweakData:_init_pd2_values()
 	self.explosive_bullet.camera_shake_max_mul = 5
 	
 	self.weapon_movement_penalty = {}
-	
-	self.values.rep_upgrades.values = {0}
-	
+		
 	--ARMOR STABILITY
 	self.values.player.body_armor.damage_shake[1] = 2.000
 	self.values.player.body_armor.damage_shake[2] = 1.714
@@ -26,27 +24,76 @@ function UpgradesTweakData:_init_pd2_values()
 	self.values.player.body_armor.damage_shake[7] = 0.286
 	
 	if not SC then
-		log("SC's Mod is active, disabling DMCWO's perk changes")
 		self.values.player.passive_health_regen = {0.015}
-		self.specialization_descs[2][9].multiperk2 = "1.5%"
 	end
+	
+	
+	if DMCWO.havel_mum ~= true then
+			
+		self.values.rep_upgrades.values = {0}
 		
-	--[[   MASTERMIND   ]]--
+		--[[   MASTERMIND   ]]--
 		--{
 			--[[   MEDIC SUBTREE   ]]--
 			--{
+				--Combat Medic
+				self.values.temporary.combat_medic_damage_multiplier = { {1.25, 10}, {1.25, 15} }
+				self.revive_health_multiplier = {1.3}
+				
 				--Quick Fix
+				self.values.first_aid_kit.deploy_time_multiplier = {0.5}
 				self.values.temporary.first_aid_damage_reduction = { {0.85, 20} }
-			
+				--Painkillers
+				self.values.temporary.passive_revive_damage_reduction = {
+					{0.75, 5},
+					{0.5, 5}
+				}
+				
 				--Uppers
 				self.values.first_aid_kit.quantity = {4, 10}
+				--Combat Doctor
+				self.doctor_bag_base = 2
+				self.values.doctor_bag.quantity = {1}
+				self.values.doctor_bag.amount_increase = {2}
 				
 				--Inspire
 				self.values.player.long_dis_revive = {0.5, 0.5}
+				self.values.cooldown.long_dis_revive = {{1, 20}}
+				self.morale_boost_speed_bonus = 1.2
+				self.morale_boost_suppression_resistance = 1
+				self.morale_boost_time = 10
+				self.morale_boost_reload_speed_bonus = 1
+				self.morale_boost_base_cooldown = 3.5
 			--}
 			
 			--[[   CONTROLLER SUBTREE   ]]--
 			--{
+				--Cable Guy
+				self.values.cable_tie.interact_speed_multiplier = {0.25}
+				self.values.cable_tie.quantity_1 = {4}
+				self.values.player.stamina_multiplier = {2}
+				self.values.team.stamina.multiplier = {1.5}
+
+				--Clowns are Scary
+				self.values.player.intimidate_range_mul = {1.5}
+				self.values.player.intimidate_aura = {1000}
+				self.values.player.convert_enemies_max_minions = {1, 2}
+				--Joker
+				self.values.player.convert_enemies = {true}
+				self.values.player.convert_enemies_health_multiplier = {0.65}
+				self.values.player.convert_enemies_damage_multiplier = {1.45}
+				self.values.player.convert_enemies_interaction_speed_multiplier = {0.35}
+
+				--Stockholm Syndrome
+				self.values.player.civ_calming_alerts = {true}
+				self.values.player.civ_intimidation_mul = {1.5}
+				self.values.player.civilian_reviver = {true}
+				self.values.player.civilian_gives_ammo = {true}
+				--Partners in Crime
+				self.values.player.minion_master_speed_multiplier = {1.1}
+				self.values.player.minion_master_health_multiplier = {1.3}
+				self.values.player.passive_convert_enemies_health_multiplier = {0.25}
+				self.values.player.passive_convert_enemies_damage_multiplier = {1.15}				
 			
 				--Hostage Taker
 				self.values.player.hostage_health_regen_addend = {0.025, 0.05}
@@ -54,6 +101,10 @@ function UpgradesTweakData:_init_pd2_values()
 			
 			--[[   ASSAULT SUBTREE   ]]--
 			--{
+				--Leadership
+				self.values.smg.recoil_index_addend = {4}
+				self.values.team.weapon.recoil_index_addend = {4}
+				
 				--MG Handling (Rifleman)
 				self.values.smg.reload_speed_multiplier = {1.35}
 				self.values.smg.hip_fire_spread_multiplier = {0.5}
@@ -65,10 +116,10 @@ function UpgradesTweakData:_init_pd2_values()
 				self.values.weapon.clip_ammo_increase = {1.3, 1.5}
 				--Heavy Impact
 				self.values.weapon.knock_down = {0.1, 0.25}
-	
+		
 				--Body Expertise
-				self.values.weapon.automatic_head_shot_add = {0.25, 0.25}
-
+				self.values.weapon.automatic_head_shot_add = {0.25, 0.50}
+	
 			--}
 		--}
 		
@@ -81,7 +132,7 @@ function UpgradesTweakData:_init_pd2_values()
 				self.values.temporary.dmg_dampener_outnumbered = { {0.9, 7} }
 				
 				--Shotgun CQB
-				self.values.shotgun.reload_speed_multiplier = {1.25, 1.25}
+				self.values.shotgun.reload_speed_multiplier = {1.25, 1.50}
 				self.values.shotgun.enter_steelsight_speed_multiplier = {2.25}
 				--Shotgun Impact
 				self.values.shotgun.recoil_index_addend = {4}
@@ -106,20 +157,23 @@ function UpgradesTweakData:_init_pd2_values()
 			--[[   ARMORER SUBTREE   ]]--
 			--{
 				--Stun Resistance
-				self.values.player.damage_shake_multiplier = {0.75}
-				self.values.player.damage_shake_addend = {1.5}
+				self.values.player.damage_shake_addend = {1}
 				self.values.player.flashbang_multiplier = {0.75, 0.25}
 				
 				--Die Hard
 				self.values.player.armor_regen_timer_multiplier = {0.85}
 				self.values.player.primary_weapon_when_downed = {true}
 				--Transporter
+				self.values.carry.throw_distance_multiplier = {1.5}
 				self.values.carry.movement_penalty_nullifier = {true}
 				
 				--More Blood To Bleed
 				self.values.player.health_multiplier = {1.25, 1.5}
 				--Bullseye
-				self.values.player.headshot_regen_armor_bonus = {1, 3.5}
+				self.values.player.headshot_regen_armor_bonus = {0.5, 3.5}
+				
+				--Iron Man
+				self.values.player.shield_knock = {true}
 			--}
 			
 			--[[   AMMO SPECIALIST SUBTREE   ]]--
@@ -159,7 +213,7 @@ function UpgradesTweakData:_init_pd2_values()
 			--[[   ENGINEER SUBTREE   ]]--
 			--{
 				--Defense up
-				self.values.sentry_gun.cost_reduction = {1.5, 2}
+				self.values.sentry_gun.cost_reduction = {1.25, 1.5}
 				self.values.sentry_gun.shield = {true}	
 				
 				--Sentry Targeting Package
@@ -177,15 +231,9 @@ function UpgradesTweakData:_init_pd2_values()
 				--Jack of All Trades
 				self.values.player.deploy_interact_faster = {0.5}
 				self.values.player.second_deployable = {true}
-	
+		
 				--Tower Defence
 				self.values.sentry_gun.quantity = {1, 2}
-				self.skill_descs.tower_defense = { 
-					[1] = 1, 
-					[2] = 1, 
-					multibasic = "2",
-					multipro = "3"
-				}
 			--}
 			
 			--[[   BREACHER SUBTREE   ]]--
@@ -219,14 +267,14 @@ function UpgradesTweakData:_init_pd2_values()
 				--Nerves of Steel
 				self.values.player.interacting_damage_multiplier = {0.5}
 				self.values.player.steelsight_when_downed = {true}
-	
+		
 				--Sharpshooter
-				self.values.weapon.single_spread_index_addend = {5}
+				self.values.weapon.single_spread_index_addend = {4}
 				self.values.assault_rifle.recoil_index_addend = {4}
 				self.values.snp.recoil_index_addend = {4}
 				--Spotter
 				self.values.player.marked_enemy_extra_damage = {true}
-				self.values.player.marked_enemy_damage_mul = 1.15
+				self.values.player.marked_enemy_damage_mul = 1.20
 				self.values.player.marked_inc_dmg_distance = {{2500, 1.5}}
 				
 				--Kilmer
@@ -293,6 +341,19 @@ function UpgradesTweakData:_init_pd2_values()
 				self.values.player.run_speed_multiplier = {1.25}
 				self.values.player.crouch_dodge_chance = {0.05, 0.15}
 				
+				--Evasion
+				self.values.player.movement_speed_multiplier = {1.1}
+				self.values.player.climb_speed_multiplier = {1.2, 1.75}
+				self.values.player.can_free_run = {true}
+				self.values.player.fall_damage_multiplier = {0.25}
+				self.values.player.fall_health_damage_multiplier = {0}
+				--Deep Pockets
+				self.values.player.melee_concealment_modifier = {2}
+				self.values.player.ballistic_vest_concealment = {4}
+				self.values.player.level_2_armor_addend = {2}
+				self.values.player.level_3_armor_addend = {2}
+				self.values.player.level_4_armor_addend = {2}
+				
 				--Moving Target
 				self.values.player.detection_risk_add_movement_speed = {
 					{
@@ -314,16 +375,42 @@ function UpgradesTweakData:_init_pd2_values()
 			
 			--[[   SILENT KILLER SUBTREE   ]]--
 			--{
+				--Second Wind
+				self.values.temporary.damage_speed_multiplier = {
+					{1.15, 5},
+					{1.3, 8}
+				}
+				
+				--Optical Illusions
+				self.values.player.silencer_concealment_increase = {1}
+				self.values.player.silencer_concealment_penalty_decrease = {2}
 				--The Professional
 				self.values.weapon.silencer_spread_index_addend = {5}
 				self.values.weapon.silencer_recoil_index_addend = {8}
 				self.values.weapon.silencer_enter_steelsight_speed_multiplier = {1.5}
 				
-				--Optical Illusions
-				self.values.player.silencer_concealment_increase = {1}
-				self.values.player.silencer_concealment_penalty_decrease = {2}
+				--Dire Need
+				self.values.player.armor_depleted_stagger_shot = {0, 5}
 				--Subsonic Rounds
 				self.values.weapon.supp_range_buff = {1.25, 1.50}
+				
+				--Low Blow
+				self.values.player.detection_risk_add_crit_chance = {
+					{
+						0.03,
+						3,
+						"below",
+						35,
+						0.3
+					},
+					{
+						0.03,
+						1,
+						"below",
+						35,
+						0.3
+					}
+				}
 			--}
 		--}
 		
@@ -412,6 +499,26 @@ function UpgradesTweakData:_init_pd2_values()
 				self.values.player.melee_damage_health_ratio_multiplier = {2.50}
 			--}
 		--}
+	else
+	
+		--Subsonic Rounds
+		self.values.weapon.supp_range_buff = {1.25, 1.50}
+		--Akimbo
+		self.values.akimbo.extra_ammo_multiplier = {1.25, 1.5}
+		self.values.akimbo.recoil_multiplier = {
+			1.5,
+			1.25,
+			1
+		}
+		--Uppers
+		self.values.first_aid_kit.quantity = {4, 10}
+		--Tower Defence
+		self.values.sentry_gun.quantity = {1, 2}
+		--Swan Song
+		self.values.temporary.berserker_damage_multiplier = { {1, 5}, {1, 10} }
+		
+	end
+		
 end
 
 local old_player_definitions = UpgradesTweakData._player_definitions
@@ -517,6 +624,17 @@ function UpgradesTweakData:_player_definitions()
 		upgrade = {
 			category = "player",
 			upgrade = "messiah_revive_from_bleed_out",
+			value = 2
+		}
+	}
+	
+	
+	self.definitions.temporary_damage_speed_multiplier_2 = {
+		category = "temporary",
+		name_id = "menu_temporary_damage_speed_1",
+		upgrade = {
+			category = "temporary",
+			upgrade = "damage_speed_multiplier",
 			value = 2
 		}
 	}

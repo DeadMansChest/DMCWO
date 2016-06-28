@@ -5,18 +5,22 @@ This script is used in DMC's Weapon Overhaul, please make sure you have the most
 local old_skill_init = SkillTreeTweakData.init
 function SkillTreeTweakData:init()
 	old_skill_init(self)
+	
 	local digest = function(value)
 		return Application:digest_value(value, true)
 	end
+	
+	if DMCWO.havel_mum ~= true then
+	
 	self.tier_unlocks = {
 		digest(0),
 		digest(1),
 		digest(9),
 		digest(18)
 	}
+	
 	--[[   SKILLTREES   ]]--
 	--{
-	
 		--[[   MASTERMIND   ]]--
 		--{
 			--[[   MEDIC SUBTREE   ]]--
@@ -364,13 +368,14 @@ function SkillTreeTweakData:init()
 					["icon_xy"] = {10, 3},
 					[1] = {
 						upgrades = {
-							"player_ap_bullets_1"
+							"player_ap_bullets_1",
+							"weapon_automatic_head_shot_add_1"
 						},
 						cost = self.costs.hightier
 					},
 					[2] = {
 						upgrades = {
-							"weapon_automatic_head_shot_add_1"
+							"weapon_automatic_head_shot_add_2"
 						},
 						cost = self.costs.hightierpro
 					}
@@ -508,7 +513,7 @@ function SkillTreeTweakData:init()
 					["icon_xy"] = {6, 1},
 					[1] = {
 						upgrades = {
-							"player_damage_shake_multiplier"
+							"player_damage_shake_addend"
 						},
 						cost = self.costs.default
 					},
@@ -1273,14 +1278,14 @@ function SkillTreeTweakData:init()
 						cost = self.costs.pro
 					}
 				}
-				--Thick Skin
+				--Deep Pockets (Thick Skin)
 				self.skills.thick_skin = {
 					["name_id"] = "menu_thick_skin_dmc",
 					["desc_id"] = "menu_thick_skin_desc_dmc",
 					["icon_xy"] = {2, 12},
 					[1] = {
 						upgrades = {
-							"player_damage_shake_addend"
+							"player_melee_concealment_modifier"
 						},
 						cost = self.costs.default
 					},
@@ -1288,7 +1293,8 @@ function SkillTreeTweakData:init()
 						upgrades = {
 							"player_level_2_armor_addend",
 							"player_level_3_armor_addend",
-							"player_level_4_armor_addend"
+							"player_level_4_armor_addend",
+							"player_ballistic_vest_concealment_1"
 						},
 						cost = self.costs.pro
 					}	
@@ -1354,40 +1360,39 @@ function SkillTreeTweakData:init()
 			
 			--[[   SILENT KILLER SUBTREE   ]]--
 			--{
-				--Shinobi (Camouflage)
+				--Second Wind
 				self.skills.scavenger = {
 					["name_id"] = "menu_scavenger_dmc",
 					["desc_id"] = "menu_scavenger_desc_dmc",
 					["icon_xy"] = {0, 3},
 					[1] = {
 						upgrades = {
-							"player_crouch_speed_multiplier",
-							"weapon_special_damage_taken_multiplier"
+							"temporary_damage_speed_multiplier"
 						},
 						cost = self.costs.default
 					},
 					[2] = {
 						upgrades = {
-							"player_walk_speed_multiplier"
+							"temporary_damage_speed_multiplier_2"
 						},
 						cost = self.costs.pro
 					}
 				}
 				
-				--Hidden Blade (Optic Illusions)
+				--Optical Illusions
 				self.skills.optic_illusions = {
 					["name_id"] = "menu_optic_illusions_dmc",
 					["desc_id"] = "menu_optic_illusions_desc_dmc",
 					["icon_xy"] = {4, 10},
 					[1] = {
 						upgrades = {
-							"player_melee_concealment_modifier"
-						},
+							"player_silencer_concealment_increase_1"
+						},	
 						cost = self.costs.hightier
 					},
 					[2] = {
 						upgrades = {
-							"player_ballistic_vest_concealment_1"
+							"player_silencer_concealment_penalty_decrease_1"
 						},
 						cost = self.costs.hightierpro
 					}
@@ -1412,20 +1417,20 @@ function SkillTreeTweakData:init()
 					}
 				}
 				
-				--Optical Illusions (Low Blow)
+				--Dire Need (Low Blow)
 				self.skills.backstab = {
 					["name_id"] = "menu_backstab_dmc",
 					["desc_id"] = "menu_backstab_desc_dmc",
 					["icon_xy"] = {10, 10},
 					[1] = {
 						upgrades = {
-							"player_silencer_concealment_increase_1"
+							"player_armor_depleted_stagger_shot_1"
 						},	
 						cost = self.costs.hightier
 					},
 					[2] = {
 						upgrades = {
-							"player_silencer_concealment_penalty_decrease_1"
+							"player_armor_depleted_stagger_shot_2"
 						},
 						cost = self.costs.hightierpro
 					}
@@ -1830,7 +1835,8 @@ function SkillTreeTweakData:init()
 			--}
 		--}
 	--}
-	
+		
+	--Default Upgrades
 	self.default_upgrades = {
 		"carry_interact_speed_multiplier_1",
 		"carry_interact_speed_multiplier_2",
@@ -1879,22 +1885,347 @@ function SkillTreeTweakData:init()
 		"player_intimidate_enemies"
 	}
 	
+	else
 	
-	if DMCWO.GEDDAN == true then
-		self.skills.ammo_reservoir["desc_id"] = "menu_ammo_reservoir_desc_jam"
+		--Fully Loaded
+		self.skills.bandoliers = {
+			["name_id"] = "menu_bandoliers_dmc",
+			["desc_id"] = "menu_bandoliers_desc_dmc",
+			["icon_xy"] = {3, 0},
+			[1] = {
+				upgrades = {
+					"extra_ammo_multiplier1"
+				},
+				cost = self.costs.hightier
+			},
+			[2] = {
+				upgrades = {
+					"player_pick_up_ammo_multiplier",
+					"player_pick_up_ammo_multiplier_2"
+				},
+				cost = self.costs.hightierpro
+			}
+		}
+		--Bullet Storm
+		self.skills.ammo_reservoir = {
+			["name_id"] = "menu_ammo_reservoir_dmc",
+			["desc_id"] = "menu_ammo_reservoir_desc_dmc",
+			["icon_xy"] = {4, 5},
+			[1] = {
+				upgrades = {
+					"temporary_no_ammo_cost_1"
+				},
+				cost = self.costs.default
+			},
+			[2] = {
+				upgrades = {
+					"temporary_no_ammo_cost_2"
+				},
+				cost = self.costs.pro
+			}
+		}
+		--Akimbo
+		self.skills.akimbo = {
+			["name_id"] = "menu_akimbo_skill",
+			["desc_id"] = "menu_gun_fighter_desc_dmc",
+			["icon_xy"] = {7, 11},
+			[1] = {
+				upgrades = {
+					"akimbo_recoil_multiplier_2"
+				},
+				cost = self.costs.hightier
+			},
+			[2] = {
+				upgrades = {
+					"akimbo_recoil_multiplier_3",
+					"akimbo_extra_ammo_multiplier_1",
+					"akimbo_extra_ammo_multiplier_2"
+				},
+				cost = self.costs.hightierpro
+			}
+		}
+		--Tower Defense
+		self.skills.tower_defense = {
+			["name_id"] = "menu_tower_defense_dmc",
+			["desc_id"] = "menu_tower_defense_desc_dmc",
+			["icon_xy"] = {9, 5},
+			[1] = {
+				upgrades = {
+					"sentry_gun_quantity_1"
+				},
+				cost = self.costs.hightier
+			},
+			[2] = {
+				upgrades = {
+					"sentry_gun_quantity_2"
+				},
+				cost = self.costs.hightierpro
+			}
+		}
+		--Uppers
+		self.skills.tea_cookies = {
+			["name_id"] = "menu_tea_cookies_dmc",
+			["desc_id"] = "menu_tea_cookies_desc_dmc",
+			["icon_xy"] = {2, 11},
+			[1] = {
+				upgrades = {
+					"first_aid_kit_quantity_increase_1"
+				},
+				cost = self.costs.hightier
+			},
+			[2] = {
+				upgrades = {
+					"first_aid_kit_quantity_increase_2"
+				},
+				cost = self.costs.hightierpro
+			}
+		}
+		--Subsonic Rounds
+		self.skills.hitman = {
+			["name_id"] = "menu_hitman_dmc",
+			["desc_id"] = "menu_hitman_desc_dmc",
+			["icon_xy"] = {5, 9},
+			[1] = {
+				upgrades = {
+					"weapon_supp_range_buff_1"
+				},
+				cost = self.costs.hightier
+			},
+			[2] = {
+				upgrades = {
+					"weapon_supp_range_buff_2"
+				},
+				cost = self.costs.hightierpro
+			}
+		}
+		--Swan Song
+		self.skills.perseverance = {
+			["name_id"] = "menu_perseverance_dmc",
+			["desc_id"] = "menu_perseverance_desc_dmc",
+			["icon_xy"] = {5, 12},
+			[1] = {
+				upgrades = {
+					"temporary_berserker_damage_multiplier_1"
+				},
+				cost = self.costs.hightier
+			},
+			[2] = {
+				upgrades = {
+					"temporary_berserker_damage_multiplier_2"
+				},
+				cost = self.costs.hightierpro
+			}
+		}
+				
+		self.default_upgrades = {
+			"player_fall_damage_multiplier",
+			"player_fall_health_damage_multiplier",
+			"player_silent_kill",
+			"player_primary_weapon_when_downed",
+			"player_intimidate_enemies",
+			"player_stamina_multiplier",
+			"team_stamina_multiplier",
+			"player_special_enemy_highlight",
+			"player_hostage_trade",
+			"player_sec_camera_highlight",
+			"player_corpse_dispose",
+			"player_corpse_dispose_amount_1",
+			"player_civ_harmless_melee",
+			"player_walk_speed_multiplier",
+			"player_steelsight_when_downed",
+			"player_crouch_speed_multiplier",
+			"carry_interact_speed_multiplier_1",
+			"carry_interact_speed_multiplier_2",
+			"carry_movement_speed_multiplier",
+			"trip_mine_sensor_toggle",
+			"trip_mine_sensor_highlight",
+			"trip_mine_can_switch_on_off",
+			"ecm_jammer_can_activate_feedback",
+			"ecm_jammer_interaction_speed_multiplier",
+			"ecm_jammer_can_retrigger",
+			"ecm_jammer_affects_cameras",
+			"temporary_first_aid_damage_reduction",
+			"temporary_passive_revive_damage_reduction_2",
+			--"akimbo_recoil_index_addend_1",
+			"akimbo_recoil_multiplier_1",
+			"doctor_bag",
+			"ammo_bag",
+			"trip_mine",
+			"ecm_jammer",
+			"first_aid_kit",
+			"sentry_gun",
+			"bodybags_bag",
+			"saw",
+			"cable_tie",
+			"jowi",
+			"x_1911",
+			"x_b92fs",
+			"x_deagle",
+			"x_g22c",
+			"x_g17",
+			"x_usp",
+			"x_sr2",
+			"x_mp5",
+			"x_akmsu"
+		}
+
 	end
 	
-	--DECKS
-	self.specializations[5][2].upgrades = {
-		"player_perk_armor_regen_timer_multiplier_2", 
-		"akimbo_recoil_multiplier_2"
-	}
-	self.specializations[5][5].upgrades = {
-		"player_perk_armor_regen_timer_multiplier_5",
-		"player_passive_loot_drop_multiplier",
-		"akimbo_recoil_multiplier_3",
-		"akimbo_extra_ammo_multiplier_1"
-	}
-	self.specializations[10][1].upgrades = {"temporary_loose_ammo_restore_health_1"}
+	if not SC then
+		--DECKS
+		local deck2 = {
+			upgrades = {
+				"weapon_passive_headshot_damage_multiplier"
+			},
+			cost = 300,
+			icon_xy = {1, 0},
+			name_id = "menu_deckall_2",
+			desc_id = "menu_deckall_2_desc"
+		}
+		local deck4 = {
+			upgrades = {
+				"passive_player_xp_multiplier",
+				"player_passive_suspicion_bonus",
+				"player_passive_armor_movement_penalty_multiplier"
+			},
+			cost = 600,
+			icon_xy = {3, 0},
+			name_id = "menu_deckall_4",
+			desc_id = "menu_deckall_4_desc"
+		}
+		local deck6 = {
+			upgrades = {
+				"armor_kit",
+				"player_pick_up_ammo_multiplier"
+			},
+			cost = 1600,
+			icon_xy = {5, 0},
+			name_id = "menu_deckall_6",
+			desc_id = "menu_deckall_6_desc"
+		}
+		local deck8 = {
+			upgrades = {
+				"weapon_passive_damage_multiplier",
+				"passive_doctor_bag_interaction_speed_multiplier"
+			},
+			cost = 3200,
+			icon_xy = {7, 0},
+			name_id = "menu_deckall_8",
+			desc_id = "menu_deckall_8_desc"
+		}
+		
+		self.specializations[5] = {
+			name_id = "menu_st_spec_5",
+			desc_id = "menu_st_spec_5_desc",
+			{
+				upgrades = {
+					"player_perk_armor_regen_timer_multiplier_1"
+				},
+				cost = 200,
+				icon_xy = {6, 2},
+				name_id = "menu_deck5_1",
+				desc_id = "menu_deck5_1_desc"
+			},
+			deck2,
+			{
+				upgrades = {
+					"player_perk_armor_regen_timer_multiplier_2",
+					"akimbo_recoil_multiplier_2"
+				},
+				cost = 400,
+				icon_xy = {7, 2},
+				name_id = "menu_deck5_3",
+				desc_id = "menu_deck5_3_desc"
+			},
+			deck4,
+			{
+				upgrades = {
+					"player_perk_armor_regen_timer_multiplier_3"
+				},
+				cost = 1000,
+				icon_xy = {0, 3},
+				name_id = "menu_deck5_5",
+				desc_id = "menu_deck5_5_desc"
+			},
+			deck6,
+			{
+				upgrades = {
+					"player_perk_armor_regen_timer_multiplier_4"
+				},
+				cost = 2400,
+				icon_xy = {1, 3},
+				name_id = "menu_deck5_7",
+				desc_id = "menu_deck5_7_desc"
+			},
+			deck8,
+			{
+				upgrades = {
+					"player_perk_armor_regen_timer_multiplier_5",
+					"player_passive_loot_drop_multiplier",
+					"akimbo_recoil_multiplier_3",
+					"akimbo_extra_ammo_multiplier_1"
+				},
+				cost = 4000,
+				icon_xy = {3, 3},
+				name_id = "menu_deck5_9",
+				desc_id = "menu_deck5_9_desc"
+			}
+		}
+		
+		self.specializations[10] = {
+			name_id = "menu_st_spec_10",
+			desc_id = "menu_st_spec_10_desc",
+			{
+				upgrades = {
+					"temporary_loose_ammo_restore_health_1"
+				},
+				cost = 200,
+				icon_xy = {4, 5},
+				name_id = "menu_deck10_1",
+				desc_id = "menu_deck10_1_desc"
+			},
+			deck2,
+			{
+				upgrades = {
+					"temporary_loose_ammo_give_team"
+				},
+				cost = 400,
+				icon_xy = {5, 5},
+				name_id = "menu_deck10_3",
+				desc_id = "menu_deck10_3_desc"
+			},
+			deck4,
+			{
+				upgrades = {
+					"player_loose_ammo_restore_health_give_team"
+				},
+				cost = 1000,
+				icon_xy = {6, 5},
+				name_id = "menu_deck10_5",
+				desc_id = "menu_deck10_5_desc"
+			},
+			deck6,
+			{
+				upgrades = {
+					"temporary_loose_ammo_restore_health_2"
+				},
+				cost = 2400,
+				icon_xy = {7, 5},
+				name_id = "menu_deck10_7",
+				desc_id = "menu_deck10_7_desc"
+			},
+			deck8,
+			{
+				upgrades = {
+					"temporary_loose_ammo_restore_health_3",
+					"player_passive_loot_drop_multiplier"
+				},
+				cost = 4000,
+				icon_xy = {0, 6},
+				name_id = "menu_deck10_9",
+				desc_id = "menu_deck10_9_desc"
+			}
+		}
+	end
 	
 end

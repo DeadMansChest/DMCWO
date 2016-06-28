@@ -1,4 +1,4 @@
-#DMC's Weapon Overhaul v1.80: "Me, Me, Pump-a-rum" Edition
+#DMC's Weapon Overhaul v1.81: "Me, Me, Pump-a-rum" Edition
 ####[I'd pump her rum if you know what I mean ;)](https://www.youtube.com/watch?v=1wTndUgskZQ)
 [Steam group](http://steamcommunity.com/groups/DMCWO)
 

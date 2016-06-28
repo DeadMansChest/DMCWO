@@ -222,6 +222,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		self.p90.AMMO_MAX = 150
 		
 		self.olympic.AMMO_MAX = 150
+		self.hajk.AMMO_MAX = 120
 		self.akmsu.AMMO_MAX = 90
 		self.x_akmsu.AMMO_MAX = 150
 		self.tecci.AMMO_MAX = 180
@@ -246,6 +247,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		self.ksg.AMMO_MAX = 35 --counted in 7s (a single tube on the KSG)
 		self.huntsman.AMMO_MAX = 26
 		self.b682.AMMO_MAX = 26
+		self.boot.AMMO_MAX = 25
 		self.spas12.AMMO_MAX = 48
 		self.benelli.AMMO_MAX = 45
 		
@@ -332,7 +334,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	pickup_rate = {'p90','mp7'}
 	for i, wep_id in ipairs(pickup_rate) do
-		self[ wep_id ].AMMO_PICKUP = {0.40, 2.10}
+		self[ wep_id ].AMMO_PICKUP = {0.45, 2.10}
 	end
 	
 	pickup_rate = {'sr2','x_sr2'}
@@ -341,7 +343,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		self[ wep_id ].warsaw = true
 	end
 	
-	pickup_rate = {'r870','serbu','benelli','ksg','striker','huntsman','spas12','b682'}
+	pickup_rate = {'r870','serbu','benelli','ksg','striker','huntsman','spas12','b682','boot'}
 	for i, wep_id in ipairs(pickup_rate) do
 		self[ wep_id ].AMMO_PICKUP = {0.55, 1.85}
 	end
@@ -349,7 +351,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.aa12.AMMO_PICKUP = {0.45, 1.75}
 	
 	
-	pickup_rate = {'olympic','m16','amcar','new_m4','ak5','s552','g36','aug','famas','l85a2','vhs','tecci'}
+	pickup_rate = {'olympic','m16','amcar','new_m4','ak5','s552','g36','aug','famas','l85a2','vhs','tecci','hajk'}
 	for i, wep_id in ipairs(pickup_rate) do
 		self[ wep_id ].AMMO_PICKUP = {1.10, 3.00}
 		self[ wep_id ].nato = true
@@ -420,7 +422,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		self[ wep_id ].panic_suppression_chance = 0.025
 	end
 	
-	local mid_panic = {'new_m4','ak5','aug','m16','famas','akmsu','vhs','x_akmsu','tecci'}
+	local mid_panic = {'new_m4','ak5','aug','m16','famas','akmsu','vhs','x_akmsu','tecci','hajk'}
 	for i, wep_id in ipairs(mid_panic) do
 		self[ wep_id ].panic_suppression_chance = 0.05
 	end
@@ -435,7 +437,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		self[ wep_id ].panic_suppression_chance = 0.10
 	end
 	
-	local weed2_panic = {'benelli','saiga','serbu','striker','huntsman','r870','ksg','judge','spas12','hk21','mg42','b682','aa12','wa2000'}
+	local weed2_panic = {'benelli','saiga','serbu','striker','huntsman','r870','ksg','judge','spas12','hk21','mg42','b682','aa12','wa2000','boot'}
 	for i, wep_id in ipairs(weed2_panic) do
 		self[ wep_id ].panic_suppression_chance = 0.125
 	end
@@ -461,7 +463,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	--{
 	
 	--tactical reloading shite
-	local tact_rel = {'deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','new_m14','scar','fal','rpk','msr','r93','m95','famas','galil','g3','scorpion','benelli','serbu','r870','ksg','g26','spas12','l85a2','vhs','hs2000','tec9','sub2000','asval','wa2000','polymer','winchester1874','sparrow','model70','m37','china','sr2','pl14','tecci'}
+	local tact_rel = {'deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','new_m14','scar','fal','rpk','msr','r93','m95','famas','galil','g3','scorpion','benelli','serbu','r870','ksg','g26','spas12','l85a2','vhs','hs2000','tec9','sub2000','asval','wa2000','polymer','winchester1874','sparrow','model70','m37','china','sr2','pl14','tecci','hajk','boot'}
 		for i, wep_id in ipairs(tact_rel) do
 			self[ wep_id ].tactical_reload = 1
 		end
@@ -503,7 +505,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	end
 	
 	--Weapons that are loaded shell by shell
-	local shell_loaded = {'r870','benelli','ksg','serbu','striker','spas12','peacemaker','winchester1874','huntsman','b682','gre_m79','m32','china'}
+	local shell_loaded = {'r870','benelli','ksg','serbu','striker','spas12','peacemaker','winchester1874','huntsman','b682','gre_m79','m32','china','boot'}
 	for i, wep_id in ipairs(shell_loaded) do
 		self[ wep_id ].rms = 0.85
 	end
@@ -521,7 +523,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	--[[ GENERAL STATS ]]
 	--{
-	local standard_stat_shit = {'saw','saw_secondary','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','rpg7','cobray','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','mateba','sub2000','asval','polymer','wa2000','hunter','baka','frankish','arblast','long','par','sparrow','model70','m37','china','sr2','x_sr2','pl14','x_mp5','x_akmsu','tecci'}
+	local standard_stat_shit = {'saw','saw_secondary','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','rpg7','cobray','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','mateba','sub2000','asval','polymer','wa2000','hunter','baka','frankish','arblast','long','par','sparrow','model70','m37','china','sr2','x_sr2','pl14','x_mp5','x_akmsu','tecci','hajk','boot'}
 	for i, wep_id in ipairs(standard_stat_shit) do
 		self[ wep_id ].stats.zoom = 1
 		self[ wep_id ].stats.alert_size	= 150
@@ -529,7 +531,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		self[ wep_id ].stats.total_ammo_mod = 201
 	end
 	
-	standard_stat_shit = {'colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','s552','new_m14','x_deagle','x_1911','x_b92fs','jowi','g26','c96','sterling','m1928','hs2000','rpg7','cobray','x_usp','x_g17','x_g22c','hunter','frankish','arblast','sparrow','pl14'}
+	standard_stat_shit = {'colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','s552','new_m14','x_deagle','x_1911','x_b92fs','jowi','g26','c96','sterling','m1928','hs2000','rpg7','cobray','x_usp','x_g17','x_g22c','hunter','frankish','arblast','sparrow','pl14','hajk'}
 	for i, wep_id in ipairs(standard_stat_shit) do
 		self[ wep_id ].lock_slide = true
 	end
@@ -537,15 +539,18 @@ function WeaponTweakData:_init_new_weapons(...)
 	standard_stat_shit = {'x_deagle','x_1911','x_b92fs','jowi','x_usp','x_g17','x_g22c'}
 	for i, wep_id in ipairs(standard_stat_shit) do
 		self[ wep_id ].BURST_DELAY = 0.05
+		self[ wep_id ].BURST_FIRE_RECOIL_MULTIPLIER = 1.2
+		self[ wep_id ].BURST_FIRE_HIP_MULTIPLIER = 1.25
 		self[ wep_id ].force_burst = true
 		self[ wep_id ].CAN_TOGGLE_FIREMODE = true
 		self[ wep_id ].no_auto_anims = true
-		self[ wep_id ].AUTO_FIRE_RATE_MULTIPLIER = 0.5
+		self[ wep_id ].AUTO_FIRE_RATE_MULTIPLIER = 0.75
 		self[ wep_id ].auto_anim_speed_mult = self[ wep_id ].AUTO_FIRE_RATE_MULTIPLIER
-		self[ wep_id ].AUTO_FIRE_RECOIL_MULTIPLIER = 2
+		self[ wep_id ].AUTO_FIRE_RECOIL_MULTIPLIER = 1.75
+		self[ wep_id ].AUTO_FIRE_HIP_MULTIPLIER = 3
 	end
 		
-	standard_stat_shit = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','famas','galil','g3','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','cobray','x_usp','x_g17','x_g22c','peacemaker','winchester1874','mateba','sub2000','asval','polymer','baka','par','sparrow','model70','sr2','x_sr2','pl14','x_mp5','x_akmsu','tecci'}
+	standard_stat_shit = {'new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','famas','galil','g3','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','cobray','x_usp','x_g17','x_g22c','peacemaker','winchester1874','mateba','sub2000','asval','polymer','baka','par','sparrow','model70','sr2','x_sr2','pl14','x_mp5','x_akmsu','tecci','hajk'}
 	for i, wep_id in ipairs(standard_stat_shit) do
 		self[ wep_id ].can_shoot_through_wall = true
 	end
@@ -555,7 +560,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		self[ wep_id ].can_shoot_through_shield = true
 	end
 	
-	standard_stat_shit = {'new_raging_bull','deagle','colt_1911','usp','mac10','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','famas','galil','g3','x_deagle','x_1911','mg42','mosin','c96','m1928','l85a2','vhs','m134','x_usp','peacemaker','winchester1874','mateba','asval','polymer','par','model70','sr2','x_sr2','x_akmsu','tecci'}
+	standard_stat_shit = {'new_raging_bull','deagle','colt_1911','usp','mac10','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','famas','galil','g3','x_deagle','x_1911','mg42','mosin','c96','m1928','l85a2','vhs','m134','x_usp','peacemaker','winchester1874','mateba','asval','polymer','par','model70','sr2','x_sr2','x_akmsu','tecci','hajk'}
 	for i, wep_id in ipairs(standard_stat_shit) do
 		self[ wep_id ].can_shoot_through_enemy = true
 	end
@@ -640,7 +645,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	standard_stat_shit = {'g22c','p226','hs2000','x_g22c'}
 	for i, wep_id in ipairs(standard_stat_shit) do
 		self[ wep_id ].penetration_power = 0.5
-		self[ wep_id ].penetration_damage = 0.45
+		self[ wep_id ].penetration_damage = 0.4
 	end
 	self.g22c.r_recover = 0.8
 	self.g22c.r_speed = 70
@@ -757,7 +762,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.x_sr2.r_speed = 85
 	self.x_sr2.c_speed = 5
 	
-	standard_stat_shit = {'r870','serbu','benelli','ksg','striker','huntsman','spas12','judge','b682','saiga','aa12','m37'}
+	standard_stat_shit = {'r870','serbu','benelli','ksg','striker','huntsman','spas12','judge','b682','saiga','aa12','m37','boot'}
 	for i, wep_id in ipairs(standard_stat_shit) do
 		self[ wep_id ].penetration_power = 0.5 --Only relevant if you're using slugs!!
 		self[ wep_id ].penetration_damage = 0.45 --ditto
@@ -784,10 +789,13 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.striker.c_speed = 5.1
 	self.huntsman.r_recover = 0.4
 	self.huntsman.r_speed = 135
-	self.huntsman.c_speed = 5.3
+	self.huntsman.c_speed = 5.35
 	self.b682.r_recover = 0.6
 	self.b682.r_speed = 140
-	self.b682.c_speed = 5.1
+	self.b682.c_speed = 5.25
+	self.boot.r_recover = 0.45
+	self.boot.r_speed = 140
+	self.boot.c_speed = 5.1
 	self.spas12.r_recover = 0.5
 	self.spas12.r_speed = 120
 	self.spas12.c_speed = 5.2
@@ -801,7 +809,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.aa12.r_speed = 95
 	self.aa12.c_speed = 6
 	
-	standard_stat_shit = {'olympic','m16','amcar','new_m4','ak5','s552','g36','aug','famas','m249','l85a2','vhs','tecci'}
+	standard_stat_shit = {'olympic','m16','amcar','new_m4','ak5','s552','g36','aug','famas','m249','l85a2','vhs','tecci','hajk'}
 	for i, wep_id in ipairs(standard_stat_shit) do
 		self[ wep_id ].penetration_power = 0.65
 		self[ wep_id ].penetration_damage = 0.45
@@ -827,6 +835,9 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m249.r_recover = 0.4
 	self.m249.r_speed = 90
 	self.m249.c_speed = 5.2
+	self.hajk.r_recover = 0.60
+	self.hajk.r_speed = 82.5
+	self.hajk.c_speed = 5.25
 	self.m16.r_recover = 0.65
 	self.m16.r_speed = 85
 	self.m16.c_speed = 5.35
@@ -989,7 +1000,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		
 	
 	local worth_the_weight = {}
-	worth_the_weight = {'ak74','s552','new_m4','vhs','saiga','scar','aug','famas','r870','benelli','ak5','spas12','m16','mosin','striker','b682','model70','x_akmsu'}
+	worth_the_weight = {'ak74','s552','new_m4','vhs','saiga','scar','aug','famas','r870','benelli','ak5','spas12','m16','mosin','striker','b682','model70','x_akmsu','hajk','boot'}
 	for i, wep_id in ipairs(worth_the_weight) do
 		self[ wep_id ].weapon_movement_penalty = 0.95
 	end
@@ -1067,8 +1078,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		
 	stock = {
 		'x_sr2','x_mp5',
-		'mp7','p90',
-		'serbu','striker','aa12','saiga','r870','huntsman','benelli','ksg','spas12','b682','m37'
+		'mp7','p90'
 	}
 	for i, wep_id in ipairs(stock) do
 		self[ wep_id ].ams = 0.65
@@ -1076,6 +1086,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	stock = {
 		'olympic','akmsu','amcar','s552','g36','sub2000','x_akmsu',
+		'serbu','striker','saiga','r870','huntsman','benelli','ksg','spas12','b682','m37','boot',
 		'plainsrider','frankish',
 		'gre_m79','china'
 	}
@@ -1084,7 +1095,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	end
 		
 	stock = {
-		'akm','akm_gold','ak74','m16','new_m4','ak5','aug','famas','l85a2','vhs','asval','tecci',
+		'akm','akm_gold','ak74','m16','new_m4','ak5','aug','famas','l85a2','vhs','asval','tecci','hajk',
 		'rpk',
 		'winchester1874','model70',
 		'm32'
@@ -1096,6 +1107,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	stock = {		
 		'new_m14','scar','fal','galil','g3',
 		'm249','hk21','mg42','par',
+		'aa12',
 		'msr','r93','m95','mosin','wa2000',
 		'flamethrower_mk2',
 		'long','arblast',
@@ -1493,6 +1505,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	eq_time = {
+	'hajk',
 	'fal','galil','new_m14','g3',
 	'winchester1874','msr','model70',
 	'm32','gre_m79'	
@@ -1501,6 +1514,9 @@ function WeaponTweakData:_init_new_weapons(...)
 		self[ wep_id ].timers.equip = 0.6
 	end 
 	
+	self.hajk.equip = 1.45
+	self.hajk.unequip = 0.6
+	self.hajk.sprintout_time = 0.430
 	self.fal.equip = 1.6
 	self.fal.unequip = 0.6
 	self.fal.sprintout_time = 0.460
@@ -1570,9 +1586,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	eq_time = {
 	'tecci','sub2000',
-	
 	'm95','wa2000',
-	
+	'boot',
 	'm37'
 	}
 	for i, wep_id in ipairs(eq_time) do
@@ -1591,6 +1606,10 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.wa2000.equip = 1.2
 	self.wa2000.unequip = 0.6
 	self.wa2000.sprintout_time = 0.540
+	
+	self.boot.equip = 1.1
+	self.boot.unequip = 0.6
+	self.boot.sprintout_time = 0.420	
 	
 	self.m37.equip = 1.1
 	self.m37.unequip = 0.6
@@ -1633,7 +1652,9 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.saw.AMMO_MAX = 60
 	self.saw.CLIP_AMMO_MAX = 30 
-
+	
+	self.saw.hit_alert_size_increase = 10
+	
 	self.saw.stats.alert_size = 265
 	self.saw.stats.suppression = 7
 	self.saw.stats.spread = 109
@@ -1732,7 +1753,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	--[[     HONG MEI-LING     ]]--	
 	self.china.ADS_TIMER = 0.380
 	self.china.rms = 0.75
-	self.china.anim_speed_mult = 0.65
+	self.china.anim_speed_mult = 0.675
 	self.china.bmp = 90
 	self.china.block_b_storm = true
 	self.china.recategorize = "nadeshot"
@@ -1908,6 +1929,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.plainsrider.stats_modifiers = { damage = 2 }
 		
+	self.plainsrider.stats.alert_size = 300
 	self.plainsrider.stats.damage = 60
 	self.plainsrider.stats.recoil = 91
 	self.plainsrider.stats.spread = 86
@@ -1936,6 +1958,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.long.stats_modifiers = { damage = 2 }
 		
+	self.long.stats.alert_size = 300
 	self.long.stats.damage = 80
 	self.long.stats.recoil = 84
 	self.long.stats.spread = 91
@@ -1968,6 +1991,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.hunter.stats_modifiers = {}
 		
+	self.hunter.stats.alert_size = 300
 	self.hunter.stats.damage = 80
 	self.hunter.stats.recoil = 89
 	self.hunter.stats.spread = 78
@@ -2001,6 +2025,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.frankish.stats_modifiers = {damage = 2}
 		
+	self.frankish.stats.alert_size = 300
 	self.frankish.stats.damage = 60
 	self.frankish.stats.recoil = 79
 	self.frankish.stats.spread = 78
@@ -2035,6 +2060,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.arblast.stats_modifiers = {damage = 2}
 		
+	self.arblast.stats.alert_size = 300
 	self.arblast.stats.damage = 80
 	self.arblast.stats.recoil = 61
 	self.arblast.stats.spread = 81
@@ -2186,6 +2212,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.x_g17.stats.spread = 50
 	self.x_g17.stats.recoil = 79
 	self.x_g17.stats.suppression = 16
+	self.x_g17.stats.concealment = 29
 	
 	
 	
@@ -2291,6 +2318,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.x_b92fs.stats.spread = 57
 	self.x_b92fs.stats.recoil = 69
 	self.x_b92fs.stats.suppression = 16
+	self.x_b92fs.stats.concealment = 29
 	
 	
 	
@@ -2400,6 +2428,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.jowi.stats.spread = 47
 	self.jowi.stats.recoil = 82
 	self.jowi.stats.suppression = 16
+	self.jowi.stats.concealment = 29
 	
 	
 	
@@ -2513,7 +2542,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.x_g22c.stats.spread = 51
 	self.x_g22c.stats.recoil = 66
 	self.x_g22c.stats.suppression = 12
-	
+	self.x_g22c.stats.concealment = 27
 	
 	--[[     PEE TOOT TOOT SEX     ]]--
 	self.p226.weapon_hold = "colt_1911"
@@ -2666,7 +2695,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.x_1911.stats.spread = 50
 	self.x_1911.stats.recoil = 52
 	self.x_1911.stats.suppression = 10
-	
+	self.x_1911.stats.concealment = 27
 	
 	
 	--[[     U SUCK PEEN -H&K     ]]--
@@ -2741,6 +2770,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.x_usp.stats.spread = 55
 	self.x_usp.stats.recoil = 46
 	self.x_usp.stats.suppression = 10
+	self.x_usp.stats.concealment = 27
 	
 	
 	
@@ -3394,7 +3424,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.polymer.BURST_FIRE = 2
 	self.polymer.BURST_FIRE_RATE_MULTIPLIER = 1.1
-	self.polymer.BURST_DELAY = 0.05
+	self.polymer.BURST_DELAY = 0.1
 	
 	self.polymer.CLIP_AMMO_MAX = 25
 	
@@ -3646,6 +3676,43 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.olympic.stats.recoil = 76
 	self.olympic.stats.suppression = 10
 	self.olympic.stats.concealment = 25
+
+
+
+	--[[     805     ]]--
+	self.hajk.category = "assault_rifle"
+	self.hajk.bmp = 11
+	
+	self.hajk.ADS_TIMER = 0.255
+		
+	self.hajk.kick.standing = { -0.225, 0.575, -0.35, 0.35 }
+	self.hajk.kick.crouching = self.hajk.kick.standing
+	self.hajk.kick.steelsight = self.hajk.kick.standing
+	
+	self.hajk.spread.standing = 2.2
+	self.hajk.spread.crouching = 2.1
+	self.hajk.spread.steelsight = 0.1
+	self.hajk.spread.moving_standing = self.hajk.spread.standing * 1.175
+	self.hajk.spread.moving_crouching = self.hajk.spread.crouching * 1.175
+	self.hajk.spread.moving_steelsight = self.hajk.spread.steelsight * 1.175
+	
+	self.hajk.armor_piercing_chance = 0.05
+	
+	self.hajk.CLIP_AMMO_MAX = 30
+	
+	self.hajk.fire_mode_data.fire_rate = 0.08571428571428571428571428571429
+	self.hajk.BURST_FIRE = 2
+	self.hajk.BURST_FIRE_RATE_MULTIPLIER = 1.1
+	
+	self.hajk.damage_near = 13
+	self.hajk.damage_far = 74
+	self.hajk.damage_min = 2.5
+	
+	self.hajk.stats.damage = 19
+	self.hajk.stats.spread = 75
+	self.hajk.stats.recoil = 79
+	self.hajk.stats.suppression = 10
+	self.hajk.stats.concealment = 17
 	
 	
 	
@@ -3941,7 +4008,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.famas.BURST_FIRE = 3
 	self.famas.BURST_FIRE_RATE_MULTIPLIER = 1.1
-	self.famas.BURST_DELAY = 0.1
+	self.famas.BURST_FIRE_RECOIL_MULTIPLIER = 0.85
+	self.famas.BURST_DELAY = 0.15
 	
 	self.famas.shake.fire_multiplier = 0.9
 	self.famas.shake.fire_steelsight_multiplier = -0.9
@@ -3951,8 +4019,8 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.famas.damage_min = 2.75
 	
 	self.famas.stats.damage = 17
-	self.famas.stats.spread = 81
-	self.famas.stats.recoil = 74
+	self.famas.stats.spread = 80
+	self.famas.stats.recoil = 71
 	self.famas.stats.suppression = 10
 		
 	
@@ -4028,7 +4096,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.new_m4.damage_near = 15
 	self.new_m4.damage_far = 72
 	self.new_m4.damage_min = 2.75
-	
+		
 	self.new_m4.stats.damage = 17
 	self.new_m4.stats.spread = 78
 	self.new_m4.stats.recoil = 82
@@ -4611,12 +4679,66 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	
 	
+	--[[     It's MW2 all over again ;_;     ]]
+	self.boot.bmp = 5
+	self.boot.reload_speed_mult = 0.65
+	self.boot.ADS_TIMER = 0.260
+	self.boot.anim_speed_mult = 0.85
+	if DMCWO.win_1887_ads_for_hipfire_anim == true then
+		self.boot.ads_for_hipfire_anim = true
+	end
+	if DMCWO.win_1887_hipfire_for_ads_anim == true then
+		self.boot.hipfire_for_ads_anim = true
+	end
+	
+	self.boot.spread.standing = 1.75
+	self.boot.spread.crouching = self.boot.spread.standing * 0.9
+	self.boot.spread.steelsight = 0.3
+	self.boot.spread.moving_standing = self.boot.spread.standing 
+	self.boot.spread.moving_crouching = self.boot.spread.crouching 
+	self.boot.spread.moving_steelsight = self.boot.spread.steelsight
+	
+	self.boot.rays = 8
+	
+	self.boot.timers.shotgun_reload_exit_empty = 0.8
+	self.boot.timers.shotgun_reload_exit_not_empty = 0.5
+
+	self.boot.damage_near = 5
+	self.boot.damage_far = 36
+	
+	self.boot.kick.standing = {0.8, 0.5, -0.1, 0.1}
+	self.boot.kick.crouching = self.boot.kick.standing
+	self.boot.kick.steelsight = self.boot.kick.standing
+	
+	self.boot.armor_piercing_chance = 0.1
+	
+	self.boot.fire_mode_data.fire_rate = 1.0909090909090909090909090909091
+	
+	self.boot.shake.fire_multiplier = 2
+	self.boot.shake.fire_steelsight_multiplier = -2
+	
+	self.boot.CLIP_AMMO_MAX = 5
+	
+	self.boot.muzzleflash = "effects/payday2/particles/weapons/big_762_auto_fps"
+	
+	self.boot.stats_modifiers = {
+			damage = 2,
+		}
+	
+	self.boot.stats.damage = 60
+	self.boot.stats.spread = 38
+	self.boot.stats.recoil = 10
+	self.boot.stats.suppression = 2
+	
+	
+	
 	--[[     Roberta (best girl, fuck the OVA ending)     ]]--
 	self.spas12.bmp = 32
 	self.spas12.reload_speed_mult = 0.95
 	self.spas12.ADS_TIMER = 0.280
+	self.spas12.anim_speed_mult = 1.1
 	
-	self.spas12.spread.standing = 1.4
+	self.spas12.spread.standing = 0.8
 	self.spas12.spread.crouching = self.spas12.spread.standing * 0.9
 	self.spas12.spread.steelsight = 0.3
 	self.spas12.spread.moving_standing = self.spas12.spread.standing
@@ -4632,10 +4754,21 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.spas12.muzzleflash = "effects/payday2/particles/weapons/big_762_auto_fps"
 	
-	self.spas12.fire_mode_data.fire_rate = 0.18181818181818181818181818181818
+	self.spas12.fire_mode_data.fire_rate = 0.4 --0.14457831325301204819277108433735
+	
+ 	self.spas12.no_auto_anims = true
+	self.spas12.CAN_TOGGLE_BURST = true
+	self.spas12.BURST_FIRE = 1
+	self.spas12.BURST_FIRE_RATE_MULTIPLIER = 2.7666666666666666666666666666667
+	self.spas12.BURST_FIRE_WEAPON_HOLD = "benelli"
+	self.spas12.burst_anim_speed_mult = 1
+	self.spas12.BURST_FIRE_RECOIL_MULTIPLIER = 1.4
+	self.spas12.BURST_FIRE_HIP_MULTIPLIER = 1.85
 	
 	self.spas12.damage_near = 8
 	self.spas12.damage_far = 34
+	
+	self.spas12.weapon_hold = "r870_shotgun"
 	
 	self.spas12.armor_piercing_chance = 0.1
 	
@@ -4649,7 +4782,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.spas12.stats.damage = 32
 	self.spas12.stats.spread = 37
-	self.spas12.stats.recoil = 26
+	self.spas12.stats.recoil = 31
 	self.spas12.stats.suppression = 5
 	
 	
@@ -4659,7 +4792,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.benelli.reload_speed_mult = 1.05
 	self.benelli.ADS_TIMER = 0.265
 	
-	self.benelli.spread.standing = 1.325
+	self.benelli.spread.standing = 1.25
 	self.benelli.spread.crouching = self.benelli.spread.standing * 0.9
 	self.benelli.spread.steelsight = 0.3
 	self.benelli.spread.moving_standing = self.benelli.spread.standing
@@ -4682,7 +4815,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	
 	self.benelli.rays = 8
 	
-	self.benelli.fire_mode_data.fire_rate = 0.15
+	self.benelli.fire_mode_data.fire_rate = 0.13043478260869565217391304347826
 	
 	self.benelli.muzzleflash = "effects/payday2/particles/weapons/big_762_auto_fps"
 	
@@ -4691,7 +4824,7 @@ function WeaponTweakData:_init_new_weapons(...)
 		}
 	
 	self.benelli.stats.damage = 32
-	self.benelli.stats.spread = 46
+	self.benelli.stats.spread = 47
 	self.benelli.stats.recoil = 20
 	self.benelli.stats.suppression = 6
 	
@@ -4705,11 +4838,11 @@ function WeaponTweakData:_init_new_weapons(...)
  	self.m37.NO_ADS_BURST = true
  	self.m37.no_auto_anims = true
 	self.m37.CAN_TOGGLE_BURST = true
-	self.m37.BURST_FIRE = 100
+	self.m37.BURST_FIRE = 250
 	self.m37.BURST_FIRE_RATE_MULTIPLIER = 1.8
 	self.m37.burst_anim_speed_mult = self.m37.BURST_FIRE_RATE_MULTIPLIER
 	self.m37.BURST_FIRE_RECOIL_MULTIPLIER = 1.50
-	self.m37.BURST_FIRE_HIP_MULTIPLIER = 2
+	self.m37.BURST_FIRE_HIP_MULTIPLIER = 1.75
 	
 	self.m37.spread.standing = 1.4
 	self.m37.spread.crouching = self.m37.spread.standing * 0.9
@@ -4932,7 +5065,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	}
 			
 	self.g3.stats.damage = 24
-	self.g3.stats.spread = 94
+	self.g3.stats.spread = 93
 	self.g3.stats.recoil = 49
 	self.g3.stats.suppression = 5
 	
@@ -5120,7 +5253,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m249.damage_far = 75
 	self.m249.damage_min = 4.0
 	
-	self.m249.stats.damage = 19
+	self.m249.stats.damage = 18
 	self.m249.stats.spread = 67
 	self.m249.stats.recoil = 78
 	self.m249.stats.suppression = 2
@@ -5492,7 +5625,7 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.mosin.ADS_TIMER = 0.330
 	self.mosin.bmp = 1
 	
-	self.mosin.spread.standing = 4
+	self.mosin.spread.standing = 3.5
 	self.mosin.spread.crouching = self.mosin.spread.standing * 0.8
 	self.mosin.spread.steelsight = 0.1
 	self.mosin.spread.moving_standing = self.mosin.spread.standing * 1.3
@@ -5620,5 +5753,32 @@ function WeaponTweakData:_init_new_weapons(...)
 	self.m95.stats.recoil = 5
 	self.m95.stats.suppression = 2
 	--}
+	
+	--[[
+	standard_stat_shit = {'saw','saw_secondary','new_raging_bull','deagle','colt_1911','usp','p226','g22c','glock_17','glock_18c','b92fs','ppk','mac10','m45','mp9','new_mp5','mp7','p90','olympic','akmsu','akm','akm_gold','ak74','m16','amcar','new_m4','ak5','s552','g36','aug','saiga','r870','huntsman','benelli','ksg','serbu','striker','new_m14','scar','fal','hk21','rpk','m249','msr','r93','m95','judge','famas','galil','g3','gre_m79','tec9','scorpion','uzi','x_deagle','x_1911','x_b92fs','jowi','g26','spas12','mg42','mosin','c96','sterling','m1928','l85a2','vhs','hs2000','m134','rpg7','cobray','b682','x_usp','x_g17','x_g22c','aa12','flamethrower_mk2','m32','plainsrider','peacemaker','winchester1874','mateba','sub2000','asval','polymer','wa2000','hunter','baka','frankish','arblast','long','par','sparrow','model70','m37','china','sr2','x_sr2','pl14','x_mp5','x_akmsu','tecci','hajk','boot'}
+	for i, wep_id in ipairs(standard_stat_shit) do
+		self[ wep_id ].crosshair = {}
+		self[ wep_id ].crosshair.standing = {}
+		self[ wep_id ].crosshair.crouching = {}
+		self[ wep_id ].crosshair.steelsight = {}
+		
+		self[ wep_id ].crosshair.standing.offset = ( self[ wep_id ].spread.standing ) * (math.min(self.stats.spread[self[ wep_id ].stats.spread], self.stats.spread[95])) /10
+		self[ wep_id ].crosshair.standing.moving_offset = ( self[ wep_id ].spread.moving_standing ) * (math.min(self.stats.spread[self[ wep_id ].stats.spread], self.stats.spread[95])) /10
+		self[ wep_id ].crosshair.standing.kick_offset = ( 1 )
+		
+		self[ wep_id ].crosshair.crouching.offset = ( self[ wep_id ].spread.crouching ) * (math.min(self.stats.spread[self[ wep_id ].stats.spread], self.stats.spread[95])) /10
+		self[ wep_id ].crosshair.crouching.moving_offset = ( self[ wep_id ].spread.moving_standing ) * (math.min(self.stats.spread[self[ wep_id ].stats.spread], self.stats.spread[95])) /10
+		self[ wep_id ].crosshair.crouching.kick_offset = ( 1 )
+		
+		if self[ wep_id ].always_hipfire then
+			self[ wep_id ].crosshair.steelsight.hidden = false
+		else
+			self[ wep_id ].crosshair.steelsight.hidden = true
+		end
+		self[ wep_id ].crosshair.steelsight.offset = ( self[ wep_id ].spread.steelsight ) * (math.min(self.stats.spread[self[ wep_id ].stats.spread], self.stats.spread[95])) /10
+		self[ wep_id ].crosshair.steelsight.moving_offset = ( self[ wep_id ].spread.moving_steelsight ) * (math.min(self.stats.spread[self[ wep_id ].stats.spread], self.stats.spread[95])) /10
+		self[ wep_id ].crosshair.steelsight.kick_offset = ( 1 )
+	end
+	]]
 	
 end

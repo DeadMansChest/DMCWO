@@ -1,6 +1,6 @@
 --[[
 DMC's Weapon Overhaul
-v1.80
+v1.81
 ]]
 
 if not _G.DMCWO then
@@ -28,6 +28,7 @@ DMCWO.Hooks = {
 	["lib/tweak_data/economytweakdata"] = "lua/tweak_data/economytweakdata.lua",	
 	["lib/tweak_data/equipmentstweakdata"] = "lua/tweak_data/equipmentstweakdata.lua",
 	["lib/tweak_data/infamytweakdata"] = "lua/tweak_data/infamytweakdata.lua",
+	["lib/tweak_data/levelstweakdata"] = "lua/tweak_data/levelstweakdata.lua",
 	["lib/tweak_data/lootdroptweakdata"] = "lua/tweak_data/lootdroptweakdata.lua",
 	["lib/tweak_data/playertweakdata"] = "lua/tweak_data/playertweakdata.lua",	
 	["lib/tweak_data/skilltreetweakdata"] = "lua/tweak_data/skilltreetweakdata.lua",		
@@ -56,6 +57,8 @@ DMCWO.Hooks = {
 	["lib/units/weapons/newraycastweaponbase"] = "lua/units/weapons/newraycastweaponbase.lua",
 	["lib/units/weapons/raycastweaponbase"] = "lua/units/weapons/raycastweaponbase.lua",
 	["lib/units/weapons/sawweaponbase"] = "lua/units/weapons/sawweaponbase.lua",
+	
+	["lib/units/weapons/grenades/fraggrenade"] = "lua/units/weapons/grenades/fraggrenade.lua",
 	
 	["lib/units/weapons/shotgun/newshotgunbase"] = "lua/units/weapons/shotgun/newshotgunbase.lua",
 			
@@ -121,6 +124,15 @@ WIP
 ]]
 DMCWO.GEDDAN = false
 DMCWO.l85a1_sim = false
+--}
+
+--[[ SKILLTREE SETTINGS ]]--{
+
+--If set to true, make use of *closer* to vanilla skills
+--I say *closer* as I've already done things to keep some vanilla skills in check (Uppers, sentry quantities, etc.)
+--Default = false
+DMCWO.havel_mum = false
+
 --}
 
 --[[ STRING SETTINGS ]]--{
@@ -205,7 +217,7 @@ DMCWO.melee_hs = true
 
 --If set to true, using the fists allows you to turn into Kenshiro from Hokuto No Ken (Fist of the North Star)
 --"AAAH-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA"
---Aternatively, become Star Platinum
+--Alternatively, become Star Platinum
 --"ORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORAORA"
 --Default = false
 DMCWO.kenshiroraoraora = false
@@ -339,7 +351,7 @@ DMCWO.loco_cap = 0
 --[SG552]--{
 --If set to true, changes the rear iron sight on the Commando 553/SG552 to be replaced with the Marksman rear pistol sight. 
 --Default = false
-DMCWO.sig_rear_iron = false
+DMCWO.sig_rear_iron = true
 
 --If set to true, on the SG552, the respective "Standard" version of a part will have its model swapped with its "Enhanced" counterpart and vice versa.
 --Default = false

@@ -1,6 +1,13 @@
 --[[
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
+function NewRaycastWeaponBase:weapon_hold()
+	if self:in_burst_mode() and self._burst_fire_weapon_hold then
+		return self._burst_fire_weapon_hold
+	else
+		return self:weapon_tweak_data().weapon_hold
+	end
+end
 
 local old_update_stats_values = NewRaycastWeaponBase._update_stats_values
 local ids_single = Idstring("single")
@@ -29,6 +36,7 @@ function NewRaycastWeaponBase:_update_stats_values()
 	self._auto_burst = self:weapon_tweak_data().AUTO_BURST or nil
 	self._burst_fire_recoil_mult = self:weapon_tweak_data().BURST_FIRE_RECOIL_MULTIPLIER or nil
 	self._burst_fire_hip_mult = self:weapon_tweak_data().BURST_FIRE_HIP_MULTIPLIER or nil
+	self._burst_fire_weapon_hold = self:weapon_tweak_data().BURST_FIRE_WEAPON_HOLD or nil
 	
 	self._no_ads_auto = self:weapon_tweak_data().NO_ADS_AUTO or false
 	self._auto_fire_rate_multiplier = self:weapon_tweak_data().AUTO_FIRE_RATE_MULTIPLIER or nil
@@ -41,6 +49,9 @@ function NewRaycastWeaponBase:_update_stats_values()
 	self._auto_anim_speed_mult = self:weapon_tweak_data().auto_anim_speed_mult or nil
 	self._no_singlefire_anim = self:weapon_tweak_data().no_singlefire_anim or nil
 	self._no_auto_anims = self:weapon_tweak_data().no_auto_anims or nil
+	
+	self._ads_for_hipfire_anim = self:weapon_tweak_data().ads_for_hipfire_anim or nil
+	self._hipfire_for_ads_anim = self:weapon_tweak_data().hipfire_for_ads_anim or nil
 	
 	self._damage_bonus_range = self:weapon_tweak_data().damage_bonus_range or nil
 	if self._damage_bonus_range then 
@@ -85,7 +96,7 @@ function NewRaycastWeaponBase:_update_stats_values()
 	
 	self._block_eq_aced = nil
 			
-	self._shield_damage = self:weapon_tweak_data().shield_damage or nil
+	self._shield_damage = math.clamp(self:weapon_tweak_data().shield_damage, 0, 1) or nil
 	
 	self._hipfire_mod = 1
 	
@@ -125,6 +136,8 @@ function NewRaycastWeaponBase:_update_stats_values()
 	self._regen_ammo_time = nil
 	self._overheat_pen = nil
 	self._shield_knock = nil
+	
+	self._override_factory_id = self:weapon_tweak_data().override_factory_id or nil 
 	
 	self._hip_fire_rate_inc = self:weapon_tweak_data().category == "shotgun" and managers.player:upgrade_value("shotgun", "hip_rate_of_fire", 0)
 	
@@ -225,7 +238,7 @@ function NewRaycastWeaponBase:_update_stats_values()
 			self._can_shoot_through_shield = stats.can_shoot_through_shield
 		end
 		if stats.shield_damage then
-			self._shield_damage = self._shield_damage + stats.shield_damage
+			self._shield_damage = math.clamp(self._shield_damage + stats.shield_damage, 0, 1)
 		end
 		if stats.hipfire_mod then
 			self._hipfire_mod = self._hipfire_mod * stats.hipfire_mod 
@@ -301,11 +314,17 @@ function NewRaycastWeaponBase:_update_stats_values()
 		if stats.block_b_storm == true then
 			self._block_b_storm = true
 		end
+		if stats.ignore_region_pickup then
+			self._ignore_region_pickup = true
+		end
 		if stats.ammo_pickup_min_set then
 			self._ammo_pickup[1] = stats.ammo_pickup_min_set
 		end
 		if stats.ammo_pickup_max_set then
 			self._ammo_pickup[2] = stats.ammo_pickup_max_set
+		end
+		if stats.override_factory_id then
+			self._override_factory_id = stats.override_factory_id
 		end
 		if tweak_data.weapon.factory.parts[part_id].type ~= "ammo" then
 			if stats.ammo_pickup_min_mul then
@@ -326,19 +345,20 @@ function NewRaycastWeaponBase:_update_stats_values()
 		self._damage_far = self._damage_far * self._supp_range_mult
 	end
 	
-	local pickup_type = tweak_data.levels:get_ai_group_type()		
-	if pickup_type == "america" then
-		if self:weapon_tweak_data().nato then
-			self._ammo_pickup[1] = self._ammo_pickup[1] * 1.5
-			self._ammo_pickup[2] = self._ammo_pickup[2] * 1.5
-		end
-	elseif pickup_type == "russia" then
-		if self:weapon_tweak_data().warsaw then
-			self._ammo_pickup[1] = self._ammo_pickup[1] * 1.5
-			self._ammo_pickup[2] = self._ammo_pickup[2] * 1.5
+	if not self._ignore_region_pickup then	
+	local pickup_type = tweak_data.levels:get_ai_group_type()	
+		if pickup_type == "america" then
+			if self:weapon_tweak_data().nato then
+				self._ammo_pickup[1] = self._ammo_pickup[1] * 1.5
+				self._ammo_pickup[2] = self._ammo_pickup[2] * 1.5
+			end
+		elseif pickup_type == "russia" then
+			if self:weapon_tweak_data().warsaw then
+				self._ammo_pickup[1] = self._ammo_pickup[1] * 1.5
+				self._ammo_pickup[2] = self._ammo_pickup[2] * 1.5
+			end
 		end
 	end
-	
 	--[[ 
 	if self:weapon_tweak_data().nato then
 	log("NATO TRACERS")
@@ -433,6 +453,7 @@ function NewRaycastWeaponBase:toggle_firemode()
 	--log("SWITCHING")
 		if self._fire_mode == ids_single then
 			if self._has_burst_fire then
+				self:weapon_hold()
 				self:_set_burst_mode(true, true)
 			end
 			self._fire_mode = ids_auto
@@ -459,6 +480,7 @@ function NewRaycastWeaponBase:toggle_firemode()
 	end
 	return false
 end
+
 	
 function NewRaycastWeaponBase:_set_burst_mode(status, skip_sound)
 	self._in_burst_mode = status
@@ -575,9 +597,9 @@ function NewRaycastWeaponBase:movement_penalty()
 	local mult = 1
 	local state = managers.player:player_unit():movement():current_state()
 	
-	local dicks = 1.8918918918918918918918918918919
+	local dicks = tweak_data.player.movement_state.standard.movement.speed.STANDARD_MAX / tweak_data.player.movement_state.standard.movement.speed.STEELSIGHT_MAX
 	if state._state_data.ducking then
-		dicks = 1.2162162162162162162162162162162
+		dicks = tweak_data.player.movement_state.standard.movement.speed.CROUCHING_MAX / tweak_data.player.movement_state.standard.movement.speed.STEELSIGHT_MAX
 	end		
 	if state._state_data.in_steelsight and not managers.player:has_category_upgrade("player", "steelsight_normal_movement_speed") then
 		if self._ams then
@@ -817,7 +839,7 @@ function NewRaycastWeaponBase:_fire_raycast(user_unit, from_pos, direction, dmg_
 			
 			local ray_from_unit = hit_unit and col_ray.unit
 			if is_shield then
-				dmg_mul = ( dmg_mul or 1 ) * (self._shield_damage or 0.10)
+				dmg_mul = ( dmg_mul or 1 ) * (self._shield_damage or 0.15)
 				if col_ray.unit:name():key() == '8816e70e510c8c2e' then --fbi
 					dmg_mul = dmg_mul * 0.75
 				elseif col_ray.unit:name():key() == 'af254947f0288a6c' or col_ray.unit:name():key() == '63c0a27ecd41fc5e' then --phalanx/russian
@@ -973,7 +995,7 @@ function NewRaycastWeaponBase:_get_spread(user_unit)
 	end
 	if not ( current_state:in_steelsight() or current_state:_is_using_bipod() ) then
 		spread_multiplier = spread_multiplier * self:_laser_spread()
-	elseif tweak_data.weapon[self._name_id].always_hipfire == true then 
+	elseif self:weapon_tweak_data().always_hipfire == true then 
 		spread_multiplier = spread_multiplier * self:_laser_spread()
 	end
 	
@@ -983,11 +1005,14 @@ function NewRaycastWeaponBase:_get_spread(user_unit)
 	elseif not current_state:in_steelsight() and spread < min_spread then
 		spread = min_spread
 	end
-	if self:in_burst_mode() and self._burst_fire_hip_mult then
-		spread = spread * self._burst_fire_hip_mult
-	end
-	if not self:in_burst_mode() and self._firemode == Idstring("auto") and self._auto_fire_hip_mult then
-		spread = spread * self._auto_fire_hip_mult
+	if not current_state:in_steelsight() or (current_state:in_steelsight() and self:weapon_tweak_data().always_hipfire == true) then
+	
+		if self:in_burst_mode() and self._burst_fire_hip_mult then
+			spread = spread * self._burst_fire_hip_mult
+		end
+		if not self:in_burst_mode() and self:fire_mode() == "auto" and self._auto_fire_hip_mult then
+			spread = spread * self._auto_fire_hip_mult
+		end
 	end
 	return spread
 end
@@ -1195,6 +1220,7 @@ function NewRaycastWeaponBase:exit_run_speed_multiplier()
 end
 
 --From SC's Mod
+if DMCWO.havel_mum ~= true and DMCWO.be_all_end_all ~= true and DMCWO.grind ~= true and DMCWO.no_investment ~= true then
 function NewRaycastWeaponBase:calculate_ammo_max_per_clip()
     local ammo = tweak_data.weapon[self._name_id].CLIP_AMMO_MAX + (self._extra_ammo or 0)
     ammo = ammo * managers.player:upgrade_value(self._name_id, "clip_ammo_increase", 1)
@@ -1206,6 +1232,7 @@ function NewRaycastWeaponBase:calculate_ammo_max_per_clip()
     end
     ammo = math.floor(ammo)
     return ammo
+end
 end
 
 function NewRaycastWeaponBase:enter_steelsight_speed_multiplier()

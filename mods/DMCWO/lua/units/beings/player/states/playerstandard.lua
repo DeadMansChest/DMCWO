@@ -435,6 +435,7 @@ function PlayerStandard:_update_reload_timers(t, dt, input)
 	old_update_reload_timers(self, t, dt, input)
 end
 
+
 function PlayerStandard:_check_action_primary_attack(t, input)
 	local new_action
 	local action_wanted = input.btn_primary_attack_state or input.btn_primary_attack_release or self._sticky_burst
@@ -446,7 +447,7 @@ function PlayerStandard:_check_action_primary_attack(t, input)
 	if weap_base:in_burst_mode() and self._sticky_burst then
 		input.btn_primary_attack_state = true
 	end
-	
+		
 	if weap_base:in_burst_mode() then
 		if weap_base._shotsfired >= burst then
 			--log("STOP")
@@ -588,6 +589,13 @@ function PlayerStandard:_check_action_primary_attack(t, input)
 											
 					if fired then
 						managers.rumble:play("weapon_fire")
+						
+						if self._weapon_hold then
+							self._camera_unit:anim_state_machine():set_global(self._weapon_hold, 0)
+						end
+						self._weapon_hold = weap_base.weapon_hold and weap_base:weapon_hold() or weap_base:get_name_id()
+						self._camera_unit:anim_state_machine():set_global(self._weapon_hold, 1)
+						
 						local weap_tweak_data = tweak_data.weapon[weap_base:get_name_id()]
 						local shake_multiplier = weap_tweak_data.shake[self._state_data.in_steelsight and "fire_steelsight_multiplier" or "fire_multiplier"]
 						self._ext_camera:play_shaker("fire_weapon_rot", 1 * shake_multiplier)
@@ -608,11 +616,24 @@ function PlayerStandard:_check_action_primary_attack(t, input)
 							if weap_base._anim_delay then
 								self._anim_delay = weap_base._anim_delay
 							end
-							if not self._state_data.in_steelsight or not weap_base:tweak_data_anim_play("fire_steelsight", anim_speed_mult) then
-								weap_base:tweak_data_anim_play("fire", anim_speed_mult)
-							end
 						end
 						
+						if not self._state_data.in_steelsight then
+							if weap_base._second_gun and not weap_base._fire_second_gun_next then
+							else
+								weap_base:tweak_data_anim_play("fire", anim_speed_mult)
+							end
+						else
+							if weap_base._second_gun and not weap_base._fire_second_gun_next then
+							else
+								if weap_base._second_gun then
+									weap_base:tweak_data_anim_play("fire", anim_speed_mult)
+								else
+									weap_base:tweak_data_anim_play("fire_steelsight", anim_speed_mult) 
+								end
+							end
+						end
+							
 						anim_speed_mult = ( weap_base._anim_speed_mult and weap_base:fire_rate_multiplier() ) or 1
 						if weap_base:in_burst_mode() and weap_base._burst_anim_speed_mult then
 							anim_speed_mult = weap_base._burst_anim_speed_mult
@@ -623,9 +644,9 @@ function PlayerStandard:_check_action_primary_attack(t, input)
 						
 						if fire_mode == "single" or weap_base._no_auto_anims or weap_base._starwars and weap_base:get_name_id() ~= "saw" then
 							if not self._state_data.in_steelsight then
-								self._ext_camera:play_redirect( weap_base._no_singlefire_anim and self.IDS_RECOIL_EXIT or self.IDS_RECOIL, anim_speed_mult or 1)
+								self._ext_camera:play_redirect( (weap_base._no_singlefire_anim and self.IDS_RECOIL_EXIT) or (weap_base._ads_for_hipfire_anim and self.IDS_RECOIL_STEELSIGHT) or self.IDS_RECOIL, anim_speed_mult or 1)
 							elseif weap_tweak_data.animations.recoil_steelsight and not weap_base._no_recoil_anim then
-								self._ext_camera:play_redirect( (weap_base._no_singlefire_anim and self.IDS_RECOIL_EXIT) or (weap_base:is_second_sight_on() and self.IDS_RECOIL) or self.IDS_RECOIL_STEELSIGHT, anim_speed_mult or 1)
+								self._ext_camera:play_redirect( (weap_base._no_singlefire_anim and self.IDS_RECOIL_EXIT) or (weap_base:is_second_sight_on() and self.IDS_RECOIL) or (weap_base._hipfire_for_ads_anim and self.IDS_RECOIL) or self.IDS_RECOIL_STEELSIGHT, anim_speed_mult or 1)
 							end
 						end
 						

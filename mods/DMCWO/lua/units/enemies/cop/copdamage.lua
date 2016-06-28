@@ -16,7 +16,7 @@ function CopDamage:damage_bullet(attack_data)
 	local has_ap = attack_data.weapon_unit:base()._has_ap or nil
 	local has_hp = attack_data.weapon_unit:base()._has_hp or nil
 	
-	if attack_data.col_ray.body and ( (self._has_plate and attack_data.col_ray.body:name() == self._ids_plate_name) or ( self._char_tweak and self._char_tweak == "tank" and (attack_data.col_ray.body:name() == Idstring("body_armor_chest") or attack_data.col_ray.body:name() == Idstring("body_armor_stomache") or attack_data.col_ray.body:name() == Idstring("body_armor_back"))) ) and not attack_data.armor_piercing
+	if attack_data.col_ray.body and ( (self._has_plate and attack_data.col_ray.body:name() == Idstring("body_plate")) or ( self._char_tweak and self._char_tweak == "tank" and (attack_data.col_ray.body:name() == Idstring("body_armor_chest") or attack_data.col_ray.body:name() == Idstring("body_armor_stomache") or attack_data.col_ray.body:name() == Idstring("body_armor_back"))) ) and not attack_data.armor_piercing
 	then
 		local armor_pierce_roll = math.rand(1)
 		local armor_pierce_value = 0
@@ -326,7 +326,7 @@ if DMCWO.melee_hs == true then
 		local damage_effect = attack_data.damage_effect
 		local headshot_multiplier = 1
 		if attack_data.attacker_unit == managers.player:player_unit() then
-			headshot_multiplier = managers.player:upgrade_value("weapon", "passive_headshot_damage_multiplier", 1)
+			headshot_multiplier = managers.player:has_category_upgrade("weapon", "passive_headshot_damage_multiplier") and managers.player:upgrade_value("weapon", "passive_headshot_damage_multiplier", 1)
 			if self._char_tweak.priority_shout then
 				damage = damage * managers.player:upgrade_value("weapon", "special_damage_taken_multiplier", 1)
 			end

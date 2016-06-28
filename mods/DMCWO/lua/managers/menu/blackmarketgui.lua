@@ -852,7 +852,7 @@ function BlackMarketGui:choose_weapon_buy_callback(data)
 end
 
 
-if GoonBase and GoonBase.SupportedVersion then
+if GoonBase and (GoonBase.SupportedVersion or GoonBase.Options.Updates.BypassVersion) then
 	Hooks:Add("BlackMarketGUIOnPopulateModsActionList", "DMCWO_icon_shit", function(BlackMarketGui, data)
 		if data.name then
 			data.use_icon = tweak_data.weapon.factory.parts[data.name] and tweak_data.weapon.factory.parts[data.name].alt_icon
