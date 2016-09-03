@@ -2,7 +2,6 @@
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
-
 if DMCWO.fix_pickup then
 --While I made this myself, credits to LazyOzzy for making the pickup fix in the first place
 	function RaycastWeaponBase:add_ammo(ratio, add_amount_override)
@@ -97,6 +96,28 @@ function RaycastWeaponBase:fire(from_pos, direction, dmg_mul, shoot_player, spre
 	return ray_res
 end
 
+FlameBulletBase.EFFECT_PARAMS = {
+	sound_event = "round_explode",
+	feedback_range = tweak_data.upgrades.flame_bullet.feedback_range,
+	camera_shake_max_mul = tweak_data.upgrades.flame_bullet.camera_shake_max_mul,
+	sound_muffle_effect = true,
+	on_unit = true,
+	pushunits = tweak_data.upgrades
+}
+
+local FlameBulletBase_on_collision_old = FlameBulletBase.on_collision
+function FlameBulletBase:on_collision(col_ray, weapon_unit, user_unit, damage, blank)
+	local hit_unit = col_ray.unit
+	local weapon_name_id = weapon_unit.base and weapon_unit:base()._name_id 
+	if weapon_name_id ~= "flamethrower_mk2" and (not hit_unit:character_damage() or not hit_unit:character_damage()._no_blood) then
+		self:play_impact_sound_and_effects(col_ray)
+	end
+	FlameBulletBase_on_collision_old(self, col_ray, weapon_unit, user_unit, damage, blank)
+end
+
+function FlameBulletBase:play_impact_sound_and_effects(col_ray)
+	managers.game_play_central:play_impact_sound_and_effects({col_ray = col_ray})
+end
 
 -- Header comment that will likely be deleted. This was made by 90e.
 -- Reverb fixed by Doctor Mister Cool

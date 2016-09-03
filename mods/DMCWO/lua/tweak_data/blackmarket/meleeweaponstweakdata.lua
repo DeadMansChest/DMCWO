@@ -3,8 +3,8 @@ This script is used in DMC's Weapon Overhaul, please make sure you have the most
 ]]
 
 local old_melee_init = BlackMarketTweakData._init_melee_weapons
-function BlackMarketTweakData:_init_melee_weapons()
-	old_melee_init(self)
+function BlackMarketTweakData:_init_melee_weapons(...)
+	old_melee_init(self, ...)
 	
 	local melee_anim = {}
 	
@@ -62,7 +62,8 @@ function BlackMarketTweakData:_init_melee_weapons()
 	for i, melee_id in ipairs(melee_anim) do
 		self.melee_weapons[melee_id].anim_global_param = "melee_twins"
 		self.melee_weapons[melee_id].align_objects = {"a_weapon_right","a_weapon_left"}
-		self.melee_weapons[melee_id].anim_attack_vars = { "var1","var2","var4"}
+		self.melee_weapons[melee_id].anim_attack_vars = {"var1","var4"}
+		self.melee_weapons[melee_id].anim_attack_charged_vars = {"var2"}
 		self.melee_weapons[melee_id].expire_t = 0.9
 		self.melee_weapons[melee_id].melee_damage_delay = 0.1
 	end
@@ -189,7 +190,8 @@ function BlackMarketTweakData:_init_melee_weapons()
 	for i, melee_id in ipairs(melee_anim) do
 		self.melee_weapons[melee_id].anim_global_param = "melee_cutters"
 		self.melee_weapons[melee_id].align_objects = {"a_weapon_right"}
-		self.melee_weapons[melee_id].anim_attack_vars = {"var1","var2","var3","var4"}
+		self.melee_weapons[melee_id].anim_attack_vars = {"var1","var2","var3"}
+		self.melee_weapons[melee_id].anim_attack_charged_vars = {"var4"}
 		self.melee_weapons[melee_id].expire_t = 1.15
 		self.melee_weapons[melee_id].repeat_expire_t = 0.8
 		self.melee_weapons[melee_id].melee_damage_delay = 0.3
@@ -225,7 +227,8 @@ function BlackMarketTweakData:_init_melee_weapons()
 	for i, melee_id in ipairs(melee_anim) do
 		self.melee_weapons[melee_id].anim_global_param = "melee_boxing"
 		self.melee_weapons[melee_id].align_objects = {"a_weapon_left","a_weapon_right"}
-		self.melee_weapons[melee_id].anim_attack_vars = {"var1","var2","var3","var4"}
+		self.melee_weapons[melee_id].anim_attack_vars = {"var1","var3"}
+		self.melee_weapons[melee_id].anim_attack_charged_vars = {"var2","var4"}
 		self.melee_weapons[melee_id].expire_t = 0.75
 		self.melee_weapons[melee_id].repeat_expire_t = 0.5
 		self.melee_weapons[melee_id].melee_damage_delay = 0.15
@@ -238,7 +241,7 @@ function BlackMarketTweakData:_init_melee_weapons()
 		self.melee_weapons[melee_id].anim_global_param = "melee_blunt"
 		self.melee_weapons[melee_id].align_objects = {"a_weapon_right"}
 		self.melee_weapons[melee_id].anim_attack_vars = {"var1","var2"}
-		self.melee_weapons[melee_id].expire_t = 1
+		self.melee_weapons[melee_id].expire_t = 1.1
 		self.melee_weapons[melee_id].repeat_expire_t = 0.8
 		self.melee_weapons[melee_id].melee_damage_delay = 0.1
 	end
@@ -298,7 +301,11 @@ function BlackMarketTweakData:_init_melee_weapons()
 	for i, melee_id in ipairs(melee_anim) do
 		self.melee_weapons[melee_id].anim_global_param = "melee_sandsteel"
 		self.melee_weapons[melee_id].align_objects = {"a_weapon_right"}
-		self.melee_weapons[melee_id].anim_attack_vars = {"var2","var1"}
+		self.melee_weapons[melee_id].timing_fix = {"var3"}
+		self.melee_weapons[melee_id].timing_fix_speed_mult = 0.8
+		self.melee_weapons[melee_id].anim_attack_vars = {"var3"}
+		self.melee_weapons[melee_id].anim_attack_left_vars = {"var2"}
+		self.melee_weapons[melee_id].anim_attack_right_vars = {"var1"}
 		self.melee_weapons[melee_id].expire_t = 1
 		self.melee_weapons[melee_id].repeat_expire_t = 0.75
 		self.melee_weapons[melee_id].melee_damage_delay = 0.215
@@ -322,7 +329,9 @@ function BlackMarketTweakData:_init_melee_weapons()
 	for i, melee_id in ipairs(melee_anim) do
 		self.melee_weapons[melee_id].anim_global_param = "melee_hockey"
 		self.melee_weapons[melee_id].align_objects = {"a_weapon_right"}
-		self.melee_weapons[melee_id].anim_attack_vars = {"var1"}
+		self.melee_weapons[melee_id].anim_attack_vars = {"var1","var4"}
+		self.melee_weapons[melee_id].timing_fix = {"var4"}
+		self.melee_weapons[melee_id].timing_fix_speed_mult = 0.58
 		self.melee_weapons[melee_id].expire_t = 0.8
 		self.melee_weapons[melee_id].repeat_expire_t = 0.7
 		self.melee_weapons[melee_id].melee_damage_delay = 0.175
@@ -334,7 +343,10 @@ function BlackMarketTweakData:_init_melee_weapons()
 	for i, melee_id in ipairs(melee_anim) do
 		self.melee_weapons[melee_id].anim_global_param = "melee_great"
 		self.melee_weapons[melee_id].align_objects = {"a_weapon_right"}
-		self.melee_weapons[melee_id].anim_attack_vars = {"var1","var2","var3","var4"}
+		self.melee_weapons[melee_id].anim_attack_vars = {"var4"}
+		self.melee_weapons[melee_id].anim_attack_left_vars = {"var1"}
+		self.melee_weapons[melee_id].anim_attack_right_vars = {"var2"}
+		self.melee_weapons[melee_id].anim_attack_charged_vars = {"var3"}
 		self.melee_weapons[melee_id].expire_t = 1.45
 		self.melee_weapons[melee_id].repeat_expire_t = 1.25
 		self.melee_weapons[melee_id].melee_damage_delay = 0.6
@@ -694,7 +706,7 @@ function BlackMarketTweakData:_init_melee_weapons()
 		self.melee_weapons.sandsteel.stats.max_damage = 10
 	end
 	--FREEEEEDOOOOOOOM
-	self.melee_weapons.great.speed_mult = 1.15
+	self.melee_weapons.great.speed_mult = 0.95
 	self.melee_weapons.great.make_effect = true
 	self.melee_weapons.great.stats.charge_time = 2.9
 	self.melee_weapons.great.stats.min_damage = 10
@@ -753,7 +765,7 @@ function BlackMarketTweakData:_init_melee_weapons()
 	--AND MY AXE!!!
 	self.melee_weapons.beardy.type = "knife"
 	self.melee_weapons.beardy.make_effect = true
-	self.melee_weapons.beardy.speed_mult = 1.1
+	self.melee_weapons.beardy.speed_mult = 0.95
 	self.melee_weapons.beardy.stats.charge_time = 3.2
 	self.melee_weapons.beardy.stats.min_damage = 12
 	self.melee_weapons.beardy.stats.max_damage = 20
@@ -1012,7 +1024,7 @@ function BlackMarketTweakData:_init_melee_weapons()
 	self.melee_weapons.shillelagh.stats.range = 145
 	--Rusty chain thing
 	self.melee_weapons.road.type = "axe"
-	self.melee_weapons.road.speed_mult = 0.9
+	self.melee_weapons.road.speed_mult = 0.8
 	self.melee_weapons.road.stats.charge_time = 3
 	self.melee_weapons.road.stats.min_damage = 9
 	self.melee_weapons.road.stats.max_damage = 16

@@ -1,0 +1,49 @@
+{
+	"menu_id" : "dmcwo_strings_menu",
+	"parent_menu_id" : "dmcwo_main_menu",
+	"title" : "dmc_string_title",
+	"description" : "dmc_string_desc",
+	"items" : [
+		{
+			"type" : "toggle",
+			"id" : "dmc_string_realnames_toggle",
+			"title" : "dmc_string_realnames_title",
+			"description" : "dmc_string_realnames_desc",
+			"callback" : "DMCWOStringsRealNames",
+			"value" : "reelnames",
+			"default_value" : true,
+		},
+		{
+			"type" : "divider",
+			"size" : 20,
+		},
+		{
+			"type" : "button",
+			"id" : "dmc_string_sillynames_button",
+			"title" : "dmc_string_sillynames_title",
+			"description" : "dmc_string_sillynames_desc"
+		},
+		{
+			"type" : "divider",
+			"size" : 4,
+		},
+		{
+			"type" : "toggle",
+			"id" : "dmc_string_upotte_toggle",
+			"title" : "dmc_string_upotte_title",
+			"description" : "dmc_string_upotte_desc",
+			"callback" : "DMCWOStringsUpotte",
+			"value" : "upotte",
+			"default_value" : false,
+		},
+		{
+			"type" : "toggle",
+			"id" : "dmc_string_ocelot_toggle",
+			"title" : "dmc_string_ocelot_title",
+			"description" : "dmc_string_ocelot_desc",
+			"callback" : "DMCWOStringsOcelot",
+			"value" : "ocelot",
+			"default_value" : false,
+		}
+	]
+}

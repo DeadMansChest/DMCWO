@@ -1,10 +1,11 @@
 --[[
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
+
 local old_infamy_init = InfamyTweakData.init
 function InfamyTweakData:init()
 	old_infamy_init(self)
-	if DMCWO.mozzarella ~= true then
+	if DMCWO._data_skills.havel_mum ~= true then
 		self.items.infamy_mastermind.upgrades.skilltree.multiplier = 1
 		self.items.infamy_mastermind.desc_id = "menu_infamy_desc_mastermind_dmc"
 		self.items.infamy_enforcer.upgrades.skilltree.multiplier = 1

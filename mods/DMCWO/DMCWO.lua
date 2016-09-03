@@ -1,12 +1,16 @@
 --[[
 DMC's Weapon Overhaul
-v1.81
+v1.82
 ]]
 
 if not _G.DMCWO then
 	_G.DMCWO = _G.DMCWO or {}
 end
 DMCWO._path = ModPath
+DMCWO._data_path = SavePath .. "DMCWO_opt.txt"
+DMCWO._data_path_skills = SavePath .. "DMCWO_skill_opt.txt"
+DMCWO._data = {}
+DMCWO._data_skills = {}
 DMCWO.Hooks = {
 	["lib/managers/blackmarketmanager"] = "lua/managers/blackmarketmanager.lua",
 	["lib/managers/hudmanagerpd2"] = "lua/managers/hudmanagerpd2.lua",
@@ -41,8 +45,11 @@ DMCWO.Hooks = {
 	
 	["lib/units/beings/player/states/playerbipod"] = "lua/units/beings/player/states/playerbipod.lua",
 	["lib/units/beings/player/states/playerbleedout"] = "lua/units/beings/player/states/playerbleedout.lua",
+	["lib/units/beings/player/states/playercarry"] = "lua/units/beings/player/states/playercarry.lua",
 	["lib/units/beings/player/states/playerstandard"] = "lua/units/beings/player/states/playerstandard.lua",
 	["lib/units/beings/player/states/playertased"] = "lua/units/beings/player/states/playertased.lua",
+	
+	--["lib/player_actions/skills/playeractionstockholmsyndrometrade"] = "lua/player_actions/skills/playeractionstockholmsyndrometrade.lua",
 	
 	["lib/units/cameras/fpcameraplayerbase"] = "lua/units/cameras/fpcameraplayerbase.lua",
 	
@@ -64,16 +71,207 @@ DMCWO.Hooks = {
 			
 	["lib/utils/inventorydescription"] = "lua/utils/inventorydescription.lua"
 }
- 
+
+function DMCWO:SaveSkills()
+	local file = io.open( self._data_path_skills, "w" )
+	if file then
+		file:write( json.encode( self._data_skills ) )
+		file:close()
+	end
+end
+function DMCWO:LoadSkills()
+	local file = io.open( self._data_path_skills, "r" )
+	if file then
+		self._data_skills = json.decode( file:read("*all") )
+		file:close()
+	end
+end
+
+function DMCWO:Save()
+	local file = io.open( self._data_path, "w" )
+	if file then
+		file:write( json.encode( self._data ) )
+		file:close()
+	end
+end
+function DMCWO:Load()
+	local file = io.open( self._data_path, "r" )
+	if file then
+		self._data = json.decode( file:read("*all") )
+		file:close()
+	end
+end
+
+DMCWO:Load()
+DMCWO:LoadSkills()
+Hooks:Add( "MenuManagerInitialize", "MenuManagerInitialize_DMC", function( menu_manager )
+	MenuCallbackHandler.DMCWOLogSpam = function(self, item)
+		DMCWO._data.stfu = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+		
+
+	MenuCallbackHandler.DMCWOPlayerSkills = function(self, item)
+		DMCWO._data_skills.havel_mum = (item:value() == "on" and true or false)
+		DMCWO:SaveSkills()
+	end
+	
+	
+	MenuCallbackHandler.DMCWOWeaponsTracers = function(self, item)
+		DMCWO._data.sniper_tracers = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	MenuCallbackHandler.DMCWOWeaponsLightShow = function(self, item)
+		DMCWO._data.light_show = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	--
+	MenuCallbackHandler.DMCWOWeaponsBipodSwivel = function(self, item)
+		DMCWO._data.no_bipod_swivel = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	MenuCallbackHandler.DMCWOWeaponsBipodAutodeploy = function(self, item)
+		DMCWO._data.bipod_ads_autodeploy = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	MenuCallbackHandler.DMCWOWeaponsBipodUndeploy = function(self, item)
+		DMCWO._data.bipod_wasd_undeploy = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	
+	
+	MenuCallbackHandler.DMCWOStringsRealNames = function(self, item)
+		DMCWO._data.reelnames = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	MenuCallbackHandler.DMCWOStringsUpotte = function(self, item)
+		DMCWO._data.upotte = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	MenuCallbackHandler.DMCWOStringsOcelot = function(self, item)
+		DMCWO._data.ocelot = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	
+	
+	MenuCallbackHandler.DMCWOAttachHideBrakes = function(self, item)
+		DMCWO._data.hide_brakes = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	MenuCallbackHandler.DMCWOAttachHideSGBrakes = function(self, item)
+		DMCWO._data.hide_sg_brakes = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	MenuCallbackHandler.DMCWOAttachHidePisFlash = function(self, item)
+		DMCWO._data.hide_pis_flash = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	--
+	MenuCallbackHandler.DMCWOAttachBUISSwap = function(self, item)
+		DMCWO._data.buis_swap = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	--
+	MenuCallbackHandler.DMCWOAttachS552Rear = function(self, item)
+		DMCWO._data.sg552_rear = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	MenuCallbackHandler.DMCWOAttachS552Handguard = function(self, item)
+		DMCWO._data.sg552_handguard = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	MenuCallbackHandler.DMCWOAttachS552Stock = function(self, item)
+		DMCWO._data.sg552_stock = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	MenuCallbackHandler.DMCWOAttachS552Grip = function(self, item)
+		DMCWO._data.sg552_grip = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	--
+	MenuCallbackHandler.DMCWOAttachM95Bipod = function(self, item)
+		DMCWO._data.m95_bipod = (item:value() == "on" and true or false)
+		DMCWO:Save()
+	end
+	
+	DMCWO:Load()
+	DMCWO:LoadSkills()
+	MenuHelper:LoadFromJsonFile( DMCWO._path .. "options/m_menu.txt", DMCWO, DMCWO._data )
+	MenuHelper:LoadFromJsonFile( DMCWO._path .. "options/strings.txt", DMCWO, DMCWO._data )
+	MenuHelper:LoadFromJsonFile( DMCWO._path .. "options/skills.txt", DMCWO, DMCWO._data_skills )
+	MenuHelper:LoadFromJsonFile( DMCWO._path .. "options/weapons.txt", DMCWO, DMCWO._data )
+	MenuHelper:LoadFromJsonFile( DMCWO._path .. "options/attachments.txt", DMCWO, DMCWO._data )
+	MenuHelper:LoadFromJsonFile( DMCWO._path .. "options/attachments_s552.txt", DMCWO, DMCWO._data )
+	MenuHelper:LoadFromJsonFile( DMCWO._path .. "options/attachments_m95.txt", DMCWO, DMCWO._data )
+end )
+
+function DMCWO:ResetOptions()
+	self._data.stfu = false
+		
+	self._data.sniper_tracers = false
+	self._data.light_show = false
+	--
+	self._data.no_bipod_swivel = false
+	self._data.bipod_ads_autodeploy = false
+	self._data.bipod_wasd_undeploy = false
+		
+	self._data.reelnames = true
+	self._data.upotte = false
+	self._data.ocelot = false
+	
+	self._data.hide_brakes = false
+	self._data.hide_sg_brakes = false
+	self._data.hide_pis_flash = false
+	--
+	self._data.buis_swap = false
+	--
+	self._data.sg552_rear = false
+	self._data.sg552_handguard = false
+	self._data.sg552_stock = false
+	self._data.sg552_grip = false
+	--
+	self._data.m95_bipod = false
+	
+	DMCWO:Save()
+end
+
+function DMCWO:ResetOptionsSkills()
+	self._data_skills.havel_mum = false
+	DMCWO:SaveSkills()
+end
+
+if DMCWO._data.stfu == nil
+or DMCWO._data.sniper_tracers == nil
+or DMCWO._data.light_show == nil
+or DMCWO._data.no_bipod_swivel == nil
+or DMCWO._data.bipod_ads_autodeploy == nil
+or DMCWO._data.bipod_wasd_undeploy == nil
+or DMCWO._data.reelnames == nil
+or DMCWO._data.upotte == nil
+or DMCWO._data.ocelot  == nil
+or DMCWO._data.hide_brakes == nil
+or DMCWO._data.hide_sg_brakes == nil
+or DMCWO._data.hide_pis_flash == nil
+or DMCWO._data.buis_swap == nil 
+or DMCWO._data.sg552_rear == nil 
+or DMCWO._data.sg552_handguard == nil 
+or DMCWO._data.sg552_stock == nil 
+or DMCWO._data.sg552_grip == nil 
+or DMCWO._data.m95_bipod == nil 
+then 
+	DMCWO:ResetOptions() 
+end
+
+if DMCWO._data_skills.havel_mum == nil then
+	DMCWO:ResetOptionsSkills() 
+end
+
 if RequiredScript then
     local script = RequiredScript:lower()
     if DMCWO.Hooks[script] then
         dofile(DMCWO._path .. DMCWO.Hooks[script])
     end
 end
-
---Set to true if you don't want the random message printing to the console/log
-DMCWO.stfu = false 
 
 --[[ DEBUG/WIP SETTINGS ]]--{
 --Really these are just for me for development and testing purposes but I figure why not? The default setting for all of these are "false"
@@ -82,7 +280,7 @@ DMCWO.stfu = false
 --YOU MAY GET PERFORMANCE DROPS WHILE USING THIS WITH AUTOMATIC FIRE
 --If set to true, outputs various statistics from each shot taken from a "newraycastweaponbase" gun into the console/log
 --Shots into the open skybox are not tracked
---Non-"newraycastweaponbase" guns are not tracked
+--"newshotgunbase" guns are only tracked on impact with enemy units
 DMCWO.debug_range = false
 
 --If set to true, disables ALL damage boosts from skills (or at least tries to)
@@ -126,58 +324,11 @@ DMCWO.GEDDAN = false
 DMCWO.l85a1_sim = false
 --}
 
---[[ SKILLTREE SETTINGS ]]--{
-
---If set to true, make use of *closer* to vanilla skills
---I say *closer* as I've already done things to keep some vanilla skills in check (Uppers, sentry quantities, etc.)
---Default = false
-DMCWO.havel_mum = false
-
---}
-
---[[ STRING SETTINGS ]]--{
-
---If set to true, renames weapons to their IRL counter parts
---NOTE: This only affects weapon names. Descriptions are unchanged
---Default = true
-DMCWO.reelnaems = true
-
---If set to true, Revolver Ocelot
---NOTE: Revolver Ocelot
---NOTE 2: (Revolver Ocelot)
---Revolver Ocelot 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
---Default = false
-DMCWO.ocelot = false
-
---If set to true, renames/changes the descriptions of weapons to their Upotte counter parts (if they've made an appearance)
---NOTE: This is fucking stupid
---NOTE 2: Jiisuri is loev. Jiisuri is lyfe.
---NOTE 3: This overrides weapons affected by DMCWO.reelnaems if it's also set to true
---Default = false
-DMCWO.upotte = false
---}
-
 --[[ WEAPON SETTINGS ]]--{
 
---If set to true, you leave behind PD:TH sniper trails for the MSR, G3 (if using the PSG-1 barrel), R93, Mosin, WA2000, Model 70 and M95
---Default = false
-DMCWO.sniper_tracers = false
-
---If set to true, ALL raycast firing guns (shotguns too) leave PD:TH sniper trails.
---NOTE: This is REALLY fucking stupid
---Default = false
-DMCWO.light_show = false
-
---If set to true, you retain closer-to-vanilla total ammo count.
---I say "closer-to-vanilla" as mag capacities remain adjusted which can still influence total ammo.
---More or less just there if you're really paranoid about being questioned about your ammo when playing with the unknowing 
---With that said, why are you playing pubs with this?
---Default = false
-DMCWO.vanilla_ammo = false
-
---Repositions the viewmodels of most weapons so they obscure less of your view and reduce clipping of guns and/or attachments with the FPS camera
+--Repositions the viewmodels of most weapons so they're in a more realistic position and not to the far-far right of your body. Also reduces clipping in some instances
 --Intended for use with a maximized FOV slider (using the default slider ranges) although it'll still work with any FOV setting
---If false, you'll probably encounter floating arms or camera clipping
+--If false, you'll probably encounter floating arms and/or camera clipping
 --Default = true
 DMCWO.reposed_vms = true
 
@@ -189,18 +340,6 @@ DMCWO.fix_pickup = false
 --NOTE: Damage and RoF are adjusted depending on the setting
 --Default = true
 DMCWO.judge_pistol = true
-
---If set to true, gets rid of the rotational aspect of your viewmodel when the bipod is deployed, removing the janky ADS transition at the cost of, again, removing the rotational aspect when deployed
---Default = false
-DMCWO.no_bipod_swivel = false
-
---If set to true, when you ADS with a bipod on your MG, if all deployment checks are good (valid surface, not moving, not actively changing stances, etc.), you will auto-deploy your bipod 
---Default = false
-DMCWO.bipod_ads_autodeploy = false
-
---If set to true, pressing a move key (i.e. WASD) will now un-deploy your bipod 
---Default = false
-DMCWO.bipod_wasd_undeploy = false
 
 --If set to true, enables burst memory for AR-15 rifles
 --Default = true
@@ -215,6 +354,10 @@ DMCWO.ar15_burst_suckage = false
 --Default = true
 DMCWO.melee_hs = true
 
+--If set to true, all characters can dice up cloakers with the katana
+--Default = false
+DMCWO.all_dismember_cloaker = false
+
 --If set to true, using the fists allows you to turn into Kenshiro from Hokuto No Ken (Fist of the North Star)
 --"AAAH-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA-TA"
 --Alternatively, become Star Platinum
@@ -228,33 +371,6 @@ DMCWO.kenshiroraoraora = false
 DMCWO.RULESOFNATURE = false
 --AND THEY RUN WHEN THE SUN COMES UP
 --WITH THEIR LIVES ON THE LINE
-
---If set to true, all characters can dice up cloakers with the katana
---Default = false
-DMCWO.all_dismember_cloaker = false
-
---}
-
---[[ ATTACHMENT SETTINGS ]]--{
---Pick and choose what you want, mostly eveything here is aesthetic. Only a few may change gameplay
---Changes will ony take effect after you go through a loading screen or reboot the game
-
---[General]--{
---If set to true, hides attachable AR/SMG/LMG class muzzle brakes or replaces them with a barrel's default brake (if it had one to begin with)
---Default = false
-DMCWO.hide_brakes = false
-
---If set to true, hides attachable shotgun class muzzle brakes or replaces them with a barrel's default brake (if it had one to begin with)
---Default = false
-DMCWO.hide_sg_brakes = false
-
---If set to true, hides the Flash Hider attachment for all pistols that can accept it or replaces them with a barrel's default brake (if it had one to begin with)
---Default = false
-DMCWO.hide_pis_flash = false
-
---if set to true, swaps the Magpul BUIS/Flip-up sights with the default ones from the KSG (Daniel Defence Irons)
---NOTE: May be slightly misaligned, not a priority of mine to fix it.
-DMCWO.buis_swap = false
 --}
 
 --[AK type weapons]--{
@@ -281,39 +397,19 @@ DMCWO.a2_upper = false
 --Default = true
 DMCWO.ar_front_post = true
 
---If set to true, sets the Long Barrel for the CAR-4/M4A1 to use the medium barrel (default barrel normally), the default Medium Barrel for the CAR-4/M4A1 to use the Short Barrel model and the Short Barrel for the CAR-4/M4A1 to use the AUG Short Barrel model. 
+--If set to true, sets the Long Barrel for the CAR-4/M4A1 to use the Beowulf barrel connection point, making it appear slightly shorter. 
 --Default = false
---NOTE: Slight clipping will occur if you use a suppressor w/ the Short Barrel and Geissele Rail
 DMCWO.m4_barrel = false
 
 --If set to true, visually breaks the AMCAR upon attaching the Exotique/VLTOR upper reciever, even more so if you dettach it. A bug I'm keeping in as a toggle at the request of friends during pre-release. If you toggled while it's broken/not broken, just reattach the Exotique/VLTOR upper. 
 --Default = false
 DMCWO.its_fucked = false
-
---if set to true, sets the default A2 upper on the AMCAR/M733 to the railed upper w/carry handle
---DMCWO.amcar_upper = WIP, not a priority
 --}
 
 --[M249]--{
 --If set to true, sets the M249 short and long barrels to use the G3 barrel models to match the rest of the black barrel. 
 --Default = false
 DMCWO.m249_barrel = false
---}
-
---[MP7]--{
---If set to true, hides the collapsed stock on the SpecOps/MP7 so it looks like you're buying it. 
---Default = false
-DMCWO.mp7_nostock = false
-
---If set to true, changes the stubby tan VFG on the MP7 to the black VFG. 
---Default = false
-DMCWO.mp7_vfg = false
---}
-
---[M45]--{
---If set to true, hides the folded stock "attachment" so it looks like you're paying for custom work to have it removed. 
---Default = false
-DMCWO.m45_nostock = false
 --}
 
 --[KSG]--{
@@ -328,12 +424,6 @@ DMCWO.ksg_gadget = true
 DMCWO.judge_grip = false
 --}
 
---[M10]--{
---If set to true, hides the M10's default wire stock. 
---Default = false
-DMCWO.hide_mac_wire = false
---}
-
 --[Model 870]--{
 --If set to 1, hides the R870 tube cap extension on the R870. 
 --If set to 2, sets the R870 tube cap extension to the one used on the Loco. 
@@ -346,31 +436,6 @@ DMCWO.remington_cap = 0
 --Any other value uses the default Loco tube cap. 
 --Default = "0"
 DMCWO.loco_cap = 0
---}
-
---[SG552]--{
---If set to true, changes the rear iron sight on the Commando 553/SG552 to be replaced with the Marksman rear pistol sight. 
---Default = false
-DMCWO.sig_rear_iron = true
-
---If set to true, on the SG552, the respective "Standard" version of a part will have its model swapped with its "Enhanced" counterpart and vice versa.
---Default = false
---Keep in mind this won't make sense for concealment
-DMCWO.sg552_stock = false
-DMCWO.sg552_handguard = false
-DMCWO.sg552_grip = false
---}
-
---[MK.17]--{
---if set to true, hides the AFG seen on the SCAR. 
---Default = false
-DMCWO.scar_afg_hide = false
---}
-
---[M95]--{
---if set to true, hides the M95's bipod. 
---Default = false
-DMCWO.barret_bipod = false
 --}
 
 --}
@@ -505,9 +570,6 @@ DMCWO.Strings = {
 "\"Your opinion, my choice\"",
 ";)",
 ";)",
-
-";)",
-";)",
 "\"Shame on you if you thought otherwise\"",
 ";)",
 ";)",
@@ -517,6 +579,7 @@ DMCWO.Strings = {
 "$2.49",
 "Based LazyOzzy",
 "Based Seven",
+"Based Zdann",
 "\"Dickbutt\"",
 "\"What what, in the butt\"",
 "\"Her name is Koko, she is loco, I said oh no!\"", --https://www.youtube.com/watch?v=IIn63BNIncE
@@ -527,6 +590,7 @@ DMCWO.Strings = {
 "\"Weapon, I have it all!\"",
 "I need to draw more often...",
 "ISHYGDDT",
+"28 DOWNS",
 "\"Funco-chan!\"",
 "[x]Touch fluffy tail",
 "PUFFY VULVA",
@@ -541,6 +605,7 @@ DMCWO.Strings = {
 "\"DOZER INCOMING\"",
 "dat floor tho", --le Rustle faec
 "Rustle is a damn good artist",
+"\"fuck being superman, I have the power of /k/ in my hands\" - /pdg/ Anon No.148191216",
 "\"CRAAAAAWLING IIIIN MY CRAAAAAAAAWL!!!\"",
 "More lood Kawaii pictures when?",
 "hOI!",
@@ -564,7 +629,7 @@ DMCWO.Strings = {
 "\"HABEEB IT\"",
 }
 
-if not DMCWO.stfu then
+if not DMCWO._data.stfu then
 	if not DMCWO.dongs then
 		log( "\n" .. tostring(DMCWO.Strings[math.random(#DMCWO.Strings)]) .. "\n" )
 		DMCWO.dongs = true

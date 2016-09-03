@@ -5,7 +5,7 @@ This script is used in DMC's Weapon Overhaul, please make sure you have the most
 local old_init = PlayerTweakData.init
 function PlayerTweakData:init()
 	old_init(self)
-	if DMCWO.havel_mum ~= true and DMCWO.be_all_end_all ~= true and DMCWO.grind ~= true and DMCWO.no_investment ~= true then
+	if DMCWO._data_skills.havel_mum ~= true then
 		--Making Shinobi speed skills base
 		self.movement_state.standard.movement.speed.STANDARD_MAX = 437.5
 		self.movement_state.standard.movement.speed.CROUCHING_MAX = 247.5
@@ -301,12 +301,12 @@ function PlayerTweakData:_init_new_stances()
 		pivot_shoulder_rotation = Rotation(0.0999949, -0.687702, 0.630304)
 		local pistol_type_wep = {'glock_17','glock_18c','g22c','g26','b92fs','usp','colt_1911','ppk','p226','c96','hs2000','deagle','sparrow','pl14'}
 		for i, wep_id in ipairs(pistol_type_wep) do
-			pivot_head_translation = Vector3(8, 30, -8)
+			pivot_head_translation = Vector3(7, 30, -6)
 			pivot_head_rotation = Rotation(0, 0, -1)
 			self.stances[wep_id].standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 			self.stances[wep_id].standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 			
-			pivot_head_translation = Vector3(6, 28, -6)
+			pivot_head_translation = Vector3(5, 28, -4)
 			pivot_head_rotation = Rotation(0, 0, -2)
 			self.stances[wep_id].crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 			self.stances[wep_id].crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
@@ -791,12 +791,12 @@ function PlayerTweakData:_init_new_stances()
 		--M14
 		pivot_shoulder_translation = Vector3(10.7332, 15.6145, -2.75549)
 		pivot_shoulder_rotation = Rotation(0.106625, -0.450997, 0.629212)
-		pivot_head_translation = Vector3(11,14,-4)
+		pivot_head_translation = Vector3(8,14,-4)
 		pivot_head_rotation = Rotation(0,0,-1)
 		self.stances.new_m14.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 		self.stances.new_m14.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
 		
-		pivot_head_translation = Vector3(9,12,-2)
+		pivot_head_translation = Vector3(6,12,-2)
 		pivot_head_rotation = Rotation(0,0,-2)
 		self.stances.new_m14.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
 		self.stances.new_m14.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
@@ -1584,3 +1584,37 @@ function PlayerTweakData:_init_new_stances()
 	
 	--}
 end
+
+Hooks:PostHook( PlayerTweakData, "init", "CustomWeaponsInit", function(self)
+	
+	-->:3's SKS
+	if self.stances.sks then		
+		pivot_shoulder_translation = Vector3(10.9676, 22.9989, -4.06557)
+		pivot_shoulder_rotation = Rotation(5.57069E-5, 5.88677E-4, -3.47486E-4)
+		pivot_head_translation = Vector3(-0.01, 12, 0.05)
+		pivot_head_rotation = Rotation(0.025, 0, 0)
+		self.stances.sks.steelsight.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+		self.stances.sks.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+	end
+	--[[
+	if self.stances.pp then	
+		pivot_shoulder_translation = Vector3(8.49051, 38.6474, -5.09399)
+		pivot_shoulder_rotation = Rotation(0.0999949, -0.687702, 0.630304)
+		pivot_head_translation = Vector3(7, 42, -4)
+		pivot_head_rotation = Rotation(0, 0, -1)
+		self.stances.pp.standard.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+		self.stances.pp.standard.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+		
+		pivot_head_translation = Vector3(5, 38, -2)
+		pivot_head_rotation = Rotation(0, 0, -2)
+		self.stances.pp.crouched.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+		twp.stances.pp.crouched.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+		
+		pivot_head_translation = Vector3(-2.4, 29, 2.35)
+		pivot_head_rotation = Rotation(0.05, -1.5, 0)
+		self.stances.pp.steelsight.shoulders.translation = pivot_head_translation - pivot_shoulder_translation:rotate_with(pivot_shoulder_rotation:inverse()):rotate_with(pivot_head_rotation)
+		self.stances.pp.steelsight.shoulders.rotation = pivot_head_rotation * pivot_shoulder_rotation:inverse()
+	end
+	--]]
+end)
+	

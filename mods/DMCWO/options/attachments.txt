@@ -1,0 +1,62 @@
+{
+	"menu_id" : "dmcwo_attachments_menu",
+	"parent_menu_id" : "dmcwo_main_menu",
+	"title" : "dmc_attach_title",
+	"description" : "dmc_attach_desc",
+	"items" : [
+		{
+			"type" : "toggle",
+			"id" : "dmc_attach_hide_brakes_toggle",
+			"title" : "dmc_attach_hide_brakes_title",
+			"description" : "dmc_attach_hide_brakes_desc",
+			"callback" : "DMCWOAttachHideBrakes",
+			"value" : "hide_brakes",
+			"default_value" : false,
+		},
+		{
+			"type" : "toggle",
+			"id" : "dmc_attach_hide_sg_brakes_toggle",
+			"title" : "dmc_attach_hide_sg_brakes_title",
+			"description" : "dmc_attach_hide_sg_brakes_desc",
+			"callback" : "DMCWOAttachHideSGBrakes",
+			"value" : "hide_sg_brakes",
+			"default_value" : false,
+		},
+		{
+			"type" : "toggle",
+			"id" : "dmc_attach_hide_pis_flash_toggle",
+			"title" : "dmc_attach_hide_pis_flash_title",
+			"description" : "dmc_attach_hide_pis_flash_desc",
+			"callback" : "DMCWOAttachHidePisFlash",
+			"value" : "hide_pis_flash",
+			"default_value" : false,
+		},
+		{
+			"type" : "divider",
+			"size" : 20,
+		},
+		{
+			"type" : "toggle",
+			"id" : "dmc_attach_buis_swap_toggle",
+			"title" : "dmc_attach_buis_swap_title",
+			"description" : "dmc_attach_buis_swap_desc",
+			"callback" : "DMCWOAttachBUISSwap",
+			"value" : "buis_swap",
+			"default_value" : false,
+		},
+		{
+			"type" : "divider",
+			"size" : 20,
+		},
+		{
+			"type" : "button",
+			"id" : "dmc_attach_weapon_specific",
+			"title" : "dmc_attach_weapon_specific_title",
+			"description" : "dmc_attach_weapon_specific_desc"
+		},
+		{
+			"type" : "divider",
+			"size" : 4,
+		}
+	]
+}

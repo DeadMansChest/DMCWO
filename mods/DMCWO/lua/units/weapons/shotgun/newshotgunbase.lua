@@ -187,6 +187,34 @@ function NewShotgunBase:_fire_raycast(user_unit, from_pos, direction, dmg_mul, s
 	
 	return result
 end
+
+function NewShotgunBase:get_damage_falloff(damage, col_ray, user_unit, distance)
+	local dist = distance or col_ray.distance or mvector3.distance(col_ray.unit:position(), user_unit:position())
+	local fuck = ( (self._current_stats.damage / self._damage) * damage )
+	local min_damage = self._damage_min or 0
+	if min_damage > damage then
+		min_damage = damage
+	end
+	
+	if DMCWO.debug_range == true then
+		log("Dist: " .. tostring(dist/100) .. "\nDrop Start: " .. tostring(self._damage_near/100) .. "m\n\nInit Dmg: " .. tostring(damage * 10) .. "\nMin. Dmg at: " .. tostring(self._damage_far/100) .. "m \nMin. Dmg: " .. tostring( (min_damage) * 10) .. "\n")
+	end
+	
+	if self._damage_bonus_range and dist < self._damage_bonus_range then
+		damage = damage + (self._damage_bonus or 0)
+	elseif dist > self._damage_near and dist < self._damage_far then
+		damage = damage - (( dist - self._damage_near) / ( self._damage_far - self._damage_near ) * ( damage - min_damage ))
+	elseif dist >= self._damage_far then
+		damage = min_damage 
+	end
+	
+	if DMCWO.debug_range == true then
+		log("Impact Dmg: " .. tostring(damage * 10) .. "\n\n") --Damage on impact
+	end
+	
+	return damage
+end
+
 	
 	
 --[[ 
@@ -440,7 +468,6 @@ function NewShotgunBase:fire_rate_multiplier()
 	return multiplier * ( (self:in_burst_mode() and self._burst_fire_rate_multiplier) or 1)
 end
 
-SaigaShotgun = SaigaShotgun or class(NewShotgunBase)
 function SaigaShotgun:reload_expire_t()
 	return nil
 end
@@ -450,11 +477,11 @@ function SaigaShotgun:reload_enter_expire_t()
 end
 
 function SaigaShotgun:reload_exit_expire_t()
-	return nil
+	return self:weapon_tweak_data().timers.reload_exit_empty or nil
 end
 
 function SaigaShotgun:reload_not_empty_exit_expire_t()
-	return nil
+	return self:weapon_tweak_data().timers.reload_exit_not_empty or nil
 end
 
 function SaigaShotgun:update_reloading(t, dt, time_left)

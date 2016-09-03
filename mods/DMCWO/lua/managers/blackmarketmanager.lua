@@ -200,4 +200,47 @@ function BlackMarketManager:damage_multiplier(name, category, sub_category, sile
 	return self:_convert_add_to_mul(multiplier)
 end
 
+function BlackMarketManager:get_silencer_concealment_modifiers(weapon)
+	local factory_id = weapon.factory_id
+	local blueprint = weapon.blueprint
+	local weapon_id = weapon.weapon_id or managers.weapon_factory:get_weapon_id_by_factory_id(factory_id)
+	local base_stats = tweak_data.weapon[weapon_id].stats
+	local bonus = 0
+	if not base_stats or not base_stats.concealment then
+		return 0
+	end
+	local silencer = managers.weapon_factory:has_perk("silencer", weapon.factory_id, blueprint)
+	if silencer and managers.player:has_category_upgrade("player", "silencer_concealment_increase") then
+		bonus = managers.player:upgrade_value("player", "silencer_concealment_increase", 0)
+	end
+	if silencer and managers.player:has_category_upgrade("player", "silencer_concealment_penalty_decrease") then
+		local stats = managers.weapon_factory:get_perk_stats("silencer", factory_id, blueprint)
+		if stats and stats.concealment and stats.concealment < 0 then
+			bonus = bonus + math.min(managers.player:upgrade_value("player", "silencer_concealment_penalty_decrease", 0), math.abs(stats.concealment))
+		end
+	end
+	return bonus
+end
+
+function BlackMarketManager:visibility_modifiers()
+	local skill_bonuses = 0
+	skill_bonuses = skill_bonuses - managers.player:upgrade_value("player", "passive_concealment_modifier", 0)
+	skill_bonuses = skill_bonuses - managers.player:upgrade_value("player", "concealment_modifier", 0)
+	skill_bonuses = skill_bonuses - managers.player:upgrade_value("player", "melee_concealment_modifier", 0)
+	local armor_data = tweak_data.blackmarket.armors[managers.blackmarket:equipped_armor(true, true)]
+	if armor_data.upgrade_level == 2 or armor_data.upgrade_level == 3 or armor_data.upgrade_level == 4 then
+		skill_bonuses = skill_bonuses - managers.player:upgrade_value("player", "ballistic_vest_concealment", 0)
+	end
+	--[[
+	--Why are these heeeeeeere, OVK
+	skill_bonuses = skill_bonuses - managers.player:upgrade_value("player", "silencer_concealment_increase", 0)
+	skill_bonuses = skill_bonuses - managers.player:upgrade_value("player", "silencer_concealment_penalty_decrease", 0)
+	]]
+	local silencer_bonus = 0
+	silencer_bonus = silencer_bonus + self:get_silencer_concealment_modifiers(self:equipped_primary())
+	silencer_bonus = silencer_bonus + self:get_silencer_concealment_modifiers(self:equipped_secondary())
+	skill_bonuses = skill_bonuses - silencer_bonus
+	return skill_bonuses
+end
+
 

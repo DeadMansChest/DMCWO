@@ -1,0 +1,27 @@
+<table>
+	<!--M249/240 casings-->
+    <effect path="_dmc/effects/shell_lmg_down" force="true" load="true" unload="true" reload="true"/>
+	
+	<!--NATO Tracer-->
+    <effect path="_dmc/effects/nato_trail" force="false" load="true" unload="true" reload="true"/>
+    <effect path="_dmc/effects/parts/nato_streak" force="false" load="true" unload="true" reload="true"/>
+	<!--Warsaw Tracer-->
+    <effect path="_dmc/effects/warsaw_trail" force="false" load="true" unload="true" reload="true"/>
+    <effect path="_dmc/effects/parts/warsaw_streak" force="false" load="true" unload="true" reload="true"/>
+	<!--STERWERS Tracer-->
+    <effect path="_dmc/effects/sterwers_trail" force="false" load="true" unload="true" reload="true"/>
+    <effect path="_dmc/effects/parts/sterwers_streak" force="false" load="true" unload="true" reload="true"/>
+	<!--Large Tracer-->
+    <effect path="_dmc/effects/large_trail" force="false" load="true" unload="true" reload="true"/>
+    <effect path="_dmc/effects/parts/large_streak" force="false" load="true" unload="true" reload="true"/>
+	
+	<!--Judge .45 LC-->
+	<unit path="_noob/units/pd2_million/weapons/wpn_fps_pis_judge_pts/wpn_fps_pis_judge_body_45lc" force="false"/>
+	<model path="_noob/units/pd2_million/weapons/wpn_fps_pis_judge_pts/wpn_fps_pis_judge_body_45lc" force="false"/>
+    <object path="_noob/units/pd2_million/weapons/wpn_fps_pis_judge_pts/wpn_fps_pis_judge_body_45lc" force="false"/>
+    <cooked_physics path="_noob/units/pd2_million/weapons/wpn_fps_pis_judge_pts/wpn_fps_pis_judge_body_45lc" force="false"/>
+	<material_config path="_noob/units/pd2_million/weapons/wpn_fps_pis_judge_pts/wpn_fps_pis_judge_body_45lc" force="false"/>
+	<material_config path="_noob/units/pd2_million/weapons/wpn_fps_pis_judge_pts/wpn_fps_pis_judge_body_45lc_thq" force="false"/>
+	<material_config path="_noob/units/pd2_million/weapons/wpn_fps_pis_judge_pts/wpn_fps_pis_judge_body_45lc_cc" force="false"/>
+	<material_config path="_noob/units/pd2_million/weapons/wpn_fps_pis_judge_pts/wpn_fps_pis_judge_body_45lc_cc_thq" force="false"/>
+</table>

@@ -1,13 +1,15 @@
 --[[
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
+
+Also get the fuck out of here
 ]]
 
 local old_init_pd2_values = UpgradesTweakData._init_pd2_values
-function UpgradesTweakData:_init_pd2_values()
-	old_init_pd2_values(self, tweak_data)
+function UpgradesTweakData:_init_pd2_values(...)
+	old_init_pd2_values(self, ...)
 	
 	self.explosive_bullet.curve_pow = 0.8
-	self.explosive_bullet.player_dmg_mul = 0.5
+	self.explosive_bullet.player_dmg_mul = 1
 	self.explosive_bullet.range = 175
 	self.explosive_bullet.feedback_range = 300
 	self.explosive_bullet.camera_shake_max_mul = 5
@@ -28,8 +30,20 @@ function UpgradesTweakData:_init_pd2_values()
 	end
 	
 	
-	if DMCWO.havel_mum ~= true then
-			
+	if DMCWO._data_skills.havel_mum ~= true then
+		
+		if not SC then	
+			self.values.player.body_armor.dodge = {
+				0.2,
+				0.1,
+				0.05,
+				0.0,
+				-0.2,
+				-0.25,
+				-0.55
+			}
+		end
+		
 		self.values.rep_upgrades.values = {0}
 		
 		--[[   MASTERMIND   ]]--
@@ -90,10 +104,13 @@ function UpgradesTweakData:_init_pd2_values()
 				self.values.player.civilian_reviver = {true}
 				self.values.player.civilian_gives_ammo = {true}
 				--Partners in Crime
+				--[[
+				--This is broke as fuck for some reason, nothing was changed anyways
 				self.values.player.minion_master_speed_multiplier = {1.1}
 				self.values.player.minion_master_health_multiplier = {1.3}
 				self.values.player.passive_convert_enemies_health_multiplier = {0.25}
-				self.values.player.passive_convert_enemies_damage_multiplier = {1.15}				
+				self.values.player.passive_convert_enemies_damage_multiplier = {1.15}
+				]]
 			
 				--Hostage Taker
 				self.values.player.hostage_health_regen_addend = {0.025, 0.05}
@@ -106,7 +123,7 @@ function UpgradesTweakData:_init_pd2_values()
 				self.values.team.weapon.recoil_index_addend = {4}
 				
 				--MG Handling (Rifleman)
-				self.values.smg.reload_speed_multiplier = {1.35}
+				self.values.smg.reload_speed_multiplier = {1.25}
 				self.values.smg.hip_fire_spread_multiplier = {0.5}
 				--MG Specialist (Marksman)
 				self.values.smg.fire_rate_multiplier = {1.20}
@@ -132,24 +149,24 @@ function UpgradesTweakData:_init_pd2_values()
 				self.values.temporary.dmg_dampener_outnumbered = { {0.9, 7} }
 				
 				--Shotgun CQB
-				self.values.shotgun.reload_speed_multiplier = {1.25, 1.50}
-				self.values.shotgun.enter_steelsight_speed_multiplier = {2.25}
+				self.values.shotgun.reload_speed_multiplier = {1.25, 1.25}
+				self.values.shotgun.enter_steelsight_speed_multiplier = {1.50}
 				--Shotgun Impact
 				self.values.shotgun.recoil_index_addend = {4}
-				self.values.shotgun.damage_multiplier = {1, 1.25}
+				self.values.shotgun.damage_multiplier = {1.15, 1.15}
 				
-				--Far Away
+				--Pigeon Shooter (Far Away)
 				self.values.shotgun.steelsight_accuracy_inc = {0.6}
 				self.values.shotgun.steelsight_range_inc = {1.5}
-				--Close By
+				--Gung-Ho (Close By)
 				self.values.shotgun.hip_run_and_shoot = {true}
-				self.values.shotgun.hip_rate_of_fire = {1.35}
+				self.values.shotgun.hip_rate_of_fire = {1.25}
 				
 				--Overkill
 				self.values.shotgun.swap_speed_multiplier = {1.8}
 				self.values.saw.swap_speed_multiplier = {1.8}
 				self.values.temporary.overkill_damage_multiplier = {
-					{1.75, 5},
+					{1.75, 2},
 					{1.75, 10}
 				}
 			--}
@@ -213,27 +230,29 @@ function UpgradesTweakData:_init_pd2_values()
 			--[[   ENGINEER SUBTREE   ]]--
 			--{
 				--Defense up
-				self.values.sentry_gun.cost_reduction = {1.25, 1.5}
-				self.values.sentry_gun.shield = {true}	
-				
-				--Sentry Targeting Package
-				self.values.sentry_gun.spread_multiplier = {0.5}
-				self.values.sentry_gun.rot_speed_multiplier = {2.5}
-				self.values.sentry_gun.extra_ammo_multiplier = {1.5, 2.5}
-				--Eco Sentry
-				self.values.sentry_gun.armor_multiplier = {2.5}
-			
-				--Engineering
-				self.values.sentry_gun.less_noisy = {true}
-				self.values.sentry_gun.ap_bullets = {true}
-				self.values.sentry_gun.fire_rate_reduction = {4}
-				self.values.sentry_gun.damage_multiplier = {2.5}
-				--Jack of All Trades
-				self.values.player.deploy_interact_faster = {0.5}
-				self.values.player.second_deployable = {true}
-		
-				--Tower Defence
-				self.values.sentry_gun.quantity = {1, 2}
+                self.values.sentry_gun.cost_reduction = {2, 3}
+                self.values.sentry_gun.shield = {true} 
+               
+                --Sentry Targeting Package
+                self.values.sentry_gun.spread_multiplier = {2}
+                self.values.sentry_gun.rot_speed_multiplier = {2}
+                self.values.sentry_gun.extra_ammo_multiplier = {2}
+ 
+                --Eco Sentry
+                self.values.sentry_gun.armor_multiplier = {2.5}
+           
+                --Engineering
+                self.values.sentry_gun.less_noisy = {true}
+                self.values.sentry_gun.ap_bullets = {true}
+                self.values.sentry_gun.fire_rate_reduction = {4}
+                self.values.sentry_gun.damage_multiplier = {2.5}
+ 
+                --Jack of All Trades
+                self.values.player.deploy_interact_faster = {0.5}
+                self.values.player.second_deployable = {true}
+   
+                --Tower Defence
+                self.values.sentry_gun.quantity = {1, 2}
 			--}
 			
 			--[[   BREACHER SUBTREE   ]]--
@@ -272,6 +291,7 @@ function UpgradesTweakData:_init_pd2_values()
 				self.values.weapon.single_spread_index_addend = {4}
 				self.values.assault_rifle.recoil_index_addend = {4}
 				self.values.snp.recoil_index_addend = {4}
+				self.values.weapon.exit_run_speed_multiplier = {2.00}
 				--Spotter
 				self.values.player.marked_enemy_extra_damage = {true}
 				self.values.player.marked_enemy_damage_mul = 1.20
@@ -337,7 +357,7 @@ function UpgradesTweakData:_init_pd2_values()
 			--[[   COMMANDO SUBTREE   ]]--
 			--{
 				--Duck and Cover
-				self.values.player.run_dodge_chance = {0.25}
+				self.values.player.run_dodge_chance = {0.1}
 				self.values.player.run_speed_multiplier = {1.25}
 				self.values.player.crouch_dodge_chance = {0.05, 0.15}
 				
@@ -490,7 +510,8 @@ function UpgradesTweakData:_init_pd2_values()
 				self.values.player.counter_strike_spooc = {true}
 				--Frenzy (Berserker)
 				self.values.player.max_health_reduction = {0.15}
-				self.values.player.health_damage_reduction = {0.70, 0.50}
+				self.values.player.health_damage_reduction = {1, 1}
+				self.values.player.real_health_damage_reduction = {0.70, 0.50}
 				self.values.player.healing_reduction = {0.25, 0.50}
 				
 				--Berserker (Frenzy)
@@ -501,6 +522,9 @@ function UpgradesTweakData:_init_pd2_values()
 		--}
 	else
 	
+		--Shotgun CQB
+		self.values.shotgun.reload_speed_multiplier = {1.10, 1.25}
+		self.values.shotgun.enter_steelsight_speed_multiplier = {1.50}
 		--Subsonic Rounds
 		self.values.weapon.supp_range_buff = {1.25, 1.50}
 		--Akimbo
@@ -516,6 +540,9 @@ function UpgradesTweakData:_init_pd2_values()
 		self.values.sentry_gun.quantity = {1, 2}
 		--Swan Song
 		self.values.temporary.berserker_damage_multiplier = { {1, 5}, {1, 10} }
+		--Frenzy
+		self.values.player.health_damage_reduction = {1, 1}
+		self.values.player.real_health_damage_reduction = {0.70, 0.50}
 		
 	end
 		
@@ -638,13 +665,39 @@ function UpgradesTweakData:_player_definitions()
 			value = 2
 		}
 	}
+	self.definitions.player_real_health_damage_reduction_1 = {
+		category = "feature",
+		name_id = "menu_player_real_health_damage_reduction",
+		upgrade = {
+			category = "player",
+			upgrade = "real_health_damage_reduction",
+			value = 1
+		}
+	}
+	self.definitions.player_real_health_damage_reduction_2 = {
+		category = "feature",
+		name_id = "menu_player_real_health_damage_reduction",
+		upgrade = {
+			category = "player",
+			upgrade = "real_health_damage_reduction",
+			value = 2
+		}
+	}
 end
 
 local old_weapon_definitions = UpgradesTweakData._weapon_definitions
 function UpgradesTweakData:_weapon_definitions()
 	old_weapon_definitions (self)
-	
 
+	self.definitions.weapon_exit_run_speed_multiplier = {
+		category = "feature",
+		name_id = "menu_exit_run_speed_multiplier",
+		upgrade = {
+			category = "weapon",
+			upgrade = "exit_run_speed_multiplier",
+			value = 1
+		}
+	}
 	self.definitions.weapon_supp_range_buff_1 = {
 		category = "feature",
 		name_id = "menu_weapon_supp_range_buff_1",

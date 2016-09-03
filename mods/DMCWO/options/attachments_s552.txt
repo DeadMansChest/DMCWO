@@ -1,0 +1,48 @@
+{
+	"menu_id" : "dmcwo_attachments_s552_menu",
+	"parent_menu_id" : "dmcwo_attachments_menu",
+	"title" : "dmc_attach_s552_title",
+	"description" : "dmc_attach_s552_desc",
+	"items" : [
+		{
+			"type" : "toggle",
+			"id" : "dmc_attach_s552_rear_toggle",
+			"title" : "dmc_attach_s552_rear_title",
+			"description" : "dmc_attach_s552_rear_desc",
+			"callback" : "DMCWOAttachS552Rear",
+			"value" : "sg552_rear",
+			"default_value" : false,
+		},
+		{
+			"type" : "divider",
+			"size" : 20,
+		},
+		{
+			"type" : "toggle",
+			"id" : "dmc_attach_s552_handguard_toggle",
+			"title" : "dmc_attach_s552_handguard_title",
+			"description" : "dmc_attach_s552_handguard_desc",
+			"callback" : "DMCWOAttachS552Handguard",
+			"value" : "sg552_handguard",
+			"default_value" : false,
+		},
+		{
+			"type" : "toggle",
+			"id" : "dmc_attach_s552_stock_toggle",
+			"title" : "dmc_attach_s552_stock_title",
+			"description" : "dmc_attach_s552_stock_desc",
+			"callback" : "DMCWOAttachS552Stock",
+			"value" : "sg552_stock",
+			"default_value" : false,
+		},
+		{
+			"type" : "toggle",
+			"id" : "dmc_attach_s552_grip_toggle",
+			"title" : "dmc_attach_s552_grip_title",
+			"description" : "dmc_attach_s552_grip_desc",
+			"callback" : "DMCWOAttachS552Grip",
+			"value" : "sg552_grip",
+			"default_value" : false,
+		}
+	]
+}

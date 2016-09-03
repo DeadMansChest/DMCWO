@@ -1,0 +1,57 @@
+{
+	"menu_id" : "dmcwo_weapons_menu",
+	"parent_menu_id" : "dmcwo_main_menu",
+	"title" : "dmc_weapons_title",
+	"description" : "dmc_weapons_desc",
+	"items" : [
+		{
+			"type" : "toggle",
+			"id" : "dmc_weapons_tracers_toggle",
+			"title" : "dmc_weapons_tracers_title",
+			"description" : "dmc_weapons_tracers_desc",
+			"callback" : "DMCWOWeaponsTracers",
+			"value" : "sniper_tracers",
+			"default_value" : false,
+		},
+		{
+			"type" : "toggle",
+			"id" : "dmc_weapons_light_show_toggle",
+			"title" : "dmc_weapons_light_show_title",
+			"description" : "dmc_weapons_light_show_desc",
+			"callback" : "DMCWOWeaponsLightShow",
+			"value" : "light_show",
+			"default_value" : false,
+		},
+		{
+			"type" : "divider",
+			"size" : 20,
+		},
+		{
+			"type" : "toggle",
+			"id" : "dmc_weapons_bipod_swivel_toggle",
+			"title" : "dmc_weapons_bipod_swivel_title",
+			"description" : "dmc_weapons_bipod_swivel_desc",
+			"callback" : "DMCWOWeaponsBipodSwivel",
+			"value" : "no_bipod_swivel",
+			"default_value" : false,
+		},
+		{
+			"type" : "toggle",
+			"id" : "dmc_weapons_bipod_autodeploy_toggle",
+			"title" : "dmc_weapons_bipod_autodeploy_title",
+			"description" : "dmc_weapons_bipod_autodeploy_desc",
+			"callback" : "DMCWOWeaponsBipodAutodeploy",
+			"value" : "bipod_ads_autodeploy",
+			"default_value" : false,
+		},
+		{
+			"type" : "toggle",
+			"id" : "dmc_weapons_bipod_undeploy_toggle",
+			"title" : "dmc_weapons_bipod_undeploy_title",
+			"description" : "dmc_weapons_bipod_undeploy_desc",
+			"callback" : "DMCWOWeaponsBipodUndeploy",
+			"value" : "bipod_wasd_undeploy",
+			"default_value" : false,
+		}
+	]
+}

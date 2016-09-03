@@ -1,0 +1,17 @@
+{
+	"menu_id" : "dmcwo_skill_menu",
+	"parent_menu_id" : "dmcwo_main_menu",
+	"title" : "dmc_skill_title",
+	"description" : "dmc_skill_desc",
+	"items" : [
+		{
+			"type" : "toggle",
+			"id" : "dmc_skill_toggle",
+			"title" : "dmc_skill_toggle_title",
+			"description" : "dmc_skill_toggle_desc",
+			"callback" : "DMCWOPlayerSkills",
+			"value" : "havel_mum",
+			"default_value" : false,
+		}
+	]
+}

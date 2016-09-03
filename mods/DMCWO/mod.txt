@@ -3,11 +3,11 @@
 	"description" : "Full overhaul of things present in PD2",
 	"author" : "DeadMansChest/Noep",
 	"contact" : "steamid/qt3_14",
-	"version" : "1.81",
+	"version" : "1.82",
 	"priority" : 29,
 	"updates" : [
 		{
-			"revision" : 1.81,
+			"revision" : 1.82,
 			"identifier" : "dmcwo",
 			"install_dir" : "."
 		}
@@ -46,8 +46,11 @@
 		
 		{ "hook_id" : "lib/units/beings/player/states/playerbipod", "script_path" : "DMCWO.lua" },
 		{ "hook_id" : "lib/units/beings/player/states/playerbleedout", "script_path" : "DMCWO.lua" },
+		{ "hook_id" : "lib/units/beings/player/states/playercarry", "script_path" : "DMCWO.lua" },
 		{ "hook_id" : "lib/units/beings/player/states/playerstandard", "script_path" : "DMCWO.lua" },
 		{ "hook_id" : "lib/units/beings/player/states/playertased", "script_path" : "DMCWO.lua" },
+		
+		{ "hook_id" : "lib/player_actions/skills/playeractionstockholmsyndrometrade", "script_path" : "DMCWO.lua" },
 		
 		{ "hook_id" : "lib/units/cameras/fpcameraplayerbase", "script_path" : "DMCWO.lua" },
 	

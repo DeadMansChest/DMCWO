@@ -2,6 +2,13 @@
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
+local old_playerdamage_init = PlayerDamage.init
+function PlayerDamage:init(...)
+	old_playerdamage_init(self, ...)
+	self._has_damage_speed_team = managers.player:has_team_category_upgrade("player", "team_damage_speed_multiplier_send")
+	self._has_damage_speed = managers.player:has_category_upgrade("temporary", "damage_speed_multiplier")
+end
+
 function PlayerDamage:damage_bullet(attack_data)
 	if not self:_chk_can_take_dmg() then
 		return
@@ -97,6 +104,44 @@ function PlayerDamage:damage_bullet(attack_data)
 		managers.enemy:add_delayed_clbk(self._kill_taunt_clbk_id, callback(self, self, "clbk_kill_taunt", attack_data), TimerManager:game():time() + tweak_data.timespeed.downed.fade_in + tweak_data.timespeed.downed.sustain + tweak_data.timespeed.downed.fade_out)
 	end
 	self:_call_listeners(damage_info)
+end
+
+
+function PlayerDamage:_calc_health_damage(attack_data)
+	local health_subtracted = 0
+	health_subtracted = self:get_real_health()
+	attack_data.damage = attack_data.damage * managers.player:upgrade_value("player", "real_health_damage_reduction", 1)
+	self:change_health(-attack_data.damage)
+	health_subtracted = health_subtracted - self:get_real_health()
+	local bullet_or_explosion_or_melee = attack_data.variant and (attack_data.variant == "bullet" or attack_data.variant == "explosion") or attack_data.variant == "melee"
+	if self:get_real_health() == 0 and bullet_or_explosion_or_melee then
+		self:_chk_cheat_death()
+	end
+	self:_damage_screen()
+	self:_check_bleed_out(bullet_or_explosion_or_melee)
+	managers.hud:set_player_health({
+		current = self:get_real_health(),
+		total = self:_max_health(),
+		revives = Application:digest_value(self._revives, false)
+	})
+	self:_send_set_health()
+	self:_set_health_effect()
+	managers.statistics:health_subtracted(health_subtracted)
+	return health_subtracted
+end
+
+local damage_bullet_original = PlayerDamage.damage_bullet
+function PlayerDamage:damage_bullet(attack_data, ...)
+	self._last_bullet_damage = attack_data.damage
+	local next_allowed_dmg_t_old = self._next_allowed_dmg_t
+	
+	local result = damage_bullet_original(self, attack_data, ...)
+	
+	if self._next_allowed_dmg_t ~= next_allowed_dmg_t_old then
+		self._last_received_dmg = self._last_bullet_damage
+	end
+	
+	return result
 end
 
 local old_player_regenerated = PlayerDamage._regenerated

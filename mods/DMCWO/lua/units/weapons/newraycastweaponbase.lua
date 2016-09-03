@@ -1,6 +1,7 @@
 --[[
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
+
 function NewRaycastWeaponBase:weapon_hold()
 	if self:in_burst_mode() and self._burst_fire_weapon_hold then
 		return self._burst_fire_weapon_hold
@@ -26,6 +27,7 @@ function NewRaycastWeaponBase:_update_stats_values()
 		--self._auto_anim_burst = self:weapon_tweak_data().AUTO_ANIM_BURST or nil
 	end
 		
+	self._ignore_use_shotgun_reload = self:weapon_tweak_data().ignore_use_shotgun_reload or nil
 	self._can_toggle_burst = self:weapon_tweak_data().CAN_TOGGLE_BURST or nil
 	self._burst_fire_rate_multiplier = self:weapon_tweak_data().BURST_FIRE_RATE_MULTIPLIER or 1
 	self._force_burst = self:weapon_tweak_data().force_burst or nil
@@ -60,7 +62,7 @@ function NewRaycastWeaponBase:_update_stats_values()
 	end
 	self._damage_near = (self:weapon_tweak_data().damage_near or 10) * 100 -- 10 meters
 	self._damage_far = (self:weapon_tweak_data().damage_far or 80) * 100 -- 80 meters
-	self._damage_min = self:weapon_tweak_data().damage_min or 3.0 -- 30 damage
+	self._damage_min = self:weapon_tweak_data().damage_min or 0.0 -- 30 damage
 	self._supp_range_mult = nil
 	self._damage_near_set = nil
 	self._damage_far_set = nil
@@ -135,12 +137,16 @@ function NewRaycastWeaponBase:_update_stats_values()
 	self._regen_rate_overheat = nil
 	self._regen_ammo_time = nil
 	self._overheat_pen = nil
-	self._shield_knock = nil
 	
 	self._override_factory_id = self:weapon_tweak_data().override_factory_id or nil 
 	
 	self._hip_fire_rate_inc = self:weapon_tweak_data().category == "shotgun" and managers.player:upgrade_value("shotgun", "hip_rate_of_fire", 0)
 	
+	self._warsaw = self:weapon_tweak_data().warsaw
+	self._nato = self:weapon_tweak_data().nato
+	
+	self._large_tracers = self:weapon_tweak_data().large_tracers
+			
 	local custom_stats = managers.weapon_factory:get_custom_stats_from_weapon(self._factory_id, self._blueprint)
 	for part_id, stats in pairs(custom_stats) do
 		if stats.movement_speed then
@@ -317,6 +323,17 @@ function NewRaycastWeaponBase:_update_stats_values()
 		if stats.ignore_region_pickup then
 			self._ignore_region_pickup = true
 		end
+		if stats.switch_nato then
+			self._warsaw = false
+			self._nato = true
+		end
+		if stats.switch_warsaw then
+			self._warsaw = true
+			self._nato = false
+		end
+		if stats.large_tracers then
+			self._large_tracers = true
+		end
 		if stats.ammo_pickup_min_set then
 			self._ammo_pickup[1] = stats.ammo_pickup_min_set
 		end
@@ -325,6 +342,11 @@ function NewRaycastWeaponBase:_update_stats_values()
 		end
 		if stats.override_factory_id then
 			self._override_factory_id = stats.override_factory_id
+		end
+		if stats.disable_steelsight_stance then
+			if self:weapon_tweak_data().animations then
+				self:weapon_tweak_data().animations.has_steelsight_stance = false
+			end
 		end
 		if tweak_data.weapon.factory.parts[part_id].type ~= "ammo" then
 			if stats.ammo_pickup_min_mul then
@@ -348,32 +370,40 @@ function NewRaycastWeaponBase:_update_stats_values()
 	if not self._ignore_region_pickup then	
 	local pickup_type = tweak_data.levels:get_ai_group_type()	
 		if pickup_type == "america" then
-			if self:weapon_tweak_data().nato then
+			if self._nato  then
 				self._ammo_pickup[1] = self._ammo_pickup[1] * 1.5
 				self._ammo_pickup[2] = self._ammo_pickup[2] * 1.5
 			end
 		elseif pickup_type == "russia" then
-			if self:weapon_tweak_data().warsaw then
+			if self._warsaw then
 				self._ammo_pickup[1] = self._ammo_pickup[1] * 1.5
 				self._ammo_pickup[2] = self._ammo_pickup[2] * 1.5
 			end
 		end
 	end
-	--[[ 
-	if self:weapon_tweak_data().nato then
-	log("NATO TRACERS")
-		self._trail_effect_table.effect = Idstring("effects/particles/weapons/mp5/muzzleflash_3dp")
-	elseif self:weapon_tweak_data().warsaw then
-	log("WARSAW TRACERS")
-		self._trail_effect_table.effect = Idstring("effects/particles/weapons/raging/muzzleflash_3dp")
-	end ]]
 	
-	--[[
+	if BeardLib then
+		if self._starwars == true then
+		--log("STARWARS TRACERS")
+			self._trail_effect_table.effect = Idstring("_dmc/effects/sterwers_trail") 
+		elseif self._nato then
+		--log("NATO TRACERS")
+			self._trail_effect_table.effect = Idstring("_dmc/effects/nato_trail")
+		elseif self._warsaw then
+		--log("WARSAW TRACERS")
+			self._trail_effect_table.effect = Idstring("_dmc/effects/warsaw_trail")
+		elseif self._large_tracers then
+		--log("LARGE TRACERS")
+			self._trail_effect_table.effect = Idstring("_dmc/effects/large_trail")
+		end 
+	end
+	
+	--[[ 
 	track_weight = 1
 	if self._movement_penalty < track_weight then
 		track_weight = self._movement_penalty
-	end
-	]]
+	end ]]
+	
 	if self._can_toggle_burst then
 		self._fire_mode = Idstring("single")
 		--self:_set_burst_mode(true, true)
@@ -423,6 +453,19 @@ function NewRaycastWeaponBase:_update_stats_values()
 	self:can_toggle_firemode()
 end
 
+function NewRaycastWeaponBase:reload_exit_expire_t()
+	if self._use_shotgun_reload then
+		return self:weapon_tweak_data().timers.shotgun_reload_exit_empty or 0.7
+	end
+	return self:weapon_tweak_data().timers.reload_exit_empty or nil
+end
+function NewRaycastWeaponBase:reload_not_empty_exit_expire_t()
+	if self._use_shotgun_reload then
+		return self:weapon_tweak_data().timers.shotgun_reload_exit_not_empty or 0.3
+	end
+	return self:weapon_tweak_data().timers.reload_exit_not_empty or nil
+end
+
 function NewRaycastWeaponBase:can_toggle_firemode()
 	if self._locked_fire_mode then
 		return false
@@ -447,9 +490,9 @@ end
 
 function NewRaycastWeaponBase:toggle_firemode()
 	local state = managers.player:player_unit():movement():current_state()
-	local can_toggle = not self._locked_fire_mode  and self:can_toggle_firemode()
+	local can_toggle = not self._locked_fire_mode and self:can_toggle_firemode()
 	--log(tostring( state._shooting ))
-	if (can_toggle or self._has_burst_fire) and not self._burst_only and not (state and state._shooting) then
+	if not self._locked_fire_mode and (can_toggle or self._has_burst_fire) and not self._burst_only and not (state and state._shooting) then
 	--log("SWITCHING")
 		if self._fire_mode == ids_single then
 			if self._has_burst_fire then
@@ -603,15 +646,13 @@ function NewRaycastWeaponBase:movement_penalty()
 	end		
 	if state._state_data.in_steelsight and not managers.player:has_category_upgrade("player", "steelsight_normal_movement_speed") then
 		if self._ams then
-			mult = dicks * self._ams
+			mult = dicks * (self._ams * self._stocker)
 		end
 		
 		--bullpup bonus speed
 		if self:weapon_tweak_data().is_bullpup then 
 			mult = mult * 1.2
 		end	
-		
-		--mult = mult * self._stocker
 	
 	end
 	
@@ -631,7 +672,6 @@ function NewRaycastWeaponBase:movement_penalty()
 	if mult > dicks then
 		mult = dicks
 	end
-	
 	return (track_weight or self._movement_penalty or 1) * mult
 end
 		
@@ -752,11 +792,11 @@ function NewRaycastWeaponBase:_fire_raycast(user_unit, from_pos, direction, dmg_
 		if (col_ray and tracer_dist > 300 or not col_ray) and alive(self._obj_fire) and not shoot_through_data then
 			self._obj_fire:m_position(self._trail_effect_table.position)
 			mvector3.set(self._trail_effect_table.normal, mvec_spread_direction)
-			if self:weapon_tweak_data().has_trail == true or self._starwars == true or self._is_tracer == true then
+			if self:weapon_tweak_data().has_trail == true or self._is_tracer == true then
 				self._trail_effect_table.effect = Idstring("effects/particles/weapons/sniper_trail")
 			end
 			local clamp_dist = tracer_dist
-			if self._starwars or self._is_tracer then
+			if self._is_tracer then
 				clamp_dist = 0.01
 			end
 			local trail = World:effect_manager():spawn(self._trail_effect_table)
@@ -767,11 +807,11 @@ function NewRaycastWeaponBase:_fire_raycast(user_unit, from_pos, direction, dmg_
 	elseif not col_ray then
 		self._obj_fire:m_position(self._trail_effect_table.position)
 		mvector3.set(self._trail_effect_table.normal, mvec_spread_direction)
-		if self:weapon_tweak_data().has_trail == true or self._starwars == true or self._is_tracer == true then
+		if self:weapon_tweak_data().has_trail == true or self._is_tracer == true then
 			self._trail_effect_table.effect = Idstring("effects/particles/weapons/sniper_trail")
 		end
 		local clamp_dist = 0.5
-		if self._starwars or self._is_tracer then
+		if self._is_tracer then
 			clamp_dist = 0.01
 		end
 		local trail = World:effect_manager():spawn(self._trail_effect_table)
@@ -1170,7 +1210,7 @@ end
 
 	
 --[[	Reload stuff	]]--
-function NewRaycastWeaponBase:reload_speed_multiplier(use_consumable)
+function NewRaycastWeaponBase:reload_speed_multiplier()
 	local multiplier = 1
 	multiplier = multiplier * self._base_reload_speed_mult
 	if self._dual_mags then
@@ -1186,25 +1226,21 @@ function NewRaycastWeaponBase:reload_speed_multiplier(use_consumable)
 	end
 	multiplier = multiplier * managers.player:upgrade_value("weapon", "passive_reload_speed_multiplier", 1)
 	multiplier = multiplier * managers.player:upgrade_value(self._name_id, "reload_speed_multiplier", 1)
-	if self._setup and alive(self._setup.user_unit) and self._setup.user_unit:movement() then
+	--[[ if self._setup and alive(self._setup.user_unit) and self._setup.user_unit:movement() then
 		local morale_boost_bonus = self._setup.user_unit:movement():morale_boost()
 		if morale_boost_bonus then
 			multiplier = multiplier * morale_boost_bonus.reload_speed_bonus
 		end
-	end
+	end ]]
 	
 	if managers.player:has_activate_temporary_upgrade("temporary", "reload_weapon_faster") then
 		multiplier = multiplier * (managers.player:temporary_upgrade_value("temporary", "reload_weapon_faster", 1))
 	end
-	if managers.player:has_activate_temporary_upgrade("temporary", "melee_kill_increase_reload_speed") then
-		multiplier = multiplier * (managers.player:temporary_upgrade_value("temporary", "melee_kill_increase_reload_speed", 1))
-	end
 	if managers.player:has_activate_temporary_upgrade("temporary", "single_shot_fast_reload") then
 		multiplier = multiplier * (managers.player:temporary_upgrade_value("temporary", "single_shot_fast_reload", 1))
 	end
-	if use_consumable then
-		multiplier = multiplier * (managers.player:consumable_upgrade_value("shock_and_awe_reload_multiplier", 1))
-	end
+	multiplier = multiplier * (managers.player:get_property("shock_and_awe_reload_multiplier", 1))
+	multiplier = multiplier * (managers.player:get_temporary_property("bloodthirst_reload_speed", 1))
 	
 	return multiplier
 end
@@ -1214,13 +1250,14 @@ function NewRaycastWeaponBase:exit_run_speed_multiplier()
 	if self:weapon_tweak_data().sub_category then
 		multiplier = multiplier * managers.player:upgrade_value(self:weapon_tweak_data().sub_category, "exit_run_speed_multiplier", 1)
 	end
+	multiplier = multiplier * managers.player:upgrade_value("weapon", "exit_run_speed_multiplier", 1)
 	multiplier = multiplier * managers.player:upgrade_value(self._name_id, "exit_run_speed_multiplier", 1)
 	multiplier = multiplier / ( (self:weapon_tweak_data().sprintout_time or 0.300) / 0.45 )
 	return multiplier
 end
 
 --From SC's Mod
-if DMCWO.havel_mum ~= true and DMCWO.be_all_end_all ~= true and DMCWO.grind ~= true and DMCWO.no_investment ~= true then
+if DMCWO._data_skills.havel_mum ~= true then
 function NewRaycastWeaponBase:calculate_ammo_max_per_clip()
     local ammo = tweak_data.weapon[self._name_id].CLIP_AMMO_MAX + (self._extra_ammo or 0)
     ammo = ammo * managers.player:upgrade_value(self._name_id, "clip_ammo_increase", 1)
@@ -1263,4 +1300,29 @@ function NewRaycastWeaponBase:enter_steelsight_speed_multiplier()
 		multiplier = multiplier * 0.75
 	end ]]
 	return multiplier
+end
+
+
+function NewRaycastWeaponBase:tweak_data_anim_play(anim, speed_multiplier)
+	local data = tweak_data.weapon.factory[self._factory_id]
+	if data.animations and data.animations[anim] then
+		local anim_name = data.animations[anim]
+		local length = self._unit:anim_length(Idstring(anim_name))
+		speed_multiplier = speed_multiplier or 1
+		self._unit:anim_stop(Idstring(anim_name))
+		self._unit:anim_play_to(Idstring(anim_name), length, speed_multiplier)
+	end
+	for part_id, data in pairs(self._parts) do
+		if not (self:in_burst_mode() and data.animations and data.animations.burst_stop_anim) then
+			if data.animations and data.animations[anim] then
+				local anim_name = data.animations[anim]
+				local length = data.unit:anim_length(Idstring(anim_name))
+				speed_multiplier = speed_multiplier or 1
+				data.unit:anim_stop(Idstring(anim_name))
+				data.unit:anim_play_to(Idstring(anim_name), length, speed_multiplier)
+			end
+		end
+	end
+	NewRaycastWeaponBase.super.tweak_data_anim_play(self, anim, speed_multiplier)
+	return true
 end

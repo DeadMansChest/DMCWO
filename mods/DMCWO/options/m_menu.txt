@@ -1,0 +1,21 @@
+{
+	"menu_id" : "dmcwo_main_menu",
+	"parent_menu_id" : "lua_mod_options_menu",
+	"title" : "dmc_menu_title",
+	"description" : "dmc_menu_desc",
+	"items" : [
+		{
+			"type" : "toggle",
+			"id" : "dmc_log_toggle",
+			"title" : "dmc_log_toggle_title",
+			"description" : "dmc_log_toggle_desc",
+			"callback" : "DMCWOLogSpam",
+			"value" : "stfu",
+			"default_value" : false,
+		},
+		{
+			"type" : "divider",
+			"size" : 20,
+		}
+	]
+}

@@ -1,0 +1,6 @@
+<unit type="wpn" slot="1" >
+    <object file="units/pd2_million/weapons/wpn_fps_pis_judge_pts/wpn_fps_pis_judge_body_45lc" />
+    <extensions>
+        <extension class="ScriptUnitData" name="unit_data" />
+    </extensions>
+</unit>

@@ -59,6 +59,9 @@ function FPCameraPlayerBase:_vertical_recoil_kick(t, dt)
 		if recoil_speed < 0 then
 			recoil_speed = 0
 		end
+		if player_state and player_state:in_air() then
+			recoil_speed = recoil_speed * 3
+		end
 	end
 	if self._recoil_kick.current and self._recoil_kick.current ~= self._recoil_kick.accumulated then
 		local n = math.step(self._recoil_kick.current, self._recoil_kick.accumulated, (recoil_speed or 40)  * dt)
@@ -108,6 +111,9 @@ function FPCameraPlayerBase:_horizonatal_recoil_kick(t, dt)
 	if recoil_speed then
 		if recoil_speed < 0 then
 			recoil_speed = 0
+		end
+		if player_state and player_state:in_air() then
+			recoil_speed = recoil_speed * 3
 		end
 	end
 	if self._recoil_kick.h.current and self._recoil_kick.h.current ~= self._recoil_kick.h.accumulated then
@@ -258,7 +264,7 @@ function FPCameraPlayerBase:_update_rot(axis)
 	end
 	if player_state == "bipod" and not self._parent_unit:movement()._current_state:in_steelsight() then
 		self._parent_unit:camera():set_position(PlayerBipod._camera_pos or self._output_data.position)
-		if self:is_stance_done() and DMCWO.no_bipod_swivel == false then
+		if self:is_stance_done() and DMCWO._data.no_bipod_swivel == false then
 			self:set_position(PlayerBipod._shoulder_pos or new_shoulder_pos)
 			self:set_rotation(bipod_rot)
 		end

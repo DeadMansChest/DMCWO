@@ -10,7 +10,7 @@ function SkillTreeTweakData:init()
 		return Application:digest_value(value, true)
 	end
 	
-	if DMCWO.havel_mum ~= true then
+	if DMCWO._data_skills.havel_mum ~= true then
 	
 	self.tier_unlocks = {
 		digest(0),
@@ -21,6 +21,7 @@ function SkillTreeTweakData:init()
 	
 	--[[   SKILLTREES   ]]--
 	--{
+			
 		--[[   MASTERMIND   ]]--
 		--{
 			--[[   MEDIC SUBTREE   ]]--
@@ -293,13 +294,13 @@ function SkillTreeTweakData:init()
 					["icon_xy"] = {10, 0},
 					[1] = {
 						upgrades = {
-							"smg_reload_speed_multiplier"
+							"smg_hip_fire_spread_multiplier"
 						},
 						cost = self.costs.default
 					},
 					[2] = {
 						upgrades = {
-							"smg_hip_fire_spread_multiplier"
+							"smg_reload_speed_multiplier"
 						},
 						cost = self.costs.pro
 					}
@@ -413,14 +414,13 @@ function SkillTreeTweakData:init()
 					["icon_xy"] = {5, 1},
 					[1] = {
 						upgrades = {
-							"shotgun_reload_speed_multiplier_1"
+							"shotgun_enter_steelsight_speed_multiplier",
 						},
 						cost = self.costs.hightier
 					},
 					[2] = {
 						upgrades = {
-							"shotgun_enter_steelsight_speed_multiplier",
-							"shotgun_reload_speed_multiplier_2"
+							"shotgun_reload_speed_multiplier_1"
 						},
 						cost = self.costs.hightierpro
 					}
@@ -982,29 +982,10 @@ function SkillTreeTweakData:init()
 			
 			--[[   BATTLE SAPPER SUBTREE (OPPRESSOR)   ]]--
 			--{
-				--Nerves of Steel (Steady Grip)	
+				--Sharpshooter (Steady Grip)	
 				self.skills.steady_grip = {
 					["name_id"] = "menu_steady_grip_dmc",
 					["desc_id"] = "menu_steady_grip_desc_dmc",
-					["icon_xy"] = {6, 6},
-					[1] = {
-						upgrades = {
-							"player_interacting_damage_multiplier"
-						},
-						cost = self.costs.default
-					},
-					[2] = {
-						upgrades = {
-							"player_steelsight_when_downed"
-						},
-						cost = self.costs.pro
-					}
-				}
-	
-				--Sharpshooter (Heavy Impact)
-				self.skills.heavy_impact = {
-					["name_id"] = "menu_heavy_impact_dmc",
-					["desc_id"] = "menu_heavy_impact_desc_dmc",
 					["icon_xy"] = {0, 5},
 					[1] = {
 						upgrades = {
@@ -1015,8 +996,29 @@ function SkillTreeTweakData:init()
 					[2] = {
 						upgrades = {
 							"assault_rifle_recoil_index_addend",
-							"snp_recoil_index_addend",
-							"player_steelsight_normal_movement_speed"
+							"snp_recoil_index_addend"
+						},
+						cost = self.costs.pro
+					}
+				}
+	
+				--Kilmer (Heavy Impact)
+				self.skills.heavy_impact = {
+					["name_id"] = "menu_heavy_impact_dmc",
+					["desc_id"] = "menu_heavy_impact_desc_dmc",
+					["icon_xy"] = {1, 9},
+					[1] = {
+						upgrades = {
+							"assault_rifle_enter_steelsight_speed_multiplier",
+							"snp_enter_steelsight_speed_multiplier"
+						},
+						cost = self.costs.default
+					},
+					[2] = {
+						upgrades = {
+							"assault_rifle_reload_speed_multiplier",
+							"snp_reload_speed_multiplier",
+							"weapon_exit_run_speed_multiplier"
 						},
 						cost = self.costs.pro
 					}
@@ -1040,25 +1042,23 @@ function SkillTreeTweakData:init()
 					}
 				}
 	
-				--Kilmer (Shock And Awe)
+				--Nerves of Steel (Shock and Awe)
 				self.skills.shock_and_awe = {
 					["name_id"] = "menu_shock_and_awe_dmc",
 					["desc_id"] = "menu_shock_and_awe_desc_dmc",
-					["icon_xy"] = {1, 9},
+					["icon_xy"] = {6, 6},
 					[1] = {
 						upgrades = {
-							"assault_rifle_reload_speed_multiplier",
-							"snp_reload_speed_multiplier",
-							"assault_rifle_enter_steelsight_speed_multiplier",
-							"snp_enter_steelsight_speed_multiplier"
+							"player_interacting_damage_multiplier",
+							"player_steelsight_when_downed"
 						},
 						cost = self.costs.hightier
 					},
 					[2] = {
 						upgrades = {
 							"assault_rifle_move_spread_multiplier",
-							"snp_move_spread_multiplier",
-							"player_run_and_reload"
+							"player_run_and_reload",
+							"snp_move_spread_multiplier"
 						},
 						cost = self.costs.hightierpro
 					}
@@ -1271,7 +1271,7 @@ function SkillTreeTweakData:init()
 					},
 					[2] = {
 						upgrades = {
-							"player_can_free_run",
+							"player_steelsight_normal_movement_speed",
 							"player_fall_damage_multiplier",
 							"player_fall_health_damage_multiplier"
 						},
@@ -1282,7 +1282,7 @@ function SkillTreeTweakData:init()
 				self.skills.thick_skin = {
 					["name_id"] = "menu_thick_skin_dmc",
 					["desc_id"] = "menu_thick_skin_desc_dmc",
-					["icon_xy"] = {2, 12},
+					["icon_xy"] = {10, 7},
 					[1] = {
 						upgrades = {
 							"player_melee_concealment_modifier"
@@ -1364,7 +1364,7 @@ function SkillTreeTweakData:init()
 				self.skills.scavenger = {
 					["name_id"] = "menu_scavenger_dmc",
 					["desc_id"] = "menu_scavenger_desc_dmc",
-					["icon_xy"] = {0, 3},
+					["icon_xy"] = {10, 9},
 					[1] = {
 						upgrades = {
 							"temporary_damage_speed_multiplier"
@@ -1383,7 +1383,7 @@ function SkillTreeTweakData:init()
 				self.skills.optic_illusions = {
 					["name_id"] = "menu_optic_illusions_dmc",
 					["desc_id"] = "menu_optic_illusions_desc_dmc",
-					["icon_xy"] = {4, 10},
+					["icon_xy"] = {10, 10},
 					[1] = {
 						upgrades = {
 							"player_silencer_concealment_increase_1"
@@ -1421,7 +1421,7 @@ function SkillTreeTweakData:init()
 				self.skills.backstab = {
 					["name_id"] = "menu_backstab_dmc",
 					["desc_id"] = "menu_backstab_desc_dmc",
-					["icon_xy"] = {10, 10},
+					["icon_xy"] = {10, 8},
 					[1] = {
 						upgrades = {
 							"player_armor_depleted_stagger_shot_1"
@@ -1569,7 +1569,7 @@ function SkillTreeTweakData:init()
 					},
 					[2] = {
 						upgrades = {
-							"pistol_reload_speed_multiplier"
+							"pistol_stacked_accuracy_bonus_2"
 						},
 						cost = self.costs.hightierpro
 					}
@@ -1800,7 +1800,7 @@ function SkillTreeTweakData:init()
 					[1] = {
 						upgrades = {
 							"player_healing_reduction_1",
-							"player_health_damage_reduction_1",
+							"player_real_health_damage_reduction_1",
 							"player_max_health_reduction_1"
 						},
 						cost = self.costs.hightier
@@ -1808,7 +1808,7 @@ function SkillTreeTweakData:init()
 					[2] = {
 						upgrades = {
 							"player_healing_reduction_2",
-							"player_health_damage_reduction_2"
+							"player_real_health_damage_reduction_2"
 						},
 						cost = self.costs.hightierpro
 					}
@@ -1847,6 +1847,7 @@ function SkillTreeTweakData:init()
 		"player_fall_damage_multiplier",
 		"player_fall_health_damage_multiplier",
 		"player_silent_kill",
+		"player_can_free_run",
 		--"player_primary_weapon_when_downed",
 		"jowi",
 		"x_1911",
@@ -2016,7 +2017,28 @@ function SkillTreeTweakData:init()
 				cost = self.costs.hightierpro
 			}
 		}
-				
+		--Frenzy
+		self.skills.frenzy = {
+			["name_id"] = "menu_frenzy",
+			["desc_id"] = "menu_frenzy_desc",
+			["icon_xy"] = {11, 8},
+			[1] = {
+				upgrades = {
+					"player_healing_reduction_1",
+					"player_real_health_damage_reduction_1",
+					"player_max_health_reduction_1"
+				},
+				cost = self.costs.hightier
+			},
+			[2] = {
+				upgrades = {
+					"player_healing_reduction_2",
+					"player_real_health_damage_reduction_2"
+				},
+				cost = self.costs.hightierpro
+			}
+		}
+	
 		self.default_upgrades = {
 			"player_fall_damage_multiplier",
 			"player_fall_health_damage_multiplier",

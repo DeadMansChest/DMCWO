@@ -95,7 +95,7 @@ function WeaponDescription._get_skill_stats(name, category, slot, base_stats, mo
 					end
 					if silencer and managers.player:has_category_upgrade("player", "silencer_concealment_penalty_decrease") then
 						local stats = managers.weapon_factory:get_perk_stats("silencer", factory_id, blueprint)
-						if stats and stats.concealment then
+						if stats and stats.concealment and stats.concealment < 0 then
 							modifier = modifier + math.min(managers.player:upgrade_value("player", "silencer_concealment_penalty_decrease", 0), math.abs(stats.concealment))
 						end
 					end

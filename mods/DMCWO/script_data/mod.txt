@@ -1,0 +1,22 @@
+{
+	"name" : "Dozah",
+	"description" : "dicks",
+	"author" : "Ellie",
+	"contact" : "steamcommunity.com/id/3lewd5me/",
+	"version" : "0",
+	"priority" : 0,
+	"hooks" : [
+        	{	"hook_id": "core/lib/managers/coresequencemanager",
+   			"script_path": "Core.lua"
+    		}
+	],
+ 	"libraries" : [
+       {
+        "display_name" : "BeardLib",
+        "identifier" : "beardlib",
+        "optional" : "false"
+       }
+   ]
+}
+		
+}

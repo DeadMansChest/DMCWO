@@ -771,7 +771,7 @@ function BlackMarketGui:update_info_text()
 		self._rename_caret:set_h(h)
 		self._rename_caret:set_world_position(x + w, y)
 	end
-	if GoonBase and GoonBase.SupportedVersion then
+	if GoonBase and (GoonBase.SupportedVersion or GoonBase.Options.Updates.BypassVersion) then
 		Hooks:Call("BlackMarketGUIUpdateInfoText", self)
 	end
 end

@@ -9,7 +9,7 @@ function PlayerBipod:_update_check_actions(t, dt)
 	new_action = new_action or self:_check_action_weapon_firemode(t, input)
 end
 
-if DMCWO.bipod_wasd_undeploy == true then
+if DMCWO._data.bipod_wasd_undeploy == true then
 	function PlayerBipod:_update_movement(t, dt)
 		local current_state = managers.player:get_current_state()
 		if self._move_dir then

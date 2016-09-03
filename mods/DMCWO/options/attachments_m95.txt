@@ -1,0 +1,17 @@
+{
+	"menu_id" : "dmcwo_attachments_m95_menu",
+	"parent_menu_id" : "dmcwo_attachments_menu",
+	"title" : "dmc_attach_m95_title",
+	"description" : "dmc_attach_m95_desc",
+	"items" : [
+		{
+			"type" : "toggle",
+			"id" : "dmc_attach_m95_bipod_toggle",
+			"title" : "dmc_attach_m95_bipod_title",
+			"description" : "dmc_attach_m95_bipod_desc",
+			"callback" : "DMCWOAttachM95Bipod",
+			"value" : "m95_bipod",
+			"default_value" : false,
+		}
+	]
+}

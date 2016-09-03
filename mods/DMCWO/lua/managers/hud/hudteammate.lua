@@ -2,6 +2,7 @@
 This script is used in DMC's Weapon Overhaul, please make sure you have the most up to date version
 ]]
 
+--From LazyOzzy
 HUDTeammate.set_weapon_firemode_burst = HUDTeammate.set_weapon_firemode_burst or function(self, id, firemode, burst_fire)	--Custom HUD compatibility
 	local is_secondary = id == 1
 	local secondary_weapon_panel = self._player_panel:child("weapons_panel"):child("secondary_weapon_panel")
