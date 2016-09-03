@@ -1,5 +1,5 @@
-#DMC's Weapon Overhaul v1.81: "Me, Me, Pump-a-rum" Edition
-####[I'd pump her rum if you know what I mean ;)](https://www.youtube.com/watch?v=1wTndUgskZQ)
+#DMC's Weapon Overhaul v1.82: Giant Robits Edition
+####[Literal COCKpits](https://www.youtube.com/watch?v=Wp8uaRoRfa8)
 [Steam group](http://steamcommunity.com/groups/DMCWO)
 
 
